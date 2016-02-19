@@ -12,7 +12,16 @@ public class UserManager {
         this.user = user;
     }
 
-    public static UserManager login(String user, String pass){
-        MockServer.checkLogin(user, pass);
+    /**Logs the customer into their account, based on their User.
+     *
+     * @param user
+     * @param pass
+     * @return
+     */
+    public boolean login(String user, String pass){
+        boolean validUser = MockServer.checkLogin(user, pass);
+        if (validUser){
+            this.user = new User(MockServer.getUserData(user));
+        }
     }
 }
