@@ -8,7 +8,7 @@ public class User {
     /**A user of Zhi Yin. Contains all the necessary information for the user.
      *
      */
-    public User(String data){
+    public User(String[] data){
 
     }
 }
