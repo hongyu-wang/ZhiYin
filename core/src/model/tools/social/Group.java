@@ -1,4 +1,6 @@
-package yonghu;
+package model.tools.social;
+
+import model.user.User;
 
 import java.util.ArrayList;
 
