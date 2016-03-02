@@ -19,9 +19,10 @@ public class UserManager {
      * @return
      */
     public boolean login(String user, String pass){
-        boolean validUser = MockServer.checkLogin(user, pass);
+        /**boolean validUser = MockServer.checkLogin(user, pass);
         if (validUser){
             this.user = new User(MockServer.getUserData(user));
-        }
+        }*/
+        return false;
     }
 }
