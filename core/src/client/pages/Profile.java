@@ -6,6 +6,16 @@ package client.pages;
  */
 public class Profile extends State{
     @Override
+    public void update(float dt) {
+
+    }
+
+    @Override
+    public void draw() {
+
+    }
+
+    @Override
     public void dispose() {
 
     }
