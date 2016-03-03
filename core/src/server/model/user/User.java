@@ -2,7 +2,7 @@ package server.model.user;
 
 /**A model filled with the information on a user.
  *
- *      - Profile:
+ *      - ProfileManager:
  *          -Basic user information.
  *      - Conversations
  *      - Diary Content

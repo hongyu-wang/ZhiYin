@@ -1,11 +1,11 @@
-package server.services.loginService;
+package server.services.userService;
 
 import server.model.user.User;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public interface LoginInterface {
+public interface LoginManager {
     /**Requests authentication from the server for a user and pass combo.
      *
      * @param user  The username.

@@ -1,12 +1,12 @@
-package server.services.loginService;
+package server.services.userService;
 
 import server.model.user.User;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Login implements LoginInterface{
-    public Login(){
+public class LoginManagerImplementation implements LoginManager {
+    public LoginManagerImplementation(){
 
     }
 
@@ -14,7 +14,7 @@ public class Login implements LoginInterface{
      *
      * @param user  The username.
      * @param pass  The password.
-     * @return
+     * @return  True if the user/pass combo is correct.
      */
     @Override
     public boolean validateLogin(String user, String pass) {
@@ -22,6 +22,11 @@ public class Login implements LoginInterface{
         //TODO Implement.
     }
 
+    /**Retrieves all relevant information on the user.
+     *
+     * @param user  The username of the user.
+     * @return  The user class with all information.
+     */
     @Override
     public User retrieveUserData(String user) {
         return null;

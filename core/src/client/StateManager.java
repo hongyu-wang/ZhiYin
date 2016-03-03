@@ -10,7 +10,7 @@ import java.util.Hashtable;
 public class StateManager {
     public static final String PROFILE_STATE = "HomePage";
     public static final String HOME_PAGE_STATE = "NewsFeed";
-    public static final String NEWS_FEED = "Profile";
+    public static final String NEWS_FEED = "ProfileManager";
 
     private static String [] states = {PROFILE_STATE, HOME_PAGE_STATE, NEWS_FEED};
 
