@@ -1,7 +1,7 @@
 package server.model.social;
 
 import server.model.user.User;
-import server.ServiceList;
+import Service;
 
 /**
  * Created by Kevin Zheng on 2016-02-19.
@@ -11,24 +11,24 @@ public class Group {
      * For now group only contains a list of users and a list of posts that users
      * have put into the group
      */
-    private ServiceList<User> members;
-    private ServiceList<Post> posts;
+    private Service<User> members;
+    private Service<Post> posts;
     private User creator;
-    private ServiceList<User> admins;
+    private Service<User> admins;
 
-    public ServiceList<User> getMembers() {
+    public Service<User> getMembers() {
         return members;
     }
 
-    public void setMembers(ServiceList<User> members) {
+    public void setMembers(Service<User> members) {
         this.members = members;
     }
 
-    public ServiceList<Post> getPosts() {
+    public Service<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(ServiceList<Post> posts) {
+    public void setPosts(Service<Post> posts) {
         this.posts = posts;
     }
 
@@ -40,11 +40,11 @@ public class Group {
         this.creator = creator;
     }
 
-    public ServiceList<User> getAdmins() {
+    public Service<User> getAdmins() {
         return admins;
     }
 
-    public void setAdmins(ServiceList<User> admins) {
+    public void setAdmins(Service<User> admins) {
         this.admins = admins;
     }
 }

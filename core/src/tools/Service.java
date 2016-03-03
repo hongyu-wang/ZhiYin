@@ -1,4 +1,4 @@
-package server;
+package tools;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -9,13 +9,13 @@ import java.util.stream.Stream;
 /**
  * Created by Hairuo on 2016-03-02.
  */
-public class ServiceList<E> {
+public class Service<E> {
     /**
      * Service list object in replace of an arraylist
      */
     ArrayList<E> sList;
 
-    public ServiceList(){
+    public Service(){
         sList = new ArrayList<>();
     }
 
