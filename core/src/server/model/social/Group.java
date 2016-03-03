@@ -1,6 +1,7 @@
 package server.model.social;
 
 import server.model.user.User;
+import tools.ServiceList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,8 @@ public class Group {
      * For now group only contains a list of users and a list of posts that users
      * have put into the group
      */
-    private List<User> members;
-    private List<Post> posts;
+    private ServiceList<User> members;
+    private ServiceList<Post> posts;
     private User creator;
     private List<User> admins;
 
@@ -23,7 +24,7 @@ public class Group {
      * @param user the creator of the group
      */
     public Group(User user){
-        this.members = new ArrayList<>();
+        this.members = new ServiceList<>();
         this.posts = new ArrayList<>();
 
     }

@@ -1,8 +1,9 @@
 package server.services.groupService;
 
-import model.tools.social.Group;
-import model.tools.social.Post;
-import model.user.User;
+
+import server.model.social.Group;
+import server.model.social.Post;
+import server.model.user.User;
 
 /**
  * Created by Hairuo on 2016-03-02.
@@ -17,7 +18,7 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group createGroup(User user) {
-        return null;
+
     }
 
     /**
