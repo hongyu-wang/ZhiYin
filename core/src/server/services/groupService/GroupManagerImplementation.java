@@ -24,6 +24,7 @@ public class GroupManagerImplementation implements GroupManager{
         crGroup.setMembers(new ServiceList<User>());
         crGroup.setAdmins(new ServiceList<User>());
         crGroup.setPosts(new ServiceList<Post>());
+        return crGroup;
     }
 
     /**
@@ -50,7 +51,10 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group enterGroup(User user, Group group) {
-        return null;
+        ServiceList<User> uList = group.getMembers();
+        uList.add(user);
+        group.setMembers(uList);
+        return group;
     }
 
     /**
@@ -62,7 +66,10 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group addPost(Post post, Group group) {
-        return null;
+        ServiceList<Post> pList = group.getPosts();
+        pList.add(post);
+        group.setPosts(pList);
+        return group;
     }
 
     /**
@@ -74,6 +81,9 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group removePost(Post post, Group group) {
-        return null;
+        ServiceList<Post> pList = group.getPosts();
+        pList.remove(post);
+        group.setPosts(pList);
+        return group;
     }
 }
