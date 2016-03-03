@@ -5,4 +5,8 @@ package server.services.loginService;
  */
 public class Login implements LoginInterface{
 
+    @Override
+    public boolean validateLogin() {
+        return false;
+    }
 }
