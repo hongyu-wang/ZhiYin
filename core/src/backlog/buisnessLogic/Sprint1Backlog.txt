@@ -1,0 +1,29 @@
+//Sprint 1 Backlog
+
+
+Features of "UserManager":
+    a) Validate username and password.
+
+    c) Retrieving all relevant data regarding a specific user/username.
+
+    d) Modifying the data of the user.
+
+Specific tasks to be accomplished:
+    a-1.  Create method ask the server to check for username
+          and password validity.
+
+    b-1.  Create method to retrieve activity log from server.
+    b-2.  Create method to retrieve conversation from server.
+    b-3.  Create method to retrieve diary content from server.
+    b-4.  Create method to retrieve profile from server.
+    b-5.  Create method to retrieve uploaded content from server.
+    b-6.  Return User model to Presentation layer.
+
+    c-1.  Create method to modify a User's activity log and send to server.
+    c-2.  Create method to modify a User's conversation and send to server.
+    c-3.  Create method to modify a User's diary content and send to server.
+    c-4.  Create method to modify a User's profile and send to server.
+    c-5.  Create method to modify a User's uploaded content and send to server.
+    c-6.  Return the modified user.
+
+These tasks are assigned as follows:
