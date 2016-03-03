@@ -5,6 +5,16 @@ package client.pages;
  */
 public class NewsFeed extends State{
     @Override
+    public void update(float dt) {
+
+    }
+
+    @Override
+    public void draw() {
+
+    }
+
+    @Override
     public void dispose() {
 
     }
