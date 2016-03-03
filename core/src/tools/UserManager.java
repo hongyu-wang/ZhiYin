@@ -1,4 +1,4 @@
-package managers;
+package tools;
 
 import server.MockServer;
 import model.user.User;
