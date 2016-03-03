@@ -1,4 +1,4 @@
-package server.services;
+package server.services.messengerService;
 
 /**
  * Created by Kevin Zheng on 2016-02-19.

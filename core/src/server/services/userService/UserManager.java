@@ -1,4 +1,4 @@
-package server.services;
+package server.services.userService;
 
 import server.model.user.User;
 

@@ -1,4 +1,4 @@
-package tools.manager;
+package server.services.groupService;
 
 import model.tools.social.Group;
 import model.tools.social.Post;
