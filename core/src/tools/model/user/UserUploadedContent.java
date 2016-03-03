@@ -1,4 +1,4 @@
-package model.user;
+package tools.model.user;
 
 /**A model of all user uploaded content.
  *

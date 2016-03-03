@@ -1,7 +1,7 @@
-package model.tools.social;
+package tools.services;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Comment {
+public class SoundCloud {
 }

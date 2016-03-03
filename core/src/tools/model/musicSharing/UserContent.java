@@ -1,4 +1,4 @@
-package model.tools.musicSharing;
+package tools.model.musicSharing;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
