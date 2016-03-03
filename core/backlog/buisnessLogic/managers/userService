@@ -1,0 +1,10 @@
+UserServices:
+
+    User
+        Login
+
+    UserProfile
+    UserConversations
+    UserDiaryContent
+    UserUploadedContent
+    UserActivityLog
