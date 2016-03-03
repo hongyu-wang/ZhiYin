@@ -1,4 +1,4 @@
-package model.user;
+package server.model.user;
 
 /**A class filled with all the actions a user have undertaken within the past
  * ... time.

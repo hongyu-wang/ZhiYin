@@ -1,7 +1,7 @@
-package model.tools.media;
+package tools.manager;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Image {
+public class GroupManager {
 }

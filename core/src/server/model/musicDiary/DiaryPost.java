@@ -1,4 +1,4 @@
-package model.tools.musicDiary;
+package server.model.musicDiary;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.

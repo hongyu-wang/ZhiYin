@@ -1,6 +1,6 @@
-package model.tools.social;
+package server.model.social;
 
-import model.user.User;
+import server.model.user.User;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package model.user;
+package server.model.user;
 
 /**A model filled with all the conversations and messages between users.
  *
