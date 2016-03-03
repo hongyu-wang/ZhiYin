@@ -9,13 +9,13 @@ import java.util.stream.Stream;
 /**
  * Created by Hairuo on 2016-03-02.
  */
-public class Service<E> {
+public class ServiceList<E> {
     /**
-     * Service list object in replace of an arraylist
+     * ServiceList list object in replace of an arraylist
      */
     ArrayList<E> sList;
 
-    public Service(){
+    public ServiceList(){
         sList = new ArrayList<>();
     }
 
