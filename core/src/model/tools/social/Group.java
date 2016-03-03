@@ -3,18 +3,30 @@ package model.tools.social;
 import model.user.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kevin Zheng on 2016-02-19.
  */
 public class Group {
-    ArrayList<User> members;
+    /**
+     * For now group only contains a list of users and a list of posts that users
+     * have put into the group
+     */
+    private List<User> members;
+    private List<Post> posts;
+    private User creator;
+    private List<User> admins;
 
     /**Creates a group with various other users.
      *
-     * @param users
+     * @param user the creator of the group
      */
-    public Group(ArrayList<User> users){
-        members = users;
+    public Group(User user){
+        this.members = new ArrayList<>();
+        this.posts = new ArrayList<>();
+
     }
+
+
 }
