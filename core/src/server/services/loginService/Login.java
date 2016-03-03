@@ -10,7 +10,7 @@ public class Login implements LoginInterface{
 
     }
 
-    /**
+    /**Requests Authentication.
      *
      * @param user  The username.
      * @param pass  The password.
@@ -19,10 +19,12 @@ public class Login implements LoginInterface{
     @Override
     public boolean validateLogin(String user, String pass) {
         return false;
+        //TODO Implement.
     }
 
     @Override
     public User retrieveUserData(String user) {
         return null;
+        //TODO Implement.
     }
 }

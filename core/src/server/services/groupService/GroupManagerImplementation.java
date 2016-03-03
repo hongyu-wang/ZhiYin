@@ -4,7 +4,7 @@ package server.services.groupService;
 import server.model.social.Group;
 import server.model.social.Post;
 import server.model.user.User;
-import tools.ServiceList;
+import server.ServiceList;
 
 /**
  * Created by Hairuo on 2016-03-02.
