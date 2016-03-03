@@ -17,17 +17,37 @@ public class Group {
     private ServiceList<User> members;
     private ServiceList<Post> posts;
     private User creator;
-    private List<User> admins;
+    private ServiceList<User> admins;
 
-    /**Creates a group with various other users.
-     *
-     * @param user the creator of the group
-     */
-    public Group(User user){
-        this.members = new ServiceList<>();
-        this.posts = new ArrayList<>();
-
+    public ServiceList<User> getMembers() {
+        return members;
     }
 
+    public void setMembers(ServiceList<User> members) {
+        this.members = members;
+    }
 
+    public ServiceList<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(ServiceList<Post> posts) {
+        this.posts = posts;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public ServiceList<User> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(ServiceList<User> admins) {
+        this.admins = admins;
+    }
 }

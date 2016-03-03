@@ -4,6 +4,7 @@ package server.services.groupService;
 import server.model.social.Group;
 import server.model.social.Post;
 import server.model.user.User;
+import tools.ServiceList;
 
 /**
  * Created by Hairuo on 2016-03-02.
@@ -18,7 +19,11 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group createGroup(User user) {
-
+        Group crGroup = new Group();
+        crGroup.setCreator(user);
+        crGroup.setMembers(new ServiceList<User>());
+        crGroup.setAdmins(new ServiceList<User>());
+        crGroup.setPosts(new ServiceList<Post>());
     }
 
     /**
@@ -30,7 +35,10 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group leaveGroup(User user, Group group) {
-        return null;
+        ServiceList<User> uList = group.getMembers();
+        uList.remove(user);
+        group.setMembers(uList);
+        return group;
     }
 
     /**
