@@ -20,5 +20,5 @@ public interface LoginManager {
      * @param user  The username of the user.
      * @return      A user class with all relevant information.
      */
-    User retrieveUserData(String user);
+    User requestUserData(String user);
 }

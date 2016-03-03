@@ -28,7 +28,7 @@ public class LoginManagerImplementation implements LoginManager {
      * @return  The user class with all information.
      */
     @Override
-    public User retrieveUserData(String user) {
+    public User requestUserData(String user) {
         return null;
         //TODO Implement.
     }

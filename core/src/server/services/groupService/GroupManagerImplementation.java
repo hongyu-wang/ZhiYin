@@ -4,7 +4,7 @@ package server.services.groupService;
 import server.model.social.Group;
 import server.model.social.Post;
 import server.model.user.User;
-import Service;
+import tools.ServiceList;
 
 /**
  * Created by Hairuo on 2016-03-02.
@@ -21,9 +21,9 @@ public class GroupManagerImplementation implements GroupManager{
     public Group createGroup(User user) {
         Group crGroup = new Group();
         crGroup.setCreator(user);
-        crGroup.setMembers(new Service<User>());
-        crGroup.setAdmins(new Service<User>());
-        crGroup.setPosts(new Service<Post>());
+        crGroup.setMembers(new ServiceList<User>());
+        crGroup.setAdmins(new ServiceList<User>());
+        crGroup.setPosts(new ServiceList<Post>());
         return crGroup;
     }
 
@@ -36,7 +36,7 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group leaveGroup(User user, Group group) {
-        Service<User> uList = group.getMembers();
+        ServiceList<User> uList = group.getMembers();
         uList.remove(user);
         group.setMembers(uList);
         return group;
@@ -51,7 +51,7 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group enterGroup(User user, Group group) {
-        Service<User> uList = group.getMembers();
+        ServiceList<User> uList = group.getMembers();
         uList.add(user);
         group.setMembers(uList);
         return group;
@@ -66,7 +66,7 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group addPost(Post post, Group group) {
-        Service<Post> pList = group.getPosts();
+        ServiceList<Post> pList = group.getPosts();
         pList.add(post);
         group.setPosts(pList);
         return group;
@@ -81,7 +81,7 @@ public class GroupManagerImplementation implements GroupManager{
      */
     @Override
     public Group removePost(Post post, Group group) {
-        Service<Post> pList = group.getPosts();
+        ServiceList<Post> pList = group.getPosts();
         pList.remove(post);
         group.setPosts(pList);
         return group;
