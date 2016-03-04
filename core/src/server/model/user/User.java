@@ -1,8 +1,10 @@
 package server.model.user;
 
-/**A model filled with the information on a user.
+/**A user of Zhi Yin. Contains all the necessary information for the user.
  *
- *      - Profile:
+ * A model filled with the information on a user.
+ *
+ *      - ProfileManager:
  *          -Basic user information.
  *      - Conversations
  *      - Diary Content
@@ -13,15 +15,27 @@ package server.model.user;
  */
 public class User {
     private UserProfile profile;
-    private UserConversations conversation;
+    private UserConversations conversations;
     private UserDiaryContent diary;
     private UserActivityLog log;
     private UserUploadedContent content;
 
-    /**A user of Zhi Yin. Contains all the necessary information for the user.
-     *
-     */
+
     public User(){
 
     }
+
+    public User(UserProfile prof, UserConversations convo, UserDiaryContent diary, UserActivityLog log, UserUploadedContent cont){
+        init(prof, convo, diary, log, cont);
+    }
+
+    public void init(UserProfile prof, UserConversations convo, UserDiaryContent diary, UserActivityLog log, UserUploadedContent cont){
+        this.profile = prof;
+        this.conversations = convo;
+        this.diary = diary;
+        this.log = log;
+        this.content = cont;
+    }
+
+
 }

@@ -1,0 +1,30 @@
+UserServices:
+
+Services:
+    User
+        1) LoginInterface
+
+    UserModelServices:
+        a) UserProfile
+        b) UserConversations
+        c) UserDiaryContent
+        d) UserUploadedContent
+        e) UserActivityLog
+
+
+Design:
+    1) Responsibilities
+            1. Validation
+            2. Retrieving information.
+
+    a) Responsibilities
+            1. Retrieving profile info.
+            2. Modify User Profile info.
+
+    b) ServiceCollaboration
+            1. Conversation
+            2. Message
+
+       Responsibilities
+            1. Retrieving all convos.
+            2.

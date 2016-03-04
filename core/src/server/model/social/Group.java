@@ -3,9 +3,6 @@ package server.model.social;
 import server.model.user.User;
 import tools.ServiceList;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Kevin Zheng on 2016-02-19.
  */

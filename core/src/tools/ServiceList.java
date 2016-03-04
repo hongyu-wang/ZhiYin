@@ -11,7 +11,7 @@ import java.util.stream.Stream;
  */
 public class ServiceList<E> {
     /**
-     * Service list object in replace of an arraylist
+     * ServiceList list object in replace of an arraylist
      */
     ArrayList<E> sList;
 
