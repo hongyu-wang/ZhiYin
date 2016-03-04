@@ -17,7 +17,7 @@ public class ConversationManagerImplementation implements ConversationManager {
 
     @Override
     public User addConversation(User user, Conversation convo) {
-        user.getConversations().getConvoKeys().add(convo.getKey());
+//        user.getConversations().getConvoKeys().add(convo.getKey());
         user.getConversations().getConversations().add(convo);
         return user;
         //TODO implement keys.

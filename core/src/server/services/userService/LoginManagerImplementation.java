@@ -1,6 +1,6 @@
 package server.services.userService;
 
-import server.model.user.User;
+import server.model.user.*;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
@@ -24,19 +24,25 @@ public class LoginManagerImplementation implements LoginManager {
 
     /**Retrieves all relevant information on the user.
      *
-     * @param user  The username of the user.
+     * @param username  The username of the user.
      * @return  The user class with all information.
      */
     @Override
-    public User requestUserData(String user) {
+    public User requestUserData(String username) {
+
         User user = new User();
-        user.setContent();
-        user.setConversations();
-        user.setDiary();
-        user.getLog();
-        user.setProfile();
+
+        UserUploadedContent userContent = new ContentManagerImplementation().requestAllContent(username);
+        UserConversations conversations = new ConversationManagerImplementation().requestAllConversations(username);
+        UserDiaryContent diary = new DiaryManagerImplementation().requestAllDiaryContent(username);
+        UserActivityLog log = new ActivityManagerImplementation().requestLog(username);
+        UserProfile profile = new ProfileManagerImplementation().requestProfileData(username);
+
+        user.setContent(userContent);
+        user.setConversations(conversations);
+        user.setDiary(diary);
+        user.setLog(log);
+        user.setProfile(profile);
         return user;
-        //TODO implement proper calls to other managers.
-        //TODO request from server.
     }
 }
