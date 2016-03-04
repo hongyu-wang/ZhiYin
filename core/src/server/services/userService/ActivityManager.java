@@ -1,5 +1,6 @@
 package server.services.userService;
 
+import server.model.user.User;
 import server.model.user.UserActivityLog;
 
 /**
@@ -15,7 +16,9 @@ public interface ActivityManager {
 
     /**Add an entry to the log of activities.
      *
+     * @param user  The user.
      * @param entry The event string.
+     * @return
      */
-    void addEntry(UserActivityLog log, String entry);
+    User addEntry(User user, String entry);
 }

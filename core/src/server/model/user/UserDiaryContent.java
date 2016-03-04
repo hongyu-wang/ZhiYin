@@ -1,6 +1,6 @@
 package server.model.user;
 
-/**A model filled with every User Diary Post.
+/**A model filled with every user Diary Post.
  *
  *      - DiaryPost
  *      - Comment

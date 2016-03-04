@@ -19,7 +19,7 @@ public class LoginManagerImplementation implements LoginManager {
     @Override
     public boolean validateLogin(String user, String pass) {
         return false;
-        //TODO Implement.
+        //TODO
     }
 
     /**Retrieves all relevant information on the user.

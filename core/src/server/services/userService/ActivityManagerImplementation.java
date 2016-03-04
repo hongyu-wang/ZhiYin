@@ -1,5 +1,6 @@
 package server.services.userService;
 
+import server.model.user.User;
 import server.model.user.UserActivityLog;
 
 /**
@@ -13,7 +14,8 @@ public class ActivityManagerImplementation implements ActivityManager {
     }
 
     @Override
-    public void addEntry(UserActivityLog log, String entry) {
+    public User addEntry(User user, String entry) {
+        return null;
         //TODO
     }
 }

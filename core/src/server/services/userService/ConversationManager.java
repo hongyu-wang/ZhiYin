@@ -1,5 +1,6 @@
 package server.services.userService;
 
+import server.model.social.Conversation;
 import server.model.social.Message;
 import server.model.user.User;
 import server.model.user.UserConversations;
@@ -11,16 +12,15 @@ public interface ConversationManager {
     /**Requests the server for all conversations the user has.
      *
      * @param user  The username.
-     * @return  The UserConversations model of all user conversations.
+     * @return      The UserConversations model of all user conversations.
      */
     UserConversations requestAllConversations(String user);
 
-    /**Returns all messages between any two different users.
+    /**Adds a new conversation to both the user and the server.
      *
-     * @param userConversations The model of conversations.
-     * @param user1     The first user.
-     * @param user2     The second user.
-     * @return      The
+     * @param user  The user.
+     * @param convo The new conversation.
+     * @return      The modified user.
      */
-
+    User addConversation(User user, Conversation convo);
 }

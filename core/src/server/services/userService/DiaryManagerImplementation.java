@@ -1,5 +1,7 @@
 package server.services.userService;
 
+import server.model.musicDiary.DiaryPost;
+import server.model.user.User;
 import server.model.user.UserDiaryContent;
 
 /**
@@ -10,5 +12,10 @@ public class DiaryManagerImplementation implements DiaryManager {
     public UserDiaryContent requestAllDiaryContent(String user) {
         return null;
         //TODO
+    }
+
+    @Override
+    public User addDiaryPost(User user, DiaryPost diaryPost) {
+        return null;
     }
 }

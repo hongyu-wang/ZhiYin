@@ -1,4 +1,0 @@
-Features: UserManager, Messenger, MusicDiary, MusicHashtag, SoundCloud
-
-Current Feature: UserManager
-
