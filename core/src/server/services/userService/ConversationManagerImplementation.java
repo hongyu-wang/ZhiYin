@@ -10,13 +10,17 @@ import server.model.user.UserConversations;
 public class ConversationManagerImplementation implements ConversationManager {
     @Override
     public UserConversations requestAllConversations(String user) {
-        return null;
-        //TODO
+        UserConversations convos = new UserConversations();
+        return convos;
+        //TODO Request from server.
     }
 
     @Override
     public User addConversation(User user, Conversation convo) {
-        return null;
-        //TODO
+        user.getConversations().getConvoKeys().add(convo.getKey());
+        user.getConversations().getConversations().add(convo);
+        return user;
+        //TODO implement keys.
+        //TODO change to server
     }
 }

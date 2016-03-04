@@ -10,22 +10,29 @@ import server.model.user.UserProfile;
 public class ProfileManagerImplementation implements ProfileManager {
     @Override
     public UserProfile requestProfileData(String user) {
-        return null;
-        //TODO
+        UserProfile profile = new UserProfile();
+        return profile;
+        //TODO request from server.
     }
 
     @Override
     public User modifyUserName(User user, String username) {
-        return null;
+        user.getProfile().setUsername(username);
+        return user;
+        //TODO request change to server.
     }
 
     @Override
     public User modifyDescription(User user, String description) {
-        return null;
+        user.getProfile().setDescription(description);
+        return user;
+        //TODO request change to server.
     }
 
     @Override
     public User modifyDP(User user, Image image) {
-        return null;
+        user.getProfile().setProfilePic(image);
+        return user;
+        //TODO request change to server.
     }
 }

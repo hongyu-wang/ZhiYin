@@ -11,10 +11,16 @@ import tools.ServiceList;
  */
 public class UserActivityLog {
     ServiceList<String> log;
-    public UserActivityLog(String events){
-        events.split(";");
+
+    /**Returns a ServiceList of each event within the log.
+     *
+     * @return  The list of all events.
+     */
+    public ServiceList<String> getLog() {
+        return log;
     }
 
-    public void init(){}
-
+    public void setLog(ServiceList<String> log) {
+        this.log = log;
+    }
 }

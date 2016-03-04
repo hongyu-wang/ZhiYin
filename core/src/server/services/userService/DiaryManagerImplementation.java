@@ -10,12 +10,17 @@ import server.model.user.UserDiaryContent;
 public class DiaryManagerImplementation implements DiaryManager {
     @Override
     public UserDiaryContent requestAllDiaryContent(String user) {
-        return null;
-        //TODO
+        UserDiaryContent diary = new UserDiaryContent();
+        return diary;
+        //TODO request from server
     }
 
     @Override
     public User addDiaryPost(User user, DiaryPost diaryPost) {
-        return null;
+        user.getDiary().getDiaryKeys().add(diaryPost.getKey());
+        user.getDiary().getDiaryposts().add(diaryPost);
+        return user;
+        //TODO implement keys
+        //TODO request change to server
     }
 }

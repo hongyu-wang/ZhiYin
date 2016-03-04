@@ -16,15 +16,37 @@ public class UserProfile {
     private String description;
     private Image dp;
 
-    public UserProfile(String username, String description, Image dp){
-        init(username, description, dp);
+    /**Returns the username of the user.
+     *
+     * @return  The username string.
+     */
+    public String getUsername() {
+        return username;
     }
 
-    public void init(String username, String description, Image dp){
-        this.username = username;
+    /**Returns the description of the user.
+     *
+     * @param description   The string description.
+     */
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**Returns the profile picture of the user.
+     *
+     * @return  The Image profile pic.
+     */
+    public Image getProfilePic() {
+        return dp;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setProfilePic(Image dp) {
         this.dp = dp;
     }
-
-
 }

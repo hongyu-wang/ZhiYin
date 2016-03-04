@@ -20,22 +20,60 @@ public class User {
     private UserActivityLog log;
     private UserUploadedContent content;
 
-
-    public User(){
-
+    /**Gets all basic user information.
+     *
+     * @return  The userProfile containing info.
+     */
+    public UserProfile getProfile() {
+        return profile;
     }
 
-    public User(UserProfile prof, UserConversations convo, UserDiaryContent diary, UserActivityLog log, UserUploadedContent cont){
-        init(prof, convo, diary, log, cont);
+    /**Returns a model of all conversations a user has.
+     *
+     * @return  The userConversation containing convos.
+     */
+    public UserConversations getConversations() {
+        return conversations;
     }
 
-    public void init(UserProfile prof, UserConversations convo, UserDiaryContent diary, UserActivityLog log, UserUploadedContent cont){
-        this.profile = prof;
-        this.conversations = convo;
+    /**Returns a model of all diary posts a user has.
+     *
+     * @return  The userDiaryContent.
+     */
+    public UserDiaryContent getDiary() {
+        return diary;
+    }
+
+    /**Returns a model of all uploaded content a user has.
+     *
+     * @return  The userUploadedContent.
+     */
+    public UserUploadedContent getContent() {
+        return content;
+    }
+
+    /**Gets all logged activity of the user.
+     *
+     * @return  The userActivitylog.
+     */
+    public UserActivityLog getLog() {
+        return log;
+    }
+
+    // SETTERS
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
+    }
+    public void setConversations(UserConversations conversations) {
+        this.conversations = conversations;
+    }
+    public void setDiary(UserDiaryContent diary) {
         this.diary = diary;
-        this.log = log;
-        this.content = cont;
     }
-
-
+    public void setLog(UserActivityLog log) {
+        this.log = log;
+    }
+    public void setContent(UserUploadedContent content) {
+        this.content = content;
+    }
 }

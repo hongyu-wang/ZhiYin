@@ -9,13 +9,15 @@ import server.model.user.UserActivityLog;
 public class ActivityManagerImplementation implements ActivityManager {
     @Override
     public UserActivityLog requestLog(String user) {
-        return null;
-        //TODO
+        UserActivityLog log = new UserActivityLog();
+        //TODO request from server.
+        return log;
     }
 
     @Override
     public User addEntry(User user, String entry) {
-        return null;
-        //TODO
+        user.getLog().getLog().add(entry);
+        //TODO request change on server.
+        return user;
     }
 }
