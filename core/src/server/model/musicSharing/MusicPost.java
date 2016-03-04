@@ -3,5 +3,6 @@ package server.model.musicSharing;
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class UserContent {
+public class MusicPost {
+
 }

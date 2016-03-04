@@ -32,15 +32,12 @@ public class StateManager {
 
     private void initTable(){
         state_control = new Hashtable<String, State>();
-        for (String state : states) {
+        for (String state : states)
             try {
                 state_control.put(state, getStateFromName(state));
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
             }
-
-        }
-
 
     }
 

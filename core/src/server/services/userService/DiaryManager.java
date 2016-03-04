@@ -1,5 +1,7 @@
 package server.services.userService;
 
+import server.model.musicDiary.DiaryPost;
+import server.model.user.User;
 import server.model.user.UserDiaryContent;
 
 /**
@@ -12,4 +14,12 @@ public interface DiaryManager {
      * @return  The UserDiaryContents filled with user diary entries.
      */
     UserDiaryContent requestAllDiaryContent(String user);
+
+    /**Adds new diary post to the user and to the server.
+     *
+     * @param user      The user.
+     * @param diaryPost The new diarypost.
+     * @return          The modified user.
+     */
+    User addDiaryPost(User user, DiaryPost diaryPost);
 }

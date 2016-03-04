@@ -19,7 +19,7 @@ public class LoginManagerImplementation implements LoginManager {
     @Override
     public boolean validateLogin(String user, String pass) {
         return false;
-        //TODO Implement.
+        //TODO request from server.
     }
 
     /**Retrieves all relevant information on the user.
@@ -29,7 +29,14 @@ public class LoginManagerImplementation implements LoginManager {
      */
     @Override
     public User requestUserData(String user) {
-        return null;
-        //TODO Implement.
+        User user = new User();
+        user.setContent();
+        user.setConversations();
+        user.setDiary();
+        user.getLog();
+        user.setProfile();
+        return user;
+        //TODO implement proper calls to other managers.
+        //TODO request from server.
     }
 }
