@@ -23,8 +23,23 @@ Design:
 
     b) ServiceCollaboration
             1. Conversation
-            2. Message
 
        Responsibilities
             1. Retrieving all convos.
-            2.
+            2. Adds a convo.
+
+    c) ServiceCollaboration
+            1. DiaryPost
+
+       Responsibilities
+            1. Retreiving all diary contents.
+            2. Add a diary post.
+
+    d) ServiceCollaboration
+            1. MusicPost
+       Responsibilities
+            1. Retrieving all musicPosts.
+            2. Add a music post.
+
+    e) Responsibilities
+            1. Logs user activity.
