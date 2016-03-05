@@ -1,11 +1,11 @@
-package server.services.hashtagService;
+package server.services.mediaService;
 
 import server.model.media.Hashtag;
 
 /**
  * Created by Kevin Zheng on 2016-03-04.
  */
-public class MusicHashtagImplementation implements MusicHashtag {
+public class MusicHashtagManagerImplementation implements MusicHashtagManager {
     @Override
     public boolean validateHashtag(String hashtagName) {
         //TODO Request from server.

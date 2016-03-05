@@ -1,6 +1,6 @@
 package server.model.user;
 
-import server.model.musicSharing.MusicPost;
+import server.model.social.MusicPost;
 
 import java.util.List;
 

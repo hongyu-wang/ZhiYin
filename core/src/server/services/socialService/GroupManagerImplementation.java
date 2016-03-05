@@ -1,4 +1,4 @@
-package server.services.groupService;
+package server.services.socialService;
 
 
 import server.model.social.Group;
@@ -9,7 +9,7 @@ import tools.ServiceList;
 /**
  * Created by Hairuo on 2016-03-02.
  */
-public class GroupManagerImplementation implements GroupManager{
+public class GroupManagerImplementation implements GroupManager {
 
     /**
      * Creates a group with the user as an admin

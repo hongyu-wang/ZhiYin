@@ -1,6 +1,6 @@
 package server.model.user;
 
-import server.model.musicDiary.DiaryPost;
+import server.model.social.DiaryPost;
 
 import java.util.List;
 

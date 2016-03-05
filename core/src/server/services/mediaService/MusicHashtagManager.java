@@ -1,4 +1,4 @@
-package server.services.hashtagService;
+package server.services.mediaService;
 
 import server.model.media.Hashtag;
 
@@ -6,7 +6,7 @@ import server.model.media.Hashtag;
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
-public interface MusicHashtag {
+public interface MusicHashtagManager {
     /**Checks whether or not the hashtag exists within the server.
      *
      * @param hashtagName   The string hashtagName.

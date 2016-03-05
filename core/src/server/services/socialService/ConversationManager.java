@@ -1,16 +1,14 @@
-package server.services.messengerService;
+package server.services.socialService;
 
 import server.model.social.Conversation;
 import server.model.social.Message;
 import server.model.user.User;
 import tools.ServiceList;
 
-import java.util.LinkedList;
-
 /**
  * Created by Hairuo on 2016-03-03.
  */
-public class ConversationManagerImplementation implements ConversationManager {
+public interface ConversationManager {
 
     /**
      * Creates a conversation given a list of users
@@ -18,13 +16,7 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @param users list of users who started the conversation
      * @return the created conversation
      */
-    @Override
-    public Conversation createConversation(ServiceList<User> users){
-        Conversation newConvo = new Conversation();
-        newConvo.setParticipants(users);
-        newConvo.setMessageList(new LinkedList<Message>());
-        return newConvo;
-    }
+    public Conversation createConversation(ServiceList<User> users);
 
     /**
      * Adds a message to the conversation
@@ -33,13 +25,7 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @param conversation the conversation in question
      * @return the updated conversation
      */
-    @Override
-    public Conversation addMessage(Message message, Conversation conversation){
-        LinkedList<Message> messages = new LinkedList<>();
-        messages.add(message);
-        conversation.setMessageList(messages);
-        return conversation;
-    }
+    public Conversation addMessage(Message message, Conversation conversation);
 
     /**
      * Removes a message from the conversation
@@ -48,10 +34,7 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @param conversation the conversation in question
      * @return the updated conversation
      */
-    @Override
-    public Conversation removeMessage(Message message, Conversation conversation){
-
-    }
+    public Conversation removeMessage(Message message, Conversation conversation);
 
     /**
      * Adds a user to the conversation
@@ -60,10 +43,7 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @param conversation the conversation in question
      * @return the updated conversation
      */
-    @Override
-    public Conversation addUser(User user, Conversation conversation){
-        return null;
-    }
+    public Conversation addUser(User user, Conversation conversation);
 
     /**
      * Removes a message from the conversation
@@ -72,8 +52,7 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @param conversation the conversation in question
      * @return the updated conversation
      */
-    @Override
-    public Conversation removeUser(User user, Conversation conversation){
-        return null;
-    }
+    public Conversation removeUser(User user, Conversation conversation);
+
+
 }

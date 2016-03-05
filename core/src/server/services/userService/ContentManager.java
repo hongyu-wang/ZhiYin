@@ -1,6 +1,6 @@
 package server.services.userService;
 
-import server.model.musicSharing.MusicPost;
+import server.model.social.MusicPost;
 import server.model.user.User;
 import server.model.user.UserUploadedContent;
 
