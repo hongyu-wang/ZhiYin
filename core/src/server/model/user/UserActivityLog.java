@@ -1,6 +1,6 @@
 package server.model.user;
 
-import tools.ServiceList;
+import java.util.List;
 
 /**A class filled with all the actions a user have undertaken within the past
  * ... time.
@@ -10,17 +10,17 @@ import tools.ServiceList;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserActivityLog {
-    ServiceList<String> log;
+    List<String> log;
 
-    /**Returns a ServiceList of each event within the log.
+    /**Returns a List of each event within the log.
      *
      * @return  The list of all events.
      */
-    public ServiceList<String> getLog() {
+    public List<String> getLog() {
         return log;
     }
 
-    public void setLog(ServiceList<String> log) {
+    public void setLog(List<String> log) {
         this.log = log;
     }
 }
