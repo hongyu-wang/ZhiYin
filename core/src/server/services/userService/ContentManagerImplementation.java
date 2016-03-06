@@ -20,7 +20,7 @@ public class ContentManagerImplementation implements ContentManager {
 //        user.getContent().getPostKeys().add(musicPost.getKey());
         user.getContent().getPosts().add(musicPost);
         return user;
-        //TODO Finish KeyObject design.
+        //TODO Finish ServerModel design.
         //TODO request change to server.
     }
 }

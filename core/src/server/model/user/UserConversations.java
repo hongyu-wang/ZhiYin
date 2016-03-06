@@ -1,6 +1,7 @@
 package server.model.user;
 
 import server.model.social.Conversation;
+import server.model.structureModels.ServerModel;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class UserConversations {
+public class UserConversations extends ServerModel {
     List<String> convoKeys;
     List<Conversation> convo;
     //TODO Examine design here.

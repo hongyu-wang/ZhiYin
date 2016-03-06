@@ -2,15 +2,15 @@ package server.model.social;
 
 import server.model.media.Image;
 import server.model.media.Music;
+import server.model.structureModels.ServerModel;
 import server.model.user.User;
 
-import javax.xml.ws.Service;
 import java.util.List;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Message{
+public class Message extends ServerModel {
     private String text;
     private User creator;
     private int timeStamp;

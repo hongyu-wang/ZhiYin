@@ -1,5 +1,7 @@
 package server.model.user;
 
+import server.model.structureModels.ServerModel;
+
 /**A user of Zhi Yin. Contains all the necessary information for the user.
  *
  * A model filled with the information on a user.
@@ -13,7 +15,7 @@ package server.model.user;
  *
  * Created by Kevin Zheng on 2016-02-18.
  */
-public class User {
+public class User extends ServerModel {
     private UserProfile profile;
     private UserConversations conversations;
     private UserDiaryContent diary;

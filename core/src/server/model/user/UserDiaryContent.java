@@ -1,6 +1,7 @@
 package server.model.user;
 
 import server.model.social.DiaryPost;
+import server.model.structureModels.ServerModel;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class UserDiaryContent {
+public class UserDiaryContent extends ServerModel {
     List<String> diaryKeys;
     List<DiaryPost> diaryposts;
 

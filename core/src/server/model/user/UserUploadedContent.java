@@ -1,6 +1,7 @@
 package server.model.user;
 
 import server.model.social.MusicPost;
+import server.model.structureModels.ServerModel;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class UserUploadedContent {
+public class UserUploadedContent extends ServerModel {
     List<String> postKeys;
     List<MusicPost> posts;
 
