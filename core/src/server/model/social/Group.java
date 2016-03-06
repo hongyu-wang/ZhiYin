@@ -1,5 +1,6 @@
 package server.model.social;
 
+import server.model.structureModels.ServerModel;
 import server.model.user.User;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-02-19.
  */
-public class Group {
+public class Group  extends ServerModel {
     /**
      * For now group only contains a list of users and a list of posts that users
      * have put into the group

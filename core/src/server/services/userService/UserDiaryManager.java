@@ -7,13 +7,13 @@ import server.model.user.UserDiaryContent;
 /**
  * Created by Kevin Zheng on 2016-03-03.
  */
-public interface DiaryManager {
+public interface UserDiaryManager {
     /**Requests the server for all diary contents based on a username.
      *
-     * @param user  The username.
-     * @return  The UserDiaryContents filled with user diary entries.
+     * @param userKey   The user's key.
+     * @return          The UserDiaryContents filled with user diary entries.
      */
-    UserDiaryContent requestAllDiaryContent(String user);
+    UserDiaryContent requestAllDiaryContent(long userKey);
 
     /**Adds new diary post to the user and to the server.
      *

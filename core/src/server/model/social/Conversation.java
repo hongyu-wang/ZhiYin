@@ -1,6 +1,6 @@
 package server.model.social;
 
-import server.model.social.Message;
+import server.model.structureModels.ServerModel;
 import server.model.user.User;
 
 import java.util.LinkedList;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Hairuo on 2016-03-03.
  */
-public class Conversation{
+public class Conversation extends ServerModel {
 
     private LinkedList<Message> messageList;
 

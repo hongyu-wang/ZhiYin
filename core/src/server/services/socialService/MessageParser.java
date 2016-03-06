@@ -1,6 +1,5 @@
 package server.services.socialService;
 
-import server.model.media.MediaModel;
 import tools.ServiceList;
 
 /**

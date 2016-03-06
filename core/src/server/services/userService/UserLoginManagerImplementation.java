@@ -5,8 +5,8 @@ import server.model.user.*;
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class LoginManagerImplementation implements LoginManager {
-    public LoginManagerImplementation(){
+public class UserLoginManagerImplementation implements UserLoginManager {
+    public UserLoginManagerImplementation(){
 
     }
 
@@ -28,15 +28,19 @@ public class LoginManagerImplementation implements LoginManager {
      * @return  The user class with all information.
      */
     @Override
-    public User requestUserData(String username) {
+    public User requestUserData(String username, String pass) {
 
         User user = new User();
 
-        UserUploadedContent userContent = new ContentManagerImplementation().requestAllContent(username);
-        UserConversations conversations = new ConversationManagerImplementation().requestAllConversations(username);
-        UserDiaryContent diary = new DiaryManagerImplementation().requestAllDiaryContent(username);
-        UserActivityLog log = new ActivityManagerImplementation().requestLog(username);
-        UserProfile profile = new ProfileManagerImplementation().requestProfileData(username);
+        long key = 0;   //Server request.
+        user.setKey(key);
+        //TODO request from server.
+
+        UserUploadedContent userContent = new UserContentManagerImplementation().requestAllContent(key);
+        UserConversations conversations = new UserConversationManagerImplementation().requestAllConversations(key);
+        UserDiaryContent diary = new UserDiaryManagerImplementation().requestAllDiaryContent(key);
+        UserActivityLog log = new UserActivityManagerImplementation().requestLog(key);
+        UserProfile profile = new UserProfileManagerImplementation().requestProfileData(key);
 
         user.setContent(userContent);
         user.setConversations(conversations);

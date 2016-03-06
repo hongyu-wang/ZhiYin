@@ -13,7 +13,7 @@ public interface MusicManager {
      * @param key   The string identifying of the music.
      * @return      The new Music piece.
      */
-    Music requestMusic(String key);
+    Music requestMusic(long key);
 
     /**Uploads a piece of music from your phone.
      *

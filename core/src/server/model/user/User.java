@@ -1,12 +1,14 @@
 package server.model.user;
 
+import server.model.structureModels.ServerModel;
+
 import java.util.List;
 
 /**A user of Zhi Yin. Contains all the necessary information for the user.
  *
  * A model filled with the information on a user.
  *
- *      - ProfileManager:
+ *      - UserProfileManager:
  *          -Basic user information.
  *      - Conversations
  *      - Diary Content
@@ -15,12 +17,14 @@ import java.util.List;
  *
  * Created by Kevin Zheng on 2016-02-18.
  */
-public class User {
+public class User extends ServerModel {
     private UserProfile profile;
     private UserConversations conversations;
     private UserDiaryContent diary;
-    private List<UserActivityLog> logs;
+    private UserActivityLog log;
     private UserUploadedContent content;
+
+    //TODO Implement friends.
 
     /**Gets all basic user information.
      *
@@ -62,6 +66,22 @@ public class User {
         return log;
     }
 
+//    /**Gets the list of all friend keys.
+//     *
+//     * @return  The List of friend keys.
+//     */
+//    public List<Long> getFriendKeys() {
+//        return friendKeys;
+//    }
+//
+//    /**Gets the list of user friends.
+//     *
+//     * @return  The List of users which are friends with the user.
+//     */
+//    public List<String> getFriends() {
+//        return friends;
+//    }
+
     // SETTERS
     public void setProfile(UserProfile profile) {
         this.profile = profile;
@@ -78,4 +98,10 @@ public class User {
     public void setContent(UserUploadedContent content) {
         this.content = content;
     }
+//    public void setFriendKeys(List<Long> friendKeys) {
+//        this.friendKeys = friendKeys;
+//    }
+//    public void setFriends(List<String> friends) {
+//        this.friends = friends;
+//    }
 }

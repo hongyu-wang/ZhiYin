@@ -3,6 +3,6 @@ package server.model.social;
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class DiaryPost {
+public class DiaryPost extends Post {
 
 }

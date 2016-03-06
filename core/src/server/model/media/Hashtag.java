@@ -1,11 +1,13 @@
 package server.model.media;
 
+import server.model.structureModels.ServerModel;
+
 import java.util.List;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Hashtag{
+public class Hashtag extends ServerModel {
     private String hashtagName;
     private List<Music> music;
 
