@@ -7,13 +7,13 @@ import server.model.user.UserUploadedContent;
 /**
  * Created by Kevin Zheng on 2016-03-03.
  */
-public interface ContentManager {
+public interface UserContentManager {
     /**Requests the server for all the content related to a user.
      *
-     * @param user  The username.
-     * @return  The MusicPost model containing all user content.
+     * @param userKey   The user's key.
+     * @return          The MusicPost model containing all user content.
      */
-    UserUploadedContent requestAllContent(String user);
+    UserUploadedContent requestAllContent(long userKey);
 
     /**Adds the content to the user and updates the server.
      *

@@ -15,6 +15,7 @@ import server.model.structureModels.ServerModel;
 public class UserProfile extends ServerModel {
     private String username;
     private String description;
+    private long imageKey;
     private Image dp;
 
     /**Returns the username of the user.
@@ -27,10 +28,18 @@ public class UserProfile extends ServerModel {
 
     /**Returns the description of the user.
      *
-     * @param description   The string description.
+     * @return The string description.
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public String getDescription() {
+        return description;
+    }
+
+    /**Returns the key of the profile picture.
+     *
+     * @return  The long of the key.
+     */
+    public long getImageKey() {
+        return imageKey;
     }
 
     /**Returns the profile picture of the user.
@@ -44,8 +53,8 @@ public class UserProfile extends ServerModel {
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getDescription() {
-        return description;
+    public void setDescription(String description) {
+        this.description = description;
     }
     public void setProfilePic(Image dp) {
         this.dp = dp;

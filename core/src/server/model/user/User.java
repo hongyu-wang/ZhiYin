@@ -8,7 +8,7 @@ import java.util.List;
  *
  * A model filled with the information on a user.
  *
- *      - ProfileManager:
+ *      - UserProfileManager:
  *          -Basic user information.
  *      - Conversations
  *      - Diary Content

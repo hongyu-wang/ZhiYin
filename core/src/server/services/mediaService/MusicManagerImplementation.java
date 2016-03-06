@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class MusicManagerImplementation implements MusicManager {
     @Override
-    public Music requestMusic(String key) {
+    public Music requestMusic(long key) {
         Music music = new Music();
         return music;
         //TODO request from server.
