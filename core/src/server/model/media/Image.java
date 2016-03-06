@@ -25,7 +25,6 @@ public class Image{
         return image;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
@@ -33,4 +32,5 @@ public class Image{
     public void setImage(BufferedImage image) {
         this.image = image;
     }
+
 }

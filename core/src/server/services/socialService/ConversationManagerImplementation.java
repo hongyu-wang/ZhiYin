@@ -1,10 +1,8 @@
 package server.services.socialService;
-
 import server.model.social.Conversation;
 import server.model.social.Message;
 import server.model.user.User;
 import tools.ServiceList;
-
 import java.util.LinkedList;
 
 /**

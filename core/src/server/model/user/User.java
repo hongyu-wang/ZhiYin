@@ -1,5 +1,7 @@
 package server.model.user;
 
+import java.util.List;
+
 /**A user of Zhi Yin. Contains all the necessary information for the user.
  *
  * A model filled with the information on a user.
@@ -17,7 +19,7 @@ public class User {
     private UserProfile profile;
     private UserConversations conversations;
     private UserDiaryContent diary;
-    private UserActivityLog log;
+    private List<UserActivityLog> logs;
     private UserUploadedContent content;
 
     /**Gets all basic user information.

@@ -4,7 +4,8 @@ package server.services.socialService;
 import server.model.social.Group;
 import server.model.social.Post;
 import server.model.user.User;
-import tools.ServiceList;
+import tools.List;
+import tools.Utils;
 
 /**
  * Created by Hairuo on 2016-03-02.
@@ -21,9 +22,9 @@ public class GroupManagerImplementation implements GroupManager {
     public Group createGroup(User user) {
         Group crGroup = new Group();
         crGroup.setCreator(user);
-        crGroup.setMembers(new ServiceList<User>());
-        crGroup.setAdmins(new ServiceList<User>());
-        crGroup.setPosts(new ServiceList<Post>());
+        crGroup.setMembers(Utils.newList());
+        crGroup.setAdmins(new List<User>());
+        crGroup.setPosts(new List<Post>());
         return crGroup;
     }
 
@@ -36,7 +37,7 @@ public class GroupManagerImplementation implements GroupManager {
      */
     @Override
     public Group leaveGroup(User user, Group group) {
-        ServiceList<User> uList = group.getMembers();
+        List<User> uList = group.getMembers();
         uList.remove(user);
         group.setMembers(uList);
         return group;
@@ -51,7 +52,7 @@ public class GroupManagerImplementation implements GroupManager {
      */
     @Override
     public Group enterGroup(User user, Group group) {
-        ServiceList<User> uList = group.getMembers();
+        List<User> uList = group.getMembers();
         uList.add(user);
         group.setMembers(uList);
         return group;
@@ -66,7 +67,7 @@ public class GroupManagerImplementation implements GroupManager {
      */
     @Override
     public Group addPost(Post post, Group group) {
-        ServiceList<Post> pList = group.getPosts();
+        List<Post> pList = group.getPosts();
         pList.add(post);
         group.setPosts(pList);
         return group;
@@ -81,7 +82,7 @@ public class GroupManagerImplementation implements GroupManager {
      */
     @Override
     public Group removePost(Post post, Group group) {
-        ServiceList<Post> pList = group.getPosts();
+        List<Post> pList = group.getPosts();
         pList.remove(post);
         group.setPosts(pList);
         return group;
