@@ -4,9 +4,11 @@ import client.Components.Component;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import tools.ServiceList;
 
+import java.util.List;
+
 public abstract class Container extends Component
 {
-    protected ServiceList<Component> components = new ServiceList<>();
+    protected List<Component> components = new ServiceList<>();
 
     public Container(){
 

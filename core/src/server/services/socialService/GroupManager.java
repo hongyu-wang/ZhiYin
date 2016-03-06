@@ -1,5 +1,5 @@
 
-package server.services.groupService;
+package server.services.socialService;
 
 
 import server.model.social.Group;

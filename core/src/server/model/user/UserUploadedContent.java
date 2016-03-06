@@ -1,7 +1,8 @@
 package server.model.user;
 
-import server.model.musicSharing.MusicPost;
-import tools.ServiceList;
+import server.model.social.MusicPost;
+
+import java.util.List;
 
 /**A model of all user uploaded content.
  *
@@ -13,14 +14,14 @@ import tools.ServiceList;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserUploadedContent {
-    ServiceList<String> postKeys;
-    ServiceList<MusicPost> posts;
+    List<String> postKeys;
+    List<MusicPost> posts;
 
     /**Returns the service list of posts the user has uploaded.
      *
      * @return  The list of MusicPosts.
      */
-    public ServiceList<MusicPost> getPosts() {
+    public List<MusicPost> getPosts() {
         return posts;
     }
 
@@ -28,15 +29,15 @@ public class UserUploadedContent {
      *
      * @return  The list of post keys.
      */
-    public ServiceList<String> getPostKeys(){
+    public List<String> getPostKeys(){
         return postKeys;
     }
 
-    public void setPosts(ServiceList<MusicPost> posts) {
+    public void setPosts(List<MusicPost> posts) {
         this.posts = posts;
     }
 
-    public void setPostKeys(ServiceList<String> postKeys){
+    public void setPostKeys(List<String> postKeys){
         this.postKeys = postKeys;
     }
 }

@@ -1,6 +1,6 @@
 package server.services.userService;
 
-import server.model.musicDiary.DiaryPost;
+import server.model.social.DiaryPost;
 import server.model.user.User;
 import server.model.user.UserDiaryContent;
 
