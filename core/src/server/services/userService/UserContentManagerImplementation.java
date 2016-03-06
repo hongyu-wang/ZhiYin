@@ -21,7 +21,7 @@ public class UserContentManagerImplementation implements UserContentManager {
 
         List<MusicPost> musicPosts = new ServiceList<MusicPost>();
         for(long key: userContent.getPostKeys()){
-            MusicPost post = new PostManagerImplementation().requestPost(key);
+            MusicPost post = new SoundCloudManagerImplementation().requestPost(key);
             musicPosts.add(post);
         }
         userContent.setPosts(musicPosts);
