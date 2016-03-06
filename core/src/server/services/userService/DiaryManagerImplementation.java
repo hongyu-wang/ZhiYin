@@ -17,10 +17,9 @@ public class DiaryManagerImplementation implements DiaryManager {
 
     @Override
     public User addDiaryPost(User user, DiaryPost diaryPost) {
-//        user.getDiary().getDiaryKeys().add(diaryPost.getKey());
+        user.getDiary().getDiaryKeys().add(diaryPost.getKey());
         user.getDiary().getDiaryposts().add(diaryPost);
         return user;
-        //TODO implement keys
         //TODO request change to server
     }
 }

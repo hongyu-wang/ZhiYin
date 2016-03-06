@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserConversations extends ServerModel {
-    List<String> convoKeys;
+    List<Long> convoKeys;
     List<Conversation> convo;
     //TODO Examine design here.
 
@@ -21,7 +21,7 @@ public class UserConversations extends ServerModel {
      *
      * @return  The List of keys to each specific conversation.
      */
-    public List<String> getConvoKeys() {
+    public List<Long> getConvoKeys() {
         return convoKeys;
     }
 
@@ -34,7 +34,7 @@ public class UserConversations extends ServerModel {
         return convo;
     }
 
-    public void setConvoKeys(List<String> convoKeys) {
+    public void setConvoKeys(List<Long> convoKeys) {
         this.convoKeys = convoKeys;
     }
     public void setConversations(List<Conversation> convo) {

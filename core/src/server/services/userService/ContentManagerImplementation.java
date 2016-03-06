@@ -17,10 +17,9 @@ public class ContentManagerImplementation implements ContentManager {
 
     @Override
     public User addContentEntry(User user, MusicPost musicPost) {
-//        user.getContent().getPostKeys().add(musicPost.getKey());
+        user.getContent().getPostKeys().add(musicPost.getKey());
         user.getContent().getPosts().add(musicPost);
         return user;
-        //TODO Finish ServerModel design.
         //TODO request change to server.
     }
 }

@@ -13,14 +13,14 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserDiaryContent extends ServerModel {
-    List<String> diaryKeys;
+    List<Long> diaryKeys;
     List<DiaryPost> diaryposts;
 
     /**Returns all keys to user diaryPosts.
      *
      * @return  The service list of all userDiaryPosts.
      */
-    public List<String> getDiaryKeys() {
+    public List<Long> getDiaryKeys() {
         return diaryKeys;
     }
 
@@ -35,7 +35,7 @@ public class UserDiaryContent extends ServerModel {
     public void setDiaryposts(List<DiaryPost> diaryposts) {
         this.diaryposts = diaryposts;
     }
-    public void setDiaryKeys(List<String> diaryKeys) {
+    public void setDiaryKeys(List<Long> diaryKeys) {
         this.diaryKeys = diaryKeys;
     }
 

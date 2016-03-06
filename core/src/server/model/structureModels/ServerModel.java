@@ -7,11 +7,11 @@ package server.model.structureModels;
 public class ServerModel {
     protected long accessKey;
 
-    public long getAccessKey() {
+    public long getKey() {
         return accessKey;
     }
 
-    public void setAccessKey(long accessKey) {
+    public void setKey(long accessKey) {
         this.accessKey = accessKey;
     }
 }

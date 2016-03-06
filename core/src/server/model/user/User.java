@@ -2,6 +2,8 @@ package server.model.user;
 
 import server.model.structureModels.ServerModel;
 
+import java.util.List;
+
 /**A user of Zhi Yin. Contains all the necessary information for the user.
  *
  * A model filled with the information on a user.
@@ -21,6 +23,8 @@ public class User extends ServerModel {
     private UserDiaryContent diary;
     private UserActivityLog log;
     private UserUploadedContent content;
+
+    //TODO Implement friends.
 
     /**Gets all basic user information.
      *
@@ -62,6 +66,22 @@ public class User extends ServerModel {
         return log;
     }
 
+//    /**Gets the list of all friend keys.
+//     *
+//     * @return  The List of friend keys.
+//     */
+//    public List<Long> getFriendKeys() {
+//        return friendKeys;
+//    }
+//
+//    /**Gets the list of user friends.
+//     *
+//     * @return  The List of users which are friends with the user.
+//     */
+//    public List<String> getFriends() {
+//        return friends;
+//    }
+
     // SETTERS
     public void setProfile(UserProfile profile) {
         this.profile = profile;
@@ -78,4 +98,10 @@ public class User extends ServerModel {
     public void setContent(UserUploadedContent content) {
         this.content = content;
     }
+//    public void setFriendKeys(List<Long> friendKeys) {
+//        this.friendKeys = friendKeys;
+//    }
+//    public void setFriends(List<String> friends) {
+//        this.friends = friends;
+//    }
 }
