@@ -5,5 +5,13 @@ package server.model.structureModels;
  * Created by Kevin Zheng on 2016-03-04.
  */
 public class ServerModel {
-    protected String accessKey;
+    protected long accessKey;
+
+    public long getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(long accessKey) {
+        this.accessKey = accessKey;
+    }
 }
