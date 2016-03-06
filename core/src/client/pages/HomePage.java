@@ -28,4 +28,9 @@ public class HomePage extends State{
     public void resume() {
 
     }
+
+    @Override
+    protected void init() {
+
+    }
 }

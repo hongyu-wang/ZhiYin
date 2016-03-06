@@ -28,4 +28,9 @@ public class NewsFeed extends State{
     public void resume() {
 
     }
+
+
+    protected void init() {
+
+    }
 }
