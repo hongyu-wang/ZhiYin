@@ -1,16 +1,15 @@
 package server.model.user;
 
-import server.model.social.MusicPost;
 import server.model.structureModels.ServerModel;
 
 import java.util.List;
 
 /**A model of all user uploaded content.
  *
- *      - Post
- *      - Music
+ *      - MPost
+ *      - MMusic
  *      - Annotation
- *      - Comment
+ *      - MComment
  *
  * Created by Kevin Zheng on 2016-03-02.
  */

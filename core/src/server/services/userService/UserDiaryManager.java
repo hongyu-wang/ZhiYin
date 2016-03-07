@@ -1,7 +1,6 @@
 package server.services.userService;
 
-import server.model.social.DiaryPost;
-import server.model.user.User;
+import server.model.social.MDiaryPost;
 import server.model.user.UserDiaryContent;
 
 /**
@@ -21,5 +20,5 @@ public interface UserDiaryManager {
      * @param diaryPost  The new diarypost.
      * @return           The modified user.
      */
-    UserDiaryContent addDiaryPost(UserDiaryContent diary, DiaryPost diaryPost);
+    UserDiaryContent addDiaryPost(UserDiaryContent diary, MDiaryPost diaryPost);
 }

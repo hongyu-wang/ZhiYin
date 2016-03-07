@@ -3,7 +3,6 @@ package server.services.socialService;
 
 
 import server.model.social.Group;
-import server.model.social.Post;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.

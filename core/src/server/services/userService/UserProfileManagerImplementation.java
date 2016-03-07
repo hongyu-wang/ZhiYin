@@ -1,8 +1,7 @@
 package server.services.userService;
 
-import server.model.media.Image;
+import server.model.media.MImage;
 import server.model.user.UserProfile;
-import server.services.mediaService.ImageManagerImplementation;
 
 /**
  * Created by Kevin Zheng on 2016-03-03.
@@ -40,7 +39,7 @@ public class UserProfileManagerImplementation implements UserProfileManager {
     }
 
     @Override
-    public UserProfile modifyDP(UserProfile profile, Image image) {
+    public UserProfile modifyDP(UserProfile profile, MImage image) {
         profile.setImageKey(image.getKey());
         return profile;
         //TODO request change to server.

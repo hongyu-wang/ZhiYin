@@ -1,6 +1,6 @@
 package server.services.socialService;
 
-import server.model.social.Comment;
+import server.model.social.MComment;
 import tools.Utils;
 
 import java.util.List;
@@ -19,8 +19,8 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  a new comment object
      */
     @Override
-    public Comment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text){
-        Comment comment = new Comment();
+    public MComment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text){
+        MComment comment = new MComment();
         comment.setAudio(audio);
         comment.setMusic(music);
         comment.setImages(images);
@@ -39,7 +39,7 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  the updated comment
      */
     @Override
-    public Comment addMusic(Long music, Comment comment){
+    public MComment addMusic(Long music, MComment comment){
         List<Long> musicList = comment.getMusic();
         musicList.add(music);
         comment.setMusic(musicList);
@@ -54,7 +54,7 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  the updated comment
      */
     @Override
-    public Comment removeMusic(Long music, Comment comment){
+    public MComment removeMusic(Long music, MComment comment){
         List<Long> musicList = comment.getMusic();
         musicList.remove(music);
         comment.setMusic(musicList);
@@ -69,7 +69,7 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  the updated comment
      */
     @Override
-    public Comment addImage(Long image, Comment comment){
+    public MComment addImage(Long image, MComment comment){
         List<Long> imageList = comment.getImages();
         imageList.add(image);
         comment.setMusic(imageList);
@@ -84,7 +84,7 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  the updated comment
      */
     @Override
-    public Comment removeImage(Long image, Comment comment){
+    public MComment removeImage(Long image, MComment comment){
         List<Long> imageList = comment.getImages();
         imageList.remove(image);
         comment.setMusic(imageList);
@@ -99,7 +99,7 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  the updated comment
      */
     @Override
-    public Comment addAudio(Long audio, Comment comment){
+    public MComment addAudio(Long audio, MComment comment){
         List<Long> audioList = comment.getAudio();
         audioList.add(audio);
         comment.setMusic(audioList);
@@ -114,7 +114,7 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  the updated comment
      */
     @Override
-    public Comment removeAudio(Long audio, Comment comment){
+    public MComment removeAudio(Long audio, MComment comment){
         List<Long> audioList = comment.getAudio();
         audioList.remove(audio);
         comment.setMusic(audioList);
@@ -129,7 +129,7 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  the updated comment
      */
     @Override
-    public Comment like(Long user, Comment comment){
+    public MComment like(Long user, MComment comment){
         List<Long> userList = comment.getLikes();
         userList.remove(user);
         comment.setMusic(userList);
@@ -144,7 +144,7 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  the updated comment
      */
     @Override
-    public Comment addComment(Long commentAdd, Comment commentOrig){
+    public MComment addComment(Long commentAdd, MComment commentOrig){
         List<Long> comments = commentOrig.getComments();
         comments.add(commentAdd);
         commentOrig.setComments(comments);
@@ -159,7 +159,7 @@ public class CommentManagerImplementation implements CommentManager{
      * @return                  the updated comment
      */
     @Override
-    public Comment removeComment(Long commentRemove, Comment commentOrig){
+    public MComment removeComment(Long commentRemove, MComment commentOrig){
         List<Long> comments = commentOrig.getComments();
         comments.remove(commentRemove);
         commentOrig.setComments(comments);

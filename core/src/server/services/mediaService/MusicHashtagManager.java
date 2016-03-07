@@ -1,6 +1,6 @@
 package server.services.mediaService;
 
-import server.model.media.Hashtag;
+import server.model.media.MHashtag;
 
 /**
  *
@@ -16,20 +16,20 @@ public interface MusicHashtagManager {
 
     /**Returns a hashtag object of relevant information.
      *
-     * @return  The Hashtag model of string hashtag.
+     * @return  The MHashtag model of string hashtag.
      */
-    Hashtag requestHashTag(long hashtagKey);
+    MHashtag requestHashTag(long hashtagKey);
 
     /**Adds a new hashtag to the server.
      *
      * @param hashtag   The new hashtag object.
      */
-    void pushHashTag(Hashtag hashtag);
+    void pushHashTag(MHashtag hashtag);
 
-    /**Returns a new Hashtag based on a string.
+    /**Returns a new MHashtag based on a string.
      *
      * @param hashtagName   The text of the new hashtag.
      * @return              The new hashtag.
      */
-    Hashtag createNewHashTag(String hashtagName);
+    MHashtag createNewHashTag(String hashtagName);
 }

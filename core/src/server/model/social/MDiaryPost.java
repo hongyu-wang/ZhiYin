@@ -10,11 +10,11 @@ import server.model.media.*;
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class DiaryPost extends Post {
-    private Audio audio;
-    private Image image;
-    private Music music;
-    private Text text;
+public class MDiaryPost extends MPost {
+    private MAudio audio;
+    private MImage image;
+    private MMusic music;
+    private MText text;
 
     private long audioKey = 0;
     private long imageKey = 0;
@@ -25,7 +25,7 @@ public class DiaryPost extends Post {
      *
      * @return  The audio.
      */
-    public Audio getAudio(){
+    public MAudio getAudio(){
         return this.audio;
     }
 
@@ -33,7 +33,7 @@ public class DiaryPost extends Post {
      *
      * @return  The image.
      */
-    public Image getImage(){
+    public MImage getImage(){
         return this.image;
     }
 
@@ -41,7 +41,7 @@ public class DiaryPost extends Post {
      *
      * @return  The music.
      */
-    public Music getMusic(){
+    public MMusic getMusic(){
         return this.music;
     }
 
@@ -49,7 +49,7 @@ public class DiaryPost extends Post {
      *
      * @return  The text.
      */
-    public Text getText(){
+    public MText getText(){
         return this.text;
     }
 
@@ -85,19 +85,19 @@ public class DiaryPost extends Post {
         return this.textKey;
     }
 
-    public void setAudio(Audio audio){
+    public void setAudio(MAudio audio){
         this.audio = audio;
     }
 
-    public void setImage(Image image){
+    public void setImage(MImage image){
         this.image = image;
     }
 
-    public void setMusic(Music music){
+    public void setMusic(MMusic music){
         this.music = music;
     }
 
-    public void setText(Text text){
+    public void setText(MText text){
         this.text = text;
     }
 }

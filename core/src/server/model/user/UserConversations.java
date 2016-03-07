@@ -1,6 +1,5 @@
 package server.model.user;
 
-import server.model.social.Conversation;
 import server.model.structureModels.ServerModel;
 
 import java.util.List;

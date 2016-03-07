@@ -1,10 +1,7 @@
 package server.services.userService;
 
-import server.model.social.MusicPost;
-import server.model.social.Post;
-import server.model.user.User;
+import server.model.social.MMusicPost;
 import server.model.user.UserUploadedContent;
-import tools.ServiceList;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class UserContentManagerImplementation implements UserContentManager {
     }
 
     @Override
-    public UserUploadedContent addContentEntry(UserUploadedContent content, MusicPost musicPost) {
+    public UserUploadedContent addContentEntry(UserUploadedContent content, MMusicPost musicPost) {
         content.getPostKeys().add(musicPost.getKey());
         return content;
         //TODO request change to server.

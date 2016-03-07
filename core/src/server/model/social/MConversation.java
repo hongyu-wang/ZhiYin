@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Hairuo on 2016-03-03.
  */
-public class Conversation extends ServerModel {
+public class MConversation extends ServerModel {
 
     private List<Long> messageList;
 

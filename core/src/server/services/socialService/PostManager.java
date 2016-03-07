@@ -1,7 +1,6 @@
 package server.services.socialService;
 
-import server.model.media.Text;
-import server.model.social.Post;
+import server.model.social.MPost;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface PostManager {
      * @param audio id's of audio pieces that the post contains
      * @return a new post object
      */
-    public Post createPost(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text);
+    public MPost createPost(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text);
 
     /**
      * Adds music to the given post object
@@ -27,7 +26,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public Post addMusic(Long music, Post post);
+    public MPost addMusic(Long music, MPost post);
 
     /**
      * Removes music from the given post object
@@ -36,7 +35,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public Post removeMusic(Long music, Post post);
+    public MPost removeMusic(Long music, MPost post);
 
     /**
      * Adds images to the given post object
@@ -45,7 +44,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public Post addImage(Long image, Post post);
+    public MPost addImage(Long image, MPost post);
 
     /**
      * Remove images from the given post object
@@ -54,7 +53,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public Post removeImage(Long image, Post post);
+    public MPost removeImage(Long image, MPost post);
 
     /**
      * Adds audio pieces to the given post object
@@ -63,7 +62,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public Post addAudio(Long audio, Post post);
+    public MPost addAudio(Long audio, MPost post);
 
     /**
      * Remove audio from the given post object
@@ -72,7 +71,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public Post removeAudio(Long audio, Post post);
+    public MPost removeAudio(Long audio, MPost post);
 
     /**
      * Adds a like to the given post
@@ -81,7 +80,7 @@ public interface PostManager {
      * @param post the post that has been liked
      * @return the updated post
      */
-    public Post like(Long user, Post post);
+    public MPost like(Long user, MPost post);
 
     /**
      * Adds comments to the given post object
@@ -90,7 +89,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public Post addComment(Long comment, Post post);
+    public MPost addComment(Long comment, MPost post);
 
     /**
      * Remove comments from the given post object
@@ -99,7 +98,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public Post removeComment(Long comment, Post post);
+    public MPost removeComment(Long comment, MPost post);
 
 
 

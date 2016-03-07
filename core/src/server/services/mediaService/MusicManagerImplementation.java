@@ -1,7 +1,6 @@
 package server.services.mediaService;
 
-import server.model.media.Audio;
-import server.model.media.Music;
+import server.model.media.MMusic;
 
 import java.io.IOException;
 
@@ -10,15 +9,15 @@ import java.io.IOException;
  */
 public class MusicManagerImplementation implements MusicManager {
     @Override
-    public Music requestMusic(long key) {
-        Music music = new Music();
+    public MMusic requestMusic(long key) {
+        MMusic music = new MMusic();
         return music;
         //TODO request from server.
     }
 
     @Override
-    public Music createMusic(String path) throws IOException {
-        Music music = new Music();
+    public MMusic createMusic(String path) throws IOException {
+        MMusic music = new MMusic();
 
         long key = 0;
         //TODO Generate key.

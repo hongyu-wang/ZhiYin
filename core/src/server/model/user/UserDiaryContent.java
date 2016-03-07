@@ -1,14 +1,13 @@
 package server.model.user;
 
-import server.model.social.DiaryPost;
 import server.model.structureModels.ServerModel;
 
 import java.util.List;
 
-/**A model filled with every user Diary Post.
+/**A model filled with every user Diary MPost.
  *
- *      - DiaryPost
- *      - Comment
+ *      - MDiaryPost
+ *      - MComment
  *
  * Created by Kevin Zheng on 2016-03-02.
  */

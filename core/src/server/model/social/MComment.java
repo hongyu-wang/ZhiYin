@@ -4,26 +4,17 @@ import server.model.structureModels.ServerModel;
 
 import java.util.List;
 
-
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Post extends ServerModel {
-    private List<Long> comments;
+public class MComment extends ServerModel {
     private long text;
     private List<Long> likes;
     private List<Long> Music;
     private List<Long> Images;
     private List<Long> Audio;
+    private List<Long> comments;
     private long timeStamp;
-
-    public List<Long> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Long> comments) {
-        this.comments = comments;
-    }
 
     public long getText() {
         return text;
@@ -31,6 +22,14 @@ public class Post extends ServerModel {
 
     public void setText(long text) {
         this.text = text;
+    }
+
+    public List<Long> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Long> likes) {
+        this.likes = likes;
     }
 
     public List<Long> getMusic() {
@@ -45,8 +44,8 @@ public class Post extends ServerModel {
         return Images;
     }
 
-    public void setImages(List<Long> images) {
-        Images = images;
+    public void setImages(List<Long> image) {
+        Images = image;
     }
 
     public List<Long> getAudio() {
@@ -65,11 +64,11 @@ public class Post extends ServerModel {
         this.timeStamp = timeStamp;
     }
 
-    public List<Long> getLikes() {
-        return likes;
+    public List<Long> getComments() {
+        return comments;
     }
 
-    public void setLikes(List<Long> likes) {
-        this.likes = likes;
+    public void setComments(List<Long> comments) {
+        this.comments = comments;
     }
 }

@@ -1,9 +1,7 @@
 package server.services.userService;
 
-import server.model.social.DiaryPost;
-import server.model.user.User;
+import server.model.social.MDiaryPost;
 import server.model.user.UserDiaryContent;
-import tools.ServiceList;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class UserDiaryManagerImplementation implements UserDiaryManager {
     }
 
     @Override
-    public UserDiaryContent addDiaryPost(UserDiaryContent diary, DiaryPost diaryPost) {
+    public UserDiaryContent addDiaryPost(UserDiaryContent diary, MDiaryPost diaryPost) {
         diary.getDiaryKeys().add(diaryPost.getKey());
         return diary;
         //TODO request change to server
