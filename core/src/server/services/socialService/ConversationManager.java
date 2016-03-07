@@ -1,9 +1,6 @@
 package server.services.socialService;
 
-import server.model.social.Conversation;
-import server.model.social.Message;
-import server.model.user.User;
-import tools.ServiceList;
+import server.model.social.MConversation;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ public interface ConversationManager {
      * @param users list of users who started the conversation
      * @return the created conversation
      */
-    public Conversation createConversation(List<Long> users);
+    public MConversation createConversation(List<Long> users);
 
     /**
      * Adds a message to the conversation
@@ -27,7 +24,7 @@ public interface ConversationManager {
      * @param conversation  the conversation in question
      * @return              the updated conversation
      */
-    public Conversation addMessage(long message, Conversation conversation);
+    public MConversation addMessage(long message, MConversation conversation);
 
     /**
      * Removes a message from the conversation
@@ -36,7 +33,7 @@ public interface ConversationManager {
      * @param conversation  the conversation in question
      * @return              the updated conversation
      */
-    public Conversation removeMessage(long message, Conversation conversation);
+    public MConversation removeMessage(long message, MConversation conversation);
 
     /**
      * Adds a user to the conversation
@@ -45,7 +42,7 @@ public interface ConversationManager {
      * @param conversation  the conversation in question
      * @return              the updated conversation
      */
-    public Conversation addUser(long user, Conversation conversation);
+    public MConversation addUser(long user, MConversation conversation);
 
     /**
      * Removes a message from the conversation
@@ -54,7 +51,7 @@ public interface ConversationManager {
      * @param conversation  the conversation in question
      * @return              the updated conversation
      */
-    public Conversation removeUser(long user, Conversation conversation);
+    public MConversation removeUser(long user, MConversation conversation);
 
     /**
      * Retrieves a conversation from the database
@@ -62,7 +59,7 @@ public interface ConversationManager {
      * @param key           the id of the conversation
      * @return              the conversation associated with the id
      */
-    public Conversation requestConversation(long key);
+    public MConversation requestConversation(long key);
 
 
 }

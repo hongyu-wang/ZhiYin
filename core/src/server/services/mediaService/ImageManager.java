@@ -1,6 +1,6 @@
 package server.services.mediaService;
 
-import server.model.media.Image;
+import server.model.media.MImage;
 
 import java.io.IOException;
 
@@ -12,12 +12,12 @@ public interface ImageManager {
      *
      */
 
-    Image requestImage(long key);
+    MImage requestImage(long key);
 
     /**Creates a new image based on images stored on the phone.
      *
      * @param path  The string path to the image.
-     * @return      The Image created from the path.
+     * @return      The MImage created from the path.
      */
-    Image createNewImage(String path) throws IOException;
+    MImage createNewImage(String path) throws IOException;
 }

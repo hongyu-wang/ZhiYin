@@ -1,10 +1,7 @@
 package server.services.userService;
 
-import server.model.social.Conversation;
-import server.model.user.User;
+import server.model.social.MConversation;
 import server.model.user.UserConversations;
-import server.services.socialService.ConversationManagerImplementation;
-import tools.ServiceList;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class UserConversationManagerImplementation implements UserConversationMa
     }
 
     @Override
-    public UserConversations addConversation(UserConversations conversations, Conversation convo) {
+    public UserConversations addConversation(UserConversations conversations, MConversation convo) {
         conversations.getConvoKeys().add(convo.getKey());
         return conversations;
         //TODO change to server

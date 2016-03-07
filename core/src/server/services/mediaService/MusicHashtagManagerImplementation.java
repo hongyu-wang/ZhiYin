@@ -1,6 +1,6 @@
 package server.services.mediaService;
 
-import server.model.media.Hashtag;
+import server.model.media.MHashtag;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ public class MusicHashtagManagerImplementation implements MusicHashtagManager {
     }
 
     @Override
-    public Hashtag requestHashTag(long hashtagKey) {
-        Hashtag hashtag = new Hashtag();
+    public MHashtag requestHashTag(long hashtagKey) {
+        MHashtag hashtag = new MHashtag();
         hashtag.setKey(hashtagKey);
 
         List<Long> keys = null;
@@ -28,13 +28,13 @@ public class MusicHashtagManagerImplementation implements MusicHashtagManager {
     }
 
     @Override
-    public void pushHashTag(Hashtag hashtag) {
+    public void pushHashTag(MHashtag hashtag) {
         //TODO Push to server.
     }
 
     @Override
-    public Hashtag createNewHashTag(String hashtagName) {
-        Hashtag hashtag = new Hashtag();
+    public MHashtag createNewHashTag(String hashtagName) {
+        MHashtag hashtag = new MHashtag();
 
         long hashtagKey = 0;
         hashtag.setKey(hashtagKey);

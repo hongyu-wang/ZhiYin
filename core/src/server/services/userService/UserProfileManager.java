@@ -1,7 +1,6 @@
 package server.services.userService;
 
-import server.model.media.Image;
-import server.model.user.User;
+import server.model.media.MImage;
 import server.model.user.UserProfile;
 
 /**
@@ -37,5 +36,5 @@ public interface UserProfileManager {
      * @param image     The new image of profile picutre/
      * @return          The modified user profile model
      */
-    UserProfile modifyDP(UserProfile profile, Image image);
+    UserProfile modifyDP(UserProfile profile, MImage image);
 }

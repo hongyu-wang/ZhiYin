@@ -1,6 +1,5 @@
 package server.model.user;
 
-import server.model.media.Image;
 import server.model.structureModels.ServerModel;
 
 /**A model of all relevant and basic user information.

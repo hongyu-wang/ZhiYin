@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Image extends ServerModel {
+public class MImage extends ServerModel {
     String name;
     BufferedImage image;
 

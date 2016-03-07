@@ -1,10 +1,8 @@
 package server.services.socialService;
 
-import server.model.media.Text;
-import server.model.social.Message;
+import server.model.media.MText;
+import server.model.social.MMessage;
 import tools.Utils;
-
-import javax.rmi.CORBA.Util;
 
 /**
  * Created by Hairuo on 2016-03-06.
@@ -19,8 +17,8 @@ public class MessageManagerImplementation implements MessageManager{
      * @return a message containing the inputed data
      */
     @Override
-    public Message createMessage(Text text, long timeStamp, long creator){
-        Message message = new Message();
+    public MMessage createMessage(MText text, long timeStamp, long creator){
+        MMessage message = new MMessage();
         message.setCreator(creator);
         message.setText(text);
         message.setTimeStamp(timeStamp);
@@ -35,7 +33,7 @@ public class MessageManagerImplementation implements MessageManager{
      * @return the message associated with the id
      */
     @Override
-    public Message retrieveMessage(long key){
+    public MMessage retrieveMessage(long key){
         //TODO Implement this stuff
         return null;
     }
@@ -47,7 +45,7 @@ public class MessageManagerImplementation implements MessageManager{
      * @return the edited message
      */
     @Override
-    public Message editMessage(Text text, Message message){
+    public MMessage editMessage(MText text, MMessage message){
         message.setText(text);
         return message;
 

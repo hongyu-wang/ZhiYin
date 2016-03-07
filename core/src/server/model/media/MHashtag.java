@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Hashtag extends ServerModel {
+public class MHashtag extends ServerModel {
     private String hashtagName;
     private List<Long> musicKeys;
 
@@ -19,9 +19,9 @@ public class Hashtag extends ServerModel {
         return hashtagName;
     }
 
-    /**Returns list of
+    /**Returns list of keys to the music.
      *
-     * @return
+     * @return  The list of long keys.
      */
     public List<Long> getMusicKeys() {
         return musicKeys;

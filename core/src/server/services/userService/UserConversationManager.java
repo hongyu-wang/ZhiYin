@@ -1,8 +1,6 @@
 package server.services.userService;
 
-import server.model.social.Conversation;
-import server.model.social.Message;
-import server.model.user.User;
+import server.model.social.MConversation;
 import server.model.user.UserConversations;
 
 /**
@@ -22,5 +20,5 @@ public interface UserConversationManager {
      * @param convo             The new conversation.
      * @return                  The modified user.
      */
-    UserConversations addConversation(UserConversations conversations, Conversation convo);
+    UserConversations addConversation(UserConversations conversations, MConversation convo);
 }

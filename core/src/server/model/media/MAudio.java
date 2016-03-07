@@ -6,6 +6,6 @@ import server.model.structureModels.ServerModel;
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Audio extends ServerModel {
+public class MAudio extends ServerModel {
 
 }

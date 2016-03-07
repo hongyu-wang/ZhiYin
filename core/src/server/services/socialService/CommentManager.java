@@ -1,6 +1,6 @@
 package server.services.socialService;
 
-import server.model.social.Comment;
+import server.model.social.MComment;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface CommentManager {
      * @param audio id's of audio pieces that the comment contains
      * @return a new comment object
      */
-    public Comment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text);
+    public MComment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text);
 
     /**
      * Adds music to the given comment object
@@ -25,7 +25,7 @@ public interface CommentManager {
      * @param comment the given comment object
      * @return the updated comment
      */
-    public Comment addMusic(Long music, Comment comment);
+    public MComment addMusic(Long music, MComment comment);
 
     /**
      * Removes music from the given comment object
@@ -34,7 +34,7 @@ public interface CommentManager {
      * @param comment the given comment object
      * @return the updated comment
      */
-    public Comment removeMusic(Long music, Comment comment);
+    public MComment removeMusic(Long music, MComment comment);
 
     /**
      * Adds images to the given comment object
@@ -43,7 +43,7 @@ public interface CommentManager {
      * @param comment the given comment object
      * @return the updated comment
      */
-    public Comment addImage(Long image, Comment comment);
+    public MComment addImage(Long image, MComment comment);
 
     /**
      * Remove images from the given comment object
@@ -52,7 +52,7 @@ public interface CommentManager {
      * @param comment the given comment object
      * @return the updated comment
      */
-    public Comment removeImage(Long image, Comment comment);
+    public MComment removeImage(Long image, MComment comment);
 
     /**
      * Adds audio pieces to the given comment object
@@ -61,7 +61,7 @@ public interface CommentManager {
      * @param comment the given comment object
      * @return the updated comment
      */
-    public Comment addAudio(Long audio, Comment comment);
+    public MComment addAudio(Long audio, MComment comment);
 
     /**
      * Remove audio from the given comment object
@@ -70,7 +70,7 @@ public interface CommentManager {
      * @param comment the given comment object
      * @return the updated comment
      */
-    public Comment removeAudio(Long audio, Comment comment);
+    public MComment removeAudio(Long audio, MComment comment);
 
     /**
      * Adds a like to the given comment
@@ -79,7 +79,7 @@ public interface CommentManager {
      * @param comment the comment that has been liked
      * @return the updated comment
      */
-    public Comment like(Long user, Comment comment);
+    public MComment like(Long user, MComment comment);
 
     /**
      * Adds comments to the given comment object
@@ -88,7 +88,7 @@ public interface CommentManager {
      * @param commentOrig the given comment object
      * @return the updated comment
      */
-    public Comment addComment(Long commentAdd, Comment commentOrig);
+    public MComment addComment(Long commentAdd, MComment commentOrig);
 
     /**
      * Remove comments from the given comment object
@@ -97,5 +97,5 @@ public interface CommentManager {
      * @param commentOrig the given comment object
      * @return the updated comment
      */
-    public Comment removeComment(Long commentRemove, Comment commentOrig);
+    public MComment removeComment(Long commentRemove, MComment commentOrig);
 }

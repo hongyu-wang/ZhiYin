@@ -1,50 +1,50 @@
 package server.services.diaryService;
-import server.model.media.Audio;
-import server.model.media.Music;
-import server.model.media.Image;
-import server.model.media.Text;
-import server.model.social.DiaryPost;
+import server.model.media.MAudio;
+import server.model.media.MImage;
+import server.model.media.MMusic;
+import server.model.media.MText;
+import server.model.social.MDiaryPost;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
 public interface MusicDiary {
-    /**Requests the DiaryPost's data from the server.
+    /**Requests the MDiaryPost's data from the server.
      *
      * @param key   The user's key.
-     * @return          The DiaryPost model.
+     * @return          The MDiaryPost model.
      */
-    DiaryPost requestDiaryPostData(long key);
+    MDiaryPost requestDiaryPostData(long key);
 
     /**Modify the audio.
      *
-     * @param diaryPost      The DiaryPost.
+     * @param diaryPost      The MDiaryPost.
      * @param audio          The audio.
-     * @return               The modified DiaryPost model.
+     * @return               The modified MDiaryPost model.
      */
-    DiaryPost modifyAudio(DiaryPost diaryPost, Audio audio);
+    MDiaryPost modifyAudio(MDiaryPost diaryPost, MAudio audio);
 
     /**Modify the image.
      *
-     * @param diaryPost      The DiaryPost.
+     * @param diaryPost      The MDiaryPost.
      * @param image          The image.
-     * @return               The modified DiaryPost model.
+     * @return               The modified MDiaryPost model.
      */
-    DiaryPost modifyImage(DiaryPost diaryPost, Image image);
+    MDiaryPost modifyImage(MDiaryPost diaryPost, MImage image);
 
     /**Modify the image.
      *
-     * @param diaryPost      The DiaryPost.
+     * @param diaryPost      The MDiaryPost.
      * @param music          The music.
-     * @return               The modified DiaryPost model.
+     * @return               The modified MDiaryPost model.
      */
-    DiaryPost modifyMusic(DiaryPost diaryPost, Music music);
+    MDiaryPost modifyMusic(MDiaryPost diaryPost, MMusic music);
 
     /**Modify the image.
      *
-     * @param diaryPost      The DiaryPost.
+     * @param diaryPost      The MDiaryPost.
      * @param text          The text.
-     * @return               The modified DiaryPost model.
+     * @return               The modified MDiaryPost model.
      */
-    DiaryPost modifyText(DiaryPost diaryPost, Text text);
+    MDiaryPost modifyText(MDiaryPost diaryPost, MText text);
 }

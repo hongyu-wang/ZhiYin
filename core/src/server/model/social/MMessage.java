@@ -1,8 +1,6 @@
 package server.model.social;
 
-import server.model.media.Image;
-import server.model.media.Music;
-import server.model.media.Text;
+import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 
@@ -11,8 +9,8 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Message extends ServerModel {
-    private Text text;
+public class MMessage extends ServerModel {
+    private MText text;
     private long creator;
     private long timeStamp;
     private List<User> seenBy;
@@ -25,11 +23,11 @@ public class Message extends ServerModel {
         this.seenBy = seenBy;
     }
 
-    public Text getText() {
+    public MText getText() {
         return text;
     }
 
-    public void setText(Text text) {
+    public void setText(MText text) {
         this.text = text;
     }
 
