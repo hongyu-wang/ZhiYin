@@ -11,8 +11,9 @@ public class Comment extends ServerModel {
     private long text;
     private List<Long> likes;
     private List<Long> Music;
-    private List<Long> Image;
+    private List<Long> Images;
     private List<Long> Audio;
+    private List<Long> comments;
     private long timeStamp;
 
     public long getText() {
@@ -39,12 +40,12 @@ public class Comment extends ServerModel {
         Music = music;
     }
 
-    public List<Long> getImage() {
-        return Image;
+    public List<Long> getImages() {
+        return Images;
     }
 
-    public void setImage(List<Long> image) {
-        Image = image;
+    public void setImages(List<Long> image) {
+        Images = image;
     }
 
     public List<Long> getAudio() {
@@ -61,5 +62,13 @@ public class Comment extends ServerModel {
 
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public List<Long> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Long> comments) {
+        this.comments = comments;
     }
 }
