@@ -1,11 +1,8 @@
 package server.services.diaryService;
 
-import server.model.social.DiaryPost;
+import server.model.musicDiary.DiaryPost;
 import server.model.media.*;
 import server.services.mediaService.ImageManagerImplementation;
-import server.services.mediaService.AudioManagerImplementation;
-import server.services.mediaService.MusicManagerImplementation;
-import server.services.mediaService.TextManagerImplementation;
 
 /**
  * Created by calin on 06/03/2016.
@@ -15,19 +12,19 @@ public class MusicDiaryImplementation implements MusicDiary {
     public DiaryPost requestDiaryPostData(long diaryPostKey){
         DiaryPost diaryPost = new DiaryPost();
 
-        long key = 0;
+        long key = 0;           //Server request
         diaryPost.setKey(key);
 
-        Audio audio = new AudioManagerImplementation().requestAudio(diaryPost.getAudioKey());
+        Audio audio = null;     //Server request
         diaryPost.setAudio(audio);
 
-        Image image = new ImageManagerImplementation().requestImage(diaryPost.getImageKey());
+        Image image = null;     //Server request
         diaryPost.setImage(image);
 
-        Music music = new MusicManagerImplementation().requestMusic(diaryPost.getMusicKey());
+        Music music = null;     //Server request
         diaryPost.setMusic(music);
 
-        Text text = new TextManagerImplementation().requestText(diaryPost.getTextKey());
+        Text text = null;       //Server request
         diaryPost.setText(text);
 
         return diaryPost;
