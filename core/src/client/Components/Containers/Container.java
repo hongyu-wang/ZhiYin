@@ -4,16 +4,12 @@ import client.Components.Component;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import tools.ServiceList;
 
-public abstract class Container extends Component
+public class Container extends Component
 {
     protected ServiceList<Component> components = new ServiceList<>();
 
-    public Container(){
 
-    }
-
-    public Container(SpriteBatch batch, double x, double y, double width, double height){
-        this.batch = batch;
+    public Container(int x, int y, int width, int height){
         this.x = x;
         this.y = y;
         this.width = width;
@@ -33,4 +29,24 @@ public abstract class Container extends Component
         components.clear();
     }
 
+    @Override
+    public void dispose() {
+        for (Component comp : components){
+            comp.dispose();
+        }
+    }
+
+    @Override
+    public void draw() {
+        for (Component comp : components){
+            comp.draw();
+        }
+    }
+
+    @Override
+    public void update(float dt) {
+        for (Component comp : components){
+            comp.update(dt);
+        }
+    }
 }

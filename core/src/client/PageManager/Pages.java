@@ -1,7 +1,6 @@
 package client.PageManager;
 
 import client.pages.State;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * This is the enum storing all possible page states across all the pages.
@@ -14,7 +13,7 @@ public enum Pages {
      * Here should be placed state objects as a classname. Note, className needs
      * to include all subpackages within package.
      */
-    DIARY("musicDiary.mainMusicDiaryPage.Diary");
+    DIARY("musicDiary.mainMusicDiaryPage.Diary"), MAIN("Main");
 
 
 
