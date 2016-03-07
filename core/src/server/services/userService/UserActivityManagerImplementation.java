@@ -16,14 +16,15 @@ public class UserActivityManagerImplementation implements UserActivityManager {
         List<String> logEntries = null; //Server request
         log.setLog(logEntries);
 
-        //TODO request from server.
         return log;
+        //TODO request from server.
     }
 
     @Override
-    public User addEntry(User user, String entry) {
-        user.getLog().getLog().add(entry);
-        //TODO request change on server.
-        return user;
+    public UserActivityLog addEntry(UserActivityLog log, String entry) {
+        log.getLog().add(entry);
+        //TODO request change to server.
+
+        return log;
     }
 }

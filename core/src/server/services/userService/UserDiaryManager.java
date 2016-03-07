@@ -17,9 +17,9 @@ public interface UserDiaryManager {
 
     /**Adds new diary post to the user and to the server.
      *
-     * @param user      The user.
-     * @param diaryPost The new diarypost.
-     * @return          The modified user.
+     * @param diary      The user.
+     * @param diaryPost  The new diarypost.
+     * @return           The modified user.
      */
-    User addDiaryPost(User user, DiaryPost diaryPost);
+    UserDiaryContent addDiaryPost(UserDiaryContent diary, DiaryPost diaryPost);
 }

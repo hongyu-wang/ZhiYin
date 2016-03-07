@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Hashtag extends ServerModel {
     private String hashtagName;
-    private List<Music> music;
+    private List<Long> musicKeys;
 
     /**Returns the string representation of the hashtag.
      *
@@ -23,8 +23,8 @@ public class Hashtag extends ServerModel {
      *
      * @return
      */
-    public List<Music> getMusic() {
-        return music;
+    public List<Long> getMusicKeys() {
+        return musicKeys;
     }
 
 
@@ -33,7 +33,7 @@ public class Hashtag extends ServerModel {
         this.hashtagName = hashtagName;
     }
 
-    public void setMusic(List<Music> music) {
-        this.music = music;
+    public void setMusicKeys(List<Long> musicKeys) {
+        this.musicKeys = musicKeys;
     }
 }

@@ -10,16 +10,16 @@ import server.model.user.UserUploadedContent;
 public interface UserContentManager {
     /**Requests the server for all the content related to a user.
      *
-     * @param userKey   The user's key.
-     * @return          The MusicPost model containing all user content.
+     * @param contentKey    The user's key.
+     * @return              The MusicPost model containing all user content.
      */
-    UserUploadedContent requestAllContent(long userKey);
+    UserUploadedContent requestAllContent(long contentKey);
 
     /**Adds the content to the user and updates the server.
      *
-     * @param user      The user.
-     * @param musicPost The musicPost.
-     * @return          The modified user.
+     * @param content       The user content.
+     * @param musicPost     The musicPost.
+     * @return              The modified user.
      */
-    User addContentEntry(User user, MusicPost musicPost);
+    UserUploadedContent addContentEntry(UserUploadedContent content, MusicPost musicPost);
 }

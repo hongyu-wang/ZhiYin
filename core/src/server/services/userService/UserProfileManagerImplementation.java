@@ -1,7 +1,6 @@
 package server.services.userService;
 
 import server.model.media.Image;
-import server.model.user.User;
 import server.model.user.UserProfile;
 import server.services.mediaService.ImageManagerImplementation;
 
@@ -13,40 +12,37 @@ public class UserProfileManagerImplementation implements UserProfileManager {
     public UserProfile requestProfileData(long userKey) {
         UserProfile profile = new UserProfile();
 
+        long key = 0;               //Server request
+        profile.setKey(key);
+
         String description = null;  //Server request
         profile.setDescription(description);
 
         String username = null;     //Server request
         profile.setUsername(username);
 
-        long key = 0;               //Server request
-        profile.setKey(key);
-
-        Image dp = new ImageManagerImplementation().requestImage(profile.getImageKey());
-        profile.setProfilePic(dp);
-
         return profile;
         //TODO request from server.
     }
 
     @Override
-    public User modifyUserName(User user, String username) {
-        user.getProfile().setUsername(username);
-        return user;
+    public UserProfile modifyUserName(UserProfile profile, String username) {
+        profile.setUsername(username);
+        return profile;
         //TODO request change to server.
     }
 
     @Override
-    public User modifyDescription(User user, String description) {
-        user.getProfile().setDescription(description);
-        return user;
+    public UserProfile modifyDescription(UserProfile profile, String description) {
+        profile.setDescription(description);
+        return profile;
         //TODO request change to server.
     }
 
     @Override
-    public User modifyDP(User user, Image image) {
-        user.getProfile().setProfilePic(image);
-        return user;
+    public UserProfile modifyDP(UserProfile profile, Image image) {
+        profile.setImageKey(image.getKey());
+        return profile;
         //TODO request change to server.
     }
 }

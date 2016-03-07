@@ -7,7 +7,7 @@ import server.model.structureModels.ServerModel;
  */
 public class Music extends ServerModel {
     String name;
-    Audio music;
+    long audioKey;
 
     /**Returns the title of the music.
      *
@@ -21,8 +21,8 @@ public class Music extends ServerModel {
      *
      * @return  The audio file.
      */
-    public Audio getMusic() {
-        return music;
+    public long getMusic() {
+        return audioKey;
     }
 
 
@@ -31,7 +31,7 @@ public class Music extends ServerModel {
         this.name = name;
     }
 
-    public void setMusic(Audio music) {
-        this.music = music;
+    public void setMusic(long audioKey) {
+        this.audioKey = audioKey;
     }
 }

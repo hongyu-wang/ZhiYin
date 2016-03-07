@@ -16,15 +16,6 @@ import java.util.List;
  */
 public class UserUploadedContent extends ServerModel {
     List<Long> postKeys;
-    List<MusicPost> posts;
-
-    /**Returns the service list of posts the user has uploaded.
-     *
-     * @return  The list of MusicPosts.
-     */
-    public List<MusicPost> getPosts() {
-        return posts;
-    }
 
     /**Returns the service list of all keys to posts the user has uploaded.
      *
@@ -32,10 +23,6 @@ public class UserUploadedContent extends ServerModel {
      */
     public List<Long> getPostKeys(){
         return postKeys;
-    }
-
-    public void setPosts(List<MusicPost> posts) {
-        this.posts = posts;
     }
 
     public void setPostKeys(List<Long> postKeys){

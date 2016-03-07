@@ -12,13 +12,13 @@ public interface MusicHashtagManager {
      * @param hashtagName   The string hashtagName.
      * @return              True if the string corresponds to a server hashtag.
      */
-    boolean validateHashtag(String hashtagName);
+    long requestAuthenticationKey(String hashtagName);
 
     /**Returns a hashtag object of relevant information.
      *
      * @return  The Hashtag model of string hashtag.
      */
-    Hashtag requestHashTag(String hashtagName);
+    Hashtag requestHashTag(long hashtagKey);
 
     /**Adds a new hashtag to the server.
      *

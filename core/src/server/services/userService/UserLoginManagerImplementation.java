@@ -14,33 +14,36 @@ public class UserLoginManagerImplementation implements UserLoginManager {
      *
      * @param user  The username.
      * @param pass  The password.
-     * @return  True if the user/pass combo is correct.
+     * @return      The key of the user model.
      */
     @Override
-    public boolean validateLogin(String user, String pass) {
-        return false;
+    public long requestAuthenticationKey(String user, String pass) {
+        long userKey = 0;
+        return userKey;
         //TODO request from server.
     }
 
     /**Retrieves all relevant information on the user.
      *
-     * @param username  The username of the user.
-     * @return  The user class with all information.
+     * @param userKey   The userkey of the user.
+     * @return          The user class with all information.
      */
     @Override
-    public User requestUserData(String username, String pass) {
+    public User requestUserData(long userKey) {
 
         User user = new User();
+        user.setKey(userKey);
 
-        long key = 0;   //Server request.
-        user.setKey(key);
+        long userContent = 0;
         //TODO request from server.
-
-        UserUploadedContent userContent = new UserContentManagerImplementation().requestAllContent(key);
-        UserConversations conversations = new UserConversationManagerImplementation().requestAllConversations(key);
-        UserDiaryContent diary = new UserDiaryManagerImplementation().requestAllDiaryContent(key);
-        UserActivityLog log = new UserActivityManagerImplementation().requestLog(key);
-        UserProfile profile = new UserProfileManagerImplementation().requestProfileData(key);
+        long conversations = 0;
+        //TODO request from server.
+        long diary = 0;
+        //TODO request from server.
+        long log = 0;
+        //TODO request from server.
+        long profile = 0;
+        //TODO request from server.
 
         user.setContent(userContent);
         user.setConversations(conversations);

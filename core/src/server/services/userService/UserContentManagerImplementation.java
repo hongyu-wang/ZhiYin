@@ -13,28 +13,21 @@ import java.util.List;
  */
 public class UserContentManagerImplementation implements UserContentManager {
     @Override
-    public UserUploadedContent requestAllContent(long userKey) {
+    public UserUploadedContent requestAllContent(long contentKey) {
         UserUploadedContent userContent = new UserUploadedContent();
+        userContent.setKey(contentKey);
 
         List<Long> keys = null; //Server request
         userContent.setPostKeys(keys);
 
-        List<MusicPost> musicPosts = new ServiceList<MusicPost>();
-        for(long key: userContent.getPostKeys()){
-            MusicPost post = new SoundCloudManagerImplementation().requestPost(key);
-            musicPosts.add(post);
-        }
-        userContent.setPosts(musicPosts);
-
-        //TODO request from server.
         return userContent;
+        //TODO request from server.
     }
 
     @Override
-    public User addContentEntry(User user, MusicPost musicPost) {
-        user.getContent().getPostKeys().add(musicPost.getKey());
-        user.getContent().getPosts().add(musicPost);
-        return user;
+    public UserUploadedContent addContentEntry(UserUploadedContent content, MusicPost musicPost) {
+        content.getPostKeys().add(musicPost.getKey());
+        return content;
         //TODO request change to server.
     }
 }

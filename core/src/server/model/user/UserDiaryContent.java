@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class UserDiaryContent extends ServerModel {
     List<Long> diaryKeys;
-    List<DiaryPost> diaryposts;
 
     /**Returns all keys to user diaryPosts.
      *
@@ -24,17 +23,6 @@ public class UserDiaryContent extends ServerModel {
         return diaryKeys;
     }
 
-    /**Returns all user diaryPosts.
-     *
-     * @return  The List of all diaryPosts.
-     */
-    public List<DiaryPost> getDiaryposts() {
-        return diaryposts;
-    }
-
-    public void setDiaryposts(List<DiaryPost> diaryposts) {
-        this.diaryposts = diaryposts;
-    }
     public void setDiaryKeys(List<Long> diaryKeys) {
         this.diaryKeys = diaryKeys;
     }
