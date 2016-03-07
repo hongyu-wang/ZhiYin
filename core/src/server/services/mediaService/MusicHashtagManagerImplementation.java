@@ -2,6 +2,8 @@ package server.services.mediaService;
 
 import server.model.media.Hashtag;
 
+import java.util.List;
+
 /**
  * Created by Kevin Zheng on 2016-03-04.
  */
@@ -18,7 +20,8 @@ public class MusicHashtagManagerImplementation implements MusicHashtagManager {
         Hashtag hashtag = new Hashtag();
         hashtag.setKey(hashtagKey);
 
-        hashtag.
+        List<Long> keys = null;
+        hashtag.setMusicKeys(keys);
 
         return hashtag;
         //TODO Request from server.
