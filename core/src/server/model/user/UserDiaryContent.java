@@ -1,6 +1,7 @@
 package server.model.user;
 
 import server.model.social.DiaryPost;
+import server.model.structureModels.ServerModel;
 
 import java.util.List;
 
@@ -11,30 +12,18 @@ import java.util.List;
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class UserDiaryContent {
-    List<String> diaryKeys;
-    List<DiaryPost> diaryposts;
+public class UserDiaryContent extends ServerModel {
+    List<Long> diaryKeys;
 
     /**Returns all keys to user diaryPosts.
      *
      * @return  The service list of all userDiaryPosts.
      */
-    public List<String> getDiaryKeys() {
+    public List<Long> getDiaryKeys() {
         return diaryKeys;
     }
 
-    /**Returns all user diaryPosts.
-     *
-     * @return  The List of all diaryPosts.
-     */
-    public List<DiaryPost> getDiaryposts() {
-        return diaryposts;
-    }
-
-    public void setDiaryposts(List<DiaryPost> diaryposts) {
-        this.diaryposts = diaryposts;
-    }
-    public void setDiaryKeys(List<String> diaryKeys) {
+    public void setDiaryKeys(List<Long> diaryKeys) {
         this.diaryKeys = diaryKeys;
     }
 

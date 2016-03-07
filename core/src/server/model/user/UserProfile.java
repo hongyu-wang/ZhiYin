@@ -1,6 +1,7 @@
 package server.model.user;
 
 import server.model.media.Image;
+import server.model.structureModels.ServerModel;
 
 /**A model of all relevant and basic user information.
  *
@@ -11,10 +12,11 @@ import server.model.media.Image;
  * Created by Kevin Zheng on 2016-03-02.
  *
  */
-public class UserProfile {
+public class UserProfile extends ServerModel {
     private String username;
     private String description;
-    private Image dp;
+
+    private long imageKey;
 
     /**Returns the username of the user.
      *
@@ -26,27 +28,27 @@ public class UserProfile {
 
     /**Returns the description of the user.
      *
-     * @param description   The string description.
+     * @return The string description.
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public String getDescription() {
+        return description;
     }
 
-    /**Returns the profile picture of the user.
+    /**Returns the key of the profile picture.
      *
-     * @return  The Image profile pic.
+     * @return  The long of the key.
      */
-    public Image getProfilePic() {
-        return dp;
+    public long getImageKey() {
+        return imageKey;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getDescription() {
-        return description;
+    public void setDescription(String description) {
+        this.description = description;
     }
-    public void setProfilePic(Image dp) {
-        this.dp = dp;
+    public void setImageKey(long imageKey) {
+        this.imageKey = imageKey;
     }
 }

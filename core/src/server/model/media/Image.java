@@ -1,11 +1,13 @@
 package server.model.media;
 
+import server.model.structureModels.ServerModel;
+
 import java.awt.image.BufferedImage;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class Image{
+public class Image extends ServerModel {
     String name;
     BufferedImage image;
 
@@ -25,7 +27,6 @@ public class Image{
         return image;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
@@ -33,4 +34,5 @@ public class Image{
     public void setImage(BufferedImage image) {
         this.image = image;
     }
+
 }
