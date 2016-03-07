@@ -1,6 +1,5 @@
-package server.model.musicDiary;
+package server.model.social;
 import server.model.media.*;
-import server.model.social.Post;
 
 /** A model of all basic information for MusicDiary.
  *

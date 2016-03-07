@@ -3,7 +3,7 @@ import server.model.media.Audio;
 import server.model.media.Music;
 import server.model.media.Image;
 import server.model.media.Text;
-import server.model.musicDiary.DiaryPost;
+import server.model.social.DiaryPost;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
