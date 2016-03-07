@@ -1,6 +1,7 @@
 package client.pages;
 
 import client.Components.Component;
+import client.MainBatch;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Pauseable;
@@ -9,10 +10,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import tools.ServiceList;
 
 public abstract class State implements Pauseable, Updatable, Drawable, Disposable {
+
+
     /**
-     * This is the sprite batch which all components will be used to draw.
+     * This is the primary spriteBatch for all state classes.
+     * This is gotten from the Singleton SpriteBatch instance within MainBatch.
      */
-    protected SpriteBatch spriteBatch;
+    protected SpriteBatch spriteBatch = MainBatch.getInstance();
 
     /**
      * This is the serviceList will store all components
@@ -27,10 +31,10 @@ public abstract class State implements Pauseable, Updatable, Drawable, Disposabl
     /**
      * This method will initialize all values
      */
-    protected void init(SpriteBatch sb){
-        spriteBatch = sb;
+    public void init(){
         components = new ServiceList<Component>();
     }
+
 
 
 }

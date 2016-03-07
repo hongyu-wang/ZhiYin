@@ -8,23 +8,37 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Component implements Disposable, Drawable, Updatable
 {
-    protected SpriteBatch batch;
+
     protected double x, y;
     protected double width, height;
 
-    public double getX() {
-        return this.x;
+
+    /**
+     * Default constructor for Component.
+     */
+    public Component(){
+        init();
     }
 
-    public double getY(){
-        return this.y;
+
+    /**
+     * This sets the dimension of the component.
+     *
+     * Note: The x coordinate and y coordinate should have the origin in bottom left
+     *       and it should be positive right and up, similar to standard cartesian coordinates.
+     *
+     * @param x The x value of the dimension.
+     * @param y The y value of the dimension.
+     */
+    public void setDimension(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 
-    public double getWidth() {
-        return width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
+    /**
+     * This is the primary initialize method.
+     *
+     * This method is called automatically in the constructor of Component.
+     */
+    public abstract void init();
 }
