@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Utils {
 
-    public static List newList(){
-        return new ArrayList<>();
+    public static <T> List<T> newList(){
+        return new ArrayList<T>();
     }
 }

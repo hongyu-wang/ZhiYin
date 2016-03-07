@@ -11,23 +11,23 @@ import java.util.List;
  */
 public class Conversation extends ServerModel {
 
-    private LinkedList<Message> messageList;
+    private List<Long> messageList;
 
-    private List<User> participants;
+    private List<Long> participants;
 
-    public LinkedList<Message> getMessageList() {
+    public List<Long> getMessageList() {
         return messageList;
     }
 
-    public void setMessageList(LinkedList<Message> messageList) {
+    public void setMessageList(List<Long> messageList) {
         this.messageList = messageList;
     }
 
-    public List<User> getParticipants() {
+    public List<Long> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(List<User> participants) {
+    public void setParticipants(List<Long> participants) {
         this.participants = participants;
     }
 }

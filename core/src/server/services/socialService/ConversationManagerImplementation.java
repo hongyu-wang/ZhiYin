@@ -3,7 +3,11 @@ import server.model.social.Conversation;
 import server.model.social.Message;
 import server.model.user.User;
 import tools.ServiceList;
+import tools.Utils;
+
+import javax.rmi.CORBA.Util;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Hairuo on 2016-03-03.
@@ -17,10 +21,10 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @return the created conversation
      */
     @Override
-    public Conversation createConversation(ServiceList<User> users){
+    public Conversation createConversation(List<Long> users){
         Conversation newConvo = new Conversation();
         newConvo.setParticipants(users);
-        newConvo.setMessageList(new LinkedList<Message>());
+        newConvo.setMessageList(Utils.newList());
         return newConvo;
     }
 
@@ -32,8 +36,8 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @return the updated conversation
      */
     @Override
-    public Conversation addMessage(Message message, Conversation conversation){
-        LinkedList<Message> messages = new LinkedList<>();
+    public Conversation addMessage(long message, Conversation conversation){
+        List<Long> messages = Utils.newList();
         messages.add(message);
         conversation.setMessageList(messages);
         return conversation;
@@ -47,8 +51,11 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @return the updated conversation
      */
     @Override
-    public Conversation removeMessage(Message message, Conversation conversation){
-
+    public Conversation removeMessage(long message, Conversation conversation){
+        List<Long> messages = conversation.getMessageList();
+        messages.remove(message);
+        conversation.setMessageList(messages);
+        return conversation;
     }
 
     /**
@@ -59,8 +66,11 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @return the updated conversation
      */
     @Override
-    public Conversation addUser(User user, Conversation conversation){
-        return null;
+    public Conversation addUser(long user, Conversation conversation){
+        List<Long> users = conversation.getParticipants();
+        users.add(user);
+        conversation.setParticipants(users);
+        return conversation;
     }
 
     /**
@@ -71,7 +81,22 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @return the updated conversation
      */
     @Override
-    public Conversation removeUser(User user, Conversation conversation){
+    public Conversation removeUser(long user, Conversation conversation){
+        List<Long> users = conversation.getParticipants();
+        users.remove(user);
+        conversation.setParticipants(users);
+        return conversation;
+    }
+
+    /**
+     * Retrieves a conversation from the database
+     *
+     * @param key the id of the conversation
+     * @return the conversation associated with the id
+     */
+    @Override
+    public Conversation requestConversation(long key){
+        //TODO implement this
         return null;
     }
 }

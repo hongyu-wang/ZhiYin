@@ -2,6 +2,7 @@ package server.model.social;
 
 import server.model.media.Image;
 import server.model.media.Music;
+import server.model.media.Text;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 
@@ -11,14 +12,10 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class Message extends ServerModel {
-    private String text;
-    private User creator;
-    private int timeStamp;
+    private Text text;
+    private long creator;
+    private long timeStamp;
     private List<User> seenBy;
-
-    //TBD
-    private List<Image> images;
-    private List<Music> music;
 
     public List<User> getSeenBy() {
         return seenBy;
@@ -28,43 +25,28 @@ public class Message extends ServerModel {
         this.seenBy = seenBy;
     }
 
-    public String getText() {
+    public Text getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(Text text) {
         this.text = text;
     }
 
-    public User getCreator() {
+    public long getCreator() {
         return creator;
     }
 
-    public void setCreator(User creator) {
+    public void setCreator(long creator) {
         this.creator = creator;
     }
 
-    public int getTimeStamp() {
+    public long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(int timeStamp) {
+    public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
 
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
-
-    public List<Music> getMusic() {
-        return music;
-    }
-
-    public void setMusic(List<Music> music) {
-        this.music = music;
-    }
 }
