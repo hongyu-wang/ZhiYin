@@ -1,14 +1,14 @@
 package driver;
 
-import client.MainBatch;
-import client.PageManager.Pages;
-import client.PageManager.StateManager;
+import client.singletons.MainBatch;
+import client.pageManager.Pages;
+import client.pageManager.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class MainLoop extends ApplicationAdapter {
+public class GameLoop extends ApplicationAdapter {
 	private StateManager state_manager;
 	private SpriteBatch sprite_batch;
 

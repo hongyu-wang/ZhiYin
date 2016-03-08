@@ -1,6 +1,6 @@
 package client.pages;
 
-import client.Components.Component;
+import client.components.Component;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Pauseable;
