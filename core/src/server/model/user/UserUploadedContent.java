@@ -14,6 +14,9 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserUploadedContent extends ServerModel {
+    /**
+     * The keys the posts for uploaded content.
+     */
     List<Long> postKeys;
 
     /**Returns the service list of all keys to posts the user has uploaded.

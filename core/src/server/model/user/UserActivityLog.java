@@ -12,6 +12,9 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserActivityLog extends ServerModel {
+    /**
+     * The list of log events.
+     */
     List<String> log;
 
     /**Returns a List of each event within the log.

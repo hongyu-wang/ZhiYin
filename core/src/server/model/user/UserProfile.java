@@ -12,9 +12,18 @@ import server.model.structureModels.ServerModel;
  *
  */
 public class UserProfile extends ServerModel {
+    /**
+     * The user's username or display name.
+     */
     private String username;
+    /**
+     * The user's description.
+     */
     private String description;
 
+    /**
+     * The key to the profile picture of the user.
+     */
     private long imageKey;
 
     /**Returns the username of the user.

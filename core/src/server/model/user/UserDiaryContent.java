@@ -12,6 +12,9 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserDiaryContent extends ServerModel {
+    /**
+     * The list of keys to the diary posts.
+     */
     List<Long> diaryKeys;
 
     /**Returns all keys to user diaryPosts.

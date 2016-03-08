@@ -11,6 +11,9 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserConversations extends ServerModel {
+    /**
+     * The list of keys to each conversation.
+     */
     List<Long> convoKeys;
 
 

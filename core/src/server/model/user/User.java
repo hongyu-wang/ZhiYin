@@ -18,10 +18,25 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-02-18.
  */
 public class User extends ServerModel {
+    /**
+     * The key to the userProfile.
+     */
     private long profileKey;
+    /**
+     * The key to the userConversations.
+     */
     private long conversationsKey;
+    /**
+     * The key to the userDiary.
+     */
     private long diaryKey;
+    /**
+     * The key to the userLog.
+     */
     private long logKey;
+    /**
+     * The key to the userContent.
+     */
     private long contentKey;
 
     //TODO Implement friends.

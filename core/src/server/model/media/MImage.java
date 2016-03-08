@@ -8,7 +8,13 @@ import java.awt.image.BufferedImage;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class MImage extends ServerModel {
+    /**
+     * The name of the image.
+     */
     String name;
+    /**
+     * The buffered image.
+     */
     BufferedImage image;
 
     /**Returns the name or title of this image.
@@ -26,6 +32,7 @@ public class MImage extends ServerModel {
     public BufferedImage getImage() {
         return image;
     }
+
 
     public void setName(String name) {
         this.name = name;
