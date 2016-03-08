@@ -32,7 +32,7 @@ public abstract class Component implements Disposable, Drawable, Updatable
      *
      * This method is called automatically in the constructor of Component.
      */
-    public abstract void init();
+    protected abstract void init();
 
 
     /**

@@ -8,7 +8,7 @@ public class Label extends Component
 
 
     @Override
-    public void init() {
+    protected void init() {
 
     }
 

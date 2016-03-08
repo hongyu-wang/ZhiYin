@@ -3,11 +3,10 @@ package client.pages;
 import client.component.Component;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
-import client.stateInterfaces.Pauseable;
 import client.stateInterfaces.Updatable;
 import tools.ServiceList;
 
-public abstract class State implements Pauseable, Updatable, Drawable, Disposable {
+public abstract class State implements Updatable, Drawable, Disposable {
 
 
     /**
@@ -15,10 +14,6 @@ public abstract class State implements Pauseable, Updatable, Drawable, Disposabl
      * inside the given state.
      */
     protected ServiceList<Component> components;
-
-
-
-
 
     /**
      * This method will initialize all values

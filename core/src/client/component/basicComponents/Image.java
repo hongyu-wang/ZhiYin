@@ -8,7 +8,7 @@ public class Image extends Component {
 
 
     @Override
-    public void init() {
+    protected void init() {
 
     }
 
