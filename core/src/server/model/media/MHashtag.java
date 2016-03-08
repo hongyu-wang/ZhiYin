@@ -8,12 +8,18 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class MHashtag extends ServerModel {
+    /**
+     * The text of the hashtag.
+     */
     private String hashtagName;
+    /**
+     * The keys to all the music which relates to the hashTag.
+     */
     private List<Long> musicKeys;
 
     /**Returns the string representation of the hashtag.
      *
-     * @return
+     * @return  The text of the hashtag.
      */
     public String getHashtagName() {
         return hashtagName;

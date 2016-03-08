@@ -12,6 +12,11 @@ public interface ImageManager {
      *
      */
 
+    /**Request the image from the server based on a key.
+     *
+     * @param key   The key long.
+     * @return      The MImage with the image.
+     */
     MImage requestImage(long key);
 
     /**Creates a new image based on images stored on the phone.
