@@ -1,6 +1,6 @@
-package client.Components;
+package client.component;
 
-import client.MainBatch;
+import client.singletons.MainBatch;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;

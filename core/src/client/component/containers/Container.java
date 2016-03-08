@@ -1,7 +1,7 @@
-package client.Components.Containers;
+package client.component.containers;
 
-import client.Components.Component;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import client.component.Component;
+import client.components.Component;
 import tools.ServiceList;
 
 public class Container extends Component

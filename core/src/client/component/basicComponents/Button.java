@@ -1,9 +1,10 @@
-package client.Components.basicComponents;
+package client.component.basicComponents;
 
-import client.Components.Component;
+import client.component.Component;
+import client.stateInterfaces.Performable;
 import client.stateInterfaces.Pressable;
 
-public class Button extends Component implements Pressable {
+public class Button extends Component implements Pressable, Performable {
 
 
     @Override

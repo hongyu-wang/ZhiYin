@@ -1,6 +1,7 @@
-package client.Components.basicComponents;
+package client.component.basicComponents;
 
-import client.Components.Component;
+import client.component.Component;
+import client.components.Component;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Image extends Component
