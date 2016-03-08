@@ -27,7 +27,7 @@ public class MMusic extends ServerModel {
      *
      * @return  The audio file.
      */
-    public long getMusic() {
+    public long getMusicKey() {
         return audioKey;
     }
 
@@ -37,7 +37,7 @@ public class MMusic extends ServerModel {
         this.name = name;
     }
 
-    public void setMusic(long audioKey) {
+    public void setMusicKey(long audioKey) {
         this.audioKey = audioKey;
     }
 }

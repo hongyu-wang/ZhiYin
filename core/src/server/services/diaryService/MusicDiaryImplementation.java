@@ -18,46 +18,49 @@ public class MusicDiaryImplementation implements MusicDiary {
         long key = 0;
         diaryPost.setKey(key);
 
-        MAudio audio = new AudioManagerImplementation().requestAudio(diaryPost.getAudioKey());
-        diaryPost.setAudio(audio);
+        long audioKey = 0;
+        diaryPost.setAudioKey(audioKey);
+        //TODO request from server.
 
-        MImage image = new ImageManagerImplementation().requestImage(diaryPost.getImageKey());
-        diaryPost.setImage(image);
+        long imageKey = 0;
+        diaryPost.setImageKey(imageKey);
+        //TODO request from server.
 
-        MMusic music = new MusicManagerImplementation().requestMusic(diaryPost.getMusicKey());
-        diaryPost.setMusic(music);
+        long musicKey = 0;
+        diaryPost.setMusicKey(musicKey);
+        //TODO request from server.
 
-        MText text = new TextManagerImplementation().requestText(diaryPost.getTextKey());
-        diaryPost.setText(text);
+        long textKey = 0;
+        diaryPost.setTextKey(textKey);
+        //TODO request from server.
 
         return diaryPost;
-        //TODO request from server.
     }
 
     @Override
     public MDiaryPost modifyAudio(MDiaryPost diaryPost, MAudio audio){
-        diaryPost.setAudio(audio);
+        diaryPost.setAudioKey(audio.getKey());
         return diaryPost;
         //TODO request change to server.
     }
 
     @Override
     public MDiaryPost modifyImage(MDiaryPost diaryPost, MImage image){
-        diaryPost.setImage(image);
+        diaryPost.setImageKey(image.getKey());
         return diaryPost;
         //TODO request change to server.
     }
 
     @Override
     public MDiaryPost modifyMusic(MDiaryPost diaryPost, MMusic music){
-        diaryPost.setMusic(music);
+        diaryPost.setMusicKey(music.getKey());
         return diaryPost;
         //TODO request change to server.
     }
 
     @Override
     public MDiaryPost modifyText(MDiaryPost diaryPost, MText text){
-        diaryPost.setText(text);
+        diaryPost.setTextKey(text.getKey());
         return diaryPost;
         //TODO request change to server.
     }
