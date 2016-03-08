@@ -1,8 +1,18 @@
 package server.services.mediaService;
 
-/**
- * Created by Kevin Zheng on 2016-03-04.
- */
+import server.model.media.MAudio;
+
 public interface AudioManager {
-    //TODO KK audio design.
+
+    void startRecording();
+
+    MAudio stopRecording();
+
+    void playAudio();
+
+    String[] requestAudioInfo();
+
+    public MAudio requestAudio(long key);
+
+
 }
