@@ -3,8 +3,15 @@ package client.component.containers;
 import client.component.Component;
 import tools.ServiceList;
 
-public class Container extends Component
+/**
+ * This is the container class for components.
+ * This class has an add, a clear, a dispose method.
+ */
+public abstract class Container extends Component
 {
+    /**
+     * This is the primary component array of the Container.
+     */
     protected ServiceList<Component> components = new ServiceList<>();
 
 
@@ -17,14 +24,23 @@ public class Container extends Component
     }
 
     @Override
-    public void init(){
+    protected void init(){
 
     }
 
+    /**
+     * This is the addComponent method. This will add a component
+     * into the container
+     * @param component the component to be added.
+     */
     public void addComponent(Component component){
         this.components.add(component);
     }
 
+    /**
+     * This is the clear method. This will clear all components
+     * out of the container.
+     */
     public void clear(){
         components.clear();
     }

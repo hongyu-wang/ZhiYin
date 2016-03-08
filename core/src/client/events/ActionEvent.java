@@ -12,7 +12,7 @@ public class ActionEvent {
     /**
      * This is the source of the ActionEvent.
      */
-    private Performable source;
+    private final Performable source;
 
     /**
      * This is the primary constructor of the ActionEvent

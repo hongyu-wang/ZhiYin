@@ -9,5 +9,10 @@ import client.events.ActionEvent;
  * Created by Hongyu Wang on 3/7/2016.
  */
 public interface ActionMonitor {
+
+    /**
+     * This is the actionPerformed
+     * @param e
+     */
     void actionPerformed(ActionEvent e);
 }
