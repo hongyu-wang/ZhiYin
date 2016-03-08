@@ -1,6 +1,7 @@
 package client.pages.musicDiary.mainMusicDiaryPage;
 
-import client.components.containers.Container;
+
+import client.component.containers.Container;
 
 /**
  * This Container should be created in order to represent
