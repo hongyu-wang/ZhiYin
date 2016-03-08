@@ -1,7 +1,6 @@
 package client.component.basicComponents;
 
 import client.component.Component;
-import client.components.Component;
 
 public class Label extends Component
 {

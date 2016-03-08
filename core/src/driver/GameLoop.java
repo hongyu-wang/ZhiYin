@@ -1,8 +1,7 @@
 package driver;
 
 import client.singletons.MainBatch;
-import client.pageManager.Pages;
-import client.pageManager.StateManager;
+import client.singletons.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,7 +13,7 @@ public class GameLoop extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		state_manager = new StateManager(Pages.MAIN);
+		state_manager = StateManager.getInstance();
 		sprite_batch = MainBatch.getInstance();
 
 	}

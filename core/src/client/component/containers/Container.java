@@ -1,7 +1,6 @@
 package client.component.containers;
 
 import client.component.Component;
-import client.components.Component;
 import tools.ServiceList;
 
 public class Container extends Component
@@ -17,6 +16,7 @@ public class Container extends Component
         init();
     }
 
+    @Override
     public void init(){
 
     }

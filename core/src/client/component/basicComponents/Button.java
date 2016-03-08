@@ -2,9 +2,8 @@ package client.component.basicComponents;
 
 import client.component.Component;
 import client.stateInterfaces.Performable;
-import client.stateInterfaces.Pressable;
 
-public class Button extends Component implements Pressable, Performable {
+public class Button extends Component implements Performable {
 
 
     @Override
@@ -27,8 +26,8 @@ public class Button extends Component implements Pressable, Performable {
 
     }
 
-    @Override
-    public void pressed() {
+
+    private void pressed() {
 
     }
 }

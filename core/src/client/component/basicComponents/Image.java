@@ -1,11 +1,9 @@
 package client.component.basicComponents;
 
 import client.component.Component;
-import client.components.Component;
 import com.badlogic.gdx.graphics.Texture;
 
-public class Image extends Component
-{
+public class Image extends Component {
     protected Texture image;
 
 

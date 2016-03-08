@@ -1,23 +1,25 @@
-package client.pageManager;
+package client.singletons;
 
+import client.pageManager.Pages;
 import client.pages.State;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
 
-
 /**
- * This is the current StateManager class.
- * This class shows the current state and allows you to also change
- * the state.
- *
- * Created by Hongyu Wang on 3/1/2016.
+ * Created by Hongyu Wang on 3/7/2016.
  */
-public class StateManager implements Updatable, Drawable, Disposable {
+public class StateManager implements Disposable, Updatable, Drawable {
+    private static StateManager ourInstance = new StateManager(Pages.MAIN);
+
+    public static StateManager getInstance() {
+        return ourInstance;
+    }
+
     private State current_state;
 
 
-    public StateManager(Pages initial_state){
+    private StateManager(Pages initial_state){
         init();
         changeState(initial_state);
     }
@@ -28,7 +30,10 @@ public class StateManager implements Updatable, Drawable, Disposable {
     }
 
 
-
+    /**
+     * This is the changeState method inside the StateManager.
+     * @param page the page within the Pages enum
+     */
     public void changeState(Pages page){
         current_state.pause();
         current_state = page.getStateReference();
@@ -50,4 +55,6 @@ public class StateManager implements Updatable, Drawable, Disposable {
     public void dispose() {
         current_state.dispose();
     }
+
+
 }

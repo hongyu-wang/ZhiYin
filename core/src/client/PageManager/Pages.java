@@ -13,10 +13,8 @@ public enum Pages {
      * Here should be placed state objects as a classname. Note, className needs
      * to include all subpackages within package.
      */
-    DIARY("musicDiary.mainMusicDiaryPage.Diary"), MAIN("Main");
-
-
-
+    DIARY("musicDiary.mainMusicDiaryPage.Diary"),
+    MAIN("Main");
 
     /**
      * This attribute denotes the current className of the given enum
@@ -50,10 +48,6 @@ public enum Pages {
             e.printStackTrace();
         }
     }
-
-
-
-
 
     @Override
     public String toString(){
