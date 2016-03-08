@@ -9,16 +9,16 @@ import server.model.user.UserActivityLog;
 public interface UserActivityManager {
     /**Requests the log of activities thus far.
      *
-     * @param userKey   The user's key.
+     * @param logKey    The user's key.
      * @return          The UserActivity model of recent activities.
      */
-    UserActivityLog requestLog(long userKey);
+    UserActivityLog requestLog(long logKey);
 
     /**Add an entry to the log of activities.
      *
-     * @param user  The user.
+     * @param log   The user.
      * @param entry The event string.
      * @return
      */
-    User addEntry(User user, String entry);
+    UserActivityLog addEntry(UserActivityLog log, String entry);
 }

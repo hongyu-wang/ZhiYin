@@ -1,6 +1,6 @@
 package server.services.mediaService;
 
-import server.model.media.Music;
+import server.model.media.MMusic;
 
 import java.io.IOException;
 
@@ -11,14 +11,14 @@ public interface MusicManager {
     /**Requests a piece of music from the server.
      *
      * @param key   The string identifying of the music.
-     * @return      The new Music piece.
+     * @return      The new MMusic piece.
      */
-    Music requestMusic(long key);
+    MMusic requestMusic(long key);
 
     /**Uploads a piece of music from your phone.
      *
      * @param path  The string path to the music.
      * @return      The newly created music.
      */
-    Music createMusic(String path) throws IOException;
+    MMusic createMusic(String path) throws IOException;
 }

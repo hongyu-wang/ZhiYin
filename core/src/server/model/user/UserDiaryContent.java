@@ -1,20 +1,21 @@
 package server.model.user;
 
-import server.model.social.DiaryPost;
 import server.model.structureModels.ServerModel;
 
 import java.util.List;
 
-/**A model filled with every user Diary Post.
+/**A model filled with every user Diary MPost.
  *
- *      - DiaryPost
- *      - Comment
+ *      - MDiaryPost
+ *      - MComment
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserDiaryContent extends ServerModel {
+    /**
+     * The list of keys to the diary posts.
+     */
     List<Long> diaryKeys;
-    List<DiaryPost> diaryposts;
 
     /**Returns all keys to user diaryPosts.
      *
@@ -24,17 +25,6 @@ public class UserDiaryContent extends ServerModel {
         return diaryKeys;
     }
 
-    /**Returns all user diaryPosts.
-     *
-     * @return  The List of all diaryPosts.
-     */
-    public List<DiaryPost> getDiaryposts() {
-        return diaryposts;
-    }
-
-    public void setDiaryposts(List<DiaryPost> diaryposts) {
-        this.diaryposts = diaryposts;
-    }
     public void setDiaryKeys(List<Long> diaryKeys) {
         this.diaryKeys = diaryKeys;
     }

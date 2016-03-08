@@ -1,7 +1,6 @@
 package server.services.socialService;
 
-import server.model.media.Text;
-import server.model.social.Post;
+import server.model.social.MPost;
 import tools.Utils;
 
 import java.util.List;
@@ -19,8 +18,8 @@ public class PostManagerImplementation implements PostManager {
      * @return a new post object
      */
     @Override
-    public Post createPost(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text){
-        Post post = new Post();
+    public MPost createPost(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text){
+        MPost post = new MPost();
         post.setAudio(audio);
         post.setMusic(music);
         post.setImages(images);
@@ -39,7 +38,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public Post addMusic(Long music, Post post){
+    public MPost addMusic(Long music, MPost post){
         List<Long> musicList = post.getMusic();
         musicList.add(music);
         post.setMusic(musicList);
@@ -54,7 +53,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public Post removeMusic(Long music, Post post){
+    public MPost removeMusic(Long music, MPost post){
         List<Long> musicList = post.getMusic();
         musicList.remove(music);
         post.setMusic(musicList);
@@ -69,7 +68,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public Post addImage(Long image, Post post){
+    public MPost addImage(Long image, MPost post){
         List<Long> imageList = post.getImages();
         imageList.add(image);
         post.setMusic(imageList);
@@ -84,7 +83,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public Post removeImage(Long image, Post post){
+    public MPost removeImage(Long image, MPost post){
         List<Long> imageList = post.getImages();
         imageList.remove(image);
         post.setMusic(imageList);
@@ -99,7 +98,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public Post addAudio(Long audio, Post post){
+    public MPost addAudio(Long audio, MPost post){
         List<Long> audioList = post.getAudio();
         audioList.add(audio);
         post.setMusic(audioList);
@@ -114,7 +113,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public Post removeAudio(Long audio, Post post){
+    public MPost removeAudio(Long audio, MPost post){
         List<Long> audioList = post.getAudio();
         audioList.remove(audio);
         post.setMusic(audioList);
@@ -129,7 +128,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public Post like(Long user, Post post){
+    public MPost like(Long user, MPost post){
         List<Long> userList = post.getLikes();
         userList.remove(user);
         post.setMusic(userList);
@@ -144,7 +143,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public Post addComment(Long comment, Post post){
+    public MPost addComment(Long comment, MPost post){
         List<Long> comments = post.getComments();
         comments.add(comment);
         post.setComments(comments);
@@ -159,7 +158,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public Post removeComment(Long comment, Post post){
+    public MPost removeComment(Long comment, MPost post){
         List<Long> comments = post.getComments();
         comments.remove(comment);
         post.setComments(comments);

@@ -1,33 +1,47 @@
 package server.services.mediaService;
 
-import server.model.media.Hashtag;
+import server.model.media.MHashtag;
+
+import java.util.List;
 
 /**
  * Created by Kevin Zheng on 2016-03-04.
  */
 public class MusicHashtagManagerImplementation implements MusicHashtagManager {
     @Override
-    public boolean validateHashtag(String hashtagName) {
+    public long requestAuthenticationKey(String hashtagName) {
+        long hashtagKey = 0;
+        return hashtagKey;
         //TODO Request from server.
-        return false;
     }
 
     @Override
-    public Hashtag requestHashTag(String hashtagName) {
-        Hashtag hashtag = new Hashtag();
+    public MHashtag requestHashTag(long hashtagKey) {
+        MHashtag hashtag = new MHashtag();
+        hashtag.setKey(hashtagKey);
+
+        List<Long> keys = null;
+        hashtag.setMusicKeys(keys);
+
         return hashtag;
         //TODO Request from server.
     }
 
     @Override
-    public void pushHashTag(Hashtag hashtag) {
+    public void pushHashTag(MHashtag hashtag) {
         //TODO Push to server.
     }
 
     @Override
-    public Hashtag createNewHashTag(String hashtagName) {
-        Hashtag hashtag = new Hashtag();
+    public MHashtag createNewHashTag(String hashtagName) {
+        MHashtag hashtag = new MHashtag();
+
+        long hashtagKey = 0;
+        hashtag.setKey(hashtagKey);
+        //TODO Generate key.
+
         hashtag.setHashtag(hashtagName);
+
         return hashtag;
     }
 }

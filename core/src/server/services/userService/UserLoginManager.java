@@ -12,14 +12,13 @@ public interface UserLoginManager {
      * @param pass  The password.
      * @return      True if the combination was correct.
      */
-    boolean validateLogin(String user, String pass);
+    long requestAuthenticationKey(String user, String pass);
 
     /**Requests the server for all relevant information on a user based on
      * a username.
      *
-     * @param user  The username of the user.
-     * @param pass  The password of the user.
-     * @return      A user class with all relevant information.
+     * @param userKey   The user's key.
+     * @return          A user class with all relevant information.
      */
-    User requestUserData(String user, String pass);
+    User requestUserData(long userKey);
 }

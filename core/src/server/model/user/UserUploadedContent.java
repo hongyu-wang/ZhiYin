@@ -1,30 +1,23 @@
 package server.model.user;
 
-import server.model.social.MusicPost;
 import server.model.structureModels.ServerModel;
 
 import java.util.List;
 
 /**A model of all user uploaded content.
  *
- *      - Post
- *      - Music
+ *      - MPost
+ *      - MMusic
  *      - Annotation
- *      - Comment
+ *      - MComment
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class UserUploadedContent extends ServerModel {
-    List<Long> postKeys;
-    List<MusicPost> posts;
-
-    /**Returns the service list of posts the user has uploaded.
-     *
-     * @return  The list of MusicPosts.
+    /**
+     * The keys the posts for uploaded content.
      */
-    public List<MusicPost> getPosts() {
-        return posts;
-    }
+    List<Long> postKeys;
 
     /**Returns the service list of all keys to posts the user has uploaded.
      *
@@ -32,10 +25,6 @@ public class UserUploadedContent extends ServerModel {
      */
     public List<Long> getPostKeys(){
         return postKeys;
-    }
-
-    public void setPosts(List<MusicPost> posts) {
-        this.posts = posts;
     }
 
     public void setPostKeys(List<Long> postKeys){

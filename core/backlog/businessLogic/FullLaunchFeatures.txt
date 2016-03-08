@@ -1,0 +1,2 @@
+1. Albums
+    One for each type of Media.

@@ -1,7 +1,6 @@
 package server.services.userService;
 
-import server.model.media.Image;
-import server.model.user.User;
+import server.model.media.MImage;
 import server.model.user.UserProfile;
 
 /**
@@ -17,25 +16,25 @@ public interface UserProfileManager {
 
     /**Modify the username.
      *
-     * @param user      The user.
-     * @param username  The new username.
-     * @return          The modified user model.
+     * @param profile       The user.
+     * @param username      The new username.
+     * @return              The modified user profile model.
      */
-    User modifyUserName(User user, String username);
+    UserProfile modifyUserName(UserProfile profile, String username);
 
     /**Modify the description.
      *
-     * @param user          The user.
-     * @param description   The new description.
-     * @return              The modified user model.
+     * @param profile          The user.
+     * @param description      The new description.
+     * @return                 The modified user profile model.
      */
-    User modifyDescription(User user, String description);
+    UserProfile modifyDescription(UserProfile profile, String description);
 
     /**Modify the profile picture.
      *
-     * @param user  The user.
-     * @param image The new image of profile picutre/
-     * @return
+     * @param profile   The user.
+     * @param image     The new image of profile picutre/
+     * @return          The modified user profile model
      */
-    User modifyDP(User user, Image image);
+    UserProfile modifyDP(UserProfile profile, MImage image);
 }

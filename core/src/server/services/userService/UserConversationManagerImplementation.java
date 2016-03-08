@@ -1,10 +1,7 @@
 package server.services.userService;
 
-import server.model.social.Conversation;
-import server.model.user.User;
+import server.model.social.MConversation;
 import server.model.user.UserConversations;
-import server.services.socialService.ConversationManagerImplementation;
-import tools.ServiceList;
 
 import java.util.List;
 
@@ -13,28 +10,21 @@ import java.util.List;
  */
 public class UserConversationManagerImplementation implements UserConversationManager {
     @Override
-    public UserConversations requestAllConversations(long userKey) {
+    public UserConversations requestAllConversations(long convoKey) {
         UserConversations convos = new UserConversations();
+        convos.setKey(convoKey);
 
         List<Long> keys = null; //Server request
         convos.setConvoKeys(keys);
-
-        List<Conversation> conversations = new ServiceList<Conversation>();
-        for(long key: convos.getConvoKeys()){
-            Conversation convo = new ConversationManagerImplementation().requestConversation(key);
-            conversations.add(convo);
-        }
-        convos.setConversations(conversations);
 
         return convos;
         //TODO Request from server.
     }
 
     @Override
-    public User addConversation(User user, Conversation convo) {
-        user.getConversations().getConvoKeys().add(convo.getKey());
-        user.getConversations().getConversations().add(convo);
-        return user;
+    public UserConversations addConversation(UserConversations conversations, MConversation convo) {
+        conversations.getConvoKeys().add(convo.getKey());
+        return conversations;
         //TODO change to server
     }
 }
