@@ -27,12 +27,26 @@ public abstract class Component implements Disposable, Drawable, Updatable
         init();
     }
 
+
+    /**
+     * Creates a component with given position and dimensions.
+     *
+     * @param x The component's x value.
+     * @param y The component's y value.
+     * @param width The component's width.
+     * @param height The component's height.
+     */
+    public Component(int x, int y, int width, int height){
+        setPosition(x, y);
+        setDimension(width, height);
+    }
+
     /**
      * This is the primary initialize method.
      *
      * This method is called automatically in the constructor of Component.
      */
-    protected abstract void init();
+    protected void init(){}
 
 
     /**
@@ -90,4 +104,5 @@ public abstract class Component implements Disposable, Drawable, Updatable
     public int getHeight() {
         return height;
     }
+
 }
