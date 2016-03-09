@@ -2,7 +2,7 @@ package server.services.socialService;
 
 import server.model.media.MText;
 import server.model.social.MMessage;
-import tools.Utils;
+import tools.utilities.Utils;
 
 /**
  * Created by Hairuo on 2016-03-06.

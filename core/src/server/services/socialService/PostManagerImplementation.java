@@ -1,7 +1,7 @@
 package server.services.socialService;
 
 import server.model.social.MPost;
-import tools.Utils;
+import tools.utilities.Utils;
 
 import java.util.List;
 

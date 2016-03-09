@@ -3,7 +3,7 @@ package client.pages.friends;
 import client.component.Component;
 import client.component.basicComponents.Label;
 import client.pages.State;
-import tools.ServiceList;
+import tools.utilities.ServiceList;
 
 /**
  * The main state for the friends page.

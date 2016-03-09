@@ -1,4 +1,4 @@
-package tools;
+package tools.utilities;
 
 import java.io.Serializable;
 import java.util.Dictionary;

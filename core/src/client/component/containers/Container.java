@@ -1,7 +1,7 @@
 package client.component.containers;
 
 import client.component.Component;
-import tools.ServiceList;
+import tools.utilities.ServiceList;
 
 /**
  * This is the container class for components.

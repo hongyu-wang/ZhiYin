@@ -1,4 +1,4 @@
-package tools;
+package tools.utilities;
 
 import java.util.*;
 import java.util.function.Consumer;
