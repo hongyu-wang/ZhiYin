@@ -9,13 +9,14 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class MPost extends ServerModel {
-    private List<Long> comments;
-    private long text;
-    private List<Long> likes;
-    private List<Long> Music;
-    private List<Long> Images;
-    private List<Long> Audio;
-    private long timeStamp;
+    protected long creator;
+    protected List<Long> comments;
+    protected long text;
+    protected List<Long> likes;
+    protected List<Long> Music;
+    protected List<Long> Images;
+    protected List<Long> Audio;
+    protected long timeStamp;
 
     public List<Long> getComments() {
         return comments;
@@ -71,5 +72,13 @@ public class MPost extends ServerModel {
 
     public void setLikes(List<Long> likes) {
         this.likes = likes;
+    }
+
+    public long getCreator() {
+        return creator;
+    }
+
+    public void setCreator(long creator) {
+        this.creator = creator;
     }
 }

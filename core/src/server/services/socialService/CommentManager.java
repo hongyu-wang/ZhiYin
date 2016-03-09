@@ -11,9 +11,9 @@ public interface CommentManager {
     /**
      * Creates a comment object
      *
-     * @param music id's of music that the comment contains
+     * @param music  id's of music that the comment contains
      * @param images id's of images that the comment contains
-     * @param audio id's of audio pieces that the comment contains
+     * @param audio  id's of audio pieces that the comment contains
      * @return a new comment object
      */
     public MComment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text);
@@ -21,7 +21,7 @@ public interface CommentManager {
     /**
      * Adds music to the given comment object
      *
-     * @param music the id of the piece of music to be added
+     * @param music   the id of the piece of music to be added
      * @param comment the given comment object
      * @return the updated comment
      */
@@ -30,7 +30,7 @@ public interface CommentManager {
     /**
      * Removes music from the given comment object
      *
-     * @param music the id of the piece of music to be removed
+     * @param music   the id of the piece of music to be removed
      * @param comment the given comment object
      * @return the updated comment
      */
@@ -39,7 +39,7 @@ public interface CommentManager {
     /**
      * Adds images to the given comment object
      *
-     * @param image the id of the image to be added
+     * @param image   the id of the image to be added
      * @param comment the given comment object
      * @return the updated comment
      */
@@ -48,7 +48,7 @@ public interface CommentManager {
     /**
      * Remove images from the given comment object
      *
-     * @param image the id of the image to be removed
+     * @param image   the id of the image to be removed
      * @param comment the given comment object
      * @return the updated comment
      */
@@ -57,7 +57,7 @@ public interface CommentManager {
     /**
      * Adds audio pieces to the given comment object
      *
-     * @param audio the id of the audio piece to be added
+     * @param audio   the id of the audio piece to be added
      * @param comment the given comment object
      * @return the updated comment
      */
@@ -66,7 +66,7 @@ public interface CommentManager {
     /**
      * Remove audio from the given comment object
      *
-     * @param audio the id of the audio piece to be removed
+     * @param audio   the id of the audio piece to be removed
      * @param comment the given comment object
      * @return the updated comment
      */
@@ -75,7 +75,7 @@ public interface CommentManager {
     /**
      * Adds a like to the given comment
      *
-     * @param user id of the user who liked it
+     * @param user    id of the user who liked it
      * @param comment the comment that has been liked
      * @return the updated comment
      */
@@ -84,7 +84,7 @@ public interface CommentManager {
     /**
      * Adds comments to the given comment object
      *
-     * @param commentAdd the id of the comment to be added
+     * @param commentAdd  the id of the comment to be added
      * @param commentOrig the given comment object
      * @return the updated comment
      */
@@ -94,8 +94,16 @@ public interface CommentManager {
      * Remove comments from the given comment object
      *
      * @param commentRemove the id of the comment to be removed
-     * @param commentOrig the given comment object
+     * @param commentOrig   the given comment object
      * @return the updated comment
      */
     public MComment removeComment(Long commentRemove, MComment commentOrig);
+
+    /**
+     * Retrieves a comment
+     *
+     * @param comment id of the comment
+     * @return the associated comment
+     */
+    public MComment getComment(long comment);
 }

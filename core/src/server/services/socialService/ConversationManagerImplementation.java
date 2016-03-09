@@ -90,7 +90,7 @@ public class ConversationManagerImplementation implements ConversationManager {
      * @return              the conversation associated with the id
      */
     @Override
-    public MConversation requestConversation(long key){
+    public MConversation getConversation(long key){
         //TODO implement this
         return null;
     }

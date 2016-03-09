@@ -1,5 +1,6 @@
 package server.services.socialService;
 
+import server.model.media.MMusic;
 import server.model.media.MText;
 import server.model.social.MMessage;
 import tools.utilities.Utils;
@@ -33,7 +34,7 @@ public class MessageManagerImplementation implements MessageManager{
      * @return the message associated with the id
      */
     @Override
-    public MMessage retrieveMessage(long key){
+    public MMessage getMessage(long key){
         //TODO Implement this stuff
         return null;
     }
@@ -50,4 +51,5 @@ public class MessageManagerImplementation implements MessageManager{
         return message;
 
     }
+
 }

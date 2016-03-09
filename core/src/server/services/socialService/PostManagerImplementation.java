@@ -18,7 +18,7 @@ public class PostManagerImplementation implements PostManager {
      * @return a new post object
      */
     @Override
-    public MPost createPost(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text){
+    public MPost createPost(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text, long creator){
         MPost post = new MPost();
         post.setAudio(audio);
         post.setMusic(music);
@@ -26,6 +26,7 @@ public class PostManagerImplementation implements PostManager {
         post.setComments(Utils.newList());
         post.setTimeStamp(timestamp);
         post.setText(text);
+        post.setCreator(creator);
         return post;
 
     }
@@ -38,7 +39,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public MPost addMusic(Long music, MPost post){
+    public MPost addMusic(long music, MPost post){
         List<Long> musicList = post.getMusic();
         musicList.add(music);
         post.setMusic(musicList);
@@ -53,7 +54,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public MPost removeMusic(Long music, MPost post){
+    public MPost removeMusic(long music, MPost post){
         List<Long> musicList = post.getMusic();
         musicList.remove(music);
         post.setMusic(musicList);
@@ -68,7 +69,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public MPost addImage(Long image, MPost post){
+    public MPost addImage(long image, MPost post){
         List<Long> imageList = post.getImages();
         imageList.add(image);
         post.setMusic(imageList);
@@ -83,7 +84,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public MPost removeImage(Long image, MPost post){
+    public MPost removeImage(long image, MPost post){
         List<Long> imageList = post.getImages();
         imageList.remove(image);
         post.setMusic(imageList);
@@ -98,7 +99,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public MPost addAudio(Long audio, MPost post){
+    public MPost addAudio(long audio, MPost post){
         List<Long> audioList = post.getAudio();
         audioList.add(audio);
         post.setMusic(audioList);
@@ -113,7 +114,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public MPost removeAudio(Long audio, MPost post){
+    public MPost removeAudio(long audio, MPost post){
         List<Long> audioList = post.getAudio();
         audioList.remove(audio);
         post.setMusic(audioList);
@@ -128,7 +129,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public MPost like(Long user, MPost post){
+    public MPost like(long user, MPost post){
         List<Long> userList = post.getLikes();
         userList.remove(user);
         post.setMusic(userList);
@@ -143,7 +144,7 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public MPost addComment(Long comment, MPost post){
+    public MPost addComment(long comment, MPost post){
         List<Long> comments = post.getComments();
         comments.add(comment);
         post.setComments(comments);
@@ -158,10 +159,21 @@ public class PostManagerImplementation implements PostManager {
      * @return the updated post
      */
     @Override
-    public MPost removeComment(Long comment, MPost post){
+    public MPost removeComment(long comment, MPost post){
         List<Long> comments = post.getComments();
         comments.remove(comment);
         post.setComments(comments);
         return post;
+    }
+
+    /**
+     * Retrieves a post from the server
+     *
+     * @param post the id of the post
+     * @return the associated post
+     */
+    @Override
+    public MPost getPost(long post){
+        return null;
     }
 }

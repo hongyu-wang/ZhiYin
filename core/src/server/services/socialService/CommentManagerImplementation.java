@@ -165,4 +165,15 @@ public class CommentManagerImplementation implements CommentManager{
         commentOrig.setComments(comments);
         return commentOrig;
     }
+
+    /**
+     * Retrieves a comment
+     *
+     * @param comment id of the comment
+     * @return the associated comment
+     */
+    @Override
+    public MComment getComment(long comment) {
+        return null;
+    }
 }
