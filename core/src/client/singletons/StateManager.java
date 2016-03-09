@@ -1,6 +1,6 @@
 package client.singletons;
 
-import client.pageManager.Pages;
+import client.PageManager.Pages;
 import client.pages.State;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;

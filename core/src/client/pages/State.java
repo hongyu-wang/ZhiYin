@@ -19,7 +19,7 @@ public abstract class State implements Updatable, Drawable, Disposable {
      * This method will initialize all values
      */
     public void init(){
-        components = new ServiceList<Component>();
+        components = new ServiceList<>();
     }
 
 

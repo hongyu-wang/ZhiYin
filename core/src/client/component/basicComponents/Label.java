@@ -6,9 +6,14 @@ public class Label extends Component
 {
     protected String text;
 
+    public Label(String text, int x, int y, int width, int height){
+        super(x, y, width, height);
+        this.text = text;
+    }
+
 
     @Override
-    protected void init() {
+    protected void init(){
 
     }
 
