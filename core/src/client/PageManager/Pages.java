@@ -1,4 +1,4 @@
-package client.pageManager;
+package client.PageManager;
 
 import client.pages.State;
 
@@ -14,6 +14,7 @@ public enum Pages {
      * to include all subpackages within package.
      */
     DIARY("musicDiary.mainMusicDiaryPage.Diary"),
+    FRIENDS("friends.FriendsState"),
     MAIN("Main");
 
     /**
