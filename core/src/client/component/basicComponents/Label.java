@@ -6,8 +6,8 @@ public class Label extends Component
 {
     protected String text;
 
-    public Label(String text, int x, int y, int width, int height){
-        super(x, y, width, height);
+    public Label(String text){
+        super();
         this.text = text;
     }
 

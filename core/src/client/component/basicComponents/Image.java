@@ -7,7 +7,8 @@ public class Image extends Component {
     protected Texture image;
 
     public Image(String path){
-        image = new Texture(path);
+        super();
+        this.image = new Texture(path);
     }
 
 

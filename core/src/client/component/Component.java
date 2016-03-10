@@ -60,10 +60,10 @@ public abstract class Component implements Disposable, Drawable, Updatable
 
     /**
      * Sets both the position and dimensions of the component.
-     * @param x
-     * @param y
-     * @param width
-     * @param height
+     * @param x The component's x coordinate.
+     * @param y The y component's y coordinate.
+     * @param width The component's width.
+     * @param height The component's height.
      */
     public void setBounds(int x, int y, int width, int height){
         setPosition(x, y);

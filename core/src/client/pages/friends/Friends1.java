@@ -12,11 +12,6 @@ public class Friends1 extends State implements ActionMonitor{
 
     //private ServiceList<> friends;
 
-
-    public Friends1(){
-        init();
-    }
-
     public void init(){
         super.init();
 
