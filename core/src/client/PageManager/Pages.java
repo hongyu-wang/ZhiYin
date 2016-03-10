@@ -14,7 +14,7 @@ public enum Pages {
      * to include all subpackages within package.
      */
     DIARY("musicDiary.mainMusicDiaryPage.Diary"),
-    FRIENDS("friends.FriendsState"),
+    FRIENDS("friends.Friends1"),
     MAIN("Main");
 
     /**
