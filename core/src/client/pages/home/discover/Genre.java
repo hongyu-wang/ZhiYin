@@ -1,4 +1,4 @@
-package client.pages.browse.discover;
+package client.pages.home.discover;
 
 /**
  * Created by Hongyu Wang on 3/7/2016.

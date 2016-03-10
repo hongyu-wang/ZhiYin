@@ -1,4 +1,4 @@
-package client.pages.browse.ArtistList;
+package client.pages.home.ArtistList;
 
 /**
  * Created by Hongyu Wang on 3/7/2016.

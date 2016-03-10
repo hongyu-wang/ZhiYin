@@ -10,6 +10,8 @@ import tools.utilities.ServiceList;
  */
 public class FriendsState extends State{
 
+    //TODO
+
     private ServiceList<Friend> friends;
 
 
