@@ -44,7 +44,7 @@ public enum Pages {
 
 
     Pages(String class_name){
-        String preamble = "pages.";
+        String preamble = "client.pages.";
         CLASS_NAME = preamble + class_name;
 
         initializeState();

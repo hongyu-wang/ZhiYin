@@ -17,7 +17,7 @@ public class Friends1 extends State implements ActionMonitor{
 
         //friends = new ServiceList<>();
 
-        this.components.add(new Label("FRIENDS", 200, 0, 400, 100));
+        //this.components.add(new Label("FRIENDS", 200, 0, 400, 100));
     }
 
     @Override
