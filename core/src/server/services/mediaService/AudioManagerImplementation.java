@@ -18,21 +18,12 @@
 //        //TODO request from server the audio.
 //        return null;
 //    }
+
+//    public void createAudio(){
+
+}
+
 //
-//    public void startRecording() {
-//
-//    }
-//
-//    public Audio stopRecording() {
-//
-//    }
-//
-//    public void playAudio(Audio audio) {
-//
-//    }
-//
-//    public String[] requestAudioInfo() {
-//
-//    }
+
 //
 //}

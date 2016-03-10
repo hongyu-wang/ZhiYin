@@ -46,8 +46,6 @@ public class MAudio extends ServerModel {
 
     protected AudioQueue mQueue = null;
 
-    private long key;
-
     public MAudio()
     {
         mSampleRate = 44100;
@@ -219,8 +217,5 @@ public class MAudio extends ServerModel {
         AQPlayerState.drop(mStateID);
     }
 
-    public void setKey(long key){
-        this.key = key;
-    }
 
 }
