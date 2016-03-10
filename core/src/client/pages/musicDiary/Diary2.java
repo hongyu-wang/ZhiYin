@@ -20,10 +20,7 @@ public class Diary2 extends State{
 
     }
 
-    @Override
-    public void draw() {
 
-    }
 
     @Override
     public void update(float dt) {
