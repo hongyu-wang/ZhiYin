@@ -12,10 +12,6 @@ import client.pages.State;
 public class Diary1 extends State {
 
 
-    public void init(){
-        super.init();
-    }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -27,10 +23,7 @@ public class Diary1 extends State {
 
     }
 
-    @Override
-    public void draw() {
 
-    }
 
     @Override
     public void update(float dt) {
