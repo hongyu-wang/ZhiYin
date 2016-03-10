@@ -1,4 +1,4 @@
-package client.PageManager;
+package client.pageManager;
 
 import client.pages.State;
 
