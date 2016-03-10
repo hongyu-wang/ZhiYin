@@ -1,7 +1,7 @@
 package client.singletons;
 
+import client.events.ActionEvent;
 import client.stateInterfaces.Performable;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -44,6 +44,7 @@ public class InputListener implements InputProcessor, Performable{
     }
 
     private InputListener() {
+        stateManager = StateManager.getInstance();
     }
 
     @Override
@@ -63,7 +64,9 @@ public class InputListener implements InputProcessor, Performable{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
+        stateManager.actionPerformed(new ActionEvent(this));
+        mouseX = screenX;
+        mouseY = screenY;
         return false;
     }
 
@@ -85,5 +88,23 @@ public class InputListener implements InputProcessor, Performable{
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    /**
+     * Returns the mouse x position bottom left on the screen
+     * @return the current mouseX position based on the bottom left
+     */
+    public int getMouseX(){
+        return mouseX;
+    }
+
+
+
+    /**
+     * Returns the mouse y position bottom left on the screen
+     * @return the current mouseY position based on the bottom left
+     */
+    public int getMouseY(){
+        return mouseY;
     }
 }

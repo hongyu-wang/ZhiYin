@@ -5,6 +5,7 @@ import client.stateInterfaces.ActionMonitor;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
+import tools.utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * This method will initialize all values as required within state
      */
     public void init(){
-        components = new ArrayList<Component>();
+        components = Utils.<Component>newList();
     }
 
 
