@@ -6,6 +6,8 @@ import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import static client.singletons.StateManager.M;
+
 
 public abstract class Component implements Disposable, Drawable, Updatable
 {
@@ -44,8 +46,8 @@ public abstract class Component implements Disposable, Drawable, Updatable
      * @param y The y value of the dimension.
      */
     public void setPosition(int x, int y){
-        this.x = x;
-        this.y = y;
+        this.x = (int) (x * M);
+        this.y = (int) (y * M);
     }
 
     /**
@@ -54,8 +56,8 @@ public abstract class Component implements Disposable, Drawable, Updatable
      * @param height This is the integer height of the component.
      */
     public void setDimensions(int width, int height){
-        this.width = width;
-        this.height = height;
+        this.width = (int) (width * M);
+        this.height = (int) (height * M);
     }
 
     /**
