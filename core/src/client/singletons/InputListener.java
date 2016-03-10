@@ -1,7 +1,7 @@
 package client.singletons;
 
 import client.events.ActionEvent;
-import client.pageManager.Pages;
+import client.pageStorage.Pages;
 import client.stateInterfaces.Performable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -70,7 +70,7 @@ public class InputListener implements InputProcessor, Performable{
 
     @Override
     public boolean keyDown(int keycode) {
-        System.out.println(keycode);
+
         if (keycode == Input.Keys.NUM_1)
             stateManager.changeState(Pages.FRIENDS1);
 
