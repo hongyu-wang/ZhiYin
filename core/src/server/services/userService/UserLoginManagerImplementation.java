@@ -47,6 +47,7 @@ public class UserLoginManagerImplementation implements UserLoginManager {
         long profile = 0;
         //TODO request from server.
         List<Long> friends = null;
+        //TODO request from server
 
         user.setContent(userContent);
         user.setConversations(conversations);
