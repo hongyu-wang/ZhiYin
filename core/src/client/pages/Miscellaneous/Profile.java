@@ -1,4 +1,4 @@
-package client.pages;
+package client.pages.miscellaneous;
 
 /**
  * Created by Hongyu Wang on 3/7/2016.

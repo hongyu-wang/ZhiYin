@@ -12,10 +12,22 @@ public enum Pages {
     /**
      * Here should be placed state objects as a classname. Note, className needs
      * to include all subpackages within package.
+     *
+     * TODO add all required paths.
      */
-    DIARY("musicDiary.mainMusicDiaryPage.Diary"),
-    FRIENDS("friends.FriendsState"),
-    MAIN("Main");
+    DIARY1(""),
+    DIARY2(""),
+    DIARY3(""),
+    FRIENDS1(""),
+    FRIENDS2(""),
+    FRIENDS3(""),
+    FRIENDS4(""),
+    HOME1(""),
+    HOME2(""),
+    HOME3(""),
+    HOME4(""),
+    NOWPLAYING(""),
+    PROFILE("Main");
 
     /**
      * This attribute denotes the current className of the given enum
