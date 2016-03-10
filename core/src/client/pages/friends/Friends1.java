@@ -1,14 +1,11 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
-import client.component.basicComponents.Label;
+import client.component.basicComponents.Image;
 import client.events.ActionEvent;
 import client.pages.State;
 import client.stateInterfaces.ActionMonitor;
 
-/**
- * The main state for the friends page.
- */
 public class Friends1 extends State implements ActionMonitor{
 
     //private ServiceList<> friends;
@@ -20,11 +17,13 @@ public class Friends1 extends State implements ActionMonitor{
 
         //friends = new ServiceList<>();
 
-        Label background = new Label("Friends - 1.png");
+        Image background = new Image("Friends -1.png");
+
+
         background.setBounds(0, 0, 750, 1350);
 
         Button addFriendButton = new Button(this);
-        addFriendButton.setBounds(700, 1300, 50, 50);
+        addFriendButton.setBounds(650, 1250, 100, 100);
 
         Button toolsButton = new Button(this);
         toolsButton.setBounds(0, 0, 750, 100);

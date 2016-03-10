@@ -34,6 +34,7 @@ public class MText extends ServerModel {
     public void setType(int type) {
         this.type = type;
     }
+    
     public void setText(String text) {
         this.text = text;
     }

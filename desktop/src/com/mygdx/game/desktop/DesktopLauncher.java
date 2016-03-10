@@ -1,5 +1,6 @@
 package com.mygdx.game.desktop;
 
+import client.singletons.StateManager;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import driver.GameLoop;
@@ -9,8 +10,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.vSyncEnabled = true;
 		cfg.title = "Zhi Yin";
-		cfg.width = 375;
-		cfg.height = 667;
+		cfg.width = (int)(750* StateManager.M);
+		cfg.height = (int) (1334* StateManager.M);
 
 		new LwjglApplication(new GameLoop(), cfg);
 	}

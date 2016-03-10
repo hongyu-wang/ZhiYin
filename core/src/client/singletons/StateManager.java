@@ -1,6 +1,6 @@
 package client.singletons;
 import client.events.ActionEvent;
-import client.pageManager.Pages;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.stateInterfaces.ActionMonitor;
 import client.stateInterfaces.Disposable;
@@ -26,7 +26,7 @@ public class StateManager implements Disposable, Updatable, Drawable, ActionMoni
         return ourInstance;
     }
 
-    public static final double M = 0.5;
+    public static final double M = .5;
 
 
     /**
