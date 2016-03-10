@@ -13,9 +13,22 @@ public enum Pages {
      * Here should be placed state objects as a classname. Note, className needs
      * to include all subpackages within package.
      */
-    DIARY("musicDiary.mainMusicDiaryPage.Diary"),
-    FRIENDS("friends.FriendsState"),
-    MAIN("Main");
+
+    FRIENDS1("friends.Friends1"),
+    FRIENDS2("friends.Friends1"),
+    FRIENDS3("friends.Friends1"),
+    FRIENDS4("friends.Friends1"),
+    HOME1("home.Home1"),
+    HOME2("home.Home2"),
+    HOME3("home.Home3"),
+    HOME4("home.Home4"),
+    NOWPLAYING("miscellaneous.NowPlaying"),
+    PROFILE("miscellaneous.Profile"),
+    DIARY1("musicDiary.Diary1"),
+    DIARY2("musicDiary.Diary1"),
+    DIARY3("musicDiary.Diary1"),
+    DIARY4("musicDiary.Diary1"),
+    ;
 
     /**
      * This attribute denotes the current className of the given enum
@@ -48,6 +61,8 @@ public enum Pages {
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        state_reference.init();
     }
 
     @Override
