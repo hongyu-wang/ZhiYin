@@ -27,7 +27,6 @@ public enum Pages {
     DIARY1("musicDiary.Diary1"),
     DIARY2("musicDiary.Diary2"),
     DIARY3("musicDiary.Diary3"),
-    DIARY4("musicDiary.Diary4"),
     ;
 
     /**
