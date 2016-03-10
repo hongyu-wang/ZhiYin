@@ -2,7 +2,7 @@ package server.services.soundcloudService;
 
 import server.model.media.MText;
 import server.model.soundCloud.MPlaylist;
-import tools.Utils;
+import tools.utilities.Utils;
 
 import java.util.List;
 
@@ -61,3 +61,4 @@ public class PlaylistManagerImplementation {
     }
 
 }
+

@@ -5,7 +5,7 @@ import server.model.social.MPost;
 import server.model.soundCloud.MMusicPost;
 import server.services.socialService.PostManager;
 import server.services.socialService.PostManagerImplementation;
-import tools.Utils;
+import tools.utilities.Utils;
 
 import java.util.List;
 
@@ -81,3 +81,4 @@ public class MusicPostManagerImplementation extends PostManagerImplementation im
         return post;
     }
 }
+

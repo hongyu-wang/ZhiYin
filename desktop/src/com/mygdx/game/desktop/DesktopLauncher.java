@@ -6,7 +6,12 @@ import driver.GameLoop;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new GameLoop(), config);
+		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
+		cfg.vSyncEnabled = true;
+		cfg.title = "Zhi Yin";
+		cfg.width = 375;
+		cfg.height = 667;
+
+		new LwjglApplication(new GameLoop(), cfg);
 	}
 }
