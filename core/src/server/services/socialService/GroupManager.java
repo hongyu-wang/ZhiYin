@@ -60,6 +60,6 @@ public interface GroupManager {
      * @param key           id of the group
      * @return              group with the id
      */
-    public Group requestGroup(long key);
+    public Group getGroup(long key);
 
 }

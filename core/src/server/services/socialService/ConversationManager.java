@@ -59,7 +59,7 @@ public interface ConversationManager {
      * @param key           the id of the conversation
      * @return              the conversation associated with the id
      */
-    public MConversation requestConversation(long key);
+    public MConversation getConversation(long key);
 
 
 }

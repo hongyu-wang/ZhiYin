@@ -24,7 +24,7 @@ public interface MessageManager {
      * @param key id of the message to be retrieved
      * @return the message associated with the id
      */
-    public MMessage retrieveMessage(long key);
+    public MMessage getMessage(long key);
 
     /**
      * Edits the text of a message

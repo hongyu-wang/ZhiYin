@@ -3,7 +3,7 @@ package server.services.socialService;
 
 import server.model.social.Group;
 
-import tools.Utils;
+import tools.utilities.Utils;
 
 import java.util.List;
 
@@ -95,7 +95,7 @@ public class GroupManagerImplementation implements GroupManager {
      * @return              group with the id
      */
     @Override
-    public Group requestGroup(long key){
+    public Group getGroup(long key){
         //TODO implement this
         return null;
     }

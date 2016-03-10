@@ -9,6 +9,7 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-02-19.
  */
 public class Group  extends ServerModel {
+
     /**
      * For now group only contains a list of users and a list of posts that users
      * have put into the group

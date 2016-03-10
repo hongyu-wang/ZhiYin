@@ -1,7 +1,9 @@
 package client.component.containers;
 
 import client.component.Component;
-import tools.ServiceList;
+import tools.utilities.Utils;
+
+import java.util.List;
 
 /**
  * This is the container class for components.
@@ -12,7 +14,7 @@ public abstract class Container extends Component
     /**
      * This is the primary component array of the Container.
      */
-    protected ServiceList<Component> components = new ServiceList<>();
+    protected List<Component> components = Utils.<Component>newList();
 
 
     public Container(int x, int y, int width, int height){

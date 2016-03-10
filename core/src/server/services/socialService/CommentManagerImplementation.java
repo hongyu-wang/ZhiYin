@@ -1,7 +1,7 @@
 package server.services.socialService;
 
 import server.model.social.MComment;
-import tools.Utils;
+import tools.utilities.Utils;
 
 import java.util.List;
 
@@ -164,5 +164,16 @@ public class CommentManagerImplementation implements CommentManager{
         comments.remove(commentRemove);
         commentOrig.setComments(comments);
         return commentOrig;
+    }
+
+    /**
+     * Retrieves a comment
+     *
+     * @param comment id of the comment
+     * @return the associated comment
+     */
+    @Override
+    public MComment getComment(long comment) {
+        return null;
     }
 }

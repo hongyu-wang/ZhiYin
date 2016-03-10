@@ -17,7 +17,7 @@ public interface PostManager {
      * @param audio id's of audio pieces that the post contains
      * @return a new post object
      */
-    public MPost createPost(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text);
+    public MPost createPost(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text, long creator);
 
     /**
      * Adds music to the given post object
@@ -26,7 +26,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public MPost addMusic(Long music, MPost post);
+    public MPost addMusic(long music, MPost post);
 
     /**
      * Removes music from the given post object
@@ -35,7 +35,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public MPost removeMusic(Long music, MPost post);
+    public MPost removeMusic(long music, MPost post);
 
     /**
      * Adds images to the given post object
@@ -44,7 +44,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public MPost addImage(Long image, MPost post);
+    public MPost addImage(long image, MPost post);
 
     /**
      * Remove images from the given post object
@@ -53,7 +53,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public MPost removeImage(Long image, MPost post);
+    public MPost removeImage(long image, MPost post);
 
     /**
      * Adds audio pieces to the given post object
@@ -62,7 +62,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public MPost addAudio(Long audio, MPost post);
+    public MPost addAudio(long audio, MPost post);
 
     /**
      * Remove audio from the given post object
@@ -71,7 +71,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public MPost removeAudio(Long audio, MPost post);
+    public MPost removeAudio(long audio, MPost post);
 
     /**
      * Adds a like to the given post
@@ -80,7 +80,7 @@ public interface PostManager {
      * @param post the post that has been liked
      * @return the updated post
      */
-    public MPost like(Long user, MPost post);
+    public MPost like(long user, MPost post);
 
     /**
      * Adds comments to the given post object
@@ -89,7 +89,7 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public MPost addComment(Long comment, MPost post);
+    public MPost addComment(long comment, MPost post);
 
     /**
      * Remove comments from the given post object
@@ -98,7 +98,15 @@ public interface PostManager {
      * @param post the given post object
      * @return the updated post
      */
-    public MPost removeComment(Long comment, MPost post);
+    public MPost removeComment(long comment, MPost post);
+
+    /**
+     * Retrieves a post from the server
+     *
+     * @param post the id of the post
+     * @return the associated post
+     */
+    public MPost getPost(long post);
 
 
 
