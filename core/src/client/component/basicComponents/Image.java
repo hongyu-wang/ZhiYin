@@ -6,6 +6,11 @@ import com.badlogic.gdx.graphics.Texture;
 public class Image extends Component {
     protected Texture image;
 
+    public Image(String path){
+        super();
+        this.image = new Texture(path);
+    }
+
 
     @Override
     protected void init() {
@@ -19,7 +24,7 @@ public class Image extends Component {
 
     @Override
     public void draw() {
-
+        sprite_batch.draw(image, this.x, this.y, this.width, this.height);
     }
 
     @Override

@@ -81,3 +81,4 @@ public class MusicPostManagerImplementation extends PostManagerImplementation im
         return post;
     }
 }
+

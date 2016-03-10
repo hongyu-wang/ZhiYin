@@ -10,8 +10,8 @@ import client.stateInterfaces.Performable;
  * will have its own specific textures.
  */
 public class Button extends Component implements Performable {
-    private ActionMonitor monitor;
 
+    private ActionMonitor monitor;
 
     /**
      * The primary constructor for button.

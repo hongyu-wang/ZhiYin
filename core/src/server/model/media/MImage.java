@@ -33,7 +33,6 @@ public class MImage extends ServerModel {
         return image;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }

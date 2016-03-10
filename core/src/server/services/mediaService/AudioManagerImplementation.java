@@ -1,6 +1,5 @@
 package server.services.mediaService;
 
-import server.model.media.Audio;
 import server.model.media.MAudio;
 
 /**
@@ -13,25 +12,10 @@ public class AudioManagerImplementation implements AudioManager {
         MAudio audio = new MAudio();
         audio.setKey(key);
 
-        //TODO Implement MAudio.
-
-        //TODO request from server the audio.
-        return null;
+        return audio;
     }
 
-    public void startRecording() {
-
-    }
-
-    public Audio stopRecording() {
-
-    }
-
-    public void playAudio(Audio audio) {
-
-    }
-
-    public String[] requestAudioInfo() {
+    public void createAudio() {
 
     }
 

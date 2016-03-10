@@ -1,5 +1,6 @@
 package driver;
 
+import client.singletons.InputListener;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -11,16 +12,21 @@ public class GameLoop extends ApplicationAdapter {
 	private StateManager state_manager;
 	private SpriteBatch sprite_batch;
 
+	public static final int WIDTH = 750;
+
+	public static final int HEIGHT = 1334;
+
+
 	@Override
 	public void create () {
 		state_manager = StateManager.getInstance();
 		sprite_batch = MainBatch.getInstance();
-
+		Gdx.input.setInputProcessor(InputListener.getInstance());
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sprite_batch.begin();
 		state_manager.draw();
