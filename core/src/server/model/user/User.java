@@ -38,8 +38,10 @@ public class User extends ServerModel {
      * The key to the userContent.
      */
     private long contentKey;
-
-    //TODO Implement friends.
+    /**
+     * The keys to the friends.
+     */
+    private List<Long> friendsKey;
 
     /**Gets all basic user information.
      *
@@ -81,21 +83,15 @@ public class User extends ServerModel {
         return logKey;
     }
 
-//    /**Gets the list of all friend keys.
-//     *
-//     * @return  The List of friend keys.
-//     */
-//    public List<Long> getFriendKeys() {
-//        return friendKeys;
-//    }
-//
-//    /**Gets the list of user friends.
-//     *
-//     * @return  The List of users which are friends with the user.
-//     */
-//    public List<String> getFriends() {
-//        return friends;
-//    }
+    /**Gets the list of all friend keys.
+     *
+     * @return  The List of friend keys.
+     */
+    public List<Long> getFriendKeys() {
+        return friendsKey;
+    }
+
+
 
     // SETTERS
     public void setProfile(long profileKey) {
@@ -113,10 +109,7 @@ public class User extends ServerModel {
     public void setContent(long contentKey) {
         this.contentKey = contentKey;
     }
-//    public void setFriendKeys(List<Long> friendKeys) {
-//        this.friendKeys = friendKeys;
-//    }
-//    public void setFriends(List<String> friends) {
-//        this.friends = friends;
-//    }
+    public void setFriends(List<Long> friendsKey) {
+        this.friendsKey = friendsKey;
+    }
 }

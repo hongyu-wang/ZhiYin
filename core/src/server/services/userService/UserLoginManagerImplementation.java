@@ -2,6 +2,8 @@ package server.services.userService;
 
 import server.model.user.*;
 
+import java.util.List;
+
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
@@ -44,12 +46,14 @@ public class UserLoginManagerImplementation implements UserLoginManager {
         //TODO request from server.
         long profile = 0;
         //TODO request from server.
+        List<Long> friends = null;
 
         user.setContent(userContent);
         user.setConversations(conversations);
         user.setDiary(diary);
         user.setLog(log);
         user.setProfile(profile);
+        user.setFriends(friends);
         return user;
     }
 }
