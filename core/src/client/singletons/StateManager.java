@@ -1,6 +1,8 @@
 package client.singletons;
+import client.events.ActionEvent;
 import client.pageManager.Pages;
 import client.pages.State;
+import client.stateInterfaces.ActionMonitor;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
@@ -10,7 +12,7 @@ import client.stateInterfaces.Updatable;
  *
  * Created by Hongyu Wang on 3/7/2016.
  */
-public class StateManager implements Disposable, Updatable, Drawable {
+public class StateManager implements Disposable, Updatable, Drawable, ActionMonitor {
     /**
      * The current instance of StateManager
      */
@@ -69,4 +71,8 @@ public class StateManager implements Disposable, Updatable, Drawable {
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        current_state.actionPerformed(e);
+    }
 }
