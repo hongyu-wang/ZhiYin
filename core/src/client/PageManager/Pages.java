@@ -16,8 +16,8 @@ public enum Pages {
 
     FRIENDS1("friends.Friends1"),
     FRIENDS2("friends.Friends2"),
-    FRIENDS3("friends.Friends1"),
-    FRIENDS4("friends.Friends1"),
+    FRIENDS3("friends.Friends3"),
+    FRIENDS4("friends.Friends4"),
     HOME1("home.Home1"),
     HOME2("home.Home2"),
     HOME3("home.Home3"),

@@ -1,7 +1,10 @@
 package client.singletons;
 
 import client.events.ActionEvent;
+import client.pageManager.Pages;
 import client.stateInterfaces.Performable;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -62,10 +65,52 @@ public class InputListener implements InputProcessor, Performable{
 
     private InputListener() {
         stateManager = StateManager.getInstance();
+
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        System.out.println(keycode);
+        if (keycode == Input.Keys.NUM_1)
+            stateManager.changeState(Pages.FRIENDS1);
+
+        if (keycode == Input.Keys.NUM_2)
+            stateManager.changeState(Pages.FRIENDS2);
+
+        if (keycode == Input.Keys.NUM_3)
+            stateManager.changeState(Pages.FRIENDS3);
+
+        if (keycode == Input.Keys.NUM_4)
+            stateManager.changeState(Pages.FRIENDS4);
+
+        if (keycode == Input.Keys.Q)
+            stateManager.changeState(Pages.DIARY1);
+
+        if (keycode == Input.Keys.W)
+            stateManager.changeState(Pages.DIARY2);
+
+        if (keycode == Input.Keys.E)
+            stateManager.changeState(Pages.DIARY3);
+
+        if (keycode == Input.Keys.A)
+            stateManager.changeState(Pages.HOME1);
+
+        if (keycode == Input.Keys.S)
+            stateManager.changeState(Pages.HOME2);
+
+        if (keycode == Input.Keys.D)
+            stateManager.changeState(Pages.HOME3);
+
+        if (keycode == Input.Keys.F)
+            stateManager.changeState(Pages.HOME4);
+
+        if (keycode == Input.Keys.Z)
+            stateManager.changeState(Pages.NOWPLAYING);
+
+        if (keycode == Input.Keys.X)
+            stateManager.changeState(Pages.PROFILE);
+
+
         return false;
     }
 
