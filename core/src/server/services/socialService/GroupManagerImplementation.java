@@ -22,16 +22,16 @@ public class GroupManagerImplementation implements GroupManager {
     public Group createGroup(long user) {
         Group crGroup = new Group();
         crGroup.setCreator(user);
-        crGroup.setMembers(Utils.newList());
-        crGroup.setAdmins(Utils.newList());
-        crGroup.setPosts(Utils.newList());
+        crGroup.setMembers(Utils.<Long>newList());
+        crGroup.setAdmins(Utils.<Long>newList());
+        crGroup.setPosts(Utils.<Long>newList());
         return crGroup;
     }
 
     /**
      * Removes a user from a given group
      *
-     * @param user the user to be added
+     * @param user  the user to be added
      * @param group the group in question
      * @return the updated group
      */
@@ -46,9 +46,9 @@ public class GroupManagerImplementation implements GroupManager {
     /**
      * Adds a user to a given group
      *
-     * @param user      the user to be added
-     * @param group     the group in question
-     * @return          the updated group
+     * @param user  the user to be added
+     * @param group the group in question
+     * @return the updated group
      */
     @Override
     public Group enterGroup(long user, Group group) {
@@ -61,9 +61,9 @@ public class GroupManagerImplementation implements GroupManager {
     /**
      * Adds a post to the given group
      *
-     * @param post          post to be added
-     * @param group         group in question
-     * @return              the updated group
+     * @param post  post to be added
+     * @param group group in question
+     * @return the updated group
      */
     @Override
     public Group addPost(long post, Group group) {
@@ -76,9 +76,9 @@ public class GroupManagerImplementation implements GroupManager {
     /**
      * Removes the post from the given group
      *
-     * @param post          the post that needs to be removed
-     * @param group         the group in question
-     * @return              the updated group
+     * @param post  the post that needs to be removed
+     * @param group the group in question
+     * @return the updated group
      */
     @Override
     public Group removePost(long post, Group group) {
@@ -91,11 +91,11 @@ public class GroupManagerImplementation implements GroupManager {
     /**
      * Retrieves a group from the database
      *
-     * @param key           id of the group
-     * @return              group with the id
+     * @param key id of the group
+     * @return group with the id
      */
     @Override
-    public Group getGroup(long key){
+    public Group getGroup(long key) {
         //TODO implement this
         return null;
     }

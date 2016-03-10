@@ -22,7 +22,7 @@ public interface PlaylistManager {
      * @param description description of the playlist
      * @return new playlist
      */
-    public MPlaylist createPlaylist(MText description);
+    public MPlaylist createPlaylist(long description);
 
     /**
      * Adds to the playlist

@@ -5,7 +5,7 @@ import server.model.social.MPost;
 import server.model.soundCloud.MMusicPost;
 import server.services.socialService.PostManager;
 import server.services.socialService.PostManagerImplementation;
-import tools.Utils;
+import tools.utilities.Utils;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class MusicPostManagerImplementation extends PostManagerImplementation im
         MMusicPost post = new MMusicPost();
         post.setMusic(music);
         post.setImages(images);
-        post.setComments(Utils.newList());
+        post.setComments(Utils.<Long>newList());
         post.setTimeStamp(timestamp);
         post.setText(text);
         post.setCreator(creator);

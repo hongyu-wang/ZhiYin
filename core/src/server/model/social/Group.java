@@ -6,17 +6,29 @@ import server.model.user.User;
 import java.util.List;
 
 /**
- * Created by Kevin Zheng on 2016-02-19.
+ * Group model
+ * Contains id's of users and posts
  */
 public class Group  extends ServerModel {
 
     /**
-     * For now group only contains a list of users and a list of posts that users
-     * have put into the group
+     * list of id's of the group members
      */
     private List<Long> members;
+
+    /**
+     * List of id's of posts that the group contains
+     */
     private List<Long> posts;
+
+    /**
+     * Id of the creator of the group
+     */
     private long creator;
+
+    /**
+     * List of id's of the admins of the group
+     */
     private List<Long> admins;
 
     public List<Long> getMembers() {

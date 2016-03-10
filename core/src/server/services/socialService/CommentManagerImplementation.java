@@ -8,23 +8,22 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-06.
  */
-public class CommentManagerImplementation implements CommentManager{
-
+public class CommentManagerImplementation implements CommentManager {
     /**
      * Creates a comment object
      *
-     * @param music             id's of music that the comment contains
-     * @param images            id's of images that the comment contains
-     * @param audio             id's of audio pieces that the comment contains
-     * @return                  a new comment object
+     * @param music  id's of music that the comment contains
+     * @param images id's of images that the comment contains
+     * @param audio  id's of audio pieces that the comment contains
+     * @return a new comment object
      */
     @Override
-    public MComment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text){
+    public MComment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text) {
         MComment comment = new MComment();
         comment.setAudio(audio);
         comment.setMusic(music);
         comment.setImages(images);
-        comment.setComments(Utils.newList());
+        comment.setComments(Utils.<Long>newList());
         comment.setTimeStamp(timestamp);
         comment.setText(text);
         return comment;
@@ -34,12 +33,12 @@ public class CommentManagerImplementation implements CommentManager{
     /**
      * Adds music to the given comment object
      *
-     * @param music             the id of the piece of music to be added
-     * @param comment           the given comment object
-     * @return                  the updated comment
+     * @param music   the id of the piece of music to be added
+     * @param comment the given comment object
+     * @return the updated comment
      */
     @Override
-    public MComment addMusic(Long music, MComment comment){
+    public MComment addMusic(Long music, MComment comment) {
         List<Long> musicList = comment.getMusic();
         musicList.add(music);
         comment.setMusic(musicList);
@@ -49,12 +48,12 @@ public class CommentManagerImplementation implements CommentManager{
     /**
      * Removes music from the given comment object
      *
-     * @param music             the id of the piece of music to be removed
-     * @param comment           the given comment object
-     * @return                  the updated comment
+     * @param music   the id of the piece of music to be removed
+     * @param comment the given comment object
+     * @return the updated comment
      */
     @Override
-    public MComment removeMusic(Long music, MComment comment){
+    public MComment removeMusic(Long music, MComment comment) {
         List<Long> musicList = comment.getMusic();
         musicList.remove(music);
         comment.setMusic(musicList);
@@ -64,12 +63,12 @@ public class CommentManagerImplementation implements CommentManager{
     /**
      * Adds images to the given comment object
      *
-     * @param image             the id of the image to be added
-     * @param comment           the given comment object
-     * @return                  the updated comment
+     * @param image   the id of the image to be added
+     * @param comment the given comment object
+     * @return the updated comment
      */
     @Override
-    public MComment addImage(Long image, MComment comment){
+    public MComment addImage(Long image, MComment comment) {
         List<Long> imageList = comment.getImages();
         imageList.add(image);
         comment.setMusic(imageList);
@@ -79,12 +78,12 @@ public class CommentManagerImplementation implements CommentManager{
     /**
      * Remove images from the given comment object
      *
-     * @param image             the id of the image to be removed
-     * @param comment           the given comment object
-     * @return                  the updated comment
+     * @param image   the id of the image to be removed
+     * @param comment the given comment object
+     * @return the updated comment
      */
     @Override
-    public MComment removeImage(Long image, MComment comment){
+    public MComment removeImage(Long image, MComment comment) {
         List<Long> imageList = comment.getImages();
         imageList.remove(image);
         comment.setMusic(imageList);
@@ -94,12 +93,12 @@ public class CommentManagerImplementation implements CommentManager{
     /**
      * Adds audio pieces to the given comment object
      *
-     * @param audio             the id of the audio piece to be added
-     * @param comment           the given comment object
-     * @return                  the updated comment
+     * @param audio   the id of the audio piece to be added
+     * @param comment the given comment object
+     * @return the updated comment
      */
     @Override
-    public MComment addAudio(Long audio, MComment comment){
+    public MComment addAudio(Long audio, MComment comment) {
         List<Long> audioList = comment.getAudio();
         audioList.add(audio);
         comment.setMusic(audioList);
@@ -109,12 +108,12 @@ public class CommentManagerImplementation implements CommentManager{
     /**
      * Remove audio from the given comment object
      *
-     * @param audio             the id of the audio piece to be removed
-     * @param comment           the given comment object
-     * @return                  the updated comment
+     * @param audio   the id of the audio piece to be removed
+     * @param comment the given comment object
+     * @return the updated comment
      */
     @Override
-    public MComment removeAudio(Long audio, MComment comment){
+    public MComment removeAudio(Long audio, MComment comment) {
         List<Long> audioList = comment.getAudio();
         audioList.remove(audio);
         comment.setMusic(audioList);
@@ -124,12 +123,12 @@ public class CommentManagerImplementation implements CommentManager{
     /**
      * Adds a like to the given comment
      *
-     * @param user              id of the user who liked it
-     * @param comment           the comment that has been liked
-     * @return                  the updated comment
+     * @param user    id of the user who liked it
+     * @param comment the comment that has been liked
+     * @return the updated comment
      */
     @Override
-    public MComment like(Long user, MComment comment){
+    public MComment like(Long user, MComment comment) {
         List<Long> userList = comment.getLikes();
         userList.remove(user);
         comment.setMusic(userList);
@@ -139,12 +138,12 @@ public class CommentManagerImplementation implements CommentManager{
     /**
      * Adds comments to the given comment object
      *
-     * @param commentAdd        the id of the comment to be added
-     * @param commentOrig       the given comment object
-     * @return                  the updated comment
+     * @param commentAdd  the id of the comment to be added
+     * @param commentOrig the given comment object
+     * @return the updated comment
      */
     @Override
-    public MComment addComment(Long commentAdd, MComment commentOrig){
+    public MComment addComment(Long commentAdd, MComment commentOrig) {
         List<Long> comments = commentOrig.getComments();
         comments.add(commentAdd);
         commentOrig.setComments(comments);
@@ -154,12 +153,12 @@ public class CommentManagerImplementation implements CommentManager{
     /**
      * Remove comments from the given comment object
      *
-     * @param commentRemove     the id of the comment to be removed
-     * @param commentOrig       the given comment object
-     * @return                  the updated comment
+     * @param commentRemove the id of the comment to be removed
+     * @param commentOrig   the given comment object
+     * @return the updated comment
      */
     @Override
-    public MComment removeComment(Long commentRemove, MComment commentOrig){
+    public MComment removeComment(Long commentRemove, MComment commentOrig) {
         List<Long> comments = commentOrig.getComments();
         comments.remove(commentRemove);
         commentOrig.setComments(comments);

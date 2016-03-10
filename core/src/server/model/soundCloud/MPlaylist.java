@@ -9,8 +9,16 @@ import java.util.List;
  * Created by Hairuo on 2016-03-09.
  */
 public class MPlaylist {
+
+    /**
+     * List of id's of all the songs in the playlist
+     */
     private List<Long> songs;
-    private MText description;
+
+    /**
+     * Id of the MText representation of the description of the playlist
+     */
+    private long description;
 
     public List<Long> getSongs() {
         return songs;
@@ -20,11 +28,11 @@ public class MPlaylist {
         this.songs = songs;
     }
 
-    public MText getDescription() {
+    public long getDescription() {
         return description;
     }
 
-    public void setDescription(MText description) {
+    public void setDescription(long description) {
         this.description = description;
     }
 }

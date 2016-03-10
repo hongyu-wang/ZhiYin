@@ -12,9 +12,9 @@ public interface PostManager {
     /**
      * Creates a post object
      *
-     * @param music id's of music that the post contains
+     * @param music  id's of music that the post contains
      * @param images id's of images that the post contains
-     * @param audio id's of audio pieces that the post contains
+     * @param audio  id's of audio pieces that the post contains
      * @return a new post object
      */
     public MPost createPost(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text, long creator);
@@ -23,7 +23,7 @@ public interface PostManager {
      * Adds music to the given post object
      *
      * @param music the id of the piece of music to be added
-     * @param post the given post object
+     * @param post  the given post object
      * @return the updated post
      */
     public MPost addMusic(long music, MPost post);
@@ -32,7 +32,7 @@ public interface PostManager {
      * Removes music from the given post object
      *
      * @param music the id of the piece of music to be removed
-     * @param post the given post object
+     * @param post  the given post object
      * @return the updated post
      */
     public MPost removeMusic(long music, MPost post);
@@ -41,7 +41,7 @@ public interface PostManager {
      * Adds images to the given post object
      *
      * @param image the id of the image to be added
-     * @param post the given post object
+     * @param post  the given post object
      * @return the updated post
      */
     public MPost addImage(long image, MPost post);
@@ -50,7 +50,7 @@ public interface PostManager {
      * Remove images from the given post object
      *
      * @param image the id of the image to be removed
-     * @param post the given post object
+     * @param post  the given post object
      * @return the updated post
      */
     public MPost removeImage(long image, MPost post);
@@ -59,7 +59,7 @@ public interface PostManager {
      * Adds audio pieces to the given post object
      *
      * @param audio the id of the audio piece to be added
-     * @param post the given post object
+     * @param post  the given post object
      * @return the updated post
      */
     public MPost addAudio(long audio, MPost post);
@@ -68,7 +68,7 @@ public interface PostManager {
      * Remove audio from the given post object
      *
      * @param audio the id of the audio piece to be removed
-     * @param post the given post object
+     * @param post  the given post object
      * @return the updated post
      */
     public MPost removeAudio(long audio, MPost post);
@@ -86,7 +86,7 @@ public interface PostManager {
      * Adds comments to the given post object
      *
      * @param comment the id of the comment to be added
-     * @param post the given post object
+     * @param post    the given post object
      * @return the updated post
      */
     public MPost addComment(long comment, MPost post);
@@ -95,7 +95,7 @@ public interface PostManager {
      * Remove comments from the given post object
      *
      * @param comment the id of the comment to be removed
-     * @param post the given post object
+     * @param post    the given post object
      * @return the updated post
      */
     public MPost removeComment(long comment, MPost post);
@@ -107,7 +107,6 @@ public interface PostManager {
      * @return the associated post
      */
     public MPost getPost(long post);
-
 
 
 }
