@@ -1,5 +1,6 @@
 package client.pages.friends;
 
+import client.component.basicComponents.Button;
 import client.component.basicComponents.Label;
 import client.events.ActionEvent;
 import client.pages.State;
@@ -12,12 +13,29 @@ public class Friends1 extends State implements ActionMonitor{
 
     //private ServiceList<> friends;
 
+
+
     public void init(){
         super.init();
 
         //friends = new ServiceList<>();
 
-        this.components.add(new Label("FRIENDS", 200, 0, 400, 100));
+        Label background = new Label("Friends - 1.png");
+        background.setBounds(0, 0, 750, 1350);
+
+        Button addFriendButton = new Button(this);
+        addFriendButton.setBounds(700, 1300, 50, 50);
+
+        Button toolsButton = new Button(this);
+        toolsButton.setBounds(0, 0, 750, 100);
+
+        Button recordButton = new Button(this);
+        recordButton.setBounds(0, 100, 750, 100);
+
+        this.components.add(background);
+        this.components.add(addFriendButton);
+        this.components.add(toolsButton);
+        this.components.add(recordButton);
     }
 
     @Override

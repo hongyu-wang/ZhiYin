@@ -26,7 +26,7 @@ public class StateManager implements Disposable, Updatable, Drawable, ActionMoni
         return ourInstance;
     }
 
-
+    public static final double M = 0.5;
 
 
     /**
