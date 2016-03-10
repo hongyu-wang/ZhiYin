@@ -11,6 +11,11 @@ public class GameLoop extends ApplicationAdapter {
 	private StateManager state_manager;
 	private SpriteBatch sprite_batch;
 
+	public static final int WIDTH = 750;
+
+	public static final int HEIGHT = 1334;
+
+
 	@Override
 	public void create () {
 		state_manager = StateManager.getInstance();

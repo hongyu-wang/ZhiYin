@@ -15,7 +15,7 @@ public enum Pages {
      */
 
     FRIENDS1("friends.Friends1"),
-    FRIENDS2("friends.Friends1"),
+    FRIENDS2("friends.Friends2"),
     FRIENDS3("friends.Friends1"),
     FRIENDS4("friends.Friends1"),
     HOME1("home.Home1"),
@@ -25,9 +25,9 @@ public enum Pages {
     NOWPLAYING("miscellaneous.NowPlaying"),
     PROFILE("miscellaneous.Profile"),
     DIARY1("musicDiary.Diary1"),
-    DIARY2("musicDiary.Diary1"),
-    DIARY3("musicDiary.Diary1"),
-    DIARY4("musicDiary.Diary1"),
+    DIARY2("musicDiary.Diary2"),
+    DIARY3("musicDiary.Diary3"),
+    DIARY4("musicDiary.Diary4"),
     ;
 
     /**
