@@ -36,6 +36,23 @@ public class InputListener implements InputProcessor, Performable{
 
 
     /**
+     * Returns the mouse x position bottom left on the screen
+     * @return the current mouseX position based on the bottom left
+     */
+    public int getMouseX(){
+        return mouseX;
+    }
+
+
+    /**
+     * Returns the mouse y position bottom left on the screen
+     * @return the current mouseY position based on the bottom left
+     */
+    public int getMouseY(){
+        return mouseY;
+    }
+
+    /**
      * Returns the singleton instance of InputListener
      * @return Singleton instance of InputListener
      */
@@ -90,21 +107,4 @@ public class InputListener implements InputProcessor, Performable{
         return false;
     }
 
-    /**
-     * Returns the mouse x position bottom left on the screen
-     * @return the current mouseX position based on the bottom left
-     */
-    public int getMouseX(){
-        return mouseX;
-    }
-
-
-
-    /**
-     * Returns the mouse y position bottom left on the screen
-     * @return the current mouseY position based on the bottom left
-     */
-    public int getMouseY(){
-        return mouseY;
-    }
 }

@@ -31,6 +31,14 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         components = Utils.<Component>newList();
     }
 
+    /**
+     * This method will draw everything.
+     */
+    public void draw(){
+        for (Component comp : components){
+            comp.draw();
+        }
+    }
 
 
 }

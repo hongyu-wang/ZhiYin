@@ -16,7 +16,7 @@ public class StateManager implements Disposable, Updatable, Drawable, ActionMoni
     /**
      * The current instance of StateManager
      */
-    private static StateManager ourInstance = new StateManager(Pages.MAIN);
+    private static StateManager ourInstance = new StateManager(Pages.PROFILE);
 
     /**
      * This returns the current instance of the StateManager class
