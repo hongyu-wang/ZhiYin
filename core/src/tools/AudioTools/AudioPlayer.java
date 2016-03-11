@@ -93,10 +93,10 @@ public class AudioPlayer {
         //ptr.set(refcon);
         //AQPlayerState aqps = ptr.get();
         //MAudio me = aqps.getTrack();
-        nextChunk(inAQ, inBuffer, track);
+        nextChunk(inAQ, inBuffer);
     }
 
-    private void nextChunk(AudioQueue inAQ, AudioQueueBuffer inBuffer, MAudio track) throws OSStatusException
+    private void nextChunk(AudioQueue inAQ, AudioQueueBuffer inBuffer) throws OSStatusException
     {
         byte[] ba = null;
         long when = System.currentTimeMillis() + 30000;
@@ -127,6 +127,7 @@ public class AudioPlayer {
     public void play ()
     {
        //final MAudio me = this;
+        final AudioPlayer me = this;
 
         Runnable r = new Runnable()
         {
@@ -135,7 +136,7 @@ public class AudioPlayer {
                 AudioStreamBasicDescription asbd = new AudioStreamBasicDescription(mSampleRate, mFormatID, new AudioFormatFlags(mFormatFlags), mBytesPerPacket, mFramesPerPacket, mBytesPerFrame, mChannelsPerFrame, mBitsPerChannel);
                 AudioQueue.AudioQueuePtr mQueuePtr = new AudioQueue.AudioQueuePtr();
                 Method callbackMethod = null;
-                Method[] methods = this.getClass().getMethods();
+                Method[] methods = me.getClass().getMethods();
                 int i = methods.length;
                 while (i-->0) if (methods[i].getName().equals("callbackMethod"))
                 {
@@ -145,7 +146,7 @@ public class AudioPlayer {
 
                 FunctionPtr fp = new FunctionPtr(callbackMethod );
 
-                AQPlayerState aqData = new AQPlayerState(track);
+                AQPlayerState aqData = new AQPlayerState(me);
                 mStateID = aqData.mID();
                 VoidPtr vp = aqData.as(VoidPtr.class);
 //              AudioErrorCode aqe = AudioQueue.newOutput(asbd, fp, vp, CFRunLoop.getCurrent(), new CFString(CFRunLoopMode.Common.value()), 0, mQueuePtr);
@@ -173,7 +174,7 @@ public class AudioPlayer {
 
                     try {
                         mQueue.allocateBuffer(bufferByteSize);
-                        nextChunk(mQueue, buffers[i].get(), track);
+                        nextChunk(mQueue, buffers[i].get());
                     } catch (OSStatusException e) {
                         e.printStackTrace();
                     }

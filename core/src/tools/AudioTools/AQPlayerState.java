@@ -19,7 +19,7 @@ import org.robovm.rt.bro.ptr.*;
         extends /*<extends>*/Struct<AQPlayerState>/*</extends>*/
     /*<implements>*//*</implements>*/ {
 
-  protected static Hashtable<Integer, MAudio> mAudioTracks = new Hashtable<>();
+  protected static Hashtable<Integer, AudioPlayer> mAudioTracks = new Hashtable<>();
   protected static int mLastID = 0;
 
   /*<ptr>*/public static class AQPlayerStatePtr extends Ptr<AQPlayerState, AQPlayerStatePtr> {}/*</ptr>*/
@@ -28,11 +28,11 @@ import org.robovm.rt.bro.ptr.*;
     /*<constants>*//*</constants>*/
     /*<constructors>*/
   public AQPlayerState() {}
-  public AQPlayerState(MAudio ar)
+  public AQPlayerState(AudioPlayer ap)
   {
     this.mID(++mLastID);
     this.mID2(mLastID);
-    mAudioTracks.put(mID(), ar);
+    mAudioTracks.put(mID(), ap);
   }
   /*</constructors>*/
     /*<properties>*//*</properties>*/
@@ -44,7 +44,7 @@ import org.robovm.rt.bro.ptr.*;
     /*</members>*/
     /*<methods>*//*</methods>*/
 
-  public MAudio getTrack()
+  public AudioPlayer getTrack()
   {
     return mAudioTracks.get(mID());
   }
