@@ -1,4 +1,4 @@
-package server.services.userService;
+package server.services.serviceInterfaces;
 
 import server.model.social.MConversation;
 import server.model.user.UserConversations;
@@ -16,7 +16,7 @@ public interface UserConversationManager {
 
     /**Adds a new conversation to both the user and the server.
      *
-     * @param conversations     The user.
+     * @param conversations     The user's conversations;
      * @param convo             The new conversation.
      * @return                  The modified user.
      */

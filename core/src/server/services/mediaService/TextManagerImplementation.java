@@ -1,6 +1,7 @@
 package server.services.mediaService;
 
 import server.model.media.MText;
+import server.services.serviceInterfaces.TextManager;
 
 /**
  * Created by Kevin Zheng on 2016-03-07.

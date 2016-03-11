@@ -1,4 +1,4 @@
-package server.services.diaryService;
+package server.services.serviceInterfaces;
 import server.model.media.MAudio;
 import server.model.media.MImage;
 import server.model.media.MMusic;

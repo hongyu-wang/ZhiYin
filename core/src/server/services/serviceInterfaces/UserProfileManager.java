@@ -1,4 +1,4 @@
-package server.services.userService;
+package server.services.serviceInterfaces;
 
 import server.model.media.MImage;
 import server.model.user.UserProfile;
@@ -16,7 +16,7 @@ public interface UserProfileManager {
 
     /**Modify the username.
      *
-     * @param profile       The user.
+     * @param profile       The user's profile.
      * @param username      The new username.
      * @return              The modified user profile model.
      */
@@ -24,7 +24,7 @@ public interface UserProfileManager {
 
     /**Modify the description.
      *
-     * @param profile          The user.
+     * @param profile          The user's profile.
      * @param description      The new description.
      * @return                 The modified user profile model.
      */
@@ -32,7 +32,7 @@ public interface UserProfileManager {
 
     /**Modify the profile picture.
      *
-     * @param profile   The user.
+     * @param profile   The user's profile.
      * @param image     The new image of profile picutre/
      * @return          The modified user profile model
      */

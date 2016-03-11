@@ -1,6 +1,7 @@
 package server.services.userService;
 
 import server.model.user.*;
+import server.services.serviceInterfaces.UserLoginManager;
 
 import java.util.List;
 

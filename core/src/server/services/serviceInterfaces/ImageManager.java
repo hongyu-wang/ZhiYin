@@ -1,4 +1,4 @@
-package server.services.mediaService;
+package server.services.serviceInterfaces;
 
 import server.model.media.MImage;
 

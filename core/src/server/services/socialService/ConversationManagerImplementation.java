@@ -1,6 +1,7 @@
 package server.services.socialService;
 
 import server.model.social.MConversation;
+import server.services.serviceInterfaces.ConversationManager;
 import tools.utilities.Utils;
 
 import java.util.List;

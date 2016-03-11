@@ -2,6 +2,7 @@ package server.services.userService;
 
 import server.model.social.MDiaryPost;
 import server.model.user.UserDiaryContent;
+import server.services.serviceInterfaces.UserDiaryManager;
 
 import java.util.List;
 

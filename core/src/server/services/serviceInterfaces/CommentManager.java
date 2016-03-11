@@ -1,4 +1,4 @@
-package server.services.socialService;
+package server.services.serviceInterfaces;
 
 import server.model.social.MComment;
 

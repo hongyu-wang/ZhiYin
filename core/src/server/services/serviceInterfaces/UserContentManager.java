@@ -1,4 +1,4 @@
-package server.services.userService;
+package server.services.serviceInterfaces;
 
 import server.model.soundCloud.MMusicPost;
 import server.model.user.UserUploadedContent;

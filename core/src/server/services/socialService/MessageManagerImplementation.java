@@ -1,8 +1,8 @@
 package server.services.socialService;
 
-import server.model.media.MMusic;
 import server.model.media.MText;
 import server.model.social.MMessage;
+import server.services.serviceInterfaces.MessageManager;
 import tools.utilities.Utils;
 
 /**

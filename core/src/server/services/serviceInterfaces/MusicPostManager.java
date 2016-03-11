@@ -1,8 +1,6 @@
-package server.services.soundcloudService;
+package server.services.serviceInterfaces;
 
-import server.model.social.MPost;
 import server.model.soundCloud.MMusicPost;
-import server.services.socialService.PostManager;
 
 import java.util.List;
 

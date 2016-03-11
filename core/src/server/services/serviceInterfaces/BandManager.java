@@ -1,4 +1,4 @@
-package server.services.soundcloudService;
+package server.services.serviceInterfaces;
 
 import server.model.soundCloud.MBand;
 

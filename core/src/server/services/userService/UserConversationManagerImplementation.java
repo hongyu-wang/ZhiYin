@@ -2,6 +2,7 @@ package server.services.userService;
 
 import server.model.social.MConversation;
 import server.model.user.UserConversations;
+import server.services.serviceInterfaces.UserConversationManager;
 
 import java.util.List;
 

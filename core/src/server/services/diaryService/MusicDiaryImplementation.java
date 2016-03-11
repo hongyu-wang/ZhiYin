@@ -2,10 +2,7 @@ package server.services.diaryService;
 
 import server.model.social.MDiaryPost;
 import server.model.media.*;
-import server.services.mediaService.ImageManagerImplementation;
-import server.services.mediaService.AudioManagerImplementation;
-import server.services.mediaService.MusicManagerImplementation;
-import server.services.mediaService.TextManagerImplementation;
+import server.services.serviceInterfaces.MusicDiary;
 
 /**
  * Created by calin on 06/03/2016.

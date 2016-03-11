@@ -1,6 +1,7 @@
 package server.services.soundcloudService;
 
 import server.model.soundCloud.MMusicAlbum;
+import server.services.serviceInterfaces.MusicAlbumManager;
 import tools.utilities.Utils;
 
 import java.util.List;

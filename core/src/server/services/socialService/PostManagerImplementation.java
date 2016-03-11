@@ -1,6 +1,7 @@
 package server.services.socialService;
 
 import server.model.social.MPost;
+import server.services.serviceInterfaces.PostManager;
 import tools.utilities.Utils;
 
 import java.util.List;

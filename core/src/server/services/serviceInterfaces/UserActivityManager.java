@@ -1,4 +1,4 @@
-package server.services.userService;
+package server.services.serviceInterfaces;
 
 import server.model.user.User;
 import server.model.user.UserActivityLog;
@@ -16,7 +16,7 @@ public interface UserActivityManager {
 
     /**Add an entry to the log of activities.
      *
-     * @param log   The user.
+     * @param log   The user's log.
      * @param entry The event string.
      * @return
      */
