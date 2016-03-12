@@ -3,6 +3,7 @@ package client.component.basicComponents;
 import client.component.Component;
 import client.events.ActionEvent;
 import client.stateInterfaces.ActionMonitor;
+import client.stateInterfaces.Executable;
 import client.stateInterfaces.Performable;
 
 /**
@@ -13,12 +14,17 @@ public class Button extends Component implements Performable {
 
     private ActionMonitor monitor;
 
+    private Executable executable;
+
+
     /**
      * The primary constructor for button.
      */
-    public Button(ActionMonitor monitor){
+    public Button(ActionMonitor monitor, Executable ex){
         super();
         this.monitor = monitor;
+        this.executable = ex;
+
     }
 
     @Override
@@ -47,5 +53,10 @@ public class Button extends Component implements Performable {
      */
     private void pressed() {
         monitor.actionPerformed(new ActionEvent(this));
+    }
+
+    @Override
+    public Executable getExecutable() {
+        return executable;
     }
 }
