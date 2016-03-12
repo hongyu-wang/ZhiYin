@@ -17,6 +17,7 @@ public class BandManagerImplementation implements BandManager {
      * @param description id of the description of the band
      * @return the new band
      */
+    @Override
     public MBand createBand(long name, long description) {
         MBand newBand = new MBand();
         newBand.setName(name);
@@ -33,6 +34,7 @@ public class BandManagerImplementation implements BandManager {
      * @param band  the band in question
      * @return the edited band
      */
+    @Override
     public MBand addAlbum(long album, MBand band) {
         List<Long> albumList = band.getAlbums();
         albumList.add(album);
@@ -46,6 +48,7 @@ public class BandManagerImplementation implements BandManager {
      * @param band  the band in question
      * @return the edited band
      */
+    @Override
     public MBand removeAlbum(long album, MBand band) {
         List<Long> albumList = band.getAlbums();
         albumList.remove(album);
@@ -59,6 +62,7 @@ public class BandManagerImplementation implements BandManager {
      * @param band the band in question
      * @return the edited band
      */
+    @Override
     public MBand addSong(long song, MBand band) {
         List<Long> songList = band.getSongs();
         songList.add(song);
@@ -72,6 +76,7 @@ public class BandManagerImplementation implements BandManager {
      * @param band the band in question
      * @return the edited band
      */
+    @Override
     public MBand removeSong(long song, MBand band) {
         List<Long> songList = band.getSongs();
         songList.remove(song);
@@ -85,6 +90,7 @@ public class BandManagerImplementation implements BandManager {
      * @param band the band in question
      * @return the edited band
      */
+    @Override
     public MBand editName(long name, MBand band) {
         band.setName(name);
         return band;
@@ -97,18 +103,20 @@ public class BandManagerImplementation implements BandManager {
      * @param band        the band in question
      * @return the edited band
      */
+    @Override
     public MBand editDescription(long description, MBand band) {
         band.setDescription(description);
         return band;
     }
 
-    /**
-     * Retrieves a band from the server
-     *
-     * @param band the id of the band
-     * @return the associated band
-     */
-    public MBand retrieveBand(long band) {
-        return null;
-    }
+//    /**
+//     * Retrieves a band from the server
+//     *
+//     * @param band the id of the band
+//     * @return the associated band
+//     */
+//    @Override
+//    public MBand retrieveBand(long band) {
+//        return null;
+//    }
 }

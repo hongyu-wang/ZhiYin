@@ -9,14 +9,6 @@ import server.model.soundCloud.MPlaylist;
 public interface PlaylistManager {
 
     /**
-     * retrieves a playlist from the server
-     *
-     * @param key id of the playlist
-     * @return the associated playlist
-     */
-    public MPlaylist getPlaylist(long key);
-
-    /**
      * Create a new playlist
      *
      * @param description description of the playlist

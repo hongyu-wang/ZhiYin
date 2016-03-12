@@ -11,10 +11,10 @@ import server.model.media.*;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class MDiaryPost extends MPost {
-    private long audioKey = 0;
-    private long imageKey = 0;
-    private long musicKey = 0;
-    private long textKey = 0;
+    private long audioKey;
+    private long imageKey;
+    private long musicKey;
+    private long textKey;
 
     /**Returns the audioKey of the MusicDiary.
      *

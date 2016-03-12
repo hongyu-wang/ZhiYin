@@ -9,12 +9,6 @@ import server.model.social.MDiaryPost;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public interface MusicDiary {
-    /**Requests the MDiaryPost's data from the server.
-     *
-     * @param key   The user's key.
-     * @return          The MDiaryPost model.
-     */
-    MDiaryPost requestDiaryPostData(long key);
 
     /**Modify the audio.
      *

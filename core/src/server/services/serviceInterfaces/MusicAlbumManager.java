@@ -52,12 +52,4 @@ public interface MusicAlbumManager {
      * @return the edited album
      */
     public MMusicAlbum removeSong(long song, MMusicAlbum musicAlbum);
-
-    /**
-     * Retrieves an album from the server
-     *
-     * @param key id of the album
-     * @return the associated album
-     */
-    public MMusicAlbum retrieveAlbum(long key);
 }
