@@ -1,6 +1,7 @@
 package server.services.mediaService;
 
 import server.model.media.MImage;
+import server.services.serviceInterfaces.ImageManager;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -10,17 +11,17 @@ import java.io.IOException;
  */
 public class ImageManagerImplementation implements ImageManager {
 
-    @Override
-    public MImage requestImage(long key) {
-        MImage image = new MImage();
-        image.setKey(key);
-
-        BufferedImage imageContent = null;
-        image.setImage(imageContent);
-
-        return image;
-        //TODO request from server.
-    }
+//    @Override
+//    public MImage requestImage(long key) {
+//        MImage image = new MImage();
+//        image.setKey(key);
+//
+//        BufferedImage imageContent = null;
+//        image.setImage(imageContent);
+//
+//        return image;
+//        //TODO request from server.
+//    }
 
 
     @Override

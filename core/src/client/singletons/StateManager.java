@@ -1,6 +1,6 @@
 package client.singletons;
 import client.events.ActionEvent;
-import client.pageManager.Pages;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.stateInterfaces.ActionMonitor;
 import client.stateInterfaces.Disposable;

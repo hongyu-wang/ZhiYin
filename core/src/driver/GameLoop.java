@@ -1,5 +1,6 @@
 package driver;
 
+import client.singletons.InputListener;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -20,7 +21,7 @@ public class GameLoop extends ApplicationAdapter {
 	public void create () {
 		state_manager = StateManager.getInstance();
 		sprite_batch = MainBatch.getInstance();
-
+		Gdx.input.setInputProcessor(InputListener.getInstance());
 	}
 
 	@Override

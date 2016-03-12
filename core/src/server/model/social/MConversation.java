@@ -7,12 +7,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by Hairuo on 2016-03-03.
+ * Conversation model
  */
 public class MConversation extends ServerModel {
 
+    /**
+     * List of id's of the messages that have been sent in the conversation
+     */
     private List<Long> messageList;
 
+    /**
+     * List of id's of the users in the conversation
+     */
     private List<Long> participants;
 
     public List<Long> getMessageList() {

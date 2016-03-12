@@ -9,14 +9,47 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class MPost extends ServerModel {
+
+    /**
+     * Id of the user who created the post
+     */
     protected long creator;
+
+    /**
+     * List of id's of the comments in the post
+     */
     protected List<Long> comments;
+
+    /**
+     * Id of the MText representation of the description
+     */
     protected long text;
+
+    /**
+     * List of id's of the users who liked the post
+     */
     protected List<Long> likes;
+
+    /**
+     * List of id's of the music pieces that the post contains
+     */
     protected List<Long> Music;
+
+    /**
+     * List of id's of the images that the post contains
+     */
     protected List<Long> Images;
+
+    /**
+     * List of id's of audio pieces that the post contains
+     */
     protected List<Long> Audio;
+
+    /**
+     * Long representation of the timestamp of when the post was created
+     */
     protected long timeStamp;
+
 
     public List<Long> getComments() {
         return comments;

@@ -3,6 +3,7 @@ package client.pages.home;
 import client.component.basicComponents.Image;
 import client.events.ActionEvent;
 import client.pages.State;
+import driver.GameLoop;
 
 /**
  * This is the first home diary page as given in the
@@ -12,9 +13,11 @@ import client.pages.State;
  */
 public class Home1 extends State{
 
-    public void init(){
-
-
+    public void init() {
+        super.init();
+        Image background = new Image("Home - 1.png");
+        background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
+        components.add(background);
     }
 
     @Override

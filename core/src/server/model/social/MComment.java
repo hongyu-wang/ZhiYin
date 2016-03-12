@@ -5,15 +5,44 @@ import server.model.structureModels.ServerModel;
 import java.util.List;
 
 /**
- * Created by Kevin Zheng on 2016-03-02.
+ * Comment model
+ * Very similar to post right now
  */
 public class MComment extends ServerModel {
+
+    /**
+     * Id of the MText representation of the comment
+     */
     private long text;
+
+    /**
+     * List of id's of the users who liked the comment
+     */
     private List<Long> likes;
+
+    /**
+     * List of id's of of the Music pieces inside the comment
+     */
     private List<Long> Music;
+
+    /**
+     * List of id's of of the images inside the comment
+     */
     private List<Long> Images;
+
+    /**
+     * List of id's of the audio pieces inside the comment
+     */
     private List<Long> Audio;
+
+    /**
+     * List of id's of the comments of the comment
+     */
     private List<Long> comments;
+
+    /**
+     * Long representation of the timestamp of the comment
+     */
     private long timeStamp;
 
     public long getText() {

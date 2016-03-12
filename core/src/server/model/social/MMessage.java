@@ -7,27 +7,43 @@ import server.model.user.User;
 import java.util.List;
 
 /**
- * Created by Kevin Zheng on 2016-03-02.
+ * Message model
  */
 public class MMessage extends ServerModel {
-    private MText text;
-    private long creator;
-    private long timeStamp;
-    private List<User> seenBy;
 
-    public List<User> getSeenBy() {
+    /**
+     * Id of the MText representation of the message
+     */
+    private long text;
+
+    /**
+     * Id of the creator of the message
+     */
+    private long creator;
+
+    /**
+     * Long representation of the timestamp of the message
+     */
+    private long timeStamp;
+
+    /**
+     * Id of users who have seen the message
+     */
+    private List<Long> seenBy;
+
+    public List<Long> getSeenBy() {
         return seenBy;
     }
 
-    public void setSeenBy(List<User> seenBy) {
+    public void setSeenBy(List<Long> seenBy) {
         this.seenBy = seenBy;
     }
 
-    public MText getText() {
+    public long getText() {
         return text;
     }
 
-    public void setText(MText text) {
+    public void setText(long text) {
         this.text = text;
     }
 

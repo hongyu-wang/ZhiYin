@@ -1,7 +1,7 @@
 package server.model.social;
 
 /**
- * Created by Hairuo on 2016-03-06.
+ * Generic post not used right now
  */
 public class MGenericPost extends MPost {
 }

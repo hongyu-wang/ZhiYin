@@ -1,8 +1,9 @@
 package server.services.socialService;
 
 
-import server.model.social.Group;
+import server.model.social.MGroup;
 
+import server.services.serviceInterfaces.GroupManager;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -19,24 +20,24 @@ public class GroupManagerImplementation implements GroupManager {
      * @return the created group
      */
     @Override
-    public Group createGroup(long user) {
-        Group crGroup = new Group();
+    public MGroup createGroup(long user) {
+        MGroup crGroup = new MGroup();
         crGroup.setCreator(user);
-        crGroup.setMembers(Utils.newList());
-        crGroup.setAdmins(Utils.newList());
-        crGroup.setPosts(Utils.newList());
+        crGroup.setMembers(Utils.<Long>newList());
+        crGroup.setAdmins(Utils.<Long>newList());
+        crGroup.setPosts(Utils.<Long>newList());
         return crGroup;
     }
 
     /**
      * Removes a user from a given group
      *
-     * @param user the user to be added
+     * @param user  the user to be added
      * @param group the group in question
      * @return the updated group
      */
     @Override
-    public Group leaveGroup(long user, Group group) {
+    public MGroup leaveGroup(long user, MGroup group) {
         List<Long> uList = group.getMembers();
         uList.remove(user);
         group.setMembers(uList);
@@ -46,12 +47,12 @@ public class GroupManagerImplementation implements GroupManager {
     /**
      * Adds a user to a given group
      *
-     * @param user      the user to be added
-     * @param group     the group in question
-     * @return          the updated group
+     * @param user  the user to be added
+     * @param group the group in question
+     * @return the updated group
      */
     @Override
-    public Group enterGroup(long user, Group group) {
+    public MGroup enterGroup(long user, MGroup group) {
         List<Long> uList = group.getMembers();
         uList.add(user);
         group.setMembers(uList);
@@ -61,12 +62,12 @@ public class GroupManagerImplementation implements GroupManager {
     /**
      * Adds a post to the given group
      *
-     * @param post          post to be added
-     * @param group         group in question
-     * @return              the updated group
+     * @param post  post to be added
+     * @param group group in question
+     * @return the updated group
      */
     @Override
-    public Group addPost(long post, Group group) {
+    public MGroup addPost(long post, MGroup group) {
         List<Long> pList = group.getPosts();
         pList.add(post);
         group.setPosts(pList);
@@ -76,27 +77,27 @@ public class GroupManagerImplementation implements GroupManager {
     /**
      * Removes the post from the given group
      *
-     * @param post          the post that needs to be removed
-     * @param group         the group in question
-     * @return              the updated group
+     * @param post  the post that needs to be removed
+     * @param group the group in question
+     * @return the updated group
      */
     @Override
-    public Group removePost(long post, Group group) {
+    public MGroup removePost(long post, MGroup group) {
         List<Long> pList = group.getPosts();
         pList.remove(post);
         group.setPosts(pList);
         return group;
     }
 
-    /**
-     * Retrieves a group from the database
-     *
-     * @param key           id of the group
-     * @return              group with the id
-     */
-    @Override
-    public Group getGroup(long key){
-        //TODO implement this
-        return null;
-    }
+//    /**
+//     * Retrieves a group from the database
+//     *
+//     * @param key id of the group
+//     * @return group with the id
+//     */
+//    @Override
+//    public MGroup getGroup(long key) {
+//        //TODO implement this
+//        return null;
+//    }
 }

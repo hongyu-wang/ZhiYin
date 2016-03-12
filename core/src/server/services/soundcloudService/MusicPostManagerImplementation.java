@@ -1,9 +1,8 @@
 package server.services.soundcloudService;
 
 
-import server.model.social.MPost;
 import server.model.soundCloud.MMusicPost;
-import server.services.socialService.PostManager;
+import server.services.serviceInterfaces.MusicPostManager;
 import server.services.socialService.PostManagerImplementation;
 import tools.utilities.Utils;
 
@@ -13,19 +12,6 @@ import java.util.List;
  * Created by Hairuo on 2016-03-09.
  */
 public class MusicPostManagerImplementation extends PostManagerImplementation implements MusicPostManager {
-
-
-    /**
-     * Retrieves a music post from the server
-     *
-     * @param key the key of the music post
-     * @return the corresponding music post
-     */
-    @Override
-    public MMusicPost getMusicPost(Long key) {
-        //Make this work
-        return null;
-    }
 
     /**
      * Create a new Music Post
@@ -44,7 +30,7 @@ public class MusicPostManagerImplementation extends PostManagerImplementation im
         MMusicPost post = new MMusicPost();
         post.setMusic(music);
         post.setImages(images);
-        post.setComments(Utils.newList());
+        post.setComments(Utils.<Long>newList());
         post.setTimeStamp(timestamp);
         post.setText(text);
         post.setCreator(creator);
