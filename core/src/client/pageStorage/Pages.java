@@ -1,6 +1,19 @@
 package client.pageStorage;
 
 import client.pages.State;
+import client.pages.friends.Friends1;
+import client.pages.friends.Friends2;
+import client.pages.friends.Friends3;
+import client.pages.friends.Friends4;
+import client.pages.home.Home1;
+import client.pages.home.Home2;
+import client.pages.home.Home3;
+import client.pages.home.Home4;
+import client.pages.miscellaneous.NowPlaying;
+import client.pages.miscellaneous.Profile;
+import client.pages.musicDiary.Diary1;
+import client.pages.musicDiary.Diary2;
+import client.pages.musicDiary.Diary3;
 
 /**
  * This is the enum storing all possible page states across all the pages.
@@ -14,60 +27,39 @@ public enum Pages {
      * to include all subpackages within package.
      */
 
-    FRIENDS1("friends.Friends1"),
-    FRIENDS2("friends.Friends2"),
-    FRIENDS3("friends.Friends3"),
-    FRIENDS4("friends.Friends4"),
-    HOME1("home.Home1"),
-    HOME2("home.Home2"),
-    HOME3("home.Home3"),
-    HOME4("home.Home4"),
-    NOWPLAYING("miscellaneous.NowPlaying"),
-    PROFILE("miscellaneous.Profile"),
-    DIARY1("musicDiary.Diary1"),
-    DIARY2("musicDiary.Diary2"),
-    DIARY3("musicDiary.Diary3"),
+    FRIENDS1(new Friends1()),
+    FRIENDS2(new Friends2()),
+    FRIENDS3(new Friends3()),
+    FRIENDS4(new Friends4()),
+    HOME1(new Home1()),
+    HOME2(new Home2()),
+    HOME3(new Home3()),
+    HOME4(new Home4()),
+    NOWPLAYING(new NowPlaying()),
+    PROFILE(new Profile()),
+    DIARY1(new Diary1()),
+    DIARY2(new Diary2()),
+    DIARY3(new Diary3()),
     ;
 
-    /**
-     * This attribute denotes the current className of the given enum
-     */
-    private final String CLASS_NAME;
+
 
 
     /**
      * This variable stores the given state Reference to the classname.
      */
-    private State state_reference;
+    private State stateReference;
 
 
 
-    Pages(String class_name){
-        String preamble = "client.pages.";
-        CLASS_NAME = preamble + class_name;
-
-        initializeState();
+    Pages(State state){
+      this.stateReference = state;
 
     }
 
-    /**
-     * This method will initialize a state reference from the given name.
-     *
-     */
-    private void initializeState(){
-        try {
-            state_reference = (State) Class.forName(CLASS_NAME).newInstance();
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        state_reference.init();
-    }
 
-    @Override
-    public String toString(){
-        return CLASS_NAME;
-    }
+
 
     /**
      * This method returns the given state reference
@@ -76,6 +68,6 @@ public enum Pages {
      *
      */
     public State getStateReference() {
-        return this.state_reference;
+        return this.stateReference;
     }
 }

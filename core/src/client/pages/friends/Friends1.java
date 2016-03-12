@@ -22,13 +22,13 @@ public class Friends1 extends State implements ActionMonitor{
 
         background.setBounds(0, 0, 750, 1350);
 
-        Button addFriendButton = new Button(this);
+        Button addFriendButton = new Button(this, null);
         addFriendButton.setBounds(650, 1250, 100, 100);
 
-        Button toolsButton = new Button(this);
+        Button toolsButton = new Button(this, null);
         toolsButton.setBounds(0, 0, 750, 100);
 
-        Button recordButton = new Button(this);
+        Button recordButton = new Button(this, null);
         recordButton.setBounds(0, 100, 750, 100);
 
         this.components.add(background);

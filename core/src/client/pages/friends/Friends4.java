@@ -20,10 +20,10 @@ public class Friends4 extends State implements ActionMonitor{
         Image background = new Image("Friends -4.png");
         background.setBounds(0, 0, 750, 1350);
 
-        Button messageButton = new Button(this);
+        Button messageButton = new Button(this, null);
         messageButton.setBounds(0, 0, 650, 100);
 
-        Button sendButton = new Button(this);
+        Button sendButton = new Button(this, null);
         sendButton.setBounds(650, 0, 100, 100);
 
         this.components.add(background);
