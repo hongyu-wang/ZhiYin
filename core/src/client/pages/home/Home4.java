@@ -17,7 +17,7 @@ public class Home4 extends State {
         super.init();
         Image background = new Image("Home - 4.png");
         background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
-        components.add(background);
+        add(background);
     }
 
 

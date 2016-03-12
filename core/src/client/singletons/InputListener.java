@@ -17,11 +17,34 @@ import com.badlogic.gdx.InputProcessor;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class InputListener implements InputProcessor, Performable{
+public class InputListener implements InputProcessor, Performable {
     /**
      * Our instance of InputListener as per the Singleton design pattern.
      */
     private static InputListener ourInstance = new InputListener();
+
+
+    /**
+     * This is the value of currentEvent when
+     * the screen isn't pressed.
+     */
+    private static final int DOWN = 0;
+
+    /**
+     * This is the value of currentEvent
+     * when the screen is currently pressed
+     */
+    private static final int UP = 1;
+
+    /**
+     * This is the value that stores the currentEvent
+     * This is useful mainly because InputListener needs to implement performable
+     * and thus will return the appropriate executable.
+     */
+    private int currentEvent = UP;
+
+
+
 
 
     /**
@@ -33,10 +56,11 @@ public class InputListener implements InputProcessor, Performable{
     private StateManager stateManager;
 
     /**
-     * These are the coordinates of the mouse on the screen updated
-     * when the button is pressed.
+     * These are the coordinates of where on the screen was pressed.
      */
     private int mouseX, mouseY;
+
+    private Executable [] executables;
 
 
     /**
@@ -65,9 +89,20 @@ public class InputListener implements InputProcessor, Performable{
     }
 
     private InputListener() {
-        stateManager = StateManager.getInstance();
-
+        init();
     }
+
+    /**
+     * This is the primary init method of our class.
+     *
+     */
+    private void init(){
+        stateManager = StateManager.getInstance();
+        executables = new Executable[2];
+    }
+
+
+
 
     @Override
     public boolean keyDown(int keycode) {
@@ -130,11 +165,23 @@ public class InputListener implements InputProcessor, Performable{
         stateManager.actionPerformed(new ActionEvent(this));
         mouseX = screenX;
         mouseY = screenY;
+        currentEvent = DOWN;
+
+        //TODO REMOVE THIS PRINT STATEMENT
+        System.out.println("x_pos: " + mouseX + " y_pos: "+  mouseY);
+
+
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        stateManager.actionPerformed(new ActionEvent(this));
+        mouseX = screenX;
+        mouseY = screenY;
+        currentEvent = UP;
+
+
         return false;
     }
 
@@ -153,8 +200,11 @@ public class InputListener implements InputProcessor, Performable{
         return false;
     }
 
+
     @Override
     public Executable getExecutable() {
-        return null;
+        return executables[currentEvent];
     }
+
+
 }

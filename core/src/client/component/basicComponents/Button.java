@@ -20,12 +20,12 @@ public class Button extends Component implements Performable {
     /**
      * The primary constructor for button.
      */
-    public Button(ActionMonitor monitor, Executable ex){
+    public Button(ActionMonitor monitor){
         super();
         this.monitor = monitor;
-        this.executable = ex;
 
     }
+
 
     @Override
     protected void init() {
@@ -58,5 +58,10 @@ public class Button extends Component implements Performable {
     @Override
     public Executable getExecutable() {
         return executable;
+    }
+
+    @Override
+    public void setExecutable(Executable ex) {
+
     }
 }

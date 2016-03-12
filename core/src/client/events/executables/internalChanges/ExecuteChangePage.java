@@ -1,5 +1,7 @@
-package client.events.executables;
+package client.events.executables.internalChanges;
 
+import client.pageStorage.Pages;
+import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 
 /**
@@ -12,13 +14,14 @@ import client.stateInterfaces.Executable;
  * Created by Hongyu Wang on 3/11/2016.
  */
 public class ExecuteChangePage implements Executable{
+    private Pages page;
 
-    public ExecuteChangePage(){
-
+    public ExecuteChangePage(Pages page){
+        this.page = page;
     }
 
     @Override
     public void execute() {
-
+        StateManager.getInstance().changeState(page);
     }
 }

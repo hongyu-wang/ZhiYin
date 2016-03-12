@@ -16,7 +16,7 @@ public class Diary2 extends State{
         super.init();
         Image background = new Image("Diary - 2.png");
         background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
-        components.add(background);
+        add(background);
     }
 
     @Override

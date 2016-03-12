@@ -16,15 +16,15 @@ public class Friends3Shell extends State {
         Label friendsLabel = new Label("Friends");
         friendsLabel.setBounds(0, 1234, 750, 100);
 
-        Button discardButton = new Button(this, null);
+        Button discardButton = new Button(this);
         discardButton.setBounds(0, 0, 375, 100);
 
-        Button sendButton = new Button(this, null);
+        Button sendButton = new Button(this);
         sendButton.setBounds(375, 0, 375, 100);
 
-        this.components.add(friendsLabel);
-        this.components.add(discardButton);
-        this.components.add(sendButton);
+        add(friendsLabel);
+        add(discardButton);
+        add(sendButton);
     }
 
     @Override

@@ -12,14 +12,14 @@ public class Friends4Shell extends State {
     public void init(){
         super.init();
 
-        Button messageButton = new Button(this, null);
+        Button messageButton = new Button(this);
         messageButton.setBounds(0, 0, 650, 100);
 
-        Button sendButton = new Button(this, null);
+        Button sendButton = new Button(this);
         sendButton.setBounds(650, 0, 100, 100);
 
-        this.components.add(messageButton);
-        this.components.add(sendButton);
+        add(messageButton);
+        add(sendButton);
     }
 
     @Override

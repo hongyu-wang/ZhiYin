@@ -15,7 +15,7 @@ public class Friends2 extends Friends2Shell{
         Image background = new Image("Friends - 2.png");
         background.setBounds(0, 0, 750, 1334);
 
-        this.components.add(background);
+        add(background);
     }
 
     @Override

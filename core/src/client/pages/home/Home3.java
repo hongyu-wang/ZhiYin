@@ -16,7 +16,7 @@ public class Home3 extends State {
         super.init();
         Image background = new Image("Home - 3.png");
         background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
-        components.add(background);
+        add(background);
     }
 
     @Override
