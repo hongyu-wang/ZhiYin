@@ -2,6 +2,7 @@ package client.singletons;
 
 import client.events.ActionEvent;
 import client.pageStorage.Pages;
+import client.stateInterfaces.Executable;
 import client.stateInterfaces.Performable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -152,4 +153,8 @@ public class InputListener implements InputProcessor, Performable{
         return false;
     }
 
+    @Override
+    public Executable getExecutable() {
+        return null;
+    }
 }
