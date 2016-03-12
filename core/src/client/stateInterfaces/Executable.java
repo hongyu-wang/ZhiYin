@@ -1,5 +1,7 @@
 package client.stateInterfaces;
 
+import client.pages.State;
+
 /**
  * This is the primary "Executable" interface.
  * This interface will contain one method: Execute.

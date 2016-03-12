@@ -12,10 +12,7 @@ public class Friends2 extends Friends2Shell{
 
         //friends = new ServiceList<>();
 
-        Image background = new Image("Friends - 2.png");
-        background.setBounds(0, 0, 750, 1334);
 
-        add(background);
     }
 
     @Override
@@ -28,8 +25,5 @@ public class Friends2 extends Friends2Shell{
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 }

@@ -8,10 +8,7 @@ public class Friends4 extends Friends4Shell{
     public void init(){
         super.init();
 
-        Image background = new Image("Friends -4.png");
-        background.setBounds(0, 0, 750, 1334);
 
-        add(background);
     }
 
     @Override
@@ -24,8 +21,5 @@ public class Friends4 extends Friends4Shell{
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 }

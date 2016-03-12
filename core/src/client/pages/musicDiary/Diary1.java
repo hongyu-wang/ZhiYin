@@ -20,10 +20,7 @@ public class Diary1 extends State {
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 
     @Override
     public void dispose() {

@@ -19,10 +19,7 @@ public class Home2 extends State {
         background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
         add(background);
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 
     @Override
     public void dispose() {

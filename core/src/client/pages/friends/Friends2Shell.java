@@ -1,6 +1,7 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
+import client.component.basicComponents.Image;
 import client.component.basicComponents.Label;
 import client.events.ActionEvent;
 import client.pages.State;
@@ -12,7 +13,10 @@ public class Friends2Shell extends State {
 
     public void init(){
         super.init();
+        Image background = new Image("Friends - 2.png");
+        background.setBounds(0, 0, 750, 1334);
 
+        add(background);
         Label friendsLabel = new Label("Friends");
         friendsLabel.setBounds(0, 1234, 750, 100);
 
@@ -37,8 +41,5 @@ public class Friends2Shell extends State {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 }

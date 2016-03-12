@@ -12,7 +12,7 @@ public class DesktopLauncher {
 		cfg.title = "Zhi Yin";
 		cfg.width = (int)(750* StateManager.M);
 		cfg.height = (int) (1334* StateManager.M);
-
+		cfg.resizable = false;
 		new LwjglApplication(new GameLoop(), cfg);
 	}
 }

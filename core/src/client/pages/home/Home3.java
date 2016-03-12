@@ -19,10 +19,7 @@ public class Home3 extends State {
         add(background);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 
     @Override
     public void dispose() {

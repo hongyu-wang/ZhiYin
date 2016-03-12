@@ -21,10 +21,6 @@ public class Home4 extends State {
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 
     @Override
     public void dispose() {

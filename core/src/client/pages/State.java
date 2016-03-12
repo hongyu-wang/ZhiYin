@@ -1,6 +1,9 @@
 package client.pages;
 
 import client.component.Component;
+import client.component.basicComponents.Button;
+import client.events.ActionEvent;
+import client.internalExceptions.NoExecutableException;
 import client.stateInterfaces.*;
 import tools.utilities.Utils;
 
@@ -22,7 +25,11 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         init();
     }
 
-    protected List<Performable> performables;
+    private boolean released = true;
+
+    private Pressable currentButton;
+
+    private List<Pressable> pressables;
 
 
     /**
@@ -36,6 +43,8 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      */
     public void init(){
         components = Utils.<Component>newList();
+        pressables = Utils.<Pressable>newList();
+        currentButton = null;
     }
 
     /**
@@ -45,9 +54,8 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * @param c the component to be added
      */
     public void add(Component c){
-        if (c instanceof Performable)
-            performables.add((Performable) c);
-
+        if (c instanceof Pressable)
+            pressables.add((Pressable)c);
         components.add(c);
     }
 
@@ -65,19 +73,6 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         return deepCopy;
     }
 
-    /**
-     * This will return a deep copy of the stored performable list
-     * @return A deep copy of the components.
-     */
-    public List<Performable> getPerformables(){
-        List<Performable> deepCopy = Utils.<Performable>newList();
-        for (Performable comp : performables){
-            deepCopy.add(comp);
-        }
-
-        return deepCopy;
-
-    }
 
 
 
@@ -90,5 +85,38 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         }
     }
 
+    /**
+     * This is the method that will get called
+     * by InputListener whenever the screen is pressed.
+     */
+    public void checkPressed(){
+        for (Pressable comp : pressables){
+            if (comp.isPressed()){
+                if (currentButton == null) {
+                    released = false;
+                    currentButton = comp;
+                }
+
+                else {
+                    comp.press();
+                    currentButton = null;
+                    released = true;
+                }
+            }
+        }
+
+        if (currentButton != null && released)
+            currentButton = null;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+        try {
+            e.getSource().getExecutable().execute();
+        } catch (NoExecutableException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 
 }
+

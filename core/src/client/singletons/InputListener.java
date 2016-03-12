@@ -1,12 +1,9 @@
 package client.singletons;
 
-import client.events.ActionEvent;
 import client.pageStorage.Pages;
-import client.stateInterfaces.Executable;
-import client.stateInterfaces.Performable;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import driver.GameLoop;
 
 /**
  * This is the InputListener class.
@@ -17,7 +14,7 @@ import com.badlogic.gdx.InputProcessor;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class InputListener implements InputProcessor, Performable {
+public class InputListener implements InputProcessor {
     /**
      * Our instance of InputListener as per the Singleton design pattern.
      */
@@ -60,7 +57,6 @@ public class InputListener implements InputProcessor, Performable {
      */
     private int mouseX, mouseY;
 
-    private Executable [] executables;
 
 
     /**
@@ -98,7 +94,7 @@ public class InputListener implements InputProcessor, Performable {
      */
     private void init(){
         stateManager = StateManager.getInstance();
-        executables = new Executable[2];
+
     }
 
 
@@ -162,25 +158,24 @@ public class InputListener implements InputProcessor, Performable {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        stateManager.actionPerformed(new ActionEvent(this));
+
         mouseX = screenX;
-        mouseY = screenY;
+        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
         currentEvent = DOWN;
 
         //TODO REMOVE THIS PRINT STATEMENT
         System.out.println("x_pos: " + mouseX + " y_pos: "+  mouseY);
-
+        stateManager.receiveInput();
 
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        stateManager.actionPerformed(new ActionEvent(this));
         mouseX = screenX;
-        mouseY = screenY;
+        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
         currentEvent = UP;
-
+        stateManager.receiveInput();
 
         return false;
     }
@@ -200,11 +195,6 @@ public class InputListener implements InputProcessor, Performable {
         return false;
     }
 
-
-    @Override
-    public Executable getExecutable() {
-        return executables[currentEvent];
-    }
 
 
 }

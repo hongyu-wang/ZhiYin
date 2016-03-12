@@ -1,6 +1,7 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
+import client.component.basicComponents.Image;
 import client.events.ActionEvent;
 import client.pages.State;
 
@@ -11,7 +12,10 @@ public class Friends4Shell extends State {
 
     public void init(){
         super.init();
+        Image background = new Image("Friends -4.png");
+        background.setBounds(0, 0, 750, 1334);
 
+        add(background);
         Button messageButton = new Button(this);
         messageButton.setBounds(0, 0, 650, 100);
 
@@ -32,8 +36,5 @@ public class Friends4Shell extends State {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 }
