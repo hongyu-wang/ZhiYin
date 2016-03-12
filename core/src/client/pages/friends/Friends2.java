@@ -1,16 +1,11 @@
 package client.pages.friends;
 
-import client.component.basicComponents.Button;
 import client.component.basicComponents.Image;
 import client.events.ActionEvent;
-import client.pages.State;
-import client.stateInterfaces.ActionMonitor;
 
-public class Friends2 extends State implements ActionMonitor{
+public class Friends2 extends Friends2Shell{
 
     //private ServiceList<> friends;
-
-
 
     public void init(){
         super.init();
@@ -18,17 +13,9 @@ public class Friends2 extends State implements ActionMonitor{
         //friends = new ServiceList<>();
 
         Image background = new Image("Friends - 2.png");
-        background.setBounds(0, 0, 750, 1350);
-
-        Button toolsButton = new Button(this);
-        toolsButton.setBounds(0, 0, 750, 100);
-
-        Button discardButton = new Button(this);
-        discardButton.setBounds(0, 100, 750, 200);
+        background.setBounds(0, 0, 750, 1334);
 
         this.components.add(background);
-        this.components.add(toolsButton);
-        this.components.add(discardButton);
     }
 
     @Override
