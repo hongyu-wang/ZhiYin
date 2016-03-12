@@ -16,13 +16,13 @@ public abstract class Friends1Shell extends State {
         Label friendsLabel = new Label("Friends");
         friendsLabel.setBounds(0, 1234, 750, 100);
 
-        Button addFriendButton = new Button(this);
+        Button addFriendButton = new Button(this, null);
         addFriendButton.setBounds(650, 1234, 100, 100);
 
-        Button toolsButton = new Button(this);
+        Button toolsButton = new Button(this, null);
         toolsButton.setBounds(0, 0, 750, 100);
 
-        Button recordButton = new Button(this);
+        Button recordButton = new Button(this, null);
         recordButton.setBounds(0, 100, 750, 100);
 
         this.components.add(friendsLabel);

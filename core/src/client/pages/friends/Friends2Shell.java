@@ -16,10 +16,10 @@ public class Friends2Shell extends State {
         Label friendsLabel = new Label("Friends");
         friendsLabel.setBounds(0, 1234, 750, 100);
 
-        Button toolsButton = new Button(this);
+        Button toolsButton = new Button(this, null);
         toolsButton.setBounds(0, 0, 750, 100);
 
-        Button discardButton = new Button(this);
+        Button discardButton = new Button(this, null);
         discardButton.setBounds(0, 100, 750, 200);
 
         this.components.add(friendsLabel);
