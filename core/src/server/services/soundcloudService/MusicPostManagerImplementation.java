@@ -2,7 +2,7 @@ package server.services.soundcloudService;
 
 
 import server.model.soundCloud.MMusicPost;
-import server.services.serviceInterfaces.MusicPostManager;
+import server.services.interfaces.models.MusicPostManager;
 import server.services.socialService.PostManagerImplementation;
 import tools.utilities.Utils;
 

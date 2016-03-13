@@ -1,9 +1,7 @@
 package server.services.mediaService;
 
 import server.model.media.MHashtag;
-import server.services.serviceInterfaces.MusicHashtagManager;
-
-import java.util.List;
+import server.services.interfaces.models.MusicHashtagManager;
 
 /**
  * Created by Kevin Zheng on 2016-03-04.

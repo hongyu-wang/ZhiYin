@@ -1,9 +1,7 @@
 package server.services.userService;
 
 import server.model.user.*;
-import server.services.serviceInterfaces.UserManager;
-
-import java.util.List;
+import server.services.interfaces.models.UserManager;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.

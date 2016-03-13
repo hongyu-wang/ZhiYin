@@ -1,7 +1,7 @@
 package server.services.serverService;
 
 import server.model.structureModels.ServerModel;
-import server.services.serviceInterfaces.ServerModelManager;
+import server.services.interfaces.ServerModelManager;
 import tools.serverTools.server.ServerInteraction;
 
 /**

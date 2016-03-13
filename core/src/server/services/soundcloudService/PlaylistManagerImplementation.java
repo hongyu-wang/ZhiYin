@@ -1,8 +1,7 @@
 package server.services.soundcloudService;
 
-import server.model.media.MText;
 import server.model.soundCloud.MPlaylist;
-import server.services.serviceInterfaces.PlaylistManager;
+import server.services.interfaces.models.PlaylistManager;
 import tools.utilities.Utils;
 
 import java.util.List;

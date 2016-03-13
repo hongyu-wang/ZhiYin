@@ -3,7 +3,7 @@ package server.services.socialService;
 
 import server.model.social.MGroup;
 
-import server.services.serviceInterfaces.GroupManager;
+import server.services.interfaces.models.GroupManager;
 import tools.utilities.Utils;
 
 import java.util.List;

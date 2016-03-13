@@ -1,4 +1,4 @@
-package server.services.serviceInterfaces;
+package server.services.interfaces.models;
 
 import server.model.social.MDiaryPost;
 import server.model.user.UserDiaryContent;
