@@ -18,22 +18,22 @@ public class Diary3Shell extends State{
         add(background);
 
         Button backButton = new Button(this);
-        backButton.setBounds(0, 1217, 117, 117);
+        backButton.setBounds(0 + 1, 1217, 117, 117);
         backButton.setExecutable(new TestExecutable("back"));
         add(backButton);
 
         Button b1 = new Button(this);
-        b1.setBounds(0, 0, 230, 117);
+        b1.setBounds(0 + 1, 0, 230, 117);
         b1.setExecutable(new TestExecutable("b1"));
         add(b1);
 
         Button b2 = new Button(this);
-        b2.setBounds(230, 0, 290, 117);
+        b2.setBounds(230 + 1, 0, 290, 117);
         b2.setExecutable(new TestExecutable("b2"));
         add(b2);
 
         Button b3 = new Button(this);
-        b3.setBounds(520, 0, 230, 117);
+        b3.setBounds(520 + 1, 0, 230, 117);
         b3.setExecutable(new TestExecutable("b3"));
         add(b3);
     }

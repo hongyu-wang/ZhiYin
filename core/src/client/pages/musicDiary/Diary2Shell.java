@@ -23,27 +23,27 @@ public class Diary2Shell extends State {
         add(composeLabel);
 
         Button titleButton = new Button(this);
-        titleButton.setBounds(0, 1112, 750, 88);
+        titleButton.setBounds(0 + 1, 1112, 750, 88);
         titleButton.setExecutable(new TestExecutable("title"));
         add(titleButton);
 
         Button contentButton = new Button(this);
-        contentButton.setBounds(0, 553, 750, 555);
+        contentButton.setBounds(0 + 1, 553, 750, 555);
         contentButton.setExecutable(new TestExecutable("content"));
         add(contentButton);
 
         Button recordingButton = new Button(this);
-        recordingButton.setBounds(0, 134 + 135*2, 750, 135);
+        recordingButton.setBounds(0 + 1, 134 + 135*2, 750, 135);
         recordingButton.setExecutable(new TestExecutable("recording"));
         add(recordingButton);
 
         Button pictureButton = new Button(this);
-        pictureButton.setBounds(0, 134 + 135, 750, 135);
+        pictureButton.setBounds(0 + 1, 134 + 135, 750, 135);
         pictureButton.setExecutable(new TestExecutable("picture"));
         add(pictureButton);
 
         Button videoButton = new Button(this);
-        videoButton.setBounds(0, 134, 750, 135);
+        videoButton.setBounds(0 + 1, 134, 750, 135);
         videoButton.setExecutable(new TestExecutable("video"));
         add(videoButton);
 
