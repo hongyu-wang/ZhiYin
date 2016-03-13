@@ -82,14 +82,14 @@ public class MusicAlbumManagerImplementation implements MusicAlbumManager {
         return musicAlbum;
     }
 
-    /**
-     * Retrieves an album from the server
-     *
-     * @param key id of the album
-     * @return the associated album
-     */
-    @Override
-    public MMusicAlbum retrieveAlbum(long key) {
-        return null;
-    }
+//    /**
+//     * Retrieves an album from the server
+//     *
+//     * @param key id of the album
+//     * @return the associated album
+//     */
+//    @Override
+//    public MMusicAlbum retrieveAlbum(long key) {
+//        return null;
+//    }
 }

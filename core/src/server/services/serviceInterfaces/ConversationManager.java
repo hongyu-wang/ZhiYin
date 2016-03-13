@@ -53,13 +53,5 @@ public interface ConversationManager {
      */
     public MConversation removeUser(long user, MConversation conversation);
 
-    /**
-     * Retrieves a conversation from the database
-     *
-     * @param key the id of the conversation
-     * @return the conversation associated with the id
-     */
-    public MConversation getConversation(long key);
-
 
 }

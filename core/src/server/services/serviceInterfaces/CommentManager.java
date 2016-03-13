@@ -98,12 +98,4 @@ public interface CommentManager {
      * @return the updated comment
      */
     public MComment removeComment(Long commentRemove, MComment commentOrig);
-
-    /**
-     * Retrieves a comment
-     *
-     * @param comment id of the comment
-     * @return the associated comment
-     */
-    public MComment getComment(long comment);
 }

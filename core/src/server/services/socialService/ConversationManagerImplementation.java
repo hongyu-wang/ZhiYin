@@ -85,15 +85,15 @@ public class ConversationManagerImplementation implements ConversationManager {
         return conversation;
     }
 
-    /**
-     * Retrieves a conversation from the database
-     *
-     * @param key the id of the conversation
-     * @return the conversation associated with the id
-     */
-    @Override
-    public MConversation getConversation(long key) {
-        //TODO implement this
-        return null;
-    }
+//    /**
+//     * Retrieves a conversation from the database
+//     *
+//     * @param key the id of the conversation
+//     * @return the conversation associated with the id
+//     */
+//    @Override
+//    public MConversation getConversation(long key) {
+//        //TODO implement this
+//        return null;
+//    }
 }

@@ -69,12 +69,4 @@ public interface BandManager {
      * @return the edited band
      */
     public MBand editDescription(long description, MBand band);
-
-    /**
-     * Retrieves a band from the server
-     *
-     * @param band the id of the band
-     * @return the associated band
-     */
-    public MBand retrieveBand(long band);
 }

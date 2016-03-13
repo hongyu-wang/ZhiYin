@@ -5,7 +5,7 @@ import server.model.user.User;
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public interface UserLoginManager {
+public interface UserManager {
     /**Requests authentication from the server for a user and pass combo.
      *
      * @param user  The username.
@@ -14,11 +14,12 @@ public interface UserLoginManager {
      */
     long requestAuthenticationKey(String user, String pass);
 
-    /**Requests the server for all relevant information on a user based on
-     * a username.
+    /**Creates a new user to the database, based on a username and password.
      *
-     * @param userKey   The user's key.
-     * @return          A user class with all relevant information.
+     * @param user  The usename.
+     * @param pass  The password.
+     * @return      The newly generated user.
      */
-    User requestUserData(long userKey);
+    User createNewUser(String user, String pass);
+
 }

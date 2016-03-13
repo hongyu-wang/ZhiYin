@@ -100,13 +100,5 @@ public interface PostManager {
      */
     public MPost removeComment(long comment, MPost post);
 
-    /**
-     * Retrieves a post from the server
-     *
-     * @param post the id of the post
-     * @return the associated post
-     */
-    public MPost getPost(long post);
-
 
 }

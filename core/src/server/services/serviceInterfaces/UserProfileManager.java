@@ -7,12 +7,6 @@ import server.model.user.UserProfile;
  * Created by Kevin Zheng on 2016-03-03.
  */
 public interface UserProfileManager {
-    /**Requests the user's profile data from the server based on a username.
-     *
-     * @param userKey   The user's key.
-     * @return          The UserProfile model for user profile.
-     */
-    UserProfile requestProfileData(long userKey);
 
     /**Modify the username.
      *

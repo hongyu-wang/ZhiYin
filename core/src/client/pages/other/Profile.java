@@ -1,4 +1,4 @@
-package client.pages.miscellaneous;
+package client.pages.other;
 
 import client.component.basicComponents.Image;
 import client.events.ActionEvent;
@@ -6,24 +6,19 @@ import client.pages.State;
 import driver.GameLoop;
 
 /**
- * This is the now playing page as given in the
+ * This is the profile page as given in the
  * art assets folder.
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class NowPlaying extends State {
+public class Profile extends State {
     public void init() {
         super.init();
-        Image background = new Image("Now Playing.JPG");
+        Image background = new Image("Profile.png");
         background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
-        components.add(background);
+        add(background);
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 
     @Override
     public void dispose() {

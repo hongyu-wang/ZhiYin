@@ -14,12 +14,6 @@ public interface MusicHashtagManager {
      */
     long requestAuthenticationKey(String hashtagName);
 
-    /**Returns a hashtag object of relevant information.
-     *
-     * @return  The MHashtag model of string hashtag.
-     */
-    MHashtag requestHashTag(long hashtagKey);
-
     /**Adds a new hashtag to the server.
      *
      * @param hashtag   The new hashtag object.

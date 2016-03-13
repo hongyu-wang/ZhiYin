@@ -10,14 +10,6 @@ import java.util.List;
 public interface MusicPostManager extends PostManager {
 
     /**
-     * Retrieves a music post from the server
-     *
-     * @param key the key of the music post
-     * @return the corresponding music post
-     */
-    public MMusicPost getMusicPost(Long key);
-
-    /**
      * Create a new Music Post
      *
      * @param music     music piece that the post contains

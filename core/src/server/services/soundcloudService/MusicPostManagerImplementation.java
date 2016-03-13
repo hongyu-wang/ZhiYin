@@ -13,19 +13,6 @@ import java.util.List;
  */
 public class MusicPostManagerImplementation extends PostManagerImplementation implements MusicPostManager {
 
-
-    /**
-     * Retrieves a music post from the server
-     *
-     * @param key the key of the music post
-     * @return the corresponding music post
-     */
-    @Override
-    public MMusicPost getMusicPost(Long key) {
-        //Make this work
-        return null;
-    }
-
     /**
      * Create a new Music Post
      *

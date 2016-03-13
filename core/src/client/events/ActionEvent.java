@@ -1,6 +1,7 @@
 package client.events;
 
 import client.stateInterfaces.Performable;
+import client.stateInterfaces.Pressable;
 
 /**
  * This is an ActionEvent class. This is mainly a marker class with only one method: Get source.
@@ -12,13 +13,13 @@ public class ActionEvent {
     /**
      * This is the source of the ActionEvent.
      */
-    private final Performable source;
+    private final Pressable source;
 
     /**
      * This is the primary constructor of the ActionEvent
      * @param performer the component which "performs" the action.
      */
-    public ActionEvent(Performable performer){
+    public ActionEvent(Pressable performer){
         source = performer;
     }
 
@@ -27,7 +28,7 @@ public class ActionEvent {
      * some event.
      * @return The source of the event.
      */
-    public Performable getSource() {
+    public Pressable getSource() {
         return source;
     }
 

@@ -6,10 +6,10 @@ import server.model.user.User;
 import java.util.List;
 
 /**
- * Group model
+ * MGroup model
  * Contains id's of users and posts
  */
-public class Group  extends ServerModel {
+public class MGroup extends ServerModel {
 
     /**
      * list of id's of the group members

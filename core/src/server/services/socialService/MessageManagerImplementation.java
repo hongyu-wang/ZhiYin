@@ -27,17 +27,17 @@ public class MessageManagerImplementation implements MessageManager {
         return message;
     }
 
-    /**
-     * Retrieves a message from the database
-     *
-     * @param key id of the message to be retrieved
-     * @return the message associated with the id
-     */
-    @Override
-    public MMessage getMessage(long key) {
-        //TODO Implement this stuff
-        return null;
-    }
+//    /**
+//     * Retrieves a message from the database
+//     *
+//     * @param key id of the message to be retrieved
+//     * @return the message associated with the id
+//     */
+//    @Override
+//    public MMessage getMessage(long key) {
+//        //TODO Implement this stuff
+//        return null;
+//    }
 
     /**
      * Edits the text of a message

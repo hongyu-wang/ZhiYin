@@ -8,16 +8,17 @@ import server.services.serviceInterfaces.AudioManager;
  */
 public class AudioManagerImplementation implements AudioManager {
 
-    @Override
-    public MAudio requestAudio(long key) {
-        MAudio audio = new MAudio();
-        audio.setKey(key);
+//    @Override
+//    public MAudio requestAudio(long key) {
+//        MAudio audio = new MAudio();
+//        audio.setKey(key);
+//
+//        return audio;
+//    }
 
-        return audio;
-    }
-
-    public void createAudio() {
-
+    public MAudio createAudio() {
+        return null;
+        //TODO Implement.
     }
 
 }
