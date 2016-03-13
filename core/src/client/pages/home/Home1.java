@@ -23,6 +23,7 @@ public class Home1 extends State implements Scrollable {
         Image background = new Image("Home - 1.png");
         background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
         add(background);
+        setBottomBar();
     }
 
 

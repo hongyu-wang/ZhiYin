@@ -17,6 +17,7 @@ public class Home3 extends State {
         Image background = new Image("Home - 3.png");
         background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
         add(background);
+        setBottomBar();
     }
 
 
