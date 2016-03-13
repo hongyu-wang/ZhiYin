@@ -3,7 +3,6 @@ package tools.serverTools.databases;
 import server.model.media.MImage;
 import server.model.structureModels.ServerModel;
 import server.model.user.*;
-import server.services.serviceInterfaces.UserContentManager;
 import tools.serverTools.server.ServerInteraction;
 import tools.utilities.Utils;
 
@@ -12,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /** *

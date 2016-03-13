@@ -2,7 +2,7 @@ package server.services.diaryService;
 
 import server.model.social.MDiaryPost;
 import server.model.media.*;
-import server.services.serviceInterfaces.MusicDiary;
+import server.services.interfaces.models.MusicDiary;
 
 /**
  * Created by calin on 06/03/2016.

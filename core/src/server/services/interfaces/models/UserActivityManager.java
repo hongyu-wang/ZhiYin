@@ -1,6 +1,5 @@
-package server.services.serviceInterfaces;
+package server.services.interfaces.models;
 
-import server.model.user.User;
 import server.model.user.UserActivityLog;
 
 /**
