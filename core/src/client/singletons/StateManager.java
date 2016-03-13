@@ -2,17 +2,16 @@ package client.singletons;
 import client.events.ActionEvent;
 import client.pageStorage.Pages;
 import client.pages.State;
-import client.stateInterfaces.ActionMonitor;
-import client.stateInterfaces.Disposable;
-import client.stateInterfaces.Drawable;
-import client.stateInterfaces.Updatable;
+import client.stateInterfaces.*;
+import com.badlogic.gdx.math.Matrix4;
+import driver.GameLoop;
 
 /**
  * This is essentially a card layout.
  *
  * Created by Hongyu Wang on 3/7/2016.
  */
-public class StateManager implements Disposable, Updatable, Drawable {
+public class StateManager implements Disposable, Updatable, Drawable, Scrollable {
     /**
      * The current instance of StateManager
      */
@@ -65,6 +64,10 @@ public class StateManager implements Disposable, Updatable, Drawable {
         currentState.draw();
     }
 
+
+
+
+
     @Override
     public void dispose() {
         currentState.dispose();
@@ -75,7 +78,21 @@ public class StateManager implements Disposable, Updatable, Drawable {
      * InputListener registers an input on the screen.
      */
     public void receiveInput(){
-        currentState.checkPressed();
+        currentState.getInputController(State.SHELLINPUT).checkPressed();
     }
 
+    @Override
+    public void drawScrolled() {
+        if (currentState instanceof Scrollable){
+            ((Scrollable) currentState).drawScrolled();
+        }
+    }
+
+    @Override
+    public Matrix4 getCamera() {
+        if (currentState instanceof Scrollable) {
+            return ((Scrollable) currentState).getCamera();
+        }
+        return GameLoop.getPrimary();
+    }
 }

@@ -3,12 +3,15 @@ package client.pages;
 import client.component.Component;
 import client.component.basicComponents.Button;
 import client.events.ActionEvent;
+import client.inputController.InputController;
 import client.internalExceptions.NoExecutableException;
 import client.stateInterfaces.*;
 import tools.utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * This is the superclass of all States.
@@ -16,6 +19,9 @@ import java.util.List;
  * All pages should extend this.
  */
 public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor {
+    public static final String SHELLINPUT = "shell";
+    public static final String MOVEABLEINPUT = "moveable";
+
 
     /**
      * This is the primary constructor of state.
@@ -25,11 +31,10 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         init();
     }
 
-    private boolean released = true;
 
-    private Pressable currentButton;
 
-    private List<Pressable> pressables;
+    private Map<String, InputController> controllers;
+
 
 
     /**
@@ -43,19 +48,21 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      */
     public void init(){
         components = Utils.<Component>newList();
-        pressables = Utils.<Pressable>newList();
-        currentButton = null;
+        controllers = Utils.newMap();
+        controllers.put(SHELLINPUT, new InputController());
+        controllers.put(MOVEABLEINPUT, new InputController());
     }
 
     /**
      * This method will add a component to the components.
      *
-     * This will also add all Performables to the performable list.
+     * This will also add all Performables to the performable list in the static
+     * input controller.
      * @param c the component to be added
      */
     public void add(Component c){
         if (c instanceof Pressable)
-            pressables.add((Pressable)c);
+            controllers.get(SHELLINPUT).add((Pressable) c);
         components.add(c);
     }
 
@@ -65,14 +72,11 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      */
     public List<Component> getComponents(){
 
-        List<Component> deepCopy = Utils.<Component>newList();
-        for (Component comp : components){
-            deepCopy.add(comp);
-        }
+        List<Component> deepCopy = Utils.newList();
+        deepCopy.addAll(components.stream().collect(Collectors.toList()));
 
         return deepCopy;
     }
-
 
 
 
@@ -80,34 +84,10 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * This method will draw everything.
      */
     public void draw(){
-        for (Component comp : components){
-            comp.draw();
-        }
+        components.forEach(client.component.Component::draw);
     }
 
-    /**
-     * This is the method that will get called
-     * by InputListener whenever the screen is pressed.
-     */
-    public void checkPressed(){
-        for (Pressable comp : pressables){
-            if (comp.isPressed()){
-                if (currentButton == null) {
-                    released = false;
-                    currentButton = comp;
-                }
 
-                else {
-                    comp.press();
-                    currentButton = null;
-                    released = true;
-                }
-            }
-        }
-
-        if (currentButton != null && released)
-            currentButton = null;
-    }
 
     @Override
     public void actionPerformed(ActionEvent e){
@@ -116,6 +96,14 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         } catch (NoExecutableException ex){
             System.out.println(ex.getMessage());
         }
+    }
+
+    public InputController getInputController(String FIXEDINPUT){
+        return controllers.get(FIXEDINPUT);
+    }
+
+    protected void getInformationFromServer(){
+
     }
 
 }
