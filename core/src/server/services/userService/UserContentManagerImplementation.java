@@ -2,9 +2,7 @@ package server.services.userService;
 
 import server.model.soundCloud.MMusicPost;
 import server.model.user.UserUploadedContent;
-import server.services.serviceInterfaces.UserContentManager;
-
-import java.util.List;
+import server.services.interfaces.models.UserContentManager;
 
 /**
  * Created by Kevin Zheng on 2016-03-03.

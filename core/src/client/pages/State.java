@@ -4,11 +4,11 @@ import client.component.Component;
 import client.component.basicComponents.Button;
 import client.events.ActionEvent;
 import client.inputController.InputController;
+import client.events.executables.internalChanges.TestExecutable;
 import client.internalExceptions.NoExecutableException;
 import client.stateInterfaces.*;
 import tools.utilities.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -64,6 +64,33 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         if (c instanceof Pressable)
             controllers.get(SHELLINPUT).add((Pressable) c);
         components.add(c);
+    }
+
+    /**
+     * Create and add the buttons for the bottom bar.
+     */
+    protected void setBottomBar(){
+        // 59 + 117 + 55 + 117 + 55 + 117 + 55 + 117 + 58
+
+        Button homeButton = new Button(this);
+        homeButton.setBounds((59) + 1, 0, 117, 117);
+        homeButton.setExecutable(new TestExecutable("home"));
+        add(homeButton);
+
+        Button diaryButton = new Button(this);
+        diaryButton.setBounds((59 + 117 + 55) + 1, 0, 117, 117);
+        diaryButton.setExecutable(new TestExecutable("diary"));
+        add(diaryButton);
+
+        Button friendsButton = new Button(this);
+        friendsButton.setBounds((59 + 117*2 + 55*2) + 1, 0, 117, 117);
+        friendsButton.setExecutable(new TestExecutable("friends"));
+        add(friendsButton);
+
+        Button toolsButton = new Button(this);
+        toolsButton.setBounds((59 + 117*3 + 55*3) + 1, 0, 117, 117);
+        toolsButton.setExecutable(new TestExecutable("tools"));
+        add(toolsButton);
     }
 
     /**

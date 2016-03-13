@@ -1,4 +1,4 @@
-package client.pages.friends;
+package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
 import client.component.basicComponents.Image;
@@ -7,30 +7,30 @@ import client.events.executables.internalChanges.TestExecutable;
 import client.pages.State;
 
 /**
- * The shell for the Friends3 state.
+ * Created by blobbydude24 on 2016-03-13.
  */
-public class Friends3Shell extends State {
+public class Diary2Shell extends State {
 
     public void init(){
         super.init();
 
-        Image background = new Image("Friends - 3.png");
+        Image background = new Image("Diary - 2.png");
         background.setBounds(0, 0, 750, 1334);
         add(background);
 
-        Label friendsLabel = new Label("FRIENDS");
-        friendsLabel.setBounds(0, 1217, 750, 117);
-        add(friendsLabel);
+        Label composeLabel = new Label("COMPOSE");
+        composeLabel.setBounds(0, 1217, 750, 117);
+        add(composeLabel);
 
         Button discardButton = new Button(this);
         discardButton.setBounds(0 + 1, 0, 375, 117);
         discardButton.setExecutable(new TestExecutable("discard"));
         add(discardButton);
 
-        Button sendButton = new Button(this);
-        sendButton.setBounds(375 + 1, 0, 375, 117);
-        sendButton.setExecutable(new TestExecutable("send"));
-        add(sendButton);
+        Button postButton = new Button(this);
+        postButton.setBounds(375 + 1, 0, 375, 117);
+        postButton.setExecutable(new TestExecutable("post"));
+        add(postButton);
     }
 
     @Override
@@ -42,5 +42,4 @@ public class Friends3Shell extends State {
     public void update(float dt) {
 
     }
-
 }

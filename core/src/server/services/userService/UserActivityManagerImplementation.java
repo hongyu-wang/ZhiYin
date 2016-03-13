@@ -1,9 +1,7 @@
 package server.services.userService;
 
 import server.model.user.UserActivityLog;
-import server.services.serviceInterfaces.UserActivityManager;
-
-import java.util.List;
+import server.services.interfaces.models.UserActivityManager;
 
 /**
  * Created by Kevin Zheng on 2016-03-03.

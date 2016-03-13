@@ -1,36 +1,25 @@
 package client.pages.musicDiary;
 
-import client.component.basicComponents.Image;
-import client.events.ActionEvent;
-import client.pages.State;
-import driver.GameLoop;
-
 /**
  * This is the first music diary page as given in the
  * art assets folder.
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class Diary1 extends State {
+public class Diary1 extends Diary1Shell {
+
     public void init() {
         super.init();
-        Image background = new Image("Diary - 1.png");
-        background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
-        add(background);
     }
-
-
-
 
     @Override
     public void dispose() {
 
     }
 
-
-
     @Override
     public void update(float dt) {
 
     }
+
 }

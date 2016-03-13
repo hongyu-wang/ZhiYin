@@ -1,7 +1,7 @@
 package server.services.mediaService;
 
 import server.model.media.MImage;
-import server.services.serviceInterfaces.ImageManager;
+import server.services.interfaces.models.ImageManager;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
