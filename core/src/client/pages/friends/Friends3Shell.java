@@ -18,7 +18,7 @@ public class Friends3Shell extends State {
         background.setBounds(0, 0, 750, 1334);
         add(background);
 
-        Label friendsLabel = new Label("Friends");
+        Label friendsLabel = new Label("FRIENDS");
         friendsLabel.setBounds(0, 1217, 750, 117);
         add(friendsLabel);
 

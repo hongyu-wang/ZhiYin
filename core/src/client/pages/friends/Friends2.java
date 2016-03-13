@@ -16,5 +16,4 @@ public class Friends2 extends Friends2Shell{
 
     }
 
-
 }

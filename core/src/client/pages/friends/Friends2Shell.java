@@ -18,7 +18,7 @@ public class Friends2Shell extends State {
         background.setBounds(0, 0, 750, 1334);
         add(background);
 
-        Label friendsLabel = new Label("Friends");
+        Label friendsLabel = new Label("FRIENDS");
         friendsLabel.setBounds(0, 1217, 750, 117);
         add(friendsLabel);
 
@@ -27,31 +27,7 @@ public class Friends2Shell extends State {
         discardButton.setExecutable(new TestExecutable("discard"));
         add(discardButton);
 
-        setMainButtons();
-    }
-
-    private void setMainButtons(){
-        // 59 + 117 + 55 + 117 + 55 + 117 + 55 + 117 + 58
-
-        Button homeButton = new Button(this);
-        homeButton.setBounds((59) + 1, 0, 117, 117);
-        homeButton.setExecutable(new TestExecutable("home"));
-        add(homeButton);
-
-        Button diaryButton = new Button(this);
-        diaryButton.setBounds((59 + 117 + 55) + 1, 0, 117, 117);
-        diaryButton.setExecutable(new TestExecutable("diary"));
-        add(diaryButton);
-
-        Button friendsButton = new Button(this);
-        friendsButton.setBounds((59 + 117*2 + 55*2) + 1, 0, 117, 117);
-        friendsButton.setExecutable(new TestExecutable("friends"));
-        add(friendsButton);
-
-        Button toolsButton = new Button(this);
-        toolsButton.setBounds((59 + 117*3 + 55*3) + 1, 0, 117, 117);
-        toolsButton.setExecutable(new TestExecutable("tools"));
-        add(toolsButton);
+        setBottomBar();
     }
 
     @Override
