@@ -13,6 +13,7 @@ public class Home2 extends State {
 
     public void init() {
         super.init();
+
         Image background = new Image("Home - 2.png");
         background.setBounds(0, 0, 750, 1334);
         add(background);

@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Matrix4;
  */
 public class Home1 extends Home1Shell implements Scrollable {
     private OrthographicCamera cam;
+    
     public void init() {
         super.init();
         cam = new OrthographicCamera();

@@ -8,7 +8,7 @@ import client.pages.State;
 /**
  * Created by blobbydude24 on 2016-03-13.
  */
-public class Home3Shell extends State{
+public abstract class Home3Shell extends State{
 
     public void init(){
         super.init();

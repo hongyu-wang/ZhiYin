@@ -8,7 +8,7 @@ import client.pages.State;
 /**
  * The shell for the Friends4 state.
  */
-public class Friends4Shell extends State {
+public abstract class Friends4Shell extends State {
 
     public void init(){
         super.init();

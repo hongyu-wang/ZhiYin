@@ -9,7 +9,7 @@ import client.pages.State;
 /**
  * The shell for the Friends3 state.
  */
-public class Friends3Shell extends State {
+public abstract class Friends3Shell extends State {
 
     public void init(){
         super.init();

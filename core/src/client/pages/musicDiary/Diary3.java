@@ -12,7 +12,6 @@ public class Diary3 extends Diary3Shell {
     }
 
 
-
     @Override
     public void dispose() {
 

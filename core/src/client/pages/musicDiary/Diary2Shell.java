@@ -9,7 +9,7 @@ import client.pages.State;
 /**
  * Created by blobbydude24 on 2016-03-13.
  */
-public class Diary2Shell extends State {
+public abstract class Diary2Shell extends State {
 
     public void init(){
         super.init();
