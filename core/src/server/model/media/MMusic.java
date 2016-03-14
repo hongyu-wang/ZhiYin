@@ -1,5 +1,6 @@
 package server.model.media;
 
+import server.model.social.MComment;
 import server.model.structureModels.ServerModel;
 
 /**
@@ -38,4 +39,5 @@ public class MMusic extends ServerModel {
     public void setMusicKey(long audioKey) {
         this.audioKey = audioKey;
     }
+
 }

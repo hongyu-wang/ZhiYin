@@ -12,7 +12,7 @@ import client.stateInterfaces.Updatable;
  *
  * Created by Hongyu Wang on 3/7/2016.
  */
-public class StateManager implements Disposable, Updatable, Drawable, ActionMonitor {
+public class StateManager implements Disposable, Updatable, Drawable {
     /**
      * The current instance of StateManager
      */
@@ -32,7 +32,7 @@ public class StateManager implements Disposable, Updatable, Drawable, ActionMoni
     /**
      * This is the current state within the statemanager.
      */
-    private State current_state;
+    private State currentState;
 
 
     private StateManager(Pages initial_state){
@@ -51,28 +51,31 @@ public class StateManager implements Disposable, Updatable, Drawable, ActionMoni
      * @param page the page within the Pages enum
      */
     public void changeState(Pages page){
-        current_state = page.getStateReference();
+        currentState = page.getStateReference();
     }
 
 
     @Override
     public void update(float dt) {
-        current_state.update(dt);
+        currentState.update(dt);
     }
 
     @Override
     public void draw() {
-        current_state.draw();
+        currentState.draw();
     }
 
     @Override
     public void dispose() {
-        current_state.dispose();
+        currentState.dispose();
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        current_state.actionPerformed(e);
+    /**
+     * This is the method that is called when
+     * InputListener registers an input on the screen.
+     */
+    public void receiveInput(){
+        currentState.checkPressed();
     }
+
 }

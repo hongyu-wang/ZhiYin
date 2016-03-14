@@ -14,10 +14,13 @@ public class MAudio extends ServerModel {
 
 
     private Vector<byte[]> mData = new Vector<>();
+    private String trackName;
+    private int sampleRate;
+    private String album;
 
 
-    public MAudio()
-    {
+
+    public MAudio() {
 
     }
 
@@ -31,6 +34,10 @@ public class MAudio extends ServerModel {
 
     public Vector<byte[]> getmData(){
         return mData;
+    }
+
+    public String getName(){
+        return trackName;
     }
 
 }

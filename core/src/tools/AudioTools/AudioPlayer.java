@@ -114,8 +114,9 @@ public class AudioPlayer {
 
         if (ba.length>0)
         {
-            VoidPtr vp = inBuffer.getAudioData();
-            BytePtr bp = vp.as(BytePtr.class); //Struct.allocate(BytePtr.class, ba.length);
+            //
+            //BytePtr bp = vp.as(BytePtr.class); //Struct.allocate(BytePtr.class, ba.length);
+            BytePtr bp = new BytePtr();
             bp.set(ba);
 //          inBuffer.setMAudioData(vp);
             inBuffer.setAudioData(inBuffer.getDataPointer(),ba.length);
@@ -134,7 +135,7 @@ public class AudioPlayer {
                 AudioStreamBasicDescription asbd = new AudioStreamBasicDescription(mSampleRate, mFormatID, new AudioFormatFlags(mFormatFlags), mBytesPerPacket, mFramesPerPacket, mBytesPerFrame, mChannelsPerFrame, mBitsPerChannel);
                 AudioQueue.AudioQueuePtr mQueuePtr = new AudioQueue.AudioQueuePtr();
                 Method callbackMethod = null;
-                Method[] methods = track.getClass().getMethods();
+                Method[] methods = this.getClass().getMethods();
                 int i = methods.length;
                 while (i-->0) if (methods[i].getName().equals("callbackMethod"))
                 {
@@ -169,8 +170,13 @@ public class AudioPlayer {
 
                 for (i = 0; i < kNumberBuffers; ++i)
                 {
-                    mQueue.allocateBuffer(bufferByteSize);
-                    nextChunk(mQueue, buffers[i].get(), track);
+
+                    try {
+                        mQueue.allocateBuffer(bufferByteSize);
+                        nextChunk(mQueue, buffers[i].get(), track);
+                    } catch (OSStatusException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 System.out.println("STARTING QUEUE");

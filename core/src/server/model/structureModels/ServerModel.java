@@ -21,4 +21,10 @@ public class ServerModel {
     public void setKey(long accessKey) {
         this.accessKey = accessKey;
     }
+
+    public int getUniqueKeyTag(){
+        return 0;
+//        throw new UnsupportedOperationException();
+    };
+
 }

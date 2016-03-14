@@ -1,6 +1,7 @@
 package server.services.socialService;
 
 import server.model.social.MPost;
+import server.services.serviceInterfaces.PostManager;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -166,14 +167,14 @@ public class PostManagerImplementation implements PostManager {
         return post;
     }
 
-    /**
-     * Retrieves a post from the server
-     *
-     * @param post the id of the post
-     * @return the associated post
-     */
-    @Override
-    public MPost getPost(long post) {
-        return null;
-    }
+//    /**
+//     * Retrieves a post from the server
+//     *
+//     * @param post the id of the post
+//     * @return the associated post
+//     */
+//    @Override
+//    public MPost getPost(long post) {
+//        return null;
+//    }
 }

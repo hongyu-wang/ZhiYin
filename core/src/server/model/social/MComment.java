@@ -100,4 +100,5 @@ public class MComment extends ServerModel {
     public void setComments(List<Long> comments) {
         this.comments = comments;
     }
+
 }

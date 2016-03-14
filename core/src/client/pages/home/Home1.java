@@ -17,13 +17,9 @@ public class Home1 extends State{
         super.init();
         Image background = new Image("Home - 1.png");
         background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
-        components.add(background);
+        add(background);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 
     @Override
     public void dispose() {
