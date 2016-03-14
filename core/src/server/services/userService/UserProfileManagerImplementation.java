@@ -2,7 +2,7 @@ package server.services.userService;
 
 import server.model.media.MImage;
 import server.model.user.UserProfile;
-import server.services.serviceInterfaces.UserProfileManager;
+import server.services.interfaces.models.UserProfileManager;
 
 /**
  * Created by Kevin Zheng on 2016-03-03.

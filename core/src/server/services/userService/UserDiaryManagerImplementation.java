@@ -2,9 +2,7 @@ package server.services.userService;
 
 import server.model.social.MDiaryPost;
 import server.model.user.UserDiaryContent;
-import server.services.serviceInterfaces.UserDiaryManager;
-
-import java.util.List;
+import server.services.interfaces.models.UserDiaryManager;
 
 /**
  * Created by Kevin Zheng on 2016-03-03.

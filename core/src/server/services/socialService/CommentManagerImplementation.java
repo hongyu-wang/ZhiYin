@@ -1,7 +1,7 @@
 package server.services.socialService;
 
 import server.model.social.MComment;
-import server.services.serviceInterfaces.CommentManager;
+import server.services.interfaces.models.CommentManager;
 import tools.utilities.Utils;
 
 import java.util.List;

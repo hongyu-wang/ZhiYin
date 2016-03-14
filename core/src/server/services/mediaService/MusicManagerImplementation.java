@@ -1,7 +1,7 @@
 package server.services.mediaService;
 
 import server.model.media.MMusic;
-import server.services.serviceInterfaces.MusicManager;
+import server.services.interfaces.models.MusicManager;
 
 import java.io.IOException;
 
