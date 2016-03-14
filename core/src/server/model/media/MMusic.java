@@ -1,6 +1,5 @@
 package server.model.media;
 
-import server.model.social.MComment;
 import server.model.structureModels.ServerModel;
 
 /**
@@ -20,6 +19,9 @@ public class MMusic extends ServerModel {
      *
      * @return  The title string.
      */
+
+    MAudio song;
+
     public String getName() {
         return name;
     }
@@ -40,4 +42,7 @@ public class MMusic extends ServerModel {
         this.audioKey = audioKey;
     }
 
+    public MAudio getSong() { return song; }
+
+    public void setSong(MAudio song) {this.song = song;}
 }

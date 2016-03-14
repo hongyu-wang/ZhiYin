@@ -1,0 +1,12 @@
+ForAll:
+    User
+
+Profile:
+    UserProfile
+
+MusicDiary:
+    UserDiaryContent
+
+Friends:
+    UserConversations
+

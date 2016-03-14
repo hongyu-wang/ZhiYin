@@ -1,9 +1,8 @@
 package client.pages.home;
 
-import client.component.basicComponents.Image;
-import client.events.ActionEvent;
-import client.pages.State;
-import driver.GameLoop;
+import client.stateInterfaces.Scrollable;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Matrix4;
 
 /**
  * This is the first home diary page as given in the
@@ -11,13 +10,12 @@ import driver.GameLoop;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class Home1 extends State{
-
+public class Home1 extends Home1Shell implements Scrollable {
+    private OrthographicCamera cam;
+    
     public void init() {
         super.init();
-        Image background = new Image("Home - 1.png");
-        background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
-        add(background);
+        cam = new OrthographicCamera();
     }
 
 
@@ -29,5 +27,15 @@ public class Home1 extends State{
     @Override
     public void update(float dt) {
 
+    }
+
+    @Override
+    public void drawScrolled() {
+
+    }
+
+    @Override
+    public Matrix4 getCamera() {
+        return cam.combined;
     }
 }
