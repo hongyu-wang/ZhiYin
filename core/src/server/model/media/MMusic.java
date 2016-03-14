@@ -19,6 +19,9 @@ public class MMusic extends ServerModel {
      *
      * @return  The title string.
      */
+
+    MAudio song;
+
     public String getName() {
         return name;
     }
@@ -38,4 +41,8 @@ public class MMusic extends ServerModel {
     public void setMusicKey(long audioKey) {
         this.audioKey = audioKey;
     }
+
+    public MAudio getSong() { return song; }
+
+    public void setSong(MAudio song) {this.song = song;}
 }
