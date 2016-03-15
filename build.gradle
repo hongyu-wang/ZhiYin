@@ -29,6 +29,9 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        // todo webservices
+        // Restful web services client repository
+        maven { url "https://repo.spring.io/libs-milestone" }
     }
 }
 
@@ -106,6 +109,15 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "org.robovm:robovm-rt:$roboVMVersion"
         compile "org.robovm:robovm-cocoatouch:$roboVMVersion"
+        // todo webservices
+        // resteasy server.
+        compile ('org.jboss.resteasy:resteasy-netty:3.0.16.Final') {
+            exclude group: 'org.apache.httpcomponents'
+        }
+
+        compile 'org.jboss.resteasy:resteasy-jackson2-provider:3.0.16.Final'
+        // Restful web services client
+        compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     }
 }
 
