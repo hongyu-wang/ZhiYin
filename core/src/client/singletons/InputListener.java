@@ -2,6 +2,7 @@ package client.singletons;
 
 import client.pageStorage.Pages;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import driver.GameLoop;
 
@@ -18,8 +19,9 @@ public class InputListener implements InputProcessor {
     /**
      * Our instance of InputListener as per the Singleton design pattern.
      */
-    private static InputListener ourInstance = new InputListener();
 
+    private static InputListener ourInstance = new InputListener();
+    private static InputMultiplexer im = new InputMultiplexer();
 
     /**
      * This is the value of currentEvent when
@@ -97,8 +99,16 @@ public class InputListener implements InputProcessor {
 
     }
 
+    public static void addListeners(){
+        im.addProcessor(InputListener.getInstance());
+        for (Pages page : Pages.values())
+            im.addProcessor(page.getStateReference().getStage());
 
+    }
 
+    public static InputMultiplexer getMultiplexer(){
+        return im;
+    }
 
     @Override
     public boolean keyDown(int keycode) {
@@ -128,12 +138,9 @@ public class InputListener implements InputProcessor {
             stateManager.changeState(Pages.HOME1);
 
         if (keycode == Input.Keys.S)
-            stateManager.changeState(Pages.HOME2);
-
-        if (keycode == Input.Keys.D)
             stateManager.changeState(Pages.HOME3);
 
-        if (keycode == Input.Keys.F)
+        if (keycode == Input.Keys.D)
             stateManager.changeState(Pages.HOME4);
 
         if (keycode == Input.Keys.Z)
@@ -163,8 +170,7 @@ public class InputListener implements InputProcessor {
         mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
         currentEvent = DOWN;
 
-        //TODO REMOVE THIS PRINT STATEMENT
-        System.out.println("x_pos: " + mouseX + " y_pos: "+  mouseY);
+
         stateManager.receiveInput();
 
         return false;

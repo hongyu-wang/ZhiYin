@@ -11,6 +11,7 @@ import client.stateInterfaces.Performable;
 import client.stateInterfaces.Pressable;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -47,12 +48,12 @@ public class Button extends Component implements Pressable{
      * This is the boolean that triggers the animation of the button press.
      *
      */
-    private boolean playAnimation = true;
+    private boolean playAnimation;
 
 
     @Override
     protected void init() {
-
+        playAnimation = false;
     }
 
     @Override
@@ -60,18 +61,18 @@ public class Button extends Component implements Pressable{
 
     }
 
-    @Override
-    public void draw() {
-        sprite_batch.end();
+    public void draw(Batch sb, float parentAlpha) {
+        super.draw(sb, parentAlpha);
+        spriteBatch.end();
         if (playAnimation){
             ShapeRenderer sr = ShapeCreater.getInstance();
             sr.setAutoShapeType(true);
             sr.setColor(1, 1, 0, 0);
             sr.begin();
-            sr.rect(x, y, width, height);
+            sr.rect(getX(), getY(), getWidth(), getHeight());
             sr.end();
         }
-        sprite_batch.begin();
+        spriteBatch.begin();
     }
 
     @Override
@@ -105,7 +106,7 @@ public class Button extends Component implements Pressable{
 
     @Override
     public void setAnimation() {
-        //playAnimation = !playAnimation;
+        playAnimation = !playAnimation;
     }
 
 
@@ -115,7 +116,7 @@ public class Button extends Component implements Pressable{
      * @return whether or not the button is in the width span
      */
     private boolean checkInX(InputListener il){
-        return  il.getMouseX() - x > 0 && width > il.getMouseX() - x;
+        return  il.getMouseX() - getX() > 0 && getWidth() > il.getMouseX() - getX();
     }
 
     /**
@@ -125,7 +126,7 @@ public class Button extends Component implements Pressable{
      */
     private boolean checkInY(InputListener il){
 
-        return il.getMouseY() - y > 0 && height > il.getMouseY() - y ;
+        return il.getMouseY() - getY() > 0 && getHeight() > il.getMouseY() - getY();
     }
 
 

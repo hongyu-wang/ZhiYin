@@ -11,11 +11,11 @@ import driver.GameLoop;
  *
  * Created by Hongyu Wang on 3/7/2016.
  */
-public class StateManager implements Disposable, Updatable, Drawable, Scrollable {
+public class StateManager implements Disposable, Updatable, Drawable {
     /**
      * The current instance of StateManager
      */
-    private static StateManager ourInstance = new StateManager(Pages.PROFILE);
+    private static StateManager ourInstance = new StateManager();
 
     /**
      * This returns the current instance of the StateManager class
@@ -25,7 +25,7 @@ public class StateManager implements Disposable, Updatable, Drawable, Scrollable
         return ourInstance;
     }
 
-    public static final double M = .5;
+    public static final float M = .5F;
 
 
     /**
@@ -34,9 +34,9 @@ public class StateManager implements Disposable, Updatable, Drawable, Scrollable
     private State currentState;
 
 
-    private StateManager(Pages initial_state){
+    private StateManager(){
         init();
-        changeState(initial_state);
+
     }
 
 
@@ -50,7 +50,8 @@ public class StateManager implements Disposable, Updatable, Drawable, Scrollable
      * @param page the page within the Pages enum
      */
     public void changeState(Pages page){
-        currentState = page.getStateReference();
+        if (page.getStateReference() != null)
+            currentState = page.getStateReference();
     }
 
 
@@ -81,18 +82,5 @@ public class StateManager implements Disposable, Updatable, Drawable, Scrollable
         currentState.getInputController(State.SHELLINPUT).checkPressed();
     }
 
-    @Override
-    public void drawScrolled() {
-        if (currentState instanceof Scrollable){
-            ((Scrollable) currentState).drawScrolled();
-        }
-    }
 
-    @Override
-    public Matrix4 getCamera() {
-        if (currentState instanceof Scrollable) {
-            return ((Scrollable) currentState).getCamera();
-        }
-        return GameLoop.getPrimary();
-    }
 }

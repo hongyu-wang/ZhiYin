@@ -1,10 +1,12 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
-import client.component.basicComponents.Image;
-import client.component.basicComponents.Label;
 import client.events.executables.internalChanges.TestExecutable;
 import client.pages.State;
+import client.singletons.StateManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import driver.GameLoop;
 
 /**
  * Created by blobbydude24 on 2016-03-13.
@@ -14,13 +16,11 @@ public abstract class Diary2Shell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image("Diary - 2.png");
-        background.setBounds(0, 0, 750, 1334);
+        Image background = new Image(new Texture("Diary - 2.png"));
+        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         add(background);
 
-        Label composeLabel = new Label("COMPOSE");
-        composeLabel.setBounds(0, 1200, 750, 134);
-        add(composeLabel);
+
 
         Button titleButton = new Button(this);
         titleButton.setBounds(0 + 1, 1112, 750, 88);
@@ -63,8 +63,4 @@ public abstract class Diary2Shell extends State {
 
     }
 
-    @Override
-    public void update(float dt) {
-
-    }
 }

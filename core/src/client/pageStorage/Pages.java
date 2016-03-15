@@ -6,7 +6,6 @@ import client.pages.friends.Friends2;
 import client.pages.friends.Friends3;
 import client.pages.friends.Friends4;
 import client.pages.home.Home1;
-import client.pages.home.Home2;
 import client.pages.home.Home3;
 import client.pages.home.Home4;
 import client.pages.other.NowPlaying;
@@ -27,20 +26,19 @@ public enum Pages {
      * to include all subpackages within package.
      */
 
-    FRIENDS1(new Friends1()),
-    FRIENDS2(new Friends2()),
-    FRIENDS3(new Friends3()),
-    FRIENDS4(new Friends4()),
-    HOME1(new Home1()),
-    HOME2(new Home2()),
-    HOME3(new Home3()),
-    HOME4(new Home4()),
-    NOWPLAYING(new NowPlaying()),
-    PROFILE(new Profile()),
-    DIARY1(new Diary1()),
-    DIARY2(new Diary2()),
-    DIARY3(new Diary3()),
-    ;
+    FRIENDS1("friends.Friends1"),
+    FRIENDS2("friends.Friends2"),
+    FRIENDS3("friends.Friends3"),
+    FRIENDS4("friends.Friends4"),
+    HOME1("home.Home1"),
+    HOME3("home.Home3"),
+    HOME4("home.Home4"),
+    NOWPLAYING("other.NowPlaying"),
+    PROFILE("other.Profile"),
+    DIARY1("musicDiary.Diary1"),
+    DIARY2("musicDiary.Diary2"),
+    DIARY3("musicDiary.Diary3");
+
 
 
 
@@ -50,13 +48,25 @@ public enum Pages {
      */
     private State stateReference;
 
+    private String name;
 
-
-    Pages(State state){
-      this.stateReference = state;
-
+    Pages(String state){
+      name = state;
     }
 
+
+    public static void initClass(){
+
+        for (Pages page : Pages.values()){
+            if (page != null) {
+                try {
+                    page.stateReference = (State) Class.forName("client.pages." + page.name).newInstance();
+                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 
 

@@ -1,5 +1,6 @@
 package driver;
 
+import client.pageStorage.Pages;
 import client.singletons.InputListener;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
@@ -13,21 +14,27 @@ import com.badlogic.gdx.math.Matrix4;
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
-	private static OrthographicCamera primary;
 	public static final int WIDTH = 750;
 
 	public static final int HEIGHT = 1334;
 
+    private static OrthographicCamera primary;
 
 	@Override
 	public void create () {
 		stateManager = StateManager.getInstance();
+
+        Pages.initClass();
+        stateManager.changeState(Pages.PROFILE);
 		spriteBatch = MainBatch.getInstance();
-        primary = new OrthographicCamera(WIDTH*(float)StateManager.M, HEIGHT*(float)StateManager.M);
-        primary.translate(primary.viewportWidth/2, primary.viewportHeight/2);
+        primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
+        primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
         primary.update();
-		Gdx.input.setInputProcessor(InputListener.getInstance());
-	}
+
+		InputListener.addListeners();
+		Gdx.input.setInputProcessor(InputListener.getMultiplexer());
+
+    }
 
 	@Override
 	public void render () {
@@ -42,10 +49,7 @@ public class GameLoop extends ApplicationAdapter {
 		stateManager.update(Gdx.graphics.getDeltaTime());
 		spriteBatch.end();
 
-        spriteBatch.setProjectionMatrix(stateManager.getCamera());
-        spriteBatch.begin();
-        stateManager.drawScrolled();
-        spriteBatch.end();
+
 	}
 
     @Override
@@ -53,11 +57,4 @@ public class GameLoop extends ApplicationAdapter {
         stateManager.dispose();
     }
 
-
-    /**
-     * @return the current camera used
-     */
-    public static Matrix4 getPrimary(){
-        return primary.combined;
-    }
 }

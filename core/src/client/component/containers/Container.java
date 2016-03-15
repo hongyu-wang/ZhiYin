@@ -1,6 +1,7 @@
 package client.component.containers;
 
 import client.component.Component;
+import client.singletons.MainBatch;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -18,10 +19,7 @@ public abstract class Container extends Component
 
 
     public Container(int x, int y, int width, int height){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        setBounds(x, y, width, height);
         init();
     }
 
@@ -54,10 +52,9 @@ public abstract class Container extends Component
         }
     }
 
-    @Override
     public void draw() {
         for (Component comp : components){
-            comp.draw();
+            comp.draw(MainBatch.getInstance(), 0);
         }
     }
 

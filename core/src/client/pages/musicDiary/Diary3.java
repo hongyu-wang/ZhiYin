@@ -16,9 +16,4 @@ public class Diary3 extends Diary3Shell {
     public void dispose() {
 
     }
-
-    @Override
-    public void update(float dt) {
-
-    }
 }

@@ -17,9 +17,6 @@ public class NowPlaying extends NowPlayingShell {
 
     }
 
-    @Override
-    public void update(float dt) {
 
-    }
 
 }

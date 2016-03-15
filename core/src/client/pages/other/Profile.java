@@ -1,8 +1,9 @@
 package client.pages.other;
 
-import client.component.basicComponents.Image;
-import client.events.ActionEvent;
 import client.pages.State;
+import client.singletons.StateManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
 
 /**
@@ -14,8 +15,9 @@ import driver.GameLoop;
 public class Profile extends State {
     public void init() {
         super.init();
-        Image background = new Image("Profile.png");
-        background.setBounds(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
+        Image background = new Image(new Texture("Profile.png"));
+        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
+
         add(background);
     }
 
@@ -25,8 +27,4 @@ public class Profile extends State {
 
     }
 
-    @Override
-    public void update(float dt) {
-
-    }
 }
