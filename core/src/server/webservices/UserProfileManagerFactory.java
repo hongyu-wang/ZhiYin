@@ -1,6 +1,6 @@
 package server.webservices;
 
-import server.services.serviceInterfaces.UserProfileManager;
+import server.services.interfaces.models.UserProfileManager;
 import server.services.userService.UserProfileManagerImplementation;
 
 /**

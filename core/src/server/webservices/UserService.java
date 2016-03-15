@@ -1,8 +1,7 @@
 package server.webservices;
 
 import server.model.user.UserProfile;
-import server.services.serviceInterfaces.UserProfileManager;
-import server.services.userService.UserProfileManagerImplementation;
+import server.services.interfaces.models.UserProfileManager;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
