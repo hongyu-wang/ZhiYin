@@ -40,22 +40,31 @@ public class InputController {
      * by InputListener whenever the screen is pressed.
      */
     public void checkPressed(){
+        boolean press = false;
         for (Pressable comp : pressables){
             if (comp.isPressed()){
+                press = true;
                 if (currentButton == null) {
                     released = false;
                     currentButton = comp;
-                }
+                    currentButton.setAnimation();
+                } else {
+                    if (comp == currentButton) {
+                        currentButton.press();
+                        currentButton.setAnimation();
+                        currentButton = null;
+                    }
 
-                else {
-                    comp.press();
-                    currentButton = null;
                     released = true;
                 }
             }
         }
 
-        if (currentButton != null && released)
+        if (!press) released = true;
+
+        if (currentButton != null && released) {
+            currentButton.setAnimation();
             currentButton = null;
+        }
     }
 }

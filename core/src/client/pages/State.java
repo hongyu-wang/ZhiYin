@@ -3,10 +3,18 @@ package client.pages;
 import client.component.Component;
 import client.component.basicComponents.Button;
 import client.events.ActionEvent;
+import client.events.executables.internalChanges.ExecuteChangePage;
 import client.inputController.InputController;
 import client.events.executables.internalChanges.TestExecutable;
 import client.internalExceptions.NoExecutableException;
+import client.pageStorage.Pages;
+import client.singletons.InputListener;
+import client.singletons.MainBatch;
+import client.singletons.StateManager;
 import client.stateInterfaces.*;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import driver.GameLoop;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -21,7 +29,7 @@ import java.util.stream.Collectors;
 public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor {
     public static final String SHELLINPUT = "shell";
     public static final String MOVEABLEINPUT = "moveable";
-
+    protected Stage stage;
 
     /**
      * This is the primary constructor of state.
@@ -31,7 +39,23 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         init();
     }
 
+    @Override
+    public void update(float dt) {
+        stage.act();
+    }
 
+
+    public void initStage(){
+
+    }
+
+    /**
+     * This clears the stage of all actors. The main purpose of this
+     * is for the input multiplexer to work properly.
+     */
+    public void clearStage(){
+        stage.clear();
+    }
 
     private Map<String, InputController> controllers;
 
@@ -41,16 +65,18 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * This is the serviceList will store all components
      * inside the given state.
      */
-    private List<Component> components;
+    private List<Actor> components;
 
     /**
      * This method will initialize all values as required within state
      */
     public void init(){
-        components = Utils.<Component>newList();
+        components = Utils.newList();
         controllers = Utils.newMap();
         controllers.put(SHELLINPUT, new InputController());
         controllers.put(MOVEABLEINPUT, new InputController());
+        stage = new Stage();
+
     }
 
     /**
@@ -60,7 +86,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * input controller.
      * @param c the component to be added
      */
-    public void add(Component c){
+    public void add(Actor c){
         if (c instanceof Pressable)
             controllers.get(SHELLINPUT).add((Pressable) c);
         components.add(c);
@@ -74,17 +100,17 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
         Button homeButton = new Button(this);
         homeButton.setBounds((59) + 1, 0, 117, 117);
-        homeButton.setExecutable(new TestExecutable("home"));
+        homeButton.setExecutable(new ExecuteChangePage(Pages.HOME1));
         add(homeButton);
 
         Button diaryButton = new Button(this);
         diaryButton.setBounds((59 + 117 + 55) + 1, 0, 117, 117);
-        diaryButton.setExecutable(new TestExecutable("diary"));
+        diaryButton.setExecutable(new ExecuteChangePage(Pages.DIARY1));
         add(diaryButton);
 
         Button friendsButton = new Button(this);
         friendsButton.setBounds((59 + 117*2 + 55*2) + 1, 0, 117, 117);
-        friendsButton.setExecutable(new TestExecutable("friends"));
+        friendsButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
         add(friendsButton);
 
         Button toolsButton = new Button(this);
@@ -97,9 +123,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * This will return a deep copy of the stored component list
      * @return A deep copy of the components.
      */
-    public List<Component> getComponents(){
+    public List<Actor> getComponents(){
 
-        List<Component> deepCopy = Utils.newList();
+        List<Actor> deepCopy = Utils.newList();
         deepCopy.addAll(components.stream().collect(Collectors.toList()));
 
         return deepCopy;
@@ -111,7 +137,11 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * This method will draw everything.
      */
     public void draw(){
-        components.forEach(client.component.Component::draw);
+        if (stage.getActors().size != 0)
+            stage.draw();
+        for (Actor actor : components){
+            actor.draw(MainBatch.getInstance(), 1);
+        }
     }
 
 
@@ -125,6 +155,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         }
     }
 
+
+
+
     public InputController getInputController(String FIXEDINPUT){
         return controllers.get(FIXEDINPUT);
     }
@@ -133,5 +166,8 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
     }
 
+    public Stage getStage() {
+        return stage;
+    }
 }
 

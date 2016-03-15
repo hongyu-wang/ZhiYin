@@ -18,8 +18,4 @@ public class Diary2 extends Diary2Shell{
     }
 
 
-    @Override
-    public void update(float dt) {
-
-    }
 }

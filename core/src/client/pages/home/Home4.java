@@ -1,5 +1,9 @@
 package client.pages.home;
 
+
+import client.pages.State;
+import driver.GameLoop;
+
 /**
  * This is the fourth home diary page as given in the
  * art assets folder.
@@ -10,6 +14,7 @@ public class Home4 extends Home4Shell {
 
     public void init() {
         super.init();
+
     }
 
 
@@ -19,8 +24,4 @@ public class Home4 extends Home4Shell {
 
     }
 
-    @Override
-    public void update(float dt) {
-
-    }
 }

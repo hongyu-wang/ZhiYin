@@ -23,6 +23,7 @@ public class ExecuteChangePage implements Executable{
 
     @Override
     public void execute() {
+
         StateManager.getInstance().changeState(page);
     }
 }
