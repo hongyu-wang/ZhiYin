@@ -216,6 +216,10 @@ public class AudioRecorder {
     }
 
     public void startRecording() throws NSErrorException {
+        session.requestRecordPermission(b -> {
+            //TODO test.
+        });
+
         session.setCategory(AVAudioSessionCategory.Record);
         session.setActive(true);
         avar.prepareToRecord();
