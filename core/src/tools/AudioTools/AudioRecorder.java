@@ -167,6 +167,8 @@ public class AudioRecorder {
 //        mQueue.start(null);
 //    }
 
+    private boolean running = false;
+
     private NSObject[] objects = {
         NSNumber.valueOf(44100.f),
         NSNumber.valueOf((int) AudioFormat.LinearPCM.value()),
@@ -216,6 +218,8 @@ public class AudioRecorder {
     }
 
     public void startRecording() throws NSErrorException {
+
+        running = true;
         session.requestRecordPermission(b -> {
             //TODO test.
         });
@@ -227,6 +231,7 @@ public class AudioRecorder {
     }
 
     public MAudio stopRecording() throws NSErrorException{
+        running = false;
         session.setActive(false);
         avar.stop();
         avar.release();
@@ -236,8 +241,8 @@ public class AudioRecorder {
         return voice;
     }
 
-
-
-
+    public boolean isRecording(){
+        return running;
+    }
 
 }

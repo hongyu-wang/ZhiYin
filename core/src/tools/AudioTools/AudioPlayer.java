@@ -223,6 +223,8 @@ public class AudioPlayer {
 //        AQPlayerState.drop(mStateID);
 //    }
 
+    private boolean running;
+
     AVAudioPlayer player1;
     AVAudioPlayer player2;
     boolean snapShot;
@@ -257,6 +259,7 @@ public class AudioPlayer {
     }
 
     public void play() throws NSErrorException{
+        running = true;
         session.setCategory(AVAudioSessionCategory.Playback);
 
         player1.play();
@@ -282,6 +285,7 @@ public class AudioPlayer {
     }
 
     public void stop() throws NSErrorException{
+        running = false;
         session.setActive(false);
         player1.stop();
         if(snapShot)
