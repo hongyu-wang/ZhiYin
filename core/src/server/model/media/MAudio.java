@@ -13,10 +13,6 @@ public class MAudio extends ServerModel {
 
     private NSData mData;
 
-    public MAudio(NSData mData){
-        this.mData = mData;
-    }
-
     public NSData getmData() {
         return mData;
     }
