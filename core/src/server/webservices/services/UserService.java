@@ -1,10 +1,10 @@
-package server.webservices;
+package server.webservices.services;
 
 import server.model.user.UserProfile;
 import server.services.interfaces.models.UserProfileManager;
+import server.webservices.factories.UserProfileManagerFactory;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
