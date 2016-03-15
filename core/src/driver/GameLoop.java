@@ -25,7 +25,7 @@ public class GameLoop extends ApplicationAdapter {
 		stateManager = StateManager.getInstance();
 
         Pages.initClass();
-        stateManager.changeState(Pages.PROFILE);
+        stateManager.changeState(Pages.HOME1);
 		spriteBatch = MainBatch.getInstance();
         primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
@@ -38,7 +38,7 @@ public class GameLoop extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 

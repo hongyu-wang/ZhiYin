@@ -15,9 +15,7 @@ import java.util.List;
  */
 public class InputController {
 
-    private boolean released;
     private List<Pressable> pressables;
-    private Pressable currentButton;
 
     public InputController(){
         init();
@@ -25,9 +23,7 @@ public class InputController {
 
 
     private void init(){
-        released = true;
-        pressables = Utils.<Pressable>newList();
-        currentButton = null;
+        pressables = Utils.newList();
     }
 
 
@@ -40,31 +36,11 @@ public class InputController {
      * by InputListener whenever the screen is pressed.
      */
     public void checkPressed(){
-        boolean press = false;
         for (Pressable comp : pressables){
             if (comp.isPressed()){
-                press = true;
-                if (currentButton == null) {
-                    released = false;
-                    currentButton = comp;
-                    currentButton.setAnimation();
-                } else {
-                    if (comp == currentButton) {
-                        currentButton.press();
-                        currentButton.setAnimation();
-                        currentButton = null;
-                    }
-
-                    released = true;
-                }
+                comp.press();
             }
         }
 
-        if (!press) released = true;
-
-        if (currentButton != null && released) {
-            currentButton.setAnimation();
-            currentButton = null;
-        }
     }
 }

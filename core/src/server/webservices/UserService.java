@@ -31,7 +31,8 @@ public class UserService {
     @Produces("application/json")
     public UserProfile getUser(@PathParam("param") Long key) {
         UserProfileManager userProfileManager = UserProfileManagerFactory.createUserProfileManager();
-        return userProfileManager.getUserProfile(key);
+        //return userProfileManager.getUserProfile(key);
+        return null;
     }
 
 }

@@ -181,7 +181,7 @@ public class InputListener implements InputProcessor {
         mouseX = screenX;
         mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
         currentEvent = UP;
-        stateManager.receiveInput();
+        //stateManager.receiveInput();
 
         return false;
     }

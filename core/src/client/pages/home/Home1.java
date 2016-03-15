@@ -1,6 +1,9 @@
 package client.pages.home;
 
 import client.component.basicComponents.ScrollTable;
+import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.ExecuteChangeandSetMusic;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
@@ -27,30 +30,48 @@ import driver.GameLoop;
  * Created by Hongyu Wang on 3/9/2016.
  */
 public class Home1 extends Home1Shell {
-    private OrthographicCamera cam;
     public void init() {
         super.init();
-        Texture tex = new Texture("Scrolling Test 2.png");
+        final Texture tex = new Texture("Scrolling Test 2.png");
 
         Image img = new Image(tex);
-        Image img2 = new Image(tex);
+        Image img3 = new Image(new Texture("tempButton1.png"));
 
-        ScrollTable table = new ScrollTable();
+        Image img4 = new Image(new Texture("tempButton2.png"));
+        Image img5 = new Image(new Texture("tempButton3.png"));
+
+        final ScrollTable table = new ScrollTable();
 
 
-        ImageButton button = new ImageButton(img.getDrawable());
+        final ImageButton button1 = new ImageButton(img3.getDrawable());
+        final ImageButton button2 = new ImageButton(img4.getDrawable());
+        final ImageButton button3 = new ImageButton(img5.getDrawable());
 
-        table.addToPane(img);
-        table.addToPane(img2);
-        table.addToPane(button);
-
-        button.addListener(new ClickListener() {
+        button1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println('a');
-                table.addToPane(new Image(tex));
+                new ExecuteChangeandSetMusic("Ben Rector - 30,000 Feet.mp3").execute();
             }
         });
+
+        button2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                new ExecuteChangeandSetMusic("Sara Bareilles - Bottle It Up.mp3").execute();
+            }
+        });
+
+        button3.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                new ExecuteChangeandSetMusic("Avril Lavigne - Everybody Hurts.mp3").execute();
+            }
+        });
+        table.addToPane(button1);
+        table.addToPane(button2);
+        table.addToPane(button3);
+        table.addToPane(img);
+
 
 
         stage.addActor(table.getPane());

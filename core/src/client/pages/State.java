@@ -126,7 +126,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     public List<Actor> getComponents(){
 
         List<Actor> deepCopy = Utils.newList();
-        deepCopy.addAll(components.stream().collect(Collectors.toList()));
+        for (Actor i : components){
+            deepCopy.add(i);
+        }
 
         return deepCopy;
     }
@@ -137,8 +139,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * This method will draw everything.
      */
     public void draw(){
-        if (stage.getActors().size != 0)
+        if (stage.getActors().size != 0) {
             stage.draw();
+        }
         for (Actor actor : components){
             actor.draw(MainBatch.getInstance(), 1);
         }
