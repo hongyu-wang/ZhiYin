@@ -32,7 +32,7 @@ import driver.GameLoop;
 public class Home1 extends Home1Shell {
     public void init() {
         super.init();
-        final Texture tex = new Texture("Scrolling Test 2.png");
+        final Texture tex = new Texture("Scrolling Test.png");
 
         Image img = new Image(tex);
         Image img3 = new Image(new Texture("tempButton1.png"));

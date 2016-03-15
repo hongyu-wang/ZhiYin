@@ -25,7 +25,7 @@ public class StateManager implements Disposable, Updatable, Drawable {
         return ourInstance;
     }
 
-    public static final float M = .5F;
+    public static final float M = 1;
 
 
     /**
@@ -80,6 +80,7 @@ public class StateManager implements Disposable, Updatable, Drawable {
      */
     public void receiveInput(){
         currentState.getInputController(State.SHELLINPUT).checkPressed();
+
     }
 
 

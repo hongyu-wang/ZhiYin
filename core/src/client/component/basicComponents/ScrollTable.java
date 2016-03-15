@@ -1,5 +1,6 @@
 package client.component.basicComponents;
 
+import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -39,7 +40,7 @@ public class ScrollTable {
     private void init(){
         table = new Table();
         scrollPane = new ScrollPane(table);
-        scrollPane.setBounds(0, 60, 750 / 2, 1100 / 2);
+        scrollPane.setBounds(0, 117*StateManager.M, 750*StateManager.M, 1100* StateManager.M);
     }
 
 

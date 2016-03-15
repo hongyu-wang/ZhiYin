@@ -72,10 +72,6 @@ public enum Pages {
         }
     }
 
-    public static void initClass2(){
-
-        State [] states = new State[]{new Friends1(), };
-    }
 
 
 
