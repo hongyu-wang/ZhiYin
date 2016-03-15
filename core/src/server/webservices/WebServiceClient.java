@@ -3,26 +3,31 @@ package server.webservices;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-import server.model.user.UserProfile;
+import server.model.structureModels.ServerModel;
+import server.webservices.webErrors.WebRequestException;
 
 /**
  * @author rsang
  */
 public class WebServiceClient {
 
-    public static UserProfile getUserProfile(long key) {
-        String url = "http://127.0.0.1:7001/userservice/getUser/{key}";
+    public static <E> E getServerModel(long key) throws WebRequestException{
+        String url = "http://127.0.0.1:7001/userservice/getServerModel/{key}";
 
         RestTemplate restTemplate = new RestTemplate();
 
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-        return restTemplate.getForObject(url, UserProfile.class, 1L);
-
+        try {
+            return (E) restTemplate.getForObject(url, ServerModel.class, key);
+        }
+        catch(ClassCastException e){
+            throw new WebRequestException();
+        }
     }
 
     public static void main(String args[]) throws Exception {
-        getUserProfile(1);
+        getServerModel(1);
     }
 
 

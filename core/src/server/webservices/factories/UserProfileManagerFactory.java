@@ -1,4 +1,4 @@
-package server.webservices;
+package server.webservices.factories;
 
 import server.services.interfaces.models.UserProfileManager;
 import server.services.userService.UserProfileManagerImplementation;
@@ -16,4 +16,7 @@ public class UserProfileManagerFactory {
         }
         return userProfileManager;
     }
+
+    private UserProfileManagerFactory(){}
+
 }

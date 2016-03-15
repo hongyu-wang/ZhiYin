@@ -13,7 +13,7 @@ public class MockServer {
     private VirtualDatabase database;
     private SerialGenerator generator;
 
-    public MockServer(){
+    MockServer(){
         try{
             database = new VirtualDatabase();
         }
