@@ -1,5 +1,10 @@
 package tools.AudioTools;
 
+import org.robovm.apple.avfoundation.AVAudioPlayer;
+import org.robovm.apple.avfoundation.AVAudioSession;
+import org.robovm.apple.avfoundation.AVAudioSessionCategory;
+import org.robovm.apple.foundation.NSData;
+import org.robovm.apple.foundation.NSErrorException;
 import server.model.media.MAudio;
 import org.robovm.apple.audiotoolbox.AudioQueue;
 import org.robovm.apple.audiotoolbox.AudioQueueBuffer;
@@ -15,6 +20,8 @@ import org.robovm.rt.bro.annotation.Pointer;
 import org.robovm.rt.bro.ptr.BytePtr;
 import org.robovm.rt.bro.ptr.FunctionPtr;
 import org.robovm.rt.bro.ptr.VoidPtr;
+import server.model.media.MMusic;
+import server.model.media.MSnapShot;
 
 import java.lang.reflect.Method;
 import java.util.Vector;
@@ -216,6 +223,72 @@ public class AudioPlayer {
 //        AQPlayerState.drop(mStateID);
 //    }
 
+    private boolean running;
 
+    AVAudioPlayer player1;
+    AVAudioPlayer player2;
+    boolean snapShot;
+    AVAudioSession session = AVAudioSession.getSharedInstance();
 
+    public void AudioPlayer(MSnapShot ss) throws NSErrorException{
+        snapShot = true;
+
+        player1 = new AVAudioPlayer(ss.getMessage().getmData());
+        player2 = new AVAudioPlayer(ss.getSong().getSong().getmData());
+        player2.setCurrentTime((double)ss.getStartTime());
+    }
+
+    public void AudioPlayer(MMusic m) throws NSErrorException{
+        snapShot = false;
+        player1 = new AVAudioPlayer(m.getSong().getmData());
+    }
+
+    public void AudioPlayer(MAudio audio) throws NSErrorException{
+        snapShot = false;
+        player1 = new AVAudioPlayer(audio.getmData());
+    }
+
+    public void prepareToPlay() throws NSErrorException {
+        session.setActive(true);
+        player1.prepareToPlay();
+        player1.setDelegate(player1.getDelegate());
+        if(snapShot) {
+            player2.prepareToPlay();
+            player2.setDelegate(player2.getDelegate());
+        }
+    }
+
+    public void play() throws NSErrorException{
+        running = true;
+        session.setCategory(AVAudioSessionCategory.Playback);
+
+        player1.play();
+        if(snapShot)
+            player2.play();
+
+    }
+
+    public void playAtTime(int time) throws NSErrorException{
+        player1.setCurrentTime((double)time);
+         if(snapShot)
+            player2.setCurrentTime(player2.getCurrentTime() + (double)time);
+
+        play();
+    }
+
+    public void pause() throws NSErrorException{
+
+        player1.pause();
+        if(snapShot)
+            player2.pause();
+
+    }
+
+    public void stop() throws NSErrorException{
+        running = false;
+        session.setActive(false);
+        player1.stop();
+        if(snapShot)
+            player2.stop();
+    }
 }
