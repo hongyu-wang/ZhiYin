@@ -13,6 +13,10 @@ import client.pages.other.Profile;
 import client.pages.musicDiary.Diary1;
 import client.pages.musicDiary.Diary2;
 import client.pages.musicDiary.Diary3;
+import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.badlogic.gdx.utils.reflect.ReflectionException;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * This is the enum storing all possible page states across all the pages.
@@ -60,12 +64,17 @@ public enum Pages {
         for (Pages page : Pages.values()){
             if (page != null) {
                 try {
-                    page.stateReference = (State) Class.forName("client.pages." + page.name).newInstance();
-                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                    page.stateReference = (State) ClassReflection.forName("client.pages." + page.name).getDeclaredConstructor().newInstance();
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | ReflectionException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    public static void initClass2(){
+
+        State [] states = new State[]{new Friends1(), };
     }
 
 
