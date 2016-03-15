@@ -5,9 +5,14 @@ import java.lang.reflect.Method;
 
 import org.robovm.apple.avfoundation.AVAudioRecorder;
 import org.robovm.apple.avfoundation.AVAudioSession;
+import org.robovm.apple.avfoundation.AVAudioSessionCategory;
 import org.robovm.apple.avfoundation.AVAudioSettings;
 import org.robovm.apple.corefoundation.OSStatusException;
 import org.robovm.apple.foundation.*;
+import org.robovm.objc.annotation.Block;
+import org.robovm.objc.block.BooleanBlock;
+import org.robovm.objc.block.VoidBlock1;
+import org.robovm.objc.block.VoidBlock2;
 import org.robovm.objc.block.VoidBooleanBlock;
 import org.robovm.rt.bro.annotation.Callback;
 import org.robovm.rt.bro.annotation.Pointer;
@@ -162,16 +167,16 @@ public class AudioRecorder {
 //        mQueue.start(null);
 //    }
 
-    private static NSObject[] objects = {
+    private NSObject[] objects = {
         NSNumber.valueOf(44100.f),
-        NSNumber.valueOf((int)AudioFormat.LinearPCM.value()),
+        NSNumber.valueOf((int) AudioFormat.LinearPCM.value()),
         NSNumber.valueOf(2),
         NSNumber.valueOf(16),
         NSNumber.valueOf(false),
         NSNumber.valueOf(false)
     };
 
-    private static NSObject[] keys ={
+    private NSString[] keys ={
         AVAudioSettings.Keys.SampleRate(),
         AVAudioSettings.Keys.FormatID(),
         AVAudioSettings.Keys.NumberOfChannels(),
@@ -180,7 +185,12 @@ public class AudioRecorder {
         AVAudioSettings.Keys.IsFloatKey()
     };
 
-    private static NSDictionary settings = new NSDictionary(new NSArray(keys),new NSArray(objects));
+    private AVAudioSettings settings;
+
+    private void makeSettings(){
+        for(int i=0;i<keys.length;i++)
+            settings.set(keys[i],objects[i]);
+    }
 
     NSURL filePath;
     private static NSFileManager fm = new NSFileManager();
@@ -188,23 +198,25 @@ public class AudioRecorder {
     AVAudioSession session;
     AVAudioRecorder avar;
 
-    public AudioRecorder(MMusic rs){
+    public AudioRecorder(){
         NSArray nsa = fm.getURLsForDirectory(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask);
         filePath = (NSURL)nsa.first();
         session = AVAudioSession.getSharedInstance();
-
+        makeSettings();
     }
 
     public void prepareToRecord() throws NSErrorException{
-        String fp  = filePath.getAbsoluteString() + recordCount +".mp3";
+        String fp  = filePath.getAbsoluteString() + recordCount;
         filePath = new NSURL(fp);
         fm.createFileAtPath(fp, new NSData(), null);
-        avar = new AVAudioRecorder(filePath, new AVAudioSettings(settings));
+        avar = new AVAudioRecorder(filePath, settings);
+        avar.setDelegate(avar.getDelegate());
+        avar.setMeteringEnabled(true);
         recordCount++;
     }
 
     public void startRecording() throws NSErrorException {
-        //session.requestRecordPermission(); // what the fuck is a void boolean block help
+        session.setCategory(AVAudioSessionCategory.Record);
         session.setActive(true);
         avar.prepareToRecord();
         avar.record();
@@ -212,11 +224,11 @@ public class AudioRecorder {
 
     public MAudio stopRecording() throws NSErrorException{
         session.setActive(false);
+        avar.stop();
+        avar.release();
         NSData mData = fm.getContentsAtPath(filePath.getAbsoluteString());
-
         MAudio voice = new MAudio();
         voice.setmData(mData);
-
         return voice;
     }
 
