@@ -31,8 +31,7 @@ public class GameLoop extends ApplicationAdapter {
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
         primary.update();
 
-		InputListener.addListeners();
-		Gdx.input.setInputProcessor(InputListener.getMultiplexer());
+
 
     }
 

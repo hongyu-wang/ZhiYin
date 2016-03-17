@@ -1,16 +1,13 @@
 package client.pages.other;
 
-import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecutePlayMusic;
-import client.events.executables.internalChanges.TestExecutable;
+import client.singletons.StateManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-
 /**
  * This is the now playing page as given in the
  * art assets folder.
@@ -19,21 +16,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
  */
 public class NowPlaying extends NowPlayingShell {
     private Music music;
+    Slider slider;
+    private Image buttonAnimation;
+
     public void init() {
         super.init();
-        Slider slider = new Slider(0, 100, 1, false, new Slider.SliderStyle());
-        slider.setBounds(80, 300, 295, 50);
-        slider.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                System.out.println('a');
-            }
-        });
-        Table table = new Table();
-        table.add(slider).minWidth(100).fillX().colspan(3);
-        table.setBounds(0, 0, 375, 1334/2);
 
-        stage.addActor(table);
+        slider = new Slider(0, 100, 1, false, new Skin(Gdx.files.internal("uiskin.json")));
+
+        slider.getStyle().knob.setMinHeight(10);
+        float m = StateManager.M;
+        slider.setBounds((int)(m*180), (int)(m*400), (int)(m*410), 10);
+        buttonAnimation = new Image("Pause@2x.png");
+
+        stage.addActor(slider);
 
     }
 
@@ -41,6 +37,11 @@ public class NowPlaying extends NowPlayingShell {
     public void dispose() {
 
 
+    }
+
+
+    public void update(float dt){
+        super.update(dt);
     }
 
 

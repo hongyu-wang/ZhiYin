@@ -45,10 +45,6 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     }
 
 
-    public void initStage(){
-
-    }
-
     /**
      * This clears the stage of all actors. The main purpose of this
      * is for the input multiplexer to work properly.

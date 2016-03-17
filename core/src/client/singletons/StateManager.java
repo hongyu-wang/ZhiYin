@@ -25,7 +25,7 @@ public class StateManager implements Disposable, Updatable, Drawable {
         return ourInstance;
     }
 
-    public static final float M = 1;
+    public static final float M = 0.5F;
 
 
     /**
@@ -50,8 +50,8 @@ public class StateManager implements Disposable, Updatable, Drawable {
      * @param page the page within the Pages enum
      */
     public void changeState(Pages page){
-        if (page.getStateReference() != null)
-            currentState = page.getStateReference();
+        currentState = page.getStateReference();
+        InputListener.setListener(page);
     }
 
 

@@ -1,6 +1,7 @@
 package client.singletons;
 
 import client.pageStorage.Pages;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
@@ -99,10 +100,11 @@ public class InputListener implements InputProcessor {
 
     }
 
-    public static void addListeners(){
+    public static void setListener(Pages page){
+        im.clear();
+        im.addProcessor(page.getStateReference().getStage());
         im.addProcessor(InputListener.getInstance());
-        for (Pages page : Pages.values())
-            im.addProcessor(page.getStateReference().getStage());
+        Gdx.input.setInputProcessor(im);
 
     }
 
@@ -170,7 +172,7 @@ public class InputListener implements InputProcessor {
         mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
         currentEvent = DOWN;
 
-
+        System.out.println(mouseX + " " + mouseY);
         stateManager.receiveInput();
 
         return false;
