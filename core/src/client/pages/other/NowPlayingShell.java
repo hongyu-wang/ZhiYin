@@ -34,6 +34,10 @@ public abstract class NowPlayingShell extends State{
         backButton.setExecutable(executables);
         add(backButton);
 
+        Button record = new Button(this);
+        record.setBounds(700,0,50,5000);
+        record.setExecutable(new ExecuteRecord());
+        add(record);
 
 
         Button rewindButton = new Button(this);

@@ -5,6 +5,7 @@ import org.robovm.apple.avfoundation.AVAudioSession;
 import org.robovm.apple.avfoundation.AVAudioSessionCategory;
 import org.robovm.apple.foundation.NSData;
 import org.robovm.apple.foundation.NSErrorException;
+import org.robovm.apple.foundation.NSURL;
 import server.model.media.MAudio;
 import org.robovm.apple.audiotoolbox.AudioQueue;
 import org.robovm.apple.audiotoolbox.AudioQueueBuffer;
@@ -29,6 +30,8 @@ import java.util.Vector;
 /**
  * Created by Kevin on 3/10/2016.
  */
+
+//TODO make this a singleton
 public class AudioPlayer {
 
 //    private int kNumberBuffers = 3;
@@ -223,14 +226,14 @@ public class AudioPlayer {
 //        AQPlayerState.drop(mStateID);
 //    }
 
-    private boolean running;
+    private boolean running = false;
 
     AVAudioPlayer player1;
     AVAudioPlayer player2;
     boolean snapShot;
     AVAudioSession session = AVAudioSession.getSharedInstance();
 
-    public void AudioPlayer(MSnapShot ss) throws NSErrorException{
+    public AudioPlayer(MSnapShot ss) throws NSErrorException{
         snapShot = true;
 
         player1 = new AVAudioPlayer(ss.getMessage().getmData());
@@ -238,14 +241,19 @@ public class AudioPlayer {
         player2.setCurrentTime((double)ss.getStartTime());
     }
 
-    public void AudioPlayer(MMusic m) throws NSErrorException{
+    public AudioPlayer(MMusic m) throws NSErrorException{
         snapShot = false;
         player1 = new AVAudioPlayer(m.getSong().getmData());
     }
 
-    public void AudioPlayer(MAudio audio) throws NSErrorException{
+    public AudioPlayer(MAudio audio) throws NSErrorException{
         snapShot = false;
         player1 = new AVAudioPlayer(audio.getmData());
+    }
+
+    public AudioPlayer(NSURL path) throws NSErrorException{
+        snapShot = false;
+        player1 = new AVAudioPlayer(path);
     }
 
     public void prepareToPlay() throws NSErrorException {
@@ -277,10 +285,10 @@ public class AudioPlayer {
     }
 
     public void pause() throws NSErrorException{
-
-        player1.pause();
+        running = false;
+        player1.stop();
         if(snapShot)
-            player2.pause();
+            player2.stop();
 
     }
 
@@ -290,5 +298,9 @@ public class AudioPlayer {
         player1.stop();
         if(snapShot)
             player2.stop();
+    }
+
+    public boolean isPlaying(){
+        return running;
     }
 }

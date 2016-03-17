@@ -20,6 +20,10 @@ public class AudioCreator {
 
     }
 
+    public static NSData createFromFilePath(String filePath){
+        return NSData.read(new NSURL(filePath));
+    }
+
     public static NSData createFromFilePath(NSURL filePath){
         //return NSFileManager.getContentsAtPath(filePath.getPath());
         return NSData.read(filePath);
@@ -32,6 +36,13 @@ public class AudioCreator {
         ss.setStartTime(start);
         ss.setEndTime(end);
         return ss;
+    }
+
+    public static MAudio createMAudio(NSData data){
+        MAudio m = new MAudio();
+        m.setmData(data);
+
+        return m;
     }
 
     //public MAudio createFromFilePath(String path, )

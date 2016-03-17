@@ -201,6 +201,7 @@ public class AudioRecorder {
     AVAudioRecorder avar;
 
     public AudioRecorder(){
+        settings = new AVAudioSettings();
         NSArray nsa = fm.getURLsForDirectory(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask);
         filePath = (NSURL)nsa.first();
         session = AVAudioSession.getSharedInstance();
@@ -208,10 +209,13 @@ public class AudioRecorder {
     }
 
     public void prepareToRecord() throws NSErrorException{
-        String fp  = filePath.getAbsoluteString() + recordCount;
+
+        String fp  = filePath.getPath() + "/" + recordCount;
+        System.out.println(fp);
         filePath = new NSURL(fp);
-        fm.createFileAtPath(fp, new NSData(), null);
+        //fm.createFileAtPath(fp, new NSData(), null);
         avar = new AVAudioRecorder(filePath, settings);
+        System.out.println("set");
         avar.setDelegate(avar.getDelegate());
         avar.setMeteringEnabled(true);
         recordCount++;
@@ -220,9 +224,9 @@ public class AudioRecorder {
     public void startRecording() throws NSErrorException {
 
         running = true;
-        session.requestRecordPermission(b -> {
+        //session.requestRecordPermission(b -> {
             //TODO test.
-        });
+        //});
 
         session.setCategory(AVAudioSessionCategory.Record);
         session.setActive(true);
@@ -235,7 +239,7 @@ public class AudioRecorder {
         session.setActive(false);
         avar.stop();
         avar.release();
-        NSData mData = fm.getContentsAtPath(filePath.getAbsoluteString());
+        NSData mData = fm.getContentsAtPath(filePath.getPath());
         MAudio voice = new MAudio();
         voice.setmData(mData);
         return voice;
