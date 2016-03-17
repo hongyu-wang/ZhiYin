@@ -1,5 +1,6 @@
 package tools.serverTools.server;
 
+import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import tools.serverTools.databases.VirtualDatabase;
 import tools.serverTools.generators.SerialGenerator;
@@ -14,13 +15,16 @@ public class MockServer {
     private SerialGenerator generator;
 
     MockServer(){
+        generator = SerialGenerator.getGenerator();
         try{
+
             database = new VirtualDatabase();
+
         }
         catch(IOException e){
             System.out.print("MockServer Init Fail.");
         }
-        generator = SerialGenerator.getGenerator();
+
     }
 
     public long getSerial(){

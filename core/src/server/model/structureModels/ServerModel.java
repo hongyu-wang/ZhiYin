@@ -23,7 +23,7 @@ public class ServerModel {
     }
 
     public int getUniqueKeyTag(){
-        throw new UnsupportedOperationException();
+        return 0;
     }
 
 }

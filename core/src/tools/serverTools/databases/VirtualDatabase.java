@@ -63,11 +63,18 @@ public class VirtualDatabase {
 //        this.userActivityLog = new HashMap<>();
 //        this.userUploadedContent = new HashMap<>();
 //        this.userDiaryContent = new HashMap<>();
+
+
+
         this.data = new HashMap<>();
 
-        User user1 = new User();
-        user1.setKey(ServerInteraction.getServer().getSerial());
 
+
+        User user1 = new User();
+        user1.setKey(1L);
+        this.data.put(1L, user1);
+
+        /**
         //User Profile
         UserProfile profile = new UserProfile();
         profile.setKey(ServerInteraction.getServer().getSerial());
@@ -83,29 +90,30 @@ public class VirtualDatabase {
         //User Convo
         UserConversations convos = new UserConversations();
         convos.setKey(ServerInteraction.getServer().getSerial());
-        convos.setConvoKeys(Utils.newList());
+        convos.setConvoKeys(Utils.<Long>newList());
 
         //User Diary
         UserDiaryContent diary = new UserDiaryContent();
         diary.setKey(ServerInteraction.getServer().getSerial());
-        diary.setDiaryKeys(Utils.newList());
+        diary.setDiaryKeys(Utils.<Long>newList());
 
         //User Content
         UserUploadedContent content = new UserUploadedContent();
         content.setKey(ServerInteraction.getServer().getSerial());
-        content.setPostKeys(Utils.newList());
+        content.setPostKeys(Utils.<Long>newList());
 
         //User Activity
         UserActivityLog log = new UserActivityLog();
         log.setKey(ServerInteraction.getServer().getSerial());
-        log.setLog(Utils.newList());
+        log.setLog(Utils.<String>newList());
 
         user1.setProfile(profile.getKey());
         user1.setContent(content.getKey());
         user1.setDiary(diary.getKey());
         user1.setLog(log.getKey());
         user1.setConversations(convos.getKey());
-        user1.setFriends(Utils.newList());
+        user1.setFriends(Utils.<Long>newList());
+        **/
     }
 
     /**Gets a model from the database.

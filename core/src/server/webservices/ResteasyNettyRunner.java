@@ -5,6 +5,7 @@ import org.jboss.resteasy.plugins.server.netty.NettyJaxrsServer;
 import org.jboss.resteasy.spi.ResteasyDeployment;
 import org.jboss.resteasy.test.TestPortProvider;
 import server.webservices.services.UserService;
+import server.webservices.services.WebService;
 
 /**
  * @author rsang
@@ -38,6 +39,7 @@ public class ResteasyNettyRunner {
         ResteasyDeployment deployment = new ResteasyDeployment();
         /**** add class here ****/
         deployment.getScannedResourceClasses().add(UserService.class.getName());
+        deployment.getScannedResourceClasses().add(WebService.class.getName());
         /**** add class here ****/
         deployment.setSecurityEnabled(true);
         return start(bindPath, domain, deployment);

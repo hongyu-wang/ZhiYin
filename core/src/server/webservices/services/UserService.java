@@ -1,13 +1,12 @@
 package server.webservices.services;
 
+import server.model.media.MText;
+import server.model.structureModels.ServerModel;
 import server.model.user.UserProfile;
 import server.services.interfaces.models.UserProfileManager;
 import server.webservices.factories.UserProfileManagerFactory;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 
 /**
  * @author rsang
@@ -29,10 +28,14 @@ public class UserService {
     @GET
     @Path("/getUser/{param}")
     @Produces("application/json")
-    public UserProfile getUser(@PathParam("param") Long key) {
+    public ServerModel getUser(@PathParam("param") Long key) {
         UserProfileManager userProfileManager = UserProfileManagerFactory.createUserProfileManager();
-        //return userProfileManager.getUserProfile(key);
-        return null;
+        MText text = new MText();
+        text.setKey(1);
+        text.setType(1);
+        text.setText("LOL");
+        return text;
     }
+
 
 }

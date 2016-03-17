@@ -1,5 +1,6 @@
 package server.webservices.services;
 
+import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import server.services.interfaces.models.UserProfileManager;
 import server.webservices.factories.UserProfileManagerFactory;
@@ -33,6 +34,7 @@ public class WebService {
     @Produces("application/json")
     public ServerModel getServerModel(@PathParam("param") Long key) {
         MockServer mockServer = ServerInteraction.getServer();
+
         return mockServer.getModel(key);
     }
 
