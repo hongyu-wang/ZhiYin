@@ -43,4 +43,10 @@ public class InputController {
         }
 
     }
+
+    public void checkReleased(){
+        for (Pressable comp : pressables){
+
+        }
+    }
 }

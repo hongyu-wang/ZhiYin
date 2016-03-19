@@ -21,39 +21,23 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  */
 public class Button extends Component implements Pressable{
 
-    /**
-     * This is the monitor that this button
-     * is attached to. In general, this should be a state.
-     */
     private ActionMonitor monitor;
-
-    /**
-     * This is the executable that is contained within the Button.
-     *
-     * This will contain the logic that the button needs to operate.
-     */
     private Executable executable;
+    private boolean playAnimation;
+    private boolean isReleased;
 
-
-    /**
-     * The primary constructor for button.
-     */
     public Button(ActionMonitor monitor){
         super();
         this.monitor = monitor;
 
     }
 
-    /**
-     * This is the boolean that triggers the animation of the button press.
-     *
-     */
-    private boolean playAnimation;
+
 
 
     @Override
     protected void init() {
-        playAnimation = false;
+        playAnimation = true;
     }
 
     @Override
@@ -83,6 +67,11 @@ public class Button extends Component implements Pressable{
 
     public void press() {
         monitor.actionPerformed(new ActionEvent(this));
+    }
+
+    @Override
+    public boolean isReleased() {
+        return isPressed();
     }
 
     @Override
