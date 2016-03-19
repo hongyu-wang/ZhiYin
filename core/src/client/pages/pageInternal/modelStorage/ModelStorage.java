@@ -42,11 +42,23 @@ public class ModelStorage {
         if(models.containsKey(key)){
             return (E)models.get(key);
         }
+        return updateModel(key);
+    }
+
+    /**Updates the model based on a key.
+     *
+     * For messages, conversations, and posts which require constant updating
+     * this method is used to pull a more current state from the server.
+     *
+     * @param key   The key.
+     * @param <E>   The type of the model.
+     * @return      The serverModel.
+     */
+    public <E extends ServerModel> E updateModel(long key){
         try{
             E model = WebServiceClient.<E>getServerModel(key);
             models.put(model.getKey(), model);
             return model;
-
         }
         catch(WebRequestException e){
             System.out.println("ServerRequest failed.");
