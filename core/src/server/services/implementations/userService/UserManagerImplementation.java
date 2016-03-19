@@ -17,12 +17,6 @@ public class UserManagerImplementation implements UserManager {
      * @param pass  The password.
      * @return      The key of the user model.
      */
-    @Override
-    public long requestAuthenticationKey(String user, String pass) {
-        long userKey = 0;
-        return userKey;
-        //TODO request from server.
-    }
 //
 //    /**Retrieves all relevant information on the user.
 //     *

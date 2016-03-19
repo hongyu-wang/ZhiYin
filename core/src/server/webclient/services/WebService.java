@@ -49,14 +49,11 @@ public class WebService {
      *
      */
     @GET
-    @Path("/getUserByName/{param}")
+    @Path("/getSerial/")
     @Produces("application/json")
-    public ServerModel getUserByName(@PathParam("param") String username) {
+    public Long getSerial() {
         MockServer mockServer = ServerInteraction.getServer();
-        long userKey = mockServer.getUserKeybyName(username);
 
-        return mockServer.getModel(userKey);
+        return mockServer.getSerial();
     }
-
-
 }

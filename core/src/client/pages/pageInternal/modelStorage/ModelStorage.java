@@ -15,11 +15,11 @@ public class ModelStorage {
     User user;
     Map<Long, ServerModel> models;
 
-    public ModelStorage(){
+    ModelStorage(){
         models = new HashMap<Long, ServerModel>();
     }
 
-    public ModelStorage(User user){
+    ModelStorage(User user){
         this.user = user;
         models = new HashMap<Long, ServerModel>();
         models.put(user.getKey(), user);
@@ -31,9 +31,9 @@ public class ModelStorage {
      *
      * Otherwise request the model from the server.
      *
-     * @param key
-     * @param <E>
-     * @return
+     * @param key   The key of the servermodel.
+     * @param <E>   The type of the model.
+     * @return      The model.
      */
     public <E> E getModel(long key){
         if(models.containsKey(key)){
@@ -46,6 +46,44 @@ public class ModelStorage {
             System.out.println("ServerRequest failed.");
         }
         return null;
+    }
+
+    /**Pushes the model into the database.
+     *
+     * If it fails to send it to the server the system will return false;
+     *
+     * @param model The new model.
+     * @return      True if it sucessfully pushed to server.
+     */
+    public boolean pushModel(ServerModel model){
+        try{
+            WebServiceClient.pushServerModel(model);
+            models.put(model.getKey(), model);
+            return true;
+        }
+        catch(WebRequestException e){
+            System.out.println("ServerRequest failed.");
+            return false;
+        }
+    }
+
+    public boolean loginUser(String username){
+        try {
+            this.user = WebServiceClient.getUserbyName(username);
+            return true;
+        }
+        catch(WebRequestException e){
+            System.out.println("Unable to login.");
+            return false;
+        }
+    }
+
+    /**Returns the owner of the app.
+     *
+     * @return  The user data of the owner.
+     */
+    public User getUser(){
+        return user;
     }
 
 }

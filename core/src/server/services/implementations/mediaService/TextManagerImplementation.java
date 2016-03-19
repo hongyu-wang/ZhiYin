@@ -2,6 +2,9 @@ package server.services.implementations.mediaService;
 
 import server.model.media.MText;
 import server.services.interfaces.models.TextManager;
+import server.webclient.WebServiceClient;
+import server.webclient.services.WebService;
+import server.webclient.webErrors.WebRequestException;
 
 /**
  * Created by Kevin Zheng on 2016-03-07.
@@ -22,6 +25,17 @@ public class TextManagerImplementation implements TextManager {
 //
 //        return text;
 //    }
+
+    @Override
+    public MText createText(String message, int type){
+        MText text = new MText();
+
+        text.setText(message);
+
+        text.setType(type);
+
+        return text;
+    }
 
     @Override
     public MText modifyType(MText text, int type) {

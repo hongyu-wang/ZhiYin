@@ -1,11 +1,20 @@
 package server.services.interfaces.models;
 
 import server.model.media.MText;
+import server.webclient.webErrors.WebRequestException;
 
 /**
  * Created by Kevin Zheng on 2016-03-06.
  */
 public interface TextManager {
+
+    /**Creates a new MText.
+     *
+     * @param message   The message.
+     * @param type      The style of the message.
+     * @return          The new MText.
+     */
+    MText createText(String message, int type);
 
     /**Modify the type of the MText.
      *

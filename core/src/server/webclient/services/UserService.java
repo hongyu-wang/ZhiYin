@@ -5,6 +5,8 @@ import server.model.structureModels.ServerModel;
 import server.model.user.UserProfile;
 import server.services.interfaces.models.UserProfileManager;
 import server.services.factories.UserProfileManagerFactory;
+import tools.serverTools.server.MockServer;
+import tools.serverTools.server.ServerInteraction;
 
 import javax.ws.rs.*;
 
@@ -26,15 +28,13 @@ public class UserService {
      *
      */
     @GET
-    @Path("/getUser/{param}")
+    @Path("/getUserByName/{param}")
     @Produces("application/json")
-    public ServerModel getUser(@PathParam("param") Long key) {
-        UserProfileManager userProfileManager = UserProfileManagerFactory.createUserProfileManager();
-        MText text = new MText();
-        text.setKey(1);
-        text.setType(1);
-        text.setText("LOL");
-        return text;
+    public ServerModel getUserByName(@PathParam("param") String username) {
+        MockServer mockServer = ServerInteraction.getServer();
+        long userKey = mockServer.getUserKeybyName(username);
+
+        return mockServer.getModel(userKey);
     }
 
 
