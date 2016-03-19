@@ -33,10 +33,20 @@ public class WebServiceClient {
 
     }//TODO implement
 
-    public static User getUserbyName(String username) throws WebRequestException{
+    public static long getUserByName(String username) throws WebRequestException{
         String url = serverIP + "userservice/getUserByName/{param}";
 
-        return null;
+        long key = 0;
+
+        return key;
+    }//TODO implement
+
+    public static long getHashtagByName(String hashtag) throws WebRequestException{
+        String url = serverIP + "hashtagservice/getHashtagByName/{param}";
+
+        long key = 0;
+
+        return key;
     }//TODO implement
 
     public static long getSerial() throws WebRequestException{

@@ -1,5 +1,6 @@
 package client.pages.pageInternal.modelStorage;
 
+import server.model.media.MHashtag;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.webclient.WebServiceClient;
@@ -8,7 +9,9 @@ import server.webclient.webErrors.WebRequestException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
+/**A storage object of all model types the user client will need.
+ *
+ *
  * Created by Hongyu Wang on 3/19/2016.
  */
 public class ModelStorage {
@@ -35,12 +38,15 @@ public class ModelStorage {
      * @param <E>   The type of the model.
      * @return      The model.
      */
-    public <E> E getModel(long key){
+    public <E extends ServerModel> E getModel(long key){
         if(models.containsKey(key)){
             return (E)models.get(key);
         }
         try{
-            return WebServiceClient.<E>getServerModel(key);
+            E model = WebServiceClient.<E>getServerModel(key);
+            models.put(model.getKey(), model);
+            return model;
+
         }
         catch(WebRequestException e){
             System.out.println("ServerRequest failed.");
@@ -67,15 +73,31 @@ public class ModelStorage {
         }
     }
 
+    /**Sets the prime user of this app.
+     *
+     * @param username  The username.
+     * @return          True if the login was successful.
+     */
     public boolean loginUser(String username){
         try {
-            this.user = WebServiceClient.getUserbyName(username);
+            this.user = this.getModel(WebServiceClient.getUserByName(username));
             return true;
         }
         catch(WebRequestException e){
             System.out.println("Unable to login.");
             return false;
         }
+    }
+
+    public MHashtag getHashtagByName(String hashtag){
+        try{
+            MHashtag tag = this.getModel(WebServiceClient.getHashtagByName(hashtag));
+            return tag;
+        }
+        catch(WebRequestException e){
+            System.out.println("Unable to get hashtag.");
+        }
+        return null;
     }
 
     /**Returns the owner of the app.
