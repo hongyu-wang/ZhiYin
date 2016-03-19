@@ -1,4 +1,4 @@
-package client.inputController;
+package client.pages.pageInternal.inputController;
 
 import client.stateInterfaces.Pressable;
 import tools.utilities.Utils;
