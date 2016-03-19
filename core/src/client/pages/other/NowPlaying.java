@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.graphics.Texture;
 /**
  * This is the now playing page as given in the
  * art assets folder.
@@ -27,7 +28,7 @@ public class NowPlaying extends NowPlayingShell {
         slider.getStyle().knob.setMinHeight(10);
         float m = StateManager.M;
         slider.setBounds((int)(m*180), (int)(m*400), (int)(m*410), 10);
-        buttonAnimation = new Image("Pause@2x.png");
+        buttonAnimation = new Image(new Texture("Pause@2x.png"));
 
         stage.addActor(slider);
 
