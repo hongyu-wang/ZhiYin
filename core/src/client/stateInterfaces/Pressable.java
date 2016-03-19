@@ -45,4 +45,12 @@ public interface Pressable extends Performable{
      * a new ActionEvent to the actionListener.
      */
     void press();
+
+    /**
+     * This method will make the performable check
+     * if the mouse has been released at their location.
+     *
+     * @return mouse location matches the component's location.
+     */
+    boolean isReleased();
 }

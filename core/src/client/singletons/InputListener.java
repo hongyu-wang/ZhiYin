@@ -136,6 +136,9 @@ public class InputListener implements InputProcessor {
         if (keycode == Input.Keys.E)
             stateManager.changeState(Pages.DIARY3);
 
+        if (keycode == Input.Keys.R)
+            stateManager.changeState(Pages.DIARY4);
+
         if (keycode == Input.Keys.A)
             stateManager.changeState(Pages.HOME1);
 
@@ -145,10 +148,13 @@ public class InputListener implements InputProcessor {
         if (keycode == Input.Keys.D)
             stateManager.changeState(Pages.HOME4);
 
-        if (keycode == Input.Keys.Z)
+        if (keycode == Input.Keys.X)
             stateManager.changeState(Pages.NOWPLAYING);
 
-        if (keycode == Input.Keys.X)
+        if (keycode == Input.Keys.C)
+            stateManager.changeState(Pages.NOWPLAYING2);
+
+        if (keycode == Input.Keys.Z)
             stateManager.changeState(Pages.PROFILE);
 
 

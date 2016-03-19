@@ -38,10 +38,12 @@ public enum Pages {
     HOME3("home.Home3"),
     HOME4("home.Home4"),
     NOWPLAYING("other.NowPlaying"),
+    NOWPLAYING2("other.NowPlaying2"),
     PROFILE("other.Profile"),
     DIARY1("musicDiary.Diary1"),
     DIARY2("musicDiary.Diary2"),
-    DIARY3("musicDiary.Diary3");
+    DIARY3("musicDiary.Diary3"),
+    DIARY4("musicDiary.Diary4");
 
 
 

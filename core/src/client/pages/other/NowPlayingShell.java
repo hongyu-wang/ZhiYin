@@ -21,7 +21,7 @@ public abstract class NowPlayingShell extends State{
 
     public void init(){
         super.init();
-        Image background = new Image(new Texture("Now Playing.jpg"));
+        Image background = new Image(new Texture("Now Playing.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 
