@@ -221,7 +221,7 @@ public class AudioRecorder {
 
         running = true;
         session.requestRecordPermission(b -> {
-            //TODO test.
+            /* TODO test. */
         });
 
         session.setCategory(AVAudioSessionCategory.Record);

@@ -1,9 +1,6 @@
 package server.model.soundCloud;
 
-import server.model.media.MText;
 import server.model.social.MPost;
-
-import java.util.List;
 
 /**
  * Music post model

@@ -1,8 +1,5 @@
 package server.model.soundCloud;
 
-import server.model.media.MText;
-
-import javax.xml.soap.Text;
 import java.util.List;
 
 /**

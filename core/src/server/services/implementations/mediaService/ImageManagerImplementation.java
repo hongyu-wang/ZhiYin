@@ -3,7 +3,6 @@ package server.services.implementations.mediaService;
 import server.model.media.MImage;
 import server.services.interfaces.models.ImageManager;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**

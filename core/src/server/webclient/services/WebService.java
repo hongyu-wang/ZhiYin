@@ -2,6 +2,7 @@ package server.webclient.services;
 
 import server.model.media.MText;
 import server.model.structureModels.ServerModel;
+import server.model.user.User;
 import tools.serverTools.server.MockServer;
 import tools.serverTools.server.ServerInteraction;
 
@@ -41,6 +42,20 @@ public class WebService {
     @Path("/putServerModel/{param}")
     public void putServerModel(@PathParam("param") ServerModel model){
 
+    }
+
+    /**
+     *  Using Jackson.
+     *
+     */
+    @GET
+    @Path("/getUserByName/{param}")
+    @Produces("application/json")
+    public ServerModel getUserByName(@PathParam("param") String username) {
+        MockServer mockServer = ServerInteraction.getServer();
+        long userKey = mockServer.getUserKeybyName(username);
+
+        return mockServer.getModel(userKey);
     }
 
 
