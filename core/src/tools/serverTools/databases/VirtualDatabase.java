@@ -52,6 +52,19 @@ public class VirtualDatabase {
         generateTestUser("Alice", 1);
         generateTestUser("Benny", 2);
         generateTestUser("Cindy", 3);
+
+        User user1 = (User)data.get(1);
+        User user2 = (User)data.get(2);
+        User user3 = (User)data.get(3);
+
+        user1.getFriendKeys().add(user2.getKey());
+        user1.getFriendKeys().add(user3.getKey());
+
+        user2.getFriendKeys().add(user1.getKey());
+        user2.getFriendKeys().add(user3.getKey());
+
+        user3.getFriendKeys().add(user1.getKey());
+        user3.getFriendKeys().add(user2.getKey());
     }
 
     private void initMediaData(){
@@ -160,16 +173,16 @@ public class VirtualDatabase {
         profile.setImageKey(0);//i.e. empty
 
         //Conversation Attributes
-        conversations.setConvoKeys(new ArrayList<>());
+        conversations.setConvoKeys(new ArrayList<Long>());
 
         //ActivityLog Attributes
-        log.setLog(new ArrayList<>());
+        log.setLog(new ArrayList<String>());
 
         //UploadedContent Attributes
-        content.setPostKeys(new ArrayList<>());
+        content.setPostKeys(new ArrayList<Long>());
 
         //DiaryContent Attributes
-        diary.setDiaryKeys(new ArrayList<>());
+        diary.setDiaryKeys(new ArrayList<Long>());
 
         //Assign to user.
         user.setProfile(profile.getKey());
@@ -223,9 +236,7 @@ public class VirtualDatabase {
 
         audio.setKey(ServerInteraction.getServer().getSerial());
 
-        NSData data = AudioCreator.createFromFilePath(path);
-
-        audio.setmData(data);
+//        audio.setmData(AudioCreator.createFromFilePath(path));
 
         return audio;
     }
