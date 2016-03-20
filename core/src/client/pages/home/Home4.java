@@ -3,6 +3,7 @@ package client.pages.home;
 
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import static client.singletons.StateManager.M;
 
 /**
  * This is the fourth home diary page as given in the
@@ -22,8 +23,8 @@ public class Home4 extends Home4Shell {
 
     private void addSearchField(){
         searchField = new TextField("Search...", SkinSingleton.getInstance());
-        searchField.setPosition(26 + 1, 1146);
-        searchField.setSize(642, 58);
+        searchField.setPosition((26 + 1) * M, 1146 * M);
+        searchField.setSize(642 * M, 58 * M);
         stage.addActor(searchField);
     }
 
