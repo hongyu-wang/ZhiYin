@@ -11,10 +11,6 @@ import sun.misc.Perf;
  * Created by Hongyu Wang on 3/7/2016.
  */
 public class ActionEvent {
-    public static final int PRESSABLE = 0;
-    public static final int DRAGGABLE = 1;
-
-    private int performableType;
 
 
     /**
@@ -26,9 +22,8 @@ public class ActionEvent {
      * This is the primary constructor of the ActionEvent
      * @param performer the component which "performs" the action.
      */
-    public ActionEvent(Performable performer, int type){
+    public ActionEvent(Performable performer){
 
-        performableType = type;
         source = performer;
     }
 
@@ -42,8 +37,6 @@ public class ActionEvent {
     }
 
 
-    public int getPerformableType(){
-        return performableType;
-    }
+
 
 }
