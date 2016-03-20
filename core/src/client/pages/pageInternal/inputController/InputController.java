@@ -55,9 +55,8 @@ public class InputController {
 
     public void checkRelease(){
         for (Pressable comp : pressables){
-            if (comp.isPressed()){
-                comp.release();
-            }
+            comp.release();
+
         }
     }
 }
