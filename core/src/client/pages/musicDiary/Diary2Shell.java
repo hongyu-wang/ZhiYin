@@ -1,7 +1,9 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.ExecuteChangePage;
 import client.events.executables.internalChanges.TestExecutable;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -34,7 +36,7 @@ public abstract class Diary2Shell extends State {
 
         Button HoldToRecordButton = new Button(this);
         HoldToRecordButton.setBounds(0 + 1, 134 + 135*2, 750, 135);
-        HoldToRecordButton.setExecutable(new TestExecutable("hold to record"));
+        HoldToRecordButton.setExecutable(new ExecuteChangePage(Pages.DIARY3));
         add(HoldToRecordButton);
 
         Button pictureButton = new Button(this);
@@ -49,7 +51,7 @@ public abstract class Diary2Shell extends State {
 
         Button discardButton = new Button(this);
         discardButton.setBounds(0 + 1, 0, 375, 117);
-        discardButton.setExecutable(new TestExecutable("discard"));
+        discardButton.setExecutable(new ExecuteChangePage(Pages.DIARY1));
         add(discardButton);
 
         Button postButton = new Button(this);
