@@ -22,10 +22,10 @@ public abstract class Friends2Shell extends State {
 
 
 
-        Button discardButton = new Button(this);
-        discardButton.setBounds(0 + 1, 117, 750, 283);
-        discardButton.setExecutable(new TestExecutable("discard"));
-        add(discardButton);
+        Button SwipeToDiscardButton = new Button(this);
+        SwipeToDiscardButton.setBounds(0 + 1, 117, 750, 283);
+        SwipeToDiscardButton.setExecutable(new TestExecutable("swipe to discard"));
+        add(SwipeToDiscardButton);
 
         setBottomBar();
     }

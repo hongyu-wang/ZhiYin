@@ -1,27 +1,12 @@
 package client.pages.home;
 
 import client.component.basicComponents.ScrollTable;
-import client.events.executables.internalChanges.ExecuteChangePage;
 import client.events.executables.internalChanges.ExecuteChangeandSetMusic;
-import client.pageStorage.Pages;
-import client.pages.State;
-import client.singletons.MainBatch;
-import client.singletons.StateManager;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import driver.GameLoop;
 
 /**
  * This is the first home diary page as given in the
@@ -32,6 +17,7 @@ import driver.GameLoop;
 public class Home1 extends Home1Shell {
     public void init() {
         super.init();
+
         final Texture tex = new Texture("Scrolling Test 2.png");
 
         Image img = new Image(tex);

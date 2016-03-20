@@ -1,5 +1,8 @@
 package client.pages.musicDiary;
 
+import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.ExecuteChangePage;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,6 +21,11 @@ public abstract class Diary4Shell extends State {
         Image background = new Image(new Texture("Diary - 4.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         add(background);
+
+        Button backButton = new Button(this);
+        backButton.setBounds(0 + 1, 1217, 117, 117);
+        backButton.setExecutable(new ExecuteChangePage(Pages.DIARY1));
+        add(backButton);
     }
 
     @Override

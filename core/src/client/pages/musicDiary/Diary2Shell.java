@@ -32,10 +32,10 @@ public abstract class Diary2Shell extends State {
         contentButton.setExecutable(new TestExecutable("content"));
         add(contentButton);
 
-        Button recordingButton = new Button(this);
-        recordingButton.setBounds(0 + 1, 134 + 135*2, 750, 135);
-        recordingButton.setExecutable(new TestExecutable("recording"));
-        add(recordingButton);
+        Button HoldToRecordButton = new Button(this);
+        HoldToRecordButton.setBounds(0 + 1, 134 + 135*2, 750, 135);
+        HoldToRecordButton.setExecutable(new TestExecutable("hold to record"));
+        add(HoldToRecordButton);
 
         Button pictureButton = new Button(this);
         pictureButton.setBounds(0 + 1, 134 + 135, 750, 135);

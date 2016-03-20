@@ -21,12 +21,12 @@ public abstract class Friends4Shell extends State {
         add(background);
 
         Button messageButton = new Button(this);
-        messageButton.setBounds(0 + 1, 0, 633, 117);
+        messageButton.setBounds(26 + 1, 31, 560, 60);
         messageButton.setExecutable(new TestExecutable("message"));
         add(messageButton);
 
         Button sendButton = new Button(this);
-        sendButton.setBounds(633 + 1, 0, 117, 117);
+        sendButton.setBounds(604 + 1, 31, 122, 60);
         sendButton.setExecutable(new TestExecutable("send"));
         add(sendButton);
     }

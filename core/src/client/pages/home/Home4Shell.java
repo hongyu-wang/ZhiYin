@@ -37,7 +37,7 @@ public abstract class Home4Shell extends State {
         searchButton.setExecutable(new TestExecutable("search"));
         add(searchButton);
 
-        setBottomBar();
+        //setBottomBar();
     }
 
     @Override
