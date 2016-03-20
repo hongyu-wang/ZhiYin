@@ -20,7 +20,7 @@ public abstract class Diary4Shell extends State {
         super.init();
         Image background = new Image(new Texture("Diary - 4.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
-        add(background);
+        stage.addActor(background);
 
         Button backButton = new Button(this);
         backButton.setBounds(0 + 1, 1217, 117, 117);

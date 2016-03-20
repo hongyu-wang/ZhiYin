@@ -18,7 +18,7 @@ public abstract class Diary3Shell extends State{
 
         Image background = new Image(new Texture("Diary - 3.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
-        add(background);
+        stage.addActor(background);
 
         Button titleButton = new Button(this);
         titleButton.setBounds(0 + 1, 1112, 750, 88);

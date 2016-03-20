@@ -20,7 +20,7 @@ public abstract class Home3Shell extends State{
 
         Image background = new Image(new Texture("Home - 3.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
-        add(background);
+        stage.addActor(background);
 
         Button homeButton = new Button(this);
         homeButton.setBounds(0 + 1, 1217, 250, 117);
@@ -35,7 +35,7 @@ public abstract class Home3Shell extends State{
         Button searchButton = new Button(this);
         searchButton.setBounds(26 + 1, 1146, 642, 58);
         searchButton.setExecutable(new TestExecutable("search"));
-        add(searchButton);
+        //add(searchButton);
 
         Button sortButton = new Button(this);
         sortButton.setBounds((750 - 75) + 1, 1146, 65, 58);

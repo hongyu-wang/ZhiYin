@@ -20,7 +20,7 @@ public abstract class Home4Shell extends State {
 
         Image background = new Image(new Texture("Home - 4.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
-        add(background);
+        stage.addActor(background);
 
         Button homeButton = new Button(this);
         homeButton.setBounds(0, 1217, 250, 117);
