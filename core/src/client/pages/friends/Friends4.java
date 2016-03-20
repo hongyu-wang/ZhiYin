@@ -1,9 +1,17 @@
 package client.pages.friends;
 
+import client.singletons.SkinSingleton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+
+import static client.singletons.StateManager.M;
+
 public class Friends4 extends Friends4Shell{
+    private TextField messageField;
 
     public void init(){
         super.init();
+
+        addMessageField();
     }
 
     @Override
@@ -11,9 +19,19 @@ public class Friends4 extends Friends4Shell{
 
     }
 
-    @Override
-    public void update(float dt) {
+    private void addMessageField(){
+        messageField = new TextField("Message...", SkinSingleton.getInstance());
+        messageField.setPosition((26 + 1) * M, 31 * M);
+        messageField.setSize(560 * M, 60 * M);
 
+        stage.addActor(messageField);
+    }
+
+    @Override
+    public void update(float fy){
+        super.update(fy);
+
+        messageField.getText();//TODO something
     }
 
 }

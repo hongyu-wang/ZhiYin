@@ -1,10 +1,8 @@
 package client.pages.home;
 
 
-import client.pages.State;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import driver.GameLoop;
 
 /**
  * This is the fourth home diary page as given in the
@@ -29,6 +27,12 @@ public class Home4 extends Home4Shell {
         stage.addActor(searchField);
     }
 
+    @Override
+    public void update(float fy){
+        super.update(fy);
+
+        searchField.getText();//TODO something
+    }
 
     @Override
     public void dispose() {

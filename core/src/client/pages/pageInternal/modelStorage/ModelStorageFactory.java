@@ -8,6 +8,8 @@ import server.model.user.User;
 public class ModelStorageFactory {
     private static ModelStorage modelStorage;
 
+    private ModelStorageFactory(){}
+
     public static ModelStorage createModelStorage(){
         if(modelStorage == null){
             modelStorage = new ModelStorage();
