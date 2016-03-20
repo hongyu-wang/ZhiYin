@@ -1,5 +1,6 @@
 package client.pages.pageInternal.inputController;
 
+import client.component.basicComponents.DragButton;
 import client.stateInterfaces.Pressable;
 import tools.utilities.Utils;
 
@@ -44,9 +45,11 @@ public class InputController {
 
     }
 
-    public void checkReleased(){
+    public void checkDragged(){
         for (Pressable comp : pressables){
-
+            if (comp instanceof DragButton){
+                ((DragButton)comp).drag();
+            }
         }
     }
 }
