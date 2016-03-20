@@ -171,7 +171,7 @@ public class InputListener implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         mouseX = screenX;
         mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
-        //stateManager.receiveInput();
+        stateManager.recieveRelease();
 
         return false;
     }

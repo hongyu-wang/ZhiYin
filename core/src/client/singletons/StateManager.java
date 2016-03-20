@@ -85,7 +85,11 @@ public class StateManager implements Disposable, Updatable, Drawable {
 
 
     public void recieveDragged(){
-        currentState.getInputController(State.SHELLINPUT).checkPressed();
+        currentState.getInputController(State.SHELLINPUT).checkDragged();
+    }
+
+    public void recieveRelease(){
+        currentState.getInputController(State.SHELLINPUT).checkRelease();
     }
 
 }

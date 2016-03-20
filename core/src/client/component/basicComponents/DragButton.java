@@ -13,4 +13,8 @@ public class DragButton extends Button{
     public void drag(){
 
     }
+
+    public void release(){
+
+    }
 }
