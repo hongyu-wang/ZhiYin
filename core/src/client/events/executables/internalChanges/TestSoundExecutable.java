@@ -11,7 +11,7 @@ import tools.AudioTools.AudioRecorder;
  */
 public class TestSoundExecutable implements Executable {
 
-    AudioRecorder audRec = new AudioRecorder();
+    AudioRecorder audRec = AudioRecorder.getInstance();
     /**
      * Starts the recording.
      */
