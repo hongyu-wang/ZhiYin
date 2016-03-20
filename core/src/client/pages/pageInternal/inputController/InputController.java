@@ -52,4 +52,11 @@ public class InputController {
             }
         }
     }
+
+    public void checkRelease(){
+        for (Pressable comp : pressables){
+            comp.release();
+
+        }
+    }
 }

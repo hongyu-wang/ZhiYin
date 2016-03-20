@@ -70,8 +70,9 @@ public class Button extends Component implements Pressable{
     }
 
     @Override
-    public boolean isReleased() {
-        return isPressed();
+    public void release() {
+
+
     }
 
     @Override

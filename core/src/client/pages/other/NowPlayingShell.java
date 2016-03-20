@@ -1,17 +1,13 @@
 package client.pages.other;
 
 import client.component.basicComponents.Button;
-import client.events.ActionEvent;
 import client.events.executables.internalChanges.*;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import driver.GameLoop;
 
 /**
@@ -21,8 +17,8 @@ public abstract class NowPlayingShell extends State{
 
     public void init(){
         super.init();
-        Image background = new Image(new Texture("Now Playing.jpg"));
-        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
+        Image background = new Image(new Texture("Now Playing.png"));
+        background.setBounds(0, 0, GameLoop.WIDTH * StateManager.M, GameLoop.HEIGHT * StateManager.M);
         stage.addActor(background);
 
 
@@ -34,21 +30,20 @@ public abstract class NowPlayingShell extends State{
         backButton.setExecutable(executables);
         add(backButton);
 
-        Button record = new Button(this);
-        record.setBounds(700,0,50,5000);
-        record.setExecutable(new ExecuteRecord());
-        add(record);
-
-
         Button rewindButton = new Button(this);
-        rewindButton.setBounds(180 + 1, 235, 70, 70);
+        rewindButton.setBounds(170 + 1, 246, 53, 46);
         rewindButton.setExecutable(new TestExecutable("rewind"));
         add(rewindButton);
 
         Button fastForwardButton = new Button(this);
-        fastForwardButton.setBounds(540 + 1, 235, 70, 70);
+        fastForwardButton.setBounds(535 + 1, 246, 53, 46);
         fastForwardButton.setExecutable(new TestExecutable("fast forward"));
         add(fastForwardButton);
+
+        Button pauseButton = new Button(this);
+        pauseButton.setBounds(288 + 1, 177, 180, 180);
+        pauseButton.setExecutable(new ExecutePlayMusic());
+        add(pauseButton);
 
         Button b1 = new Button(this);
         b1.setBounds(0 + 1, 0, 230, 117);
@@ -64,11 +59,6 @@ public abstract class NowPlayingShell extends State{
         b3.setBounds(520 + 1, 0, 230, 117);
         b3.setExecutable(new TestExecutable("b3"));
         add(b3);
-
-        Button pauseButton = new Button(this);
-        pauseButton.setBounds(310 + 1, 198, 140, 140);
-        pauseButton.setExecutable(new ExecutePlayMusic());
-        add(pauseButton);
     }
 
     @Override
