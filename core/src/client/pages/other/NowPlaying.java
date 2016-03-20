@@ -1,14 +1,14 @@
 package client.pages.other;
 
+import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 /**
  * This is the now playing page as given in the
  * art assets folder.
@@ -18,17 +18,13 @@ import com.badlogic.gdx.graphics.Texture;
 public class NowPlaying extends NowPlayingShell {
     private Music music;
     Slider slider;
-    private Image buttonAnimation;
 
     public void init() {
         super.init();
+        slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
 
-        slider = new Slider(0, 100, 1, false, new Skin(Gdx.files.internal("uiskin.json")));
-
-        slider.getStyle().knob.setMinHeight(10);
         float m = StateManager.M;
         slider.setBounds((int)(m*180), (int)(m*400), (int)(m*410), 10);
-        buttonAnimation = new Image(new Texture("Pause@2x.png"));
 
         stage.addActor(slider);
 
