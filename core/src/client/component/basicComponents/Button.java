@@ -66,7 +66,7 @@ public class Button extends Component implements Pressable{
 
 
     public void press() {
-        monitor.actionPerformed(new ActionEvent(this, ActionEvent.PRESSABLE));
+        monitor.actionPerformed(new ActionEvent(this));
     }
 
     @Override
