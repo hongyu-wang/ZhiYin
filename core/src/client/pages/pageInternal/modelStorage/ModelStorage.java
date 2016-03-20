@@ -119,5 +119,4 @@ public class ModelStorage {
     public User getUser(){
         return user;
     }
-
 }

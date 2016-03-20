@@ -3,14 +3,13 @@ package tools.AudioTools;
 import org.robovm.apple.avfoundation.AVAsset;
 import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVMetadataItem;
-import org.robovm.apple.avfoundation.AVURLAsset;
-import org.robovm.apple.coremedia.CMTime;
-import org.robovm.apple.foundation.*;
-import org.robovm.rt.bro.ptr.BytePtr;
+import org.robovm.apple.foundation.NSArray;
+import org.robovm.apple.foundation.NSData;
+import org.robovm.apple.foundation.NSErrorException;
+import org.robovm.apple.foundation.NSURL;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
 import server.model.media.MSnapShot;
-import server.services.mediaService.AudioManagerImplementation;
 /**
  * Created by Kevin on 3/11/2016.
  *
@@ -18,8 +17,6 @@ import server.services.mediaService.AudioManagerImplementation;
  *
  */
 public class AudioCreator {
-
-    private static AudioManagerImplementation manager = new AudioManagerImplementation();
 
     private AudioCreator(){
 

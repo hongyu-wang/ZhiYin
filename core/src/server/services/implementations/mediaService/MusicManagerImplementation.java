@@ -1,7 +1,10 @@
 package server.services.implementations.mediaService;
 
+import server.model.media.MAudio;
 import server.model.media.MMusic;
 import server.services.interfaces.models.MusicManager;
+import server.webclient.WebServiceClient;
+import server.webclient.webErrors.WebRequestException;
 
 import java.io.IOException;
 
@@ -17,14 +20,13 @@ public class MusicManagerImplementation implements MusicManager {
 //    }
 
     @Override
-    public MMusic createMusic(String path) throws IOException {
+    public MMusic createMusic(MAudio audio) throws WebRequestException {
         MMusic music = new MMusic();
 
-        long key = 0;
-        //TODO Generate key.
-        music.setKey(key);
+        music.setKey(WebServiceClient.getSerial());
 
-        //TODO implement phone path to create music.
+        music.setMusicKey(audio.getKey());
+
         return music;
     }
 }

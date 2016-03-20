@@ -232,11 +232,9 @@ public class VirtualDatabase {
     }
 
     private MAudio generateTestAudio(String path){
-        MAudio audio = new MAudio();
+        MAudio audio = AudioCreator.createFromFilePath(path);
 
         audio.setKey(ServerInteraction.getServer().getSerial());
-
-//        audio.setmData(AudioCreator.createFromFilePath(path));
 
         return audio;
     }
@@ -248,7 +246,7 @@ public class VirtualDatabase {
 
         music.setName(name);
 
-        music.setSong(audio);
+        music.setMusicKey(audio.getKey());
 
         return music;
     }

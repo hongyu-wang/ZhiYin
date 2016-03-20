@@ -1,6 +1,7 @@
 package server.services.interfaces.models;
 
 import server.model.media.MAudio;
+import server.webclient.webErrors.WebRequestException;
 
 public interface AudioManager {
     /**
@@ -8,5 +9,5 @@ public interface AudioManager {
      *
      * @return
      */
-    public MAudio createAudio();
+    public MAudio createAudio(String path) throws WebRequestException;
 }
