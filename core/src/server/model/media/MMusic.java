@@ -9,7 +9,7 @@ public class MMusic extends ServerModel {
 
     String name;
 
-    MAudio song;
+    long song;
 
     public String getName() {
         return name;
@@ -19,7 +19,7 @@ public class MMusic extends ServerModel {
         this.name = name;
     }
 
-    public MAudio getSong() { return song; }
+    public long getSong() { return song; }
 
-    public void setSong(MAudio song) {this.song = song;}
+    public void setSong(MAudio song) {this.song = song.getKey();}
 }

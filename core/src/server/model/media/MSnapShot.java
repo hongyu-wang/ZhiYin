@@ -10,7 +10,7 @@ public class MSnapShot extends ServerModel {
 
     private MAudio message;
 
-    private MMusic song;
+    private long song;
 
     private int startTime;
 
@@ -25,12 +25,12 @@ public class MSnapShot extends ServerModel {
         this.message = message;
     }
 
-    public MMusic getSong() {
+    public long getSong() {
         return song;
     }
 
     public void setSong(MMusic song) {
-        this.song = song;
+        this.song = song.getKey();
     }
 
     public int getStartTime() {
