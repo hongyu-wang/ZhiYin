@@ -24,7 +24,7 @@ public class Home4 extends Home4Shell {
     private void addSearchField(){
         searchField = new TextField("Search...", SkinSingleton.getInstance());
         searchField.setPosition((26 + 1) * M, 1146 * M);
-        searchField.setSize(642 * M, 58 * M);
+        searchField.setSize((750 - 26*2) * M, 58 * M);
         stage.addActor(searchField);
     }
 
