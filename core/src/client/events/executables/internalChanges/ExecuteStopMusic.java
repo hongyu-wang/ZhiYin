@@ -6,9 +6,9 @@ import client.stateInterfaces.Executable;
 import org.robovm.apple.foundation.NSErrorException;
 
 /**
- * Created by Hongyu Wang on 3/15/2016.
+ * Created by JimGuo on 3/15/16.
  */
-public class ExecutePauseMusic implements Executable{
+public class ExecuteStopMusic implements Executable {
 
 
     @Override
@@ -16,9 +16,10 @@ public class ExecutePauseMusic implements Executable{
         NowPlaying page = (NowPlaying)(Pages.NOWPLAYING.getStateReference());
 
         try {
-            page.getPlayer().pause();
+            page.getPlayer().stop();
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
     }
 }
+
