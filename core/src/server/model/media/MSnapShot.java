@@ -8,7 +8,7 @@ import server.model.structureModels.ServerModel;
  */
 public class MSnapShot extends ServerModel {
 
-    private MAudio message;
+    private long message;
 
     private long song;
 
@@ -17,11 +17,11 @@ public class MSnapShot extends ServerModel {
     private int endTime;
 
 
-    public MAudio getMessage() {
+    public long getMessage() {
         return message;
     }
 
-    public void setMessage(MAudio message) {
+    public void setMessage(long message) {
         this.message = message;
     }
 
@@ -29,8 +29,8 @@ public class MSnapShot extends ServerModel {
         return song;
     }
 
-    public void setSong(MMusic song) {
-        this.song = song.getKey();
+    public void setSong(long song) {
+        this.song = song;
     }
 
     public int getStartTime() {

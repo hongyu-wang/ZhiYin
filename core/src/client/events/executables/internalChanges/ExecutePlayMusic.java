@@ -3,6 +3,7 @@ package client.events.executables.internalChanges;
 import client.pageStorage.Pages;
 import client.pages.other.NowPlaying;
 import client.stateInterfaces.Executable;
+import org.robovm.apple.foundation.NSErrorException;
 
 /**
  * This class will check if
@@ -13,13 +14,19 @@ import client.stateInterfaces.Executable;
 public class ExecutePlayMusic implements Executable{
 
 
+
     @Override
     public void execute() {
-        NowPlaying page = (NowPlaying) Pages.NOWPLAYING.getStateReference();
-        if (page.getMusic().isPlaying()){
-            page.getMusic().pause();
-            return;
+        try {
+            NowPlaying page = (NowPlaying) Pages.NOWPLAYING.getStateReference();
+            if (page.getPlayer().isPlaying()) {
+                page.getPlayer().pause();
+                return;
+            }
+            page.getPlayer().prepareToPlay();
+            page.getPlayer().play();
+        }catch(NSErrorException e){
+            e.printStackTrace();
         }
-        page.getMusic().play();
     }
 }
