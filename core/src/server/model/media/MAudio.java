@@ -11,13 +11,38 @@ import java.util.Vector;
  */
 public class MAudio extends ServerModel {
 
+    private int trackMinutes;
+
+    private int trackSeconds;
+
+    private int sampleRate;
+
     private NSData mData;
 
     public NSData getmData() {
         return mData;
     }
 
-    public void setmData(NSData mData) {
-        this.mData = mData;
+    public void setmData(NSData mData) {this.mData = mData;
     }
+
+
+    public int getTrackMinutes() {return trackMinutes;
+    }
+
+    public void setTrackMinutes(int trackMinutes) {this.trackMinutes = trackMinutes;
+    }
+
+    public int getTrackSeconds() {return trackSeconds;
+    }
+
+    public void setTrackSeconds(int trackSeconds) {this.trackSeconds = trackSeconds;
+    }
+
+    public int getSampleRate() {return sampleRate;
+    }
+
+    public void setSampleRate(int sampleRate) {this.sampleRate = sampleRate;
+    }
+
 }

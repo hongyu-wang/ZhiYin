@@ -10,25 +10,27 @@ public class MMusic extends ServerModel {
      * The name of the music.
      */
     String name;
+
+    String artist;
     /**
      * The key to the audio.
      */
     long audioKey;
 
-    /**Returns the title of the music.
+    /**
+     * Returns the title of the music.
      *
-     * @return  The title string.
+     * @return The title string.
      */
-
-    MAudio song;
 
     public String getName() {
         return name;
     }
 
-    /**Returns the audio which represents the music file.
+    /**
+     * Returns the audio which represents the music file.
      *
-     * @return  The audio file.
+     * @return The audio file.
      */
     public long getMusicKey() {
         return audioKey;
@@ -42,7 +44,5 @@ public class MMusic extends ServerModel {
         this.audioKey = audioKey;
     }
 
-    public MAudio getSong() { return song; }
-
-    public void setSong(MAudio song) {this.song = song;}
 }
+
