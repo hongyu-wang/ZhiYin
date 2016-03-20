@@ -24,24 +24,8 @@ public class InputListener implements InputProcessor {
     private static InputListener ourInstance = new InputListener();
     private static InputMultiplexer im = new InputMultiplexer();
 
-    /**
-     * This is the value of currentEvent when
-     * the screen isn't pressed.
-     */
-    private static final int DOWN = 0;
 
-    /**
-     * This is the value of currentEvent
-     * when the screen is currently pressed
-     */
-    private static final int UP = 1;
 
-    /**
-     * This is the value that stores the currentEvent
-     * This is useful mainly because InputListener needs to implement performable
-     * and thus will return the appropriate executable.
-     */
-    private int currentEvent = UP;
 
 
 
@@ -176,7 +160,6 @@ public class InputListener implements InputProcessor {
 
         mouseX = screenX;
         mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
-        currentEvent = DOWN;
 
         System.out.println(mouseX + " " + mouseY);
         stateManager.receiveInput();
@@ -188,14 +171,18 @@ public class InputListener implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         mouseX = screenX;
         mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
-        currentEvent = UP;
-        //stateManager.receiveInput();
+        stateManager.recieveRelease();
 
         return false;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        mouseX = screenX;
+        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
+
+
+        stateManager.recieveDragged();
         return false;
     }
 
@@ -208,6 +195,7 @@ public class InputListener implements InputProcessor {
     public boolean scrolled(int amount) {
         return false;
     }
+
 
 
 
