@@ -30,7 +30,7 @@ import java.util.Vector;
 /**
  * Created by Kevin on 3/10/2016.
  */
-//TODO error handle properly zzzzzzz
+
 public class AudioPlayer {
 
     private boolean running = false;
@@ -51,23 +51,21 @@ public class AudioPlayer {
         return singleInstance;
     }
 
-    public void setSong(MSnapShot ss){
+
+    public void setSongSnapShot(MAudio voice, MAudio song, double startTime){
 
         player1.dispose();
         player2.dispose();
         snapShot = true;
 
-        player2 = new AVAudioPlayer(ss.getMessage().getmData()); //need to use long to request MAUdio
-        player1 = new AVAudioPlayer(ss.getSong().getSong().getmData()); //same here
-        player1.setCurrentTime((double)ss.getStartTime());
-    }
+        try {
+            player2 = new AVAudioPlayer(song.getmData());
+            player1 = new AVAudioPlayer(voice.getmData());
+        } catch (NSErrorException e) {
+            e.printStackTrace();
+        }
 
-    public void setSong(MMusic m){
-
-        player1.dispose();
-        player2.dispose();
-        snapShot = false;
-        player1 = new AVAudioPlayer(m.getSong().getmData()); //same here
+        player1.setCurrentTime(startTime);
     }
 
     public void setSong(MAudio audio){
@@ -77,18 +75,6 @@ public class AudioPlayer {
         snapShot = false;
         try {
             player1 = new AVAudioPlayer(audio.getmData());
-        } catch (NSErrorException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setSong (NSURL path){
-
-        player1.dispose();
-        player2.dispose();
-        snapShot = false;
-        try {
-            player1 = new AVAudioPlayer(path);
         } catch (NSErrorException e) {
             e.printStackTrace();
         }

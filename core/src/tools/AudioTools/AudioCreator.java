@@ -10,7 +10,7 @@ import org.robovm.rt.bro.ptr.BytePtr;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
 import server.model.media.MSnapShot;
-
+import server.services.mediaService.AudioManagerImplementation;
 /**
  * Created by Kevin on 3/11/2016.
  *
@@ -18,6 +18,8 @@ import server.model.media.MSnapShot;
  *
  */
 public class AudioCreator {
+
+    private static AudioManagerImplementation manager = new AudioManagerImplementation();
 
     private AudioCreator(){
 
@@ -33,20 +35,20 @@ public class AudioCreator {
         NSData data = NSData.read(filePath);
         return createMAudio(data);
 
-
     }
 
-    public static MMusic createSongFromFilePath(String filePath){
+    public static MMusic createMMusicFromFilePath(String filePath, long audioKey){
         MAudio audio = createMAudio(NSData.read(new NSURL(filePath))); // need to assign this a long key
+        audio.setKey(audioKey);
         MMusic music = new MMusic();
+        music.setMusicKey(audioKey);
+
 
         NSArray<AVMetadataItem> metadata = (new AVAsset(new NSURL(filePath))).getCommonMetadata();
         for(AVMetadataItem item : metadata){
             if(item.getCommonKey().equals("Title"))
                 music.setName(item.getStringValue());
-
         }
-
         return music;
     }
 
@@ -61,13 +63,12 @@ public class AudioCreator {
     }
 
     public static MAudio createMAudio(NSData data){
-        MAudio song = new MAudio();
+        MAudio song = new MAudio(); //Need to set long key
         AVAudioPlayer temp;
         try {
             temp = new AVAudioPlayer(data);
-            double duration = temp.getDuration();
-            song.setTrackMinutes((int)(duration/60));
-            song.setTrackSeconds((int) (duration % 60));
+            song.setTrackLength(temp.getDuration());
+
         } catch (NSErrorException e) {
             e.printStackTrace();
         }

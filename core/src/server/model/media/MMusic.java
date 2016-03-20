@@ -17,6 +17,10 @@ public class MMusic extends ServerModel {
      */
     long audioKey;
 
+    long albumArt;
+
+    String album;
+
     /**
      * Returns the title of the music.
      *
@@ -42,6 +46,32 @@ public class MMusic extends ServerModel {
 
     public void setMusicKey(long audioKey) {
         this.audioKey = audioKey;
+    }
+
+    public String getArtist(){
+        return artist;
+    }
+
+    public void setArtist(String artist){
+        this.artist = artist;
+    }
+
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+
+    public long getAlbumArt() {
+        return albumArt;
+    }
+
+    public void setAlbumArt(long albumArt) {
+        this.albumArt = albumArt;
     }
 
 }

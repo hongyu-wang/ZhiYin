@@ -11,9 +11,11 @@ import java.util.Vector;
  */
 public class MAudio extends ServerModel {
 
-    private int trackMinutes;
+    /**
+     * Track length in seconds.
+     */
+    private double trackLength;
 
-    private int trackSeconds;
 
     private int sampleRate;
 
@@ -27,16 +29,12 @@ public class MAudio extends ServerModel {
     }
 
 
-    public int getTrackMinutes() {return trackMinutes;
+    public double getTrackLength(){
+        return trackLength;
     }
 
-    public void setTrackMinutes(int trackMinutes) {this.trackMinutes = trackMinutes;
-    }
-
-    public int getTrackSeconds() {return trackSeconds;
-    }
-
-    public void setTrackSeconds(int trackSeconds) {this.trackSeconds = trackSeconds;
+    public void setTrackLength(double time){
+        trackLength = time;
     }
 
     public int getSampleRate() {return sampleRate;

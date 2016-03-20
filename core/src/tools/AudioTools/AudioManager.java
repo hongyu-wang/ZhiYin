@@ -31,9 +31,8 @@ public class AudioManager {
         audioPlayer.stop();
     }
 
-    public static int[] trackLength(){
-        int[] t = {audioPlayer.getCurrentAudio().getTrackMinutes(),audioPlayer.getCurrentAudio().getTrackSeconds()};
-        return t;
+    public static double trackLength(){
+        return audioPlayer.getCurrentAudio().getTrackLength();
     }
 
     public static void changeMusic(MAudio song) throws NSErrorException {
