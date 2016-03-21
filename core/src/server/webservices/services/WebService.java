@@ -3,14 +3,21 @@ package server.webservices.services;
 import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import server.services.interfaces.models.UserProfileManager;
+import server.webservices.PostObject;
 import server.webservices.factories.UserProfileManagerFactory;
 import tools.serverTools.server.MockServer;
 import tools.serverTools.server.ServerInteraction;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Net;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import server.model.structureModels.ServerModel;
+import server.model.user.User;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
 
 /**
  * @author rsang
@@ -37,5 +44,30 @@ public class WebService {
 
         return mockServer.getModel(key);
     }
+
+    /**
+     *  Using Jackson.
+     *
+     */
+    @POST
+    @Path("/postServerModel")
+    @Consumes("application/json")
+    public  Response postServerModel(String json) {
+        MockServer mockServer = ServerInteraction.getServer();
+        ObjectMapper objectMapper = new ObjectMapper();
+        ServerModel model = null;
+        String className =
+        try {
+            model = objectMapper.readValue(json, );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mockServer.setModel(model);
+        return Response.status(Response.Status.OK).build();
+
+    }
+
+
 
 }
