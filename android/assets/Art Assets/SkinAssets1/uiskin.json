@@ -8,6 +8,7 @@ com.badlogic.gdx.graphics.Color: {
 	grey: { r: 0.7, g: 0.7, b: 0.7, a: 1 }
 },
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	font_trebucbd_16pt: { file: font_trebucbd_16pt.fnt },
 	font_trebuc_16pt: { file: font_trebuc_16pt.fnt },
 	default-font: { file: default.fnt }
 },
@@ -66,7 +67,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
-		font: default-font,
+		font: font_trebuc_16pt,
 		fontColor: { a: 1, b: 1, g: 1, r: 1 },
 		background: textfield,
 		cursor: cursor,
@@ -128,7 +129,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 	default-vertical: { background: default-slider, knob: default-slider-knob },
-	default-horizontal: { background: default-pane-noborder, knob: slider_noshadow }
+	default-horizontal: { background: default-pane-noborder, knob: slider }
 },
 com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 	default: {
