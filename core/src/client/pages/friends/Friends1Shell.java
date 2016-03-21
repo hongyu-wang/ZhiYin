@@ -1,7 +1,9 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.ExecuteChangePage;
 import client.events.executables.internalChanges.TestExecutable;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,7 +21,7 @@ public abstract class Friends1Shell extends State {
         Image background = new Image(new Texture("Friends -1.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
 
-        add(background);
+        stage.addActor(background);
 
 
 
@@ -30,7 +32,7 @@ public abstract class Friends1Shell extends State {
 
         Button recordButton = new Button(this);
         recordButton.setBounds(0, 117, 750, 117);
-        recordButton.setExecutable(new TestExecutable("record"));
+        recordButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS2));
         add(recordButton);
 
         setBottomBar();

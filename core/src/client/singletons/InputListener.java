@@ -1,6 +1,7 @@
 package client.singletons;
 
 import client.pageStorage.Pages;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
@@ -23,24 +24,8 @@ public class InputListener implements InputProcessor {
     private static InputListener ourInstance = new InputListener();
     private static InputMultiplexer im = new InputMultiplexer();
 
-    /**
-     * This is the value of currentEvent when
-     * the screen isn't pressed.
-     */
-    private static final int DOWN = 0;
 
-    /**
-     * This is the value of currentEvent
-     * when the screen is currently pressed
-     */
-    private static final int UP = 1;
 
-    /**
-     * This is the value that stores the currentEvent
-     * This is useful mainly because InputListener needs to implement performable
-     * and thus will return the appropriate executable.
-     */
-    private int currentEvent = UP;
 
 
 
@@ -99,10 +84,11 @@ public class InputListener implements InputProcessor {
 
     }
 
-    public static void addListeners(){
+    public static void setListener(Pages page){
+        im.clear();
+        im.addProcessor(page.getStateReference().getStage());
         im.addProcessor(InputListener.getInstance());
-        for (Pages page : Pages.values())
-            im.addProcessor(page.getStateReference().getStage());
+        Gdx.input.setInputProcessor(im);
 
     }
 
@@ -134,6 +120,9 @@ public class InputListener implements InputProcessor {
         if (keycode == Input.Keys.E)
             stateManager.changeState(Pages.DIARY3);
 
+        if (keycode == Input.Keys.R)
+            stateManager.changeState(Pages.DIARY4);
+
         if (keycode == Input.Keys.A)
             stateManager.changeState(Pages.HOME1);
 
@@ -143,10 +132,13 @@ public class InputListener implements InputProcessor {
         if (keycode == Input.Keys.D)
             stateManager.changeState(Pages.HOME4);
 
-        if (keycode == Input.Keys.Z)
+        if (keycode == Input.Keys.X)
             stateManager.changeState(Pages.NOWPLAYING);
 
-        if (keycode == Input.Keys.X)
+        if (keycode == Input.Keys.C)
+            stateManager.changeState(Pages.NOWPLAYING2);
+
+        if (keycode == Input.Keys.Z)
             stateManager.changeState(Pages.PROFILE);
 
 
@@ -168,9 +160,8 @@ public class InputListener implements InputProcessor {
 
         mouseX = screenX;
         mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
-        currentEvent = DOWN;
 
-
+        System.out.println(mouseX + " " + mouseY);
         stateManager.receiveInput();
 
         return false;
@@ -180,14 +171,18 @@ public class InputListener implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         mouseX = screenX;
         mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
-        currentEvent = UP;
-        //stateManager.receiveInput();
+        stateManager.recieveRelease();
 
         return false;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        mouseX = screenX;
+        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
+
+
+        stateManager.recieveDragged();
         return false;
     }
 
@@ -200,6 +195,7 @@ public class InputListener implements InputProcessor {
     public boolean scrolled(int amount) {
         return false;
     }
+
 
 
 

@@ -1,7 +1,8 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.ExecuteChangePage;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,18 +19,18 @@ public abstract class Friends3Shell extends State {
 
         Image background = new Image(new Texture("Friends - 3.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
-        add(background);
+        stage.addActor(background);
 
 
 
         Button discardButton = new Button(this);
         discardButton.setBounds(1, 0, 375, 117);
-        discardButton.setExecutable(new TestExecutable("discard"));
+        discardButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
         add(discardButton);
 
         Button sendButton = new Button(this);
         sendButton.setBounds(375 + 1, 0, 375, 117);
-        sendButton.setExecutable(new TestExecutable("send"));
+        sendButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS4));
         add(sendButton);
     }
 

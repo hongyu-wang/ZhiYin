@@ -8,28 +8,28 @@ import server.model.structureModels.ServerModel;
  */
 public class MSnapShot extends ServerModel {
 
-    private MAudio message;
+    private long message;
 
-    private MMusic song;
+    private long song;
 
     private int startTime;
 
     private int endTime;
 
 
-    public MAudio getMessage() {
+    public long getMessage() {
         return message;
     }
 
-    public void setMessage(MAudio message) {
+    public void setMessage(long message) {
         this.message = message;
     }
 
-    public MMusic getSong() {
+    public long getSong() {
         return song;
     }
 
-    public void setSong(MMusic song) {
+    public void setSong(long song) {
         this.song = song;
     }
 

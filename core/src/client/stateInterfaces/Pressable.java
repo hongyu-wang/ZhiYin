@@ -9,16 +9,8 @@ import client.internalExceptions.NoExecutableException;
  * Created by Hongyu Wang on 3/12/2016.
  */
 public interface Pressable extends Performable{
-    /**
-     * This will return the Performable's executable.
-     * The executables are classes that store bundles of logic.
-     *
-     * This is so that no one method becomes cluttered with large amounts of logic and it
-     * is instead spread out through several classes
-     *
-     * @return An Executable for the ActionMonitor to run.
-     */
-    Executable getExecutable() throws NoExecutableException;
+
+
 
     /**
      * This will allow one to set the Performable's executable.
@@ -45,4 +37,6 @@ public interface Pressable extends Performable{
      * a new ActionEvent to the actionListener.
      */
     void press();
+
+    void release();
 }

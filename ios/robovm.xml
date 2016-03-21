@@ -7,7 +7,7 @@
   <iosInfoPList>Info.plist.xml</iosInfoPList>
   <resources>
     <resource>
-      <directory>../android/assets</directory>
+      <directory>../android/assets/Art Assets</directory>
       <includes>
         <include>**</include>
       </includes>
@@ -31,7 +31,13 @@
     <pattern>com.android.org.bouncycastle.crypto.digests.AndroidDigestFactoryOpenSSL</pattern>
     <pattern>org.apache.harmony.security.provider.cert.DRLCertFactory</pattern>
     <pattern>org.apache.harmony.security.provider.crypto.CryptoProvider</pattern>
+    <pattern>client.pages.friends.**</pattern>
+    <pattern>client.pages.musicDiary.**</pattern>
+    <pattern>client.pages.home.**</pattern>
+    <pattern>client.pages.other.**</pattern>
+
   </forceLinkClasses>
+
   <libs>
       <lib>z</lib>   
   </libs>

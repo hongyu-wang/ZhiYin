@@ -15,9 +15,8 @@ public class MockServer {
     private SerialGenerator generator;
 
     MockServer(){
-        generator = SerialGenerator.getGenerator();
         try{
-
+            generator = SerialGenerator.getGenerator();
             database = new VirtualDatabase();
 
         }
@@ -27,14 +26,33 @@ public class MockServer {
 
     }
 
+
     public long getSerial(){
         return generator.generateSerial();
     }
 
+    /**Returns the user key by the username.
+     *
+     * @param username
+     * @return
+     */
+    public long getUserKeybyName(String username){
+        return database.getUserKeybyName(username);
+    }
+
+    /**Returns the requested model from the database.
+     *
+     * @param key
+     * @return
+     */
     public ServerModel getModel(long key){
         return database.getModel(key);
     }
 
+    /**Pushes the model into the databse.
+     *
+     * @param model
+     */
     public void setModel(ServerModel model){
         database.setModel(model);
     }

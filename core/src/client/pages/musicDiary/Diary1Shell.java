@@ -1,7 +1,8 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.ExecuteChangePage;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,12 +20,12 @@ public abstract class Diary1Shell extends State{
         Image background = new Image(new Texture("Diary - 1.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
 
-        add(background);
+        stage.addActor(background);
 
 
         Button composeButton = new Button(this);
         composeButton.setBounds(1, 117, 750, 117);
-        composeButton.setExecutable(new TestExecutable("compose"));
+        composeButton.setExecutable(new ExecuteChangePage(Pages.DIARY2));
         add(composeButton);
 
         setBottomBar();

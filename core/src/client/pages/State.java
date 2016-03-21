@@ -1,25 +1,20 @@
 package client.pages;
 
-import client.component.Component;
 import client.component.basicComponents.Button;
 import client.events.ActionEvent;
 import client.events.executables.internalChanges.ExecuteChangePage;
-import client.inputController.InputController;
+import client.pages.pageInternal.inputController.InputController;
 import client.events.executables.internalChanges.TestExecutable;
 import client.internalExceptions.NoExecutableException;
 import client.pageStorage.Pages;
-import client.singletons.InputListener;
 import client.singletons.MainBatch;
-import client.singletons.StateManager;
 import client.stateInterfaces.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import driver.GameLoop;
 import tools.utilities.Utils;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * This is the superclass of all States.
@@ -44,10 +39,6 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         stage.act();
     }
 
-
-    public void initStage(){
-
-    }
 
     /**
      * This clears the stage of all actors. The main purpose of this
@@ -165,12 +156,13 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         return controllers.get(FIXEDINPUT);
     }
 
-    protected void getInformationFromServer(){
 
-    }
 
     public Stage getStage() {
         return stage;
     }
+
+
+
 }
 
