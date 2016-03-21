@@ -48,13 +48,11 @@ public class DragButton extends Component implements Dragable {
         returnExecutable = dragExecute;
         if (InputListener.getInstance().getMouseY() > limit)
             monitor.actionPerformed(new ActionEvent(this));
-        System.out.println("y: " + InputListener.getInstance().getMouseY());
     }
 
     public void release(){
         returnExecutable = releaseExecute;
         monitor.actionPerformed(new ActionEvent(this));
-        System.out.println("a");
     }
 
     @Override

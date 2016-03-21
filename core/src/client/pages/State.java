@@ -3,10 +3,9 @@ package client.pages;
 import client.component.basicComponents.Button;
 import client.events.ActionEvent;
 import client.events.executables.internalChanges.ExecuteChangePage;
-import client.pages.pageInternal.inputController.InputController;
-import client.events.executables.internalChanges.TestExecutable;
 import client.internalExceptions.NoExecutableException;
 import client.pageStorage.Pages;
+import client.pages.pageInternal.inputController.InputController;
 import client.singletons.MainBatch;
 import client.stateInterfaces.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -106,7 +105,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
         Button toolsButton = new Button(this);
         toolsButton.setBounds((59 + 117*3 + 55*3) + 1, 0, 117, 117);
-        toolsButton.setExecutable(new TestExecutable("tools"));
+        toolsButton.setExecutable(new ExecuteChangePage(Pages.TOOLS));
         add(toolsButton);
     }
 

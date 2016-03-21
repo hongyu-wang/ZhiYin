@@ -1,6 +1,7 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
+import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecuteChangePage;
 import client.events.executables.internalChanges.TestExecutable;
 import client.pageStorage.Pages;
@@ -27,11 +28,11 @@ public abstract class Diary3Shell extends State{
         titleButton.setExecutable(new TestExecutable("title"));
         add(titleButton);
 
-
-        Button SwipeToDiscardButton = new Button(this);
-        SwipeToDiscardButton.setBounds(0 + 1, 398, 750, 320);
-        SwipeToDiscardButton.setExecutable(new TestExecutable("swipe to discard"));
-        add(SwipeToDiscardButton);
+        DragButton SwipeToDiscardDragButton = new DragButton(this, 560);
+        SwipeToDiscardDragButton.setBounds(0 + 1, 398, 750, 320);
+        SwipeToDiscardDragButton.setDragExecutable(new ExecuteChangePage(Pages.DIARY2));
+        SwipeToDiscardDragButton.setReleaseExecutable(new ExecuteChangePage(Pages.DIARY2));
+        add(SwipeToDiscardDragButton);
 
         Button pictureButton = new Button(this);
         pictureButton.setBounds(0 + 1, 134 + 135, 750, 129);

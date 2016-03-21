@@ -1,4 +1,4 @@
-package client.pages.friends;
+package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.ExecuteChangePage;
@@ -12,30 +12,19 @@ import driver.GameLoop;
 /**
  * Created by blobbydude24 on 2016-03-21.
  */
-public abstract class Friends5Shell extends State {
+public abstract class ToolsShell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Friends5BG.png"));
+        Image background = new Image(new Texture("myProfile.jpg"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 
-        Button messagesButton = new Button(this);
-        messagesButton.setBounds(0, 1217, 375, 117);
-        messagesButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
-        add(messagesButton);
+        Button myProfileButton = new Button(this);
+        myProfileButton.setBounds(0, 1334 - 190, 750, 190);
+        myProfileButton.setExecutable(new ExecuteChangePage(Pages.PROFILE));
+        add(myProfileButton);
 
         setBottomBar();
-
-    }
-
-    @Override
-    public void dispose() {
-
-    }
-
-    @Override
-    public void update(float dt) {
-
     }
 }

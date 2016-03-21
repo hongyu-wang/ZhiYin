@@ -21,7 +21,7 @@ public abstract class Friends2Shell extends State {
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 
-        DragButton SwipeToDiscardDragButton = new DragButton(this, 350);
+        DragButton SwipeToDiscardDragButton = new DragButton(this, 300);
         SwipeToDiscardDragButton.setBounds(0 + 1, 117, 750, 283);
         SwipeToDiscardDragButton.setDragExecutable(new ExecuteChangePage(Pages.FRIENDS1));
         SwipeToDiscardDragButton.setReleaseExecutable(new ExecuteChangePage(Pages.FRIENDS3));
