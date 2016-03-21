@@ -17,11 +17,9 @@ public abstract class Friends3Shell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Friends - 3.png"));
+        Image background = new Image(new Texture("Friends3BG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
-
-
 
         Button discardButton = new Button(this);
         discardButton.setBounds(1, 0, 375, 117);
