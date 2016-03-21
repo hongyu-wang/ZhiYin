@@ -23,8 +23,7 @@ public class FriendTalkers extends Talkers {
     FUNCTIONALITY TYPE 1:
         I should be able to iterate through all the friends one by one and do:
             1. Get their name
-            2. Get the message status (The message status is whether or not the message is read, your message is read,
-                    etc).
+
     FUNCTIONALITY TYPE 2:
         I should be able to select a specific friend:
             1. Send them a message (Be it a text one or an audio one)
@@ -32,8 +31,7 @@ public class FriendTalkers extends Talkers {
                     For each message:
                         Get the type (audio or text)
                         Get the content (audio or text)
-            3. When you view the friend, you should set the your view state to <readTheirs> and thus
-                change the state of them to <readYours>
+            3. Get the profile of the friend.
     */
 
 
