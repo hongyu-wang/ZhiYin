@@ -1,17 +1,13 @@
 package server.webservices;
 
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import server.model.user.User;
+import server.model.structureModels.ServerModel;
 
-import javax.ws.rs.core.Response;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 /**
  * A singleton used to request models from the server
@@ -19,6 +15,7 @@ import java.io.OutputStreamWriter;
 public class RequestObject implements Net.HttpResponseListener {
 
     private static RequestObject ourInstance;
+    private ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
     private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
     private Object rOjbect;
@@ -60,6 +57,7 @@ public class RequestObject implements Net.HttpResponseListener {
         final int statusCode = httpResponse.getStatus().getStatusCode();
         try {
             rOjbect = objectMapper.readValue(httpResponse.getResultAsString(), Class.forName(className));
+            modelStorage.setModelFromServer((ServerModel)rOjbect);
             String line = "lol";
         } catch (Exception e) {
             System.out.println(e);
