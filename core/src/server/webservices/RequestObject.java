@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 /**
- * Created by Hairuo on 2016-03-20.
+ * A singleton used to request models from the server
  */
 public class RequestObject implements Net.HttpResponseListener {
 
@@ -24,21 +24,26 @@ public class RequestObject implements Net.HttpResponseListener {
     private Object rOjbect;
     private String className;
 
-    public static RequestObject newInstance() {
+    public static RequestObject newInstance(){
 
-        if (ourInstance == null){
+        if (ourInstance == null) {
             ourInstance = new RequestObject();
         }
         return ourInstance;
 
     }
 
-
+    /**
+     * Retrieves a model from the server
+     *
+     * @param className name of the class of the model
+     * @param key       id key of the model
+     */
     public void getModel(String className, long key) {
         // LibGDX NET CLASS
         this.className = className;
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("http://localhost:8081/webservice/getServerModel/"+key);
+        httpGet.setUrl("http://localhost:8081/webservice/getServerModel/" + key);
         //httpGet.setHeader("Content-Type", "application/json");
         //httpGet.setHeader("X-Parse-Application-Id", app_id);
         //httpGet.setHeader("X-Parse-REST-API-Key", app_key);

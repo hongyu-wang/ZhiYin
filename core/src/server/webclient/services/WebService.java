@@ -1,10 +1,9 @@
-package server.webservices.services;
+package server.webclient.services;
 
 import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import server.services.interfaces.models.UserProfileManager;
 import server.webservices.PostObject;
-import server.webservices.factories.UserProfileManagerFactory;
 import tools.serverTools.server.MockServer;
 import tools.serverTools.server.ServerInteraction;
 import com.badlogic.gdx.Gdx;
@@ -23,7 +22,7 @@ import java.io.IOException;
  * @author rsang
  */
 @Path("/webservice")
-public class WebService {
+public class WebService{
 
     @GET
     @Path("/param/{param}")
@@ -52,13 +51,16 @@ public class WebService {
     @POST
     @Path("/postServerModel")
     @Consumes("application/json")
-    public  Response postServerModel(String json) {
+    public Response postServerModel(String json) {
         MockServer mockServer = ServerInteraction.getServer();
         ObjectMapper objectMapper = new ObjectMapper();
         ServerModel model = null;
-        String className =
+        String className = json.substring(json.length()-3);
+        json = json.substring(0, json.length()-3);
+
         try {
-            model = objectMapper.readValue(json, );
+            Class name = Class.forName(className);
+            model = (ServerModel)objectMapper.readValue(json, name);
         } catch (Exception e) {
             e.printStackTrace();
         }

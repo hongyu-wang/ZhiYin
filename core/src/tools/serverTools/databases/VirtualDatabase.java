@@ -36,8 +36,9 @@ public class VirtualDatabase {
         this.hashtag_key = new HashMap<>();
         this.data = new HashMap<>();
 
+
         initUserData();
-        initMediaData();
+        //initMediaData();
     }
 
     private void initUserData(){

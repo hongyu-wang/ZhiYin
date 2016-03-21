@@ -19,8 +19,9 @@ import server.model.user.User;
         import com.badlogic.gdx.utils.JsonValue;
         import com.fasterxml.jackson.databind.ObjectMapper;
         import server.model.user.User;
+import tools.serverTools.generators.Tags;
 
-        import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response;
         import java.io.BufferedReader;
         import java.io.IOException;
         import java.io.InputStreamReader;
@@ -32,8 +33,8 @@ import server.model.user.User;
 public class PostObject implements Net.HttpResponseListener {
 
     private static PostObject ourInstance;
-    private static JsonReader reader = new JsonReader();
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    private JsonReader reader = new JsonReader();
+    private ObjectMapper objectMapper = new ObjectMapper();
     private String className;
 
 
@@ -47,16 +48,22 @@ public class PostObject implements Net.HttpResponseListener {
 
 
 
-
+    /**
+     * Posts a model to the server
+     *
+     * @param model     model to be posted
+     * @param className name of the class of the model
+     */
     public void addModel(ServerModel model, String className){
         // LibGDX NET CLASS
-        this.className = className;
+        ;
+        this.className = Tags.ID_TAGS.parseTag(className);
         Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
         httpPost.setUrl("http://localhost:8081/webservice/postServerModel");
         //httpPost.setHeader("X-Parse-Application-Id", app_id);
         //httpPost.setHeader("X-Parse-REST-API-Key", app_key);
         Json json = new Json();
-        String jString = json.toJson(model);
+        String jString = json.toJson(model+className);
 
 
 
@@ -73,13 +80,7 @@ public class PostObject implements Net.HttpResponseListener {
 
     @Override
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
-        final int statusCode = httpResponse.getStatus().getStatusCode();
-        try {
-            rOjbect = objectMapper.readValue(httpResponse.getResultAsString(), User.class);
-        }catch (Exception e){
-            System.out.println(e);
-        }
-        System.out.println(statusCode + " " + httpResponse.getResultAsString());
+        System.out.println(httpResponse.getStatus());
     }
 
     @Override
