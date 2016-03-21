@@ -33,8 +33,8 @@ public class Diary3 extends Diary3Shell {
 
     private void addBodyField(){
         bodyField = new WorkingTextArea("Text...", SkinSingleton.getInstance());
-        bodyField.setPosition((0 + 1) * M, 553 * M);
-        bodyField.setSize(750* M, 555 * M);
+        bodyField.setPosition((0 + 1) * M, 724 * M);
+        bodyField.setSize(750* M, 384 * M);
 
         stage.addActor(bodyField);
     }
