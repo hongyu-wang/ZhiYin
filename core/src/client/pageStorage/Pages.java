@@ -87,4 +87,8 @@ public enum Pages {
     public State getStateReference() {
         return this.stateReference;
     }
+
+    public String toString(){
+        return name;
+    }
 }

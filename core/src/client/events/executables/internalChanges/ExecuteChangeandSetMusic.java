@@ -2,7 +2,6 @@ package client.events.executables.internalChanges;
 
 import client.pageStorage.Pages;
 import client.pages.other.NowPlaying;
-import org.robovm.apple.foundation.NSErrorException;
 
 /**
  * This sets the music of the player and goes there.
@@ -19,10 +18,6 @@ public class ExecuteChangeandSetMusic extends ExecuteChangePage{
     public void execute(){
         super.execute();
         NowPlaying page = (NowPlaying)(Pages.NOWPLAYING.getStateReference());
-        try {
-            page.setMusic(musicName);
-        } catch (NSErrorException e) {
-            e.printStackTrace();
-        }
+        page.setMusic(musicName);
     }
 }

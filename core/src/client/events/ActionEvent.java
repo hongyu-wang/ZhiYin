@@ -2,6 +2,7 @@ package client.events;
 
 import client.stateInterfaces.Performable;
 import client.stateInterfaces.Pressable;
+import sun.misc.Perf;
 
 /**
  * This is an ActionEvent class. This is mainly a marker class with only one method: Get source.
@@ -10,16 +11,19 @@ import client.stateInterfaces.Pressable;
  * Created by Hongyu Wang on 3/7/2016.
  */
 public class ActionEvent {
+
+
     /**
      * This is the source of the ActionEvent.
      */
-    private final Pressable source;
+    private final Performable source;
 
     /**
      * This is the primary constructor of the ActionEvent
      * @param performer the component which "performs" the action.
      */
-    public ActionEvent(Pressable performer){
+    public ActionEvent(Performable performer){
+
         source = performer;
     }
 
@@ -28,8 +32,11 @@ public class ActionEvent {
      * some event.
      * @return The source of the event.
      */
-    public Pressable getSource() {
+    public Performable getSource() {
         return source;
     }
+
+
+
 
 }

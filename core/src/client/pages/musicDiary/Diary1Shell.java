@@ -20,7 +20,7 @@ public abstract class Diary1Shell extends State{
         Image background = new Image(new Texture("Diary - 1.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
 
-        add(background);
+        stage.addActor(background);
 
 
         Button composeButton = new Button(this);

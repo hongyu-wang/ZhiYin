@@ -156,9 +156,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         return controllers.get(FIXEDINPUT);
     }
 
-    protected void getInformationFromServer(){
 
-    }
 
     public Stage getStage() {
         return stage;

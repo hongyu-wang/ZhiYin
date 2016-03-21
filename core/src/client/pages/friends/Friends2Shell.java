@@ -18,7 +18,7 @@ public abstract class Friends2Shell extends State {
 
         Image background = new Image(new Texture("Friends - 2.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
-        add(background);
+        stage.addActor(background);
 
 
 

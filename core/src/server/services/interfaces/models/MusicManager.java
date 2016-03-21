@@ -1,6 +1,8 @@
 package server.services.interfaces.models;
 
+import server.model.media.MAudio;
 import server.model.media.MMusic;
+import server.webclient.webErrors.WebRequestException;
 
 import java.io.IOException;
 
@@ -11,8 +13,8 @@ public interface MusicManager {
 
     /**Uploads a piece of music from your phone.
      *
-     * @param path  The string path to the music.
-     * @return      The newly created music.
+     * @param  audio    The string path to the music.
+     * @return          The newly created music.
      */
-    MMusic createMusic(String path) throws IOException;
+    MMusic createMusic(MAudio audio) throws WebRequestException;
 }

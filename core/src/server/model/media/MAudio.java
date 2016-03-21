@@ -16,7 +16,6 @@ public class MAudio extends ServerModel {
      */
     private double trackLength;
 
-
     private int sampleRate;
 
     private NSData mData;

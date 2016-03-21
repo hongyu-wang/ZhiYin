@@ -1,5 +1,7 @@
 package client.stateInterfaces;
 
+import client.internalExceptions.NoExecutableException;
+
 /**
  * This interface will MARK all classes that can perform events.
  *
@@ -13,6 +15,15 @@ package client.stateInterfaces;
  */
 public interface Performable {
 
-
+    /**
+     * This will return the Performable's executable.
+     * The executables are classes that store bundles of logic.
+     *
+     * This is so that no one method becomes cluttered with large amounts of logic and it
+     * is instead spread out through several classes
+     *
+     * @return An Executable for the ActionMonitor to run.
+     */
+    Executable getExecutable() throws NoExecutableException;
 
 }

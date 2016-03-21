@@ -21,10 +21,10 @@ public class Home1 extends Home1Shell {
         final Texture tex = new Texture("Scrolling Test 2.png");
 
         Image img = new Image(tex);
-        Image img3 = new Image(new Texture("tempButton1.png"));
+        Image img3 = new Image(new Texture("PictureFiles\\tempButton1.png"));
 
-        Image img4 = new Image(new Texture("tempButton2.png"));
-        Image img5 = new Image(new Texture("tempButton3.png"));
+        Image img4 = new Image(new Texture("PictureFiles\\tempButton2.png"));
+        Image img5 = new Image(new Texture("PictureFiles\\tempButton3.png"));
 
         final ScrollTable table = new ScrollTable();
 

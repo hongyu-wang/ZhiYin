@@ -50,6 +50,8 @@ public class StateManager implements Disposable, Updatable, Drawable {
      * @param page the page within the Pages enum
      */
     public void changeState(Pages page){
+        //TODO remove this.
+        System.out.println(page);
         currentState = page.getStateReference();
         InputListener.setListener(page);
     }

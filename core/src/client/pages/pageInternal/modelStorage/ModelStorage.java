@@ -45,6 +45,7 @@ public class ModelStorage {
         return updateModel(key);
     }
 
+
     /**Updates the model based on a key.
      *
      * For messages, conversations, and posts which require constant updating
@@ -119,5 +120,4 @@ public class ModelStorage {
     public User getUser(){
         return user;
     }
-
 }

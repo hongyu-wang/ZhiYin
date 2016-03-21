@@ -7,7 +7,6 @@ import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import driver.GameLoop;
 
 /**
@@ -59,6 +58,22 @@ public abstract class NowPlayingShell extends State{
         b3.setBounds(520 + 1, 0, 230, 117);
         b3.setExecutable(new TestExecutable("b3"));
         add(b3);
+
+        Button upVoteButton = new Button(this);
+        upVoteButton.setBounds(562 + 1, 1240, 144, 54);
+        upVoteButton.setExecutable(new TestExecutable("up vote"));
+        add(upVoteButton);
+
+        Button testButton = new Button(this);
+        testButton.setBounds(607 + 1, 1063, 51, 51);
+        testButton.setExecutable(new ExecuteChangePage(Pages.NOWPLAYING2));
+        add(testButton);
+
+//        Dimensions of the picture are 655 x 655
+//        Button picture = new Button(this);
+//        picture.setBounds(50 + 1, 1160 - 655, 655, 655);
+//        picture.setExecutable(new TestExecutable("picture"));
+//        add(picture);
     }
 
     @Override
