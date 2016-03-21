@@ -10,6 +10,11 @@ public class Friends5 extends Friends5Shell{
     }
 
     @Override
+    public void reset() {
+
+    }
+
+    @Override
     public void dispose() {
 
     }

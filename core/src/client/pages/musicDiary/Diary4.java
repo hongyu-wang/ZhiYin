@@ -12,4 +12,9 @@ public class Diary4 extends Diary4Shell{
     public void dispose() {
 
     }
+
+    @Override
+    public void reset() {
+
+    }
 }

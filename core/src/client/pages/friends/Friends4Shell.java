@@ -1,6 +1,8 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.ExecuteChangePage;
+import client.pageStorage.Pages;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import client.events.executables.internalChanges.TestExecutable;
@@ -27,7 +29,7 @@ public abstract class Friends4Shell extends State {
 
         Button sendButton = new Button(this);
         sendButton.setBounds(604 + 1, 31, 122, 60);
-        sendButton.setExecutable(new TestExecutable("send"));
+        sendButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS4));
         add(sendButton);
     }
 

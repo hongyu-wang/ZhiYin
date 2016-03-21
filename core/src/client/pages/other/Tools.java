@@ -9,6 +9,11 @@ public class Tools extends ToolsShell {
     }
 
     @Override
+    public void reset() {
+
+    }
+
+    @Override
     public void dispose() {
 
     }

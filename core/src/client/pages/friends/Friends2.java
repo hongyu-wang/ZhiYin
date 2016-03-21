@@ -7,6 +7,11 @@ public class Friends2 extends Friends2Shell{
     }
 
     @Override
+    public void reset() {
+
+    }
+
+    @Override
     public void dispose() {
 
     }

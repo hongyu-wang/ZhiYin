@@ -53,8 +53,16 @@ public class StateManager implements Disposable, Updatable, Drawable {
         //TODO remove this.
         System.out.println(page);
         currentState = page.getStateReference();
-        InputListener.setListener(page);
+        currentState.reset();
+        InputListener.setListener(currentState);
     }
+
+
+    public void noResetChangeState(Pages page){
+        currentState = page.getStateReference();
+        InputListener.setListener(currentState);
+    }
+
 
 
     @Override

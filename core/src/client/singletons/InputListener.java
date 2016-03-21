@@ -1,6 +1,7 @@
 package client.singletons;
 
 import client.pageStorage.Pages;
+import client.pages.State;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
@@ -84,9 +85,9 @@ public class InputListener implements InputProcessor {
 
     }
 
-    public static void setListener(Pages page){
+    public static void setListener(State state){
         im.clear();
-        im.addProcessor(page.getStateReference().getStage());
+        im.addProcessor(state.getStage());
         im.addProcessor(InputListener.getInstance());
         Gdx.input.setInputProcessor(im);
 
