@@ -106,6 +106,17 @@ public class ModelStorage {
         models.put(model.getKey(), model);
     }
 
+    public long generateKey(){
+        try {
+            return WebServiceClient.getSerial();
+        }
+        catch(WebRequestException e){
+            System.out.println("Web Serial failed.");
+        }
+        return -1;
+    }
+
+
 
     /**Returns the owner of the app.
      *

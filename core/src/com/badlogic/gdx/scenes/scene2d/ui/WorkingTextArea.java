@@ -1,8 +1,5 @@
 package com.badlogic.gdx.scenes.scene2d.ui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-
 /**
  * Created by Hongyu Wang on 3/20/2016.
  */

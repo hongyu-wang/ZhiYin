@@ -9,6 +9,8 @@
     <resource>
       <directory>../android/assets/Art Assets</directory>
       <includes>
+        <include>PictureFiles/**</include>
+        <include>SkinAssets/Skin1/**</include>
         <include>**</include>
       </includes>
       <skipPngCrush>true</skipPngCrush>

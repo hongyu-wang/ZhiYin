@@ -62,32 +62,37 @@ public class AudioRecorder {
     }
 
     NSURL filePath;
-    private static NSFileManager fm = new NSFileManager();
+    private static NSFileManager fm;
 
     AVAudioSession session;
     AVAudioRecorder avar;
 
     public static AudioRecorder getInstance(){
+        System.out.println("hello");
         return singleInstance;
     }
 
     private AudioRecorder(){
+        fm = new NSFileManager();
         settings = new AVAudioSettings();
         NSArray nsa = fm.getURLsForDirectory(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask);
         filePath = (NSURL)nsa.first();
         session = AVAudioSession.getSharedInstance();
         makeSettings();
+        String fp = filePath.getPath()+ "/" + "song";
+        filePath = new NSURL(fp);
     }
 
     public void prepareToRecord() throws NSErrorException{
 
-        String fp  = filePath.getPath() + "/" + "song";
-        System.out.println(fp);
-        filePath = new NSURL(fp);
+
         avar = new AVAudioRecorder(filePath, settings);
-        System.out.println("set");
         avar.setDelegate(avar.getDelegate());
         avar.setMeteringEnabled(true);
+        session.setCategory(AVAudioSessionCategory.Record);
+        session.setActive(true);
+        avar.prepareToRecord();
+
 
     }
 
@@ -98,25 +103,39 @@ public class AudioRecorder {
             //TODO test.
         //});
 
-        session.setCategory(AVAudioSessionCategory.Record);
-        session.setActive(true);
-        avar.prepareToRecord();
+
         avar.record();
     }
 
-    public MAudio stopRecording() throws NSErrorException{
+    public NSData stopRecording(){
         running = false;
-        session.setActive(false);
+        try {
+            session.setActive(false);
+        } catch (NSErrorException e) {
+            e.printStackTrace();
+        }
         avar.stop();
         avar.release();
         NSData mData = fm.getContentsAtPath(filePath.getPath());
-        MAudio voice = new MAudio();
-        voice.setmData(mData);
-        return voice;
+
+        //MAudio voice = new MAudio();
+        //voice.setmData(mData);
+        //avar.dispose();
+        return mData;
     }
 
     public boolean isRecording(){
         return running;
+    }
+
+    public void recordForOneSecond(){
+        avar.record(1);
+    }
+
+    public NSData getCurrentMData(){
+        avar.stop();
+        avar.release();
+        return fm.getContentsAtPath(filePath.getPath());
     }
 
 }
