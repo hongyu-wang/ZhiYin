@@ -80,4 +80,9 @@ public class FriendTalkers extends Talkers {
             newList.add(friend);
         }
     }
+
+    @Override
+    public boolean isUpdated() {
+        return false;
+    }
 }
