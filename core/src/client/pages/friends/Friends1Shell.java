@@ -18,12 +18,9 @@ public abstract class Friends1Shell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Friends -1.png"));
+        Image background = new Image(new Texture("PictureFiles\\Other picture files\\Friends-1\\background.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
-
         stage.addActor(background);
-
-
 
         Button addFriendButton = new Button(this);
         addFriendButton.setBounds(633 + 1, 1217, 117, 117);
