@@ -16,7 +16,7 @@ public abstract class Friends4Shell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Friends - 4.png"));
+        Image background = new Image(new Texture("Friends4BG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 

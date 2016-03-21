@@ -10,26 +10,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
 
 /**
- * The shell for the Friends3 state.
+ * Created by blobbydude24 on 2016-03-21.
  */
-public abstract class Friends3Shell extends State {
-
+public class Friends5Shell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Friends3BG.png"));
+        Image background = new Image(new Texture("Friends5BG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 
-        Button discardButton = new Button(this);
-        discardButton.setBounds(1, 0, 375, 117);
-        discardButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
-        add(discardButton);
+        Button messagesButton = new Button(this);
+        messagesButton.setBounds(0, 1217, 375, 117);
+        messagesButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
+        add(messagesButton);
 
-        Button sendButton = new Button(this);
-        sendButton.setBounds(375 + 1, 0, 375, 117);
-        sendButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS4));
-        add(sendButton);
+        setBottomBar();
+
     }
 
     @Override
@@ -41,5 +38,4 @@ public abstract class Friends3Shell extends State {
     public void update(float dt) {
 
     }
-
 }
