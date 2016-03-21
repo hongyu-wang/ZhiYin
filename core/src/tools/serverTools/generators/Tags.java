@@ -26,6 +26,7 @@ public enum Tags {
      * The map of all tags.
      */
     private Map<String, Integer> ids;
+    private Map<Integer, String> tags;
     private String[] classes;
 
     /**
@@ -57,13 +58,24 @@ public enum Tags {
                 MPost.class.getName(),
         };
 
-
-        Map<String, Integer> idTags = new HashMap<>();
+        Map<Integer, String> tag = new HashMap<>();
+        Map<String, Integer> id = new HashMap<>();
         for(int i = 0; i < classes.length; i++){
-            idTags.put(classes[i], i);
+            id.put(classes[i], i);
+            tag.put(i, classes[i]);
         }
 
-        ids = idTags;
+        ids = id;
+        tags = tag;
+    }
+
+    public String parseTag(String className){
+        String tag = tags.get(className);
+        while(tag.length() < 4){
+            tag = "0" + tag;
+        }
+
+        return tag;
     }
 
     /**Gets the related tag from the related classname.
@@ -73,6 +85,10 @@ public enum Tags {
      */
     public long getTag(String className){
         return ids.get(className);
+    }
+
+    public long getName(long tag){
+        return ids.get(tag);
     }
 
 }
