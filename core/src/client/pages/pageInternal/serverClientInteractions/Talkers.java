@@ -13,4 +13,5 @@ public abstract class Talkers implements Updatable{
         update(0);
     }
 
+    public abstract void pull();
 }
