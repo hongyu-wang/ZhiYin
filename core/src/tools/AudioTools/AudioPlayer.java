@@ -44,7 +44,8 @@ public class AudioPlayer {
     private static AudioPlayer singleInstance = new AudioPlayer();
 
     private AudioPlayer(){
-
+        player1 = new AVAudioPlayer();
+        player2 = new AVAudioPlayer();
     }
 
     public static AudioPlayer getInstance(){
@@ -70,9 +71,11 @@ public class AudioPlayer {
 
     public void setSong(MAudio audio){
 
-        player1.dispose();
-        player2.dispose();
+            player1.dispose();
+        if(snapShot)
+            player2.dispose();
         snapShot = false;
+
         try {
             player1 = new AVAudioPlayer(audio.getmData());
         } catch (NSErrorException e) {
@@ -134,6 +137,8 @@ public class AudioPlayer {
         player1.stop();
         if(snapShot)
             player2.stop();
+
+
     }
 
     public boolean isPlaying(){
