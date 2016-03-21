@@ -22,8 +22,5 @@ public class ServerModel {
         this.accessKey = accessKey;
     }
 
-    public int getUniqueKeyTag(){
-        return 0;
-    }
 
 }
