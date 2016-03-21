@@ -1,10 +1,11 @@
 package client.pages.home;
 
 
-import client.component.basicComponents.WorkingTextArea;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+
 import static client.singletons.StateManager.M;
 
 /**

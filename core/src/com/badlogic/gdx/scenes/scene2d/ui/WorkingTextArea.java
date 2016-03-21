@@ -1,4 +1,4 @@
-package client.component.basicComponents;
+package com.badlogic.gdx.scenes.scene2d.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
@@ -31,5 +31,25 @@ public class WorkingTextArea extends TextArea {
             }
         }
         return new int[] {left, right};
+    }
+
+    protected int letterUnderCursor (float x) {
+        if (linesBreak.size > 0) {
+            if (cursorLine * 2 >= linesBreak.size) {
+                return text.length();
+            } else {
+                float[] glyphPositions = this.glyphPositions.items;
+                int start = linesBreak.items[cursorLine * 2];
+                x += glyphPositions[start];
+                int end = linesBreak.items[cursorLine * 2 + 1];
+                int i = start;
+                for (; i <= end; i++)
+                    if (glyphPositions[i] > x) break;
+                if (glyphPositions[i] - x <= x - glyphPositions[i - 1]) return i;
+                return Math.max(0, i - 1);
+            }
+        } else {
+            return 0;
+        }
     }
 }
