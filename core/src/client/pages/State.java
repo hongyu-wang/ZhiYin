@@ -78,8 +78,8 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * @param c the component to be added
      */
     public void add(Actor c){
-        if (c instanceof Pressable)
-            controllers.get(SHELLINPUT).add((Pressable) c);
+        if (c instanceof Performable)
+            controllers.get(SHELLINPUT).add((Performable) c);
         components.add(c);
     }
 
