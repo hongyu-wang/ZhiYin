@@ -1,18 +1,6 @@
 package client.pageStorage;
 
 import client.pages.State;
-import client.pages.friends.Friends1;
-import client.pages.friends.Friends2;
-import client.pages.friends.Friends3;
-import client.pages.friends.Friends4;
-import client.pages.home.Home1;
-import client.pages.home.Home3;
-import client.pages.home.Home4;
-import client.pages.other.NowPlaying;
-import client.pages.other.Profile;
-import client.pages.musicDiary.Diary1;
-import client.pages.musicDiary.Diary2;
-import client.pages.musicDiary.Diary3;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 
@@ -34,16 +22,19 @@ public enum Pages {
     FRIENDS2("friends.Friends2"),
     FRIENDS3("friends.Friends3"),
     FRIENDS4("friends.Friends4"),
+    FRIENDS5("friends.Friends5"),
     HOME1("home.Home1"),
     HOME3("home.Home3"),
     HOME4("home.Home4"),
     NOWPLAYING("other.NowPlaying"),
     NOWPLAYING2("other.NowPlaying2"),
+    TOOLS("other.Tools"),
     PROFILE("other.Profile"),
     DIARY1("musicDiary.Diary1"),
     DIARY2("musicDiary.Diary2"),
     DIARY3("musicDiary.Diary3"),
     DIARY4("musicDiary.Diary4");
+
 
 
 

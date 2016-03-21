@@ -18,6 +18,16 @@ public class Friends4 extends Friends4Shell{
     }
 
     @Override
+    public void reset() {
+        messageField.remove();
+        messageField = new WorkingTextArea("Message...", SkinSingleton.getInstance());
+        messageField.setPosition((26 + 1) * M, 31 * M);
+        messageField.setSize(560 * M, 60 * M);
+
+        stage.addActor(messageField);
+    }
+
+    @Override
     public void dispose() {
 
     }

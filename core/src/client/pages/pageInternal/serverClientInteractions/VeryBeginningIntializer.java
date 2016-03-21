@@ -13,6 +13,11 @@ public class VeryBeginningIntializer extends Talkers{
 
     }
 
+    @Override
+    public void pull() {
+
+    }
+
 
     @Override
     public void update(float dt) {

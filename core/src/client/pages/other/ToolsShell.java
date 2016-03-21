@@ -1,4 +1,4 @@
-package client.pages.musicDiary;
+package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.ExecuteChangePage;
@@ -10,31 +10,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
 
 /**
- * Created by blobbydude24 on 2016-03-13.
+ * Created by blobbydude24 on 2016-03-21.
  */
-public abstract class Diary1Shell extends State{
-
+public abstract class ToolsShell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Diary1BG.png"));
+        Image background = new Image(new Texture("myProfile.jpg"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
-
         stage.addActor(background);
 
-
-        Button composeButton = new Button(this);
-        composeButton.setBounds(1, 117, 750, 117);
-        composeButton.setExecutable(new ExecuteChangePage(Pages.DIARY2));
-        add(composeButton);
+        Button myProfileButton = new Button(this);
+        myProfileButton.setBounds(0, 1334 - 190, 750, 190);
+        myProfileButton.setExecutable(new ExecuteChangePage(Pages.PROFILE));
+        add(myProfileButton);
 
         setBottomBar();
     }
-
-    @Override
-    public void dispose() {
-
-    }
-
-
 }

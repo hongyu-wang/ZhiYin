@@ -18,6 +18,10 @@ public class ProfileTalker extends Talkers{
 
     }
 
+    @Override
+    public void pull() {
+
+    }
 
 
     @Override

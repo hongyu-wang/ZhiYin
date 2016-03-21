@@ -14,8 +14,13 @@ public class WorkingTextArea extends TextArea {
 
     String insert (int position, CharSequence text, String to) {
         if (to.length() == 0) return text.toString();
-
-        return to.substring(0, position) + text + to.substring(position, to.length());
+        try {
+            return to.substring(0, position) + text + to.substring(position, to.length());
+        }catch (StringIndexOutOfBoundsException e) {
+            System.out.println(text);
+            System.out.println(to);
+        }
+        return to;
     }
 
     @Override

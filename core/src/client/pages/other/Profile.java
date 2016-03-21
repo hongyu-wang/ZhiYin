@@ -21,6 +21,11 @@ public class Profile extends State {
         add(background);
     }
 
+    @Override
+    public void reset() {
+
+    }
+
 
     @Override
     public void dispose() {

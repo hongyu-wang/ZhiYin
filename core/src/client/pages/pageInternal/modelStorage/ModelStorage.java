@@ -5,6 +5,8 @@ import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.webclient.WebServiceClient;
 import server.webclient.webErrors.WebRequestException;
+import server.webservices.PostObject;
+import server.webservices.RequestObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +18,9 @@ import java.util.Map;
  */
 public class ModelStorage {
     User user;
-    Map<Long, ServerModel> models;
+    private Map<Long, ServerModel> models;
+    private Map<String, Long> hashtag_key;
+    private Map<String, Long> username_key;
 
     ModelStorage(){
         models = new HashMap<Long, ServerModel>();
@@ -36,35 +40,15 @@ public class ModelStorage {
      *
      * @param key   The key of the servermodel.
      * @param <E>   The type of the model.
-     * @return      The model.
+     * @return      The model, or null if the model does not exist.
      */
     public <E extends ServerModel> E getModel(long key){
-        if(models.containsKey(key)){
-            return (E)models.get(key);
+        try {
+            return (E) models.get(key);
         }
-        return updateModel(key);
-    }
-
-
-    /**Updates the model based on a key.
-     *
-     * For messages, conversations, and posts which require constant updating
-     * this method is used to pull a more current state from the server.
-     *
-     * @param key   The key.
-     * @param <E>   The type of the model.
-     * @return      The serverModel.
-     */
-    public <E extends ServerModel> E updateModel(long key){
-        try{
-            E model = WebServiceClient.<E>getServerModel(key);
-            models.put(model.getKey(), model);
-            return model;
+        catch(ClassCastException e){
+            return null;
         }
-        catch(WebRequestException e){
-            System.out.println("ServerRequest failed.");
-        }
-        return null;
     }
 
     /**Pushes the model into the database.
@@ -74,16 +58,9 @@ public class ModelStorage {
      * @param model The new model.
      * @return      True if it sucessfully pushed to server.
      */
-    public boolean pushModel(ServerModel model){
-        try{
-            WebServiceClient.pushServerModel(model);
-            models.put(model.getKey(), model);
-            return true;
-        }
-        catch(WebRequestException e){
-            System.out.println("ServerRequest failed.");
-            return false;
-        }
+    public void pushModel(ServerModel model){
+        models.put(model.getKey(), model);
+        PostObject.newInstance().addModel(model, model.getClass().getName());
     }
 
     /**Sets the prime user of this app.
@@ -102,16 +79,33 @@ public class ModelStorage {
         }
     }
 
-    public MHashtag getHashtagByName(String hashtag){
-        try{
-            MHashtag tag = this.getModel(WebServiceClient.getHashtagByName(hashtag));
-            return tag;
-        }
-        catch(WebRequestException e){
-            System.out.println("Unable to get hashtag.");
-        }
-        return null;
+    public long getHashtagByName(String hashtag){
+//        try{
+//            MHashtag tag = this.getModel(WebServiceClient.getHashtagByName(hashtag));
+//            return tag;
+//        }
+//        catch(WebRequestException e){
+//            System.out.println("Unable to get hashtag.");
+//        }
+//        return null;
+
+        //TODO // FIXME: 2016-03-20
+        return 0;
     }
+
+    public void requestModelFromServer(String className, long key){
+        RequestObject.newInstance().getModel(className, key);
+    }
+
+
+    /**Call this to update models within this class.
+     *
+     * @param model The updated model.
+     */
+    public void setModelFromServer(ServerModel model){
+        models.put(model.getKey(), model);
+    }
+
 
     /**Returns the owner of the app.
      *

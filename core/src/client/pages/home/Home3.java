@@ -22,6 +22,12 @@ public class Home3 extends Home3Shell {
         addSearchField();
     }
 
+    @Override
+    public void reset() {
+        searchField.remove();
+        addSearchField();
+    }
+
     private void addSearchField(){
         searchField = new WorkingTextArea("Search...", SkinSingleton.getInstance());
         searchField.setPosition((26 + 1) * M, 1146 * M);

@@ -24,6 +24,14 @@ public class Diary2 extends Diary2Shell{
         addBodyField();
     }
 
+    @Override
+    public void reset() {
+        titleField.remove();
+        addTitleField();
+        bodyField.remove();
+        addBodyField();
+    }
+
     private void addTitleField(){
         titleField = new WorkingTextArea("Title...", SkinSingleton.getInstance());
         titleField.setPosition((0 + 1) * M, 1112 * M);

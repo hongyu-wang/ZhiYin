@@ -1,6 +1,12 @@
 package client.pages.pageInternal.serverClientInteractions;
 
 import client.pages.pageInternal.serverClientInteractions.Talkers;
+import server.model.social.MMessage;
+import server.model.user.User;
+import server.model.user.UserConversations;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Hongyu Wang on 3/20/2016.
@@ -14,6 +20,11 @@ public class FriendTalkers extends Talkers {
     private static final int unreadYours = 2;
 
     private static final int readYours = 3;
+
+    public List<User> friends;
+    public List<MMessage> conversations;
+
+
     /*TODO
     ALL FRIEND TALKERS NEED ACCESS TO ALL FRIENDS
 
@@ -37,8 +48,36 @@ public class FriendTalkers extends Talkers {
 
     @Override
     public void update(float dt) {
+        userRequests();
 
     }
 
+    private void userRequests(){
+        User user = modelStorage.getUser();
 
+        for(long key: user.getFriendKeys())
+            modelStorage.requestModelFromServer(User.class.getName(), key);
+        modelStorage.requestModelFromServer(UserConversations.class.getName(), user.getConversations());
+    }
+
+    private void conversationRequests(){
+        User user = modelStorage.getUser();
+        UserConversations conversations = modelStorage.<UserConversations>getModel(user.getConversations());
+    }
+
+
+    @Override
+    public void pull() {
+        User user = modelStorage.getUser();
+
+        List<User> newList = new ArrayList<>();
+
+        for(long key: user.getFriendKeys()){
+            User friend = modelStorage.<User>getModel(key);
+            if(friend == null){
+                continue;
+            }
+            newList.add(friend);
+        }
+    }
 }

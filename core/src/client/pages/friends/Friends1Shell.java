@@ -18,14 +18,19 @@ public abstract class Friends1Shell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("PictureFiles\\Other picture files\\Friends-1\\background.png"));
+        Image background = new Image(new Texture("Friends1BG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 
-        Button addFriendButton = new Button(this);
-        addFriendButton.setBounds(633 + 1, 1217, 117, 117);
-        addFriendButton.setExecutable(new TestExecutable("add friend"));
-        add(addFriendButton);
+        Button friendListButton = new Button(this);
+        friendListButton.setBounds(375, 1217, 375, 117);
+        friendListButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS5));
+        add(friendListButton);
+
+        Button createGroupButton = new Button(this);
+        createGroupButton.setBounds(0, 117*2, 750, 117);
+        createGroupButton.setExecutable(new TestExecutable("create group"));
+        add(createGroupButton);
 
         Button recordButton = new Button(this);
         recordButton.setBounds(0, 117, 750, 117);

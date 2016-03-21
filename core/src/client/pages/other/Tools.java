@@ -1,7 +1,9 @@
-package client.pages.friends;
+package client.pages.other;
 
-public class Friends1 extends Friends1Shell{
-
+/**
+ * Created by blobbydude24 on 2016-03-21.
+ */
+public class Tools extends ToolsShell {
     public void init(){
         super.init();
     }
@@ -20,5 +22,4 @@ public class Friends1 extends Friends1Shell{
     public void update(float dt) {
 
     }
-
 }

@@ -17,4 +17,9 @@ public class DiaryTalker extends Talkers{
     public void update(float dt) {
 
     }
+
+    @Override
+    public void pull() {
+
+    }
 }

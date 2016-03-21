@@ -61,8 +61,8 @@ public enum Tags {
         Map<Integer, String> tag = new HashMap<>();
         Map<String, Integer> id = new HashMap<>();
         for(int i = 0; i < classes.length; i++){
-            id.put(classes[(int)i], i);
-            tag.put(i, classes[(int)i]);
+            id.put(classes[i], i);
+            tag.put(i, classes[i]);
         }
 
         ids = id;

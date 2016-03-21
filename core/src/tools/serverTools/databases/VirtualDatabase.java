@@ -1,7 +1,6 @@
 package tools.serverTools.databases;
 
 import com.badlogic.gdx.graphics.Texture;
-import org.robovm.apple.foundation.NSData;
 import server.model.media.MAudio;
 import server.model.media.MHashtag;
 import server.model.media.MImage;
@@ -10,9 +9,7 @@ import server.model.structureModels.ServerModel;
 import server.model.user.*;
 import tools.AudioTools.AudioCreator;
 import tools.serverTools.generators.SerialGenerator;
-import tools.serverTools.server.ServerInteraction;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +24,7 @@ public class VirtualDatabase {
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
     private SerialGenerator generator = SerialGenerator.getGenerator();
+    private SerialGenerator Mgenerator = SerialGenerator.getHGenerator(1000);
 
     public VirtualDatabase() throws IOException{
         init();
@@ -208,9 +206,7 @@ public class VirtualDatabase {
     private MHashtag generateTestHashtags(String hashtag){
         MHashtag tag = new MHashtag();
 
-        tag.setKey(generator.generateSerial());
-
-        tag.setHashtag(hashtag);
+        tag.setKey(Mgenerator.generateSerial());
 
         tag.setHashtag(hashtag);
 
@@ -227,7 +223,7 @@ public class VirtualDatabase {
     private MImage generateTestImage(String name, String path){
         MImage image = new MImage();
 
-        image.setKey(generator.generateSerial());
+        image.setKey(Mgenerator.generateSerial());
 
         image.setName(name);
 
@@ -241,7 +237,7 @@ public class VirtualDatabase {
     private MAudio generateTestAudio(String path){
         MAudio audio = AudioCreator.createFromFilePath(path);
 
-        audio.setKey(generator.generateSerial());
+        audio.setKey(Mgenerator.generateSerial());
 
         return audio;
     }
@@ -249,7 +245,7 @@ public class VirtualDatabase {
     private MMusic generateTestMusic(String name, MAudio audio){
         MMusic music = new MMusic();
 
-        music.setKey(generator.generateSerial());
+        music.setKey(Mgenerator.generateSerial());
 
         music.setName(name);
 

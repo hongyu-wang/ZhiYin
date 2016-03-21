@@ -19,4 +19,8 @@ public interface SerialGenerator {
         return new IncrementSerialGen();
     }
 
+    static SerialGenerator getHGenerator(long start) {
+        return new HighValueSerialGen(start);
+    }
+
 }
