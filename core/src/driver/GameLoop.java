@@ -33,15 +33,7 @@ public class GameLoop extends ApplicationAdapter {
         primary.update();
 
 
-		//Server Test Code
 
-		User user = new User();
-		user.setKey(1);
-		user.setContent(1);
-
-		//PostObject req1 = PostObject.newInstance();
-
-		//req1.addModel(user, "User");
 
     }
 

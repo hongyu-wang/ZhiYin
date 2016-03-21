@@ -1,10 +1,9 @@
 package client.singletons;
-import client.events.ActionEvent;
 import client.pageStorage.Pages;
 import client.pages.State;
-import client.stateInterfaces.*;
-import com.badlogic.gdx.math.Matrix4;
-import driver.GameLoop;
+import client.stateInterfaces.Disposable;
+import client.stateInterfaces.Drawable;
+import client.stateInterfaces.Updatable;
 
 /**
  * This is essentially a card layout.
@@ -26,7 +25,8 @@ public class StateManager implements Disposable, Updatable, Drawable {
     }
 
     public static final float M = 0.5F;
-
+    public static final float WIDTH = 750 * M;
+    public static final float HEIGHT = 1334 * M;
 
     /**
      * This is the current state within the statemanager.
