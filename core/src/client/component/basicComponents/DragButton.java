@@ -2,6 +2,7 @@ package client.component.basicComponents;
 
 import client.component.Component;
 import client.events.ActionEvent;
+import client.singletons.InputListener;
 import client.singletons.ShapeCreater;
 import client.stateInterfaces.ActionMonitor;
 import client.stateInterfaces.Dragable;
@@ -16,9 +17,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class DragButton extends Component implements Dragable {
     private Executable dragExecute, releaseExecute, returnExecutable;
     private ActionMonitor monitor;
+    private int limit;
     private boolean playAnimation;
-    public DragButton(ActionMonitor monitor) {
+    public DragButton(ActionMonitor monitor, int limit) {
         this.monitor = monitor;
+        this.limit = limit;
     }
 
     @Override
@@ -41,11 +44,14 @@ public class DragButton extends Component implements Dragable {
     }
 
     public void drag(){
-        monitor.actionPerformed(new ActionEvent(this));
+        returnExecutable = dragExecute;
+        if (InputListener.getInstance().getMouseY() > limit)
+            monitor.actionPerformed(new ActionEvent(this));
     }
 
     public void release(){
-
+        returnExecutable = releaseExecute;
+        monitor.actionPerformed(new ActionEvent(this));
     }
 
     @Override
