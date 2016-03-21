@@ -61,8 +61,8 @@ public enum Tags {
         Map<Integer, String> tag = new HashMap<>();
         Map<String, Integer> id = new HashMap<>();
         for(int i = 0; i < classes.length; i++){
-            id.put(classes[i], i);
-            tag.put(i, classes[i]);
+            id.put(classes[(int)i], i);
+            tag.put(i, classes[(int)i]);
         }
 
         ids = id;
@@ -74,7 +74,6 @@ public enum Tags {
         while(tag.length() < 4){
             tag = "0" + tag;
         }
-
         return tag;
     }
 
@@ -83,7 +82,7 @@ public enum Tags {
      * @param className
      * @return
      */
-    public long getTag(String className){
+    public int getTag(String className){
         return ids.get(className);
     }
 
