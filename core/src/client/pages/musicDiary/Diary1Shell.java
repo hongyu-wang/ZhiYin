@@ -17,7 +17,7 @@ public abstract class Diary1Shell extends State{
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Diary - 1.png"));
+        Image background = new Image(new Texture("Diary1BG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
 
         stage.addActor(background);
