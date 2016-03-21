@@ -1,3 +1,15 @@
+VERYBEGINNINGINITIALIZER
+    All user information of user1 -2 -3.
+
+    User
+    UserProfile
+    UserConversations
+    UserActivityLog
+    UserUploadedContent
+    UserDiaryContent
+
+    For each user.
+
 Friends1:
     Access all friends names and message status
 
@@ -29,7 +41,7 @@ Music Diary:
         Getting all user diary posts sorted by time
         Add a new music diary post to the user's music diary
         Comment on the post with the 1 second, text comment.
-    
+
         Get all comments on the page
 
 Music Player

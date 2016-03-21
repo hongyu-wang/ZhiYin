@@ -24,7 +24,7 @@ public class VirtualDatabase {
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
     private SerialGenerator generator = SerialGenerator.getGenerator();
-    private SerialGenerator Mgenerator = SerialGenerator.getHGenerator(1000);
+    private SerialGenerator HVGenerator = SerialGenerator.getHGenerator(1000);
 
     public VirtualDatabase() throws IOException{
         init();
@@ -206,7 +206,7 @@ public class VirtualDatabase {
     private MHashtag generateTestHashtags(String hashtag){
         MHashtag tag = new MHashtag();
 
-        tag.setKey(Mgenerator.generateSerial());
+        tag.setKey(generator.generateSerial());
 
         tag.setHashtag(hashtag);
 
@@ -223,7 +223,7 @@ public class VirtualDatabase {
     private MImage generateTestImage(String name, String path){
         MImage image = new MImage();
 
-        image.setKey(Mgenerator.generateSerial());
+        image.setKey(generator.generateSerial());
 
         image.setName(name);
 
@@ -237,7 +237,7 @@ public class VirtualDatabase {
     private MAudio generateTestAudio(String path){
         MAudio audio = AudioCreator.createFromFilePath(path);
 
-        audio.setKey(Mgenerator.generateSerial());
+        audio.setKey(generator.generateSerial());
 
         return audio;
     }
@@ -245,7 +245,7 @@ public class VirtualDatabase {
     private MMusic generateTestMusic(String name, MAudio audio){
         MMusic music = new MMusic();
 
-        music.setKey(Mgenerator.generateSerial());
+        music.setKey(HVGenerator.generateSerial());
 
         music.setName(name);
 

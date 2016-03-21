@@ -8,7 +8,10 @@ import server.webclient.webErrors.WebRequestException;
 import server.webservices.PostObject;
 import server.webservices.RequestObject;
 
+import java.nio.LongBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**A storage object of all model types the user client will need.
@@ -21,9 +24,14 @@ public class ModelStorage {
     private Map<Long, ServerModel> models;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
+    private List<Long> unassignedKeys;
 
     ModelStorage(){
         models = new HashMap<Long, ServerModel>();
+        hashtag_key = new HashMap<String, Long>();
+        username_key = new HashMap<String, Long>();
+
+        unassignedKeys = new ArrayList<Long>();
     }
 
     ModelStorage(User user){
@@ -93,9 +101,39 @@ public class ModelStorage {
         return 0;
     }
 
+    /**Returns the owner of the app.
+     *
+     * @return  The user data of the owner.
+     */
+    public User getUser(){
+        return user;
+    }
+
+    /**Requests a new model of className from the server.
+     *
+     * @param className
+     * @param key
+     */
     public void requestModelFromServer(String className, long key){
         RequestObject.newInstance().getModel(className, key);
     }
+
+    /**Returns a pre generated serial key from the server.
+     *
+     * @return
+     */
+    public long generateKey(){
+        long key = unassignedKeys.remove(0);
+
+        int size = unassignedKeys.size();
+
+        for(int i = 0; i < size; i++){
+            //TODO request Hairuo's key gen.
+        }
+
+        return key;
+    }
+
 
 
     /**Call this to update models within this class.
@@ -106,23 +144,11 @@ public class ModelStorage {
         models.put(model.getKey(), model);
     }
 
-    public long generateKey(){
-        try {
-            return WebServiceClient.getSerial();
-        }
-        catch(WebRequestException e){
-            System.out.println("Web Serial failed.");
-        }
-        return -1;
-    }
-
-
-
-    /**Returns the owner of the app.
+    /**Place the newly request server key in here.
      *
-     * @return  The user data of the owner.
+     * @param key
      */
-    public User getUser(){
-        return user;
+    public void putGeneratedKey(long key){
+        unassignedKeys.add(key);
     }
 }
