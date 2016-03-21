@@ -1,7 +1,8 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.ExecuteChangePage;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,26 +10,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
 
 /**
- * The shell for the Friends2 state.
+ * Created by blobbydude24 on 2016-03-21.
  */
-public abstract class Friends2Shell extends State {
-
+public class Friends5Shell extends State {
     public void init(){
         super.init();
 
-        //Image background = new Image(new Texture("PictureFiles\\Other picture files\\Friends-2\\background.png"));
-        Image background = new Image(new Texture("Friends - 2.png"));
+        Image background = new Image(new Texture("Friends -5.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 
-
-
-        Button SwipeToDiscardButton = new Button(this);
-        SwipeToDiscardButton.setBounds(0 + 1, 117, 750, 283);
-        SwipeToDiscardButton.setExecutable(new TestExecutable("swipe to discard"));
-        add(SwipeToDiscardButton);
+        Button messagesButton = new Button(this);
+        messagesButton.setBounds(0, 1217, 375, 117);
+        messagesButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
+        add(messagesButton);
 
         setBottomBar();
+
     }
 
     @Override
@@ -40,6 +38,4 @@ public abstract class Friends2Shell extends State {
     public void update(float dt) {
 
     }
-
-
 }
