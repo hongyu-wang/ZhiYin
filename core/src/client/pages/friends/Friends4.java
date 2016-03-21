@@ -1,5 +1,6 @@
 package client.pages.friends;
 
+import client.component.basicComponents.WorkingTextArea;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -21,7 +22,7 @@ public class Friends4 extends Friends4Shell{
     }
 
     private void addMessageField(){
-        messageField = new TextArea("Message...", SkinSingleton.getInstance());
+        messageField = new WorkingTextArea("Message...", SkinSingleton.getInstance());
         messageField.setPosition((26 + 1) * M, 31 * M);
         messageField.setSize(560 * M, 60 * M);
 
