@@ -86,7 +86,7 @@ public enum Tags {
         return ids.get(className);
     }
 
-    public String getName(long tag){
+    public String getName(int tag){
         return tags.get(tag);
     }
 
