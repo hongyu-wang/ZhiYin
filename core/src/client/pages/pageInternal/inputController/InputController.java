@@ -1,6 +1,7 @@
 package client.pages.pageInternal.inputController;
 
 import client.component.basicComponents.DragButton;
+import client.stateInterfaces.Performable;
 import client.stateInterfaces.Pressable;
 import tools.utilities.Utils;
 
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class InputController {
 
-    private List<Pressable> pressables;
+    private List<Performable> pressables;
 
     public InputController(){
         init();
@@ -28,7 +29,7 @@ public class InputController {
     }
 
 
-    public void add(Pressable p){
+    public void add(Performable p){
         pressables.add(p);
     }
 
@@ -37,16 +38,17 @@ public class InputController {
      * by InputListener whenever the screen is pressed.
      */
     public void checkPressed(){
-        for (Pressable comp : pressables){
-            if (comp.isPressed()){
-                comp.press();
-            }
+        for (Performable comp : pressables){
+            if (comp instanceof Pressable)
+                if (((Pressable)comp).isPressed()){
+                    ((Pressable)comp).press();
+                }
         }
 
     }
 
     public void checkDragged(){
-        for (Pressable comp : pressables){
+        for (Performable comp : pressables){
             if (comp instanceof DragButton){
                 ((DragButton)comp).drag();
             }
@@ -54,9 +56,10 @@ public class InputController {
     }
 
     public void checkRelease(){
-        for (Pressable comp : pressables){
-            comp.release();
-
+        for (Performable comp : pressables){
+            if (comp instanceof DragButton){
+                ((DragButton)comp).release();
+            }
         }
     }
 }
