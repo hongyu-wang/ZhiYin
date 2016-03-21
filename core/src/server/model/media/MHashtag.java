@@ -36,7 +36,7 @@ public class MHashtag extends ServerModel {
     }
 
     public void setHashtag(String hashtag) {
-        this.hashtagName = hashtagName;
+        this.hashtagName = hashtag;
     }
 
     public void setMusicKeys(List<Long> musicKeys) {
