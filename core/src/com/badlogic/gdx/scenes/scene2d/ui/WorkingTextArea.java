@@ -11,6 +11,13 @@ public class WorkingTextArea extends TextArea {
         super(text, skin);
     }
 
+
+    String insert (int position, CharSequence text, String to) {
+        if (to.length() == 0) return text.toString();
+
+        return to.substring(0, position) + text + to.substring(position, to.length());
+    }
+
     @Override
     protected int[] wordUnderCursor (int at) {
         String text = this.text;
@@ -45,6 +52,8 @@ public class WorkingTextArea extends TextArea {
                 int i = start;
                 for (; i <= end; i++)
                     if (glyphPositions[i] > x) break;
+                if (i >= glyphPositions.length)
+                    return Math.max(0, i - 1);
                 if (glyphPositions[i] - x <= x - glyphPositions[i - 1]) return i;
                 return Math.max(0, i - 1);
             }
