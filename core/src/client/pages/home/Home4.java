@@ -4,6 +4,8 @@ package client.pages.home;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+
 import static client.singletons.StateManager.M;
 
 /**
@@ -23,7 +25,7 @@ public class Home4 extends Home4Shell {
     }
 
     private void addSearchField(){
-        searchField = new TextArea("Search...", SkinSingleton.getInstance());
+        searchField = new WorkingTextArea("Search...", SkinSingleton.getInstance());
         searchField.setPosition((26 + 1) * M, 1146 * M);
         searchField.setSize((750 - 26*2) * M, 58 * M);
         stage.addActor(searchField);

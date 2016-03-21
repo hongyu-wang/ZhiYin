@@ -27,10 +27,6 @@ public abstract class Diary3Shell extends State{
         titleButton.setExecutable(new TestExecutable("title"));
         add(titleButton);
 
-        Button contentButton = new Button(this);
-        contentButton.setBounds(0 + 1, 718, 750, 388);
-        contentButton.setExecutable(new TestExecutable("content"));
-        add(contentButton);
 
         Button SwipeToDiscardButton = new Button(this);
         SwipeToDiscardButton.setBounds(0 + 1, 398, 750, 320);

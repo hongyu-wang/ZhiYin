@@ -3,6 +3,7 @@ package client.pages.musicDiary;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 
 import static client.singletons.StateManager.M;
 
@@ -23,7 +24,7 @@ public class Diary3 extends Diary3Shell {
     }
 
     private void addTitleField(){
-        titleField = new TextArea("Title...", SkinSingleton.getInstance());
+        titleField = new WorkingTextArea("Title...", SkinSingleton.getInstance());
         titleField.setPosition((0 + 1) * M, 1112 * M);
         titleField.setSize(750* M, 88 * M);
 
@@ -31,9 +32,9 @@ public class Diary3 extends Diary3Shell {
     }
 
     private void addBodyField(){
-        bodyField = new TextArea("Text...", SkinSingleton.getInstance());
-        bodyField.setPosition((0 + 1) * M, 553 * M);
-        bodyField.setSize(750* M, 555 * M);
+        bodyField = new WorkingTextArea("Text...", SkinSingleton.getInstance());
+        bodyField.setPosition((0 + 1) * M, 724 * M);
+        bodyField.setSize(750* M, 384 * M);
 
         stage.addActor(bodyField);
     }
