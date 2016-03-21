@@ -4,6 +4,7 @@ import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import server.services.interfaces.models.UserProfileManager;
 import server.webservices.PostObject;
+import tools.serverTools.generators.Tags;
 import tools.serverTools.server.MockServer;
 import tools.serverTools.server.ServerInteraction;
 import com.badlogic.gdx.Gdx;
@@ -55,8 +56,10 @@ public class WebService{
         MockServer mockServer = ServerInteraction.getServer();
         ObjectMapper objectMapper = new ObjectMapper();
         ServerModel model = null;
-        String className = json.substring(json.length()-3);
-        json = json.substring(0, json.length()-3);
+        int tag = Integer.parseInt(json.substring(json.length()-4));
+        System.out.println(tag+1);
+        String className = Tags.ID_TAGS.getName(tag);
+        json = json.substring(0, json.length()-4);
 
         try {
             Class name = Class.forName(className);

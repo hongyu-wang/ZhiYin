@@ -39,9 +39,9 @@ public class GameLoop extends ApplicationAdapter {
 		user.setKey(1);
 		user.setContent(1);
 
-		PostObject req1 = PostObject.newInstance();
+		//PostObject req1 = PostObject.newInstance();
 
-		req1.addModel(user, "User");
+		//req1.addModel(user, "User");
 
     }
 
