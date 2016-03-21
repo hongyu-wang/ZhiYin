@@ -33,7 +33,7 @@ public class GameLoop extends ApplicationAdapter {
         primary.update();
 
 
-
+		//Server Test Code
 
 		User user = new User();
 		user.setKey(1);
