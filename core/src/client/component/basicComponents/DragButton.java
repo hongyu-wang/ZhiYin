@@ -20,6 +20,7 @@ public class DragButton extends Component implements Dragable {
     private ActionMonitor monitor;
     private float limit;
     private boolean playAnimation;
+    private static long begin;
     public DragButton(ActionMonitor monitor, int limit) {
         this.monitor = monitor;
         this.limit = limit * M;
@@ -28,6 +29,7 @@ public class DragButton extends Component implements Dragable {
     @Override
     protected void init() {
         playAnimation = true;
+        begin = 0;
     }
 
     public void draw(Batch sb, float parentAlpha) {
@@ -51,8 +53,17 @@ public class DragButton extends Component implements Dragable {
     }
 
     public void release(){
-        returnExecutable = releaseExecute;
-        monitor.actionPerformed(new ActionEvent(this));
+        System.out.println(System.currentTimeMillis() - begin);
+        if (System.currentTimeMillis() - begin > 200){
+
+            returnExecutable = releaseExecute;
+
+            monitor.actionPerformed(new ActionEvent(this));
+        } else{
+            returnExecutable = dragExecute;
+            monitor.actionPerformed((new ActionEvent(this)));
+
+        }
     }
 
     @Override
@@ -80,5 +91,9 @@ public class DragButton extends Component implements Dragable {
     @Override
     public void update(float dt) {
 
+    }
+
+    public static void setBegin(long begin) {
+        DragButton.begin = begin;
     }
 }
