@@ -24,7 +24,6 @@ public class GameLoop extends ApplicationAdapter {
 	@Override
 	public void create() {
 		stateManager = StateManager.getInstance();
-
         Pages.initClass();
         stateManager.changeState(Pages.HOME1);
 		spriteBatch = MainBatch.getInstance();

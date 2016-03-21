@@ -3,10 +3,7 @@ package tools.AudioTools;
 import org.robovm.apple.avfoundation.AVAsset;
 import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVMetadataItem;
-import org.robovm.apple.foundation.NSArray;
-import org.robovm.apple.foundation.NSData;
-import org.robovm.apple.foundation.NSErrorException;
-import org.robovm.apple.foundation.NSURL;
+import org.robovm.apple.foundation.*;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
 import server.model.media.MSnapShot;
@@ -18,18 +15,24 @@ import server.model.media.MSnapShot;
  */
 public class AudioCreator {
 
+    private static NSFileManager fm;
+
     private AudioCreator(){
+
+        fm = new NSFileManager();
 
     }
 
     public static MAudio createFromFilePath(String filePath){
         NSData data = NSData.read(new NSURL(filePath));
+        //data = fm.getContentsAtPath(filePath);
         return createMAudio(data);
     }
 
     public static MAudio createFromFilePath(NSURL filePath){
 
         NSData data = NSData.read(filePath);
+        //data = fm.getContentsAtPath(filePath.getPath());
         return createMAudio(data);
 
     }
@@ -61,8 +64,10 @@ public class AudioCreator {
 
     public static MAudio createMAudio(NSData data){
         MAudio song = new MAudio(); //Need to set long key
+        song.setmData(data);
         AVAudioPlayer temp;
         try {
+
             temp = new AVAudioPlayer(data);
             song.setTrackLength(temp.getDuration());
 
