@@ -13,7 +13,6 @@ import server.model.user.*;
  */
 public class VeryBeginningIntializer extends Talkers{
 
-
     public VeryBeginningIntializer(String username){
         long key = 1;
 
@@ -45,6 +44,8 @@ public class VeryBeginningIntializer extends Talkers{
         //Hashtag
         for(int i = 0; i < 3; i++)
             modelStorage.requestModelFromServer(MHashtag.class.getName(), key++);
+
+        totalmodels = key;
     }
 
     @Override
