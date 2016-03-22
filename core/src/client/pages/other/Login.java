@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.utils.StringBuilder;
 
 /**
  * #Login Page
@@ -20,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * Created by Hongyu Wang on 3/21/2016.
  */
 public class Login extends State {
+    private int delta = 0;
     public static final String NAME1 = "Alice";
     public static final String NAME2 = "Benny";
     public static final String NAME3 = "Cindy";
@@ -42,7 +45,7 @@ public class Login extends State {
                     vb.pull();
                     checkPull = true;
                     button.remove();
-
+                    label.setPosition(0, StateManager.HEIGHT);
                     stage.addActor(label = new Label("FUCK YOU", SkinSingleton.getInstance()));
                 }
             }
@@ -57,14 +60,18 @@ public class Login extends State {
     public void update(float dt) {
         super.update(dt);
         if (checkPull){
-            vb.update(dt);
-            if (label.getText().equals("FUCK YOU..."))
-                label.setText("FUCK YOU");
-            else
-                label.setText(label.getText()+".");
+            if (delta%100 == 0) {
+                if (label.getText().equals(new StringBuilder("FUCK YOU...")))
+                    label.setText("FUCK YOU");
+                else
+                    label.setText(label.getText() + ".");
+                System.out.println(vb.isUpdated());
+            }
+
             if (vb.isUpdated())
                 new ExecuteChangePage(Pages.HOME1).execute();
         }
+        delta ++;
 
     }
 
