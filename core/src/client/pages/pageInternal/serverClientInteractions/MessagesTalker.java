@@ -118,30 +118,34 @@ public class MessagesTalker extends Talkers {
         Map<MMessage, String> newMessagess = Utils.newMap();
         Map<MMessage, User> newUsers = Utils.newMap();
 
+        //Add Participants
         for(long key: conversation.getParticipants()) {
             newUserList.add(modelStorage.<User>getModel(key));
         }
 
+        //Add Messages
         for(long key: conversation.getMessageList()){
             newMessageList.add(modelStorage.<MMessage>getModel(key));
         }
+
 
         for(MMessage message: mMessages){
             if(message == null){
                 continue;
             }
+
+            //Add Message Strings
             MText text = modelStorage.getModel(message.getKey());
             if(text == null){
                 continue;
             }
             messages.put(message, text.getText());
 
+            //Add Message Users
             User user = modelStorage.getModel(message.getCreator());
-
             if(user == null){
                 continue;
             }
-
             users.put(message, user);
         }
     }
