@@ -20,9 +20,23 @@ public class SocialContentTalker extends Talkers{
     private UserDiaryContent uDiary;
 
     //--Interface Fields
-    public List<MConversation> conversations;
-    public List<MMusicPost> musicPosts;
-    public List<MDiaryPost> diaryPosts;
+    private List<MConversation> conversations;
+    private List<MMusicPost> musicPosts;
+    private List<MDiaryPost> diaryPosts;
+
+    //Getters and Setters
+    public List<MConversation> getConversations(){
+        return conversations;
+    }
+
+    public List<MMusicPost> getMusicPosts(){
+        return musicPosts;
+    }
+
+    public List<MDiaryPost> getDiaryPosts(){
+        return diaryPosts;
+    }
+
 
 
     /*------------------------------------------------------------------------*/

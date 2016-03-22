@@ -16,7 +16,13 @@ import java.util.Map;
 public class FriendTalker extends Talkers {
 
     //--Interface Fields
-    public List<User> friends;
+    private List<User> friends;
+
+    //Getters and Setters
+    public List<User> getAllFriends(){
+        return friends;
+    }
+
 
     /*------------------------------------------------------------------------*/
 

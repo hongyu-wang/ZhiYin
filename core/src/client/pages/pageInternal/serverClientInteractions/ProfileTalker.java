@@ -11,11 +11,26 @@ import server.model.user.UserProfile;
  * Created by Hongyu Wang on 3/20/2016.
  */
 public class ProfileTalker extends Talkers{
+    private UserProfile profile;
 
     //--Interface Fields
-    public Texture profileImage;
-    public String name;
-    public String description;
+    private Texture profileImage;
+    private String name;
+    private String description;
+
+    //Getters and Setters
+    public Texture getProfileImage() {
+        return profileImage;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
 
     /*------------------------------------------------------------------------*/
 
@@ -36,7 +51,7 @@ public class ProfileTalker extends Talkers{
 
     @Override
     public void pull() {
-        UserProfile profile = modelStorage.getModel(user.getProfile());
+        profile = modelStorage.getModel(user.getProfile());
 
         modelStorage.requestModelFromServer(
                 MImage.class.getName()
@@ -45,7 +60,7 @@ public class ProfileTalker extends Talkers{
 
     @Override
     public void push() {
-        UserProfile profile = modelStorage.getModel(user.getProfile());
+        profile = modelStorage.getModel(user.getProfile());
 
         MImage image = modelStorage.getModel(profile.getImageKey());
 
@@ -67,7 +82,7 @@ public class ProfileTalker extends Talkers{
 
     @Override
     public void update(float dt) {
-        UserProfile profile = modelStorage.getModel(user.getProfile());
+        profile = modelStorage.getModel(user.getProfile());
 
         MImage image = modelStorage.getModel(profile.getImageKey());
 

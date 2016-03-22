@@ -14,15 +14,47 @@ import java.util.Map;
  */
 public class MusicTalker extends Talkers{
 
-    public Texture image;
-    public String name;
-    public User creator;
+    //--Interface Fields
+    private Texture image;
+    private String name;
+    private User creator;
 
-    public List<MHashtag> mHashtags;
-    public List<MComment> mComments;
-    public List<MAudio>   audioComments;
+    private List<MHashtag> mHashtags;
+    private List<MComment> mComments;
+    private List<MAudio>   audioComments;
 
-    public Map<MComment, String> comments;
+    private Map<MComment, String> comments;
+
+
+    //Getters and Setters
+    public Texture getImage() {
+        return image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public List<MHashtag> getHashtags() {
+        return mHashtags;
+    }
+
+    public List<MComment> getComments() {
+        return mComments;
+    }
+
+    public List<MAudio> getAudioComments() {
+        return audioComments;
+    }
+
+    public String getCommentText(MComment comment){
+        return comments.get(comment);
+    }
+
 
     /*------------------------------------------------------------------------*/
 

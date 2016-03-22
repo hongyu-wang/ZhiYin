@@ -20,16 +20,43 @@ import java.util.Map;
 public class DiaryTalker extends Talkers{
     private MDiaryPost diaryPost;
 
-    public String text;
-    public Texture image;
-    public MMusic music;
-    public MAudio userAudio;
+    //
+    private String text;
+    private Texture image;
+    private MMusic music;
+    private MAudio userAudio;
 
-    public List<MComment> mComments;
-    public Map<MComment, String> comments;
-    public Map<MComment, MAudio> oneSecAudioComments;
+    private List<MComment> mComments;
+    private Map<MComment, String> comments;
+    private Map<MComment, MAudio> oneSecAudioComments;
 
+    public String getText() {
+        return text;
+    }
 
+    public Texture getImage() {
+        return image;
+    }
+
+    public MMusic getMusic() {
+        return music;
+    }
+
+    public MAudio getUserAudio() {
+        return userAudio;
+    }
+
+    public List<MComment> getAllComments() {
+        return mComments;
+    }
+
+    public String getCommentText(MComment comment) {
+        return comments.get(comment);
+    }
+
+    public MAudio getOneSecCommentAudio(MComment comment) {
+        return oneSecAudioComments.get(comment);
+    }
     /*------------------------------------------------------------------------*/
 
     @Deprecated

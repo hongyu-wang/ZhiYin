@@ -19,11 +19,34 @@ public class MessagesTalker extends Talkers {
     private MConversation conversation;
 
     //--Interface Fields
-    public List<MMessage> mMessages;
-    public List<User> participants;
-    public Map<MMessage, String> messages;
-    public Map<MMessage, User> users;
-    public boolean seen;
+    private List<MMessage> mMessages;
+    private List<User> participants;
+    private Map<MMessage, String> messages;
+    private Map<MMessage, User> users;
+    private boolean seen;
+
+
+    //Getter and Setters
+    public List<MMessage> getAllMMessages(){
+        return mMessages;
+    }
+
+    public List<User> getParticipants(){
+        return participants;
+    }
+
+    public String getMessageText(MMessage message){
+        return messages.get(message);
+    }
+
+    public User getMessageCreator(MMessage message){
+        return users.get(message);
+    }
+
+    public boolean isSeen(){
+        return seen;
+    }
+
 
     /*------------------------------------------------------------------------*/
 
@@ -37,6 +60,15 @@ public class MessagesTalker extends Talkers {
         this.conversation = conversation;
     }
 
+    public void newMessage(String userText){
+        MText text = TextManagerFactory.createTextManager().createText(userText, 0);
+
+        MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), modelStorage.getMainUser().getKey());
+
+        messages.put(message, userText);
+
+        users.put(message, modelStorage.getMainUser());
+    }
 
     /*------------------------------------------------------------------------*/
 
@@ -55,10 +87,12 @@ public class MessagesTalker extends Talkers {
     @Override
     public void push() {
         while(messages.size() > conversation.getMessageList().size()){
+            MMessage message = mMessages.get(conversation.getMessageList().size());
 
-            MText text = TextManagerFactory.createTextManager().createText(messages.get(conversation.getMessageList().size()), 0);
-
-            MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), modelStorage.getMainUser().getKey());
+            MText text = new MText();
+            text.setKey(message.getText());
+            text.setType(0);
+            text.setText(messages.get(message));
 
             conversation.getMessageList().add(message.getKey());
 

@@ -9,9 +9,18 @@ import java.util.List;
  */
 public class ArtistTalker extends Talkers {
 
+    //--Interface Fields
     public String name;
     public List<MMusic> musicList;
 
+    //Getters and Setters
+    public String getName() {
+        return name;
+    }
+
+    public List<MMusic> getMusicList() {
+        return musicList;
+    }
 
     /*------------------------------------------------------------------------*/
 
