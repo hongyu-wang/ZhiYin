@@ -13,9 +13,21 @@ import server.model.user.*;
  */
 public class VeryBeginningIntializer extends Talkers{
 
-    public VeryBeginningIntializer(String username){
-        modelStorage.loginUser("Alice");
+    /*------------------------------------------------------------------------*/
+
+    @Override
+    @Deprecated
+    public void init() {
+
     }
+
+    public void init(String username){
+        modelStorage.loginUser(username);
+    }
+
+    /*------------------------------------------------------------------------*/
+
+
 
     @Override
     public void pull() {

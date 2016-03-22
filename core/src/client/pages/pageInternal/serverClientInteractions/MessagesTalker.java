@@ -1,11 +1,14 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-/**
- *
- * Created by Hongyu Wang on 3/21/2016.
- */
-public class DiaryTalker extends Talkers{
+import java.util.List;
 
+/**
+ * Created by Kevin Zheng on 2016-03-21.
+ */
+public class MessagesTalker extends Talkers {
+
+    //--Interface Fields
+    public List<String> messages;
 
     /*------------------------------------------------------------------------*/
 
@@ -16,14 +19,7 @@ public class DiaryTalker extends Talkers{
 
     /*------------------------------------------------------------------------*/
 
-    /**
-     *
-     * @param dt The rate of change of updating
-     */
-    @Override
-    public void update(float dt) {
 
-    }
 
     @Override
     public void pull() {
@@ -35,9 +31,13 @@ public class DiaryTalker extends Talkers{
 
     }
 
-
     @Override
     public boolean isUpdated() {
         return false;
+    }
+
+    @Override
+    public void update(float dt) {
+
     }
 }
