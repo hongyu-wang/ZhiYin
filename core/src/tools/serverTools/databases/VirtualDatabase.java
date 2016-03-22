@@ -193,7 +193,7 @@ public class VirtualDatabase {
         user.setLog(log.getKey());
         user.setContent(content.getKey());
         user.setDiary(diary.getKey());
-        user.setFriends(friendList);
+        user.setFriendKeys(friendList);
 
         //Put into database.
         data.put(user.getKey(), user);
