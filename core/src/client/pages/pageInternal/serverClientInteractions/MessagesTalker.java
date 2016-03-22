@@ -128,8 +128,21 @@ public class MessagesTalker extends Talkers {
 
         for(MMessage message: mMessages){
             if(message == null){
-
+                continue;
             }
+            MText text = modelStorage.getModel(message.getKey());
+            if(text == null){
+                continue;
+            }
+            messages.put(message, text.getText());
+
+            User user = modelStorage.getModel(message.getCreator());
+
+            if(user == null){
+                continue;
+            }
+
+            users.put(message, user);
         }
     }
 }
