@@ -105,7 +105,7 @@ public class ModelStorage {
      *
      * @return  The user data of the owner.
      */
-    public User getUser(){
+    public User getMainUser(){
         return user;
     }
 

@@ -51,7 +51,7 @@ public class ProfileTalker extends Talkers{
 
     @Override
     public boolean isUpdated() {
-        return super.checkUpdated();
+        return super.checkOriginalUpdate();
     }
 
 

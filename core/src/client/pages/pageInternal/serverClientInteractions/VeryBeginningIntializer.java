@@ -60,7 +60,7 @@ public class VeryBeginningIntializer extends Talkers{
 
     @Override
     public boolean isUpdated() {
-        return super.checkUpdated();
+        return super.checkOriginalUpdate();
     }
 
 

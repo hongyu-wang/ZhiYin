@@ -24,6 +24,11 @@ public class DiaryTalker extends Talkers{
     }
 
     @Override
+    public void push() {
+
+    }
+
+    @Override
     public boolean isUpdated() {
         return false;
     }

@@ -1,28 +1,26 @@
 package client.pages.pageInternal.serverClientInteractions;
 
 import client.pages.pageInternal.serverClientInteractions.Talkers;
+import server.model.social.MConversation;
 import server.model.social.MMessage;
 import server.model.user.User;
 import server.model.user.UserConversations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Hongyu Wang on 3/20/2016.
  */
 public class FriendTalkers extends Talkers {
 
-    private static final int unreadTheirs = 0;
-
-    private static final int readTheirs = 1;
-
-    private static final int unreadYours = 2;
-
-    private static final int readYours = 3;
-
     public List<User> friends;
-    public List<MMessage> conversations;
+
+    public FriendTalkers(){
+
+    }
+
 
 
     /*TODO
@@ -47,28 +45,8 @@ public class FriendTalkers extends Talkers {
 
 
     @Override
-    public void update(float dt) {
-        userRequests();
-
-    }
-
-    private void userRequests(){
-        User user = modelStorage.getUser();
-
-        for(long key: user.getFriendKeys())
-            modelStorage.requestModelFromServer(User.class.getName(), key);
-        modelStorage.requestModelFromServer(UserConversations.class.getName(), user.getConversations());
-    }
-
-    private void conversationRequests(){
-        User user = modelStorage.getUser();
-        UserConversations conversations = modelStorage.<UserConversations>getModel(user.getConversations());
-    }
-
-
-    @Override
     public void pull() {
-        User user = modelStorage.getUser();
+        User user = modelStorage.getMainUser();
 
         List<User> newList = new ArrayList<>();
 
@@ -82,7 +60,25 @@ public class FriendTalkers extends Talkers {
     }
 
     @Override
+    public void push() {
+        User user = modelStorage.getMainUser();
+
+        for(User friend: friends){
+            if(!user.getFriendKeys().contains(friend.getKey()))
+                user.getFriendKeys().add(friend.getKey());
+        }
+    }
+
+    @Override
     public boolean isUpdated() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public void update(float dt) {
+        List<Long> pointers = modelStorage.getMainUser().getFriendKeys();
+        for(long friendKey: pointers){
+            friends.add(modelStorage.getModel(friendKey));
+        }
     }
 }
