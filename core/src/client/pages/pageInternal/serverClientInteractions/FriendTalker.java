@@ -81,7 +81,7 @@ public class FriendTalker extends Talkers {
     public void update(float dt) {
         List<User> newFriendList = new ArrayList<>();
         for(long key: modelStorage.getMainUser().getFriendKeys()){
-            newFriendList.add(modelStorage.getModel(key));
+            newFriendList.add(modelStorage.<User>getModel(key));
         }
 
         this.friends = newFriendList;

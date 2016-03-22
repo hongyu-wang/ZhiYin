@@ -71,7 +71,7 @@ public class SocialContentTalker extends Talkers{
         List<MConversation> newConversationList = new ArrayList<>();
 
         for(long key: uConv.getConvoKeys()){
-            newConversationList.add(modelStorage.getModel(key));
+            newConversationList.add(modelStorage.<MConversation>getModel(key));
         }
 
         this.conversations = newConversationList;

@@ -11,7 +11,7 @@ import server.model.user.*;
 /**
  * Created by Hongyu Wang on 3/20/2016.
  */
-public class VeryBeginningIntializer extends Talkers{
+public class VeryBeginningInitializer extends Talkers{
 
     /*------------------------------------------------------------------------*/
 

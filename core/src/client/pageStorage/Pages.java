@@ -29,6 +29,7 @@ public enum Pages {
     NOWPLAYING("other.NowPlaying"),
     NOWPLAYING2("other.NowPlaying2"),
     TOOLS("other.Tools"),
+    LOGIN("other.Login"),
     PROFILE("other.Profile"),
     DIARY1("musicDiary.Diary1"),
     DIARY2("musicDiary.Diary2"),

@@ -119,7 +119,7 @@ public class MessagesTalker extends Talkers {
         Map<MMessage, User> newUsers = Utils.newMap();
 
         for(long key: conversation.getParticipants()) {
-            newUserList.add(modelStorage.getModel(key));
+            newUserList.add(modelStorage.<User>getModel(key));
         }
 
         for(long key: conversation.getMessageList()){

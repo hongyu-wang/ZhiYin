@@ -22,7 +22,7 @@ public class GameLoop extends ApplicationAdapter {
 	public void create() {
 		stateManager = StateManager.getInstance();
         Pages.initClass();
-        stateManager.changeState(Pages.HOME1);
+        stateManager.changeState(Pages.LOGIN);
 		spriteBatch = MainBatch.getInstance();
         primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
