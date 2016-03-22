@@ -75,7 +75,6 @@ public class VeryBeginningIntializer extends Talkers{
         return super.checkOriginalUpdate();
     }
 
-
     @Override
     public void update(float dt) {
         return;
