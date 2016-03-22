@@ -23,9 +23,12 @@ import com.badlogic.gdx.utils.StringBuilder;
  */
 public class Login extends State {
     private int delta = 0;
+    private int delta2 = 0;
     public static final String NAME1 = "Alice";
     public static final String NAME2 = "Benny";
     public static final String NAME3 = "Cindy";
+    public static final String message = "Loading Loading. Loading.. Loading...";
+    public static final String [] stuff = message.split(" ");
     private Label label;
     private boolean checkPull;
     private VeryBeginningInitializer vb;
@@ -45,8 +48,11 @@ public class Login extends State {
                     vb.pull();
                     checkPull = true;
                     button.remove();
-                    label.setPosition(0, StateManager.HEIGHT);
-                    stage.addActor(label = new Label("FUCK YOU", SkinSingleton.getInstance()));
+                    label = new Label("", SkinSingleton.getInstance());
+                    label.setPosition(50, StateManager.HEIGHT - 100);
+                    stage.addActor(label);
+
+                    wta.remove();
                 }
             }
         });
@@ -61,11 +67,11 @@ public class Login extends State {
         super.update(dt);
         if (checkPull){
             if (delta%100 == 0) {
-                if (label.getText().equals(new StringBuilder("FUCK YOU...")))
-                    label.setText("FUCK YOU");
-                else
-                    label.setText(label.getText() + ".");
-                System.out.println(vb.isUpdated());
+
+
+                label.setText(stuff[delta2%(stuff.length)]);
+                delta2++;
+
             }
 
             if (vb.isUpdated())
