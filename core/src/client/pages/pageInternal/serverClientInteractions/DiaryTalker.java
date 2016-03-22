@@ -24,6 +24,7 @@ public class DiaryTalker extends Talkers{
 
     public List<MComment> mComments;
     public Map<MComment, String> comments;
+    public Map<MComment, MAudio> oneSecAudioComments;
 
 
     /*------------------------------------------------------------------------*/
