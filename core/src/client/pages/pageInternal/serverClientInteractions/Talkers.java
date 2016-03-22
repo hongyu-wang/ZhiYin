@@ -29,7 +29,7 @@ public abstract class Talkers implements Updatable{
 
     protected boolean checkOriginalUpdate() {
         for(long i = 1; i < totalmodels ; i++) {
-            System.out.println(i);
+//            System.out.println(i);
             if (modelStorage.getModel(i) == null)
                 return false;
         }

@@ -77,14 +77,14 @@ public class ModelStorage {
      * @return          True if the login was successful.
      */
     public boolean loginUser(String username){
-        try {
-            this.user = this.getModel(WebServiceClient.getUserByName(username));
-            return true;
-        }
-        catch(WebRequestException e){
-            System.out.println("Unable to login.");
-            return false;
-        }
+//        try {
+//            this.user = this.getModel(WebServiceClient.getUserByName(username));
+//            return true;
+//        }
+//        catch(WebRequestException e){
+//            System.out.println("Unable to login.");
+//            return false;
+//        }
     }
 
     public long getHashtagByName(String hashtag){

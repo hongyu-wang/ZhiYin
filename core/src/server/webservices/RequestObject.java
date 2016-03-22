@@ -13,8 +13,6 @@ import server.model.structureModels.ServerModel;
  * A singleton used to request models from the server
  */
 public class RequestObject implements Net.HttpResponseListener {
-
-    private static RequestObject ourInstance;
     private ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
     private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -22,11 +20,7 @@ public class RequestObject implements Net.HttpResponseListener {
     private String className;
 
     public static RequestObject newInstance(){
-
-        if (ourInstance == null) {
-            ourInstance = new RequestObject();
-        }
-        return ourInstance;
+        return new RequestObject();
 
     }
 
