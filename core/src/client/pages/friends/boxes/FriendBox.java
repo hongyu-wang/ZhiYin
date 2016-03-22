@@ -45,7 +45,7 @@ public class FriendBox{
 
     private void initLabel(String friendName){
         Label name = new Label(friendName, SkinSingleton.getInstance());
-        table.add(name).padLeft(10);
+        table.add(name).padLeft(20 * StateManager.M);
     }
 
     private void initButton(){
@@ -59,7 +59,7 @@ public class FriendBox{
             }
         });
 
-        table.add(button).expandX().right().padRight(10);
+        table.add(button).expandX().right().padRight(20 * StateManager.M);
     }
 
     public Table getTable(){
@@ -73,6 +73,6 @@ public class FriendBox{
         Image image = new Image(texture);
         this.currentIcon = image;
 
-        table.add(currentIcon).padLeft(30);
+        table.add(currentIcon).padLeft(60 * StateManager.M);
     }
 }
