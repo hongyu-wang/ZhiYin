@@ -32,6 +32,13 @@ public class ScrollTable {
      */
     public ScrollTable() {
         init();
+        scrollPane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
+    }
+
+
+    public ScrollTable(int x, int y, int width, int height){
+        this();
+        scrollPane.setBounds(x*StateManager.M, y * StateManager.M, width * StateManager.M, height * StateManager.M);
     }
 
     /**
@@ -40,7 +47,7 @@ public class ScrollTable {
     private void init(){
         table = new Table();
         scrollPane = new ScrollPane(table);
-        scrollPane.setBounds(0, 117*StateManager.M, 750*StateManager.M, 1100* StateManager.M);
+
     }
 
 

@@ -18,12 +18,10 @@ public class MockServer {
         try{
             generator = SerialGenerator.getGenerator();
             database = new VirtualDatabase();
-
         }
         catch(IOException e){
             System.out.print("MockServer Init Fail.");
         }
-
     }
 
 

@@ -31,6 +31,11 @@ public class NowPlaying extends NowPlayingShell {
     }
 
     @Override
+    public void reset() {
+
+    }
+
+    @Override
     public void dispose() {
 
 

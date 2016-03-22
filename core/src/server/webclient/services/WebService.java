@@ -2,21 +2,28 @@ package server.webclient.services;
 
 import server.model.media.MText;
 import server.model.structureModels.ServerModel;
-import server.model.user.User;
+import server.services.interfaces.models.UserProfileManager;
+import server.webservices.PostObject;
+import tools.serverTools.generators.Tags;
 import tools.serverTools.server.MockServer;
 import tools.serverTools.server.ServerInteraction;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Net;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import server.model.structureModels.ServerModel;
+import server.model.user.User;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.PUT;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
 
 /**
  * @author rsang
  */
 @Path("/webservice")
-public class WebService {
+public class WebService{
 
     @GET
     @Path("/param/{param}")
@@ -38,22 +45,34 @@ public class WebService {
         return mockServer.getModel(key);
     }
 
-    @PUT
-    @Path("/putServerModel/{param}")
-    public void putServerModel(@PathParam("param") ServerModel model){
-
-    }
-
     /**
      *  Using Jackson.
      *
      */
-    @GET
-    @Path("/getSerial/")
-    @Produces("application/json")
-    public Long getSerial() {
+    @POST
+    @Path("/postServerModel")
+    @Consumes("application/json")
+    public Response postServerModel(String json) {
         MockServer mockServer = ServerInteraction.getServer();
+        ObjectMapper objectMapper = new ObjectMapper();
+        ServerModel model = null;
+        int tag = Integer.parseInt(json.substring(json.length()-4));
+        System.out.println(tag+1);
+        String className = Tags.ID_TAGS.getName(tag);
+        json = json.substring(0, json.length()-4);
 
-        return mockServer.getSerial();
+        try {
+            Class name = Class.forName(className);
+            model = (ServerModel)objectMapper.readValue(json, name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mockServer.setModel(model);
+        return Response.status(Response.Status.OK).build();
+
     }
+
+
+
 }

@@ -1,9 +1,9 @@
 package client.pages.musicDiary;
 
-import client.component.basicComponents.WorkingTextArea;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 
 import static client.singletons.StateManager.M;
 
@@ -20,6 +20,14 @@ public class Diary3 extends Diary3Shell {
     public void init() {
         super.init();
         addTitleField();
+        addBodyField();
+    }
+
+    @Override
+    public void reset() {
+        titleField.remove();
+        addTitleField();
+        bodyField.remove();
         addBodyField();
     }
 

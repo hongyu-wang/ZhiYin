@@ -5,8 +5,13 @@ import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.webclient.WebServiceClient;
 import server.webclient.webErrors.WebRequestException;
+import server.webservices.PostObject;
+import server.webservices.RequestObject;
 
+import java.nio.LongBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**A storage object of all model types the user client will need.
@@ -16,10 +21,17 @@ import java.util.Map;
  */
 public class ModelStorage {
     User user;
-    Map<Long, ServerModel> models;
+    private Map<Long, ServerModel> models;
+    private Map<String, Long> hashtag_key;
+    private Map<String, Long> username_key;
+    private List<Long> unassignedKeys;
 
     ModelStorage(){
         models = new HashMap<Long, ServerModel>();
+        hashtag_key = new HashMap<String, Long>();
+        username_key = new HashMap<String, Long>();
+
+        unassignedKeys = new ArrayList<Long>();
     }
 
     ModelStorage(User user){
@@ -36,35 +48,15 @@ public class ModelStorage {
      *
      * @param key   The key of the servermodel.
      * @param <E>   The type of the model.
-     * @return      The model.
+     * @return      The model, or null if the model does not exist.
      */
     public <E extends ServerModel> E getModel(long key){
-        if(models.containsKey(key)){
-            return (E)models.get(key);
+        try {
+            return (E) models.get(key);
         }
-        return updateModel(key);
-    }
-
-
-    /**Updates the model based on a key.
-     *
-     * For messages, conversations, and posts which require constant updating
-     * this method is used to pull a more current state from the server.
-     *
-     * @param key   The key.
-     * @param <E>   The type of the model.
-     * @return      The serverModel.
-     */
-    public <E extends ServerModel> E updateModel(long key){
-        try{
-            E model = WebServiceClient.<E>getServerModel(key);
-            models.put(model.getKey(), model);
-            return model;
+        catch(ClassCastException e){
+            return null;
         }
-        catch(WebRequestException e){
-            System.out.println("ServerRequest failed.");
-        }
-        return null;
     }
 
     /**Pushes the model into the database.
@@ -74,16 +66,9 @@ public class ModelStorage {
      * @param model The new model.
      * @return      True if it sucessfully pushed to server.
      */
-    public boolean pushModel(ServerModel model){
-        try{
-            WebServiceClient.pushServerModel(model);
-            models.put(model.getKey(), model);
-            return true;
-        }
-        catch(WebRequestException e){
-            System.out.println("ServerRequest failed.");
-            return false;
-        }
+    public void pushModel(ServerModel model){
+        models.put(model.getKey(), model);
+        PostObject.newInstance().addModel(model, model.getClass().getName());
     }
 
     /**Sets the prime user of this app.
@@ -102,22 +87,68 @@ public class ModelStorage {
         }
     }
 
-    public MHashtag getHashtagByName(String hashtag){
-        try{
-            MHashtag tag = this.getModel(WebServiceClient.getHashtagByName(hashtag));
-            return tag;
-        }
-        catch(WebRequestException e){
-            System.out.println("Unable to get hashtag.");
-        }
-        return null;
+    public long getHashtagByName(String hashtag){
+//        try{
+//            MHashtag tag = this.getModel(WebServiceClient.getHashtagByName(hashtag));
+//            return tag;
+//        }
+//        catch(WebRequestException e){
+//            System.out.println("Unable to get hashtag.");
+//        }
+//        return null;
+
+        //TODO // FIXME: 2016-03-20
+        return 0;
     }
 
     /**Returns the owner of the app.
      *
      * @return  The user data of the owner.
      */
-    public User getUser(){
+    public User getMainUser(){
         return user;
+    }
+
+    /**Requests a new model of className from the server.
+     *
+     * @param className
+     * @param key
+     */
+    public void requestModelFromServer(String className, long key){
+        RequestObject.newInstance().getModel(className, key);
+    }
+
+    /**Returns a pre generated serial key from the server.
+     *
+     * @return
+     */
+    public long generateKey(){
+        long key = unassignedKeys.remove(0);
+
+        int size = unassignedKeys.size();
+
+        for(int i = 0; i < size; i++){
+            //TODO request Hairuo's key gen.
+        }
+
+        return key;
+    }
+
+
+
+    /**Call this to update models within this class.
+     *
+     * @param model The updated model.
+     */
+    public void setModelFromServer(ServerModel model){
+        models.put(model.getKey(), model);
+    }
+
+    /**Place the newly request server key in here.
+     *
+     * @param key
+     */
+    public void putGeneratedKey(long key){
+        unassignedKeys.add(key);
     }
 }

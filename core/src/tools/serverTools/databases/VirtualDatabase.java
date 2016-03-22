@@ -1,7 +1,6 @@
 package tools.serverTools.databases;
 
 import com.badlogic.gdx.graphics.Texture;
-import org.robovm.apple.foundation.NSData;
 import server.model.media.MAudio;
 import server.model.media.MHashtag;
 import server.model.media.MImage;
@@ -9,9 +8,8 @@ import server.model.media.MMusic;
 import server.model.structureModels.ServerModel;
 import server.model.user.*;
 import tools.AudioTools.AudioCreator;
-import tools.serverTools.server.ServerInteraction;
+import tools.serverTools.generators.SerialGenerator;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,11 +23,12 @@ public class VirtualDatabase {
     private Map<Long, ServerModel> data;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
+    private SerialGenerator generator = SerialGenerator.getGenerator();
+    private SerialGenerator HVGenerator = SerialGenerator.getHGenerator(1000);
 
     public VirtualDatabase() throws IOException{
         init();
     }
-
 
     public void init() throws IOException{
         this.username_key = new HashMap<>();
@@ -45,17 +44,17 @@ public class VirtualDatabase {
         username_key.put("Benny", 2L);
         username_key.put("Cindy", 3L);
 
-        assert ServerInteraction.getServer().getSerial() == 1;
-        assert ServerInteraction.getServer().getSerial() == 2;
-        assert ServerInteraction.getServer().getSerial() == 3;
+        generator.generateSerial();
+        generator.generateSerial();
+        generator.generateSerial();
 
-        generateTestUser("Alice", 1);
-        generateTestUser("Benny", 2);
-        generateTestUser("Cindy", 3);
+        generateTestUser("Alice", 1L);
+        generateTestUser("Benny", 2L);
+        generateTestUser("Cindy", 3L);
 
-        User user1 = (User)data.get(1);
-        User user2 = (User)data.get(2);
-        User user3 = (User)data.get(3);
+        User user1 = (User)data.get(1L);
+        User user2 = (User)data.get(2L);
+        User user3 = (User)data.get(3L);
 
         user1.getFriendKeys().add(user2.getKey());
         user1.getFriendKeys().add(user3.getKey());
@@ -71,19 +70,19 @@ public class VirtualDatabase {
         //TODO created all media here.
 
         //Image
-        MImage image1 = generateTestImage("ProfilePic_1", "//");// TODO path
-        MImage image2 = generateTestImage("ProfilePic_2", "//");// TODO path
-        MImage image3 = generateTestImage("ProfilePic_3", "//");// TODO path
+//        MImage image1 = generateTestImage("ProfilePic_1", "//");// TODO path
+//        MImage image2 = generateTestImage("ProfilePic_2", "//");// TODO path
+//        MImage image3 = generateTestImage("ProfilePic_3", "//");// TODO path
 
         //Audio
-        MAudio audio1 = generateTestAudio("Audio_1.mp3");// TODO path
-        MAudio audio2 = generateTestAudio("Audio_2.mp3");// TODO path
-        MAudio audio3 = generateTestAudio("Audio_3.mp3");// TODO path
+//        MAudio audio1 = generateTestAudio("Audio_1.mp3");// TODO path
+//        MAudio audio2 = generateTestAudio("Audio_2.mp3");// TODO path
+//        MAudio audio3 = generateTestAudio("Audio_3.mp3");// TODO path
 
         //Music
-        MMusic music1 = generateTestMusic("Music_1", audio1);// TODO path
-        MMusic music2 = generateTestMusic("Music_2", audio2);// TODO path
-        MMusic music3 = generateTestMusic("Music_3", audio3);// TODO path
+//        MMusic music1 = generateTestMusic("Music_1", audio1);// TODO path
+//        MMusic music2 = generateTestMusic("Music_2", audio2);// TODO path
+//        MMusic music3 = generateTestMusic("Music_3", audio3);// TODO path
 
         //Hashtag
         MHashtag tag1 = generateTestHashtags("#Happy");
@@ -94,22 +93,22 @@ public class VirtualDatabase {
         List<Long> music_tag2 = tag2.getMusicKeys();
         List<Long> music_tag3 = tag3.getMusicKeys();
 
-        music_tag1.add(music1.getKey());
-        music_tag2.add(music2.getKey());
-        music_tag3.add(music3.getKey());
+//        music_tag1.add(music1.getKey());
+//        music_tag2.add(music2.getKey());
+//        music_tag3.add(music3.getKey());
 
         //TODO add media to users here.
-        User user1 = (User)data.get(1);
-        User user2 = (User)data.get(2);
-        User user3 = (User)data.get(3);
+        User user1 = (User)data.get(1L);
+        User user2 = (User)data.get(2L);
+        User user3 = (User)data.get(3L);
 
         UserProfile profile1 = (UserProfile)data.get(user1.getProfile());
         UserProfile profile2 = (UserProfile)data.get(user2.getProfile());
         UserProfile profile3 = (UserProfile)data.get(user3.getProfile());
 
-        profile1.setImageKey(image1.getKey());
-        profile2.setImageKey(image2.getKey());
-        profile3.setImageKey(image3.getKey());
+//        profile1.setImageKey(image1.getKey());
+//        profile2.setImageKey(image2.getKey());
+//        profile3.setImageKey(image3.getKey());
     }
 
 
@@ -139,7 +138,7 @@ public class VirtualDatabase {
         return username_key.get(username);
     }
 
-    private void generateTestUser(String username, int key) {
+    private void generateTestUser(String username, long key) {
         User user =
                 new User();
         UserProfile profile =
@@ -157,15 +156,15 @@ public class VirtualDatabase {
         user.setKey(
                 key);
         profile.setKey(
-                ServerInteraction.getServer().getSerial());
+                generator.generateSerial());
         conversations.setKey(
-                ServerInteraction.getServer().getSerial());
+                generator.generateSerial());
         log.setKey(
-                ServerInteraction.getServer().getSerial());
+                generator.generateSerial());
         content.setKey(
-                ServerInteraction.getServer().getSerial());
+                generator.generateSerial());
         diary.setKey(
-                ServerInteraction.getServer().getSerial());
+                generator.generateSerial());
 
         //Profile Attributes
         profile.setUsername(username);
@@ -184,12 +183,16 @@ public class VirtualDatabase {
         //DiaryContent Attributes
         diary.setDiaryKeys(new ArrayList<Long>());
 
+        //User friends.
+        List<Long> friendList = new ArrayList<Long>();
+
         //Assign to user.
         user.setProfile(profile.getKey());
         user.setConversations(conversations.getKey());
         user.setLog(log.getKey());
         user.setContent(content.getKey());
         user.setDiary(diary.getKey());
+        user.setFriends(friendList);
 
         //Put into database.
         data.put(user.getKey(), user);
@@ -203,7 +206,7 @@ public class VirtualDatabase {
     private MHashtag generateTestHashtags(String hashtag){
         MHashtag tag = new MHashtag();
 
-        tag.setKey(ServerInteraction.getServer().getSerial());
+        tag.setKey(generator.generateSerial());
 
         tag.setHashtag(hashtag);
 
@@ -220,7 +223,7 @@ public class VirtualDatabase {
     private MImage generateTestImage(String name, String path){
         MImage image = new MImage();
 
-        image.setKey(ServerInteraction.getServer().getSerial());
+        image.setKey(generator.generateSerial());
 
         image.setName(name);
 
@@ -234,7 +237,7 @@ public class VirtualDatabase {
     private MAudio generateTestAudio(String path){
         MAudio audio = AudioCreator.createFromFilePath(path);
 
-        audio.setKey(ServerInteraction.getServer().getSerial());
+        audio.setKey(generator.generateSerial());
 
         return audio;
     }
@@ -242,7 +245,7 @@ public class VirtualDatabase {
     private MMusic generateTestMusic(String name, MAudio audio){
         MMusic music = new MMusic();
 
-        music.setKey(ServerInteraction.getServer().getSerial());
+        music.setKey(HVGenerator.generateSerial());
 
         music.setName(name);
 

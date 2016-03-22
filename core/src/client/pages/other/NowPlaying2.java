@@ -17,4 +17,9 @@ public class NowPlaying2 extends NowPlaying2Shell {
     public void dispose() {
 
     }
+
+    @Override
+    public void reset() {
+
+    }
 }

@@ -77,4 +77,9 @@ public class Home1 extends Home1Shell {
 
     }
 
+    @Override
+    public void reset() {
+
+    }
+
 }

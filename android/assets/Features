@@ -1,0 +1,53 @@
+VERYBEGINNINGINITIALIZER
+    All user information of user1 -2 -3.
+
+    User
+    UserProfile
+    UserConversations
+    UserActivityLog
+    UserUploadedContent
+    UserDiaryContent
+
+    For each user.
+
+Friends1:
+    Access all friends names and message status
+
+Friends 3:
+    Access all friends names
+
+Friends 4
+    Access conversation log of friends
+    Adding to conversation log of friends
+
+Friends 5
+    Access all friend's names
+    Access all friend's profiles
+    Access your personal profile
+
+Home1:
+    Features required:
+        Getting New Releases (Top 3)
+        Getting Top Singles (Top 3)
+        Getting Top Albums (Top 3)
+        Based on your history (Top 3)
+Home2:
+    Features required:
+        Getting all users
+        Accessing the User's profile.
+
+Music Diary:
+    Features Required:
+        Getting all user diary posts sorted by time
+        Add a new music diary post to the user's music diary
+        Comment on the post with the 1 second, text comment.
+
+        Get all comments on the page
+
+Music Player
+    Features required:
+        Image of song
+        Get all tags related to the song
+        Get all comments related to the song
+        Push a comment to the page (1 second voice/text)
+        Pull all comments to the page

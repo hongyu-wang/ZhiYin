@@ -15,7 +15,7 @@ import client.stateInterfaces.Executable;
  * Created by Hongyu Wang on 3/11/2016.
  */
 public class ExecuteChangePage implements Executable{
-    private Pages page;
+    protected Pages page;
 
     public ExecuteChangePage(Pages page){
         this.page = page;

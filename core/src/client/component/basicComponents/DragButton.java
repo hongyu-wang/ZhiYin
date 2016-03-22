@@ -2,13 +2,15 @@ package client.component.basicComponents;
 
 import client.component.Component;
 import client.events.ActionEvent;
+import client.singletons.InputListener;
 import client.singletons.ShapeCreater;
 import client.stateInterfaces.ActionMonitor;
 import client.stateInterfaces.Dragable;
 import client.stateInterfaces.Executable;
-import client.stateInterfaces.Performable;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
+import static client.singletons.StateManager.M;
 
 /**
  * Created by Hongyu Wang on 3/20/2016.
@@ -16,14 +18,18 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class DragButton extends Component implements Dragable {
     private Executable dragExecute, releaseExecute, returnExecutable;
     private ActionMonitor monitor;
+    private float limit;
     private boolean playAnimation;
-    public DragButton(ActionMonitor monitor) {
+    private static long begin;
+    public DragButton(ActionMonitor monitor, int limit) {
         this.monitor = monitor;
+        this.limit = limit * M;
     }
 
     @Override
     protected void init() {
         playAnimation = true;
+        begin = 0;
     }
 
     public void draw(Batch sb, float parentAlpha) {
@@ -41,11 +47,23 @@ public class DragButton extends Component implements Dragable {
     }
 
     public void drag(){
-        monitor.actionPerformed(new ActionEvent(this));
+        returnExecutable = dragExecute;
+        if (InputListener.getInstance().getMouseY() > limit)
+            monitor.actionPerformed(new ActionEvent(this));
     }
 
     public void release(){
+        System.out.println(System.currentTimeMillis() - begin);
+        if (System.currentTimeMillis() - begin > 200){
 
+            returnExecutable = releaseExecute;
+
+            monitor.actionPerformed(new ActionEvent(this));
+        } else{
+            returnExecutable = dragExecute;
+            monitor.actionPerformed((new ActionEvent(this)));
+
+        }
     }
 
     @Override
@@ -73,5 +91,9 @@ public class DragButton extends Component implements Dragable {
     @Override
     public void update(float dt) {
 
+    }
+
+    public static void setBegin(long begin) {
+        DragButton.begin = begin;
     }
 }

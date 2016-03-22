@@ -74,5 +74,6 @@ public class ResteasyNettyRunner {
 
     public static void main(String args[]) throws Exception {
         start();
+
     }
 }
