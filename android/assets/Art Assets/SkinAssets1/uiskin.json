@@ -54,9 +54,10 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: {
-		background: default-window,
+		background: windowtest123561235,
 		titleFont: default-font,
-		titleFontColor: { a: 1, b: 1, g: 1, r: 1 }
+		titleFontColor: { a: 1, b: 1, g: 1, r: 1 },
+		stageBackground: textfield
 	},
 	dialog: {
 		background: default-window,
@@ -69,7 +70,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
 		font: font_trebuc_16pt,
 		fontColor: { a: 1, b: 1, g: 1, r: 1 },
-		background: textfield,
+		background: untitled,
 		cursor: cursor,
 		selection: selection
 	}
@@ -128,8 +129,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
 	default: { plus: tree-plus, minus: tree-minus, selection: default-select-selection }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
-	default-vertical: { background: default-slider, knob: default-slider-knob },
-	default-horizontal: { background: default-pane-noborder, knob: slider }
+	default-vertical: { background: slider_noshadow, knob: default-slider-knob },
+	default-horizontal: { background: default-pane-noborder, knob: slider_noshadow }
 },
 com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 	default: {
