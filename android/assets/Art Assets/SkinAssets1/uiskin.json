@@ -56,8 +56,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: {
 		background: windowtest123561235,
 		titleFont: default-font,
-		titleFontColor: { a: 1, b: 1, g: 1, r: 1 },
-		stageBackground: textfield
+		titleFontColor: { a: 1, b: 1, g: 1, r: 1 }
 	},
 	dialog: {
 		background: default-window,
