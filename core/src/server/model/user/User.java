@@ -41,7 +41,7 @@ public class User extends ServerModel {
     /**
      * The keys to the friends.
      */
-    private List<Long> friendsKey;
+    private List<Long> friendKeys;
 
     /**Gets all basic user information.
      *
@@ -88,7 +88,7 @@ public class User extends ServerModel {
      * @return  The List of friend keys.
      */
     public List<Long> getFriendKeys() {
-        return friendsKey;
+        return friendKeys;
     }
 
 
@@ -109,7 +109,7 @@ public class User extends ServerModel {
     public void setContent(long contentKey) {
         this.contentKey = contentKey;
     }
-    public void setFriends(List<Long> friendsKey) {
-        this.friendsKey = friendsKey;
+    public void setFriendKeys(List<Long> friendKeys) {
+        this.friendKeys = friendKeys;
     }
 }
