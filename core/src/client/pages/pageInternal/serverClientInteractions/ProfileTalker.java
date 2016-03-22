@@ -1,11 +1,9 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import client.pages.pageInternal.modelStorage.ModelStorage;
 import com.badlogic.gdx.graphics.Texture;
 import server.model.media.MImage;
 import server.model.user.User;
 import server.model.user.UserProfile;
-import server.model.user.UserUploadedContent;
 
 /**
  * Fuck you Kevin Zheng
@@ -13,23 +11,35 @@ import server.model.user.UserUploadedContent;
  * Created by Hongyu Wang on 3/20/2016.
  */
 public class ProfileTalker extends Talkers{
+
+    //--Interface Fields
     public Texture profileImage;
     public String name;
     public String description;
 
-    private User user;
+    /*------------------------------------------------------------------------*/
 
-    public ProfileTalker(User user){
+    @Override
+    @Deprecated
+    public void init() {
+    }
+
+
+    public void init(User user){
         this.user = user;
         pull();
     }
+
+    /*------------------------------------------------------------------------*/
+
+
 
     @Override
     public void pull() {
         UserProfile profile = modelStorage.getModel(user.getProfile());
 
         modelStorage.requestModelFromServer(
-                UserUploadedContent.class.getName()
+                MImage.class.getName()
                 , profile.getImageKey());
     }
 

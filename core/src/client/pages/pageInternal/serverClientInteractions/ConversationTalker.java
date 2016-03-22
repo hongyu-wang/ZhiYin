@@ -1,44 +1,55 @@
 package client.pages.pageInternal.serverClientInteractions;
 
 import server.model.social.MConversation;
-import server.model.social.MMessage;
-import server.model.user.User;
 import server.model.user.UserConversations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Kevin Zheng on 2016-03-21.
  */
 public class ConversationTalker extends Talkers{
-    private static final int unreadTheirs = 0;
+    private UserConversations uConv;
 
-    private static final int readTheirs = 1;
+    //--Interface Fields
+    public List<MConversation> conversations;
 
-    private static final int unreadYours = 2;
 
-    private static final int readYours = 3;
+    /*------------------------------------------------------------------------*/
 
-    private MConversation conversation;
-
-    public List<MMessage> messages;
-
-    public ConversationTalker(long key){
-        conversation = modelStorage.getModel(key);
+    @Override
+    public void init() {
+        user = modelStorage.getMainUser();
+        uConv = modelStorage.getModel(user.getConversations());
     }
+
+    /*------------------------------------------------------------------------*/
+
+
 
     @Override
     public void pull() {
-        User user = modelStorage.getMainUser();
 
-        UserConversations uConv = modelStorage.getModel(user.getConversations());
-
+        for(long convoKey: uConv.getConvoKeys()){
+            modelStorage.requestModelFromServer(
+                    UserConversations.class.getName(),
+                    convoKey);
+        }
 
     }
 
     @Override
     public void push() {
 
+        //Set
+        for(MConversation conversation: conversations){
+            if(!uConv.getConvoKeys().contains(conversation.getKey()))
+                uConv.getConvoKeys().add(conversation.getKey());
+        }
+
+        //Push
+        modelStorage.pushModel(user);
     }
 
     @Override
@@ -48,7 +59,12 @@ public class ConversationTalker extends Talkers{
 
     @Override
     public void update(float dt) {
-        for(long key: conversation.getMessageList())
-            messages.add(modelStorage.getModel(key));
+        List<MConversation> newConversationList = new ArrayList<>();
+
+        for(long key: uConv.getConvoKeys()){
+            newConversationList.add(modelStorage.getModel(key));
+        }
+
+        this.conversations = newConversationList;
     }
 }

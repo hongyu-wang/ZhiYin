@@ -13,35 +13,19 @@ import java.util.Map;
 /**
  * Created by Hongyu Wang on 3/20/2016.
  */
-public class FriendTalkers extends Talkers {
+public class FriendTalker extends Talkers {
 
+    //--Interface Fields
     public List<User> friends;
 
-    public FriendTalkers(){
+    /*------------------------------------------------------------------------*/
+
+    @Override
+    public void init() {
 
     }
 
-
-
-    /*TODO
-    ALL FRIEND TALKERS NEED ACCESS TO ALL FRIENDS
-
-
-    In a friend talker, there should be two major functionality types.
-
-    FUNCTIONALITY TYPE 1:
-        I should be able to iterate through all the friends one by one and do:
-            1. Get their name
-
-    FUNCTIONALITY TYPE 2:
-        I should be able to select a specific friend:
-            1. Send them a message (Be it a text one or an audio one)
-            2. Get all messages they sent
-                    For each message:
-                        Get the type (audio or text)
-                        Get the content (audio or text)
-            3. Get the profile of the friend.
-    */
+    /*------------------------------------------------------------------------*/
 
     /**
      * Pulls all friends into the model Storage.
@@ -49,7 +33,6 @@ public class FriendTalkers extends Talkers {
      */
     @Override
     public void pull() {
-        User user = modelStorage.getMainUser();
 
         for(long key: user.getFriendKeys()){
             modelStorage.requestModelFromServer(User.class.getName(), key);
@@ -57,19 +40,21 @@ public class FriendTalkers extends Talkers {
     }
 
     /**
-     * Pushes all friends which are not added to the current user into
-     * the user.
+     * Pushes user friends to the server.
+     *
+     * Pushes the user model.
      *
      */
     @Override
     public void push() {
-        User user = modelStorage.getMainUser();
 
+        //Set
         for(User friend: friends){
-            if(!user.getFriendKeys().contains(friend))
+            if(!user.getFriendKeys().contains(friend.getKey()))
                 user.getFriendKeys().add(friend.getKey());
         }
 
+        //Push
         modelStorage.pushModel(user);
     }
 
@@ -98,5 +83,7 @@ public class FriendTalkers extends Talkers {
         for(long key: modelStorage.getMainUser().getFriendKeys()){
             newFriendList.add(modelStorage.getModel(key));
         }
+
+        this.friends = newFriendList;
     }
 }
