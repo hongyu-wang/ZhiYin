@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
- * Created by blobbydude24 on 2016-03-21.
+ * Contains a table of actors. Used in Friends1.
  */
 public class FriendBox{
 
