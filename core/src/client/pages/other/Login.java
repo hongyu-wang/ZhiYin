@@ -23,9 +23,13 @@ import com.badlogic.gdx.utils.StringBuilder;
  */
 public class Login extends State {
     private int delta = 0;
+    private int delta2 = 0;
     public static final String NAME1 = "Alice";
     public static final String NAME2 = "Benny";
     public static final String NAME3 = "Cindy";
+    public static String message = "MY NAME IS HONGYU WANG. I WANT TO KILL MYSELF BECAUSE I DON'T KNOW WHAT'S GOING ON. HELP ME JERRY XU. HELP ME KEVIN ZHENG. AAAAAAAAAAAAAAAAAAAAAAHHHHH, OMG, I" +
+            "DON'T KNOW WHAT'S GOING ON. WHY IS THE SERVER BREAKING!@!!!@#!@#. WHO CARES XDDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE E E E E E EE E E ";
+    public static final String [] stuff = message.split(" ");
     private Label label;
     private boolean checkPull;
     private VeryBeginningInitializer vb;
@@ -45,8 +49,11 @@ public class Login extends State {
                     vb.pull();
                     checkPull = true;
                     button.remove();
-                    label.setPosition(0, StateManager.HEIGHT);
-                    stage.addActor(label = new Label("FUCK YOU", SkinSingleton.getInstance()));
+                    label = new Label("", SkinSingleton.getInstance());
+                    label.setPosition(50, StateManager.HEIGHT - 100);
+                    stage.addActor(label);
+
+                    wta.remove();
                 }
             }
         });
@@ -61,11 +68,11 @@ public class Login extends State {
         super.update(dt);
         if (checkPull){
             if (delta%100 == 0) {
-                if (label.getText().equals(new StringBuilder("FUCK YOU...")))
-                    label.setText("FUCK YOU");
-                else
-                    label.setText(label.getText() + ".");
-                System.out.println(vb.isUpdated());
+
+
+                label.setText("FUCK YOU "+stuff[delta2%(stuff.length-1)]);
+                delta2++;
+
             }
 
             if (vb.isUpdated())
