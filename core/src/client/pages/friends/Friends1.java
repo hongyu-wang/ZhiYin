@@ -1,9 +1,11 @@
 package client.pages.friends;
 
 import client.pages.friends.boxes.FriendBox;
+import client.pages.pageInternal.serverClientInteractions.FriendTalker;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 
 public class Friends1 extends Friends1Shell{
-
+    FriendTalker ft;
     public void init(){
         super.init();
 
@@ -32,4 +34,10 @@ public class Friends1 extends Friends1Shell{
 
     }
 
+
+    public void pullDataFromServer(){
+        FriendTalker ft = TalkerFactory.getFriendTalker();
+        ft.pull();
+
+    }
 }
