@@ -66,8 +66,8 @@ public class VeryBeginningInitializer extends Talkers{
 //            modelStorage.requestModelFromServer(MMusic.class.getName(), key++);
 
         //Hashtag
-//        for(int i = 0; i < 3; i++)
-//            modelStorage.requestModelFromServer(MHashtag.class.getName(), key++);
+        for(int i = 0; i < 3; i++)
+            modelStorage.requestModelFromServer(MHashtag.class.getName(), key++);
 
         totalmodels = key;
     }
