@@ -1,7 +1,6 @@
 package driver;
 
 import client.pageStorage.Pages;
-import client.singletons.InputListener;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -9,8 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import server.model.user.User;
-import server.webservices.PostObject;
 
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
@@ -25,7 +22,7 @@ public class GameLoop extends ApplicationAdapter {
 	public void create() {
 		stateManager = StateManager.getInstance();
         Pages.initClass();
-        stateManager.changeState(Pages.HOME1);
+        stateManager.changeState(Pages.LOGIN);
 		spriteBatch = MainBatch.getInstance();
         primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);

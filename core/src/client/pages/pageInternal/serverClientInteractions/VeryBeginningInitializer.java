@@ -11,11 +11,23 @@ import server.model.user.*;
 /**
  * Created by Hongyu Wang on 3/20/2016.
  */
-public class VeryBeginningIntializer extends Talkers{
+public class VeryBeginningInitializer extends Talkers{
 
-    public VeryBeginningIntializer(String username){
-        modelStorage.loginUser("Alice");
+    /*------------------------------------------------------------------------*/
+
+    @Override
+    @Deprecated
+    public void init() {
+
     }
+
+    public void init(String username){
+        modelStorage.loginUser(username);
+    }
+
+    /*------------------------------------------------------------------------*/
+
+
 
     @Override
     public void pull() {
@@ -62,7 +74,6 @@ public class VeryBeginningIntializer extends Talkers{
     public boolean isUpdated() {
         return super.checkOriginalUpdate();
     }
-
 
     @Override
     public void update(float dt) {

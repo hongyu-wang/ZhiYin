@@ -123,6 +123,10 @@ public class ModelStorage {
      * @return
      */
     public long generateKey(){
+        if(unassignedKeys.size() == 0){
+            return -1L;
+        }
+
         long key = unassignedKeys.remove(0);
 
         int size = unassignedKeys.size();

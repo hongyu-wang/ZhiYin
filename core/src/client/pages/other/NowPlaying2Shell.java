@@ -50,9 +50,10 @@ public abstract class NowPlaying2Shell extends State {
         b2.setExecutable(new TestExecutable("b2"));
         add(b2);
 
+
         Button b3 = new Button(this);
         b3.setBounds(520 + 1, 0, 230, 117);
-        b3.setExecutable(new TestExecutable("b3"));
+        b3.setExecutable(new AddPane(this));
         add(b3);
 
         Button upVoteButton = new Button(this);
