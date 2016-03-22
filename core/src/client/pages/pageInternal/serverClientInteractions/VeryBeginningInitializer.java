@@ -34,16 +34,23 @@ public class VeryBeginningInitializer extends Talkers{
         long key = 1;
 
         //Users
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < 3; i++) {
             modelStorage.requestModelFromServer(User.class.getName(), key++);
+            System.out.println(key);
+        }
 
         //UserContents
         for(int i = 0; i < 3; i++) {
             modelStorage.requestModelFromServer(UserProfile.class.getName(), key++);
+            System.out.println(key);
             modelStorage.requestModelFromServer(UserConversations.class.getName(), key++);
+            System.out.println(key);
             modelStorage.requestModelFromServer(UserActivityLog.class.getName(), key++);
+            System.out.println(key);
             modelStorage.requestModelFromServer(UserUploadedContent.class.getName(), key++);
+            System.out.println(key);
             modelStorage.requestModelFromServer(UserDiaryContent.class.getName(), key++);
+            System.out.println(key);
         }
 
         //Images
@@ -59,8 +66,8 @@ public class VeryBeginningInitializer extends Talkers{
 //            modelStorage.requestModelFromServer(MMusic.class.getName(), key++);
 
         //Hashtag
-        for(int i = 0; i < 3; i++)
-            modelStorage.requestModelFromServer(MHashtag.class.getName(), key++);
+//        for(int i = 0; i < 3; i++)
+//            modelStorage.requestModelFromServer(MHashtag.class.getName(), key++);
 
         totalmodels = key;
     }

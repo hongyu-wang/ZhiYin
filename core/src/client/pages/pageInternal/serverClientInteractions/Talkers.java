@@ -28,9 +28,11 @@ public abstract class Talkers implements Updatable{
     public abstract boolean isUpdated();
 
     protected boolean checkOriginalUpdate() {
-        for(long i = 1; i < totalmodels ; i++)
-            if(modelStorage.getModel(i) == null)
+        for(long i = 1; i < totalmodels ; i++) {
+            System.out.println(i);
+            if (modelStorage.getModel(i) == null)
                 return false;
+        }
         return true;
     }
 }
