@@ -27,8 +27,7 @@ public class Login extends State {
     public static final String NAME1 = "Alice";
     public static final String NAME2 = "Benny";
     public static final String NAME3 = "Cindy";
-    public static String message = "MY NAME IS HONGYU WANG. I WANT TO KILL MYSELF BECAUSE I DON'T KNOW WHAT'S GOING ON. HELP ME JERRY XU. HELP ME KEVIN ZHENG. AAAAAAAAAAAAAAAAAAAAAAHHHHH, OMG, I" +
-            "DON'T KNOW WHAT'S GOING ON. WHY IS THE SERVER BREAKING!@!!!@#!@#. WHO CARES XDDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE E E E E E EE E E ";
+    public static final String message = "Loading Loading. Loading.. Loading...";
     public static final String [] stuff = message.split(" ");
     private Label label;
     private boolean checkPull;
@@ -70,7 +69,7 @@ public class Login extends State {
             if (delta%100 == 0) {
 
 
-                label.setText("FUCK YOU "+stuff[delta2%(stuff.length-1)]);
+                label.setText(stuff[delta2%(stuff.length)]);
                 delta2++;
 
             }
