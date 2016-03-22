@@ -9,13 +9,13 @@ import client.stateInterfaces.Executable;
  * Created by Hongyu Wang on 3/21/2016.
  */
 public class AddPane implements Executable {
-    private Pages page;
-    public AddPane(Pages page){
-        this.page = page;
+    private State state;
+    public AddPane(State state){
+        this.state = state;
     }
 
     @Override
     public void execute() {
-        page.getStateReference().getStage().addActor(new CommentWindow().getWindow());
+        state.getStage().addActor(new CommentWindow().getWindow());
     }
 }

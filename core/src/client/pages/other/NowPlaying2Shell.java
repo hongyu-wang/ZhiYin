@@ -53,7 +53,7 @@ public abstract class NowPlaying2Shell extends State {
 
         Button b3 = new Button(this);
         b3.setBounds(520 + 1, 0, 230, 117);
-        b3.setExecutable(new AddPane(Pages.NOWPLAYING2));
+        b3.setExecutable(new AddPane(this));
         add(b3);
 
         Button upVoteButton = new Button(this);
