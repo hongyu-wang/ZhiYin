@@ -1,7 +1,6 @@
 package driver;
 
 import client.pageStorage.Pages;
-import client.singletons.InputListener;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -9,8 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import server.model.user.User;
-import server.webservices.PostObject;
 
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
