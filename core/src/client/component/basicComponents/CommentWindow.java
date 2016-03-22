@@ -31,8 +31,8 @@ public class CommentWindow {
     }
     private void initializeWindow(){
         window = new Window("Comment", SkinSingleton.getInstance());
-        window.setBounds(0, 300, wta.getPrefWidth() + 200, wta.getPrefHeight() + 20 + saveButton.getPrefHeight());
-        window.add(wta).minWidth(window.getWidth());
+        window.setBounds(0, 300, wta.getPrefWidth() + 200, wta.getPrefHeight() + 50 + saveButton.getPrefHeight());
+        window.add(wta).minWidth(window.getWidth()-20);
         window.row();
         Table table = new Table();
         table.add(saveButton).minWidth(window.getWidth()/2);
@@ -41,7 +41,7 @@ public class CommentWindow {
     }
 
     private void initializeWorkingTextArea(){
-        wta = new WorkingTextArea("test.........", SkinSingleton.getInstance());
+        wta = new WorkingTextArea("", SkinSingleton.getInstance());
         wta.setPrefRows(10);
         wta.setPrefRows(10);
     }

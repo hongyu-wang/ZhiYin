@@ -15,14 +15,10 @@ public class NowPlaying2 extends NowPlaying2Shell {
     float count = 0;
     public void init(){
         super.init();
-        addWindow();
     }
 
 
-    public void addWindow(){
-        CommentWindow window = new CommentWindow();
-        stage.addActor(window.getWindow());
-    }
+
 
     @Override
     public void dispose() {
