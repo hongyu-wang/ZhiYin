@@ -43,42 +43,60 @@ public class FriendTalkers extends Talkers {
             3. Get the profile of the friend.
     */
 
-
+    /**
+     * Pulls all friends into the model Storage.
+     *
+     */
     @Override
     public void pull() {
         User user = modelStorage.getMainUser();
 
-        List<User> newList = new ArrayList<>();
-
         for(long key: user.getFriendKeys()){
-            User friend = modelStorage.<User>getModel(key);
-            if(friend == null){
-                continue;
-            }
-            newList.add(friend);
+            modelStorage.requestModelFromServer(User.class.getName(), key);
         }
     }
 
+    /**
+     * Pushes all friends which are not added to the current user into
+     * the user.
+     *
+     */
     @Override
     public void push() {
         User user = modelStorage.getMainUser();
 
         for(User friend: friends){
-            if(!user.getFriendKeys().contains(friend.getKey()))
+            if(!user.getFriendKeys().contains(friend))
                 user.getFriendKeys().add(friend.getKey());
         }
+
+        modelStorage.pushModel(user);
     }
 
+    /**Checks if all of the friends have been successfully pulled.
+     *
+     * @return  True if all friends exist within this talker.
+     */
     @Override
     public boolean isUpdated() {
+        for(User user: friends){
+            if(user == null){
+                return false;
+            }
+        }
         return true;
     }
 
+    /**
+     * Updates the friends List from modelStorage.
+     *
+     * @param dt The rate of change of updating
+     */
     @Override
     public void update(float dt) {
-        List<Long> pointers = modelStorage.getMainUser().getFriendKeys();
-        for(long friendKey: pointers){
-            friends.add(modelStorage.getModel(friendKey));
+        List<User> newFriendList = new ArrayList<>();
+        for(long key: modelStorage.getMainUser().getFriendKeys()){
+            newFriendList.add(modelStorage.getModel(key));
         }
     }
 }
