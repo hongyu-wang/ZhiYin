@@ -14,6 +14,11 @@ import server.model.user.*;
 public class VeryBeginningIntializer extends Talkers{
 
     public VeryBeginningIntializer(String username){
+        modelStorage.loginUser("Alice");
+    }
+
+    @Override
+    public void pull() {
         long key = 1;
 
         //Users
@@ -49,13 +54,18 @@ public class VeryBeginningIntializer extends Talkers{
     }
 
     @Override
-    public void pull() {
+    public void push() {
+        return;
+    }
 
+    @Override
+    public boolean isUpdated() {
+        return super.checkOriginalUpdate();
     }
 
 
     @Override
     public void update(float dt) {
-        modelStorage.loginUser("Alice");
+        return;
     }
 }

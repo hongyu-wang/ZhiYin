@@ -8,15 +8,20 @@ import client.stateInterfaces.Updatable;
  * Created by Hongyu Wang on 3/20/2016.
  */
 public abstract class Talkers implements Updatable{
-    protected long totalmodels = 0;
+    protected static long totalmodels;
     protected ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
     public Talkers(){
-        update(0);
+
     }
 
     public abstract void pull();
 
-    public boolean updated() {
+    public abstract void push();
+
+    public abstract boolean isUpdated();
+
+
+    protected boolean checkOriginalUpdate() {
         for(long i = 0; i < totalmodels ; i++)
             if(modelStorage.getModel(i) == null)
                 return false;

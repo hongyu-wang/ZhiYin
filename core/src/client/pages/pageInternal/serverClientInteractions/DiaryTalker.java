@@ -22,4 +22,14 @@ public class DiaryTalker extends Talkers{
     public void pull() {
 
     }
+
+    @Override
+    public void push() {
+
+    }
+
+    @Override
+    public boolean isUpdated() {
+        return false;
+    }
 }
