@@ -36,7 +36,7 @@ public class FriendBox{
 
     private void initTable(int y){
         this.table = new Table();
-        table.setBounds(0, (1100 - y) * StateManager.M, 750 * StateManager.M, 117 * StateManager.M);
+        table.setBounds(0, y * StateManager.M, 750 * StateManager.M, 117 * StateManager.M);
     }
 
     private void initIcon(int iconNum){
