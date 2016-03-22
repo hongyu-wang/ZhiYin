@@ -1,5 +1,6 @@
 package server.services.implementations.mediaService;
 
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import server.model.media.MText;
 import server.services.interfaces.models.TextManager;
 import server.webclient.WebServiceClient;
@@ -29,6 +30,8 @@ public class TextManagerImplementation implements TextManager {
     @Override
     public MText createText(String message, int type){
         MText text = new MText();
+
+        text.setKey(ModelStorageFactory.createModelStorage().generateKey());
 
         text.setText(message);
 
