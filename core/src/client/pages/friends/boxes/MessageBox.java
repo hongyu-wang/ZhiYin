@@ -72,7 +72,7 @@ public class MessageBox {
         stack.setHeight(height * StateManager.M);
     }
 
-    private void initSoundBox(Executable e){
+    private void initSoundBox(final Executable e){
 //        stack.setY((y - 128 - 56) * StateManager.M);
         stack.setHeight(128 * StateManager.M);
 
