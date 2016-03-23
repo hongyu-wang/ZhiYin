@@ -86,5 +86,7 @@ public class ArtistTalker extends Talkers {
         for(long key: artist.getSongs()){
             newMusicList.add(modelStorage.getModel(key));
         }
+
+        musicList = newMusicList;
     }
 }
