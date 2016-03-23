@@ -60,6 +60,7 @@ public class StateManager implements Disposable, Updatable, Drawable {
 
     public void toTemporaryState(State state){
         currentState = state;
+        currentState.reset();
         InputListener.setListener(state);
     }
 
