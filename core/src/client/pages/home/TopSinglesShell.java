@@ -10,26 +10,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
 
 /**
- * Created by blobbydude24 on 2016-03-13.
+ * Created by blobbydude24 on 2016-03-23.
  */
-public abstract class Home1Shell extends State{
+public abstract class TopSinglesShell extends State {
 
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Home/HomeBG.png"));
+        Image background = new Image(new Texture("Home/TopSinglesBG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH * StateManager.M, GameLoop.HEIGHT * StateManager.M);
         stage.addActor(background);
 
-        Button artistButton = new Button(this);
-        artistButton.setBounds(250 + 1, 1217, 250, 117);
-        artistButton.setExecutable(new ExecuteChangePage(Pages.HOME3));
-        add(artistButton);
-
-        Button discoveryButton = new Button(this);
-        discoveryButton.setBounds(500 + 1, 1217, 250, 117);
-        discoveryButton.setExecutable(new ExecuteChangePage(Pages.HOME4));
-        add(discoveryButton);
+        Button backButton = new Button(this);
+        backButton.setBounds(0, 1217, 117, 117);
+        backButton.setExecutable(new ExecuteChangePage(Pages.HOME1));
+        add(backButton);
 
         setBottomBar();
     }
@@ -38,6 +33,5 @@ public abstract class Home1Shell extends State{
     public void dispose() {
 
     }
-
 
 }

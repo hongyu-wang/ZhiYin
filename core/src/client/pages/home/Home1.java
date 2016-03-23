@@ -32,7 +32,7 @@ public class Home1 extends Home1Shell {
         b1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.PROFILE).execute();
+                StateManager.getInstance().toTemporaryState(new TopSingles());
             }
         });
 
@@ -45,7 +45,7 @@ public class Home1 extends Home1Shell {
         b2.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.PROFILE).execute();
+                StateManager.getInstance().toTemporaryState(new TopSingles());
             }
         });
 
@@ -131,33 +131,33 @@ public class Home1 extends Home1Shell {
 
     public void addNewRelease(String artistName, String songName){
         newRelease.row().padTop(30 * StateManager.M);
-        newRelease.add(createNewSingle(artistName, songName)).expand();
+        newRelease.add(createNewSingle(artistName, songName)).width(750 * StateManager.M);
     }
 
     public void addTopSingle(String artistName, String songName) {
         topSingles.row().padTop(30 * StateManager.M);
-        topSingles.add(createNewSingle(artistName, songName));
+        topSingles.add(createNewSingle(artistName, songName)).width(750 * StateManager.M);
     }
 
     private Table createNewSingle(String artistName, String songName){
         Table t = new Table();
 
-        Label artist = new Label(artistName, SkinSingleton.getInstance());
-        Label song = new Label(songName, SkinSingleton.getInstance());
+        Label label = new Label(artistName + "\n" + songName, SkinSingleton.getInstance());
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 
-        t.add(artist);
-        t.row();
-        t.add(song);
-        t.row().padTop(28 * StateManager.M);
-        t.add(line);
-
-        t.addListener(new ClickListener() {
+        Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
+        ImageButton button = new ImageButton(i.getDrawable());
+        button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 new ExecuteChangePage(Pages.NOWPLAYING).execute();
             }
         });
+
+        t.add(label).expand().left().padLeft(50 * StateManager.M);
+        t.add(button).expand().right().padRight(50 * StateManager.M);
+        t.row();
+        t.add(line).padTop(28 * StateManager.M);
 
         return t;
     }
