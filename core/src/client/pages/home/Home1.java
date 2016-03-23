@@ -1,7 +1,9 @@
 package client.pages.home;
 
 import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.ExecuteToTempState;
 import client.pageStorage.Pages;
+import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -32,7 +34,7 @@ public class Home1 extends Home1Shell {
         b1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                StateManager.getInstance().toTemporaryState(new TopSingles());
+                new ExecuteChangePage(Pages.TOPSINGLES).execute();
             }
         });
 
@@ -45,7 +47,7 @@ public class Home1 extends Home1Shell {
         b2.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                StateManager.getInstance().toTemporaryState(new TopSingles());
+                new ExecuteChangePage(Pages.TOPSINGLES).execute();
             }
         });
 
@@ -64,7 +66,7 @@ public class Home1 extends Home1Shell {
 
         stage.addActor(scrollpane);
 
-        table.setDebug(true);
+        //table.setDebug(true);
 
         addNewRelease("artist1", "song1");
         addNewRelease("artist2", "song2");
@@ -83,50 +85,6 @@ public class Home1 extends Home1Shell {
         addTopSingle("artist6", "song6");
         addTopSingle("artist7", "song7");
         addTopSingle("artist8", "song8");
-
-//        final Texture tex = new Texture("Scrolling Test 2.png");
-//
-//        Image img = new Image(tex);
-//        Image img3 = new Image(new Texture("PictureFiles\\tempButton1.png"));
-//
-//        Image img4 = new Image(new Texture("PictureFiles\\tempButton2.png"));
-//        Image img5 = new Image(new Texture("PictureFiles\\tempButton3.png"));
-//
-//        final ScrollTable table = new ScrollTable();
-//
-//
-//        final ImageButton button1 = new ImageButton(img3.getDrawable());
-//        final ImageButton button2 = new ImageButton(img4.getDrawable());
-//        final ImageButton button3 = new ImageButton(img5.getDrawable());
-//
-//        button1.addListener(new ClickListener(){
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                new ExecuteChangeandSetMusic("Ben Rector - 30,000 Feet.mp3").execute();
-//            }
-//        });
-//
-//        button2.addListener(new ClickListener(){
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                new ExecuteChangeandSetMusic("Sara Bareilles - Bottle It Up.mp3").execute();
-//            }
-//        });
-//
-//        button3.addListener(new ClickListener(){
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                new ExecuteChangeandSetMusic("Avril Lavigne - Everybody Hurts.mp3").execute();
-//            }
-//        });
-//        table.addToPane(button1);
-//        table.addToPane(button2);
-//        table.addToPane(button3);
-//        table.addToPane(img);
-//
-//
-//
-//        stage.addActor(table.getPane());
     }
 
     public void addNewRelease(String artistName, String songName){
@@ -139,27 +97,37 @@ public class Home1 extends Home1Shell {
         topSingles.add(createNewSingle(artistName, songName)).width(750 * StateManager.M);
     }
 
-    private Table createNewSingle(String artistName, String songName){
+    private Stack createNewSingle(String artistName, String songName){
+        Stack s = new Stack();
+
         Table t = new Table();
 
         Label label = new Label(artistName + "\n" + songName, SkinSingleton.getInstance());
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 
         Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
-        ImageButton button = new ImageButton(i.getDrawable());
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.NOWPLAYING).execute();
-            }
-        });
+        //ImageButton button = new ImageButton(i.getDrawable());
 
         t.add(label).expand().left().padLeft(50 * StateManager.M);
-        t.add(button).expand().right().padRight(50 * StateManager.M);
+        t.add(i).expand().right().padRight(50 * StateManager.M);
         t.row();
         t.add(line).padTop(28 * StateManager.M);
 
-        return t;
+        Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
+
+        s.add(i2);
+        s.add(t);
+
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this));
+
+        s.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                e.execute();
+            }
+        });
+
+        return s;
     }
 
 
