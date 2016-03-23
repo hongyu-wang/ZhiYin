@@ -1,8 +1,7 @@
 package client.pages.other;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.*;
-import client.pageStorage.Pages;
+import client.events.executables.internalChanges.TestExecutable;
 import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,14 +19,6 @@ public abstract class NowPlayingShell extends State{
         background.setBounds(0, 0, GameLoop.WIDTH * StateManager.M, GameLoop.HEIGHT * StateManager.M);
         stage.addActor(background);
 
-
-        Button backButton = new Button(this);
-        backButton.setBounds(0 + 1, 1217, 117, 117);
-        ExecutableMultiplexer executables = new ExecutableMultiplexer();
-        executables.addExecutable(new ExecuteChangePage(Pages.HOME1));
-        backButton.setExecutable(executables);
-        add(backButton);
-
         Button rewindButton = new Button(this);
         rewindButton.setBounds(170 + 1, 246, 53, 46);
         rewindButton.setExecutable(new TestExecutable("rewind"));
@@ -40,7 +31,7 @@ public abstract class NowPlayingShell extends State{
 
         Button pauseButton = new Button(this);
         pauseButton.setBounds(288 + 1, 177, 180, 180);
-        pauseButton.setExecutable(new ExecutePlayMusic());
+        //pauseButton.setExecutable(new ExecutePlayMusic());
         add(pauseButton);
 
         Button b1 = new Button(this);
@@ -62,11 +53,6 @@ public abstract class NowPlayingShell extends State{
         upVoteButton.setBounds(562 + 1, 1240, 144, 54);
         upVoteButton.setExecutable(new TestExecutable("up vote"));
         add(upVoteButton);
-
-        Button testButton = new Button(this);
-        testButton.setBounds(607 + 1, 1063, 51, 51);
-        testButton.setExecutable(new ExecuteChangePage(Pages.NOWPLAYING2));
-        add(testButton);
 
 //        Dimensions of the picture are 655 x 655
 //        Button picture = new Button(this);

@@ -10,7 +10,6 @@ import server.model.soundCloud.MMusicPost;
 import server.model.user.User;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Kevin Zheng on 2016-03-22.
@@ -55,10 +54,6 @@ public class MusicTalker extends Talkers{
 
     public List<MAudio> getAudioComments() {
         return audioComments;
-    }
-
-    public String getCommentText(MComment comment){
-        return comments.get(comment);
     }
 
 
