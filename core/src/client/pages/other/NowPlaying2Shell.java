@@ -21,7 +21,6 @@ public abstract class NowPlaying2Shell extends State {
         backButton.setBounds(0 + 1, 1217, 117, 117);
         ExecutableMultiplexer executables = new ExecutableMultiplexer();
         executables.addExecutable(new ExecuteChangePage(Pages.HOME1));
-        executables.addExecutable(new ExecutePauseMusic());
         backButton.setExecutable(executables);
         add(backButton);
 

@@ -58,6 +58,11 @@ public class StateManager implements Disposable, Updatable, Drawable {
     }
 
 
+    public void toTemporaryState(State state){
+        currentState = state;
+        InputListener.setListener(state);
+    }
+
     public void noResetChangeState(Pages page){
         currentState = page.getStateReference();
         InputListener.setListener(currentState);

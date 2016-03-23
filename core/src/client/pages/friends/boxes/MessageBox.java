@@ -73,7 +73,6 @@ public class MessageBox {
     }
 
     private void initSoundBox(final Executable e){
-//        stack.setY((y - 128 - 56) * StateManager.M);
         stack.setHeight(128 * StateManager.M);
 
         Image image = new Image(new Texture("Friends4\\Bubble" + byUser + "@" + StateManager.M + ".png"));
