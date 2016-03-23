@@ -12,6 +12,8 @@ public abstract class Talkers implements Updatable{
     protected static long totalOriginalModels;
     protected static ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
 
+    private boolean waiting = false;
+
     /*------------------------------------------------------------------------*/
 
     public abstract void init();
@@ -25,6 +27,9 @@ public abstract class Talkers implements Updatable{
 
     public abstract boolean isUpdated();
 
+    public boolean isWaiting(){
+        return waiting;
+    }
 
 
 
@@ -38,10 +43,9 @@ public abstract class Talkers implements Updatable{
 
 
 
-
-
-
-
+    protected void setWaiting(boolean waiting){
+        this.waiting = waiting;
+    }
 
     protected boolean checkOriginalUpdate() {
         for(long i = 1; i < totalOriginalModels; i++) {

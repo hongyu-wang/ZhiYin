@@ -44,6 +44,8 @@ public class ArtistTalker extends Talkers {
 
     @Override
     public void pull() {
+        super.setWaiting(true);
+
         modelStorage.requestModelFromServer(MText.class.getName(), artist.getName());
 
         for(long key: artist.getSongs()){
@@ -68,6 +70,7 @@ public class ArtistTalker extends Talkers {
             if(music == null)
                 return false;
 
+        super.setWaiting(false);
         return true;
     }
 
