@@ -18,6 +18,7 @@ public class MusicTalker extends Talkers{
     private Texture image;
     private String name;
     private User creator;
+    private MAudio music;
 
     private List<MHashtag> mHashtags;
     private List<MComment> mComments;
@@ -38,6 +39,8 @@ public class MusicTalker extends Talkers{
     public User getCreator() {
         return creator;
     }
+
+    public MAudio getMusicData() { return music; }
 
     public List<MHashtag> getHashtags() {
         return mHashtags;

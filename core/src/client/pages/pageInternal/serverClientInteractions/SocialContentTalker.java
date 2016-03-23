@@ -8,6 +8,7 @@ import server.model.user.UserConversations;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserUploadedContent;
 import server.services.factories.ConversationManagerFactory;
+import server.services.factories.MusicPostManagerFactory;
 import tools.utilities.Utils;
 
 import java.util.ArrayList;
@@ -47,6 +48,8 @@ public class SocialContentTalker extends Talkers{
     @Override
     public void init() {
         uConv = modelStorage.getModel(super.getMainUser().getConversations());
+        uConv = modelStorage.getModel(super.getMainUser().getContent());
+        uDiary = modelStorage.getModel(super.getMainUser().getDiary());
     }
 
     public void addNewConversation(List<User> friends){
@@ -57,7 +60,6 @@ public class SocialContentTalker extends Talkers{
         }
 
         MConversation conversation = ConversationManagerFactory.createConversationManager().createConversation(friendKeys);
-
 
         conversations.add(conversation);
     }
@@ -74,10 +76,21 @@ public class SocialContentTalker extends Talkers{
     @Override
     public void pull() {
 
+        modelStorage.requestModelFromServer(UserConversations.class.getName(), super.getMainUser().getConversations());
+        modelStorage.requestModelFromServer(UserUploadedContent.class.getName(), super.getMainUser().getContent());
+        modelStorage.requestModelFromServer(UserDiaryContent.class.getName(), super.getMainUser().getDiary());
+
+
         for(long convoKey: uConv.getConvoKeys()){
-            modelStorage.requestModelFromServer(
-                    UserConversations.class.getName(),
-                    convoKey);
+            modelStorage.requestModelFromServer(MConversation.class.getName(), convoKey);
+        }
+
+        for(long musicKey: uCont.getPostKeys()){
+            modelStorage.requestModelFromServer(MMusicPost.class.getName(), musicKey);
+        }
+
+        for(long diaryKey: uDiary.getDiaryKeys()){
+            modelStorage.requestModelFromServer(MDiaryPost.class.getName(), diaryKey);
         }
 
     }
@@ -91,8 +104,19 @@ public class SocialContentTalker extends Talkers{
                 uConv.getConvoKeys().add(conversation.getKey());
         }
 
+        for(MMusicPost musicPost: musicPosts){
+            if(!uCont.getPostKeys().contains(musicPost.getKey()))
+                uCont.getPostKeys().add(musicPost.getKey());
+        }
+
+        for(MDiaryPost diaryPost: diaryPosts){
+            if(!uDiary.getDiaryKeys().contains(diaryPost.getKey()))
+                uDiary.getDiaryKeys().add(diaryPost.getKey());
+        }
         //Push
         modelStorage.pushModel(uConv);
+        modelStorage.pushModel(uCont);
+        modelStorage.pushModel(uDiary);
     }
 
     @Override

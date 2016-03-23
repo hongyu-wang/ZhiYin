@@ -1,16 +1,15 @@
 package client.pages.pageInternal.serverClientInteractions;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import server.model.media.MAudio;
 import server.model.media.MImage;
 import server.model.media.MMusic;
 import server.model.media.MText;
 import server.model.social.MComment;
-import server.model.social.MConversation;
 import server.model.social.MDiaryPost;
-import server.model.user.UserDiaryContent;
+import tools.utilities.Utils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,7 +23,7 @@ public class DiaryTalker extends Talkers{
     private String text;
     private Texture image;
     private MMusic music;
-    private MAudio userAudio;
+    private MAudio userRecording;
 
     private List<MComment> mComments;
     private Map<MComment, String> comments;
@@ -43,8 +42,8 @@ public class DiaryTalker extends Talkers{
         return music;
     }
 
-    public MAudio getUserAudio() {
-        return userAudio;
+    public MAudio getUserRecording() {
+        return userRecording;
     }
 
     public List<MComment> getAllComments() {
@@ -79,7 +78,23 @@ public class DiaryTalker extends Talkers{
      */
     @Override
     public void update(float dt) {
+        MText postText = modelStorage.getModel(this.diaryPost.getTextKey());
+        if(postText != null)
+            text = postText.getText();
 
+        MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
+        if(postImage != null)
+            image = postImage.getImage();
+
+        music = modelStorage.getModel(this.diaryPost.getMusicKey());
+        userRecording = modelStorage.getModel(this.diaryPost.getAudioKey());
+
+
+        List<MComment> newCommentsList = Utils.<MComment>newList();
+
+        for(long key: diaryPost.getComments()){
+            newCommentsList.add(modelStorage.getModel(key));
+        }
     }
 
     @Override
@@ -90,13 +105,28 @@ public class DiaryTalker extends Talkers{
         modelStorage.requestModelFromServer(MAudio.class.getName(), diaryPost.getAudioKey());
 
         for(long key: diaryPost.getComments()){
-            modelStorage.requestModelFromServer(MConversation.class.getName(), key);
+            modelStorage.requestModelFromServer(MComment.class.getName(), key);
         }
     }
 
     @Override
     public void push() {
+        MText postText = modelStorage.getModel(this.diaryPost.getTextKey());
+        MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
 
+        postText.setText(text);
+        postImage.setImage(image);
+
+        diaryPost.setMusicKey(music.getKey());
+        diaryPost.setAudioKey(userRecording.getKey());
+
+        while(mComments.size() > diaryPost.getComments().size()){
+
+        }
+
+        modelStorage.pushModel(postText);
+        modelStorage.pushModel(postImage);
+        modelStorage.pushModel(diaryPost);
     }
 
     @Override
