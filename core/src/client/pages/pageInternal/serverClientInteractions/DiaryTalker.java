@@ -1,6 +1,7 @@
 package client.pages.pageInternal.serverClientInteractions;
 
 import com.badlogic.gdx.graphics.Texture;
+import org.w3c.dom.Comment;
 import server.model.media.MAudio;
 import server.model.media.MImage;
 import server.model.media.MMusic;
@@ -18,6 +19,7 @@ import java.util.Map;
  */
 public class DiaryTalker extends Talkers{
     private MDiaryPost diaryPost;
+    private Map<MComment, CommentHelper> userComments;
 
     //--Interface Fields
     private String text;
@@ -95,6 +97,41 @@ public class DiaryTalker extends Talkers{
         for(long key: diaryPost.getComments()){
             newCommentsList.add(modelStorage.getModel(key));
         }
+
+        mComments = newCommentsList;
+
+        for(MComment comment: mComments){
+            updateComments(comment);
+        }
+    }
+
+    private void updateComments(MComment comment){
+        if(comment != null){
+            return;
+        }
+        if(userComments.keySet().contains(comment)){
+            oldHelper(comment);
+        }
+        else{
+            newHelper(comment);
+        }
+    }
+
+    private void oldHelper(MComment comment){
+        CommentHelper helper = userComments.get(comment);
+
+        if(helper.isWaiting()){
+            helper.update(0);
+        }
+        else{
+            helper.pull();
+        }
+    }
+
+    private void newHelper(MComment comment){
+        CommentHelper helper = new CommentHelper();
+
+        helper.init(comment);
     }
 
     @Override
@@ -111,6 +148,8 @@ public class DiaryTalker extends Talkers{
 
     @Override
     public void push() {
+
+        //Text, Texture, Music, Audio
         MText postText = modelStorage.getModel(this.diaryPost.getTextKey());
         MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
 
@@ -120,10 +159,14 @@ public class DiaryTalker extends Talkers{
         diaryPost.setMusicKey(music.getKey());
         diaryPost.setAudioKey(userRecording.getKey());
 
+        //Comments
         while(mComments.size() > diaryPost.getComments().size()){
+            MComment comment = mComments.get(diaryPost.getComments().size());
 
+            diaryPost.getComments().add(comment.getKey());
+
+            modelStorage.pushModel(comment);
         }
-
         modelStorage.pushModel(postText);
         modelStorage.pushModel(postImage);
         modelStorage.pushModel(diaryPost);
@@ -131,6 +174,68 @@ public class DiaryTalker extends Talkers{
 
     @Override
     public boolean isUpdated() {
-        return false;
+        if(text == null || image == null || music == null || userRecording == null){
+            return false;
+        }
+
+        if(mComments == null || comments == null || oneSecAudioComments == null){
+            return false;
+        }
+
+        for(MComment comment: mComments){
+            if(comment == null){
+                return false;
+            }
+        }
+
+        for(MComment comment: mComments){
+            if(comments.get(comment) == null){
+                return false;
+            }
+        }
+
+        for(MComment comment: mComments){
+            if(oneSecAudioComments.get(comment) == null){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private class CommentHelper extends Talkers{
+        private MComment mComment;
+
+        private String text;
+
+
+        @Deprecated
+        @Override
+        public void init() {
+
+        }
+
+        public void init(MComment comment){}
+
+
+        @Override
+        public void pull() {
+
+        }
+
+        @Override
+        public void push() {
+
+        }
+
+        @Override
+        public boolean isUpdated() {
+            return false;
+        }
+
+        @Override
+        public void update(float dt) {
+
+        }
     }
 }

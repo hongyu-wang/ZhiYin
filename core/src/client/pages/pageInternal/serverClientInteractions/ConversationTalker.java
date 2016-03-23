@@ -17,6 +17,7 @@ import java.util.Map;
 public class ConversationTalker extends Talkers {
 
     private MConversation conversation;
+    private Map<MMessage, MessageHelper> userMessages;
 
     //--Interface Fields
     private List<MMessage> mMessages;
@@ -75,6 +76,8 @@ public class ConversationTalker extends Talkers {
 
     @Override
     public void pull() {
+        super.setWaiting(true);
+
         for(long key: conversation.getMessageList()){
             modelStorage.requestModelFromServer(MMessage.class.getName(), key);
         }
@@ -98,8 +101,9 @@ public class ConversationTalker extends Talkers {
 
             modelStorage.pushModel(text);
             modelStorage.pushModel(message);
-            modelStorage.pushModel(conversation);
         }
+
+        modelStorage.pushModel(conversation);
     }
 
     @Override
@@ -141,6 +145,7 @@ public class ConversationTalker extends Talkers {
                 return false;
         }
 
+        super.setWaiting(false);
         return true;
     }
 
@@ -162,25 +167,103 @@ public class ConversationTalker extends Talkers {
             newMessageList.add(modelStorage.<MMessage>getModel(key));
         }
 
-
         for(MMessage message: mMessages){
-            if(message == null){
-                continue;
-            }
+            updateMessages(message);
+        }
+    }
 
-            //Add Message Strings
-            MText text = modelStorage.getModel(message.getKey());
+    private void updateMessages(MMessage message){
+        if(message == null){
+            return;
+        }
+        if(!userMessages.keySet().contains(message)){
+            newHelper(message);
+        }
+        else{
+            oldHelper(message);
+        }
+    }
+
+    private void newHelper(MMessage message){
+        MessageHelper messageHelper = new MessageHelper();
+        userMessages.put(message, messageHelper);
+
+        messageHelper.init(message);
+        messageHelper.pull();
+    }
+
+
+    private void oldHelper(MMessage message){
+        MessageHelper messageHelper = userMessages.get(message);
+
+        if(messageHelper.isWaiting()){
+            messageHelper.update(0);
+        }
+        else{
+            messageHelper.pull();
+        }
+
+        if(messageHelper.isUpdated()){
+            messages.put(message, messageHelper.message);
+            users.put(message, messageHelper.creator);
+        }
+    }
+
+
+    private class MessageHelper extends Talkers{
+        private MMessage mMessage;
+        private MText text;
+
+        public String message;
+        public User creator;
+
+        @Deprecated
+        @Override
+        public void init() {
+
+        }
+
+        public void init(MMessage message){
+            this.mMessage = message;
+        }
+
+
+        @Override
+        public void pull() {
+            super.setWaiting(true);
+
+            modelStorage.requestModelFromServer(MText.class.getName(), mMessage.getText());
+            modelStorage.requestModelFromServer(User.class.getName(), mMessage.getCreator());
+        }
+
+        @Override
+        public void push() {
+            return;
+        }
+
+        @Override
+        public boolean isUpdated() {
             if(text == null){
-                continue;
+                return false;
             }
-            messages.put(message, text.getText());
 
-            //Add Message Users
-            User user = modelStorage.getModel(message.getCreator());
-            if(user == null){
-                continue;
+            if(creator == null){
+                return false;
             }
-            users.put(message, user);
+
+            super.setWaiting(false);
+
+            return true;
+        }
+
+        @Override
+        public void update(float dt) {
+            text = modelStorage.getModel(mMessage.getText());
+            creator = modelStorage.getModel(mMessage.getCreator());
+
+            if(text != null)
+                message = text.getText();
         }
     }
 }
+

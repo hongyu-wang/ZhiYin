@@ -5,31 +5,31 @@ import server.model.media.MImage;
 import server.model.user.User;
 import server.model.user.UserProfile;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- * Fuck you Kevin Zheng
  *
  * Created by Hongyu Wang on 3/20/2016.
  */
 public class ProfileTalker extends Talkers{
-    private User user;
-    private UserProfile profile;
+    private static Map<User, Profile> userProfiles;
+
+    private Profile currentProfile;
 
     //--Interface Fields
-    private Texture profileImage;
-    private String name;
-    private String description;
 
     //Getters and Setters
     public Texture getProfileImage() {
-        return profileImage;
+        return currentProfile.getProfileImage();
     }
 
     public String getName() {
-        return name;
+        return currentProfile.getName();
     }
 
     public String getDescription() {
-        return description;
+        return currentProfile.getDescription();
     }
 
 
@@ -42,8 +42,13 @@ public class ProfileTalker extends Talkers{
 
 
     public void init(User user){
-        this.user = user;
-        pull();
+        if(userProfiles.keySet().contains(user)){
+            currentProfile = userProfiles.get(user);
+        }
+        else{
+            currentProfile = new Profile();
+            currentProfile.init(user);
+        }
     }
 
     /*------------------------------------------------------------------------*/
@@ -52,27 +57,12 @@ public class ProfileTalker extends Talkers{
 
     @Override
     public void pull() {
-        profile = modelStorage.getModel(user.getProfile());
-
-        modelStorage.requestModelFromServer(
-                MImage.class.getName()
-                , profile.getImageKey());
+        currentProfile.pull();
     }
 
     @Override
     public void push() {
-        profile = modelStorage.getModel(user.getProfile());
-
-        MImage image = modelStorage.getModel(profile.getImageKey());
-
-        //Set
-        profile.setUsername(name);
-        profile.setDescription(description);
-        image.setImage(this.profileImage);
-
-        //Push
-        modelStorage.pushModel(profile);
-        modelStorage.pushModel(image);
+        currentProfile.push();
     }
 
     @Override
@@ -80,15 +70,111 @@ public class ProfileTalker extends Talkers{
         return super.checkOriginalUpdate();
     }
 
+    @Override
+    public boolean isWaiting(){
+        return currentProfile.isWaiting();
+    }
 
     @Override
     public void update(float dt) {
-        profile = modelStorage.getModel(user.getProfile());
+        currentProfile.update(dt);
+    }
 
-        MImage image = modelStorage.getModel(profile.getImageKey());
 
-        name = profile.getUsername();
-        description = profile.getDescription();
-        profileImage = image.getImage();
+
+    //-- PRIVATE PROFILE CLASS
+
+    /**PRIVATE PROFILE CLASS:
+     *
+     *      Stores the user information based on a main model: user .
+     *
+     */
+    private class Profile extends Talkers{
+
+        private User user;
+        private UserProfile profile;
+
+        //--Interface Fields
+        private Texture profileImage;
+        private String name;
+        private String description;
+
+        //Getters and Setters
+        public Texture getProfileImage() {
+            return profileImage;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+
+        /*------------------------------------------------------------------------*/
+
+        @Override
+        @Deprecated
+        public void init() {
+        }
+
+
+        public void init(User user){
+            this.user = user;
+        }
+
+        /*------------------------------------------------------------------------*/
+
+
+
+        @Override
+        public void pull() {
+            super.setWaiting(true);
+
+            profile = modelStorage.getModel(user.getProfile());
+
+            modelStorage.requestModelFromServer(
+                    MImage.class.getName()
+                    , profile.getImageKey());
+        }
+
+        @Override
+        public void push() {
+            profile = modelStorage.getModel(user.getProfile());
+
+            MImage image = modelStorage.getModel(profile.getImageKey());
+
+            //Set
+            profile.setUsername(name);
+            profile.setDescription(description);
+            image.setImage(this.profileImage);
+
+            //Push
+            modelStorage.pushModel(profile);
+            modelStorage.pushModel(image);
+        }
+
+        @Override
+        public boolean isUpdated() {
+            boolean updated = super.checkOriginalUpdate();
+
+            super.setWaiting(!updated);
+
+            return updated;
+        }
+
+
+        @Override
+        public void update(float dt) {
+            profile = modelStorage.getModel(user.getProfile());
+
+            MImage image = modelStorage.getModel(profile.getImageKey());
+
+            name = profile.getUsername();
+            description = profile.getDescription();
+            profileImage = image.getImage();
+        }
     }
 }
