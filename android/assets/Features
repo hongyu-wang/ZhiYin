@@ -29,19 +29,18 @@ Home1:
     Features required:
         Getting New Releases (Top 3)
         Getting Top Singles (Top 3)
-        Getting Top Albums (Top 3)
         Based on your history (Top 3)
 Home2:
     Features required:
-        Getting all users
-        Accessing the User's profile.
+        get a list of artists
+        have access to each artist's profile
 
 Music Diary:
     Features Required:
         Getting all user diary posts sorted by time
         Add a new music diary post to the user's music diary
         Comment on the post with the 1 second, text comment.
-
+        Push the comment onto the post
         Get all comments on the page
 
 Music Player
@@ -51,3 +50,7 @@ Music Player
         Get all comments related to the song
         Push a comment to the page (1 second voice/text)
         Pull all comments to the page
+
+Tools
+    Features required:
+        Get users profile
