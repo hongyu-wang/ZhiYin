@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
  */
 public class MessageBox {
 
-    private static float y = 1334 - 56; // -56 each time
+    //private static float y = 1334; // -56 each time
 
     private Stack stack;
     private int byUser;
@@ -46,25 +46,12 @@ public class MessageBox {
     private void initTable(int byUser){
         this.byUser = byUser;
         this.stack = new Stack();
-        //stack.setBounds((32 + 214 * byUser) * StateManager.M, y * StateManager.M, 480 * StateManager.M, 128 * StateManager.M);
 
+        //stack.setX((32 + 214 * byUser) * StateManager.M);
         stack.setWidth(480 * StateManager.M);
-        stack.setX((32 + 214 * byUser) * StateManager.M);
-        //stack.setPosition((32 + 214 * byUser) * StateManager.M, 400 * StateManager.M);
-        //System.out.println("stack height: " + stack.getHeight());
     }
 
     private void initTextBox(String message){
-//        Image image = new Image(new Texture("Friends4\\Bubble" + byUser + "@" + StateManager.M + ".png"));
-//        stack.add(image);
-//
-//        Table table = new Table();
-//        Label text = new Label(message, SkinSingleton.getInstance());
-//        text.setWrap(true);
-//        table.add(text).expand().center().padLeft(20 * StateManager.M).width(480 * StateManager.M);
-//
-//        stack.add(table);
-
         Table table1 = new Table();
         Image image = new Image(new Texture("Friends4\\Bubble" + byUser + "@" + StateManager.M + ".png"));
 
@@ -74,23 +61,21 @@ public class MessageBox {
 
         text.setWidth(240 * StateManager.M);
         text.pack();
-        float height = text.getHeight();
-        //System.out.println("text height: " + height);
+        float height = text.getHeight() + 40;
 
         table1.add(image).width(480 * StateManager.M).height(height * StateManager.M);
-        table2.add(text).expand().center().padLeft(20 * StateManager.M).width(480 * StateManager.M);
+        table2.add(text).expand().center().left().padLeft(10*StateManager.M).width(480 * StateManager.M);
 
         stack.add(table1);
         stack.add(table2);
 
-        stack.setY((y - height) * StateManager.M);
-        //System.out.println("stack y: " + stack.getY());
-
-        y = y - height - 56;
-        //System.out.println("y: " + y);
+        stack.setHeight(height * StateManager.M);
     }
 
     private void initSoundBox(Executable e){
+//        stack.setY((y - 128 - 56) * StateManager.M);
+        stack.setHeight(128 * StateManager.M);
+
         Image image = new Image(new Texture("Friends4\\Bubble" + byUser + "@" + StateManager.M + ".png"));
         stack.add(image);
 
@@ -114,6 +99,10 @@ public class MessageBox {
 
     public Stack getStack(){
         return this.stack;
+    }
+
+    public int getByUser(){
+        return this.byUser;
     }
 
 }
