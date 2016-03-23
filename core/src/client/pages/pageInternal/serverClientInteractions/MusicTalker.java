@@ -3,7 +3,10 @@ package client.pages.pageInternal.serverClientInteractions;
 import com.badlogic.gdx.graphics.Texture;
 import server.model.media.MAudio;
 import server.model.media.MHashtag;
+import server.model.media.MMusic;
 import server.model.social.MComment;
+import server.model.soundCloud.MBand;
+import server.model.soundCloud.MMusicPost;
 import server.model.user.User;
 
 import java.util.List;
@@ -13,19 +16,19 @@ import java.util.Map;
  * Created by Kevin Zheng on 2016-03-22.
  */
 public class MusicTalker extends Talkers{
+    private MMusicPost musicPost;
+    private MMusic mMusic;
 
     //--Interface Fields
     private Texture image;
     private String name;
     private User creator;
+    private MBand artist;
     private MAudio music;
 
     private List<MHashtag> mHashtags;
     private List<MComment> mComments;
     private List<MAudio>   audioComments;
-
-    private Map<MComment, String> comments;
-
 
     //Getters and Setters
     public Texture getImage() {
@@ -61,11 +64,16 @@ public class MusicTalker extends Talkers{
 
     /*------------------------------------------------------------------------*/
 
-
+    @Deprecated
     @Override
     public void init() {
 
     }
+
+    public void init(MMusicPost musicPost){
+        this.musicPost = musicPost;
+    }
+
 
     /*------------------------------------------------------------------------*/
 
