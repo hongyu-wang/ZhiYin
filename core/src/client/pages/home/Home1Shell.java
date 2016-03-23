@@ -17,7 +17,7 @@ public abstract class Home1Shell extends State{
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Skeleton.png"));
+        Image background = new Image(new Texture("Home/Home1.png"));
         background.setBounds(0, 0, GameLoop.WIDTH * StateManager.M, GameLoop.HEIGHT * StateManager.M);
         stage.addActor(background);
 
@@ -30,6 +30,7 @@ public abstract class Home1Shell extends State{
         discoveryButton.setBounds(500 + 1, 1217, 250, 117);
         discoveryButton.setExecutable(new ExecuteChangePage(Pages.HOME4));
         add(discoveryButton);
+
         setBottomBar();
     }
 

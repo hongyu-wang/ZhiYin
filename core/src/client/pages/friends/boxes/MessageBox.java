@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 
 /**
- * Contains a table of actors. Used in Friends4.
+ * Contains a stack of actors. Used in Friends4.
  */
 public class MessageBox {
 
@@ -72,7 +72,7 @@ public class MessageBox {
         stack.setHeight(height * StateManager.M);
     }
 
-    private void initSoundBox(Executable e){
+    private void initSoundBox(final Executable e){
 //        stack.setY((y - 128 - 56) * StateManager.M);
         stack.setHeight(128 * StateManager.M);
 
