@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 
 /**
- * Contains a table of actors. Used in Friends4.
+ * Contains a stack of actors. Used in Friends4.
  */
 public class MessageBox {
 
