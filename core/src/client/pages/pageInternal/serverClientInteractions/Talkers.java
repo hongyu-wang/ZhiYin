@@ -9,10 +9,8 @@ import server.model.user.User;
  * Created by Hongyu Wang on 3/20/2016.
  */
 public abstract class Talkers implements Updatable{
-    protected static long totalmodels;
-
-    protected User user;
-    protected ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
+    protected static long totalOriginalModels;
+    protected static ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
 
     /*------------------------------------------------------------------------*/
 
@@ -27,12 +25,35 @@ public abstract class Talkers implements Updatable{
 
     public abstract boolean isUpdated();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     protected boolean checkOriginalUpdate() {
-        for(long i = 1; i < totalmodels ; i++) {
+        for(long i = 1; i < totalOriginalModels; i++) {
 //            System.out.println(i);
             if (modelStorage.getModel(i) == null)
                 return false;
         }
         return true;
     }
+
+    protected User getMainUser(){
+        return modelStorage.getMainUser();
+    }
+
 }

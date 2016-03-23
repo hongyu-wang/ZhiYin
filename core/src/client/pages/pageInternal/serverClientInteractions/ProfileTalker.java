@@ -11,6 +11,7 @@ import server.model.user.UserProfile;
  * Created by Hongyu Wang on 3/20/2016.
  */
 public class ProfileTalker extends Talkers{
+    private User user;
     private UserProfile profile;
 
     //--Interface Fields

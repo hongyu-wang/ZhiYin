@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by Kevin Zheng on 2016-03-21.
  */
-public class MessagesTalker extends Talkers {
+public class ConversationTalker extends Talkers {
 
     private MConversation conversation;
 
@@ -67,7 +67,7 @@ public class MessagesTalker extends Talkers {
 
         messages.put(message, userText);
 
-        users.put(message, modelStorage.getMainUser());
+        users.put(message, super.getMainUser());
     }
 
     /*------------------------------------------------------------------------*/

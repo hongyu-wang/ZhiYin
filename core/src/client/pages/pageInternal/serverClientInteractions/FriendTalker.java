@@ -39,8 +39,9 @@ public class FriendTalker extends Talkers {
      */
     @Override
     public void pull() {
+        modelStorage.requestModelFromServer(User.class.getName(), getMainUser().getKey());
 
-        for(long key: user.getFriendKeys()){
+        for(long key: super.getMainUser().getFriendKeys()){
             modelStorage.requestModelFromServer(User.class.getName(), key);
         }
     }
@@ -56,12 +57,12 @@ public class FriendTalker extends Talkers {
 
         //Set
         for(User friend: friends){
-            if(!user.getFriendKeys().contains(friend.getKey()))
-                user.getFriendKeys().add(friend.getKey());
+            if(!super.getMainUser().getFriendKeys().contains(friend.getKey()))
+                super.getMainUser().getFriendKeys().add(friend.getKey());
         }
 
         //Push
-        modelStorage.pushModel(user);
+        modelStorage.pushModel(super.getMainUser());
     }
 
     /**Checks if all of the friends have been successfully pulled.

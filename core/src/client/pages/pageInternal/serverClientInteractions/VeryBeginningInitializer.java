@@ -1,11 +1,6 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
-import server.model.media.MAudio;
 import server.model.media.MHashtag;
-import server.model.media.MImage;
-import server.model.media.MMusic;
 import server.model.user.*;
 
 /**
@@ -69,7 +64,7 @@ public class VeryBeginningInitializer extends Talkers{
         for(int i = 0; i < 3; i++)
             modelStorage.requestModelFromServer(MHashtag.class.getName(), key++);
 
-        totalmodels = key;
+        totalOriginalModels = key;
     }
 
     @Override

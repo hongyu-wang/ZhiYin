@@ -20,7 +20,7 @@ import java.util.Map;
 public class DiaryTalker extends Talkers{
     private MDiaryPost diaryPost;
 
-    //
+    //--Interface Fields
     private String text;
     private Texture image;
     private MMusic music;
@@ -30,6 +30,7 @@ public class DiaryTalker extends Talkers{
     private Map<MComment, String> comments;
     private Map<MComment, MAudio> oneSecAudioComments;
 
+    //Getters and Setters
     public String getText() {
         return text;
     }
@@ -57,6 +58,7 @@ public class DiaryTalker extends Talkers{
     public MAudio getOneSecCommentAudio(MComment comment) {
         return oneSecAudioComments.get(comment);
     }
+
     /*------------------------------------------------------------------------*/
 
     @Deprecated

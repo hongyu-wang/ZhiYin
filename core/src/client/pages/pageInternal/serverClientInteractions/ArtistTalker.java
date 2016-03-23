@@ -10,8 +10,8 @@ import java.util.List;
 public class ArtistTalker extends Talkers {
 
     //--Interface Fields
-    public String name;
-    public List<MMusic> musicList;
+    private String name;
+    private List<MMusic> musicList;
 
     //Getters and Setters
     public String getName() {
@@ -23,7 +23,6 @@ public class ArtistTalker extends Talkers {
     }
 
     /*------------------------------------------------------------------------*/
-
 
     @Override
     public void init() {
