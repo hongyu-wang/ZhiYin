@@ -51,11 +51,20 @@ public enum Pages {
       name = state;
     }
 
+    public static void initLogin(){
+        Pages page = LOGIN;
+        try {
+            page.stateReference = (State) ClassReflection.forName("client.pages." + page.name).getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | ReflectionException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void initClass(){
 
         for (Pages page : Pages.values()){
-            if (page != null) {
+
+            if (page != null && page != Pages.LOGIN) {
                 try {
                     page.stateReference = (State) ClassReflection.forName("client.pages." + page.name).getDeclaredConstructor().newInstance();
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | ReflectionException e) {
