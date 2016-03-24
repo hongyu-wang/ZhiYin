@@ -1,7 +1,7 @@
 package client.pages.home;
 
 import client.events.executables.internalChanges.ExecuteToTempState;
-import client.pages.other.ArtistProfile;
+import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -73,7 +73,7 @@ public class Artist extends ArtistShell {
         s.add(t);
 
         //TODO fix this
-        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, artistName));
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, null));
 
         s.addListener(new ClickListener() {
             @Override

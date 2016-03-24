@@ -12,7 +12,7 @@ public class Friends1 extends Friends1Shell{
     public void init(){
         super.init();
 
-        //pullDataFromServer();
+        pullDataFromServer();
     }
 
     public void addFriendBox(int status, String name, int multiplier){
