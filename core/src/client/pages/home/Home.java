@@ -6,6 +6,8 @@ import client.pageStorage.Pages;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -66,38 +68,22 @@ public class Home extends HomeShell {
 
         stage.addActor(scrollpane);
 
+        pullDataFromServer();
         //table.setDebug(true);
 
-        addNewRelease("artist1", "song1");
-        addNewRelease("artist2", "song2");
-        addNewRelease("artist3", "song3");
-        addNewRelease("artist4", "song4");
-        addNewRelease("artist1", "song1");
-        addNewRelease("artist2", "song2");
-        addNewRelease("artist3", "song3");
-        addNewRelease("artist4", "song4");
-
-        addTopSingle("artist5", "song5");
-        addTopSingle("artist6", "song6");
-        addTopSingle("artist7", "song7");
-        addTopSingle("artist8", "song8");
-        addTopSingle("artist5", "song5");
-        addTopSingle("artist6", "song6");
-        addTopSingle("artist7", "song7");
-        addTopSingle("artist8", "song8");
     }
 
-    public void addNewRelease(String artistName, String songName){
+    public void addNewRelease(String artistName, String songName, Music music){
         newRelease.row().padTop(30 * StateManager.M);
-        newRelease.add(createNewSingle(artistName, songName)).width(750 * StateManager.M);
+        newRelease.add(createNewSingle(artistName, songName, music)).width(750 * StateManager.M);
     }
 
-    public void addTopSingle(String artistName, String songName) {
+    public void addTopSingle(String artistName, String songName, Music music) {
         topSingles.row().padTop(30 * StateManager.M);
-        topSingles.add(createNewSingle(artistName, songName)).width(750 * StateManager.M);
+        topSingles.add(createNewSingle(artistName, songName, music)).width(750 * StateManager.M);
     }
 
-    private Stack createNewSingle(String artistName, String songName){
+    private Stack createNewSingle(String artistName, String songName, Music music){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -118,7 +104,7 @@ public class Home extends HomeShell {
         s.add(i2);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this));
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
 
         s.addListener(new ClickListener() {
             @Override
@@ -149,4 +135,44 @@ public class Home extends HomeShell {
 
     }
 
+    @Override
+    public void pullDataFromServer() {
+
+        Music song1 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Avril Lavigne - Fly.mp3"));
+
+        Music song2 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Imagine Dragons - 30 Lives (iTunes Session).mp3"));
+
+        Music song3 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Bruno Mars - The Lazy Song.mp3"));
+
+        Music song4 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Katy Perry - Hot N Cold.mp3"));
+
+        Music song5 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Royals.mp3"));
+
+        Music song6 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Team.mp3"));
+
+        addNewRelease("Avril Lavigne", "Fly", song1);
+        addNewRelease("Imagine Dragons", "30 Lives", song2);
+        addNewRelease("Bruno Mars", "The Lazy Song", song3);
+        addTopSingle("Katy Perry", "Hot N Cold", song4);
+        addTopSingle("Lorde", "Royals", song5);
+        addTopSingle("Lorde", "Team", song6);
+
+
+        /*
+        TODO This is the HOME Server pull page.
+
+        Things that you need to pull
+
+        1. First, you need to pull 3 singles.
+        2. You need to pull their name, and also the artist that wrote them.
+        3. You also need to pull the MAudio associated with this song.
+        4. Place the MA
+        5. After you pull these things, you need to call:
+                addTopSingle(String name, String songName)
+
+
+
+       */
+
+    }
 }

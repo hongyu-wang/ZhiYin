@@ -4,6 +4,8 @@ import client.events.executables.internalChanges.ExecuteToTempState;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -23,27 +25,18 @@ public class TopSingles extends TopSinglesShell{
         super.init();
 
         table = new Table();
-        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100* StateManager.M);
+        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
         table.top();
 
         //table.setDebug(true);
 
-        addSingle("Song1");
-        addSingle("Song2");
-        addSingle("Song3");
-        addSingle("Song4");
-        addSingle("Song5");
-        addSingle("Song6");
-        addSingle("Song7");
-        addSingle("Song8");
-        addSingle("Song9");
-        addSingle("Song10");
-
+        Music music = Gdx.audio.newMusic(Gdx.files.internal("..//Name.mp3"))
+        addSingle("name", music);
         stage.addActor(table);
     }
 
 
-    public void addSingle(String songName){
+    public void addSingle(String songName, Music music){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -62,7 +55,8 @@ public class TopSingles extends TopSinglesShell{
         s.add(i2);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this));
+        //TODO ExecuteToTempState stuff
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
 
         s.addListener(new ClickListener() {
             @Override
