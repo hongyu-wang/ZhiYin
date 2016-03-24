@@ -20,8 +20,7 @@ public abstract class NowPlaying2Shell extends State {
         Button backButton = new Button(this);
         backButton.setBounds(0 + 1, 1217, 117, 117);
         ExecutableMultiplexer executables = new ExecutableMultiplexer();
-        executables.addExecutable(new ExecuteChangePage(Pages.HOME1));
-        executables.addExecutable(new ExecutePauseMusic());
+        executables.addExecutable(new ExecuteChangePage(Pages.HOME));
         backButton.setExecutable(executables);
         add(backButton);
 
@@ -37,7 +36,7 @@ public abstract class NowPlaying2Shell extends State {
 
         Button pauseButton = new Button(this);
         pauseButton.setBounds(288 + 1, 177, 180, 180);
-        pauseButton.setExecutable(new ExecutePlayMusic());
+        //pauseButton.setExecutable(new ExecutePlayMusic());
         add(pauseButton);
 
         Button b1 = new Button(this);
@@ -49,7 +48,6 @@ public abstract class NowPlaying2Shell extends State {
         b2.setBounds(230 + 1, 0, 290, 117);
         b2.setExecutable(new TestExecutable("b2"));
         add(b2);
-
 
         Button b3 = new Button(this);
         b3.setBounds(520 + 1, 0, 230, 117);
@@ -65,11 +63,6 @@ public abstract class NowPlaying2Shell extends State {
         addButton.setBounds(526 + 1, 1063, 51, 51);
         addButton.setExecutable(new TestExecutable("add"));
         add(addButton);
-
-        Button testButton = new Button(this);
-        testButton.setBounds(607 + 1, 1063, 51, 51);
-        testButton.setExecutable(new ExecuteChangePage(Pages.NOWPLAYING));
-        add(testButton);
 
 //        Dimensions of the picture are 655 x 655
 //        Button picture = new Button(this);

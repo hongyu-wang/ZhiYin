@@ -1,19 +1,22 @@
 package client.events.executables.internalChanges;
 
-import client.pageStorage.Pages;
-import client.pages.other.NowPlaying;
 import client.stateInterfaces.Executable;
+import com.badlogic.gdx.audio.Music;
 
 /**
  * Created by Hongyu Wang on 3/15/2016.
  */
 public class ExecutePauseMusic implements Executable{
 
+    private Music music;
+    public ExecutePauseMusic(Music music){
+        this.music = music;
+    }
 
     @Override
     public void execute() {
-        NowPlaying page = (NowPlaying)(Pages.NOWPLAYING.getStateReference());
 
-        page.getMusic().pause();
+        music.pause();
+
     }
 }

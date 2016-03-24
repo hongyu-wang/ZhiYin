@@ -13,13 +13,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
- * Created by blobbydude24 on 2016-03-21.
+ * Contains a table of actors. Used in Friends1.
  */
 public class FriendBox{
 
+    public static final int recieveRead = 1;
+    public static final int recieveUnread = 2;
+    public static final int sentRead = 3;
+    public static final int sentUnread = 4;
+
+
+
     private Table table;
     private Image currentIcon;
-
     /**
      *
      * @param y The vertical distance from the top bar.

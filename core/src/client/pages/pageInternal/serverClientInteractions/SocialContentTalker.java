@@ -3,9 +3,13 @@ package client.pages.pageInternal.serverClientInteractions;
 import server.model.social.MConversation;
 import server.model.social.MDiaryPost;
 import server.model.soundCloud.MMusicPost;
+import server.model.user.User;
 import server.model.user.UserConversations;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserUploadedContent;
+import server.services.factories.ConversationManagerFactory;
+import server.services.factories.MusicPostManagerFactory;
+import tools.utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +24,50 @@ public class SocialContentTalker extends Talkers{
     private UserDiaryContent uDiary;
 
     //--Interface Fields
-    public List<MConversation> conversations;
-    public List<MMusicPost> musicPosts;
-    public List<MDiaryPost> diaryPosts;
+    private List<MConversation> conversations;
+    private List<MMusicPost> musicPosts;
+    private List<MDiaryPost> diaryPosts;
+
+    //Getters and Setters
+    public List<MConversation> getConversations(){
+        return conversations;
+    }
+
+    public List<MMusicPost> getMusicPosts(){
+        return musicPosts;
+    }
+
+    public List<MDiaryPost> getDiaryPosts(){
+        return diaryPosts;
+    }
+
 
 
     /*------------------------------------------------------------------------*/
 
     @Override
     public void init() {
-        user = modelStorage.getMainUser();
-        uConv = modelStorage.getModel(user.getConversations());
+        uConv = modelStorage.getModel(super.getMainUser().getConversations());
+        uConv = modelStorage.getModel(super.getMainUser().getContent());
+        uDiary = modelStorage.getModel(super.getMainUser().getDiary());
     }
+
+    public void addNewConversation(List<User> friends){
+        List<Long> friendKeys = Utils.newList();
+
+        for(User friend: friends){
+            friendKeys.add(friend.getKey());
+        }
+
+        MConversation conversation = ConversationManagerFactory.createConversationManager().createConversation(friendKeys);
+
+        conversations.add(conversation);
+    }
+
+    public void addNewMusicPost(){}
+
+    public void addNewDiaryPost(){}
+
 
     /*------------------------------------------------------------------------*/
 
@@ -40,10 +76,21 @@ public class SocialContentTalker extends Talkers{
     @Override
     public void pull() {
 
+        modelStorage.requestModelFromServer(UserConversations.class.getName(), super.getMainUser().getConversations());
+        modelStorage.requestModelFromServer(UserUploadedContent.class.getName(), super.getMainUser().getContent());
+        modelStorage.requestModelFromServer(UserDiaryContent.class.getName(), super.getMainUser().getDiary());
+
+
         for(long convoKey: uConv.getConvoKeys()){
-            modelStorage.requestModelFromServer(
-                    UserConversations.class.getName(),
-                    convoKey);
+            modelStorage.requestModelFromServer(MConversation.class.getName(), convoKey);
+        }
+
+        for(long musicKey: uCont.getPostKeys()){
+            modelStorage.requestModelFromServer(MMusicPost.class.getName(), musicKey);
+        }
+
+        for(long diaryKey: uDiary.getDiaryKeys()){
+            modelStorage.requestModelFromServer(MDiaryPost.class.getName(), diaryKey);
         }
 
     }
@@ -57,23 +104,75 @@ public class SocialContentTalker extends Talkers{
                 uConv.getConvoKeys().add(conversation.getKey());
         }
 
+        for(MMusicPost musicPost: musicPosts){
+            if(!uCont.getPostKeys().contains(musicPost.getKey()))
+                uCont.getPostKeys().add(musicPost.getKey());
+        }
+
+        for(MDiaryPost diaryPost: diaryPosts){
+            if(!uDiary.getDiaryKeys().contains(diaryPost.getKey()))
+                uDiary.getDiaryKeys().add(diaryPost.getKey());
+        }
         //Push
-        modelStorage.pushModel(user);
+        modelStorage.pushModel(uConv);
+        modelStorage.pushModel(uCont);
+        modelStorage.pushModel(uDiary);
     }
 
     @Override
     public boolean isUpdated() {
-        return false;
+
+        //Lists
+        if(conversations == null){
+            return false;
+        }
+        if(musicPosts == null){
+            return false;
+        }
+        if(diaryPosts == null){
+            return false;
+        }
+
+        //Entries
+        for(MConversation entry: conversations){
+            if(entry == null){
+                return false;
+            }
+        }
+        for(MMusicPost entry: musicPosts){
+            if(entry == null){
+                return false;
+            }
+        }
+        for(MDiaryPost entry: diaryPosts){
+            if(entry == null){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public void update(float dt) {
-        List<MConversation> newConversationList = new ArrayList<>();
+
+        List<MConversation> newConversationList = Utils.<MConversation>newList();
+        List<MMusicPost> newMusicList = Utils.<MMusicPost>newList();
+        List<MDiaryPost> newDiaryList = Utils.<MDiaryPost>newList();
 
         for(long key: uConv.getConvoKeys()){
             newConversationList.add(modelStorage.<MConversation>getModel(key));
         }
 
+        for(long key: uCont.getPostKeys()){
+            newMusicList.add(modelStorage.<MMusicPost>getModel(key));
+        }
+
+        for(long key: uDiary.getDiaryKeys()){
+            newDiaryList.add(modelStorage.<MDiaryPost>getModel(key));
+        }
+
         this.conversations = newConversationList;
+        this.musicPosts = newMusicList;
+        this.diaryPosts = newDiaryList;
     }
 }

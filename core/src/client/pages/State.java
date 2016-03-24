@@ -90,7 +90,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
         Button homeButton = new Button(this);
         homeButton.setBounds((59) + 1, 0, 117, 117);
-        homeButton.setExecutable(new ExecuteChangePage(Pages.HOME1));
+        homeButton.setExecutable(new ExecuteChangePage(Pages.HOME));
         add(homeButton);
 
         Button diaryButton = new Button(this);
@@ -165,5 +165,13 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     public abstract void reset();
 
 
+    /**
+     * This is the super pull data from server method. This should never get implemented here.
+     *
+     * HOWEVER, I don't want it to be abstract
+     */
+    public void pullDataFromServer(){
+
+    }
 }
 

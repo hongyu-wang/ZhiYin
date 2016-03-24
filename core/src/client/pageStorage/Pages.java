@@ -23,22 +23,17 @@ public enum Pages {
     FRIENDS3("friends.Friends3"),
     FRIENDS4("friends.Friends4"),
     FRIENDS5("friends.Friends5"),
-    HOME1("home.Home1"),
-    HOME3("home.Home3"),
-    HOME4("home.Home4"),
-    NOWPLAYING("other.NowPlaying"),
-    NOWPLAYING2("other.NowPlaying2"),
+    HOME("home.Home"),
+    ARTIST("home.Artist"),
+    DISCOVERY("home.Discovery"),
+    TOPSINGLES("home.TopSingles"),
     TOOLS("other.Tools"),
     LOGIN("other.Login"),
-    PROFILE("other.Profile"),
+    //PROFILE("other.ArtistProfile"),
     DIARY1("musicDiary.Diary1"),
     DIARY2("musicDiary.Diary2"),
     DIARY3("musicDiary.Diary3"),
     DIARY4("musicDiary.Diary4");
-
-
-
-
 
 
     /**
@@ -52,11 +47,20 @@ public enum Pages {
       name = state;
     }
 
+    public static void initLogin(){
+        Pages page = LOGIN;
+        try {
+            page.stateReference = (State) ClassReflection.forName("client.pages." + page.name).getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | ReflectionException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void initClass(){
 
         for (Pages page : Pages.values()){
-            if (page != null) {
+
+            if (page != null && page != Pages.LOGIN) {
                 try {
                     page.stateReference = (State) ClassReflection.forName("client.pages." + page.name).getDeclaredConstructor().newInstance();
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | ReflectionException e) {

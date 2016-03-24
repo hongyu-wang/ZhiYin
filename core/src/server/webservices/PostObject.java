@@ -31,18 +31,13 @@ import javax.ws.rs.core.Response;
  * Created by Hairuo on 2016-03-20.
  */
 public class PostObject implements Net.HttpResponseListener {
-
-    private static PostObject ourInstance;
     private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
     private String className;
 
 
     public static PostObject newInstance(){
-        if (ourInstance == null){
-            ourInstance = new PostObject();
-        }
-        return ourInstance;
+        return new PostObject();
     }
 
 

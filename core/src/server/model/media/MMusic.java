@@ -1,11 +1,12 @@
 package server.model.media;
 
+import server.model.social.MPost;
 import server.model.structureModels.ServerModel;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class MMusic extends ServerModel {
+public class MMusic extends MPost {
     /**
      * The name of the music.
      */

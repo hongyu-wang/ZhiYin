@@ -167,7 +167,7 @@ public class VirtualDatabase {
         diary.setKey(
                 generator.generateSerial());
 
-        //Profile Attributes
+        //ArtistProfile Attributes
         profile.setUsername(username);
         profile.setDescription("I am " + username + ".");
         profile.setImageKey(0);//i.e. empty
@@ -193,7 +193,7 @@ public class VirtualDatabase {
         user.setLog(log.getKey());
         user.setContent(content.getKey());
         user.setDiary(diary.getKey());
-        user.setFriends(friendList);
+        user.setFriendKeys(friendList);
 
         //Put into database.
         data.put(user.getKey(), user);

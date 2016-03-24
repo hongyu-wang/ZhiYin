@@ -23,11 +23,11 @@ public class TalkerFactory {
         return (FriendTalker) talkers[1];
     }
 
-    public static MessagesTalker getMessagesTalker(){
+    public static ConversationTalker getMessagesTalker(){
         if (talkers[2] == null)
-            talkers[2] = new MessagesTalker();
+            talkers[2] = new ConversationTalker();
 
-        return (MessagesTalker) talkers[2];
+        return (ConversationTalker) talkers[2];
     }
 
     public static MusicTalker getMusicTalker(){

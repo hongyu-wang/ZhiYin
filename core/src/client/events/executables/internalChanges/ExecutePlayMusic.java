@@ -1,8 +1,7 @@
 package client.events.executables.internalChanges;
 
-import client.pageStorage.Pages;
-import client.pages.other.NowPlaying;
 import client.stateInterfaces.Executable;
+import com.badlogic.gdx.audio.Music;
 
 /**
  * This class will check if
@@ -12,14 +11,17 @@ import client.stateInterfaces.Executable;
  */
 public class ExecutePlayMusic implements Executable{
 
+    private Music music;
+    public ExecutePlayMusic(Music music){
+        this.music = music;
+    }
 
     @Override
     public void execute() {
-        NowPlaying page = (NowPlaying) Pages.NOWPLAYING.getStateReference();
-        if (page.getMusic().isPlaying()){
-            page.getMusic().pause();
-            return;
+        if (music.isPlaying()){
+            music.pause();
+        }else{
+            music.play();
         }
-        page.getMusic().play();
     }
 }
