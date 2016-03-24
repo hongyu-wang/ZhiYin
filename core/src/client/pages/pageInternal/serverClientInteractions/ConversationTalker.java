@@ -49,6 +49,8 @@ public class ConversationTalker extends Talkers {
     public void init(MConversation conversation){
         if(userConversations.containsKey(conversation.getKey())){
             ConversationHelper helper = userConversations.get(conversation.getKey());
+            currentConversation = helper;
+            currentConversation.conversation = conversation;
         }
         else{
             currentConversation = new ConversationHelper();
@@ -87,6 +89,44 @@ public class ConversationTalker extends Talkers {
     public boolean isWaiting(){
         return currentConversation.isWaiting();
     }
+
+    public int indexByFriend(String friendName){
+        int friendKey = (int) modelStorage.getUserKeyByName(friendName);
+
+
+        switch((int)modelStorage.getMainUser().getKey()){
+            case 1:
+                if(friendKey == 2){
+                    return 0;
+                }
+                else if(friendKey == 3){
+                    return 1;
+                }
+                break;
+
+            case 2:
+                if(friendKey == 1){
+                    return 0;
+                }
+                else if(friendKey == 3) {
+                    return 1;
+                }
+                break;
+
+            case 3:
+                if(friendKey == 1) {
+                    return 0;
+                }
+                else if(friendKey == 2) {
+                    return 1;
+                }
+                break;
+        }
+
+        throw new IndexOutOfBoundsException("You didn't enter a correct user");
+    }
+
+
 
 
 
@@ -260,8 +300,6 @@ public class ConversationTalker extends Talkers {
             for(MMessage message: mMessages){
                 updateMessages(message);
             }
-
-
         }
 
         //Why
