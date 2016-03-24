@@ -3,17 +3,24 @@ package client.pages.friends;
 
 import client.events.executables.internalChanges.TestExecutable;
 import client.pages.friends.boxes.MessageBox;
+import client.pages.pageInternal.serverClientInteractions.ConversationTalker;
+import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import server.model.social.MConversation;
+import server.model.social.MMessage;
 
 import static client.singletons.StateManager.M;
 
 public class Friends4 extends Friends4Shell{
     private TextField messageField;
+
+    private long counter;
 
     private Table table;
 
@@ -88,6 +95,51 @@ public class Friends4 extends Friends4Shell{
         stage.act(); //This bug tho
 
         messageField.getText();//TODO something
+        if (counter%200 == 0){
+            SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
+            sct.init();
+            sct.update(0);
+
+            MConversation fuck = sct.getConversations().get(0);
+
+            ConversationTalker talker = TalkerFactory.getMessagesTalker();
+
+            talker.init(fuck);
+            if(!talker.isWaiting())
+                talker.pull();
+            talker.update(0);
+
+            System.out.println("Here I am.");
+            for(MMessage message :talker.getAllMMessages()){
+                System.out.println(talker.getMessageText(message));
+            }
+
+        }
+        counter ++;
+
+    }
+
+
+    public void talkerTest(){
+        String message = "fuck you Kevin Zheng";
+
+        SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
+        sct.init();
+
+        sct.update(0);
+
+        MConversation fuck = sct.getConversations().get(0);
+
+        ConversationTalker talker = TalkerFactory.getMessagesTalker();
+
+        talker.init(fuck);
+
+        talker.update(0);
+
+        talker.newMessage(message);
+
+        talker.push();
+
     }
 
 }

@@ -70,7 +70,8 @@ public enum Tags {
     }
 
     public String parseTag(String className){
-        String tag = tags.get(className);
+        String tag = ids.get(className).toString();
+
         while(tag.length() < 4){
             tag = "0" + tag;
         }

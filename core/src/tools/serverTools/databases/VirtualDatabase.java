@@ -5,6 +5,7 @@ import server.model.media.MAudio;
 import server.model.media.MHashtag;
 import server.model.media.MImage;
 import server.model.media.MMusic;
+import server.model.social.MConversation;
 import server.model.structureModels.ServerModel;
 import server.model.user.*;
 import tools.AudioTools.AudioCreator;
@@ -23,8 +24,8 @@ public class VirtualDatabase {
     private Map<Long, ServerModel> data;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
-    private SerialGenerator generator = SerialGenerator.getGenerator();
-    private SerialGenerator HVGenerator = SerialGenerator.getHGenerator(1000);
+    public SerialGenerator generator = SerialGenerator.getGenerator();
+    public SerialGenerator HVGenerator = SerialGenerator.getHGenerator(1000);
 
     public VirtualDatabase() throws IOException{
         init();
@@ -37,7 +38,7 @@ public class VirtualDatabase {
 
         initUserData();
         initMediaData();
-
+        initSocialData();
     }
 
     private void initUserData(){
@@ -111,6 +112,54 @@ public class VirtualDatabase {
 //        profile2.setImageKey(image2.getKey());
 //        profile3.setImageKey(image3.getKey());
     }
+
+    private void initSocialData(){
+        User user1 = (User)data.get(1L);
+        User user2 = (User)data.get(2L);
+        User user3 = (User)data.get(3L);
+
+        UserConversations convo_1 = (UserConversations)data.get(user1.getConversations());
+        UserConversations convo_2 = (UserConversations)data.get(user2.getConversations());
+        UserConversations convo_3 = (UserConversations)data.get(user3.getConversations());
+
+        MConversation one_two = new MConversation();
+        MConversation one_three = new MConversation();
+        MConversation two_three = new MConversation();
+
+        one_two.setKey(generator.generateSerial());
+        one_three.setKey(generator.generateSerial());
+        two_three.setKey(generator.generateSerial());
+
+        one_two.setMessageList(new ArrayList<Long>());
+        one_three.setMessageList(new ArrayList<Long>());
+        two_three.setMessageList(new ArrayList<Long>());
+
+        List<Long> one = new ArrayList<Long>();
+        List<Long> two = new ArrayList<Long>();
+        List<Long> thr = new ArrayList<Long>();
+
+        one.add(user1.getKey());
+        one.add(user2.getKey());
+
+        two.add(user1.getKey());
+        two.add(user3.getKey());
+
+        thr.add(user2.getKey());
+        thr.add(user3.getKey());
+
+        one_two.setParticipants(one);
+        one_three.setParticipants(two);
+        two_three.setParticipants(thr);
+
+        convo_1.getConvoKeys().add(one_two.getKey());
+        convo_2.getConvoKeys().add(one_three.getKey());
+        convo_3.getConvoKeys().add(two_three.getKey());
+
+        data.put(one_two.getKey(), one_two);
+        data.put(two_three.getKey(), two_three);
+        data.put(one_three.getKey(), one_three);
+    }
+
 
 
     /**Gets a model from the database.

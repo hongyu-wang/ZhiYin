@@ -16,7 +16,6 @@ public class MockServer {
 
     MockServer(){
         try{
-            generator = SerialGenerator.getGenerator();
             database = new VirtualDatabase();
         }
         catch(IOException e){
@@ -26,7 +25,7 @@ public class MockServer {
 
 
     public long getSerial(){
-        return generator.generateSerial();
+        return database.generator.generateSerial();
     }
 
     /**Returns the user key by the username.

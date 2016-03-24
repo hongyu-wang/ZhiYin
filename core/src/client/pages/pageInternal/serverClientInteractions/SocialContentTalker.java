@@ -49,7 +49,7 @@ public class SocialContentTalker extends Talkers{
     @Override
     public void init() {
         uConv = modelStorage.getModel(super.getMainUser().getConversations());
-        uConv = modelStorage.getModel(super.getMainUser().getContent());
+        uCont = modelStorage.getModel(super.getMainUser().getContent());
         uDiary = modelStorage.getModel(super.getMainUser().getDiary());
     }
 
