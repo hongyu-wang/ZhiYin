@@ -3,6 +3,7 @@ package client.events.executables.internalChanges;
 import client.component.basicComponents.ScrollTable;
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
+import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 
@@ -21,8 +22,8 @@ public class ExecuteAddMessage implements Executable{
 
     @Override
     public void execute() {
-        ScrollPane scrollpane = friend2.getScrollpane();
+
         friend2.addMessage(new MessageBox(friend2.getMessage(), 1));
-        scrollpane.scrollTo(0, 0, scrollpane.getWidth(), scrollpane.getHeight()+2000);
+
     }
 }

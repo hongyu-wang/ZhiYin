@@ -46,7 +46,6 @@ public class Friends2 extends Friends2Shell{
 
         stage.addActor(scrollpane);
 
-        scrollpane.setDebug(true);
 
         Image image = new Image(new Texture("Friends//SwipeToDiscardButton.png"));
 
@@ -88,6 +87,9 @@ public class Friends2 extends Friends2Shell{
     public void addMessage(MessageBox box){
         table.add(box.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
         table.row().expandX();
+        scrollpane.layout();
+        scrollpane.setScrollPercentY(110);
+        stage.act();
     }
 
     @Override
@@ -165,7 +167,7 @@ public class Friends2 extends Friends2Shell{
 
         talker.update(0);
 
-        talker.newMessage(message);
+        talker.addNewMessage(message);
 
         talker.push();
 
