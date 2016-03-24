@@ -1,6 +1,8 @@
 package driver;
 
 import client.pageStorage.Pages;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -8,9 +10,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import server.model.user.User;
 import server.services.factories.UserManagerFactory;
 import server.services.interfaces.models.UserManager;
 import server.webservices.PostObject;
+import server.webservices.RequestObject;
 
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
@@ -26,7 +30,13 @@ public class GameLoop extends ApplicationAdapter {
 
 		UserManager userManager = UserManagerFactory.createUserManager();
 		PostObject post = new PostObject();
-		post.addModel(userManager.createNewUser("Lol", "lol"), "server.model.user.User");
+		RequestObject request = new RequestObject();
+
+		User user = userManager.createNewUser("Lol", "lol");
+		user.setKey(1000);
+		post.addModel(user , "server.model.user.User");
+		request.getModel("server.model.user.User" , 1000);
+		ModelStorage storage = ModelStorageFactory.createModelStorage();
 
 		stateManager = StateManager.getInstance();
 		Pages.initLogin();
