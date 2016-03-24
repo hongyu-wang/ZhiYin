@@ -60,7 +60,7 @@ public class Artist extends ArtistShell {
         Image picture = new Image(new Texture(picturePath));
 
         //t.add(picture).expand().left().padLeft(50 * StateManager.M);
-        t.add(single).padLeft(10 * StateManager.M);
+        t.add(single).expand().left().padLeft(10 * StateManager.M);
         t.add(i).expand().right().padRight(50 * StateManager.M);
         t.row();
         t.add(line);
