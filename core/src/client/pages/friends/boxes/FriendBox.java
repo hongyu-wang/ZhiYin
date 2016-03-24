@@ -19,10 +19,8 @@ public class FriendBox{
 
     public static final int RECIEVED_READ = 1;
     public static final int RECIEVED_UNREAD = 2;
-    public static final int SENT_READ = 3; //FUCK YOU JERRY XU
+    public static final int SENT_READ = 3;
     public static final int SENT_UNREAD = 4;
-
-
 
     private Table table;
     private Image currentIcon;
@@ -32,30 +30,30 @@ public class FriendBox{
      * @param iconNum The number representing an icon.
      * @param friendName The friend's name.
      */
-    public FriendBox(int y, int iconNum, String friendName){
-        initTable(y);
+    public FriendBox(int iconNum, String friendName){
+        initTable();
 
-        initIcon(iconNum);
-        initLabel(friendName);
-        initButton();
+        addIcon(iconNum);
+        addLabel(friendName);
+        addButton();
     }
 
-    private void initTable(int y){
+    private void initTable(){
         this.table = new Table();
-        table.setBounds(0, y * StateManager.M, 750 * StateManager.M, 117 * StateManager.M);
+//        table.setBounds(0, y * StateManager.M, 750 * StateManager.M, 117 * StateManager.M);
     }
 
-    private void initIcon(int iconNum){
+    private void addIcon(int iconNum){
         setIcon(iconNum);
     }
 
-    private void initLabel(String friendName){
+    private void addLabel(String friendName){
         Label name = new Label(friendName, SkinSingleton.getInstance());
         table.add(name).padLeft(20 * StateManager.M);
     }
 
-    private void initButton(){
-        Image i = new Image(new Texture("Chevron" + StateManager.M + ".png"));
+    private void addButton(){
+        Image i = new Image(new Texture("Friends/Enter@" + StateManager.M + ".png"));
         final ImageButton button = new ImageButton(i.getDrawable());
 
         button.addListener(new ClickListener(){
@@ -75,7 +73,7 @@ public class FriendBox{
     public void setIcon(int iconNum){
         table.removeActor(currentIcon);
 
-        Texture texture = new Texture("Friends1\\Icon" + iconNum + "@" + StateManager.M +".png");
+        Texture texture = new Texture("Friends/Icon" + iconNum + "@" + StateManager.M +".png");
         Image image = new Image(texture);
         this.currentIcon = image;
 
