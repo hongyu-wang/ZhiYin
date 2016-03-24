@@ -9,10 +9,8 @@ import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import javafx.scene.input.Dragboard;
 import server.model.social.MConversation;
 
@@ -21,6 +19,10 @@ import static client.singletons.StateManager.M;
 public class Friends2 extends Friends2Shell{
     private ScrollPane scrollpane;
     private TextField messageField;
+
+    public ScrollPane getScrollpane() {
+        return scrollpane;
+    }
 
     private long counter;
     private String friendName;
@@ -44,40 +46,40 @@ public class Friends2 extends Friends2Shell{
 
         stage.addActor(scrollpane);
 
-        MessageBox box1 = new MessageBox("This is a long message made for the sole purpose of testing our stuff. Please do not read this unless you want to waste your time." +
-                "Why are you still reading this? Do you really have nothing better to do right now? Go find yourself a hobby or something. That, or go do some work." +
-                "Just stop reading this really long string. Please. And thank you.", 0);
-        MessageBox box2 = new MessageBox("This is a long message made for the sole purpose of testing our stuff.", 1);
-        MessageBox box3 = new MessageBox("Message", 0);
-        MessageBox box4 = new MessageBox("String", 1);
+        scrollpane.setDebug(true);
 
-        MessageBox box5 = new MessageBox(new TestExecutable("clicked 1"), 0);
-        MessageBox box6 = new MessageBox(new TestExecutable("clicked 2"), 1);
-        MessageBox box7 = new MessageBox(new TestExecutable("clicked 3"), 0);
-        MessageBox box8 = new MessageBox(new TestExecutable("clicked 4"), 1);
-
-        addMessage(box1);
-        addMessage(box2);
-        addMessage(box3);
-        addMessage(box4);
-        addMessage(box5);
-        addMessage(box6);
-        addMessage(box7);
-        addMessage(box8);
-
+        Image image = new Image(new Texture("Friends//SwipeToDiscardButton.png"));
 
         DragButton button = new DragButton(this, (int)(500*M));
         button.setBounds(0, 12341234, 1234, 1234);
-        button.setReleaseExecutable(new ExecuteRemoveDragButton(button));
-        button.setDragExecutable(new ExecuteRemoveDragButton(button));
+
+        image.setBounds(32 * M, 98 * M, (750 - 64) * M, 236 * M);
+
+
+        ExecutableMultiplexer em2 = new ExecutableMultiplexer();
+        em2.addExecutable(new ExecuteRemoveDragButton(button));
+        em2.addExecutable(new ExecuteRemoveImage(image));
+        button.setReleaseExecutable(em2);
+        button.setDragExecutable(em2);
         Button sendButton = new Button(this);
+
+
         sendButton.setBounds(604 + 1, 31, 122, 60);
-        sendButton.setExecutable(new ExecuteReset(this));
+        ExecutableMultiplexer em3 = new ExecutableMultiplexer();
+        em3.addExecutable(new ExecuteAddMessage(this));
+        em3.addExecutable(new ExecuteReset(this));
+        sendButton.setExecutable(em3);
         add(sendButton);
+
+
+
         add(button);
         Button recordButton = new Button(this);
         recordButton.setBounds(32, 31, 122, 60);
-        recordButton.setExecutable(new ExecuteAddDragButton(button));
+        ExecutableMultiplexer em = new ExecutableMultiplexer();
+        em.addExecutable(new ExecuteAddDragButton(button));
+        em.addExecutable(new ExecuteAddImage(stage, image));
+        recordButton.setExecutable(em);
         add(recordButton);
     }
 
@@ -140,6 +142,10 @@ public class Friends2 extends Friends2Shell{
 //
 //        }
 //        counter ++;
+    }
+
+    public String getMessage(){
+        return messageField.getText();
     }
 
 
