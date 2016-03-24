@@ -17,10 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class FriendBox{
 
-    public static final int recieveRead = 1;
-    public static final int recieveUnread = 2;
-    public static final int sentRead = 3;
-    public static final int sentUnread = 4;
+    public static final int RECIEVED_READ = 1;
+    public static final int RECIEVED_UNREAD = 2;
+    public static final int SENT_READ = 3; //FUCK YOU JERRY XU
+    public static final int SENT_UNREAD = 4;
 
 
 
