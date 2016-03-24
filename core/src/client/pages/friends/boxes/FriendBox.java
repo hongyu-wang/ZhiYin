@@ -17,9 +17,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class FriendBox{
 
+    public static final int recieveRead = 1;
+    public static final int recieveUnread = 2;
+    public static final int sentRead = 3;
+    public static final int sentUnread = 4;
+
+
+
     private Table table;
     private Image currentIcon;
-
     /**
      *
      * @param y The vertical distance from the top bar.

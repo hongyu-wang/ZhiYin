@@ -40,6 +40,7 @@ public class Login extends State {
             public void clicked(InputEvent event, float x, float y) {
                 String text = wta.getText().trim();
                 if (text.equals(NAME1) || text.equals(NAME2) || text.equals(NAME3)) {
+
                     vb = TalkerFactory.VeryBeginningInitializer();
                     vb.init(text);
                     vb.pull();
@@ -50,6 +51,7 @@ public class Login extends State {
                     stage.addActor(label);
 
                     wta.remove();
+                    Pages.initClass();
                 }
             }
         });
