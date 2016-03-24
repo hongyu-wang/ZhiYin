@@ -3,17 +3,24 @@ package client.pages.friends;
 
 import client.events.executables.internalChanges.TestExecutable;
 import client.pages.friends.boxes.MessageBox;
+import client.pages.pageInternal.serverClientInteractions.ConversationTalker;
+import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import server.model.social.MConversation;
+import server.model.social.MMessage;
 
 import static client.singletons.StateManager.M;
 
 public class Friends4 extends Friends4Shell{
     private TextField messageField;
+
+    private long counter;
 
     private Table table;
 
