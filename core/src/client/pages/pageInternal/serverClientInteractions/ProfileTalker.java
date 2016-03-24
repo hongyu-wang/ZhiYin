@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by Hongyu Wang on 3/20/2016.
  */
 public class ProfileTalker extends Talkers{
-    private static Map<User, Profile> userProfiles = Utils.newMap();
+    private static Map<Long, Profile> userProfiles = Utils.newMap();
 
     private Profile currentProfile;
 
@@ -43,12 +43,14 @@ public class ProfileTalker extends Talkers{
 
 
     public void init(User user){
-        if(userProfiles.keySet().contains(user)){
-            currentProfile = userProfiles.get(user);
+        if(userProfiles.keySet().contains(user.getKey())){
+            currentProfile = userProfiles.get(user.getKey());
         }
         else{
             currentProfile = new Profile();
             currentProfile.init(user);
+
+            userProfiles.put(user.getKey(), currentProfile);
         }
     }
 

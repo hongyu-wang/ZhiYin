@@ -51,20 +51,22 @@ public class PostObject implements Net.HttpResponseListener {
      */
     public void addModel(ServerModel model, String className){
         // LibGDX NET CLASS
-
+        ;
         className = Tags.ID_TAGS.parseTag(className);
         Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
         httpPost.setUrl("http://localhost:8081/webservice/postServerModel");
         //httpPost.setHeader("X-Parse-Application-Id", app_id);
         //httpPost.setHeader("X-Parse-REST-API-Key", app_key);
         String jString = "";
-
         try {
 
             jString = objectMapper.writeValueAsString(model);
         }catch(Exception e){
             System.out.println(e);
         }
+
+
+
 
         httpPost.setContent(jString+className);
         Gdx.net.sendHttpRequest(httpPost,this);
@@ -78,7 +80,7 @@ public class PostObject implements Net.HttpResponseListener {
 
     @Override
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
-        System.out.println(httpResponse.getStatus().toString());
+        System.out.println(httpResponse.getStatus());
     }
 
     @Override

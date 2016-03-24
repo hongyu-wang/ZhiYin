@@ -152,7 +152,10 @@ public class VirtualDatabase {
         two_three.setParticipants(thr);
 
         convo_1.getConvoKeys().add(one_two.getKey());
-        convo_2.getConvoKeys().add(one_three.getKey());
+        convo_1.getConvoKeys().add(one_three.getKey());
+        convo_2.getConvoKeys().add(one_two.getKey());
+        convo_2.getConvoKeys().add(two_three.getKey());
+        convo_3.getConvoKeys().add(one_three.getKey());
         convo_3.getConvoKeys().add(two_three.getKey());
 
         data.put(one_two.getKey(), one_two);

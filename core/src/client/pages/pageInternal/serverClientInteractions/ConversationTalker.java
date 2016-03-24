@@ -17,13 +17,13 @@ import java.util.Map;
 public class ConversationTalker extends Talkers {
 
     private MConversation conversation;
-    private Map<MMessage, MessageHelper> userMessages;
+    private Map<Long, MessageHelper> userMessages = Utils.newMap();
 
     //--Interface Fields
     private List<MMessage> mMessages;
     private List<User> participants;
-    private Map<MMessage, String> messages;
-    private Map<MMessage, User> users;
+    private Map<Long, String> messages;
+    private Map<Long, User> users;
     private boolean seen;
 
 
@@ -37,11 +37,11 @@ public class ConversationTalker extends Talkers {
     }
 
     public String getMessageText(MMessage message){
-        return messages.get(message);
+        return messages.get(message.getKey());
     }
 
     public User getMessageCreator(MMessage message){
-        return users.get(message);
+        return users.get(message.getKey());
     }
 
     public boolean isSeen(){
@@ -71,11 +71,19 @@ public class ConversationTalker extends Talkers {
 
         MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), modelStorage.getMainUser().getKey());
 
+        MessageHelper messageHelper = new MessageHelper();
+
+        messageHelper.init(message);
+
+        userMessages.put(message.getKey(), messageHelper);
+
+        conversation.getMessageList().add(message.getKey());
+
         mMessages.add(message);
 
-        messages.put(message, userText);
+        messages.put(message.getKey(), userText);
 
-        users.put(message, super.getMainUser());
+        users.put(message.getKey(), super.getMainUser());
     }
 
     /*------------------------------------------------------------------------*/
@@ -96,15 +104,15 @@ public class ConversationTalker extends Talkers {
 
     @Override
     public void push() {
-        while(mMessages.size() > conversation.getMessageList().size()){
-            MMessage message = mMessages.get(conversation.getMessageList().size());
+        for (MMessage message : mMessages) {
+            if(message == null){
+                continue;
+            }
 
             MText text = new MText();
             text.setKey(message.getText());
             text.setType(0);
-            text.setText(messages.get(message));
-
-            conversation.getMessageList().add(message.getKey());
+            text.setText(messages.get(message.getKey()));
 
             modelStorage.pushModel(text);
             modelStorage.pushModel(message);
@@ -138,18 +146,15 @@ public class ConversationTalker extends Talkers {
             return false;
         }
 
-        for(MMessage message: mMessages){
-            if(messages.get(message) == null )
-                return false;
-        }
-
         if(users == null){
             return false;
         }
 
         for(MMessage message: mMessages){
-            if(users.get(message) == null)
+            boolean updated = userMessages.get(message.getKey()).isUpdated();
+            if(!updated){
                 return false;
+            }
         }
 
         super.setWaiting(false);
@@ -174,16 +179,22 @@ public class ConversationTalker extends Talkers {
             newMessageList.add(modelStorage.<MMessage>getModel(key));
         }
 
+        mMessages = newMessageList;
+        participants = newUserList;
+
         for(MMessage message: mMessages){
             updateMessages(message);
         }
+
+
     }
 
+    //Why
     private void updateMessages(MMessage message){
         if(message == null){
             return;
         }
-        if(!userMessages.keySet().contains(message)){
+        if(!userMessages.keySet().contains(message.getKey())){
             newHelper(message);
         }
         else{
@@ -193,7 +204,7 @@ public class ConversationTalker extends Talkers {
 
     private void newHelper(MMessage message){
         MessageHelper messageHelper = new MessageHelper();
-        userMessages.put(message, messageHelper);
+        userMessages.put(message.getKey(), messageHelper);
 
         messageHelper.init(message);
         messageHelper.pull();
@@ -201,7 +212,7 @@ public class ConversationTalker extends Talkers {
 
 
     private void oldHelper(MMessage message){
-        MessageHelper messageHelper = userMessages.get(message);
+        MessageHelper messageHelper = userMessages.get(message.getKey());
 
         if(messageHelper.isWaiting()){
             messageHelper.update(0);
@@ -211,8 +222,8 @@ public class ConversationTalker extends Talkers {
         }
 
         if(messageHelper.isUpdated()){
-            messages.put(message, messageHelper.message);
-            users.put(message, messageHelper.creator);
+            messages.put(message.getKey(), messageHelper.message);
+            users.put(message.getKey(), messageHelper.creator);
         }
     }
 

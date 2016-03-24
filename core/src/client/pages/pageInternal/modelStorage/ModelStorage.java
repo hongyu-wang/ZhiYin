@@ -121,6 +121,7 @@ public class ModelStorage {
      */
     public void requestModelFromServer(String className, long key){
         RequestObject.newInstance().getModel(className, key);
+        System.out.println(key);
     }
 
     /**Returns a pre generated serial key from the server.
