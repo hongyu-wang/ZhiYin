@@ -29,15 +29,11 @@ public enum Pages {
     TOPSINGLES("home.TopSingles"),
     TOOLS("other.Tools"),
     LOGIN("other.Login"),
-    PROFILE("other.Profile"),
+    //PROFILE("other.ArtistProfile"),
     DIARY1("musicDiary.Diary1"),
     DIARY2("musicDiary.Diary2"),
     DIARY3("musicDiary.Diary3"),
     DIARY4("musicDiary.Diary4");
-
-
-
-
 
 
     /**
