@@ -59,7 +59,7 @@ public class WebService{
      */
     @POST
     @Path("/postServerModel")
-    @Consumes("application/json")
+    @Consumes("*/*")
     public Response postServerModel(String json) {
         MockServer mockServer = ServerInteraction.getServer();
         ObjectMapper objectMapper = new ObjectMapper();

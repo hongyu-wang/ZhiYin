@@ -54,6 +54,7 @@ public class RequestObject implements Net.HttpResponseListener {
             modelStorage.setModelFromServer((ServerModel)rOjbect);
             String line = "lol";
         } catch (Exception e) {
+            rOjbect = 1;
             System.out.println(e);
         }
     }
