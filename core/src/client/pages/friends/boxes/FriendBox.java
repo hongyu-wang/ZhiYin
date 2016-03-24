@@ -21,6 +21,7 @@ public class FriendBox{
 
     private Table table;
     private Image currentIcon;
+    private String friendName;
     /**
      *
      * @param iconNum The number representing an icon.
@@ -28,7 +29,7 @@ public class FriendBox{
      */
     public FriendBox(int iconNum, String friendName){
         initTable();
-
+        this.friendName = friendName;
         addIcon(iconNum);
         addLabel(friendName);
         addButton();
@@ -63,7 +64,7 @@ public class FriendBox{
         s.add(i);
         s.add(table);
 
-        final Friends2 f2 = new Friends2();
+        final Friends2 f2 = new Friends2(friendName);
 
         s.addListener(new ClickListener() {
             @Override
