@@ -46,9 +46,9 @@ public class WebService{
     }
 
     @GET
-    @Path("/getServerKey")
+    @Path("/getServerKey/{param}")
     @Produces("application/json")
-    public Long getServerKey(){
+    public Long getServerKey(@PathParam("param") Long key){
         MockServer mockServer = ServerInteraction.getServer();
         return mockServer.getSerial();
     }
