@@ -1,5 +1,6 @@
 package client.pages.pageInternal.serverClientInteractions;
 
+import server.model.media.MMusic;
 import server.model.social.MConversation;
 import server.model.social.MDiaryPost;
 import server.model.soundCloud.MMusicPost;
