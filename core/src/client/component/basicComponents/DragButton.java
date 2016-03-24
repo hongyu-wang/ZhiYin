@@ -21,6 +21,7 @@ public class DragButton extends Component implements Dragable {
     private float limit;
     private boolean playAnimation;
     private static long begin;
+    public boolean remove = false;
     public DragButton(ActionMonitor monitor, int limit) {
         this.monitor = monitor;
         this.limit = limit * M;

@@ -1,9 +1,8 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecuteReset;
-import client.events.executables.internalChanges.ExecuteToTempState;
-import client.events.executables.internalChanges.TestExecutable;
+import client.component.basicComponents.DragButton;
+import client.events.executables.internalChanges.*;
 import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.serverClientInteractions.ConversationTalker;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
@@ -14,20 +13,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import javafx.scene.input.Dragboard;
 import server.model.social.MConversation;
 
 import static client.singletons.StateManager.M;
 
 public class Friends2 extends Friends2Shell{
-
+    private ScrollPane scrollpane;
     private TextField messageField;
 
     private long counter;
-
+    private String friendName;
     private Table table;
 
-    public Friends2(){
+    public Friends2(String friendName){
         super();
+        this.friendName = friendName;
     }
 
     public void init(){
@@ -38,7 +39,7 @@ public class Friends2 extends Friends2Shell{
         table = new Table();
         table.top();
 
-        ScrollPane scrollpane = new ScrollPane(table);
+        scrollpane = new ScrollPane(table);
         scrollpane.setBounds(0, 122 * StateManager.M, 750 * StateManager.M, 1095 * StateManager.M);
 
         stage.addActor(scrollpane);
@@ -65,16 +66,22 @@ public class Friends2 extends Friends2Shell{
         addMessage(box8);
 
 
+        DragButton button = new DragButton(this, (int)(500*M));
+        button.setBounds(0, 12341234, 1234, 1234);
+        button.setReleaseExecutable(new ExecuteRemoveDragButton(button));
+        button.setDragExecutable(new ExecuteRemoveDragButton(button));
         Button sendButton = new Button(this);
         sendButton.setBounds(604 + 1, 31, 122, 60);
         sendButton.setExecutable(new ExecuteReset(this));
         add(sendButton);
-
+        add(button);
         Button recordButton = new Button(this);
         recordButton.setBounds(32, 31, 122, 60);
-        recordButton.setExecutable(new ExecuteToTempState(new Friends3(stage)));
+        recordButton.setExecutable(new ExecuteAddDragButton(button));
         add(recordButton);
     }
+
+
 
     public void addMessage(MessageBox box){
         table.add(box.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
@@ -83,6 +90,7 @@ public class Friends2 extends Friends2Shell{
 
     @Override
     public void reset() {
+
         messageField.remove();
         messageField = new WorkingTextArea("Message...", SkinSingleton.getInstance());
         messageField.setPosition(174 * M, 31 * M);

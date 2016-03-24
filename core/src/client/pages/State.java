@@ -83,6 +83,30 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     }
 
     /**
+     * NO ONE ELSE EVER USE THIS METHOD PLSPSLSPLSLSLPSPLSPLPSPLSSPLSPLSLPSL
+     * THIS METHOD IS CALLED. ULTIMATE
+     * SPAGETTHI.
+     * NEVER EVER EVER EVER EVER EVER USE THIS!!!!!!!!!!!!!!!!!!!!!!
+     * OK? never ever ever ever ever ever everever ever everever ever everever ever everever ever everever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * Use this fucking method.
+     * @param c thing.
+     */
+    @Deprecated
+    public void remove(Performable c){
+        components.remove(c);
+        controllers.get(SHELLINPUT).remove(c);
+    }
+    /**
      * Create and add the buttons for the bottom bar.
      */
     protected void setBottomBar(){

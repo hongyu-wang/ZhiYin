@@ -68,7 +68,7 @@ public class MyProfile extends MyProfileShell {
         Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 
-        t.add(single).padLeft(10 * StateManager.M);
+        t.add(single).expand().left().padLeft(10 * StateManager.M);
         t.add(i).expand().right().padRight(50 * StateManager.M);
         t.row();
         t.add(line);
