@@ -18,21 +18,23 @@ public class Friends1 extends Friends1Shell{
         stage.addActor(table);
 
         FriendBox box1 = new FriendBox(1, "Friend1");
-        FriendBox box2 = new FriendBox(1, "Friend2");
-        FriendBox box3 = new FriendBox(1, "Friend3");
-        FriendBox box4 = new FriendBox(1, "Friend4");
+        FriendBox box2 = new FriendBox(2, "Friend2");
+        FriendBox box3 = new FriendBox(3, "Friend3");
+        FriendBox box4 = new FriendBox(4, "Friend4");
 
         addBox(box1);
         addBox(box2);
         addBox(box3);
         addBox(box4);
 
+        //table.setDebug(true);
+
         //pullDataFromServer();
     }
 
 
     public void addBox(FriendBox box){
-        table.add(box.getTable());
+        table.add(box.getStack()).width(750 * StateManager.M).height(117 * StateManager.M);
         table.row();
     }
 
