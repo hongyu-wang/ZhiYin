@@ -44,7 +44,11 @@ public class ExecuteSendMessage implements Executable {
 
         conversation.getMessageList().add(message.getKey());
 
+        messageKeys.add(message.getKey());
+
         friend2.addMessage(new MessageBox(userText, 1));
+
+        friend2.getMessageKeys().add(message.getKey());
 
         ms.pushModel(text);
         ms.pushModel(message);

@@ -19,12 +19,9 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-03-24.
  */
 public class ExecutableUpdateMessage implements Executable {
-
-    private long conversation;
     private Friends2 friend2;
 
     public ExecutableUpdateMessage(Friends2 friend2){
-        this.conversation = friend2.getConversation();
         this.friend2 = friend2;
     }
 
@@ -32,16 +29,14 @@ public class ExecutableUpdateMessage implements Executable {
     public void execute() {
         ModelStorage ms = ModelStorageFactory.createModelStorage();
 
-        MConversation conversation = ms.getModel(this.conversation);
-        if(conversation == null){
-            ms.requestModelFromServer(MConversation.class.getName(), this.conversation);
-            return;
-        }
+        MConversation conversation = ms.getModel(friend2.getConversation());
+
+        ms.requestModelFromServer(MConversation.class.getName(), friend2.getConversation());
 
         List<Long> messageKeys = conversation.getMessageList();
 
         for(long key :messageKeys){
-            if(!messageKeys.contains(key)){
+            if(!friend2.getMessageKeys().contains(key)){
                 MMessage mMessage = ms.<MMessage>getModel(key);
 
                 if(mMessage != null) {

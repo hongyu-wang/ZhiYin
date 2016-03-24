@@ -23,7 +23,7 @@ public class ExecuteAddMessage implements Executable{
     @Override
     public void execute() {
 
-        friend2.addMessage(new MessageBox(friend2.getMessage(), 1));
+//        friend2.addMessage(new MessageBox(friend2.getMessage(), 1));
 
     }
 }
