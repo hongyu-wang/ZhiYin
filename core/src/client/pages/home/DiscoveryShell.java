@@ -30,13 +30,6 @@ public abstract class DiscoveryShell extends State {
         artistButton.setBounds(250 + 1, 1217, 250, 117);
         artistButton.setExecutable(new ExecuteChangePage(Pages.ARTIST));
         add(artistButton);
-
-//        Button searchButton = new Button(this);
-//        searchButton.setBounds(26 + 1, 1146, 750 - 26*2, 58);
-//        searchButton.setExecutable(new TestExecutable("search"));
-//        add(searchButton);
-
-        //setBottomBar();
     }
 
     @Override

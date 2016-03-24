@@ -30,8 +30,6 @@ public class TopSingles extends TopSinglesShell{
 
         //table.setDebug(true);
 
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("..//Name.mp3"))
-        addSingle("name", music);
         stage.addActor(table);
     }
 
