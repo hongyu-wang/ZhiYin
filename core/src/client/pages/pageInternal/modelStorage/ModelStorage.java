@@ -20,7 +20,7 @@ import java.util.Map;
  * Created by Hongyu Wang on 3/19/2016.
  */
 public class ModelStorage {
-    User user;
+    private long user;
     private Map<Long, ServerModel> models;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
@@ -35,7 +35,7 @@ public class ModelStorage {
     }
 
     ModelStorage(User user){
-        this.user = user;
+        this.user = user.getKey();
         models = new HashMap<Long, ServerModel>();
         models.put(user.getKey(), user);
     }
@@ -77,14 +77,16 @@ public class ModelStorage {
      * @return          True if the login was successful.
      */
     public boolean loginUser(String username){
-        try {
-            this.user = this.getModel(WebServiceClient.getUserByName(username));
-            return true;
+        if(username.equals("Alice")){
+            user = 1;
         }
-        catch(WebRequestException e){
-            System.out.println("Unable to login.");
-            return false;
+        if(username.equals("Benny")){
+            user = 2;
         }
+        if(username.equals("Cindy")){
+            user = 3;
+        }
+        return true;
     }
 
     public long getHashtagByName(String hashtag){
@@ -106,7 +108,7 @@ public class ModelStorage {
      * @return  The user data of the owner.
      */
     public User getMainUser(){
-        return user;
+        return (User)models.get(user);
     }
 
     /**Requests a new model of className from the server.
@@ -116,6 +118,7 @@ public class ModelStorage {
      */
     public void requestModelFromServer(String className, long key){
         RequestObject.newInstance().getModel(className, key);
+        this.models.remove(key);
     }
 
     /**Returns a pre generated serial key from the server.

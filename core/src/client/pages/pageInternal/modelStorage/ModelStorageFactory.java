@@ -21,7 +21,7 @@ public class ModelStorageFactory {
         if(modelStorage == null){
             modelStorage = new ModelStorage(user);
         }
-        modelStorage.user = user;
+        modelStorage.user = user.getKey();
         return modelStorage;
     }
 }
