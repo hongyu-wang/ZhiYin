@@ -72,7 +72,8 @@ public class Artist extends ArtistShell {
         s.add(i2);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this));
+        //TODO fix this
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, null));
 
         s.addListener(new ClickListener() {
             @Override

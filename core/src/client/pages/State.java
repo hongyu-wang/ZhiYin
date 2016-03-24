@@ -164,6 +164,12 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
     public abstract void reset();
 
+
+    /**
+     * This is the super pull data from server method. This should never get implemented here.
+     *
+     * HOWEVER, I don't want it to be abstract
+     */
     public void pullDataFromServer(){
 
     }

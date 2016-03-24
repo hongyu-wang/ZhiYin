@@ -2,6 +2,8 @@ package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.ExecutePauseMusic;
+import client.events.executables.internalChanges.ExecutePlayMusic;
 import client.events.executables.internalChanges.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -21,8 +23,9 @@ public class NowPlaying extends NowPlayingShell {
 
     State previousState;
 
-    public NowPlaying(State previousState){
+    public NowPlaying(State previousState, Music music){
         this.previousState = previousState;
+        this.music = music;
         init();
     }
 
@@ -35,12 +38,8 @@ public class NowPlaying extends NowPlayingShell {
 
         stage.addActor(slider);
 
-        Button backButton = new Button(this);
-        backButton.setBounds(0 + 1, 1217, 117, 117);
-        ExecutableMultiplexer executables = new ExecutableMultiplexer();
-        executables.addExecutable(new ExecuteToTempState(previousState));
-        backButton.setExecutable(executables);
-        add(backButton);
+        addBackButton();
+        addPlayButton();
 
         Button nowPlaying2Button = new Button(this);
         nowPlaying2Button.setBounds(607 + 1, 1063, 51, 51);
@@ -48,6 +47,24 @@ public class NowPlaying extends NowPlayingShell {
         add(nowPlaying2Button);
 
     }
+
+    private void addBackButton(){
+        Button backButton = new Button(this);
+        backButton.setBounds(0 + 1, 1217, 117, 117);
+        ExecutableMultiplexer executables = new ExecutableMultiplexer();
+        executables.addExecutable(new ExecuteToTempState(previousState));
+        executables.addExecutable(new ExecutePauseMusic(music));
+        backButton.setExecutable(executables);
+        add(backButton);
+    }
+
+    private void addPlayButton(){
+        Button pauseButton = new Button(this);
+        pauseButton.setBounds(288 + 1, 177, 180, 180);
+        pauseButton.setExecutable(new ExecutePlayMusic(music));
+        add(pauseButton);
+    }
+
 
     @Override
     public void reset() {

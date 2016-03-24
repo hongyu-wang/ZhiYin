@@ -29,11 +29,6 @@ public abstract class NowPlayingShell extends State{
         fastForwardButton.setExecutable(new TestExecutable("fast forward"));
         add(fastForwardButton);
 
-        Button pauseButton = new Button(this);
-        pauseButton.setBounds(288 + 1, 177, 180, 180);
-        //pauseButton.setExecutable(new ExecutePlayMusic());
-        add(pauseButton);
-
         Button b1 = new Button(this);
         b1.setBounds(0 + 1, 0, 230, 117);
         b1.setExecutable(new TestExecutable("b1"));
