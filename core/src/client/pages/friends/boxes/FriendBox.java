@@ -26,7 +26,6 @@ public class FriendBox{
     private Image currentIcon;
     /**
      *
-     * @param y The vertical distance from the top bar.
      * @param iconNum The number representing an icon.
      * @param friendName The friend's name.
      */

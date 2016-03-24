@@ -29,7 +29,7 @@ public class GameLoop extends ApplicationAdapter {
 		post.addModel(userManager.createNewUser("Lol", "lol"), "server.model.user.User");
 
 		stateManager = StateManager.getInstance();
-        Pages.initLogin();
+		Pages.initLogin();
 
         stateManager.changeState(Pages.LOGIN);
 		spriteBatch = MainBatch.getInstance();

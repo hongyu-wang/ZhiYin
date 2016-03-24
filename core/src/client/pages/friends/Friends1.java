@@ -17,18 +17,23 @@ public class Friends1 extends Friends1Shell{
 
         stage.addActor(table);
 
+        FriendBox box1 = new FriendBox(1, "Friend1");
+        FriendBox box2 = new FriendBox(1, "Friend2");
+        FriendBox box3 = new FriendBox(1, "Friend3");
+        FriendBox box4 = new FriendBox(1, "Friend4");
+
+        addBox(box1);
+        addBox(box2);
+        addBox(box3);
+        addBox(box4);
+
         //pullDataFromServer();
     }
 
-    public void addFriendBox(int status, String name, int multiplier){
-
-        FriendBox box = new FriendBox(status, name);
-        stage.addActor(box.getTable());
-
-    }
 
     public void addBox(FriendBox box){
-
+        table.add(box.getTable());
+        table.row();
     }
 
     @Override
