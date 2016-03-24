@@ -17,7 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
  * Contains a stack of actors. Used in Friends4.
  */
 public class MessageBox {
-
+    public static final int THEIR_MESSAGE = 0;
+    public static final int OUR_MESSAGE = 1;
     //private static float y = 1334; // -56 each time
 
     private Stack stack;

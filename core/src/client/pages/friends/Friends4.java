@@ -3,34 +3,33 @@ package client.pages.friends;
 
 import client.events.executables.internalChanges.TestExecutable;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
-import client.pages.pageInternal.serverClientInteractions.ConversationTalker;
-import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
-import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
-import server.model.social.MConversation;
-import server.model.social.MMessage;
-import server.model.user.UserConversations;
-import server.services.interfaces.models.ConversationManager;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static client.singletons.StateManager.M;
 
 public class Friends4 extends Friends4Shell{
     private TextField messageField;
-    private int counter = 0;
+
+    private Table table;
+
     public void init(){
         super.init();
 
         addMessageField();
+
+        table = new Table();
+        table.top();
+
+        ScrollPane scrollpane = new ScrollPane(table);
+        scrollpane.setBounds(0, 122 * StateManager.M, 750 * StateManager.M, 1212 * StateManager.M);
+
+        stage.addActor(scrollpane);
+
 
         MessageBox box1 = new MessageBox("This is a long message made for the sole purpose of testing our stuff. Please do not read this unless you want to waste your time." +
                 "Why are you still reading this? Do you really have nothing better to do right now? Go find yourself a hobby or something. That, or go do some work." +
@@ -44,37 +43,19 @@ public class Friends4 extends Friends4Shell{
         MessageBox box7 = new MessageBox(new TestExecutable("clicked 3"), 0);
         MessageBox box8 = new MessageBox(new TestExecutable("clicked 4"), 1);
 
-        Table table = new Table();
-        ScrollPane scrollpane = new ScrollPane(table);
+        addMessage(box1);
+        addMessage(box2);
+        addMessage(box3);
+        addMessage(box4);
+        addMessage(box5);
+        addMessage(box6);
+        addMessage(box7);
+        addMessage(box8);
+    }
 
-        table.add(box1.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box1.getByUser()) * StateManager.M);
-        table.row();
-        table.add(box2.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box2.getByUser()) * StateManager.M);
-        table.row();
-        table.add(box3.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box3.getByUser()) * StateManager.M);
-        table.row();
-        table.add(box4.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box4.getByUser()) * StateManager.M);
-        table.row();
-        table.add(box5.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box5.getByUser()) * StateManager.M);
-        table.row();
-        table.add(box6.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box6.getByUser()) * StateManager.M);
-        table.row();
-        table.add(box7.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box7.getByUser()) * StateManager.M);
-        table.row();
-        table.add(box8.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box8.getByUser()) * StateManager.M);
+    public void addMessage(MessageBox box){
+        table.add(box.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
         table.row().expandX();
-
-        table.top();
-
-        //table.setDebug(true);
-
-        scrollpane.setBounds(0, 122 * StateManager.M, 750 * StateManager.M, 1212 * StateManager.M);
-
-        stage.addActor(scrollpane);
-
-
-        talkerTest();
-
     }
 
     @Override
