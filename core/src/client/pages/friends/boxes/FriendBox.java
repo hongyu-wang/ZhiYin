@@ -6,10 +6,7 @@ import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -65,8 +62,22 @@ public class FriendBox{
         table.add(button).expandX().right().padRight(20 * StateManager.M);
     }
 
-    public Table getTable(){
-        return this.table;
+    public Stack getStack(){
+        Stack s = new Stack();
+
+        Image i = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
+
+        s.add(i);
+        s.add(table);
+
+        s.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                new ExecuteChangePage(Pages.FRIENDS4).execute();
+            }
+        });
+
+        return s;
     }
 
     public void setIcon(int iconNum){

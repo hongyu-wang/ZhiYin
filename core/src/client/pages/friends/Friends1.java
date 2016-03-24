@@ -1,14 +1,8 @@
 package client.pages.friends;
 
 import client.pages.friends.boxes.FriendBox;
-import client.pages.pageInternal.serverClientInteractions.FriendTalker;
-import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
-import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import server.model.user.User;
-
-import java.util.List;
 
 public class Friends1 extends Friends1Shell{
 
@@ -24,15 +18,23 @@ public class Friends1 extends Friends1Shell{
         stage.addActor(table);
 
         FriendBox box1 = new FriendBox(1, "Friend1");
+        FriendBox box2 = new FriendBox(2, "Friend2");
+        FriendBox box3 = new FriendBox(3, "Friend3");
+        FriendBox box4 = new FriendBox(4, "Friend4");
 
         addBox(box1);
+        addBox(box2);
+        addBox(box3);
+        addBox(box4);
+
+        //table.setDebug(true);
 
         //pullDataFromServer();
     }
 
 
     public void addBox(FriendBox box){
-        table.add(box.getTable());
+        table.add(box.getStack()).width(750 * StateManager.M).height(117 * StateManager.M);
         table.row();
     }
 
@@ -53,15 +55,15 @@ public class Friends1 extends Friends1Shell{
 
 
     public void pullDataFromServer(){
-        FriendTalker ft = TalkerFactory.getFriendTalker();
-        ProfileTalker pt = TalkerFactory.getProfileTalker();
-
-        ft.update(0);
-        List<User> users = ft.getAllFriends();
-        for (int i = 2; i < 4; i ++){
-            pt.init(users.get(i-2));
-            pt.update(0);
-            addBox(new FriendBox(1, pt.getName()));
-        }
+//        FriendTalker ft = TalkerFactory.getFriendTalker();
+//        ProfileTalker pt = TalkerFactory.getProfileTalker();
+//
+//        ft.update(0);
+//        List<User> users = ft.getAllFriends();
+//        for (int i = 2; i < 4; i ++){
+//            pt.init(users.get(i-2));
+//            pt.update(0);
+//            addFriendBox(1, pt.getName(), i);
+//        }
     }
 }
