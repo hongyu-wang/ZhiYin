@@ -50,9 +50,12 @@ public class TopSingles extends TopSinglesShell{
 
         Label single = new Label(songName, SkinSingleton.getInstance());
         Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
+        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 
         t.add(single).expand().left().padLeft(50 * StateManager.M);
         t.add(i).expand().right().padRight(50 * StateManager.M);
+        t.row();
+        t.add(line);
 
         Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
 

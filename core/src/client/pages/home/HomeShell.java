@@ -12,7 +12,7 @@ import driver.GameLoop;
 /**
  * Created by blobbydude24 on 2016-03-13.
  */
-public abstract class Home1Shell extends State{
+public abstract class HomeShell extends State{
 
     public void init(){
         super.init();
@@ -23,12 +23,12 @@ public abstract class Home1Shell extends State{
 
         Button artistButton = new Button(this);
         artistButton.setBounds(250 + 1, 1217, 250, 117);
-        artistButton.setExecutable(new ExecuteChangePage(Pages.HOME3));
+        artistButton.setExecutable(new ExecuteChangePage(Pages.ARTIST));
         add(artistButton);
 
         Button discoveryButton = new Button(this);
         discoveryButton.setBounds(500 + 1, 1217, 250, 117);
-        discoveryButton.setExecutable(new ExecuteChangePage(Pages.HOME4));
+        discoveryButton.setExecutable(new ExecuteChangePage(Pages.DISCOVERY));
         add(discoveryButton);
 
         setBottomBar();

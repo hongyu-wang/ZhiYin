@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class Home1 extends Home1Shell {
+public class Home extends HomeShell {
     private ScrollPane scrollpane;
     private Table table;
     private Table newRelease;

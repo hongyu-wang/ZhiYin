@@ -20,7 +20,7 @@ public abstract class NowPlaying2Shell extends State {
         Button backButton = new Button(this);
         backButton.setBounds(0 + 1, 1217, 117, 117);
         ExecutableMultiplexer executables = new ExecutableMultiplexer();
-        executables.addExecutable(new ExecuteChangePage(Pages.HOME1));
+        executables.addExecutable(new ExecuteChangePage(Pages.HOME));
         backButton.setExecutable(executables);
         add(backButton);
 
