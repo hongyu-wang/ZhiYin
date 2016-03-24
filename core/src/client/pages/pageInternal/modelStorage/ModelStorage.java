@@ -118,7 +118,6 @@ public class ModelStorage {
      */
     public void requestModelFromServer(String className, long key){
         RequestObject.newInstance().getModel(className, key);
-        this.models.remove(key);
     }
 
     /**Returns a pre generated serial key from the server.

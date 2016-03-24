@@ -2,6 +2,7 @@ package client.pages.home;
 
 import client.events.executables.internalChanges.ExecuteChangePage;
 import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.TestExecutable;
 import client.pageStorage.Pages;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
@@ -36,7 +37,7 @@ public class Home extends HomeShell {
         b1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.TOPSINGLES).execute();
+                new TestExecutable("new releases").execute();
             }
         });
 

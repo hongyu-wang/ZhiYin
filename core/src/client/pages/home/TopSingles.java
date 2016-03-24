@@ -17,11 +17,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 /**
  * Created by blobbydude24 on 2016-03-23.
  */
-public class TopSingles extends TopSinglesShell {
+public class TopSingles extends TopSinglesShell{
 
     private Table table;
 
-    public void init() {
+    public void init(){
         super.init();
 
         table = new Table();
@@ -30,34 +30,11 @@ public class TopSingles extends TopSinglesShell {
 
         //table.setDebug(true);
 
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/Hand towel.mp3"));
-        addSingle("Hand towel", music);
-        Music music1 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/Blind spot.mp3"));
-        addSingle("Blind spot", music1);
-        Music music2 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/Brave Shine.mp3"));
-        addSingle("Brave Shine", music2);
-        Music music3 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/Be Ok.mp3"));
-        addSingle("Be Ok", music3);
-        Music music4 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/Imagine Dragons - Monster.mp3"));
-        addSingle("Imagine Dragons - Monster", music4);
-        Music music5 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/Jasmine Thompson - See You Again.mp3"));
-        addSingle("Jasmine Thompson - See You Again", music5);
-        Music music6 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/Katy Perry - Hot N Cold.mp3"));
-        addSingle("Hot N Cold", music6);
-        Music music7 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/Katy Perry - I Kissed a Girl.mp3"));
-        addSingle("Katy Perry - I Kissed a Girl", music7);
-        Music music8 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/OneRepublic - Counting Stars.mp3"));
-        addSingle("OneRepublic - Counting Stars", music8);
-        Music music9 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/P!NK - Just Give Me a Reason.mp3"));
-        addSingle("P!NK - Just Give Me a Reason", music9);
-        Music music10 = Gdx.audio.newMusic(Gdx.files.internal("../Music Assets/Road of wind.mp3"));
-        addSingle("Road of wind", music10);
-
         stage.addActor(table);
     }
 
 
-    public void addSingle(String songName, Music music) {
+    public void addSingle(String songName, Music music){
         Stack s = new Stack();
 
         Table t = new Table();

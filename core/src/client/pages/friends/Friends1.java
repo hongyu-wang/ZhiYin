@@ -1,22 +1,34 @@
 package client.pages.friends;
 
 import client.pages.friends.boxes.FriendBox;
-import client.pages.pageInternal.serverClientInteractions.FriendTalker;
-import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
+import client.singletons.StateManager;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class Friends1 extends Friends1Shell{
-    FriendTalker ft;
+
+    private Table table;
+
     public void init(){
         super.init();
 
-        FriendBox box1 = new FriendBox(1334 - 117 * 2, 1, "Name1");
-        stage.addActor(box1.getTable());
+        table = new Table();
+        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 *  StateManager.M);
+        table.top();
 
-        FriendBox box2 = new FriendBox(1334 - 117 * 3, 1, "Name2");
-        stage.addActor(box2.getTable());
+        stage.addActor(table);
 
-        FriendBox box3 = new FriendBox(1334 - 117 * 4, 1, "Name3");
-        stage.addActor(box3.getTable());
+        //pullDataFromServer();
+    }
+
+    public void addFriendBox(int status, String name, int multiplier){
+
+        FriendBox box = new FriendBox(status, name);
+        stage.addActor(box.getTable());
+
+    }
+
+    public void addBox(FriendBox box){
+
     }
 
     @Override
@@ -36,8 +48,15 @@ public class Friends1 extends Friends1Shell{
 
 
     public void pullDataFromServer(){
-        FriendTalker ft = TalkerFactory.getFriendTalker();
-        ft.pull();
-
+//        FriendTalker ft = TalkerFactory.getFriendTalker();
+//        ProfileTalker pt = TalkerFactory.getProfileTalker();
+//
+//        ft.update(0);
+//        List<User> users = ft.getAllFriends();
+//        for (int i = 2; i < 4; i ++){
+//            pt.init(users.get(i-2));
+//            pt.update(0);
+//            addFriendBox(1, pt.getName(), i);
+//        }
     }
 }

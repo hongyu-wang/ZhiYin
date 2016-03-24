@@ -142,8 +142,8 @@ public class InputListener implements InputProcessor {
 //        if (keycode == Input.Keys.C)
 //            stateManager.changeState(Pages.NOWPLAYING2);
 
-        if (keycode == Input.Keys.Z)
-            stateManager.changeState(Pages.PROFILE);
+//        if (keycode == Input.Keys.Z)
+//            stateManager.changeState(Pages.PROFILE);
 
 
         return false;

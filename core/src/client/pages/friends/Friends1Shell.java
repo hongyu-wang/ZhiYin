@@ -8,7 +8,6 @@ import client.events.executables.internalChanges.TestExecutable;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
-import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
@@ -21,7 +20,7 @@ public abstract class Friends1Shell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Friends1BG.png"));
+        Image background = new Image(new Texture("Friends/Friends1BG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 

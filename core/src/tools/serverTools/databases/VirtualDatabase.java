@@ -167,7 +167,7 @@ public class VirtualDatabase {
         diary.setKey(
                 generator.generateSerial());
 
-        //Profile Attributes
+        //ArtistProfile Attributes
         profile.setUsername(username);
         profile.setDescription("I am " + username + ".");
         profile.setImageKey(0);//i.e. empty
