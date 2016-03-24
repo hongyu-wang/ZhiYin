@@ -45,7 +45,7 @@ public class Friends1 extends Friends1Shell{
 
         ft.update(0);
         List<User> users = ft.getAllFriends();
-        for (int i = 2; i < 5; i ++){
+        for (int i = 2; i < 4; i ++){
             pt.init(users.get(i-2));
             pt.update(0);
             addFriendBox(1, pt.getName(), i);

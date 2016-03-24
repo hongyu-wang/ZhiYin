@@ -3,18 +3,30 @@ package client.pages.friends;
 
 import client.events.executables.internalChanges.TestExecutable;
 import client.pages.friends.boxes.MessageBox;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.serverClientInteractions.ConversationTalker;
+import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import server.model.social.MConversation;
+import server.model.social.MMessage;
+import server.model.user.UserConversations;
+import server.services.interfaces.models.ConversationManager;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static client.singletons.StateManager.M;
 
 public class Friends4 extends Friends4Shell{
     private TextField messageField;
-
+    private int counter = 0;
     public void init(){
         super.init();
 
@@ -60,6 +72,9 @@ public class Friends4 extends Friends4Shell{
 
         stage.addActor(scrollpane);
 
+
+        talkerTest();
+
     }
 
     @Override
@@ -92,6 +107,46 @@ public class Friends4 extends Friends4Shell{
         stage.act(); //This bug tho
 
         messageField.getText();//TODO something
+        if (counter%1000 == 0){
+            SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
+            sct.update(0);
+
+            MConversation fuck = sct.getConversations().get(0);
+
+            ConversationTalker talker = TalkerFactory.getMessagesTalker();
+
+            talker.init(fuck);
+
+            talker.update(0);
+
+            for(MMessage message :talker.getAllMMessages()){
+                System.out.println(talker.getMessageText(message));
+            }
+
+        }
+        counter ++;
+
+    }
+
+
+    public void talkerTest(){
+        String message = "fuck you Kevin Zheng";
+
+        SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
+        sct.update(0);
+
+        MConversation fuck = sct.getConversations().get(0);
+
+        ConversationTalker talker = TalkerFactory.getMessagesTalker();
+
+        talker.init(fuck);
+
+        talker.update(0);
+
+        talker.newMessage(message);
+
+        talker.push();
+
     }
 
 }

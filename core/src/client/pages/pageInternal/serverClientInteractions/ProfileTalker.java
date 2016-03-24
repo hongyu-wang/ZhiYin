@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import server.model.media.MImage;
 import server.model.user.User;
 import server.model.user.UserProfile;
+import tools.utilities.Utils;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
  * Created by Hongyu Wang on 3/20/2016.
  */
 public class ProfileTalker extends Talkers{
-    private static Map<User, Profile> userProfiles;
+    private static Map<User, Profile> userProfiles = Utils.newMap();
 
     private Profile currentProfile;
 
@@ -174,7 +175,7 @@ public class ProfileTalker extends Talkers{
 
             name = profile.getUsername();
             description = profile.getDescription();
-            profileImage = image.getImage();
+//            profileImage = image.getImage();
         }
     }
 }

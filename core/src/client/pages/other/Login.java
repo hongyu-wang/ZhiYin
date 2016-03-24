@@ -51,7 +51,6 @@ public class Login extends State {
                     stage.addActor(label);
 
                     wta.remove();
-                    Pages.initClass();
                 }
             }
         });
@@ -73,8 +72,11 @@ public class Login extends State {
 
             }
 
-            if (vb.isUpdated())
+            if (vb.isUpdated()) {
+                Pages.initClass();
+
                 new ExecuteChangePage(Pages.HOME).execute();
+            }
         }
         delta ++;
 

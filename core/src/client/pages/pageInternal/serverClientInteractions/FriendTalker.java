@@ -87,6 +87,7 @@ public class FriendTalker extends Talkers {
     @Override
     public void update(float dt) {
         List<User> newFriendList = new ArrayList<>();
+        System.out.println(modelStorage.getMainUser());
         for(long key: modelStorage.getMainUser().getFriendKeys()){
             newFriendList.add(modelStorage.<User>getModel(key));
         }
