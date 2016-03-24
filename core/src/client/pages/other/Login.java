@@ -7,14 +7,11 @@ import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import client.stateInterfaces.Executable;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.*;
-import com.badlogic.gdx.utils.StringBuilder;
 
 /**
  * #Login Page
@@ -75,7 +72,7 @@ public class Login extends State {
             }
 
             if (vb.isUpdated())
-                new ExecuteChangePage(Pages.HOME1).execute();
+                new ExecuteChangePage(Pages.HOME).execute();
         }
         delta ++;
 

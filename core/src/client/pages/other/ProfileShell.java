@@ -23,7 +23,7 @@ public abstract class ProfileShell extends State {
 
         Button backButton = new Button(this);
         backButton.setBounds(0, 1217, 117, 117);
-        backButton.setExecutable(new ExecuteChangePage(Pages.HOME1));
+        backButton.setExecutable(new ExecuteChangePage(Pages.HOME));
         add(backButton);
     }
 
