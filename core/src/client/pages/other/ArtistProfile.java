@@ -8,10 +8,7 @@ import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -22,14 +19,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class ArtistProfile extends ArtistProfileShell {
 
-    State previousState;
+    private State previousState;
 
-    String artistName;
+    private Image profilePicture;
 
-    Table table;
+    private String artistName;
 
-    public ArtistProfile(State previousState, String artistName){
+    private ScrollPane scrollpane;
+
+    private Table songs;
+
+
+    public ArtistProfile(State previousState, Image profilePicture, String artistName){
         this.previousState = previousState;
+        this.profilePicture = profilePicture;
         this.artistName = artistName;
         init();
     }
@@ -56,23 +59,69 @@ public class ArtistProfile extends ArtistProfileShell {
 
         stage.addActor(followButton);
 
-        table = new Table();
-        table.setBounds(0, 200 * StateManager.M, 750 * StateManager.M, 1017 * StateManager.M);
-        table.top();
+        Table t = new Table();
+        t.setBounds(0, 900 * StateManager.M, 750 * StateManager.M, 317 * StateManager.M);
+        stage.addActor(t);
+
+        songs = new Table();
+        songs.top();
+        scrollpane = new ScrollPane(songs);
+        scrollpane.setBounds(0, 200 * StateManager.M, 750 * StateManager.M, 700 * StateManager.M);
+        stage.addActor(scrollpane);
 
         Label artist = new Label(artistName, SkinSingleton.getInstance());
+        t.add(profilePicture).width(200 * StateManager.M).height(200 * StateManager.M).expand().left().padLeft(50 * StateManager.M);
+        t.add(artist).expand().left().padLeft(50 * StateManager.M);
 
-        table.add(artist);
+        //t.setDebug(true);
 
-        stage.addActor(table);
+        addSong("Song1");
+        addSong("Song2");
+        addSong("Song3");
+        addSong("Song4");
+        addSong("Song5");
+        addSong("Song6");
+        addSong("Song7");
+        addSong("Song8");
+    }
 
-        table.setDebug(true);
+    public void addSong(String songName){
+        Stack s = new Stack();
 
+        Table t = new Table();
+
+        Label single = new Label(songName, SkinSingleton.getInstance());
+        Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
+        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
+
+        t.add(single).expand().left().padLeft(50 * StateManager.M);
+        t.add(i).expand().right().padRight(50 * StateManager.M);
+        t.row();
+        t.add(line);
+
+        Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
+
+        s.add(i2);
+        s.add(t);
+
+        s.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                new TestExecutable("NowPlaying").execute();
+            }
+        });
+
+        songs.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
+        songs.row();
     }
 
     @Override
     public void reset() {
 
+    }
+
+    public void update(float dt){
+        stage.act();
     }
 
 

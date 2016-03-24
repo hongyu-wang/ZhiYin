@@ -60,7 +60,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     /**
      * This method will initialize all values as required within state
      */
-    public void init(){
+    protected void init(){
         components = Utils.newList();
         controllers = Utils.newMap();
         controllers.put(SHELLINPUT, new InputController());
@@ -105,7 +105,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
         Button toolsButton = new Button(this);
         toolsButton.setBounds((59 + 117*3 + 55*3) + 1, 0, 117, 117);
-        toolsButton.setExecutable(new ExecuteChangePage(Pages.TOOLS));
+        toolsButton.setExecutable(new ExecuteChangePage(Pages.MYPROFILE));
         add(toolsButton);
     }
 

@@ -1,5 +1,8 @@
 package client.pages.friends;
 
+import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.ExecuteChangePage;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,10 +21,10 @@ public abstract class Friends1Shell extends State {
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 
-//        Button friendListButton = new Button(this);
-//        friendListButton.setBounds(375, 1217, 375, 117);
-//        friendListButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS5));
-//        add(friendListButton);
+        Button friendsButton = new Button(this);
+        friendsButton.setBounds(375, 1217, 375, 117);
+        friendsButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS4));
+        add(friendsButton);
 //
 //        Button createGroupButton = new Button(this);
 //        createGroupButton.setBounds(0, 117 * 2, 750, 117);

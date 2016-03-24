@@ -17,14 +17,13 @@ public abstract class Diary1Shell extends State{
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Diary1BG.png"));
+        Image background = new Image(new Texture("Diary/Diary1BG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
 
         stage.addActor(background);
 
-
         Button composeButton = new Button(this);
-        composeButton.setBounds(1, 117, 750, 117);
+        composeButton.setBounds(750 - 117, 1217, 117, 117);
         composeButton.setExecutable(new ExecuteChangePage(Pages.DIARY2));
         add(composeButton);
 

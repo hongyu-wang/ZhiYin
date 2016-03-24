@@ -8,6 +8,10 @@ public class Friends1 extends Friends1Shell{
 
     private Table table;
 
+    public Friends1(){
+        init();
+    }
+
     public void init(){
         super.init();
 

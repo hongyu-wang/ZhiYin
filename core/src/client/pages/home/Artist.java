@@ -33,27 +33,23 @@ public class Artist extends ArtistShell {
         table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1000* StateManager.M);
         table.top();
 
-        //table.setDebug(true);
-
-        addArtist("Artist1");
-        addArtist("Artist2");
-        addArtist("Artist3");
-        addArtist("Artist4");
-        addArtist("Artist5");
-        addArtist("Artist6");
-        addArtist("Artist7");
-        addArtist("Artist8");
-        addArtist("Artist9");
-        addArtist("Artist10");
-
         scrollpane = new ScrollPane(table);
 
         scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1000 * StateManager.M);
 
         stage.addActor(scrollpane);
+
+        //table.setDebug(true);
+
+        addArtist("Artist/Artist1.png", "Artist1");
+        addArtist("Artist/Artist2.png", "Artist2");
+        addArtist("Artist/Artist3.png", "Artist3");
+        addArtist("Artist/Artist4.png", "Artist4");
+        addArtist("Artist/Artist5.png", "Artist5");
+
     }
 
-    public void addArtist(String artistName){
+    public void addArtist(String picturePath, String artistName){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -61,8 +57,10 @@ public class Artist extends ArtistShell {
         Label single = new Label(artistName, SkinSingleton.getInstance());
         Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
+        Image picture = new Image(new Texture(picturePath));
 
-        t.add(single).expand().left().padLeft(50 * StateManager.M);
+        //t.add(picture).expand().left().padLeft(50 * StateManager.M);
+        t.add(single).padLeft(10 * StateManager.M);
         t.add(i).expand().right().padRight(50 * StateManager.M);
         t.row();
         t.add(line);
@@ -73,7 +71,7 @@ public class Artist extends ArtistShell {
         s.add(t);
 
         //TODO fix this
-        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, artistName));
+        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, picture, artistName));
 
         s.addListener(new ClickListener() {
             @Override

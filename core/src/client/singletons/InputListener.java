@@ -103,17 +103,17 @@ public class InputListener implements InputProcessor {
         if (keycode == Input.Keys.NUM_1)
             stateManager.changeState(Pages.FRIENDS1);
 
-        if (keycode == Input.Keys.NUM_2)
-            stateManager.changeState(Pages.FRIENDS2);
+//        if (keycode == Input.Keys.NUM_2)
+//            stateManager.changeState(Pages.FRIENDS2);
 
-        if (keycode == Input.Keys.NUM_3)
-            stateManager.changeState(Pages.FRIENDS3);
+//        if (keycode == Input.Keys.NUM_3)
+//            stateManager.changeState(Pages.FRIENDS3);
 
         if (keycode == Input.Keys.NUM_4)
             stateManager.changeState(Pages.FRIENDS4);
 
-        if (keycode == Input.Keys.NUM_5)
-            stateManager.changeState(Pages.FRIENDS5);
+//        if (keycode == Input.Keys.NUM_5)
+//            stateManager.changeState(Pages.FRIENDS5);
 
         if (keycode == Input.Keys.Q)
             stateManager.changeState(Pages.DIARY1);

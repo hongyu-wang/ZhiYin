@@ -1,7 +1,7 @@
 package client.pages.friends.boxes;
 
-import client.events.executables.internalChanges.ExecuteChangePage;
-import client.pageStorage.Pages;
+import client.events.executables.internalChanges.ExecuteToTempState;
+import client.pages.friends.Friends2;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -52,13 +52,6 @@ public class FriendBox{
         Image i = new Image(new Texture("Friends/Enter@" + StateManager.M + ".png"));
         final ImageButton button = new ImageButton(i.getDrawable());
 
-        button.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.FRIENDS4).execute();
-            }
-        });
-
         table.add(button).expandX().right().padRight(20 * StateManager.M);
     }
 
@@ -70,10 +63,12 @@ public class FriendBox{
         s.add(i);
         s.add(table);
 
+        final Friends2 f2 = new Friends2();
+
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.FRIENDS4).execute();
+                new ExecuteToTempState(f2).execute();
             }
         });
 

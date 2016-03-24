@@ -19,17 +19,13 @@ public enum Pages {
      */
 
     FRIENDS1("friends.Friends1"),
-    FRIENDS2("friends.Friends2"),
-    FRIENDS3("friends.Friends3"),
     FRIENDS4("friends.Friends4"),
-    FRIENDS5("friends.Friends5"),
     HOME("home.Home"),
     ARTIST("home.Artist"),
     DISCOVERY("home.Discovery"),
     TOPSINGLES("home.TopSingles"),
-    TOOLS("other.Tools"),
+    MYPROFILE("other.MyProfile"),
     LOGIN("other.Login"),
-    //PROFILE("other.ArtistProfile"),
     DIARY1("musicDiary.Diary1"),
     DIARY2("musicDiary.Diary2"),
     DIARY3("musicDiary.Diary3"),
@@ -62,6 +58,7 @@ public enum Pages {
 
             if (page != null && page != Pages.LOGIN) {
                 try {
+                    System.out.println("name: " + page.name);
                     page.stateReference = (State) ClassReflection.forName("client.pages." + page.name).getDeclaredConstructor().newInstance();
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | ReflectionException e) {
                     e.printStackTrace();

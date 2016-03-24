@@ -9,19 +9,25 @@ import driver.GameLoop;
 /**
  * Created by blobbydude24 on 2016-03-21.
  */
-public abstract class ToolsShell extends State {
+public abstract class MyProfileShell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("myProfile.jpg"));
+        Image background = new Image(new Texture("Other/MyProfileBG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 
-//        Button myProfileButton = new Button(this);
-//        myProfileButton.setBounds(0, 1334 - 190, 750, 190);
-//        myProfileButton.setExecutable(new ExecuteChangePage(Pages.PROFILE));
-//        add(myProfileButton);
-
         setBottomBar();
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
+
+    @Override
+    public void update(float dt) {
+
     }
 }
