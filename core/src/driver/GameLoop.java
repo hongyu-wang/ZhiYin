@@ -8,6 +8,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import server.services.factories.UserManagerFactory;
+import server.services.interfaces.models.UserManager;
+import server.webservices.PostObject;
 
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
@@ -20,6 +23,11 @@ public class GameLoop extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+
+		UserManager userManager = UserManagerFactory.createUserManager();
+		PostObject post = new PostObject();
+		post.addModel(userManager.createNewUser("Lol", "lol"), "server.model.user.User");
+
 		stateManager = StateManager.getInstance();
         Pages.initLogin();
 

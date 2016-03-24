@@ -52,13 +52,18 @@ public class PostObject implements Net.HttpResponseListener {
     public void addModel(ServerModel model, String className){
         // LibGDX NET CLASS
         ;
-        this.className = Tags.ID_TAGS.parseTag(className);
+        className = Tags.ID_TAGS.parseTag(className);
         Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
         httpPost.setUrl("http://localhost:8081/webservice/postServerModel");
         //httpPost.setHeader("X-Parse-Application-Id", app_id);
         //httpPost.setHeader("X-Parse-REST-API-Key", app_key);
-        Json json = new Json();
-        String jString = json.toJson(model);
+        String jString = "";
+        try {
+
+            jString = objectMapper.writeValueAsString(model);
+        }catch(Exception e){
+            System.out.println(e);
+        }
 
 
 

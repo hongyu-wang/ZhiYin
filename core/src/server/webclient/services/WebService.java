@@ -45,6 +45,14 @@ public class WebService{
         return mockServer.getModel(key);
     }
 
+    @GET
+    @Path("/GetServerKey")
+    @Produces("application/json")
+    public Long getServerKey(){
+        MockServer mockServer = ServerInteraction.getServer();
+        return mockServer.getSerial();
+    }
+
     /**
      *  Using Jackson.
      *
