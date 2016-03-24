@@ -80,17 +80,24 @@ public class ModelStorage {
      * @return          True if the login was successful.
      */
     public boolean loginUser(String username){
-        if(username.equals("Alice")){
-            user = 1;
-        }
-        if(username.equals("Benny")){
-            user = 2;
-        }
-        if(username.equals("Cindy")){
-            user = 3;
-        }
+        user = getUserKeyByName(username);
         return true;
     }
+
+    public long getUserKeyByName(String username){
+        if(username.equals("Alice")){
+            return 1;
+        }
+        if(username.equals("Benny")){
+            return 2;
+        }
+        if(username.equals("Cindy")){
+            return 3;
+        }
+
+        throw new IndexOutOfBoundsException("Incorrect username.");
+    }
+
 
     public long getHashtagByName(String hashtag){
 //        try{

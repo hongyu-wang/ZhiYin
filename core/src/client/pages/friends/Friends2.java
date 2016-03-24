@@ -11,12 +11,26 @@ import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import javafx.scene.input.Dragboard;
+import java.util.List;
 import server.model.social.MConversation;
+import tools.utilities.Utils;
 
 import static client.singletons.StateManager.M;
 
 public class Friends2 extends Friends2Shell{
+    //Stuff
+    private long conversation;
+    private List<Long> messageKeys = Utils.<Long>newList();
+
+    public List<Long> getMessageKeys() {
+        return messageKeys;
+    }
+
+    public long getConversation() {
+        return conversation;
+    }
+
+
     private ScrollPane scrollpane;
     private TextField messageField;
 
