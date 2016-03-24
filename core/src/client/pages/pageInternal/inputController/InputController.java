@@ -12,7 +12,6 @@ import java.util.List;
  * This is the input controller class.
  * This is here in order to encapsulate input information away from the current
  * state class.
- *
  * Created by Hongyu Wang on 3/13/2016.
  */
 public class InputController {

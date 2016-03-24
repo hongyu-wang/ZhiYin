@@ -77,11 +77,12 @@ public class ModelStorage {
      * @return          True if the login was successful.
      */
     public boolean loginUser(String username){
+
         try {
-            this.user = this.getModel(WebServiceClient.getUserByName(username));
+            //this.user = this.getModel(WebServiceClient.getUserByName(username));
             return true;
         }
-        catch(WebRequestException e){
+        catch(Exception e){
             System.out.println("Unable to login.");
             return false;
         }

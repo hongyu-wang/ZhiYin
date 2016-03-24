@@ -1,5 +1,6 @@
 package server.model.user;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import server.model.structureModels.ServerModel;
 
 import java.util.List;
