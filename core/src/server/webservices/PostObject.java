@@ -58,7 +58,7 @@ public class PostObject implements Net.HttpResponseListener {
         //httpPost.setHeader("X-Parse-Application-Id", app_id);
         //httpPost.setHeader("X-Parse-REST-API-Key", app_key);
         Json json = new Json();
-        String jString = json.toJson(model+className);
+        String jString = json.toJson(model);
 
 
 

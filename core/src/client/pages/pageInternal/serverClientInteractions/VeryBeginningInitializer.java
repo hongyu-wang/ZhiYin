@@ -1,6 +1,7 @@
 package client.pages.pageInternal.serverClientInteractions;
 
 import server.model.media.MHashtag;
+import server.model.social.MConversation;
 import server.model.user.*;
 
 /**
@@ -31,21 +32,15 @@ public class VeryBeginningInitializer extends Talkers{
         //Users
         for(int i = 0; i < 3; i++) {
             modelStorage.requestModelFromServer(User.class.getName(), key++);
-            System.out.println(key);
         }
 
         //UserContents
         for(int i = 0; i < 3; i++) {
             modelStorage.requestModelFromServer(UserProfile.class.getName(), key++);
-            System.out.println(key);
             modelStorage.requestModelFromServer(UserConversations.class.getName(), key++);
-            System.out.println(key);
             modelStorage.requestModelFromServer(UserActivityLog.class.getName(), key++);
-            System.out.println(key);
             modelStorage.requestModelFromServer(UserUploadedContent.class.getName(), key++);
-            System.out.println(key);
             modelStorage.requestModelFromServer(UserDiaryContent.class.getName(), key++);
-            System.out.println(key);
         }
 
         //Images
@@ -63,6 +58,11 @@ public class VeryBeginningInitializer extends Talkers{
         //Hashtag
         for(int i = 0; i < 3; i++)
             modelStorage.requestModelFromServer(MHashtag.class.getName(), key++);
+
+
+        for(int i = 0; i < 3 ; i++){
+            modelStorage.requestModelFromServer(MConversation.class.getName(), key++);
+        }
 
         totalOriginalModels = key;
     }

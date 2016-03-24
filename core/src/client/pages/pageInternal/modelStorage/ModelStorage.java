@@ -68,7 +68,7 @@ public class ModelStorage {
      */
     public void pushModel(ServerModel model){
         models.put(model.getKey(), model);
-        PostObject.newInstance().addModel(model, model.getClass().getName());
+        PostObject.newInstance().addModel(model, model.getClass().getCanonicalName());
     }
 
     /**Sets the prime user of this app.

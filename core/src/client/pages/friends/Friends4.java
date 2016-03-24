@@ -107,8 +107,9 @@ public class Friends4 extends Friends4Shell{
         stage.act(); //This bug tho
 
         messageField.getText();//TODO something
-        if (counter%1000 == 0){
+        if (counter%200 == 0){
             SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
+            sct.init();
             sct.update(0);
 
             MConversation fuck = sct.getConversations().get(0);
@@ -116,9 +117,11 @@ public class Friends4 extends Friends4Shell{
             ConversationTalker talker = TalkerFactory.getMessagesTalker();
 
             talker.init(fuck);
-
+            if(!talker.isWaiting())
+                talker.pull();
             talker.update(0);
 
+            System.out.println("Here I am.");
             for(MMessage message :talker.getAllMMessages()){
                 System.out.println(talker.getMessageText(message));
             }
@@ -133,6 +136,8 @@ public class Friends4 extends Friends4Shell{
         String message = "fuck you Kevin Zheng";
 
         SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
+        sct.init();
+
         sct.update(0);
 
         MConversation fuck = sct.getConversations().get(0);

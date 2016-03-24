@@ -38,10 +38,5 @@ public abstract class Friends4Shell extends State {
 
     }
 
-    @Override
-    public void update(float dt) {
-
-    }
-
 
 }

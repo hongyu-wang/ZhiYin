@@ -59,12 +59,19 @@ public class ConversationTalker extends Talkers {
 
     public void init(MConversation conversation){
         this.conversation = conversation;
+
+        mMessages = Utils.newList();
+        participants = Utils.newList();
+        messages = Utils.newMap();
+        users = Utils.newMap();
     }
 
     public void newMessage(String userText){
         MText text = TextManagerFactory.createTextManager().createText(userText, 0);
 
         MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), modelStorage.getMainUser().getKey());
+
+        mMessages.add(message);
 
         messages.put(message, userText);
 
