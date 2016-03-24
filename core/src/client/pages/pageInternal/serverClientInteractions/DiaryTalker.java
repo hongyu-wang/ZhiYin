@@ -7,46 +7,40 @@ import server.model.media.MMusic;
 import server.model.media.MText;
 import server.model.social.MComment;
 import server.model.social.MDiaryPost;
+import tools.utilities.Utils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * Created by Hongyu Wang on 3/21/2016.
  */
 public class DiaryTalker extends Talkers{
-    private MDiaryPost diaryPost;
+    private static Map<Long, DiaryHelper> userDiaries = Utils.newMap();
 
-    //--Interface Fields
-    private String text;
-    private Texture image;
-    private MMusic music;
-    private MAudio userRecording;
-
-    private List<MComment> mComments;
+    private DiaryHelper currentDiary;
 
     //Getters and Setters
     public String getText() {
-        return text;
+        return currentDiary.getText();
     }
 
     public Texture getImage() {
-        return image;
+        return currentDiary.getImage();
     }
 
     public MMusic getMusic() {
-        return music;
+        return currentDiary.getMusic();
     }
 
     public MAudio getUserRecording() {
-        return userRecording;
+        return currentDiary.getUserRecording();
     }
 
     public List<MComment> getAllComments() {
-        return mComments;
+        return currentDiary.getAllComments();
     }
-
-    /*------------------------------------------------------------------------*/
 
     @Deprecated
     @Override
@@ -54,84 +48,165 @@ public class DiaryTalker extends Talkers{
 
     }
 
-    public void init(MDiaryPost diaryPost){
-        this.diaryPost = diaryPost;
+    public void init(MDiaryPost post){
+        if(userDiaries.containsKey(post.getKey())){
+            currentDiary = userDiaries.get(post.getKey());
+        }
+        else{
+            currentDiary = new DiaryHelper();
+            currentDiary.init(post);
+
+            userDiaries.put(post.getKey(), currentDiary);
+        }
     }
 
-    /*------------------------------------------------------------------------*/
-
-    /**
-     *
-     * @param dt The rate of change of updating
-     */
-    @Override
-    public void update(float dt) {
-        MText postText = modelStorage.getModel(this.diaryPost.getTextKey());
-        if(postText != null)
-            text = postText.getText();
-
-        MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
-        if(postImage != null)
-            image = postImage.getImage();
-
-        music = modelStorage.getModel(this.diaryPost.getMusicKey());
-        userRecording = modelStorage.getModel(this.diaryPost.getAudioKey());
-    }
 
     @Override
     public void pull() {
-        modelStorage.requestModelFromServer(MImage.class.getName(), diaryPost.getImageKey());
-        modelStorage.requestModelFromServer(MText.class.getName(), diaryPost.getTextKey());
-        modelStorage.requestModelFromServer(MMusic.class.getName(), diaryPost.getMusicKey());
-        modelStorage.requestModelFromServer(MAudio.class.getName(), diaryPost.getAudioKey());
-
-        for(long key: diaryPost.getComments()){
-            modelStorage.requestModelFromServer(MComment.class.getName(), key);
-        }
+        currentDiary.pull();
     }
 
     @Override
     public void push() {
-
-        //Text, Texture, Music, Audio
-        MText postText = modelStorage.getModel(this.diaryPost.getTextKey());
-        MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
-
-        postText.setText(text);
-        postImage.setImage(image);
-
-        diaryPost.setMusicKey(music.getKey());
-        diaryPost.setAudioKey(userRecording.getKey());
-
-        //Comments
-        while(mComments.size() > diaryPost.getComments().size()){
-            MComment comment = mComments.get(diaryPost.getComments().size());
-
-            diaryPost.getComments().add(comment.getKey());
-
-            modelStorage.pushModel(comment);
-        }
-        modelStorage.pushModel(postText);
-        modelStorage.pushModel(postImage);
-        modelStorage.pushModel(diaryPost);
+        currentDiary.push();
     }
 
     @Override
     public boolean isUpdated() {
-        if(text == null || image == null || music == null || userRecording == null){
-            return false;
+        return currentDiary.isUpdated();
+    }
+
+    @Override
+    public void update(float dt) {
+        currentDiary.update(dt);
+    }
+
+    @Override
+    public boolean isWaiting(){
+        return currentDiary.isWaiting();
+    }
+
+
+    private class DiaryHelper extends Talkers{
+        private MDiaryPost diaryPost;
+
+        //--Interface Fields
+        private String text;
+        private Texture image;
+        private MMusic music;
+        private MAudio userRecording;
+
+        private List<MComment> mComments;
+
+        //Getters and Setters
+        public String getText() {
+            return text;
         }
 
-        if(mComments == null){
-            return false;
+        public Texture getImage() {
+            return image;
         }
 
-        for(MComment comment: mComments){
-            if(comment == null){
-                return false;
+        public MMusic getMusic() {
+            return music;
+        }
+
+        public MAudio getUserRecording() {
+            return userRecording;
+        }
+
+        public List<MComment> getAllComments() {
+            return mComments;
+        }
+
+    /*------------------------------------------------------------------------*/
+
+        @Deprecated
+        @Override
+        public void init() {
+
+        }
+
+        public void init(MDiaryPost diaryPost){
+            this.diaryPost = diaryPost;
+        }
+
+    /*------------------------------------------------------------------------*/
+
+        /**
+         *
+         * @param dt The rate of change of updating
+         */
+        @Override
+        public void update(float dt) {
+            MText postText = modelStorage.getModel(this.diaryPost.getTextKey());
+            if(postText != null)
+                text = postText.getText();
+
+            MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
+            if(postImage != null)
+                image = postImage.getImage();
+
+            music = modelStorage.getModel(this.diaryPost.getMusicKey());
+            userRecording = modelStorage.getModel(this.diaryPost.getAudioKey());
+        }
+
+        @Override
+        public void pull() {
+            modelStorage.requestModelFromServer(MImage.class.getName(), diaryPost.getImageKey());
+            modelStorage.requestModelFromServer(MText.class.getName(), diaryPost.getTextKey());
+            modelStorage.requestModelFromServer(MMusic.class.getName(), diaryPost.getMusicKey());
+            modelStorage.requestModelFromServer(MAudio.class.getName(), diaryPost.getAudioKey());
+
+            for(long key: diaryPost.getComments()){
+                modelStorage.requestModelFromServer(MComment.class.getName(), key);
             }
         }
 
-        return true;
+        @Override
+        public void push() {
+
+            //Text, Texture, Music, Audio
+            MText postText = modelStorage.getModel(this.diaryPost.getTextKey());
+            MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
+
+            postText.setText(text);
+            postImage.setImage(image);
+
+            diaryPost.setMusicKey(music.getKey());
+            diaryPost.setAudioKey(userRecording.getKey());
+
+            //Comments
+            while(mComments.size() > diaryPost.getComments().size()){
+                MComment comment = mComments.get(diaryPost.getComments().size());
+
+                diaryPost.getComments().add(comment.getKey());
+
+                modelStorage.pushModel(comment);
+            }
+            modelStorage.pushModel(postText);
+            modelStorage.pushModel(postImage);
+            modelStorage.pushModel(diaryPost);
+        }
+
+        @Override
+        public boolean isUpdated() {
+            if(text == null || image == null || music == null || userRecording == null){
+                return false;
+            }
+
+            if(mComments == null){
+                return false;
+            }
+
+            for(MComment comment: mComments){
+                if(comment == null){
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
+
 }

@@ -55,7 +55,4 @@ public class TalkerFactory {
 
         return (VeryBeginningInitializer) talkers[6];
     }
-
-
-
 }
