@@ -12,15 +12,20 @@ import server.model.structureModels.ServerModel;
  * Created by Hairuo on 2016-03-23.
  */
 public class ServerKeyObject implements Net.HttpResponseListener {
-    private ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
+    private ModelStorage modelStorage;
     private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
     private Object rOjbect;
     private String className;
 
-    public ServerKeyObject(){
-
+    public ServerKeyObject(ModelStorage modelStorage){
+        this.modelStorage = modelStorage;
     }
+
+    public static ServerKeyObject getInstance(ModelStorage modelStorage){
+        return new ServerKeyObject(modelStorage);
+    }
+
 
     /**
      * Retrieves a model from the server
@@ -45,7 +50,9 @@ public class ServerKeyObject implements Net.HttpResponseListener {
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
         final int statusCode = httpResponse.getStatus().getStatusCode();
         try {
-            rOjbect = objectMapper.readValue(httpResponse.getResultAsString(), Class.forName(className));
+//            rOjbect = objectMapper.readValue(httpResponse.getResultAsString(), Class.forName(Long.class.getName()));
+            long key = Long.parseLong(httpResponse.getResultAsString());
+            modelStorage.putGeneratedKey(key);
         } catch (Exception e) {
             System.out.println(e);
         }

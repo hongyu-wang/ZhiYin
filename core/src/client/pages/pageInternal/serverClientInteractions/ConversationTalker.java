@@ -96,7 +96,7 @@ public class ConversationTalker extends Talkers {
 
     @Override
     public void push() {
-        while(messages.size() > conversation.getMessageList().size()){
+        while(mMessages.size() > conversation.getMessageList().size()){
             MMessage message = mMessages.get(conversation.getMessageList().size());
 
             MText text = new MText();

@@ -36,7 +36,7 @@ public enum Tags {
         classes = new String[]{
                 User.class.getName(),
                 UserActivityLog.class.getName(),
-                UserActivityLog.class.getName(),
+                UserDiaryContent.class.getName(),
                 UserConversations.class.getName(),
                 UserProfile.class.getName(),
                 UserUploadedContent.class.getName(),

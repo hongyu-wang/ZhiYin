@@ -7,6 +7,7 @@ import server.webclient.WebServiceClient;
 import server.webclient.webErrors.WebRequestException;
 import server.webservices.PostObject;
 import server.webservices.RequestObject;
+import server.webservices.ServerKeyObject;
 
 import java.nio.LongBuffer;
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class ModelStorage {
         username_key = new HashMap<String, Long>();
 
         unassignedKeys = new ArrayList<Long>();
+
+        replenishKeys(10);
     }
 
     ModelStorage(User user){
@@ -133,12 +136,17 @@ public class ModelStorage {
 
         int size = unassignedKeys.size();
 
-        for(int i = 0; i < size; i++){
-            //TODO request Hairuo's key gen.
-        }
+        replenishKeys(10 - size);
 
         return key;
     }
+
+    private void replenishKeys(int num){
+        for(int i = 0; i < num; i++){
+            ServerKeyObject.getInstance(this).getKey();
+        }
+    }
+
 
 
 

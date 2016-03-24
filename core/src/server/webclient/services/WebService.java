@@ -46,7 +46,7 @@ public class WebService{
     }
 
     @GET
-    @Path("/GetServerKey")
+    @Path("/getServerKey")
     @Produces("application/json")
     public Long getServerKey(){
         MockServer mockServer = ServerInteraction.getServer();
@@ -67,6 +67,7 @@ public class WebService{
         int tag = Integer.parseInt(json.substring(json.length()-4));
         System.out.println(tag+1);
         String className = Tags.ID_TAGS.getName(tag);
+        System.out.println(className);
         json = json.substring(0, json.length()-4);
 
         try {

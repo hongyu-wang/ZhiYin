@@ -24,10 +24,6 @@ public class GameLoop extends ApplicationAdapter {
 	@Override
 	public void create() {
 
-		UserManager userManager = UserManagerFactory.createUserManager();
-		PostObject post = new PostObject();
-		post.addModel(userManager.createNewUser("Lol", "lol"), "server.model.user.User");
-
 		stateManager = StateManager.getInstance();
 		Pages.initLogin();
 
