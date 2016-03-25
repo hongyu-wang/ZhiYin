@@ -4,6 +4,7 @@ import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.*;
 import client.pages.friends.boxes.MessageBox;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.pages.pageInternal.serverClientInteractions.ConversationTalker;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import java.util.List;
 import server.model.social.MConversation;
+import server.model.user.User;
 import tools.utilities.Utils;
 
 import static client.singletons.StateManager.M;
@@ -61,9 +63,9 @@ public class Friends2 extends Friends2Shell{
 
         int userKey = TalkerFactory.getMessagesTalker().indexByFriend(friendName);
 
-        conversation = convoList.get(userKey).getKey();
+        User main = ModelStorageFactory.createModelStorage().getMainUser();
 
-        System.out.println(conversation);
+        conversation = convoList.get(userKey).getKey();
     }
 
 
@@ -104,7 +106,7 @@ public class Friends2 extends Friends2Shell{
         sendButton.setExecutable(em3);
         add(sendButton);
 
-        updatePage = new ExecutableUpdateMessage(this);
+        updatePage = new ExecutableUpdateMessages(this);
 
         add(button);
         Button recordButton = new Button(this);

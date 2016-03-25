@@ -18,10 +18,10 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-24.
  */
-public class ExecutableUpdateMessage implements Executable {
+public class ExecutableUpdateMessages implements Executable {
     private Friends2 friend2;
 
-    public ExecutableUpdateMessage(Friends2 friend2){
+    public ExecutableUpdateMessages(Friends2 friend2){
         this.friend2 = friend2;
     }
 
@@ -50,12 +50,10 @@ public class ExecutableUpdateMessage implements Executable {
                     }
                     else{
                         ms.requestModelFromServer(MText.class.getName(), textKey);
-                        return;
                     }
                 }
                 else{
                     ms.requestModelFromServer(MMessage.class.getName(), key);
-                    return;
                 }
             }
         }

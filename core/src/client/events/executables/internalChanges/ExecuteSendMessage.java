@@ -42,8 +42,6 @@ public class ExecuteSendMessage implements Executable {
 
         MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), ms.getMainUser().getKey());
 
-        conversation.getMessageList().add(message.getKey());
-
         messageKeys.add(message.getKey());
 
         friend2.addMessage(new MessageBox(userText, 1));
