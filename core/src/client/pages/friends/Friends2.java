@@ -63,8 +63,6 @@ public class Friends2 extends Friends2Shell{
 
         int userKey = TalkerFactory.getMessagesTalker().indexByFriend(friendName);
 
-        User main = ModelStorageFactory.createModelStorage().getMainUser();
-
         conversation = convoList.get(userKey).getKey();
     }
 
