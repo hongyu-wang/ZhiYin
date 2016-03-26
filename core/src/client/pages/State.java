@@ -30,7 +30,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * No parameters should ever get passed into this constructor.
      */
     public State(){
-        init();
+        this.init();
     }
 
     @Override

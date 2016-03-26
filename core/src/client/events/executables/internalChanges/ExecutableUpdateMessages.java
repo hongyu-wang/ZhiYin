@@ -35,13 +35,15 @@ public class ExecutableUpdateMessages implements Executable {
 
         List<Long> messageKeys = conversation.getMessageList();
 
+        boolean updated = true;
+
         for(long key :messageKeys){
             if(!friend2.getMessageKeys().contains(key)){
                 MMessage mMessage = ms.<MMessage>getModel(key);
 
                 if(mMessage != null) {
                     long textKey = mMessage.getText();
-                    if (ms.<MText>getModel(textKey) != null) {
+                    if (ms.<MText>getModel(textKey) != null && updated) {
                         String text = ms.<MText>getModel(textKey).getText();
 
                         MessageBox box = new MessageBox(text, getWriter(ms, (int)mMessage.getCreator()));
@@ -50,10 +52,12 @@ public class ExecutableUpdateMessages implements Executable {
                     }
                     else{
                         ms.requestModelFromServer(MText.class.getName(), textKey);
+                        updated = false;
                     }
                 }
                 else{
                     ms.requestModelFromServer(MMessage.class.getName(), key);
+                    updated = false;
                 }
             }
         }

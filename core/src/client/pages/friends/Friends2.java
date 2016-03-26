@@ -4,8 +4,6 @@ import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.*;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
-import client.pages.pageInternal.serverClientInteractions.ConversationTalker;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
@@ -13,10 +11,10 @@ import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import java.util.List;
 import server.model.social.MConversation;
-import server.model.user.User;
 import tools.utilities.Utils;
+
+import java.util.List;
 
 import static client.singletons.StateManager.M;
 
@@ -47,7 +45,6 @@ public class Friends2 extends Friends2Shell{
     private Table table;
 
     public Friends2(String friendName){
-        super();
         this.friendName = friendName;
 
         initititititit();
@@ -65,7 +62,6 @@ public class Friends2 extends Friends2Shell{
 
         conversation = convoList.get(userKey).getKey();
     }
-
 
     public void init(){
         super.init();
@@ -165,29 +161,6 @@ public class Friends2 extends Friends2Shell{
 
     public String getMessage(){
         return messageField.getText();
-    }
-
-
-    public void talkerTest(){
-        String message = "fuck you Kevin Zheng";
-
-        SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
-        sct.init();
-
-        sct.update(0);
-
-        MConversation fuck = sct.getConversations().get(0);
-
-        ConversationTalker talker = TalkerFactory.getMessagesTalker();
-
-        talker.init(fuck);
-
-        talker.update(0);
-
-        talker.addNewMessage(message);
-
-        talker.push();
-
     }
 
 }
