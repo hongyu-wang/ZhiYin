@@ -100,7 +100,7 @@ public class Friends2 extends Friends2Shell{
         sendButton.setExecutable(em3);
         add(sendButton);
 
-        updatePage = new ExecutableUpdateMessages(this);
+        updatePage = new ExecuteUpdateMessages(this);
 
         add(button);
         Button recordButton = new Button(this);

@@ -18,10 +18,10 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-24.
  */
-public class ExecutableUpdateMessages implements Executable {
+public class ExecuteUpdateMessages implements Executable {
     private Friends2 friend2;
 
-    public ExecutableUpdateMessages(Friends2 friend2){
+    public ExecuteUpdateMessages(Friends2 friend2){
         this.friend2 = friend2;
     }
 
