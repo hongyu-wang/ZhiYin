@@ -43,12 +43,14 @@ public class ExecuteUpdateMessages implements Executable {
 
                 if(mMessage != null) {
                     long textKey = mMessage.getText();
-                    if (ms.<MText>getModel(textKey) != null && updated) {
-                        String text = ms.<MText>getModel(textKey).getText();
+                    if (ms.<MText>getModel(textKey) != null) {
+                        if(updated) {
+                            String text = ms.<MText>getModel(textKey).getText();
 
-                        MessageBox box = new MessageBox(text, getWriter(ms, (int)mMessage.getCreator()));
-                        friend2.addMessage(box);
-                        friend2.getMessageKeys().add(mMessage.getKey());
+                            MessageBox box = new MessageBox(text, getWriter(ms, (int) mMessage.getCreator()));
+                            friend2.addMessage(box);
+                            friend2.getMessageKeys().add(mMessage.getKey());
+                        }
                     }
                     else{
                         ms.requestModelFromServer(MText.class.getName(), textKey);
@@ -73,6 +75,5 @@ public class ExecuteUpdateMessages implements Executable {
         else{
             return 0;
         }
-
     }
 }

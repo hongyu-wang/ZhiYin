@@ -77,6 +77,9 @@ public class Login extends State {
 
                 new ExecuteChangePage(Pages.HOME).execute();
             }
+            else{
+                vb.pull();
+            }
         }
         delta ++;
 
