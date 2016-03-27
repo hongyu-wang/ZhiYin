@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges;
+package client.events.executables.internalChanges.conversation;
 
 import client.pages.State;
 import client.pages.friends.Friends2;

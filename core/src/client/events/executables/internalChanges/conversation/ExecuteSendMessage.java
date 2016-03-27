@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges;
+package client.events.executables.internalChanges.conversation;
 
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
