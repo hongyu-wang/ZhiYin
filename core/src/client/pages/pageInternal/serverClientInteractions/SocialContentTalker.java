@@ -1,6 +1,5 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import server.model.media.MMusic;
 import server.model.social.MConversation;
 import server.model.social.MDiaryPost;
 import server.model.soundCloud.MMusicPost;
@@ -9,10 +8,8 @@ import server.model.user.UserConversations;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserUploadedContent;
 import server.services.factories.ConversationManagerFactory;
-import server.services.factories.MusicPostManagerFactory;
 import tools.utilities.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,21 +74,21 @@ public class SocialContentTalker extends Talkers{
     @Override
     public void pull() {
 
-        modelStorage.requestModelFromServer(UserConversations.class.getName(), super.getMainUser().getConversations());
-        modelStorage.requestModelFromServer(UserUploadedContent.class.getName(), super.getMainUser().getContent());
-        modelStorage.requestModelFromServer(UserDiaryContent.class.getName(), super.getMainUser().getDiary());
+        modelStorage.requestModelFromServer(super.getMainUser().getConversations());
+        modelStorage.requestModelFromServer(super.getMainUser().getContent());
+        modelStorage.requestModelFromServer(super.getMainUser().getDiary());
 
 
         for(long convoKey: uConv.getConvoKeys()){
-            modelStorage.requestModelFromServer(MConversation.class.getName(), convoKey);
+            modelStorage.requestModelFromServer(convoKey);
         }
 
         for(long musicKey: uCont.getPostKeys()){
-            modelStorage.requestModelFromServer(MMusicPost.class.getName(), musicKey);
+            modelStorage.requestModelFromServer(musicKey);
         }
 
         for(long diaryKey: uDiary.getDiaryKeys()){
-            modelStorage.requestModelFromServer(MDiaryPost.class.getName(), diaryKey);
+            modelStorage.requestModelFromServer(diaryKey);
         }
 
     }

@@ -1,15 +1,10 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import client.pages.pageInternal.serverClientInteractions.Talkers;
-import server.model.social.MConversation;
-import server.model.social.MMessage;
 import server.model.user.User;
-import server.model.user.UserConversations;
 import tools.utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Hongyu Wang on 3/20/2016.
@@ -40,10 +35,10 @@ public class FriendTalker extends Talkers {
      */
     @Override
     public void pull() {
-        modelStorage.requestModelFromServer(User.class.getName(), getMainUser().getKey());
+        modelStorage.requestModelFromServer(getMainUser().getKey());
 
         for(long key: super.getMainUser().getFriendKeys()){
-            modelStorage.requestModelFromServer(User.class.getName(), key);
+            modelStorage.requestModelFromServer(key);
         }
     }
 

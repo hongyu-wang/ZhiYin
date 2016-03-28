@@ -1,13 +1,14 @@
 package tools.serverTools.databases;
 
 import com.badlogic.gdx.graphics.Texture;
-import server.model.media.MAudio;
-import server.model.media.MHashtag;
-import server.model.media.MImage;
-import server.model.media.MMusic;
+import server.model.media.*;
 import server.model.social.MConversation;
+import server.model.social.MDiaryPost;
 import server.model.structureModels.ServerModel;
 import server.model.user.*;
+import server.services.factories.MusicDiaryFactory;
+import server.services.factories.TextManagerFactory;
+import server.services.interfaces.models.TextManager;
 import tools.AudioTools.AudioCreator;
 import tools.serverTools.generators.SerialGenerator;
 
@@ -118,50 +119,18 @@ public class VirtualDatabase {
         User user2 = (User)data.get(2L);
         User user3 = (User)data.get(3L);
 
-        UserConversations convo_1 = (UserConversations)data.get(user1.getConversations());
-        UserConversations convo_2 = (UserConversations)data.get(user2.getConversations());
-        UserConversations convo_3 = (UserConversations)data.get(user3.getConversations());
+        generateConversation(user1, user2);
+        generateConversation(user1, user3);
+        generateConversation(user2, user3);
 
-        MConversation one_two = new MConversation();
-        MConversation one_three = new MConversation();
-        MConversation two_three = new MConversation();
+        MText alice_text = generateText("");
+        MText benny_text = generateText("");
+        MText cindy_text = generateText("");
 
-        one_two.setKey(generator.generateSerial());
-        one_three.setKey(generator.generateSerial());
-        two_three.setKey(generator.generateSerial());
+        generateDiaryPost("Title", user1, alice_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
 
-        one_two.setMessageList(new ArrayList<Long>());
-        one_three.setMessageList(new ArrayList<Long>());
-        two_three.setMessageList(new ArrayList<Long>());
-
-        List<Long> one = new ArrayList<Long>();
-        List<Long> two = new ArrayList<Long>();
-        List<Long> thr = new ArrayList<Long>();
-
-        one.add(user1.getKey());
-        one.add(user2.getKey());
-
-        two.add(user1.getKey());
-        two.add(user3.getKey());
-
-        thr.add(user2.getKey());
-        thr.add(user3.getKey());
-
-        one_two.setParticipants(one);
-        one_three.setParticipants(two);
-        two_three.setParticipants(thr);
-
-        convo_1.getConvoKeys().add(one_two.getKey());
-        convo_1.getConvoKeys().add(one_three.getKey());
-        convo_2.getConvoKeys().add(one_two.getKey());
-        convo_2.getConvoKeys().add(two_three.getKey());
-        convo_3.getConvoKeys().add(one_three.getKey());
-        convo_3.getConvoKeys().add(two_three.getKey());
-
-        data.put(one_two.getKey(), one_two);
-        data.put(two_three.getKey(), two_three);
-        data.put(one_three.getKey(), one_three);
     }
+
 
 
 
@@ -313,4 +282,53 @@ public class VirtualDatabase {
         return music;
     }
 
+    private MText generateText(String message){
+        MText text = new MText();
+
+        text.setKey(generator.generateSerial());
+
+        text.setText(message);
+
+        text.setType(0);
+
+        data.put(text.getKey(), text);
+
+        return text;
+    }
+
+
+    private void generateConversation(User user1, User user2){
+        UserConversations convo_1 = (UserConversations)data.get(user1.getConversations());
+        UserConversations convo_2 = (UserConversations)data.get(user2.getConversations());
+
+        MConversation one_two = new MConversation();
+
+        one_two.setKey(generator.generateSerial());
+
+        one_two.setMessageList(new ArrayList<Long>());
+
+        List<Long> one = new ArrayList<Long>();
+
+        one.add(user1.getKey());
+        one.add(user2.getKey());
+
+        one_two.setParticipants(one);
+
+        convo_1.getConvoKeys().add(one_two.getKey());
+        convo_2.getConvoKeys().add(one_two.getKey());
+
+        data.put(one_two.getKey(), one_two);
+    }
+
+    private void generateDiaryPost(String title, User creator, MText description, MImage image, MMusic music){
+        MDiaryPost diaryPost = MusicDiaryFactory.createMusicDiary().createDiaryPost(creator, image, music, title, description);
+
+        diaryPost.setKey(generator.generateSerial());
+
+        UserDiaryContent content = (UserDiaryContent) data.get(creator.getDiary());
+
+        content.getDiaryKeys().add(diaryPost.getKey());
+
+        data.put(diaryPost.getKey(), diaryPost);
+    }
 }

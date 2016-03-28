@@ -209,11 +209,11 @@ public class ConversationTalker extends Talkers {
             super.setWaiting(true);
 
             for(long key: conversation.getMessageList()){
-                modelStorage.requestModelFromServer(MMessage.class.getName(), key);
+                modelStorage.requestModelFromServer(key);
             }
 
             for(long key: conversation.getParticipants()){
-                modelStorage.requestModelFromServer(User.class.getName(), key);
+                modelStorage.requestModelFromServer(key);
             }
         }
 
@@ -369,8 +369,8 @@ public class ConversationTalker extends Talkers {
             public void pull() {
                 super.setWaiting(true);
 
-                modelStorage.requestModelFromServer(MText.class.getName(), mMessage.getText());
-                modelStorage.requestModelFromServer(User.class.getName(), mMessage.getCreator());
+                modelStorage.requestModelFromServer(mMessage.getText());
+                modelStorage.requestModelFromServer(mMessage.getCreator());
             }
 
             @Override
