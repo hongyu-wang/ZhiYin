@@ -1,7 +1,6 @@
 package client.events.executables.internalChanges.conversation;
 
 import client.pages.friends.Friends2;
-import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.stateInterfaces.Executable;
@@ -12,31 +11,38 @@ import server.model.social.MMessage;
 import server.services.factories.MessageManagerFactory;
 import server.services.factories.TextManagerFactory;
 
-import java.util.List;
-
 /**
- * Created by Kevin Zheng on 2016-03-24.
+ * Created by Kevin Zheng on 2016-03-28.
  */
-public class ExecuteSendMessage implements Executable{
+public class ExecutePushMessage implements Executable, Pushable {
     private Friends2 friend2;
-
-    public ExecuteSendMessage(Friends2 friend2){
+    public ExecutePushMessage(Friends2 friend2){
         this.friend2 = friend2;
     }
 
     @Override
     public void execute() {
+        String userText = friend2.getMessage();
+
         ModelStorage ms = ModelStorageFactory.createModelStorage();
 
         MConversation conversation = ms.getModel(friend2.getConversation());
 
-        if(conversation == null){
-            ms.requestModelFromServer(friend2.getConversation());
-            return;
-        }
+        MText text = TextManagerFactory.createTextManager().createText(userText, 0);
 
-        String userText = friend2.getMessage();
+        MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), ms.getMainUser().getKey());
 
-        friend2.addMessage(new MessageBox(userText, 1));
+        conversation.getMessageList().add(message.getKey());
+
+        friend2.getMessageKeys().add(message.getKey());
+
+        ms.pushModel(text);
+        ms.pushModel(message);
+        ms.pushModel(conversation);
+    }
+
+    @Override
+    public int requiredKeys() {
+        return 2;
     }
 }

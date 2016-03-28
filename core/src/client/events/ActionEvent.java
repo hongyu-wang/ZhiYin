@@ -45,8 +45,10 @@ public class ActionEvent {
      * @throws NoExecutableException Thrown iff the source has no executable.
      */
     public Executable [] getAllChildren() throws NoExecutableException {
-        if (source instanceof ExecutableMultiplexer){
-            return ((ExecutableMultiplexer)source).getAllChildren();
+        Executable e = source.getExecutable();
+
+        if (e instanceof ExecutableMultiplexer){
+            return ((ExecutableMultiplexer)e).getAllChildren();
         }
         return new Executable[]{source.getExecutable()};
     }
