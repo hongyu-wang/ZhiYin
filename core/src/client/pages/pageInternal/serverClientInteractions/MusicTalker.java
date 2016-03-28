@@ -21,7 +21,7 @@ public class MusicTalker extends Talkers{
     private MImage mImage;
 
     //--Interface Fields
-    private Texture image;
+    private String image;
     private String name;
     private String artist;
     private String album;
@@ -32,7 +32,7 @@ public class MusicTalker extends Talkers{
     private List<MComment> audioComments;
 
     //Getters and Setters
-    public Texture getImage() {
+    public String getImage() {
         return image;
     }
 

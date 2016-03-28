@@ -1,6 +1,7 @@
 package client.pages.pageInternal.serverClientInteractions;
 
 import server.model.media.MHashtag;
+import server.model.media.MImage;
 import server.model.social.MConversation;
 import server.model.user.*;
 
@@ -48,8 +49,8 @@ public class VeryBeginningInitializer extends Talkers{
         }
 
         //Images
-//        for(int i = 0; i < 3; i++)
-//            modelStorage.requestModelFromServer(MImage.class.getName(), key++);
+        for(int i = 0; i < 3; i++)
+            modelStorage.requestModelFromServer(MImage.class.getName(), key++);
 
         //Audio
 //        for(int i = 0; i < 3; i++)

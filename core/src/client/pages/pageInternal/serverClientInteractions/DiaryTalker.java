@@ -26,7 +26,7 @@ public class DiaryTalker extends Talkers{
         return currentDiary.getText();
     }
 
-    public Texture getImage() {
+    public String getImage() {
         return currentDiary.getImage();
     }
 
@@ -92,7 +92,7 @@ public class DiaryTalker extends Talkers{
 
         //--Interface Fields
         private String text;
-        private Texture image;
+        private String image;
         private MMusic music;
         private MAudio userRecording;
 
@@ -103,7 +103,7 @@ public class DiaryTalker extends Talkers{
             return text;
         }
 
-        public Texture getImage() {
+        public String getImage() {
             return image;
         }
 

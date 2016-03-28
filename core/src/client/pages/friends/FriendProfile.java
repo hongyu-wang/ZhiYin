@@ -27,9 +27,18 @@ public class FriendProfile extends FriendProfileShell {
 
     private String name;
 
+    private Image image;
+
     public FriendProfile(State previousState, String name){
         this.previousState = previousState;
         this.name = name;
+        init();
+    }
+
+    public FriendProfile(State previousState, String name, Image image){
+        this.previousState = previousState;
+        this.name = name;
+        this.image = image;
         init();
     }
 
@@ -44,6 +53,11 @@ public class FriendProfile extends FriendProfileShell {
         Label label = new Label(name, SkinSingleton.getInstance());
         label.setPosition(310 * StateManager.M, 1050 * StateManager.M);
         stage.addActor(label);
+
+        if(image != null) {
+            image.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
+            stage.addActor(image);
+        }
 
         table = new Table();
         table.top();

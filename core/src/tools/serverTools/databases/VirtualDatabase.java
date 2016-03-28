@@ -72,9 +72,9 @@ public class VirtualDatabase {
         //TODO created all media here.
 
         //Image
-//        MImage image1 = generateTestImage("ProfilePic_1", "//");// TODO path
-//        MImage image2 = generateTestImage("ProfilePic_2", "//");// TODO path
-//        MImage image3 = generateTestImage("ProfilePic_3", "//");// TODO path
+        MImage image1 = generateTestImage("Alice's Profile", "UserProfiles//Alice_After_The_War.png");// TODO path
+        MImage image2 = generateTestImage("Benny's Profile", "UserProfiles//Benny_After_The_War.png");// TODO path
+        MImage image3 = generateTestImage("Cindy's Profile", "UserProfiles//Cindy_After_The_War.png");// TODO path
 
         //Audio
 //        MAudio audio1 = generateTestAudio("Audio_1.mp3");// TODO path
@@ -108,9 +108,9 @@ public class VirtualDatabase {
         UserProfile profile2 = (UserProfile)data.get(user2.getProfile());
         UserProfile profile3 = (UserProfile)data.get(user3.getProfile());
 
-//        profile1.setImageKey(image1.getKey());
-//        profile2.setImageKey(image2.getKey());
-//        profile3.setImageKey(image3.getKey());
+        profile1.setImageKey(image1.getKey());
+        profile2.setImageKey(image2.getKey());
+        profile3.setImageKey(image3.getKey());
     }
 
     private void initSocialData(){
@@ -280,9 +280,11 @@ public class VirtualDatabase {
 
         image.setName(name);
 
-        image.setImage(new Texture(path));
+        image.setImage(path);
 
         image.setName(name);
+
+        data.put(image.getKey(), image);
 
         return image;
     }
@@ -291,6 +293,8 @@ public class VirtualDatabase {
         MAudio audio = AudioCreator.createFromFilePath(path);
 
         audio.setKey(generator.generateSerial());
+
+        data.put(audio.getKey(), audio);
 
         return audio;
     }
@@ -303,6 +307,8 @@ public class VirtualDatabase {
         music.setName(name);
 
         music.setMusicKey(audio.getKey());
+
+        data.put(music.getKey(), music);
 
         return music;
     }

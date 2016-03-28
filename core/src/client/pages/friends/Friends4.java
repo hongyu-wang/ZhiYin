@@ -37,7 +37,7 @@ public class Friends4 extends Friends4Shell{
         talkerAddFriends();
     }
 
-    public void addFriend(String name){
+    public void addFriend(String name, Image image){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -56,7 +56,7 @@ public class Friends4 extends Friends4Shell{
         s.add(i2);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new FriendProfile(this, name));
+        final ExecuteToTempState e = new ExecuteToTempState(new FriendProfile(this, name, image));
 
         s.addListener(new ClickListener() {
             @Override
@@ -95,7 +95,9 @@ public class Friends4 extends Friends4Shell{
                 if (pt.isUpdated()) {
                     String friendName = pt.getName();
 
-                    addFriend(friendName);
+                    Image image = new Image(new Texture(pt.getProfileImage()));
+
+                    addFriend(friendName, image);
                 }
             }
         }

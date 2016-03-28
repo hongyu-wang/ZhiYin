@@ -2,6 +2,7 @@ package client.events.executables.internalChanges.schmoferMusicExecutable;
 
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealChangeListener;
 import tools.AudioTools.AudioManager;
 
 /**
@@ -10,14 +11,17 @@ import tools.AudioTools.AudioManager;
  */
 public class ExecuteMoveSlider implements Executable{
     private Slider slider;
-
-    public ExecuteMoveSlider(Slider slider){
+    private ZhiYinRealChangeListener zrcl;
+    public ExecuteMoveSlider(Slider slider, ZhiYinRealChangeListener zrcl){
         this.slider = slider;
+        this.zrcl = zrcl;
     }
 
     @Override
     public void execute() {
-        slider.setValue((float)(AudioManager.getTime()/AudioManager.trackLength()*100));
+        //TODO FOR ROBOVM slider.setValue((float)(AudioManager.getTime()/AudioManager.trackLength()*100));
+        zrcl.setChange();
+        slider.setValue(slider.getValue() + 1);
 
     }
 }

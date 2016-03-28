@@ -24,8 +24,11 @@ public class MyProfile extends MyProfileShell {
 
     private String name;
 
+    private Image image;
+
 
     public MyProfile(){
+//        pull from server for name and image
         init();
     }
 
@@ -36,6 +39,11 @@ public class MyProfile extends MyProfileShell {
 //        Label label = new Label(name, SkinSingleton.getInstance());
 //        label.setPosition(310 * StateManager.M, 1050 * StateManager.M);
 //        stage.addActor(label);
+
+//        if(image != null) {
+//            image.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
+//            stage.addActor(image);
+//        }
 
         table = new Table();
         table.top();

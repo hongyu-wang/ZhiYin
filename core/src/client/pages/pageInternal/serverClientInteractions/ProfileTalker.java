@@ -21,7 +21,7 @@ public class ProfileTalker extends Talkers{
     //--Interface Fields
 
     //Getters and Setters
-    public Texture getProfileImage() {
+    public String getProfileImage() {
         return currentProfile.getProfileImage();
     }
 
@@ -98,12 +98,12 @@ public class ProfileTalker extends Talkers{
         private UserProfile profile;
 
         //--Interface Fields
-        private Texture profileImage;
+        private String profileImage;
         private String name;
         private String description;
 
         //Getters and Setters
-        public Texture getProfileImage() {
+        public String getProfileImage() {
             return profileImage;
         }
 
@@ -177,7 +177,7 @@ public class ProfileTalker extends Talkers{
 
             name = profile.getUsername();
             description = profile.getDescription();
-//            profileImage = image.getImage();
+            profileImage = image.getImage();
         }
     }
 }
