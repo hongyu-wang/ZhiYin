@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges;
+package client.events.executables.internalChanges.dragButtonExecutables;
 
 import client.component.basicComponents.DragButton;
 import client.pages.friends.Friends2;

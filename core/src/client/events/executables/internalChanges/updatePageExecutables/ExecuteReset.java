@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges;
+package client.events.executables.internalChanges.updatePageExecutables;
 
 import client.pages.State;
 import client.stateInterfaces.Executable;

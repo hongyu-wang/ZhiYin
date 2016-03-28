@@ -1,6 +1,6 @@
 package client.pages.friends.boxes;
 
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.friends.Friends2;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;

@@ -1,6 +1,6 @@
 package client.pages.musicDiary;
 
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;

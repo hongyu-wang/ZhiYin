@@ -2,9 +2,9 @@ package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.ExecutePauseMusic;
-import client.events.executables.internalChanges.ExecutePlayMusic;
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.libgdxMusicExecutables.ExecutePauseMusic;
+import client.events.executables.internalChanges.libgdxMusicExecutables.ExecutePlayMusic;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
