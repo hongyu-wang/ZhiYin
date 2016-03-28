@@ -8,6 +8,7 @@ import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveBu
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.SkinSingleton;
@@ -71,7 +72,7 @@ public class Login extends State {
             label.setPosition(50, StateManager.HEIGHT - 100);
             stage.addActor(label);
 
-            //TODO Do something with IP. Check its valid? Use the password field.
+            ModelStorage.ipAddress=password.getText();
         }
     }
 

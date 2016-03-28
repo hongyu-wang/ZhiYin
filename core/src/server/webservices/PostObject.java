@@ -1,5 +1,6 @@
 package server.webservices;
 
+import client.pages.pageInternal.modelStorage.ModelStorage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.utils.Json;
@@ -54,7 +55,7 @@ public class PostObject implements Net.HttpResponseListener {
 
         className = Tags.ID_TAGS.parseTag(className);
         Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpPost.setUrl("http://localhost:8081/webservice/postServerModel");
+        httpPost.setUrl("http://"+ ModelStorage.ipAddress+":8081/webservice/postServerModel");
         //httpPost.setHeader("X-Parse-Application-Id", app_id);
         //httpPost.setHeader("X-Parse-REST-API-Key", asspp_key);
         String jString = "";
