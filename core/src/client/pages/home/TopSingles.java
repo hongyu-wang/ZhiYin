@@ -1,10 +1,9 @@
 package client.pages.home;
 
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -15,13 +14,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
+ *
  * Created by blobbydude24 on 2016-03-23.
  */
 public class TopSingles extends TopSinglesShell{
 
     private Table table;
 
-    public void init(){
+    public TopSingles(){
+        init();
+    }
+
+    protected void init(){
         super.init();
 
         table = new Table();

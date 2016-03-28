@@ -1,7 +1,7 @@
 package client.pages.home;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.TestExecutable;
 import client.pageStorage.Pages;
 import client.pages.State;
@@ -18,7 +18,7 @@ import driver.GameLoop;
  */
 public abstract class ArtistShell extends State{
 
-    public void init(){
+    protected void init(){
         super.init();
 
         Image background = new Image(new Texture("Home/ArtistBG.png"));

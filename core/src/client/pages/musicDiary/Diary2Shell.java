@@ -1,7 +1,7 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
@@ -10,11 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
 
 /**
+ *
  * Created by blobbydude24 on 2016-03-13.
  */
 public abstract class Diary2Shell extends State {
 
-    public void init(){
+    protected void init(){
         super.init();
 
         Image background = new Image(new Texture("Diary/Diary2BG.png"));
@@ -31,10 +32,10 @@ public abstract class Diary2Shell extends State {
         postButton.setExecutable(new ExecuteChangePage(Pages.DIARY4));
         add(postButton);
 
-        Button RecordButton = new Button(this);
-        RecordButton.setBounds(0 + 1, 134 + 135*2, 750, 135);
-        RecordButton.setExecutable(new ExecuteChangePage(Pages.DIARY3));
-        add(RecordButton);
+        Button recordButton = new Button(this);
+        recordButton.setBounds(76, 33, 174, 204);
+        recordButton.setExecutable(new ExecuteChangePage(Pages.DIARY3));
+        add(recordButton);
 
 //        Button titleButton = new Button(this);
 //        titleButton.setBounds(0 + 1, 1112, 750, 88);

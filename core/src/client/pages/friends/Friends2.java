@@ -2,18 +2,26 @@ package client.pages.friends;
 
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
-import client.events.executables.internalChanges.*;
+import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
+import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.serverClientInteractions.ConversationTalker;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import java.util.List;
 import server.model.social.MConversation;
 import tools.utilities.Utils;
+
+import java.util.List;
 
 import static client.singletons.StateManager.M;
 
@@ -38,16 +46,31 @@ public class Friends2 extends Friends2Shell{
         return scrollpane;
     }
 
+    private Executable updatePage;
     private long counter;
     private String friendName;
     private Table table;
 
     public Friends2(String friendName){
-        super();
         this.friendName = friendName;
+        init();
+        initititititit();
     }
 
-    public void init(){
+    private void initititititit(){
+        SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
+
+        sct.init();
+        sct.update(0);
+
+        List<MConversation> convoList = sct.getConversations();
+
+        int userKey = TalkerFactory.getMessagesTalker().indexByFriend(friendName);
+
+        conversation = convoList.get(userKey).getKey();
+    }
+
+    protected void init(){
         super.init();
 
         addMessageField();
@@ -61,7 +84,7 @@ public class Friends2 extends Friends2Shell{
         stage.addActor(scrollpane);
 
 
-        Image image = new Image(new Texture("Friends//SwipeToDiscardButton.png"));
+        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
 
         DragButton button = new DragButton(this, (int)(500*M));
         button.setBounds(0, 12341234, 1234, 1234);
@@ -79,12 +102,12 @@ public class Friends2 extends Friends2Shell{
 
         sendButton.setBounds(604 + 1, 31, 122, 60);
         ExecutableMultiplexer em3 = new ExecutableMultiplexer();
-        em3.addExecutable(new ExecuteAddMessage(this));
+        em3.addExecutable(new ExecuteSendMessage(this));
         em3.addExecutable(new ExecuteReset(this));
         sendButton.setExecutable(em3);
         add(sendButton);
 
-
+        updatePage = new ExecuteUpdateMessages(this);
 
         add(button);
         Button recordButton = new Button(this);
@@ -137,54 +160,14 @@ public class Friends2 extends Friends2Shell{
         stage.act(); //This bug tho
 
         messageField.getText();//TODO something
-//        if (counter%200 == 0){
-//            SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
-//            sct.init();
-//            sct.update(0);
-//
-//            MConversation fuck = sct.getConversations().get(0);
-//
-//            ConversationTalker talker = TalkerFactory.getMessagesTalker();
-//
-//            talker.init(fuck);
-//            if(!talker.isWaiting())
-//                talker.pull();
-//            talker.update(0);
-//
-//            System.out.println("Here I am.");
-//            for(MMessage message :talker.getAllMMessages()){
-//                System.out.println(talker.getMessageText(message));
-//            }
-//
-//        }
-//        counter ++;
+        if (counter%10 == 0){
+            this.updatePage.execute();
+        }
+        counter ++;
     }
 
     public String getMessage(){
         return messageField.getText();
-    }
-
-
-    public void talkerTest(){
-        String message = "fuck you Kevin Zheng";
-
-        SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
-        sct.init();
-
-        sct.update(0);
-
-        MConversation fuck = sct.getConversations().get(0);
-
-        ConversationTalker talker = TalkerFactory.getMessagesTalker();
-
-        talker.init(fuck);
-
-        talker.update(0);
-
-        talker.addNewMessage(message);
-
-        talker.push();
-
     }
 
 }

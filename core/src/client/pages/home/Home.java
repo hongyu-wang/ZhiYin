@@ -1,7 +1,7 @@
 package client.pages.home;
 
-import client.events.executables.internalChanges.ExecuteChangePage;
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.events.executables.internalChanges.TestExecutable;
 import client.pageStorage.Pages;
 import client.pages.other.NowPlaying;
@@ -27,7 +27,11 @@ public class Home extends HomeShell {
     private Table newRelease;
     private Table topSingles;
 
-    public void init() {
+    public Home(){
+        init();
+    }
+
+    protected void init() {
         super.init();
 
         newRelease = new Table();

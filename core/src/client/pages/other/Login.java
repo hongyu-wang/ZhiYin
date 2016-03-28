@@ -1,6 +1,6 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
@@ -29,8 +29,16 @@ public class Login extends State {
     private Label label;
     private boolean checkPull;
     private VeryBeginningInitializer vb;
+
+
+    public Login(){
+        init();
+    }
+
+
+
     @Override
-    public void init() {
+    protected void init() {
         super.init();
         final WorkingTextArea wta = new WorkingTextArea("", SkinSingleton.getInstance());
         final TextButton button = new TextButton("Login", SkinSingleton.getInstance());
@@ -76,6 +84,9 @@ public class Login extends State {
                 Pages.initClass();
 
                 new ExecuteChangePage(Pages.HOME).execute();
+            }
+            else{
+                vb.pull();
             }
         }
         delta ++;

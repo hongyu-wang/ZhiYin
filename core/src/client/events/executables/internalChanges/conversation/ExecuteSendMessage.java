@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges;
+package client.events.executables.internalChanges.conversation;
 
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
@@ -42,9 +42,11 @@ public class ExecuteSendMessage implements Executable {
 
         MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), ms.getMainUser().getKey());
 
-        conversation.getMessageList().add(message.getKey());
+        messageKeys.add(message.getKey());
 
         friend2.addMessage(new MessageBox(userText, 1));
+
+        friend2.getMessageKeys().add(message.getKey());
 
         ms.pushModel(text);
         ms.pushModel(message);

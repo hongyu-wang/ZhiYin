@@ -116,11 +116,11 @@ public class AudioRecorder {
         }
         avar.stop();
         avar.release();
-        NSData mData = fm.getContentsAtPath(filePath.getPath());
+        NSData mData = new NSData(fm.getContentsAtPath(filePath.getPath()));
 
         //MAudio voice = new MAudio();
         //voice.setmData(mData);
-        //avar.dispose();
+        avar.dispose();
         return mData;
     }
 

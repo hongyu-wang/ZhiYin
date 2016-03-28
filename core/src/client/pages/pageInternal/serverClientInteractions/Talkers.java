@@ -57,7 +57,7 @@ public abstract class Talkers implements Updatable{
     }
 
     protected User getMainUser(){
-        return modelStorage.getModel(1);
+        return modelStorage.getMainUser();
     }
 
 }

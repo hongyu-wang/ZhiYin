@@ -1,6 +1,6 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -24,7 +24,13 @@ public class MyProfile extends MyProfileShell {
 
     private String name;
 
-    public void init(){
+
+    public MyProfile(){
+        init();
+    }
+
+
+    protected void init(){
         super.init();
 
 //        Label label = new Label(name, SkinSingleton.getInstance());

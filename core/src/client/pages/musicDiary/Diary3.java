@@ -1,7 +1,12 @@
 package client.pages.musicDiary;
 
+import client.component.basicComponents.DragButton;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.pageStorage.Pages;
 import client.singletons.SkinSingleton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import client.singletons.StateManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 
@@ -17,10 +22,25 @@ public class Diary3 extends Diary3Shell {
     private TextField titleField;
     private TextField bodyField;
 
-    public void init() {
+
+    public Diary3(){
+        init();
+    }
+
+    protected void init() {
         super.init();
         addTitleField();
         addBodyField();
+
+        Image i = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
+        i.setPosition(32 * StateManager.M, 240 * StateManager.M);
+        stage.addActor(i);
+
+        DragButton swipeToDiscardDragButton = new DragButton(this, 380);
+        swipeToDiscardDragButton.setBounds(32, 240, 694, 236);
+        swipeToDiscardDragButton.setDragExecutable(new ExecuteChangePage(Pages.DIARY2));
+        swipeToDiscardDragButton.setReleaseExecutable(new ExecuteChangePage(Pages.DIARY2));
+        add(swipeToDiscardDragButton);
     }
 
     @Override

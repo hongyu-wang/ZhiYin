@@ -2,7 +2,7 @@ package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.TestExecutable;
 import client.pageStorage.Pages;
 import client.pages.State;
@@ -12,14 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
 
 /**
+ *
  * Created by blobbydude24 on 2016-03-13.
  */
 public abstract class Diary3Shell extends State{
 
-    public void init(){
+    protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("Diary - 3.png"));
+        Image background = new Image(new Texture("Diary/Diary3BG.png"));
         background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
         stage.addActor(background);
 

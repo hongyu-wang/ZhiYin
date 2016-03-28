@@ -1,6 +1,6 @@
 package client.pages.musicDiary;
 
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
@@ -21,7 +21,11 @@ public class Diary1 extends Diary1Shell {
 
     private Table table;
 
-    public void init() {
+    public Diary1(){
+        init();
+    }
+
+    protected void init() {
         super.init();
 
         table = new Table();

@@ -1,7 +1,7 @@
 package client.pages.friends;
 
 
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,7 +14,11 @@ public class Friends4 extends Friends4Shell{
 
     private Table table;
 
-    public void init(){
+    public Friends4(){
+        init();
+    }
+
+    protected void init(){
         super.init();
 
         table = new Table();

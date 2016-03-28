@@ -1,7 +1,7 @@
 package client.pages.other;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.events.executables.internalChanges.TestExecutable;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -38,7 +38,7 @@ public class ArtistProfile extends ArtistProfileShell {
     }
 
 
-    public void init() {
+    protected void init() {
         super.init();
 
         Button backButton = new Button(this);

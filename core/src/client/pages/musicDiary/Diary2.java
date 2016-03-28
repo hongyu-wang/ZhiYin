@@ -17,7 +17,11 @@ public class Diary2 extends Diary2Shell{
     private TextField titleField;
     private TextField bodyField;
 
-    public void init() {
+    public Diary2(){
+        init();
+    }
+
+    protected void init() {
         super.init();
 
         addTitleField();

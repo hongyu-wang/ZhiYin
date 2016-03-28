@@ -1,7 +1,7 @@
 package client.pages.other;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
@@ -23,7 +23,7 @@ public class NowPlaying2 extends NowPlaying2Shell {
         init();
     }
 
-    public void init(){
+    protected void init(){
         super.init();
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
 

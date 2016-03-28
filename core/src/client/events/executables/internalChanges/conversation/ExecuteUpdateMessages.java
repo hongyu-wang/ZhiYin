@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges;
+package client.events.executables.internalChanges.conversation;
 
 import client.pages.State;
 import client.pages.friends.Friends2;
@@ -18,13 +18,10 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-24.
  */
-public class ExecutableUpdateMessage implements Executable {
-
-    private long conversation;
+public class ExecuteUpdateMessages implements Executable {
     private Friends2 friend2;
 
-    public ExecutableUpdateMessage(Friends2 friend2){
-        this.conversation = friend2.getConversation();
+    public ExecuteUpdateMessages(Friends2 friend2){
         this.friend2 = friend2;
     }
 
@@ -32,35 +29,37 @@ public class ExecutableUpdateMessage implements Executable {
     public void execute() {
         ModelStorage ms = ModelStorageFactory.createModelStorage();
 
-        MConversation conversation = ms.getModel(this.conversation);
-        if(conversation == null){
-            ms.requestModelFromServer(MConversation.class.getName(), this.conversation);
-            return;
-        }
+        MConversation conversation = ms.getModel(friend2.getConversation());
+
+        ms.requestModelFromServer(MConversation.class.getName(), friend2.getConversation());
 
         List<Long> messageKeys = conversation.getMessageList();
 
+        boolean updated = true;
+
         for(long key :messageKeys){
-            if(!messageKeys.contains(key)){
+            if(!friend2.getMessageKeys().contains(key)){
                 MMessage mMessage = ms.<MMessage>getModel(key);
 
                 if(mMessage != null) {
                     long textKey = mMessage.getText();
                     if (ms.<MText>getModel(textKey) != null) {
-                        String text = ms.<MText>getModel(textKey).getText();
+                        if(updated) {
+                            String text = ms.<MText>getModel(textKey).getText();
 
-                        MessageBox box = new MessageBox(text, getWriter(ms, (int)mMessage.getCreator()));
-                        friend2.addMessage(box);
-                        friend2.getMessageKeys().add(mMessage.getKey());
+                            MessageBox box = new MessageBox(text, getWriter(ms, (int) mMessage.getCreator()));
+                            friend2.addMessage(box);
+                            friend2.getMessageKeys().add(mMessage.getKey());
+                        }
                     }
                     else{
                         ms.requestModelFromServer(MText.class.getName(), textKey);
-                        return;
+                        updated = false;
                     }
                 }
                 else{
                     ms.requestModelFromServer(MMessage.class.getName(), key);
-                    return;
+                    updated = false;
                 }
             }
         }
@@ -76,6 +75,5 @@ public class ExecutableUpdateMessage implements Executable {
         else{
             return 0;
         }
-
     }
 }

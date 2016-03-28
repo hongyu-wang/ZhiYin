@@ -2,6 +2,8 @@ package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.*;
+import client.events.executables.internalChanges.componentUpdateExecutables.AddPane;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
@@ -11,7 +13,7 @@ import driver.GameLoop;
 
 
 public abstract class NowPlaying2Shell extends State {
-    public void init(){
+    protected void init(){
         super.init();
 
         Image background = new Image(new Texture("Now Playing - 2.png"));

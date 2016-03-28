@@ -1,6 +1,6 @@
 package client.pages.home;
 
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.ArtistProfile;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
@@ -24,7 +24,11 @@ public class Artist extends ArtistShell {
 
     private Table table;
 
-    public void init() {
+    public Artist(){
+        init();
+    }
+
+    protected void init() {
         super.init();
 
         addSearchField();
