@@ -1,6 +1,7 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
