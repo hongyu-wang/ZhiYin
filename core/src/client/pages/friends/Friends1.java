@@ -11,8 +11,6 @@ import server.model.user.User;
 import java.util.List;
 
 public class Friends1 extends Friends1Shell{
-    private FriendTalker ft;
-    private ProfileTalker pt;
 
     private Table table;
 
@@ -30,10 +28,7 @@ public class Friends1 extends Friends1Shell{
         stage.addActor(table);
 
         //table.setDebug(true);
-        ft = TalkerFactory.getFriendTalker();
-        pt = TalkerFactory.getProfileTalker();
 
-        talkerInit();
         talkerAddFriends();
     }
 
@@ -58,15 +53,10 @@ public class Friends1 extends Friends1Shell{
 
     }
 
-    private void talkerInit(){
-        ft.init();
-        ft.update(0);
-        for(User friend: ft.getAllFriends()){
-            pt.init(friend);
-        }
-    }
-
     private void talkerAddFriends(){
+        FriendTalker ft = TalkerFactory.getFriendTalker();
+        ProfileTalker pt = TalkerFactory.getProfileTalker();
+
         if(ft.isUpdated()) {
             for (User friend: ft.getAllFriends()) {
                 pt.init(friend);

@@ -1,5 +1,6 @@
 package client.pages.pageInternal.serverClientInteractions;
 
+import SQLite.Profile;
 import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.stateInterfaces.Updatable;

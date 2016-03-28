@@ -19,6 +19,8 @@ public class VeryBeginningInitializer extends Talkers{
 
     public void init(String username){
         modelStorage.loginUser(username);
+
+        TalkerFactory.getFriendTalker().init();
     }
 
     /*------------------------------------------------------------------------*/
@@ -27,6 +29,8 @@ public class VeryBeginningInitializer extends Talkers{
 
     @Override
     public void pull() {
+        super.setWaiting(true);
+
         long key = 1;
 
         //Users
@@ -74,11 +78,46 @@ public class VeryBeginningInitializer extends Talkers{
 
     @Override
     public boolean isUpdated() {
-        return super.checkOriginalUpdate();
+        boolean initialUpdate = super.checkOriginalUpdate();
+
+        if(!initialUpdate){
+            return false;
+        }
+
+        boolean updateFriend = TalkerFactory.getFriendTalker().isUpdated();
+        boolean updateProfiles = TalkerFactory.getProfileTalker().isUpdated();
+
+        boolean[] talkers = {
+                updateFriend,
+                updateProfiles
+        };
+
+        for(boolean truth: talkers){
+            if(!truth){
+                return false;
+            }
+        }
+
+        super.setWaiting(initialUpdate);
+        return initialUpdate;
     }
 
     @Override
     public void update(float dt) {
-        return;
+        if(!super.checkOriginalUpdate()){
+            return;
+        }
+
+        talkerInit();
+    }
+
+    private void talkerInit(){
+        FriendTalker ft = TalkerFactory.getFriendTalker();
+        ProfileTalker pt = TalkerFactory.getProfileTalker();
+        ft.update(0);
+        for(User friend: ft.getAllFriends()){
+            pt.init(friend);
+            pt.update(0);
+        }
     }
 }

@@ -145,24 +145,24 @@ public class Home extends HomeShell {
     @Override
     public void pullDataFromServer() {
 
-        Music song1 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Avril Lavigne - Fly.mp3"));
-
-        Music song2 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Imagine Dragons - 30 Lives (iTunes Session).mp3"));
-
-        Music song3 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Bruno Mars - The Lazy Song.mp3"));
-
-        Music song4 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Katy Perry - Hot N Cold.mp3"));
-
-        Music song5 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Royals.mp3"));
-
-        Music song6 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Team.mp3"));
-
-        addNewRelease("Avril Lavigne", "Fly", song1);
-        addNewRelease("Imagine Dragons", "30 Lives", song2);
-        addNewRelease("Bruno Mars", "The Lazy Song", song3);
-        addTopSingle("Katy Perry", "Hot N Cold", song4);
-        addTopSingle("Lorde", "Royals", song5);
-        addTopSingle("Lorde", "Team", song6);
+//        Music song1 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Avril Lavigne - Fly.mp3"));
+//
+//        Music song2 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Imagine Dragons - 30 Lives (iTunes Session).mp3"));
+//
+//        Music song3 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Bruno Mars - The Lazy Song.mp3"));
+//
+//        Music song4 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Katy Perry - Hot N Cold.mp3"));
+//
+//        Music song5 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Royals.mp3"));
+//
+//        Music song6 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Team.mp3"));
+//
+//        addNewRelease("Avril Lavigne", "Fly", song1);
+//        addNewRelease("Imagine Dragons", "30 Lives", song2);
+//        addNewRelease("Bruno Mars", "The Lazy Song", song3);
+//        addTopSingle("Katy Perry", "Hot N Cold", song4);
+//        addTopSingle("Lorde", "Royals", song5);
+//        addTopSingle("Lorde", "Team", song6);
 
 
         /*
