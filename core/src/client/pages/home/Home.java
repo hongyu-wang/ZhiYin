@@ -38,10 +38,12 @@ public class Home extends HomeShell {
         Image i1 = new Image(new Texture("Home/NewRelease@" + StateManager.M + ".png"));
         final ImageButton b1 = new ImageButton(i1.getDrawable());
 
+        final ExecuteToTempState etts = new ExecuteToTempState(new NowPlaying(this));
+
         b1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new TestExecutable("new releases").execute();
+                etts.execute();
             }
         });
 
@@ -51,7 +53,7 @@ public class Home extends HomeShell {
         Image i2 = new Image(new Texture("Home/TopSingles@" + StateManager.M + ".png"));
         final ImageButton b2 = new ImageButton(i2.getDrawable());
 
-        b2.addListener(new ClickListener(){
+        b2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 new ExecuteChangePage(Pages.TOPSINGLES).execute();

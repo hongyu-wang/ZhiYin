@@ -2,6 +2,7 @@ package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -20,17 +21,27 @@ import static client.singletons.StateManager.M;
  * Created by Hongyu Wang on 3/9/2016.
  */
 public class NowPlaying extends NowPlayingShell {
-    private Slider slider;
-
+    private ExecuteMoveSlider executeMoveSlider;
     private State previousState;
+    private Slider slider;
+    private boolean verbose;
+
 
     public NowPlaying(State previousState){
         this.previousState = previousState;
+        verbose = false;
         init();
     }
 
+    public NowPlaying(State previousState, boolean verbose){
+        this(previousState);
+        this.verbose = true;
+    }
+
+
+
     @Override
-    public void init() {
+    protected void init() {
         super.init();
 
 
@@ -41,6 +52,8 @@ public class NowPlaying extends NowPlayingShell {
         nowPlaying2Button.setBounds(607 + 1, 1063, 51, 51);
         nowPlaying2Button.setExecutable(new ExecuteToTempState(new NowPlaying2(previousState, this)));
         add(nowPlaying2Button);
+
+        initializeSlider();
 
     }
 
@@ -58,18 +71,21 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     public void update(float dt){
         super.update(dt);
+        slider.setValue(slider.getValue()+1);
+
     }
 
-    public void intializeSlider(){
+    public void initializeSlider(){
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
         slider.setBounds((int) (M * 180), (int) (M * 400), (int) (M * 410), 10);
         slider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                System.out.println('a');
 
             }
         });
+
         stage.addActor(slider);
     }
 
