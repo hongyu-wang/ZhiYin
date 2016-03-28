@@ -54,7 +54,7 @@ public class MessageBox {
 
     private void initTextBox(String message){
         Table table1 = new Table();
-        Image image = new Image(new Texture("Friends4\\Bubble" + byUser + "@" + StateManager.M + ".png"));
+        Image image = new Image(new Texture("Friends4/Bubble" + byUser + "@" + StateManager.M + ".png"));
 
         Table table2 = new Table();
         Label text = new Label(message, SkinSingleton.getInstance());
@@ -76,12 +76,12 @@ public class MessageBox {
     private void initSoundBox(final Executable e){
         stack.setHeight(128 * StateManager.M);
 
-        Image image = new Image(new Texture("Friends4\\Bubble" + byUser + "@" + StateManager.M + ".png"));
+        Image image = new Image(new Texture("Friends4/Bubble" + byUser + "@" + StateManager.M + ".png"));
         stack.add(image);
 
         Table table = new Table();
 
-        Image image2 = new Image(new Texture("Friends4\\Play" + byUser + "@" + StateManager.M + ".png"));
+        Image image2 = new Image(new Texture("Friends4/Play" + byUser + "@" + StateManager.M + ".png"));
         final ImageButton button = new ImageButton(image2.getDrawable());
         button.addListener(new ClickListener() {
             @Override
@@ -91,7 +91,7 @@ public class MessageBox {
         });
         table.add(button).expand().left().padLeft(35 * StateManager.M);
 
-        Image image3 = new Image(new Texture("Friends4\\Ripples" + byUser + "@" + StateManager.M + ".png"));
+        Image image3 = new Image(new Texture("Friends4/Ripples" + byUser + "@" + StateManager.M + ".png"));
         table.add(image3).expand().right().padRight(25 * StateManager.M);
 
         stack.add(table);

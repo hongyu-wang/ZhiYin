@@ -108,8 +108,8 @@ public class Sec1 extends Sec1Shell {
     public void addPost(String name, String time){
         Table t = new Table();
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
-        Image ripples = new Image(new Texture("Friends4\\Ripples0@" + StateManager.M + ".png"));
-        Image play = new Image(new Texture("Friends4\\Play0@" + StateManager.M + ".png"));
+        Image ripples = new Image(new Texture("Friends4/Ripples0@" + StateManager.M + ".png"));
+        Image play = new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png"));
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 
         t.add(label1).expand().left().padLeft(50 * StateManager.M).padTop(50 * StateManager.M);
