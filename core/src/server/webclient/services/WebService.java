@@ -74,9 +74,7 @@ public class WebService{
         ObjectMapper objectMapper = new ObjectMapper();
         ServerModel model = null;
         int tag = Integer.parseInt(json.substring(json.length()-4));
-        System.out.println(tag+1);
         String className = Tags.ID_TAGS.getName(tag);
-        System.out.println(className);
         json = json.substring(0, json.length()-4);
 
         try {
