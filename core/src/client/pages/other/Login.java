@@ -71,7 +71,7 @@ public class Login extends State {
             label.setPosition(50, StateManager.HEIGHT - 100);
             stage.addActor(label);
 
-            ModelStorage.ipAddress=password.getText();
+            ModelStorage.ipAddress = password.getText();
         }
     }
 
