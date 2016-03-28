@@ -32,7 +32,7 @@ public class RequestObject implements Net.HttpResponseListener {
     public void getModel(long key) {
         // LibGDX NET CLASS
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("http://local:8081/webservice/getServerModel/" + key);
+        httpGet.setUrl("http://localhost:8081/webservice/getServerModel/" + key);
         //httpGet.setHeader("Content-Type", "application/json");
         //httpGet.setHeader("X-Parse-Application-Id", app_id);
         //httpGet.setHeader("X-Parse-REST-API-Key", app_key);
