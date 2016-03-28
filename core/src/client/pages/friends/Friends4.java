@@ -34,7 +34,7 @@ public class Friends4 extends Friends4Shell{
         scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
         stage.addActor(scrollpane);
 
-        talkerAddFriends();
+        //TODO change this talkerAddFriends();
     }
 
     public void addFriend(String name, Image image){
