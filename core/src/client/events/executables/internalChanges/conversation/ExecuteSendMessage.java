@@ -30,7 +30,7 @@ public class ExecuteSendMessage implements Executable {
         MConversation conversation = ms.getModel(friend2.getConversation());
 
         if(conversation == null){
-            ms.requestModelFromServer(MConversation.class.getName(), friend2.getConversation());
+            ms.requestModelFromServer(friend2.getConversation());
             return;
         }
 

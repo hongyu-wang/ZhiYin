@@ -1,8 +1,5 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import server.model.media.MHashtag;
-import server.model.media.MImage;
-import server.model.social.MConversation;
 import server.model.user.*;
 
 /**
@@ -36,21 +33,21 @@ public class VeryBeginningInitializer extends Talkers{
 
         //Users
         for(int i = 0; i < 3; i++) {
-            modelStorage.requestModelFromServer(User.class.getName(), key++);
+            modelStorage.requestModelFromServer(key++);
         }
 
         //UserContents
         for(int i = 0; i < 3; i++) {
-            modelStorage.requestModelFromServer(UserProfile.class.getName(), key++);
-            modelStorage.requestModelFromServer(UserConversations.class.getName(), key++);
-            modelStorage.requestModelFromServer(UserActivityLog.class.getName(), key++);
-            modelStorage.requestModelFromServer(UserUploadedContent.class.getName(), key++);
-            modelStorage.requestModelFromServer(UserDiaryContent.class.getName(), key++);
+            modelStorage.requestModelFromServer(key++);
+            modelStorage.requestModelFromServer(key++);
+            modelStorage.requestModelFromServer(key++);
+            modelStorage.requestModelFromServer(key++);
+            modelStorage.requestModelFromServer(key++);
         }
 
         //Images
         for(int i = 0; i < 3; i++)
-            modelStorage.requestModelFromServer(MImage.class.getName(), key++);
+            modelStorage.requestModelFromServer(key++);
 
         //Audio
 //        for(int i = 0; i < 3; i++)
@@ -62,11 +59,11 @@ public class VeryBeginningInitializer extends Talkers{
 
         //Hashtag
         for(int i = 0; i < 3; i++)
-            modelStorage.requestModelFromServer(MHashtag.class.getName(), key++);
+            modelStorage.requestModelFromServer(key++);
 
 
         for(int i = 0; i < 3 ; i++){
-            modelStorage.requestModelFromServer(MConversation.class.getName(), key++);
+            modelStorage.requestModelFromServer(key++);
         }
 
         totalOriginalModels = key;

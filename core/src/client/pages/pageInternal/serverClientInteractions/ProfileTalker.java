@@ -1,12 +1,10 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import com.badlogic.gdx.graphics.Texture;
 import server.model.media.MImage;
 import server.model.user.User;
 import server.model.user.UserProfile;
 import tools.utilities.Utils;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -139,8 +137,7 @@ public class ProfileTalker extends Talkers{
             profile = modelStorage.getModel(user.getProfile());
 
             modelStorage.requestModelFromServer(
-                    MImage.class.getName()
-                    , profile.getImageKey());
+                    profile.getImageKey());
         }
 
         @Override
