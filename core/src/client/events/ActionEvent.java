@@ -1,5 +1,8 @@
 package client.events;
 
+import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.internalExceptions.NoExecutableException;
+import client.stateInterfaces.Executable;
 import client.stateInterfaces.Performable;
 
 
@@ -35,7 +38,18 @@ public class ActionEvent {
         return source;
     }
 
-
+    /**
+     * the get all children here returns the All of the performable's children executables
+     * @return Executable [] of all executables within the action event.
+     *
+     * @throws NoExecutableException Thrown iff the source has no executable.
+     */
+    public Executable [] getAllChildren() throws NoExecutableException {
+        if (source instanceof ExecutableMultiplexer){
+            return ((ExecutableMultiplexer)source).getAllChildren();
+        }
+        return new Executable[]{source.getExecutable()};
+    }
 
 
 }

@@ -18,13 +18,13 @@ public class MAudio extends ServerModel {
 
     private int sampleRate;
 
-    private NSData mData;
+    private byte[] mData;
 
-    public NSData getmData() {
+    public byte[] getmData() {
         return mData;
     }
 
-    public void setmData(NSData mData) {this.mData = mData;
+    public void setmData(byte[] mData) {this.mData = mData;
     }
 
 

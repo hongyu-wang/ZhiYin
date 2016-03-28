@@ -5,6 +5,7 @@ import client.stateInterfaces.Executable;
 import java.util.List;
 
 /**
+ *
  * Created by Hongyu Wang on 3/15/2016.
  */
 public class ExecutableMultiplexer implements Executable {
@@ -18,6 +19,12 @@ public class ExecutableMultiplexer implements Executable {
     public void addExecutable(Executable executable){
         executableList.add(executable);
     }
+
+
+    public Executable [] getAllChildren(){
+        return executableList.toArray(new Executable[executableList.size()]);
+    }
+
 
 
     @Override
