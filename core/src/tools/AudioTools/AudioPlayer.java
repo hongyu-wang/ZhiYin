@@ -152,4 +152,8 @@ public class AudioPlayer {
     public double getCurrentTime(){
         return player1.getCurrentTime();
     }
+
+    public void setTime(double time){
+        player1.setCurrentTime(time);
+    }
 }
