@@ -10,27 +10,58 @@ import server.model.media.MAudio;
 import server.model.media.MMusic;
 import server.model.media.MSnapShot;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import java.util.List;
+
 /**
  * Created by Kevin on 3/11/2016.
  *
  * A class that gives the capability to create an MAudio object from an audio file.
  *
  */
-public class AudioCreator {
+public final class AudioCreator {
 
-    private static ModelStorage ms;
+    private static ModelStorage ms = ModelStorageFactory.createModelStorage();;
 
-    private static NSFileManager fm;
+    private static NSFileManager fm = new NSFileManager();
+
+    private static long musicKey = 10000L;
+
+    private static long audioKey = 9000L;
+
+    public static List<MMusic> initializeAll(){
+
+        List<MMusic> songs = new ArrayList<MMusic>();
+
+        String filePath = "/Users/kevin/desktop/ZhiYin/android/assets/MusicAssets";
+
+        NSArray urls = new NSArray();
+        try {
+            urls = fm.getContentsOfDirectoryAtPath(filePath);
+        } catch (NSErrorException e) {
+            e.printStackTrace();
+        }
+        for(Object f : urls) {
+            File mp3 = new File(new File(filePath),f.toString());
+            NSURL url = new NSURL(mp3.toURI().toString());
+            MMusic m = createMMusicFromFilePath(url);
+            ms.pushModel(m);
+            songs.add(m);
+        }
+
+        return songs;
+    }
 
     private AudioCreator(){
-
-        ms = ModelStorageFactory.createModelStorage();
-        fm = new NSFileManager();
 
     }
 
     public static MAudio createFromFilePath(String filePath){
-        NSData data = NSData.read(new NSURL(filePath));
+        //NSData data = NSData.read(new NSURL(filePath));
+
+        NSData data = fm.getContentsAtPath(filePath);
 
         return createMAudio(data);
     }
@@ -45,30 +76,19 @@ public class AudioCreator {
 
     public static MMusic createMMusicFromFilePath(NSURL filePath){
         MAudio audio = createMAudio(NSData.read(filePath));
-
         MMusic music = new MMusic();
-        //music.setMusicKey(ms.generateKey());
-
-
-        NSArray<AVMetadataItem> metadata = (new AVAsset(filePath)).getCommonMetadata();
-        for(AVMetadataItem item : metadata){
-            if(item.getCommonKey().toString().equals("title")) {
-                music.setName(item.getStringValue());
-            }
-
-            if(item.getCommonKey().toString().equals("albumName"))
-                music.setAlbum(item.getStringValue());
-
-            if(item.getCommonKey().toString().equals("artist"))
-                music.setArtist(item.getStringValue());
-        }
+        music.setMusicKey(audio.getKey());
+        music.setKey(musicKey);
+        musicKey++;
+        music = getMetaData(filePath);
+        ms.pushModel(music);
         return music;
     }
 
 
     public static MSnapShot createSnapShot(long voice, long song,int start, int end){
         MSnapShot ss = new MSnapShot();
-        //ss.setKey(ms.generateKey());
+        ss.setKey(ms.generateKey());
         ss.setMessage(voice);
         ss.setSong(song);
         ss.setStartTime(start);
@@ -79,8 +99,9 @@ public class AudioCreator {
     public static MAudio createMAudio(NSData data){
         MAudio song = new MAudio();
 
-        //song.setKey(ms.generateKey());
-        song.setmData(data);
+        song.setKey(audioKey);
+        audioKey++;
+        song.setmData(data.getBytes());
         AVAudioPlayer temp;
         try {
 
@@ -90,6 +111,25 @@ public class AudioCreator {
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
+
+        ms.pushModel(song);
         return song;
+    }
+
+    private static MMusic getMetaData(NSURL filePath){
+        MMusic music = new MMusic();
+        NSArray<AVMetadataItem> metadata = (new AVAsset(filePath)).getCommonMetadata();
+        for(AVMetadataItem item : metadata){
+            //System.out.println(item.getCommonKey().toString() + " "+ item.getStringValue());
+            if(item.getCommonKey().toString().equals("title")) {
+                music.setName(item.getStringValue());
+            }
+            if(item.getCommonKey().toString().equals("albumName"))
+                music.setAlbum(item.getStringValue());
+
+            if(item.getCommonKey().toString().equals("artist"))
+                music.setArtist(item.getStringValue());
+        }
+        return music;
     }
 }

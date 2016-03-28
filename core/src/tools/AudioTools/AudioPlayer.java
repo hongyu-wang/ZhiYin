@@ -60,8 +60,8 @@ public class AudioPlayer {
         snapShot = true;
 
         try {
-            player2 = new AVAudioPlayer(song.getmData());
-            player1 = new AVAudioPlayer(voice.getmData());
+            player2 = new AVAudioPlayer(new NSData(song.getmData()));
+            player1 = new AVAudioPlayer(new NSData(voice.getmData()));
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
@@ -77,7 +77,7 @@ public class AudioPlayer {
         snapShot = false;
 
         try {
-            player1 = new AVAudioPlayer(audio.getmData());
+            player1 = new AVAudioPlayer(new NSData(audio.getmData()));
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
