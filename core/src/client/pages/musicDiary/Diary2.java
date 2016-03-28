@@ -3,6 +3,7 @@ package client.pages.musicDiary;
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Executable;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 
@@ -31,7 +32,12 @@ public class Diary2 extends Diary2Shell{
         Button postButton = new Button(this);
         postButton.setBounds(750 - 117, 1217, 117, 117);
         //Go to a Diary4 without an image
-        postButton.setExecutable(new ExecuteToTempState(new Diary4(getTitle(), getBody(), null)));
+
+        String title = getTitle();
+        String body = getBody();
+        Diary4 d = new Diary4(title, body, null);
+        Executable e = new ExecuteToTempState(d);
+        postButton.setExecutable(e);
         add(postButton);
     }
 
@@ -60,11 +66,11 @@ public class Diary2 extends Diary2Shell{
     }
 
     public String getTitle(){
-        return titleField.getMessageText();
+        return titleField.getText();
     }
 
     public String getBody(){
-        return bodyField.getMessageText();
+        return bodyField.getText();
     }
 
 

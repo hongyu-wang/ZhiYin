@@ -120,10 +120,9 @@ public class ModelStorage {
 
     /**Requests a new model of className from the server.
      *
-     * @param className
      * @param key
      */
-    public void requestModelFromServer(String className, long key){
+    public void requestModelFromServer(long key){
         RequestObject.newInstance().getModel(key);
     }
 
