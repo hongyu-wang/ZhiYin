@@ -9,11 +9,13 @@ import org.robovm.apple.foundation.*;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
 import server.model.media.MSnapShot;
+import tools.utilities.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Kevin on 3/11/2016.
@@ -31,9 +33,15 @@ public final class AudioCreator {
 
     private static long audioKey = 9000L;
 
-    public static List<MMusic> initializeAll(){
+    public static Map<String,MMusic> songNameToMMusic;
 
-        List<MMusic> songs = new ArrayList<MMusic>();
+    public static Map<String, List<MMusic>> artistToMMusic;
+
+    public static void initializeAll(){
+
+        songNameToMMusic = Utils.newMap();
+        artistToMMusic = Utils.newMap();
+
 
         String filePath = "/Users/kevin/desktop/ZhiYin/android/assets/MusicAssets";
 
@@ -44,14 +52,26 @@ public final class AudioCreator {
             e.printStackTrace();
         }
         for(Object f : urls) {
-            File mp3 = new File(new File(filePath),f.toString());
-            NSURL url = new NSURL(mp3.toURI().toString());
-            MMusic m = createMMusicFromFilePath(url);
-            ms.pushModel(m);
-            songs.add(m);
+            if(!f.toString().equals(".DS_Store")) {
+                File mp3 = new File(new File(filePath), f.toString());
+                NSURL url = new NSURL(mp3.toURI().toString());
+                MMusic m = createMMusicFromFilePath(url);
+                ms.pushModel(m);
+
+                songNameToMMusic.put(m.getArtist(), m);
+                if (!artistToMMusic.containsKey(m.getArtist())) {
+                    artistToMMusic.put(m.getArtist(), new ArrayList<MMusic>());
+                }
+                List<MMusic> temp = artistToMMusic.get(m.getArtist());
+                temp.add(m);
+                artistToMMusic.put(m.getArtist(), temp);
+            }
         }
 
-        return songs;
+
+        //Artists: The Weeknd, Justin Bieber, Justin Timberlake, Ed Sheeran, Maroon 5, Kanye West
+
+
     }
 
     private AudioCreator(){
@@ -120,7 +140,6 @@ public final class AudioCreator {
         MMusic music = new MMusic();
         NSArray<AVMetadataItem> metadata = (new AVAsset(filePath)).getCommonMetadata();
         for(AVMetadataItem item : metadata){
-            //System.out.println(item.getCommonKey().toString() + " "+ item.getStringValue());
             if(item.getCommonKey().toString().equals("title")) {
                 music.setName(item.getStringValue());
             }
