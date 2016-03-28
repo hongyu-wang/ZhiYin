@@ -1,7 +1,6 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
@@ -54,6 +53,11 @@ public class FriendProfile extends FriendProfileShell {
         Label label = new Label(name, SkinSingleton.getInstance());
         label.setPosition(310 * StateManager.M, 1050 * StateManager.M);
         stage.addActor(label);
+
+        if(image != null) {
+            image.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
+            stage.addActor(image);
+        }
 
         table = new Table();
         table.top();
