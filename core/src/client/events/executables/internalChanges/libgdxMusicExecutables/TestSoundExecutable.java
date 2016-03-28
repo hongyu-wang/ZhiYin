@@ -9,6 +9,7 @@ import tools.AudioTools.AudioRecorder;
  *
  * Created by Kevin Zheng on 2016-03-14.
  */
+@Deprecated
 public class TestSoundExecutable implements Executable {
 
     AudioRecorder audRec = AudioRecorder.getInstance();
