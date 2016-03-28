@@ -38,10 +38,12 @@ public class Home extends HomeShell {
         Image i1 = new Image(new Texture("Home/NewRelease@" + StateManager.M + ".png"));
         final ImageButton b1 = new ImageButton(i1.getDrawable());
 
+        final ExecuteToTempState etts = new ExecuteToTempState(new NowPlaying(this));
+
         b1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new TestExecutable("new releases").execute();
+                etts.execute();
             }
         });
 
@@ -51,7 +53,7 @@ public class Home extends HomeShell {
         Image i2 = new Image(new Texture("Home/TopSingles@" + StateManager.M + ".png"));
         final ImageButton b2 = new ImageButton(i2.getDrawable());
 
-        b2.addListener(new ClickListener(){
+        b2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 new ExecuteChangePage(Pages.TOPSINGLES).execute();
@@ -73,7 +75,7 @@ public class Home extends HomeShell {
 
         stage.addActor(scrollpane);
 
-        pullDataFromServer();
+        //pullDataFromServer();
         //table.setDebug(true);
 
     }
@@ -109,7 +111,7 @@ public class Home extends HomeShell {
         s.add(i2);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this));
 
         s.addListener(new ClickListener() {
             @Override
@@ -143,24 +145,24 @@ public class Home extends HomeShell {
     @Override
     public void pullDataFromServer() {
 
-        Music song1 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Avril Lavigne - Fly.mp3"));
-
-        Music song2 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Imagine Dragons - 30 Lives (iTunes Session).mp3"));
-
-        Music song3 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Bruno Mars - The Lazy Song.mp3"));
-
-        Music song4 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Katy Perry - Hot N Cold.mp3"));
-
-        Music song5 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Royals.mp3"));
-
-        Music song6 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Team.mp3"));
-
-        addNewRelease("Avril Lavigne", "Fly", song1);
-        addNewRelease("Imagine Dragons", "30 Lives", song2);
-        addNewRelease("Bruno Mars", "The Lazy Song", song3);
-        addTopSingle("Katy Perry", "Hot N Cold", song4);
-        addTopSingle("Lorde", "Royals", song5);
-        addTopSingle("Lorde", "Team", song6);
+//        Music song1 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Avril Lavigne - Fly.mp3"));
+//
+//        Music song2 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Imagine Dragons - 30 Lives (iTunes Session).mp3"));
+//
+//        Music song3 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Bruno Mars - The Lazy Song.mp3"));
+//
+//        Music song4 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Katy Perry - Hot N Cold.mp3"));
+//
+//        Music song5 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Royals.mp3"));
+//
+//        Music song6 = Gdx.audio.newMusic(Gdx.files.internal("..//Music Assets//Lorde - Team.mp3"));
+//
+//        addNewRelease("Avril Lavigne", "Fly", song1);
+//        addNewRelease("Imagine Dragons", "30 Lives", song2);
+//        addNewRelease("Bruno Mars", "The Lazy Song", song3);
+//        addTopSingle("Katy Perry", "Hot N Cold", song4);
+//        addTopSingle("Lorde", "Royals", song5);
+//        addTopSingle("Lorde", "Team", song6);
 
 
         /*

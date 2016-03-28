@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges.libgdxMusicExecutables;
+package client.events.executables.internalChanges.schmoferMusicExecutable;
 
 import client.stateInterfaces.Executable;
 import org.robovm.apple.foundation.NSErrorException;
@@ -9,7 +9,7 @@ import tools.AudioTools.AudioRecorder;
  *
  * Created by Kevin Zheng on 2016-03-14.
  */
-public class TestSoundExecutable implements Executable {
+public class ExecuteRecordSound implements Executable {
 
     AudioRecorder audRec = AudioRecorder.getInstance();
     /**

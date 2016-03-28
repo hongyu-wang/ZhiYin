@@ -5,6 +5,7 @@ import server.model.social.MConversation;
 import server.model.social.MMessage;
 import server.model.user.User;
 import server.model.user.UserConversations;
+import tools.utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class FriendTalker extends Talkers {
 
     @Override
     public void init() {
-
+        friends = Utils.newList();
     }
 
     /*------------------------------------------------------------------------*/

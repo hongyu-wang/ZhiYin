@@ -2,16 +2,10 @@ package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.libgdxMusicExecutables.ExecutePauseMusic;
-import client.events.executables.internalChanges.libgdxMusicExecutables.ExecutePlayMusic;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
-import client.stateInterfaces.Executable;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -27,19 +21,27 @@ import static client.singletons.StateManager.M;
  * Created by Hongyu Wang on 3/9/2016.
  */
 public class NowPlaying extends NowPlayingShell {
-    private Music music;
-    private Slider slider;
-
+    private ExecuteMoveSlider executeMoveSlider;
     private State previousState;
+    private Slider slider;
+    private boolean verbose;
 
-    public NowPlaying(State previousState, Music music){
+
+    public NowPlaying(State previousState){
         this.previousState = previousState;
-        this.music = music;
+        verbose = false;
         init();
     }
 
+    public NowPlaying(State previousState, boolean verbose){
+        this(previousState);
+        this.verbose = true;
+    }
+
+
+
     @Override
-    public void init() {
+    protected void init() {
         super.init();
 
 
@@ -50,6 +52,8 @@ public class NowPlaying extends NowPlayingShell {
         nowPlaying2Button.setBounds(607 + 1, 1063, 51, 51);
         nowPlaying2Button.setExecutable(new ExecuteToTempState(new NowPlaying2(previousState, this)));
         add(nowPlaying2Button);
+
+        initializeSlider();
 
     }
 
@@ -67,18 +71,21 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     public void update(float dt){
         super.update(dt);
+        slider.setValue(slider.getValue()+1);
+
     }
 
-    public void intializeSlider(){
+    public void initializeSlider(){
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
         slider.setBounds((int) (M * 180), (int) (M * 400), (int) (M * 410), 10);
         slider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                System.out.println('a');
 
             }
         });
+
         stage.addActor(slider);
     }
 
@@ -88,7 +95,6 @@ public class NowPlaying extends NowPlayingShell {
         backButton.setBounds(0 + 1, 1217, 117, 117);
         ExecutableMultiplexer executables = new ExecutableMultiplexer();
         executables.addExecutable(new ExecuteToTempState(previousState));
-        executables.addExecutable(new ExecutePauseMusic(music));
         backButton.setExecutable(executables);
         add(backButton);
     }
@@ -96,23 +102,6 @@ public class NowPlaying extends NowPlayingShell {
     private void addPlayButton(){
         Button pauseButton = new Button(this);
         pauseButton.setBounds(288 + 1, 177, 180, 180);
-        pauseButton.setExecutable(new ExecutePlayMusic(music));
         add(pauseButton);
     }
-
-
-
-
-
-    public Music getMusic() {
-
-        return music;
-    }
-
-    public void setMusic(String trackName) {
-        this.music = Gdx.audio.newMusic(Gdx.files.internal(trackName));
-
-    }
-
-
 }
