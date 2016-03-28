@@ -42,4 +42,6 @@ public class AudioManager {
     public void setTime(double time){
         audioPlayer.setTime(time);
     }
+
+    public boolean isPlaying(){ return audioPlayer.isPlaying(); }
 }
