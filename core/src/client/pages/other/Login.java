@@ -92,7 +92,6 @@ public class Login extends State {
         username.setBounds(102 * M, (GameLoop.HEIGHT - 798 - 72) * M, 545 * M, 72 * M);
         password.setBounds(102 * M, (GameLoop.HEIGHT - 910 - 72) * M, 545 * M, 72 * M);
 
-
         stage.addActor(username);
         stage.addActor(password);
 
