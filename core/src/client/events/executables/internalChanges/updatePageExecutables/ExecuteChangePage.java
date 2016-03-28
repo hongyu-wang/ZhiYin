@@ -2,6 +2,7 @@ package client.events.executables.internalChanges.updatePageExecutables;
 
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.other.TransitionState;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 
@@ -23,7 +24,7 @@ public class ExecuteChangePage implements Executable{
 
     @Override
     public void execute() {
+        StateManager.getInstance().toTemporaryState(new TransitionState(page.getStateReference()));
 
-        StateManager.getInstance().changeState(page);
     }
 }
