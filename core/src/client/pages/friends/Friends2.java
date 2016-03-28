@@ -54,7 +54,7 @@ public class Friends2 extends Friends2Shell{
     public Friends2(String friendName){
         this.friendName = friendName;
         init();
-        initititititit();
+
     }
 
     private void initititititit(){
@@ -117,6 +117,8 @@ public class Friends2 extends Friends2Shell{
         em.addExecutable(new ExecuteAddImage(stage, image));
         recordButton.setExecutable(em);
         add(recordButton);
+
+        initititititit();
     }
 
 
