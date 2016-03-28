@@ -7,6 +7,7 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.utils.JsonReader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import server.model.structureModels.ServerModel;
+import tools.serverTools.generators.Tags;
 
 
 /**
@@ -17,7 +18,6 @@ public class RequestObject implements Net.HttpResponseListener {
     private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
     private Object rOjbect;
-    private String className;
 
     public static RequestObject newInstance(){
         return new RequestObject();
@@ -27,12 +27,10 @@ public class RequestObject implements Net.HttpResponseListener {
     /**
      * Retrieves a model from the server
      *
-     * @param className name of the class of the model
      * @param key       id key of the model
      */
-    public void getModel(String className, long key) {
+    public void getModel(long key) {
         // LibGDX NET CLASS
-        this.className = className;
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
         httpGet.setUrl("http://localhost:8081/webservice/getServerModel/" + key);
         //httpGet.setHeader("Content-Type", "application/json");
@@ -49,7 +47,13 @@ public class RequestObject implements Net.HttpResponseListener {
     @Override
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
         try {
-            rOjbect = objectMapper.readValue(httpResponse.getResultAsString(), Class.forName(className));
+            String json = httpResponse.getResultAsString();
+            int tag = Integer.parseInt(json.substring(json.length()-4));
+            System.out.println(tag+1);
+            String className = Tags.ID_TAGS.getName(tag);
+            System.out.println(className);
+            json = json.substring(0, json.length()-4);
+            rOjbect = objectMapper.readValue(json, Class.forName(className));
             modelStorage.setModelFromServer((ServerModel)rOjbect);
         } catch (Exception e) {
             System.out.println(e);

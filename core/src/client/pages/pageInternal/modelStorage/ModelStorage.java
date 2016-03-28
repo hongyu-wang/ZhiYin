@@ -1,15 +1,11 @@
 package client.pages.pageInternal.modelStorage;
 
-import server.model.media.MHashtag;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
-import server.webclient.WebServiceClient;
-import server.webclient.webErrors.WebRequestException;
 import server.webservices.PostObject;
 import server.webservices.RequestObject;
 import server.webservices.ServerKeyObject;
 
-import java.nio.LongBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -127,7 +123,7 @@ public class ModelStorage {
      * @param key
      */
     public void requestModelFromServer(String className, long key){
-        RequestObject.newInstance().getModel(className, key);
+        RequestObject.newInstance().getModel(key);
     }
 
     /**Returns a pre generated serial key from the server.

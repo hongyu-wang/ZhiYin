@@ -38,11 +38,20 @@ public class WebService{
      */
     @GET
     @Path("/getServerModel/{param}")
-    @Produces("application/json")
-    public ServerModel getServerModel(@PathParam("param") Long key) {
+    @Produces("*/*")
+    public String getServerModel(@PathParam("param") Long key) {
         MockServer mockServer = ServerInteraction.getServer();
+        ServerModel model = mockServer.getModel(key);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String className = Tags.ID_TAGS.parseTag(model.getClass().getCanonicalName());
+        String jString = "";
+        try {
 
-        return mockServer.getModel(key);
+            jString = objectMapper.writeValueAsString(model);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return jString+className;
     }
 
     @GET
