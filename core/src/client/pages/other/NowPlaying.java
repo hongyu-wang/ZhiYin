@@ -15,6 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
  * This is the now playing page as given in the
  * art assets folder.
  *
+ * Picture co-ords: TopLeft: 49, 193
+ *                  BottomRight:  706, 847
+ *
  * Created by Hongyu Wang on 3/9/2016.
  */
 public class NowPlaying extends NowPlayingShell {
