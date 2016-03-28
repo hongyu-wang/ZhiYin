@@ -107,10 +107,7 @@ public class Login extends State {
     @Override
     public void update(float dt) {
         super.update(dt);
-        if (label != null && delta%10 == 0){
-            label.setText(stuff[delta2%(stuff.length)]);
-            delta2 ++;
-        }
+
         if (checkPull){
             if (delta%100 == 0) {
 
@@ -142,5 +139,10 @@ public class Login extends State {
     @Override
     public void dispose() {
 
+    }
+
+
+    public void setText(String str){
+        label.setText(str);
     }
 }
