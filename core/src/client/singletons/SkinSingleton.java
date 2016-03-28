@@ -10,8 +10,12 @@ public class SkinSingleton {
     private static Skin ourInstance;
 
     public static Skin getInstance(){
+
+
         if (ourInstance == null){
-            ourInstance = new Skin(Gdx.files.internal("SkinAssets1/uiskin.json"));
+            String filepath = StateManager.M == 0.5F ? "SkinAssets1" : "SkinAssets2";
+
+            ourInstance = new Skin(Gdx.files.internal(filepath + "/uiskin.json"));
 
         }
 
