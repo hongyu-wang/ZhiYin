@@ -2,6 +2,7 @@ package server.services.implementations.diaryService;
 
 import server.model.social.MDiaryPost;
 import server.model.media.*;
+import server.model.user.User;
 import server.services.interfaces.models.MusicDiary;
 
 /**
@@ -33,6 +34,18 @@ public class MusicDiaryImplementation implements MusicDiary {
 //
 //        return diaryPost;
 //    }
+    @Override
+    public MDiaryPost createDiaryPost(User user, MImage image, MMusic music, String title, MText description){
+        MDiaryPost diaryPost = new MDiaryPost();
+        diaryPost.setCreator(user.getKey());
+        diaryPost.setImageKey(image.getKey());
+        diaryPost.setMusicKey(music.getKey());
+        diaryPost.setTitle(title);
+        diaryPost.setText(description.getKey());
+
+        return diaryPost;
+    }
+
 
     @Override
     public MDiaryPost modifyAudio(MDiaryPost diaryPost, MAudio audio){
@@ -51,13 +64,6 @@ public class MusicDiaryImplementation implements MusicDiary {
     @Override
     public MDiaryPost modifyMusic(MDiaryPost diaryPost, MMusic music){
         diaryPost.setMusicKey(music.getKey());
-        return diaryPost;
-        //TODO request change to server.
-    }
-
-    @Override
-    public MDiaryPost modifyText(MDiaryPost diaryPost, MText text){
-        diaryPost.setTextKey(text.getKey());
         return diaryPost;
         //TODO request change to server.
     }

@@ -4,11 +4,14 @@ import server.model.media.MImage;
 import server.model.media.MMusic;
 import server.model.media.MText;
 import server.model.social.MDiaryPost;
+import server.model.user.User;
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
 public interface MusicDiary {
+
+    MDiaryPost createDiaryPost(User user, MImage image, MMusic music, String title, MText description);
 
     /**Modify the audio.
      *
@@ -33,12 +36,4 @@ public interface MusicDiary {
      * @return               The modified MDiaryPost model.
      */
     MDiaryPost modifyMusic(MDiaryPost diaryPost, MMusic music);
-
-    /**Modify the image.
-     *
-     * @param diaryPost      The MDiaryPost.
-     * @param text          The text.
-     * @return               The modified MDiaryPost model.
-     */
-    MDiaryPost modifyText(MDiaryPost diaryPost, MText text);
 }

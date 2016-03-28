@@ -139,7 +139,7 @@ public class DiaryTalker extends Talkers{
          */
         @Override
         public void update(float dt) {
-            MText postText = modelStorage.getModel(this.diaryPost.getTextKey());
+            MText postText = modelStorage.getModel(this.diaryPost.getText());
             if(postText != null)
                 text = postText.getText();
 
@@ -154,7 +154,7 @@ public class DiaryTalker extends Talkers{
         @Override
         public void pull() {
             modelStorage.requestModelFromServer(MImage.class.getName(), diaryPost.getImageKey());
-            modelStorage.requestModelFromServer(MText.class.getName(), diaryPost.getTextKey());
+            modelStorage.requestModelFromServer(MText.class.getName(), diaryPost.getText());
             modelStorage.requestModelFromServer(MMusic.class.getName(), diaryPost.getMusicKey());
             modelStorage.requestModelFromServer(MAudio.class.getName(), diaryPost.getAudioKey());
 
@@ -167,7 +167,7 @@ public class DiaryTalker extends Talkers{
         public void push() {
 
             //Text, Texture, Music, Audio
-            MText postText = modelStorage.getModel(this.diaryPost.getTextKey());
+            MText postText = modelStorage.getModel(this.diaryPost.getText());
             MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
 
             postText.setText(text);
