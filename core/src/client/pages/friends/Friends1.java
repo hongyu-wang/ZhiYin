@@ -29,7 +29,7 @@ public class Friends1 extends Friends1Shell{
 
         //table.setDebug(true);
 
-        //TODO Remove this talkerAddFriends();
+        talkerAddFriends();
     }
 
 

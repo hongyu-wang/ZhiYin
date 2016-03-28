@@ -77,16 +77,6 @@ public class VirtualDatabase {
         MImage image2 = generateTestImage("Benny's Profile", "UserProfiles//Benny_After_The_War.png");// TODO path
         MImage image3 = generateTestImage("Cindy's Profile", "UserProfiles//Cindy_After_The_War.png");// TODO path
 
-        //Audio
-//        MAudio audio1 = generateTestAudio("Audio_1.mp3");// TODO path
-//        MAudio audio2 = generateTestAudio("Audio_2.mp3");// TODO path
-//        MAudio audio3 = generateTestAudio("Audio_3.mp3");// TODO path
-
-        //Music
-//        MMusic music1 = generateTestMusic("Music_1", audio1);// TODO path
-//        MMusic music2 = generateTestMusic("Music_2", audio2);// TODO path
-//        MMusic music3 = generateTestMusic("Music_3", audio3);// TODO path
-
         //Hashtag
         MHashtag tag1 = generateTestHashtags("#Happy");
         MHashtag tag2 = generateTestHashtags("#Sad");
@@ -128,6 +118,8 @@ public class VirtualDatabase {
         MText cindy_text = generateText("");
 
         generateDiaryPost("Title", user1, alice_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
+        generateDiaryPost("Title", user1, benny_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
+        generateDiaryPost("Title", user1, cindy_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
 
     }
 

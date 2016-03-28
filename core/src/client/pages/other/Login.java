@@ -53,8 +53,7 @@ public class Login extends State {
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
-        new ExecuteChangePage(Pages.HOME).execute();
-        /**String text = username.getText().trim();
+        String text = username.getText().trim();
         if (text.equals(NAME1) || text.equals(NAME2) || text.equals(NAME3)) {
             for (Actor act : stage.getActors()){
                 act.remove();
@@ -72,7 +71,7 @@ public class Login extends State {
             stage.addActor(label);
 
             //TODO Do something with IP. Check its valid? Use the password field.
-        }*/
+        }
     }
 
     @Override
