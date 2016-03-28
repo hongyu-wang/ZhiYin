@@ -12,6 +12,7 @@ public class SkinSingleton {
     public static Skin getInstance(){
         if (ourInstance == null){
             ourInstance = new Skin(Gdx.files.internal("SkinAssets1\\uiskin.json"));
+
         }
 
         return ourInstance;

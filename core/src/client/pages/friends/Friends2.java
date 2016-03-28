@@ -5,6 +5,7 @@ import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.*;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;

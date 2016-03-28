@@ -37,7 +37,7 @@ public class Button extends Component implements Pressable{
 
     @Override
     protected void init() {
-        playAnimation = true;
+        playAnimation = false;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package client.pages.home;
 
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.ArtistProfile;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;

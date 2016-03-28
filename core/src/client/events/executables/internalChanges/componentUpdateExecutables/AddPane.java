@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges;
+package client.events.executables.internalChanges.componentUpdateExecutables;
 
 import client.component.basicComponents.CommentWindow;
 import client.pageStorage.Pages;

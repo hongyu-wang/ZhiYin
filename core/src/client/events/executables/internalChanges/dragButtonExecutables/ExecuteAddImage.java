@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges;
+package client.events.executables.internalChanges.dragButtonExecutables;
 
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.scenes.scene2d.Stage;

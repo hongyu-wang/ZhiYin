@@ -1,6 +1,6 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;

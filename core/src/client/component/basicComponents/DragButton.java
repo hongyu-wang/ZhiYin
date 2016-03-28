@@ -29,7 +29,7 @@ public class DragButton extends Component implements Dragable {
 
     @Override
     protected void init() {
-        playAnimation = true;
+        playAnimation = false;
         begin = 0;
     }
 

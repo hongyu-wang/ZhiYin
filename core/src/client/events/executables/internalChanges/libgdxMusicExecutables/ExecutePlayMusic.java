@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges;
+package client.events.executables.internalChanges.libgdxMusicExecutables;
 
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.audio.Music;

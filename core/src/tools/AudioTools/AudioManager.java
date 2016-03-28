@@ -38,4 +38,10 @@ public class AudioManager {
     public static void changeMusic(MAudio song) throws NSErrorException {
         audioPlayer.setSong(song);
     }
+
+    public void setTime(double time){
+        audioPlayer.setTime(time);
+    }
+
+    public boolean isPlaying(){ return audioPlayer.isPlaying(); }
 }

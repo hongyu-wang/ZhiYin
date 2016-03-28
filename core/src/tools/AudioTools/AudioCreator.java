@@ -1,5 +1,7 @@
 package tools.AudioTools;
 
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import org.robovm.apple.avfoundation.AVAsset;
 import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVMetadataItem;
@@ -7,6 +9,7 @@ import org.robovm.apple.foundation.*;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
 import server.model.media.MSnapShot;
+
 /**
  * Created by Kevin on 3/11/2016.
  *
@@ -15,39 +18,49 @@ import server.model.media.MSnapShot;
  */
 public class AudioCreator {
 
+    private static ModelStorage ms;
+
     private static NSFileManager fm;
 
     private AudioCreator(){
 
+        ms = ModelStorageFactory.createModelStorage();
         fm = new NSFileManager();
 
     }
 
     public static MAudio createFromFilePath(String filePath){
         NSData data = NSData.read(new NSURL(filePath));
-        //data = fm.getContentsAtPath(filePath);
+
         return createMAudio(data);
     }
 
     public static MAudio createFromFilePath(NSURL filePath){
 
         NSData data = NSData.read(filePath);
-        //data = fm.getContentsAtPath(filePath.getPath());
+
         return createMAudio(data);
 
     }
 
-    public static MMusic createMMusicFromFilePath(String filePath, long audioKey){
-        MAudio audio = createMAudio(NSData.read(new NSURL(filePath))); // need to assign this a long key
-        audio.setKey(audioKey);
+    public static MMusic createMMusicFromFilePath(NSURL filePath){
+        MAudio audio = createMAudio(NSData.read(filePath));
+
         MMusic music = new MMusic();
-        music.setMusicKey(audioKey);
+        //music.setMusicKey(ms.generateKey());
 
 
-        NSArray<AVMetadataItem> metadata = (new AVAsset(new NSURL(filePath))).getCommonMetadata();
+        NSArray<AVMetadataItem> metadata = (new AVAsset(filePath)).getCommonMetadata();
         for(AVMetadataItem item : metadata){
-            if(item.getCommonKey().equals("Title"))
+            if(item.getCommonKey().toString().equals("title")) {
                 music.setName(item.getStringValue());
+            }
+
+            if(item.getCommonKey().toString().equals("albumName"))
+                music.setAlbum(item.getStringValue());
+
+            if(item.getCommonKey().toString().equals("artist"))
+                music.setArtist(item.getStringValue());
         }
         return music;
     }
@@ -55,6 +68,7 @@ public class AudioCreator {
 
     public static MSnapShot createSnapShot(long voice, long song,int start, int end){
         MSnapShot ss = new MSnapShot();
+        //ss.setKey(ms.generateKey());
         ss.setMessage(voice);
         ss.setSong(song);
         ss.setStartTime(start);
@@ -63,7 +77,9 @@ public class AudioCreator {
     }
 
     public static MAudio createMAudio(NSData data){
-        MAudio song = new MAudio(); //Need to set long key
+        MAudio song = new MAudio();
+
+        //song.setKey(ms.generateKey());
         song.setmData(data);
         AVAudioPlayer temp;
         try {

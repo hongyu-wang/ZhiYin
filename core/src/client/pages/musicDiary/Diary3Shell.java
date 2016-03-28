@@ -2,7 +2,7 @@ package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.TestExecutable;
 import client.pageStorage.Pages;
 import client.pages.State;
