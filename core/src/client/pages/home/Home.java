@@ -73,7 +73,7 @@ public class Home extends HomeShell {
 
         stage.addActor(scrollpane);
 
-        pullDataFromServer();
+        //pullDataFromServer();
         //table.setDebug(true);
 
     }
@@ -109,7 +109,7 @@ public class Home extends HomeShell {
         s.add(i2);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this));
 
         s.addListener(new ClickListener() {
             @Override

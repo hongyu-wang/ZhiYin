@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Music;
 /**
  * Created by Hongyu Wang on 3/15/2016.
  */
+@Deprecated
 public class ExecutePauseMusic implements Executable{
 
     private Music music;
