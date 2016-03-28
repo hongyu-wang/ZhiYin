@@ -1,15 +1,11 @@
 package client.pages.other;
 
-import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealChangeListener;
 
 import static client.singletons.StateManager.M;
@@ -41,19 +37,21 @@ public class NowPlaying extends NowPlayingShell {
     }
 
 
-
     @Override
     protected void init() {
         super.init();
 
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
+        addImageButton("NowPlayingMarch27/Back@", backEx, 0, 1217, 117, 117);
 
-        addBackButton();
-        addPlayButton();
+        ExecuteToTempState showCommentsEx = new ExecuteToTempState(new NowPlaying2(previousState, this));
+        addImageButton("NowPlayingMarch27/ShowComments@", showCommentsEx, 607, 1063, 51, 51);
 
-        Button nowPlaying2Button = new Button(this);
-        nowPlaying2Button.setBounds(607 + 1, 1063, 51, 51);
-        nowPlaying2Button.setExecutable(new ExecuteToTempState(new NowPlaying2(previousState, this)));
-        add(nowPlaying2Button);
+        TestExecutable pauseEx = new TestExecutable("pause");
+        addImageButton("NowPlayingMarch27/Pause@", pauseEx, 288, 177, 180, 180);
+
+//        TestExecutable playEx = new TestExecutable("play");
+//        addImageButton("NowPlayingMarch27/Play@", playEx, 288, 177, 180, 180);
 
         initializeSlider();
 
@@ -87,19 +85,4 @@ public class NowPlaying extends NowPlayingShell {
         stage.addActor(slider);
     }
 
-
-    private void addBackButton(){
-        Button backButton = new Button(this);
-        backButton.setBounds(0 + 1, 1217, 117, 117);
-        ExecutableMultiplexer executables = new ExecutableMultiplexer();
-        executables.addExecutable(new ExecuteToTempState(previousState));
-        backButton.setExecutable(executables);
-        add(backButton);
-    }
-
-    private void addPlayButton(){
-        Button pauseButton = new Button(this);
-        pauseButton.setBounds(288 + 1, 177, 180, 180);
-        add(pauseButton);
-    }
 }

@@ -1,6 +1,6 @@
 package client.pages.other;
 
-import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -32,17 +32,18 @@ public class NowPlaying2 extends NowPlaying2Shell {
 
         stage.addActor(slider);
 
-        Button backButton = new Button(this);
-        backButton.setBounds(0 + 1, 1217, 117, 117);
-        //ExecutableMultiplexer executables = new ExecutableMultiplexer();
-        backButton.setExecutable(new ExecuteToTempState(previousState));
-        //backButton.setExecutable(executables);
-        add(backButton);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
+        addImageButton("NowPlayingMarch27/Back@", backEx, 0, 1217, 117, 117);
 
-        Button nowPlaying1Button = new Button(this);
-        nowPlaying1Button.setBounds(607 + 1, 1063, 51, 51);
-        nowPlaying1Button.setExecutable(new ExecuteToTempState(nowPlaying));
-        add(nowPlaying1Button);
+        ExecuteToTempState hideCommentsEx = new ExecuteToTempState(nowPlaying);
+        addImageButton("NowPlayingMarch27/ShowComments@", hideCommentsEx, 607, 1063, 51, 51);
+
+        TestExecutable pauseEx = new TestExecutable("pause");
+        addImageButton("NowPlayingMarch27/Pause@", pauseEx, 288, 177, 180, 180);
+
+//        TestExecutable playEx = new TestExecutable("play");
+//        addImageButton("NowPlayingMarch27/Play@", playEx, 288, 177, 180, 180);
+
     }
 
 
