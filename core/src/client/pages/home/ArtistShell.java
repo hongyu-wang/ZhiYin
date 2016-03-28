@@ -26,12 +26,12 @@ public abstract class ArtistShell extends State{
         stage.addActor(background);
 
         Button homeButton = new Button(this);
-        homeButton.setBounds(0 + 1, 1217, 250, 117);
+        homeButton.setBounds(0, 1217, 260, 117);
         homeButton.setExecutable(new ExecuteChangePage(Pages.HOME));
         add(homeButton);
 
         Button discoveryButton = new Button(this);
-        discoveryButton.setBounds(500 + 1, 1217, 250, 117);
+        discoveryButton.setBounds(410, 1217, 340, 117);
         discoveryButton.setExecutable(new ExecuteChangePage(Pages.DISCOVERY));
         add(discoveryButton);
 

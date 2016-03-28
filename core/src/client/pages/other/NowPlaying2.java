@@ -1,6 +1,5 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -33,21 +32,11 @@ public class NowPlaying2 extends NowPlaying2Shell {
         stage.addActor(slider);
 
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
-        addImageButton("NowPlayingMarch27/Back@", backEx, 0, 1217, 117, 117);
+        addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         ExecuteToTempState hideCommentsEx = new ExecuteToTempState(nowPlaying);
-        addImageButton("NowPlayingMarch27/ShowComments@", hideCommentsEx, 607, 1063, 51, 51);
-
-        TestExecutable pauseEx = new TestExecutable("pause");
-        addImageButton("NowPlayingMarch27/Pause@", pauseEx, 288, 177, 180, 180);
-
-//        TestExecutable playEx = new TestExecutable("play");
-//        addImageButton("NowPlayingMarch27/Play@", playEx, 288, 177, 180, 180);
-
+        addImageButton("NowPlaying/ShowComments@", hideCommentsEx, 607, 1063, 51, 51);
     }
-
-
-
 
     @Override
     public void dispose() {
@@ -62,6 +51,5 @@ public class NowPlaying2 extends NowPlaying2Shell {
     @Override
     public void update(float dt) {
         super.update(dt);
-
     }
 }

@@ -12,12 +12,18 @@ import static client.singletons.StateManager.M;
 public class ExecuteAddDragButton implements Executable{
 
     private DragButton button;
-    public ExecuteAddDragButton(DragButton button){
+    private int x, y, width, height;
+
+    public ExecuteAddDragButton(DragButton button, int x, int y, int width, int height){
         this.button = button;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
 
     @Override
     public void execute() {
-        button.setBounds(32*M, 98*M, (750-64)*M, 236*M);
+        button.setBounds(x*M, y*M, width*M, height*M);
     }
 }

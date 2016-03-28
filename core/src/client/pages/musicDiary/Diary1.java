@@ -1,7 +1,6 @@
 package client.pages.musicDiary;
 
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
-import client.pageStorage.Pages;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -75,10 +74,11 @@ public class Diary1 extends Diary1Shell {
         s.add(i2);
         s.add(t);
 
+        // Goes to a Diary4 without content or image
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.DIARY4).execute();
+                new ExecuteToTempState(new Diary4("title", "", null)).execute();
             }
         });
 

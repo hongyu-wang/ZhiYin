@@ -97,9 +97,8 @@ public class Friends2 extends Friends2Shell{
         em2.addExecutable(new ExecuteRemoveImage(image));
         button.setReleaseExecutable(em2);
         button.setDragExecutable(em2);
+
         Button sendButton = new Button(this);
-
-
         sendButton.setBounds(604 + 1, 31, 122, 60);
         ExecutableMultiplexer em3 = new ExecutableMultiplexer();
         em3.addExecutable(new ExecuteSendMessage(this));
@@ -113,7 +112,7 @@ public class Friends2 extends Friends2Shell{
         Button recordButton = new Button(this);
         recordButton.setBounds(32, 31, 122, 60);
         ExecutableMultiplexer em = new ExecutableMultiplexer();
-        em.addExecutable(new ExecuteAddDragButton(button));
+        em.addExecutable(new ExecuteAddDragButton(button, 32, 98, 750-64, 236));
         em.addExecutable(new ExecuteAddImage(stage, image));
         recordButton.setExecutable(em);
         add(recordButton);

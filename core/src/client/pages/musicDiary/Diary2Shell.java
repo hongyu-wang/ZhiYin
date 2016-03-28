@@ -27,11 +27,6 @@ public abstract class Diary2Shell extends State {
         backButton.setExecutable(new ExecuteChangePage(Pages.DIARY1));
         add(backButton);
 
-        Button postButton = new Button(this);
-        postButton.setBounds(750 - 117, 1217, 117, 117);
-        postButton.setExecutable(new ExecuteChangePage(Pages.DIARY4));
-        add(postButton);
-
         Button recordButton = new Button(this);
         recordButton.setBounds(76, 33, 174, 204);
         recordButton.setExecutable(new ExecuteChangePage(Pages.DIARY3));

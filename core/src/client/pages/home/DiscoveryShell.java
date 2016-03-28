@@ -22,12 +22,12 @@ public abstract class DiscoveryShell extends State {
         stage.addActor(background);
 
         Button homeButton = new Button(this);
-        homeButton.setBounds(0, 1217, 250, 117);
+        homeButton.setBounds(0, 1217, 260, 117);
         homeButton.setExecutable(new ExecuteChangePage(Pages.HOME));
         add(homeButton);
 
         Button artistButton = new Button(this);
-        artistButton.setBounds(250 + 1, 1217, 250, 117);
+        artistButton.setBounds(260, 1217, 150, 117);
         artistButton.setExecutable(new ExecuteChangePage(Pages.ARTIST));
         add(artistButton);
     }

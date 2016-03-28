@@ -1,7 +1,8 @@
 package client.pages.musicDiary;
 
+import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 
@@ -26,6 +27,12 @@ public class Diary2 extends Diary2Shell{
 
         addTitleField();
         addBodyField();
+
+        Button postButton = new Button(this);
+        postButton.setBounds(750 - 117, 1217, 117, 117);
+        //Go to a Diary4 without an image
+        postButton.setExecutable(new ExecuteToTempState(new Diary4(getTitle(), getBody(), null)));
+        add(postButton);
     }
 
     @Override
@@ -52,6 +59,13 @@ public class Diary2 extends Diary2Shell{
         stage.addActor(bodyField);
     }
 
+    public String getTitle(){
+        return titleField.getMessageText();
+    }
+
+    public String getBody(){
+        return bodyField.getMessageText();
+    }
 
 
     @Override

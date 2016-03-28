@@ -22,12 +22,12 @@ public abstract class HomeShell extends State{
         stage.addActor(background);
 
         Button artistButton = new Button(this);
-        artistButton.setBounds(250 + 1, 1217, 250, 117);
+        artistButton.setBounds(260, 1217, 150, 117);
         artistButton.setExecutable(new ExecuteChangePage(Pages.ARTIST));
         add(artistButton);
 
         Button discoveryButton = new Button(this);
-        discoveryButton.setBounds(500 + 1, 1217, 250, 117);
+        discoveryButton.setBounds(410, 1217, 340, 117);
         discoveryButton.setExecutable(new ExecuteChangePage(Pages.DISCOVERY));
         add(discoveryButton);
 
