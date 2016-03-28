@@ -87,7 +87,7 @@ public class Login extends State {
         image.setBounds(0, 0, GameLoop.WIDTH * M, GameLoop.HEIGHT * M);
         stage.addActor(image);
         username = new WorkingTextArea("username", SkinSingleton.getInstance());
-        password = new WorkingTextArea("server ip", SkinSingleton.getInstance());
+        password = new WorkingTextArea("100.65.97.49", SkinSingleton.getInstance());
 
         username.setBounds(102 * M, (GameLoop.HEIGHT - 798 - 72) * M, 545 * M, 72 * M);
         password.setBounds(102 * M, (GameLoop.HEIGHT - 910 - 72) * M, 545 * M, 72 * M);
