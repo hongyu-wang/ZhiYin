@@ -48,9 +48,7 @@ public class ServerKeyObject implements Net.HttpResponseListener {
 
     @Override
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
-        final int statusCode = httpResponse.getStatus().getStatusCode();
         try {
-//            rOjbect = objectMapper.readValue(httpResponse.getResultAsString(), Class.forName(Long.class.getName()));
             long key = Long.parseLong(httpResponse.getResultAsString());
             modelStorage.putGeneratedKey(key);
         } catch (Exception e) {

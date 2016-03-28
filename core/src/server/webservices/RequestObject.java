@@ -48,11 +48,9 @@ public class RequestObject implements Net.HttpResponseListener {
 
     @Override
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
-        final int statusCode = httpResponse.getStatus().getStatusCode();
         try {
             rOjbect = objectMapper.readValue(httpResponse.getResultAsString(), Class.forName(className));
             modelStorage.setModelFromServer((ServerModel)rOjbect);
-            String line = "lol";
         } catch (Exception e) {
             System.out.println(e);
         }
