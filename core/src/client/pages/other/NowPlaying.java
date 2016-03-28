@@ -2,6 +2,7 @@ package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
@@ -9,6 +10,7 @@ import client.singletons.SkinSingleton;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealChangeListener;
 
 import static client.singletons.StateManager.M;
 /**
@@ -71,20 +73,16 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     public void update(float dt){
         super.update(dt);
-        slider.setValue(slider.getValue()+1);
+        executeMoveSlider.execute();
 
     }
 
     public void initializeSlider(){
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
         slider.setBounds((int) (M * 180), (int) (M * 400), (int) (M * 410), 10);
-        slider.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                System.out.println('a');
-
-            }
-        });
+        ZhiYinRealChangeListener zhiYinRealChangeListener;
+        slider.addListener(zhiYinRealChangeListener = new ZhiYinRealChangeListener(new TestExecutable("eylmao")));
+        executeMoveSlider = new ExecuteMoveSlider(slider, zhiYinRealChangeListener);
 
         stage.addActor(slider);
     }
