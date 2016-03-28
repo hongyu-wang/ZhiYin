@@ -35,10 +35,10 @@ public class Diary2 extends Diary2Shell{
 
         String title = getTitle();
         String body = getBody();
-        Diary4 d = new Diary4(title, body, null);
-        Executable e = new ExecuteToTempState(d);
-        postButton.setExecutable(e);
-        add(postButton);
+//        Diary4 d = new Diary4(title, body, null);
+//        Executable e = new ExecuteToTempState(d);
+//        postButton.setExecutable(e);
+//        add(postButton);
     }
 
     @Override
