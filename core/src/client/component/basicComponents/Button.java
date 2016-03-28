@@ -7,12 +7,8 @@ import client.singletons.InputListener;
 import client.singletons.ShapeCreater;
 import client.stateInterfaces.ActionMonitor;
 import client.stateInterfaces.Executable;
-import client.stateInterfaces.Performable;
 import client.stateInterfaces.Pressable;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
@@ -37,7 +33,7 @@ public class Button extends Component implements Pressable{
 
     @Override
     protected void init() {
-        playAnimation = false;
+        playAnimation = true;
     }
 
     @Override

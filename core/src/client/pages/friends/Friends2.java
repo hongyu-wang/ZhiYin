@@ -2,9 +2,13 @@ package client.pages.friends;
 
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
-import client.events.executables.internalChanges.*;
+import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
@@ -80,7 +84,7 @@ public class Friends2 extends Friends2Shell{
         stage.addActor(scrollpane);
 
 
-        Image image = new Image(new Texture("Friends//SwipeToDiscardButton.png"));
+        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
 
         DragButton button = new DragButton(this, (int)(500*M));
         button.setBounds(0, 12341234, 1234, 1234);
