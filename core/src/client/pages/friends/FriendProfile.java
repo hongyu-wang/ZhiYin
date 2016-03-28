@@ -28,9 +28,18 @@ public class FriendProfile extends FriendProfileShell {
 
     private String name;
 
+    private Image image;
+
     public FriendProfile(State previousState, String name){
         this.previousState = previousState;
         this.name = name;
+        init();
+    }
+
+    public FriendProfile(State previousState, String name, Image image){
+        this.previousState = previousState;
+        this.name = name;
+        this.image = image;
         init();
     }
 
