@@ -22,6 +22,7 @@ public class ModelStorage {
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
     private List<Long> unassignedKeys;
+    public static String ipAddress = null;
 
     ModelStorage(){
         models = new HashMap<Long, ServerModel>();
