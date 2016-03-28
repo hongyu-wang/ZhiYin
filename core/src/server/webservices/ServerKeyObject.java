@@ -13,10 +13,9 @@ import server.model.structureModels.ServerModel;
  */
 public class ServerKeyObject implements Net.HttpResponseListener {
     private ModelStorage modelStorage;
-    private JsonReader reader = new JsonReader();
-    private ObjectMapper objectMapper = new ObjectMapper();
     private Object rOjbect;
-    private String className;
+
+    private int runMax = 100000000;
 
     public ServerKeyObject(ModelStorage modelStorage){
         this.modelStorage = modelStorage;
@@ -35,6 +34,7 @@ public class ServerKeyObject implements Net.HttpResponseListener {
         // LibGDX NET CLASS
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
         httpGet.setUrl("http://localhost:8081/webservice/getServerKey");
+        httpGet.setTimeOut(runMax);
         //httpGet.setHeader("Content-Type", "application/json");
         //httpGet.setHeader("X-Parse-Application-Id", app_id);
         //httpGet.setHeader("X-Parse-REST-API-Key", app_key);
