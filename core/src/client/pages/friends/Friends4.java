@@ -1,7 +1,7 @@
 package client.pages.friends;
 
 
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;

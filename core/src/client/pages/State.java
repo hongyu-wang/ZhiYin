@@ -2,7 +2,7 @@ package client.pages;
 
 import client.component.basicComponents.Button;
 import client.events.ActionEvent;
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.internalExceptions.NoExecutableException;
 import client.pageStorage.Pages;
 import client.pages.pageInternal.inputController.InputController;

@@ -3,15 +3,12 @@ package client.pages.friends;
 
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.ExecuteReset;
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import driver.GameLoop;
 
 public class Friends3 extends State {
     private Friends2 previousState;

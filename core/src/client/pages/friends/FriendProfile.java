@@ -1,8 +1,8 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecuteChangePage;
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.SkinSingleton;
