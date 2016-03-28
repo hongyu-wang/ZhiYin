@@ -33,7 +33,7 @@ public class ServerKeyObject implements Net.HttpResponseListener {
     public void getKey() {
         // LibGDX NET CLASS
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("http://localhost:8081/webservice/getServerKey");
+        httpGet.setUrl("http://"+ModelStorage.ipAddress+":8081/webservice/getServerKey");
         httpGet.setTimeOut(runMax);
         //httpGet.setHeader("Content-Type", "application/json");
         //httpGet.setHeader("X-Parse-Application-Id", app_id);
