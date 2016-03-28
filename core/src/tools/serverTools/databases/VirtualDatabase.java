@@ -122,6 +122,13 @@ public class VirtualDatabase {
         generateConversation(user1, user2);
         generateConversation(user1, user3);
         generateConversation(user2, user3);
+
+        MText alice_text = generateText("");
+        MText benny_text = generateText("");
+        MText cindy_text = generateText("");
+
+        generateDiaryPost("Title", user1, alice_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
+
     }
 
 
@@ -276,7 +283,15 @@ public class VirtualDatabase {
     }
 
     private MText generateText(String message){
-        MText text = TextManagerFactory.createTextManager().createText(message, 0);
+        MText text = new MText();
+
+        text.setKey(generator.generateSerial());
+
+        text.setText(message);
+
+        text.setType(0);
+
+        data.put(text.getKey(), text);
 
         return text;
     }
@@ -310,6 +325,10 @@ public class VirtualDatabase {
 
         diaryPost.setKey(generator.generateSerial());
 
+        UserDiaryContent content = (UserDiaryContent) data.get(creator.getDiary());
 
+        content.getDiaryKeys().add(diaryPost.getKey());
+
+        data.put(diaryPost.getKey(), diaryPost);
     }
 }
