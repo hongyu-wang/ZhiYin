@@ -117,9 +117,9 @@ public class VirtualDatabase {
         MText benny_text = generateText("");
         MText cindy_text = generateText("");
 
-        generateDiaryPost("Title", user1, alice_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
-        generateDiaryPost("Title", user1, benny_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
-        generateDiaryPost("Title", user1, cindy_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
+//        generateDiaryPost("Title", user1, alice_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
+//        generateDiaryPost("Title", user1, benny_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
+//        generateDiaryPost("Title", user1, cindy_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
 
     }
 
