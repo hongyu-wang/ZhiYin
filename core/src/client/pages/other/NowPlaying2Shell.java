@@ -13,7 +13,7 @@ import driver.GameLoop;
 
 
 public abstract class NowPlaying2Shell extends State {
-    public void init(){
+    protected void init(){
         super.init();
 
         Image background = new Image(new Texture("Now Playing - 2.png"));

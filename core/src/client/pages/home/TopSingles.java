@@ -14,13 +14,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
+ *
  * Created by blobbydude24 on 2016-03-23.
  */
 public class TopSingles extends TopSinglesShell{
 
     private Table table;
 
-    public void init(){
+    public TopSingles(){
+        init();
+    }
+
+    protected void init(){
         super.init();
 
         table = new Table();

@@ -4,13 +4,19 @@ import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.libgdxMusicExecutables.ExecutePauseMusic;
 import client.events.executables.internalChanges.libgdxMusicExecutables.ExecutePlayMusic;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import client.stateInterfaces.Executable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
+import static client.singletons.StateManager.M;
 /**
  * This is the now playing page as given in the
  * art assets folder.
@@ -22,9 +28,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
  */
 public class NowPlaying extends NowPlayingShell {
     private Music music;
-    Slider slider;
+    private Slider slider;
 
-    State previousState;
+    private State previousState;
 
     public NowPlaying(State previousState, Music music){
         this.previousState = previousState;
@@ -32,14 +38,10 @@ public class NowPlaying extends NowPlayingShell {
         init();
     }
 
+    @Override
     public void init() {
         super.init();
-        slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
 
-        float m = StateManager.M;
-        slider.setBounds((int)(m*180), (int)(m*400), (int)(m*410), 10);
-
-        stage.addActor(slider);
 
         addBackButton();
         addPlayButton();
@@ -50,6 +52,36 @@ public class NowPlaying extends NowPlayingShell {
         add(nowPlaying2Button);
 
     }
+
+    @Override
+    public void reset() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+
+    }
+
+    @Override
+    public void update(float dt){
+        super.update(dt);
+    }
+
+    public void intializeSlider(){
+        slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
+        slider.setBounds((int) (M * 180), (int) (M * 400), (int) (M * 410), 10);
+        slider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+
+            }
+        });
+        stage.addActor(slider);
+    }
+
 
     private void addBackButton(){
         Button backButton = new Button(this);
@@ -69,21 +101,7 @@ public class NowPlaying extends NowPlayingShell {
     }
 
 
-    @Override
-    public void reset() {
 
-    }
-
-    @Override
-    public void dispose() {
-
-
-    }
-
-
-    public void update(float dt){
-        super.update(dt);
-    }
 
 
     public Music getMusic() {
@@ -95,4 +113,6 @@ public class NowPlaying extends NowPlayingShell {
         this.music = Gdx.audio.newMusic(Gdx.files.internal(trackName));
 
     }
+
+
 }

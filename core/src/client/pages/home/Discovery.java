@@ -23,7 +23,11 @@ public class Discovery extends DiscoveryShell {
 
     private TextField searchField;
 
-    public void init() {
+    public Discovery(){
+        init();
+    }
+
+    protected void init() {
         super.init();
 
         addSearchField();

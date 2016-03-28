@@ -33,7 +33,7 @@ public class FriendProfile extends FriendProfileShell {
         init();
     }
 
-    public void init(){
+    protected void init(){
         super.init();
 
         Button backButton = new Button(this);
@@ -73,7 +73,7 @@ public class FriendProfile extends FriendProfileShell {
 
     }
 
-    public void addPost(String post){
+    private void addPost(String post){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -103,7 +103,7 @@ public class FriendProfile extends FriendProfileShell {
         table.row();
     }
 
-    public void addFollowing(Image image){
+    private void addFollowing(Image image){
         following.add(image).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
     }
 
@@ -119,7 +119,7 @@ public class FriendProfile extends FriendProfileShell {
 
     @Override
     public void update(float dt) {
-        stage.act();
+        super.update(dt);
     }
 
 }

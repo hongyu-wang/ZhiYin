@@ -21,7 +21,11 @@ public class Diary1 extends Diary1Shell {
 
     private Table table;
 
-    public void init() {
+    public Diary1(){
+        init();
+    }
+
+    protected void init() {
         super.init();
 
         table = new Table();

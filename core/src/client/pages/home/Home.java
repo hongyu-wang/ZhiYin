@@ -27,7 +27,11 @@ public class Home extends HomeShell {
     private Table newRelease;
     private Table topSingles;
 
-    public void init() {
+    public Home(){
+        init();
+    }
+
+    protected void init() {
         super.init();
 
         newRelease = new Table();

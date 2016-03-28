@@ -53,7 +53,7 @@ public class Friends2 extends Friends2Shell{
 
     public Friends2(String friendName){
         this.friendName = friendName;
-
+        init();
         initititititit();
     }
 
@@ -70,7 +70,7 @@ public class Friends2 extends Friends2Shell{
         conversation = convoList.get(userKey).getKey();
     }
 
-    public void init(){
+    protected void init(){
         super.init();
 
         addMessageField();

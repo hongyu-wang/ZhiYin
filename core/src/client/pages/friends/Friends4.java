@@ -14,7 +14,11 @@ public class Friends4 extends Friends4Shell{
 
     private Table table;
 
-    public void init(){
+    public Friends4(){
+        init();
+    }
+
+    protected void init(){
         super.init();
 
         table = new Table();

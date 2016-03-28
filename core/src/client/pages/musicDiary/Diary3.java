@@ -1,7 +1,7 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.DragButton;
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
@@ -22,7 +22,12 @@ public class Diary3 extends Diary3Shell {
     private TextField titleField;
     private TextField bodyField;
 
-    public void init() {
+
+    public Diary3(){
+        init();
+    }
+
+    protected void init() {
         super.init();
         addTitleField();
         addBodyField();

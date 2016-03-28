@@ -10,11 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
 
 /**
+ *
  * Created by blobbydude24 on 2016-03-23.
  */
 public abstract class TopSinglesShell extends State {
 
-    public void init(){
+    protected void init(){
         super.init();
 
         Image background = new Image(new Texture("Home/TopSinglesBG.png"));

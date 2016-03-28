@@ -24,7 +24,11 @@ public class Artist extends ArtistShell {
 
     private Table table;
 
-    public void init() {
+    public Artist(){
+        init();
+    }
+
+    protected void init() {
         super.init();
 
         addSearchField();

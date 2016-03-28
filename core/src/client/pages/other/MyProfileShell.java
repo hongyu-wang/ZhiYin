@@ -10,7 +10,7 @@ import driver.GameLoop;
  * Created by blobbydude24 on 2016-03-21.
  */
 public abstract class MyProfileShell extends State {
-    public void init(){
+    protected void init(){
         super.init();
 
         Image background = new Image(new Texture("Other/MyProfileBG.png"));

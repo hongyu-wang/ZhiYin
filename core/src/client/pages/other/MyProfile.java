@@ -24,7 +24,13 @@ public class MyProfile extends MyProfileShell {
 
     private String name;
 
-    public void init(){
+
+    public MyProfile(){
+        init();
+    }
+
+
+    protected void init(){
         super.init();
 
 //        Label label = new Label(name, SkinSingleton.getInstance());

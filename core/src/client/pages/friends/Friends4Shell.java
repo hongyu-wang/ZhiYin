@@ -14,7 +14,7 @@ import driver.GameLoop;
  */
 public abstract class Friends4Shell extends State {
 
-    public void init(){
+    protected void init(){
         super.init();
 
         Image background = new Image(new Texture("Friends/Friends4BG.png"));

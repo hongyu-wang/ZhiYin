@@ -23,7 +23,7 @@ public class NowPlaying2 extends NowPlaying2Shell {
         init();
     }
 
-    public void init(){
+    protected void init(){
         super.init();
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
 

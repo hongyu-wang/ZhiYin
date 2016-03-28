@@ -25,13 +25,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     public static final String MOVEABLEINPUT = "moveable";
     protected Stage stage;
 
-    /**
-     * This is the primary constructor of state.
-     * No parameters should ever get passed into this constructor.
-     */
-    public State(){
-        this.init();
-    }
+
 
     @Override
     public void update(float dt) {
@@ -172,7 +166,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         }
     }
 
-
+    public abstract void reset();
 
 
     public InputController getInputController(String FIXEDINPUT){
@@ -186,13 +180,13 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     }
 
 
-    public abstract void reset();
+
 
 
     /**
      * This is the super pull data from server method. This should never get implemented here.
      *
-     * HOWEVER, I don't want it to be abstract
+     * HOWEVER, I don't want it to be abstract cause yes.
      */
     public void pullDataFromServer(){
 

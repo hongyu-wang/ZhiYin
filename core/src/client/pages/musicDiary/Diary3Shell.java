@@ -12,11 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import driver.GameLoop;
 
 /**
+ *
  * Created by blobbydude24 on 2016-03-13.
  */
 public abstract class Diary3Shell extends State{
 
-    public void init(){
+    protected void init(){
         super.init();
 
         Image background = new Image(new Texture("Diary/Diary3BG.png"));

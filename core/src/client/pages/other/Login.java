@@ -29,8 +29,16 @@ public class Login extends State {
     private Label label;
     private boolean checkPull;
     private VeryBeginningInitializer vb;
+
+
+    public Login(){
+        init();
+    }
+
+
+
     @Override
-    public void init() {
+    protected void init() {
         super.init();
         final WorkingTextArea wta = new WorkingTextArea("", SkinSingleton.getInstance());
         final TextButton button = new TextButton("Login", SkinSingleton.getInstance());

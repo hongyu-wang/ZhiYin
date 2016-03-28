@@ -38,7 +38,7 @@ public class ArtistProfile extends ArtistProfileShell {
     }
 
 
-    public void init() {
+    protected void init() {
         super.init();
 
         Button backButton = new Button(this);

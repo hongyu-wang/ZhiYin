@@ -35,13 +35,13 @@ public class AudioManager {
         return audioPlayer.getCurrentAudio().getTrackLength();
     }
 
-    public static void changeMusic(MAudio song) throws NSErrorException {
+    public static void changeMusic(MAudio song) {
         audioPlayer.setSong(song);
     }
 
-    public void setTime(double time){
+    public static void setTime(double time){
         audioPlayer.setTime(time);
     }
 
-    public boolean isPlaying(){ return audioPlayer.isPlaying(); }
+    public static boolean isPlaying(){ return audioPlayer.isPlaying(); }
 }
