@@ -46,10 +46,10 @@ public class ArtistTalker extends Talkers {
     public void pull() {
         super.setWaiting(true);
 
-        modelStorage.requestModelFromServer(MText.class.getName(), artist.getName());
+        modelStorage.requestModelFromServer(artist.getName());
 
         for(long key: artist.getSongs()){
-            modelStorage.requestModelFromServer(MMusic.class.getName(), key);
+            modelStorage.requestModelFromServer(key);
         }
     }
 

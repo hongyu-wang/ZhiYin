@@ -1,12 +1,20 @@
 package com.badlogic.gdx.scenes.scene2d.ui;
+import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealClickListener;
+
+
 
 /**
+ *
  * Created by Hongyu Wang on 3/20/2016.
  */
 public class WorkingTextArea extends TextArea {
+
     public WorkingTextArea(String text, Skin skin) {
         super(text, skin);
+
+        addListener(new ZhiYinRealClickListener(this));
     }
+
 
 
     String insert (int position, CharSequence text, String to) {

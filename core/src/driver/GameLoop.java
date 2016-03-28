@@ -8,9 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import server.services.factories.UserManagerFactory;
-import server.services.interfaces.models.UserManager;
-import server.webservices.PostObject;
 
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
@@ -26,7 +23,6 @@ public class GameLoop extends ApplicationAdapter {
 
 		stateManager = StateManager.getInstance();
 		Pages.initLogin();
-
         stateManager.changeState(Pages.LOGIN);
 		spriteBatch = MainBatch.getInstance();
         primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);

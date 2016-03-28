@@ -1,14 +1,10 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import com.badlogic.gdx.graphics.Texture;
 import server.model.media.MAudio;
 import server.model.media.MHashtag;
 import server.model.media.MImage;
 import server.model.media.MMusic;
 import server.model.social.MComment;
-import server.model.soundCloud.MBand;
-import server.model.soundCloud.MMusicPost;
-import server.model.user.User;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -78,12 +74,12 @@ public class MusicTalker extends Talkers{
     public void pull() {
         super.setWaiting(true);
 
-        modelStorage.requestModelFromServer(MImage.class.getName(), mMusic.getAlbumArt());
-        modelStorage.requestModelFromServer(MAudio.class.getName(), mMusic.getMusicKey());
+        modelStorage.requestModelFromServer(mMusic.getAlbumArt());
+        modelStorage.requestModelFromServer(mMusic.getMusicKey());
 
         //SOCIAL MEDIA
         for(long key : mMusic.getComments()){
-            modelStorage.requestModelFromServer(MComment.class.getName(), key);
+            modelStorage.requestModelFromServer(key);
         }
 
         //TODO Hashtags

@@ -1,14 +1,10 @@
 package client.events.executables.internalChanges.conversation;
 
-import client.pages.State;
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
-import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.stateInterfaces.Executable;
-import com.android.org.conscrypt.Message;
-import org.robovm.apple.mobilecoreservices.UTType;
 import server.model.media.MText;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
@@ -31,7 +27,7 @@ public class ExecuteUpdateMessages implements Executable {
 
         MConversation conversation = ms.getModel(friend2.getConversation());
 
-        ms.requestModelFromServer(MConversation.class.getName(), friend2.getConversation());
+        ms.requestModelFromServer(friend2.getConversation());
 
         List<Long> messageKeys = conversation.getMessageList();
 
@@ -53,12 +49,12 @@ public class ExecuteUpdateMessages implements Executable {
                         }
                     }
                     else{
-                        ms.requestModelFromServer(MText.class.getName(), textKey);
+                        ms.requestModelFromServer(textKey);
                         updated = false;
                     }
                 }
                 else{
-                    ms.requestModelFromServer(MMessage.class.getName(), key);
+                    ms.requestModelFromServer(key);
                     updated = false;
                 }
             }

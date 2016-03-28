@@ -3,10 +3,8 @@ package client.events.executables.internalChanges.schmoferMusicExecutable;
 import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.stateInterfaces.Executable;
-import org.robovm.apple.foundation.NSErrorException;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
-import tools.AudioTools.AudioCreator;
 import tools.AudioTools.AudioManager;
 
 /**
@@ -32,7 +30,7 @@ public class ExecuteSetMusic implements Executable {
         MAudio audioFile = ms.getModel(mMusic.getMusicKey());
 
         if (audioFile == null){
-            ms.requestModelFromServer(MMusic.class.getName(), mMusic.getMusicKey());
+            ms.requestModelFromServer(mMusic.getMusicKey());
             System.out.println("KEVIN YOU'RE FUCKING STUPID FROM: EXECUTE SET MUSIC");
         }else{
             AudioManager.changeMusic(audioFile);

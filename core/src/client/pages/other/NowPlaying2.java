@@ -1,6 +1,5 @@
 package client.pages.other;
 
-import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -32,21 +31,12 @@ public class NowPlaying2 extends NowPlaying2Shell {
 
         stage.addActor(slider);
 
-        Button backButton = new Button(this);
-        backButton.setBounds(0 + 1, 1217, 117, 117);
-        //ExecutableMultiplexer executables = new ExecutableMultiplexer();
-        backButton.setExecutable(new ExecuteToTempState(previousState));
-        //backButton.setExecutable(executables);
-        add(backButton);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
+        addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-        Button nowPlaying1Button = new Button(this);
-        nowPlaying1Button.setBounds(607 + 1, 1063, 51, 51);
-        nowPlaying1Button.setExecutable(new ExecuteToTempState(nowPlaying));
-        add(nowPlaying1Button);
+        ExecuteToTempState hideCommentsEx = new ExecuteToTempState(nowPlaying);
+        addImageButton("NowPlaying/ShowComments@", hideCommentsEx, 607, 1063, 51, 51);
     }
-
-
-
 
     @Override
     public void dispose() {
@@ -61,6 +51,5 @@ public class NowPlaying2 extends NowPlaying2Shell {
     @Override
     public void update(float dt) {
         super.update(dt);
-
     }
 }

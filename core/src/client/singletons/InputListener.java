@@ -124,8 +124,8 @@ public class InputListener implements InputProcessor {
         if (keycode == Input.Keys.E)
             stateManager.changeState(Pages.DIARY3);
 
-        if (keycode == Input.Keys.R)
-            stateManager.changeState(Pages.DIARY4);
+//        if (keycode == Input.Keys.R)
+//            stateManager.changeState(Pages.DIARY4);
 
         if (keycode == Input.Keys.A)
             stateManager.changeState(Pages.HOME);

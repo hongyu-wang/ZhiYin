@@ -11,10 +11,18 @@ import server.model.media.*;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class MDiaryPost extends MPost {
+    private String title;
     private long audioKey;
     private long imageKey;
     private long musicKey;
-    private long textKey;
+
+    /**Returns the title of the MusicDiary.
+     *
+     * @return  The title of the diary.
+     */
+    public String getTitle(){
+        return title;
+    }
 
     /**Returns the audioKey of the MusicDiary.
      *
@@ -40,13 +48,7 @@ public class MDiaryPost extends MPost {
         return this.musicKey;
     }
 
-    /**Returns the textKey of the MusicDiary.
-     *
-     * @return  The textKey.
-     */
-    public long getTextKey(){
-        return this.textKey;
-    }
+    public void setTitle(String title){ this.title = title; }
 
     public void setAudioKey(long audioKey){
         this.audioKey = audioKey;
@@ -58,9 +60,5 @@ public class MDiaryPost extends MPost {
 
     public void setMusicKey(long musicKey){
         this.musicKey = musicKey;
-    }
-
-    public void setTextKey(long textKey){
-        this.textKey = textKey;
     }
 }

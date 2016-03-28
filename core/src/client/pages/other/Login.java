@@ -54,7 +54,6 @@ public class Login extends State {
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
-
         String text = username.getText().trim();
         if (text.equals(NAME1) || text.equals(NAME2) || text.equals(NAME3)) {
             for (Actor act : stage.getActors()){
@@ -108,12 +107,10 @@ public class Login extends State {
     @Override
     public void update(float dt) {
         super.update(dt);
-        if (label != null){
-            label.setText(stuff[delta%(stuff.length)]);
-        }
+
         if (checkPull){
             if (delta%100 == 0) {
-                delta2++;
+
 
                 pullFromServer();
             }
@@ -142,5 +139,10 @@ public class Login extends State {
     @Override
     public void dispose() {
 
+    }
+
+
+    public void setText(String str){
+        label.setText(str);
     }
 }
