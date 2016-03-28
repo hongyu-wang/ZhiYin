@@ -1,13 +1,19 @@
 package client.pages.friends;
 
 
+import SQLite.Profile;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pages.friends.boxes.FriendBox;
+import client.pages.pageInternal.serverClientInteractions.FriendTalker;
+import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.user.User;
 
 public class Friends4 extends Friends4Shell{
     private ScrollPane scrollpane;
@@ -28,18 +34,7 @@ public class Friends4 extends Friends4Shell{
         scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
         stage.addActor(scrollpane);
 
-        addFriend("Friend1");
-        addFriend("Friend2");
-        addFriend("Friend3");
-        addFriend("Friend4");
-        addFriend("Friend5");
-        addFriend("Friend6");
-        addFriend("Friend7");
-        addFriend("Friend8");
-        addFriend("Friend9");
-        addFriend("Friend10");
-        addFriend("Friend11");
-        addFriend("Friend12");
+        talkerAddFriends();
     }
 
     public void addFriend(String name){
@@ -89,4 +84,20 @@ public class Friends4 extends Friends4Shell{
         stage.act();
     }
 
+    private void talkerAddFriends(){
+        FriendTalker ft = TalkerFactory.getFriendTalker();
+        ProfileTalker pt = TalkerFactory.getProfileTalker();
+
+        if(ft.isUpdated()) {
+            for (User friend: ft.getAllFriends()) {
+                pt.init(friend);
+                pt.update(0);
+                if (pt.isUpdated()) {
+                    String friendName = pt.getName();
+
+                    addFriend(friendName);
+                }
+            }
+        }
+    }
 }

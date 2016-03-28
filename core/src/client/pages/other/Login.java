@@ -74,23 +74,26 @@ public class Login extends State {
         if (checkPull){
             if (delta%100 == 0) {
 
-
                 label.setText(stuff[delta2%(stuff.length)]);
                 delta2++;
 
-            }
-
-            if (vb.isUpdated()) {
-                Pages.initClass();
-
-                new ExecuteChangePage(Pages.HOME).execute();
-            }
-            else{
-                vb.pull();
+                pullFromServer();
             }
         }
         delta ++;
 
+    }
+
+    private void pullFromServer(){
+        vb.update(0);
+        if (vb.isUpdated()) {
+            Pages.initClass();
+
+            new ExecuteChangePage(Pages.HOME).execute();
+        }
+        else{
+            vb.pull();
+        }
     }
 
     @Override
