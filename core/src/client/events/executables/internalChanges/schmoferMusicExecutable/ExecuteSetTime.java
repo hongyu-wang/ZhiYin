@@ -11,7 +11,6 @@ import tools.AudioTools.AudioManager;
  */
 public class ExecuteSetTime implements Executable{
     private Slider slider;
-
     public ExecuteSetTime(Slider slider){
         this.slider = slider;
     }
@@ -19,9 +18,12 @@ public class ExecuteSetTime implements Executable{
 
     @Override
     public void execute() {
+
         double trackLength = AudioManager.trackLength();
         double percent = slider.getPercent();
 
         AudioManager.setTime(trackLength * percent);
+
+
     }
 }

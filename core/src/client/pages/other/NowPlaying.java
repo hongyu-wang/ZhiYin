@@ -1,6 +1,5 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMusic;
@@ -8,13 +7,13 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
-import client.stateInterfaces.Executable;
-import client.tools.Delay;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealChangeListener;
+import driver.GameLoop;
 
 import static client.singletons.StateManager.M;
 /**
@@ -31,8 +30,11 @@ public class NowPlaying extends NowPlayingShell {
     private State previousState;
     private Slider slider;
     private boolean verbose;
+    private long iterations;
+    private Label totalTime;
 
-    private Delay delay;
+    private Label currentTime;
+
 
 
     private ImageButton pauseButton;
@@ -54,8 +56,7 @@ public class NowPlaying extends NowPlayingShell {
     protected void init() {
         super.init();
 
-        delay = new Delay(10);
-
+        iterations  = 0;
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
@@ -91,6 +92,8 @@ public class NowPlaying extends NowPlayingShell {
         addImageButton("NowPlaying/1S@", secEx, 230, 0, 290, 117);
 
         initializeSlider();
+
+        addMusicLabels();
     }
 
     private void pause(){
@@ -117,38 +120,59 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     public void update(float dt){
         super.update(dt);
-        if (delay.isCompleted())
+        if (iterations%5 == 0) {
             executeMoveSlider.execute();
-
-        delay.tick();
+        }
+        iterations ++;
     }
 
     public void initializeSlider(){
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
-        slider.setBounds((int) (M * 180), (int) (M * 400), (int) (M * 410), 10);
-        ZhiYinRealChangeListener zhiYinRealChangeListener;
-        ExecutableMultiplexer em = new ExecutableMultiplexer();
-        em.addExecutable(this::resetDelay);
-        em.addExecutable(new ExecuteSetTime(slider));
-        /* TODO If the shit here doesn't work, uncomment this.
-        em.addExecutable(new Executable(){
+        Table table = new Table();
+        table.add(slider).minWidth(660*M);
+        table.setBounds(45 * M, 400 * M, 660 * M, 10);
 
+
+
+
+        slider.addListener(new ClickListener() {
             @Override
-            public void execute() {
-                resetDelay();
+            public void clicked(InputEvent event, float x, float y) {
+                new ExecuteSetTime(slider).execute();
             }
-        });*/
+        });
+        executeMoveSlider = new ExecuteMoveSlider(slider, this);
 
-
-
-        slider.addListener(zhiYinRealChangeListener = new ZhiYinRealChangeListener(em));
-        executeMoveSlider = new ExecuteMoveSlider(slider, zhiYinRealChangeListener);
-
-        stage.addActor(slider);
+        stage.addActor(table);
     }
 
 
-    public void resetDelay() {
-        delay.reset();
+    private void addMusicLabels(){
+        currentTime = new Label("0:00", SkinSingleton.getInstance());
+        //String total = convertToMinutes(AudioManager.trackLength());
+        String total = convertToMinutes(300);
+
+        totalTime = new Label(total, SkinSingleton.getInstance());
+        currentTime.setBounds(60 * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
+        totalTime.setBounds((GameLoop.WIDTH - 100 - totalTime.getPrefWidth()) * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
+        stage.addActor(totalTime);
+        stage.addActor(currentTime);
     }
+
+    public static String convertToMinutes(double timeInSeconds){
+        int time = (int)timeInSeconds;
+
+        int minutes = time/60;
+        int seconds = time%60;
+        if (seconds < 10)
+            return minutes+":0"+seconds;
+        return minutes+":"+seconds;
+    }
+
+    public void updateMusicLabels(double time){
+        currentTime.setText(convertToMinutes(time));
+    }
+
+
+
 }
