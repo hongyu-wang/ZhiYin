@@ -64,7 +64,7 @@ public final class AudioCreator {
             FileHandle fh = Gdx.files.internal("Thumbnails/"+q+".jpg");
 
             albumArt.setImage(fh.readBytes());
-
+            assert(albumArt.getImage()!=null);
             albumArt.setName(s);
             ms.pushModel(albumArt);
         }
