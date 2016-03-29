@@ -28,6 +28,7 @@ public class Diary4 extends Diary4Shell{
     }
 
     protected void init(){
+        super.init();
         ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, title, content));
         addImageButton("Diary/Comment@", toComment, 420, 100, 140, 140);
 

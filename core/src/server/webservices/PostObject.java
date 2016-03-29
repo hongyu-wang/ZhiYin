@@ -32,9 +32,9 @@ import javax.ws.rs.core.Response;
  * Created by Hairuo on 2016-03-20.
  */
 public class PostObject implements Net.HttpResponseListener {
+    private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
-    private int runTime = 0;
-    private int runMax = 100000000;
+    private String className;
 
 
     public static PostObject newInstance(){
@@ -56,7 +56,6 @@ public class PostObject implements Net.HttpResponseListener {
         className = Tags.ID_TAGS.parseTag(className);
         Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
         httpPost.setUrl("http://"+ ModelStorage.ipAddress+":8081/webservice/postServerModel");
-        httpPost.setTimeOut(runMax);
         //httpPost.setHeader("X-Parse-Application-Id", app_id);
         //httpPost.setHeader("X-Parse-REST-API-Key", asspp_key);
         String jString = "";
@@ -66,6 +65,9 @@ public class PostObject implements Net.HttpResponseListener {
         }catch(Exception e){
             System.out.println(e);
         }
+
+
+
 
         httpPost.setContent(jString+className);
         Gdx.net.sendHttpRequest(httpPost,this);
@@ -87,6 +89,9 @@ public class PostObject implements Net.HttpResponseListener {
         System.out.println(t.getMessage());
     }
 
+    public String getClassName() {
+        return className;
+    }
 
 
 }

@@ -73,11 +73,7 @@ public class FriendProfile extends FriendProfileShell {
         scrollpane2.setBounds(50 * StateManager.M,  350 * StateManager.M, 700 * StateManager.M, 150 * StateManager.M);
         stage.addActor(scrollpane2);
 
-        addPost("post1");
-        addPost("post2");
-        addPost("post3");
-        addPost("post4");
-        addPost("post5");
+
 
         addFollowing(new Image(new Texture("Artist/Artist1.png")));
         addFollowing(new Image(new Texture("Artist/Artist2.png")));
