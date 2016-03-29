@@ -3,6 +3,7 @@ package client.pages.friends;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.conversation.ExecutePushMessage;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
@@ -12,6 +13,7 @@ import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRe
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
 import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetSave;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.modelStorage.ModelStorage;
@@ -97,15 +99,18 @@ public class Friends2 extends Friends2Shell{
         image.setBounds(32 * M, 98 * M, (750 - 64) * M, 236 * M);
 
 
+        ExecuteRecord er = new ExecuteRecord(this);
+
         ExecutableMultiplexer em2 = new ExecutableMultiplexer();
         em2.addExecutable(new ExecuteRemoveDragButton(button));
         em2.addExecutable(new ExecuteRemoveImage(image));
-        em2.addExecutable(new ExecuteRecord(false, this));
+        em2.addExecutable(new TestExecutable("FUCK THIS LIFE 2"));
+        em2.addExecutable(new ExecuteSetSave(er));
 
         ExecutableMultiplexer em4 = new ExecutableMultiplexer();
         em4.addExecutable(new ExecuteRemoveDragButton(button));
         em4.addExecutable(new ExecuteRemoveImage(image));
-        em4.addExecutable(new ExecuteRecord(true, this));
+        em4.addExecutable(new TestExecutable("FUCK THIS LIFE 3"));
 
 
         button.setReleaseExecutable(em2);
@@ -117,6 +122,7 @@ public class Friends2 extends Friends2Shell{
         em3.addExecutable(new ExecutePushMessage(this));
         em3.addExecutable(new ExecuteSendMessage(this));
         em3.addExecutable(new ExecuteReset(this));
+        em3.addExecutable(er);
         sendButton.setExecutable(em3);
         add(sendButton);
 
@@ -128,6 +134,7 @@ public class Friends2 extends Friends2Shell{
         ExecutableMultiplexer em = new ExecutableMultiplexer();
         em.addExecutable(new ExecuteAddDragButton(button, 32, 98, 750-64, 236));
         em.addExecutable(new ExecuteAddImage(stage, image));
+        em.addExecutable(new TestExecutable("FUCK THIS LIFE"));
         recordButton.setExecutable(em);
         add(recordButton);
 

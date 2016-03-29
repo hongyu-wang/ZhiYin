@@ -25,5 +25,6 @@ public class ExecuteAddDragButton implements Executable{
     @Override
     public void execute() {
         button.setBounds(x*M, y*M, width*M, height*M);
+        button.reset();
     }
 }

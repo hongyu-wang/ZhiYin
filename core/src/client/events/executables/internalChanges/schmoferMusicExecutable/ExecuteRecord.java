@@ -17,9 +17,16 @@ public class ExecuteRecord implements Executable {
     private boolean save;
     private Friends2 friends2;
 
-    public ExecuteRecord(boolean save, Friends2 friends2){
-        this.save = save;
+    public ExecuteRecord(Friends2 friends2){
+        this.friends2 = friends2;
+        save = false;
     }
+
+
+    public void setSave(){
+        save = true;
+    }
+
 
 
     @Override
