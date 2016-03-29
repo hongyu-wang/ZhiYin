@@ -55,6 +55,10 @@ public final class AudioCreator {
 
         for(String s : albumToKey.keySet()){
             MImage albumArt = new MImage();
+            albumArt.setKey(albumToKey.get(s));
+            albumArt.setImage("Thumbnails/"+s+".jpg");
+            albumArt.setName(s);
+            ms.pushModel(albumArt);
         }
 
 
