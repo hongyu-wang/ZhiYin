@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import driver.GameLoop;
+import tools.AudioTools.AudioManager;
 
 import static client.singletons.StateManager.M;
 /**
@@ -30,8 +31,6 @@ public class NowPlaying extends NowPlayingShell {
     private State previousState;
     private Slider slider;
     private boolean verbose;
-    private long iterations;
-    private Label totalTime;
 
     private Label currentTime;
 
@@ -56,7 +55,6 @@ public class NowPlaying extends NowPlayingShell {
     protected void init() {
         super.init();
 
-        iterations  = 0;
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
@@ -120,10 +118,7 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     public void update(float dt){
         super.update(dt);
-        if (iterations%5 == 0) {
-            executeMoveSlider.execute();
-        }
-        iterations ++;
+        executeMoveSlider.execute();
     }
 
     public void initializeSlider(){
@@ -149,10 +144,9 @@ public class NowPlaying extends NowPlayingShell {
 
     private void addMusicLabels(){
         currentTime = new Label("0:00", SkinSingleton.getInstance());
-        //String total = convertToMinutes(AudioManager.trackLength());
-        String total = convertToMinutes(300);
+        String total = convertToMinutes(AudioManager.trackLength());
 
-        totalTime = new Label(total, SkinSingleton.getInstance());
+        Label totalTime = new Label(total, SkinSingleton.getInstance());
         currentTime.setBounds(60 * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
         totalTime.setBounds((GameLoop.WIDTH - 100 - totalTime.getPrefWidth()) * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
         stage.addActor(totalTime);
