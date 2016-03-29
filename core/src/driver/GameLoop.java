@@ -15,7 +15,7 @@ public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
 
-	public static final boolean ISMAC = false;
+	public static final boolean ISMAC = true;
 
 	public static final int WIDTH = 750;
 
