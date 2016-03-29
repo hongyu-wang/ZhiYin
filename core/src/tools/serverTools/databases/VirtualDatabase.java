@@ -65,6 +65,15 @@ public class VirtualDatabase {
 
         user3.getFriendKeys().add(user1.getKey());
         user3.getFriendKeys().add(user2.getKey());
+
+        user1.getBandKeys().add(12000L);
+
+        user2.getBandKeys().add(12001L);
+        user2.getBandKeys().add(12002L);
+        user2.getBandKeys().add(12004L);
+
+        user3.getBandKeys().add(12002L);
+        user3.getBandKeys().add(12003L);
     }
 
     private void initHashtags(){

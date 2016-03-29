@@ -82,7 +82,7 @@ public class Comment extends CommentShell {
         stage.addActor(messageField);
     }
 
-    private void addComment(String name, String time, String comment){
+    public void addComment(String name, String time, String comment){
         Table t = new Table();
         Label label1 = new Label(name, SkinSingleton.getInstance());
         Label label2 = new Label(time, SkinSingleton.getInstance());

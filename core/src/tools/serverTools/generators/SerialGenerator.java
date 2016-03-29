@@ -23,5 +23,4 @@ public interface SerialGenerator {
     static SerialGenerator getHGenerator(long start) {
         return new HighValueSerialGen(start);
     }
-
 }

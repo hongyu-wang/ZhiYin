@@ -49,9 +49,6 @@ public class FriendProfile extends FriendProfileShell {
     public FriendProfile(State previousState, String name){
         this.previousState = previousState;
         this.name = name;
-
-        currentDiaries = Utils.newList();
-        currentArtists = Utils.newList();
         init();
     }
 
@@ -59,6 +56,9 @@ public class FriendProfile extends FriendProfileShell {
         this.previousState = previousState;
         this.name = name;
         this.image = image;
+
+        currentDiaries = Utils.newList();
+        currentArtists = Utils.newList();
         init();
     }
 

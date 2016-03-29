@@ -286,6 +286,7 @@ public class VeryBeginningInitializer extends Talkers{
         for(User friend: ft.getAllFriends()){
             pt.init(friend);
             pt.update(0);
+
         }
     }
 }
