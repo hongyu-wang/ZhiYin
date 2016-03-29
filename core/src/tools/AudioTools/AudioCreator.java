@@ -134,7 +134,7 @@ public final class AudioCreator {
         music.setMusicKey(audio.getKey());
         music.setKey(musicKey);
         musicKey++;
-        music.setComments(Utils.newList());
+        music.setComments(Utils.<Long>newList());
         ms.pushModel(music);
 
         return music;

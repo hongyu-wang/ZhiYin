@@ -46,7 +46,7 @@ public class ArtistTalker extends Talkers {
     public void pull() {
         super.setWaiting(true);
 
-        modelStorage.requestModelFromServer(artist.getName());
+//        modelStorage.requestModelFromServer(artist.getName());
 
         for(long key: artist.getSongs()){
             modelStorage.requestModelFromServer(key);
@@ -76,15 +76,15 @@ public class ArtistTalker extends Talkers {
 
     @Override
     public void update(float dt) {
-        MText bandName = modelStorage.<MText>getModel(artist.getName());
+//        MText bandName = modelStorage.<MText>getModel(artist.getName());
 
-        if(bandName != null)
-            name = bandName.getText();
+//        if(bandName != null)
+//            name = bandName.getText();
 
         List<MMusic> newMusicList = Utils.<MMusic>newList();
 
         for(long key: artist.getSongs()){
-            newMusicList.add(modelStorage.getModel(key));
+//            newMusicList.add(modelStorage.getModel(key));
         }
 
         musicList = newMusicList;

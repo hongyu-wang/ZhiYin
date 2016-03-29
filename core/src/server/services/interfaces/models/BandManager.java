@@ -14,7 +14,7 @@ public interface BandManager {
      * @param description id of the description of the band
      * @return the new band
      */
-    public MBand createBand(long name, long description);
+    public MBand createBand(String name, String description);
 
     /**
      * Adds an album to the band
@@ -59,7 +59,7 @@ public interface BandManager {
      * @param band the band in question
      * @return the edited band
      */
-    public MBand editName(long name, MBand band);
+    public MBand editName(String name, MBand band);
 
     /**
      * Edits the description of the band
@@ -68,5 +68,5 @@ public interface BandManager {
      * @param band        the band in question
      * @return the edited band
      */
-    public MBand editDescription(long description, MBand band);
+    public MBand editDescription(String description, MBand band);
 }

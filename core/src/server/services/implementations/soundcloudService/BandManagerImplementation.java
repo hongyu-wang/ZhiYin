@@ -18,7 +18,7 @@ public class BandManagerImplementation implements BandManager {
      * @return the new band
      */
     @Override
-    public MBand createBand(long name, long description) {
+    public MBand createBand(String name, String description) {
         MBand newBand = new MBand();
         newBand.setName(name);
         newBand.setDescription(description);
@@ -91,7 +91,7 @@ public class BandManagerImplementation implements BandManager {
      * @return the edited band
      */
     @Override
-    public MBand editName(long name, MBand band) {
+    public MBand editName(String name, MBand band) {
         band.setName(name);
         return band;
     }
@@ -104,7 +104,7 @@ public class BandManagerImplementation implements BandManager {
      * @return the edited band
      */
     @Override
-    public MBand editDescription(long description, MBand band) {
+    public MBand editDescription(String description, MBand band) {
         band.setDescription(description);
         return band;
     }
