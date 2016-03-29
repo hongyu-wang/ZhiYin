@@ -21,7 +21,7 @@ public class ArtistProfile extends ArtistProfileShell {
 
     private State previousState;
 
-    private Image profilePicture;
+    private Image profilePic;
 
     private String artistName;
 
@@ -30,9 +30,9 @@ public class ArtistProfile extends ArtistProfileShell {
     private Table songs;
 
 
-    public ArtistProfile(State previousState, Image profilePicture, String artistName){
+    public ArtistProfile(State previousState, Image profilePic, String artistName){
         this.previousState = previousState;
-        this.profilePicture = profilePicture;
+        this.profilePic = profilePic;
         this.artistName = artistName;
         init();
     }
@@ -70,7 +70,7 @@ public class ArtistProfile extends ArtistProfileShell {
         stage.addActor(scrollpane);
 
         Label artist = new Label(artistName, SkinSingleton.getInstance());
-        t.add(profilePicture).width(200 * StateManager.M).height(200 * StateManager.M).expand().left().padLeft(50 * StateManager.M);
+        t.add(profilePic).width(200 * StateManager.M).height(200 * StateManager.M).expand().left().padLeft(50 * StateManager.M);
         t.add(artist).expand().left().padLeft(50 * StateManager.M);
 
         //t.setDebug(true);

@@ -1,18 +1,16 @@
 package driver;
 
 import client.pageStorage.Pages;
-import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
-import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import server.model.media.MMusic;
-
-import java.nio.ByteBuffer;
 
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
@@ -35,15 +33,10 @@ public class GameLoop extends ApplicationAdapter {
         primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
         primary.update();
-
-
     }
 
 	@Override
 	public void render () {
-
-
-
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -64,15 +57,11 @@ public class GameLoop extends ApplicationAdapter {
 		please.dispose();
         newMap.dispose();
 
-
-
 		spriteBatch.begin();
 
 		stateManager.draw();
 		stateManager.update(Gdx.graphics.getDeltaTime());
 		spriteBatch.end();
-
-
 	}
 
     @Override
