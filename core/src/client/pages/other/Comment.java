@@ -194,4 +194,68 @@ public class Comment extends CommentShell {
             }
         }
     }
+
+    public MPost getThisPost() {
+        return thisPost;
+    }
+
+    public void setThisPost(MPost thisPost) {
+        this.thisPost = thisPost;
+    }
+
+    public List<Long> getCurrentComments() {
+        return currentComments;
+    }
+
+    public void setCurrentComments(List<Long> currentComments) {
+        this.currentComments = currentComments;
+    }
+
+    public State getPreviousState() {
+        return previousState;
+    }
+
+    public void setPreviousState(State previousState) {
+        this.previousState = previousState;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public TextField getMessageField() {
+        return messageField;
+    }
+
+    public void setMessageField(TextField messageField) {
+        this.messageField = messageField;
+    }
+
+    public ScrollPane getScrollpane() {
+        return scrollpane;
+    }
+
+    public void setScrollpane(ScrollPane scrollpane) {
+        this.scrollpane = scrollpane;
+    }
+
+    public Table getComments() {
+        return comments;
+    }
+
+    public void setComments(Table comments) {
+        this.comments = comments;
+    }
 }
