@@ -19,7 +19,7 @@ public class CommentManagerImplementation implements CommentManager {
      * @return a new comment object
      */
     @Override
-    public MComment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text, long creator) {
+    public MComment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, String text, long creator) {
         MComment comment = new MComment();
         comment.setAudio(audio);
         comment.setMusic(music);

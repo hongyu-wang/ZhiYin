@@ -13,10 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
 import server.model.media.MText;
+import server.model.social.MComment;
 import server.model.social.MDiaryPost;
 import server.model.social.MPost;
 import java.util.List;
 
+import server.model.user.User;
+import server.model.user.UserProfile;
 import tools.utilities.Utils;
 
 import static client.singletons.StateManager.M;
@@ -151,6 +154,8 @@ public class Comment extends CommentShell {
 
     public void update(float fy){
         stage.act();
+
+        pullData();
     }
 
     public String getMessage(){
@@ -158,7 +163,7 @@ public class Comment extends CommentShell {
     }
 
     private void pullData(){
-
+        pullCommentsFromServer();
     }
 
     private void pullCommentsFromServer(){
@@ -169,7 +174,21 @@ public class Comment extends CommentShell {
 
         for(long key: commentKeys){
             if(!currentComments.contains(key)){
+                if(!isUpdated){
+                    continue;
+                }
 
+                MComment comment = ms.getModel(key);
+
+                if(comment.getAudio().size() > 0){
+                    continue;
+                }
+                String text = comment.getText();
+
+                User user = ms.getModel(comment.getCreator());
+                UserProfile profile = ms.getModel(user.getProfile());
+
+                addComment(profile.getUsername(), String.valueOf(System.currentTimeMillis()), text);
 
                 currentComments.add(key);
             }

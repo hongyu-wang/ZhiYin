@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import driver.GameLoop;
+import server.model.media.MMusic;
 import tools.AudioTools.AudioManager;
 
 import static client.singletons.StateManager.M;
@@ -35,18 +36,19 @@ public class NowPlaying extends NowPlayingShell {
     private Label currentTime;
     private long iterations;
 
+    private MMusic post;
 
     private ImageButton pauseButton;
     private ImageButton playButton;
 
-    public NowPlaying(State previousState){
+    public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
         verbose = false;
         init();
     }
 
-    public NowPlaying(State previousState, boolean verbose){
-        this(previousState);
+    public NowPlaying(State previousState, MMusic post , boolean verbose){
+        this(previousState, post);
         this.verbose = true;
         iterations = 0;
     }
@@ -84,10 +86,10 @@ public class NowPlaying extends NowPlayingShell {
 
         stage.addActor(playButton);
 
-        ExecuteToTempState commentEx = new ExecuteToTempState(new Comment(this, "title", "subtitle"));
+        ExecuteToTempState commentEx = new ExecuteToTempState(new Comment(this, post));
         addImageButton("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
-        ExecuteToTempState secEx = new ExecuteToTempState(new Sec1(this, "title", "subtitle"));
+        ExecuteToTempState secEx = new ExecuteToTempState(new Sec1(this, post));
         addImageButton("NowPlaying/1S@", secEx, 230, 0, 290, 117);
 
         initializeSlider();

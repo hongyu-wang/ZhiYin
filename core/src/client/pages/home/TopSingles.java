@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MMusic;
 
 /**
  *
@@ -38,7 +39,7 @@ public class TopSingles extends TopSinglesShell{
     }
 
 
-    public void addSingle(String songName, Music music){
+    public void addSingle(String songName, MMusic music){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -58,7 +59,7 @@ public class TopSingles extends TopSinglesShell{
         s.add(t);
 
         //TODO ExecuteToTempState stuff
-        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this));
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
 
         s.addListener(new ClickListener() {
             @Override

@@ -31,7 +31,7 @@ public class CommentTalker extends Talkers {
     public void pull() {
         super.setWaiting(true);
 
-        modelStorage.requestModelFromServer(mComment.getText());
+//        modelStorage.requestModelFromServer(mComment.getText());
         modelStorage.requestModelFromServer(mComment.getAudio().get(0));
     }
 
@@ -56,9 +56,9 @@ public class CommentTalker extends Talkers {
 
     @Override
     public void update(float dt) {
-        MText userText = modelStorage.getModel(mComment.getText());
+//        MText userText = modelStorage.getModel(mComment.getText());
 
-        text = userText.getText();
+//        text = userText.getText();
 
         audio = modelStorage.getModel(mComment.getAudio().get(0));
 

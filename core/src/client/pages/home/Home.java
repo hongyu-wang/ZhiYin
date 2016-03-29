@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MMusic;
 import tools.AudioTools.AudioCreator;
 
 
@@ -44,7 +45,7 @@ public class Home extends HomeShell {
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
 //        em.addExecutable(new ExecuteSetMusic((AudioCreator.songNameToMMusic.get("Sorry"))));
 
-        final ExecuteToTempState etts = new ExecuteToTempState(new NowPlaying(this));
+        final ExecuteToTempState etts = new ExecuteToTempState(new NowPlaying(this, AudioCreator.songNameToMMusic.get("Sorry")));
 
         em.addExecutable(etts);
 
@@ -88,17 +89,17 @@ public class Home extends HomeShell {
 
     }
 
-    public void addNewRelease(String artistName, String songName, Music music){
+    public void addNewRelease(String artistName, String songName, MMusic music){
         newRelease.row().padTop(30 * StateManager.M);
         newRelease.add(createNewSingle(artistName, songName, music)).width(750 * StateManager.M);
     }
 
-    public void addTopSingle(String artistName, String songName, Music music) {
+    public void addTopSingle(String artistName, String songName, MMusic music) {
         topSingles.row().padTop(30 * StateManager.M);
         topSingles.add(createNewSingle(artistName, songName, music)).width(750 * StateManager.M);
     }
 
-    private Stack createNewSingle(String artistName, String songName, Music music){
+    private Stack createNewSingle(String artistName, String songName, MMusic music){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -119,7 +120,7 @@ public class Home extends HomeShell {
         s.add(i2);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this));
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
 
         s.addListener(new ClickListener() {
             @Override

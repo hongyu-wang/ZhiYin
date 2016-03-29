@@ -13,7 +13,7 @@ public class MComment extends ServerModel {
     /**
      * Id of the MText representation of the comment
      */
-    private long text;
+    private String text;
 
     /**
      * List of id's of the users who liked the comment
@@ -50,11 +50,11 @@ public class MComment extends ServerModel {
      */
     private long creator;
 
-    public long getText() {
+    public String getText() {
         return text;
     }
 
-    public void setText(long text) {
+    public void setText(String text) {
         this.text = text;
     }
 

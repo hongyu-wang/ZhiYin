@@ -16,7 +16,7 @@ public interface CommentManager {
      * @param audio  id's of audio pieces that the comment contains
      * @return a new comment object
      */
-    public MComment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, long text, long creator);
+    public MComment createComment(List<Long> music, List<Long> images, List<Long> audio, long timestamp, String text, long creator);
 
     /**
      * Adds music to the given comment object
