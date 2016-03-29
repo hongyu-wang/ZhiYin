@@ -9,6 +9,7 @@ import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVMetadataItem;
 import org.robovm.apple.foundation.*;
 import server.model.media.MAudio;
+import server.model.media.MImage;
 import server.model.media.MMusic;
 import server.model.media.MSnapShot;
 import tools.utilities.Utils;
@@ -50,6 +51,16 @@ public final class AudioCreator {
         albumToKey.put("Yeezus",8003L);
         albumToKey.put("Beauty Behind The Madness",8004L);
         albumToKey.put("X (Wembley Edition)",8005L);
+
+
+        for(String s : albumToKey.keySet()){
+            MImage albumArt = new MImage();
+            albumArt.setName(s);
+            albumArt.setImage("Thumbnails/"+s+".jpg");
+            albumArt.setKey(albumToKey.get(s));
+            ms.pushModel(albumArt);
+        }
+
 
         songNameToMMusic = Utils.newMap();
         artistToMMusic = Utils.newMap();
