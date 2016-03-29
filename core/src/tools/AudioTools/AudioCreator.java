@@ -55,9 +55,9 @@ public final class AudioCreator {
 
         for(String s : albumToKey.keySet()){
             MImage albumArt = new MImage();
-            albumArt.setName(s);
-            albumArt.setImage("Thumbnails/"+s+".jpg");
             albumArt.setKey(albumToKey.get(s));
+            albumArt.setImage("Thumbnails/"+s+".jpg");
+            albumArt.setName(s);
             ms.pushModel(albumArt);
         }
 
@@ -172,9 +172,9 @@ public final class AudioCreator {
             }
             if(item.getCommonKey().toString().equals("albumName")) {
                 music.setAlbum(item.getStringValue());
-                System.out.println(item.getStringValue());
+
                 music.setAlbumArt(albumToKey.get(item.getStringValue()));
-                System.out.println(music.getAlbumArt() + " " + item.getStringValue());
+
             }
 
             if(item.getCommonKey().toString().equals("artist"))

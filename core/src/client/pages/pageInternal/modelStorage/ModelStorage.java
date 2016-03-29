@@ -1,42 +1,38 @@
 package client.pages.pageInternal.modelStorage;
 
-import client.events.ActionEvent;
-import client.internalExceptions.NoExecutableException;
-import client.stateInterfaces.ActionMonitor;
-import client.stateInterfaces.Executable;
-import client.stateInterfaces.Pushable;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.webservices.PostObject;
 import server.webservices.RequestObject;
 import server.webservices.ServerKeyObject;
+import tools.serverTools.generators.SerialGenerator;
 
-import java.util.*;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**A storage object of all model types the user client will need.
  *
  *
  * Created by Hongyu Wang on 3/19/2016.
  */
-public class ModelStorage implements ActionMonitor{
+public class ModelStorage {
     private long user;
     private Map<Long, ServerModel> models;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
-    private List<Long> unassignedKeys;
-    public static String ipAddress = null;
+    private SerialGenerator generator;
 
-    public Queue<Executable> serverExecutableQueue;
+    public static String ipAddress = null;
 
     ModelStorage(){
         models = new HashMap<Long, ServerModel>();
         hashtag_key = new HashMap<String, Long>();
         username_key = new HashMap<String, Long>();
 
-        unassignedKeys = new ArrayList<Long>();
-
-        serverExecutableQueue = new LinkedBlockingQueue();
+//        unassignedKeys = new ArrayList<Long>();
+        generator = SerialGenerator.getGenerator();
     }
 
     ModelStorage(User user){
@@ -135,18 +131,20 @@ public class ModelStorage implements ActionMonitor{
      *
      * @return
      */
-    public long generateKey() throws IndexOutOfBoundsException{
-        try {
-            long key = unassignedKeys.remove(0);
+    public long generateKey(){
+        long key = user*3000000;
 
-            int size = unassignedKeys.size();
+        return key + generator.generateSerial();
+    }
 
-            return key;
-        }
-        catch(IndexOutOfBoundsException e){
-            throw e;
+    private void replenishKeys(int num){
+        for(int i = 0; i < num; i++){
+            ServerKeyObject.getInstance(this).getKey();
         }
     }
+
+
+
 
     /**Call this to update models within this class.
      *
@@ -161,50 +159,6 @@ public class ModelStorage implements ActionMonitor{
      * @param key
      */
     public void putGeneratedKey(long key){
-        unassignedKeys.add(key);
-
-        createObject();
-    }
-
-    private void createObject(){
-        if(!serverExecutableQueue.isEmpty()){
-            Executable e = serverExecutableQueue.peek();
-            if(((Pushable)e).requiredKeys() <= unassignedKeys.size()){
-                e.execute();
-                serverExecutableQueue.remove();
-            }
-        }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Executable[] exs;
-
-        try{
-            exs = e.getAllChildren();
-        }
-        catch(NoExecutableException error){
-            System.out.println("MODELSTORAGE: 185 \n"+error.getMessage());
-            return;
-        }
-
-        for(Executable executable: exs){
-            if(executable instanceof Pushable){
-                serverExecutableQueue.add(executable);
-                Pushable push = ((Pushable) executable);
-                getRequiredKeys(push.requiredKeys());
-            }
-            else{
-                executable.execute();
-            }
-        }
-    }
-
-
-
-    private void getRequiredKeys(int keyNum) {
-        for(int i = 0; i < keyNum; i++){
-            ServerKeyObject.getInstance(ModelStorageFactory.createModelStorage()).getKey();
-        }
+//        unassignedKeys.add(key);
     }
 }

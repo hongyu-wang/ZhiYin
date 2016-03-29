@@ -123,12 +123,35 @@ public class VirtualDatabase {
         generateConversation(user1, user3);
         generateConversation(user2, user3);
 
-        MText alice_text = generateText("");
-        MText benny_text = generateText("");
-        MText cindy_text = generateText("");
+        MText alice_text = generateText("My name is Alice and I love this song.");
+        MText benny_text = generateText("My name is Benny and I love this song.");
+        MText cindy_text = generateText("My name is Benny and I love this song.");
 
-//        generateDiaryPost("Title", user1, alice_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
+        MImage image1 = new MImage();
+        MImage image2 = new MImage();
+        MImage image3 = new MImage();
 
+        image1.setName("Song Picture 1");
+        image2.setName("Song Picture 2");
+        image3.setName("Song Picture 3");
+
+        image1.setKey(2999999);
+        image2.setKey(5999999);
+        image3.setKey(8999999);
+
+        image1.setImage("UserProfiles//Alice_After_The_War.png");
+        image2.setImage("UserProfiles//Benny_After_The_War.png");
+        image3.setImage("UserProfiles//Cindy_After_The_War.png");
+
+        data.put(image1.getKey(), image1);
+        data.put(image2.getKey(), image2);
+        data.put(image3.getKey(), image3);
+
+        //TODO change image code.
+
+        generateStaticDiaryPost("Title1", user1, alice_text.getKey(), 2999999, 10000);
+        generateStaticDiaryPost("Title2", user2, benny_text.getKey(), 5999999, 10001);
+        generateStaticDiaryPost("Title3", user3, cindy_text.getKey(), 8999999, 10002);
     }
 
 
@@ -320,8 +343,18 @@ public class VirtualDatabase {
         data.put(one_two.getKey(), one_two);
     }
 
-    private void generateDiaryPost(String title, User creator, MText description, MImage image, MMusic music){
-        MDiaryPost diaryPost = MusicDiaryFactory.createMusicDiary().createDiaryPost(creator, image, music, title, description);
+    private void generateStaticDiaryPost(String title, User creator, long description, long image, long music){
+        MDiaryPost diaryPost = new MDiaryPost();
+
+        diaryPost.setTitle(title);
+
+        diaryPost.setCreator(creator.getKey());
+
+        diaryPost.setText(description);
+
+        diaryPost.setImageKey(image);
+
+        diaryPost.setMusicKey(music);
 
         diaryPost.setKey(generator.generateSerial());
 
