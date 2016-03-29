@@ -1,5 +1,6 @@
 package client.pages.pageInternal.modelStorage;
 
+import driver.GameLoop;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.webservices.PostObject;
@@ -7,9 +8,7 @@ import server.webservices.RequestObject;
 import server.webservices.ServerKeyObject;
 import tools.serverTools.generators.SerialGenerator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**A storage object of all model types the user client will need.
@@ -68,6 +67,9 @@ public class ModelStorage {
      * @return      True if it sucessfully pushed to server.
      */
     public void pushModel(ServerModel model){
+        if(!GameLoop.ISPUSHING){
+            return;
+        }
         models.put(model.getKey(), model);
         PostObject.newInstance().addModel(model, model.getClass().getCanonicalName());
     }

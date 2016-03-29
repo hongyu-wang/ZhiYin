@@ -1,6 +1,5 @@
 package server.model.user;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import server.model.structureModels.ServerModel;
 
 import java.util.List;
@@ -43,6 +42,11 @@ public class User extends ServerModel {
      * The keys to the friends.
      */
     private List<Long> friendKeys;
+
+    /**
+     * The keys to the bands.
+     */
+    private List<Long> bandKeys;
 
     /**Gets all basic user information.
      *
@@ -92,7 +96,11 @@ public class User extends ServerModel {
         return friendKeys;
     }
 
-
+    /**Gets the list of all band keys.
+     *
+     * @return  The list of all band keys.
+     */
+    public List<Long> getBandKeys() { return bandKeys; }
 
     // SETTERS
     public void setProfile(long profileKey) {
@@ -113,4 +121,5 @@ public class User extends ServerModel {
     public void setFriendKeys(List<Long> friendKeys) {
         this.friendKeys = friendKeys;
     }
+    public void setBandKeys(List<Long> bandKeys) { this.bandKeys = bandKeys; }
 }

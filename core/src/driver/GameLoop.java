@@ -18,7 +18,7 @@ public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
 
-	public static final boolean ISPHONE = true;
+	public static boolean ISPUSHING = false;
 
 	public static final int WIDTH = 750;
 

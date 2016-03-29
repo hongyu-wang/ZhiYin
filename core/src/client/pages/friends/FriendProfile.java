@@ -5,12 +5,19 @@ import client.events.executables.internalChanges.updatePageExecutables.ExecuteCh
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.social.MDiaryPost;
+import server.model.user.User;
+import server.model.user.UserDiaryContent;
+
+import java.util.List;
 
 /**
  * Created by blobbydude24 on 2016-03-21.
@@ -131,5 +138,25 @@ public class FriendProfile extends FriendProfileShell {
     public void update(float dt) {
         super.update(dt);
     }
+
+    private void pullDiary(){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+
+        User thisUser = ms.getModel(ms.getUserKeyByName(name));
+
+        UserDiaryContent dc = ms.getModel(thisUser.getDiary());
+
+        List<Long> diaryList = dc.getDiaryKeys();
+
+        for(long key : diaryList){
+            MDiaryPost post = ms.getModel(key);
+
+            String title = post.getTitle();
+
+            addPost(title);
+        }
+    }
+
+    private void pullArtists(){}
 
 }
