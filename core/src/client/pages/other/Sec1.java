@@ -3,20 +3,28 @@ package client.pages.other;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MMusic;
+import server.model.media.MText;
+import server.model.social.MComment;
+import server.model.social.MDiaryPost;
+import server.model.social.MPost;
+import server.model.structureModels.ServerModel;
+import tools.utilities.Utils;
+
+import java.util.*;
+import java.util.List;
 
 import static client.singletons.StateManager.M;
 
@@ -24,8 +32,9 @@ import static client.singletons.StateManager.M;
  * Created by blobbydude24 on 2016-03-28.
  */
 public class Sec1 extends Sec1Shell {
-
+    private MPost thisPost;
     private ImageButton holdToRecordButton;
+    private List<Long> currentComments;
 
     private State previousState;
 
@@ -37,13 +46,26 @@ public class Sec1 extends Sec1Shell {
 
     //private DragButton dragButton;
 
-    public Sec1(State previousState, String title, String subtitle){
+    public Sec1(State previousState, MMusic post){
         this.previousState = previousState;
-        this.title = title;
-        this.subtitle = subtitle;
+
+        this.thisPost = post;
+        currentComments = Utils.<Long>newList();
+        this.title = post.getTitle();
+        this.subtitle = post.getArtist();
         init();
     }
 
+
+    public Sec1(State previousState, MDiaryPost post){
+        this.previousState = previousState;
+        this.thisPost = post;
+        currentComments = Utils.<Long>newList();
+        this.title = post.getTitle();
+        MText tempText = ModelStorageFactory.createModelStorage().getModel(post.getText());
+        this.subtitle = tempText.getText();
+        init();
+    }
     protected void init(){
         super.init();
 
@@ -91,10 +113,10 @@ public class Sec1 extends Sec1Shell {
         scrollpane.setBounds(0, 200 * StateManager.M, 750 * StateManager.M, 800 * StateManager.M);
         stage.addActor(scrollpane);
 
-        addPost("name", "time", new TestExecutable("play"));
-        addPost("name", "time", new TestExecutable("play"));
-        addPost("name", "time", new TestExecutable("play"));
-        addPost("name", "time", new TestExecutable("play"));
+        addPost("name", "time");
+        addPost("name", "time");
+        addPost("name", "time");
+        addPost("name", "time");
     }
 
     private void initTable(){
@@ -109,63 +131,21 @@ public class Sec1 extends Sec1Shell {
         stage.addActor(table);
     }
 
-    public void addPost(String name, String time, Executable e){
-//        Table table = new Table();
-//        Table left = new Table();
-//        left.add(new Label(name, SkinSingleton.getInstance()));
-//        left.row();
-//        left.add(new Label(time, SkinSingleton.getInstance()));
-//        System.out.println("table width: " + table.getWidth());
-//        table.add(left).width(200 * StateManager.M).height(140).expand().center().left().padLeft(50 * StateManager.M);
-//
-//        Image ripples = new Image(new Texture("Friends4/Ripples0@" + StateManager.M + ".png"));
-//
-//        ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png")).getDrawable());
-//        final Executable ex = e;
-//        playButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                ex.execute();
-//            }
-//        });
-//
-//        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
-//
-//        table.add(ripples).width(328 * StateManager.M).height(66 * StateManager.M).expand().center().padLeft(100 * StateManager.M);
-//        table.add(playButton).width(68 * StateManager.M).height(68 * StateManager.M).expand().center().padLeft(50 * StateManager.M);
-//        table.row();
-//        table.add(line).width(700 * StateManager.M).expandX().padLeft(50 * StateManager.M);
-//
-//        posts.add(table).width(750 * StateManager.M);//.height(140 * StateManager.M);
-//        posts.row();
-//
-//        table.setDebug(true);
-
-
+    public void addPost(String name, String time){
+        Table t = new Table();
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
         Image ripples = new Image(new Texture("Friends4/Ripples0@" + StateManager.M + ".png"));
-        ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png")).getDrawable());
-        final Executable ex = e;
-        playButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                ex.execute();
-            }
-        });
-
+        Image play = new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png"));
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 
-        Table t = new Table();
-        t.add(label1).expand().center().left().padLeft(50 * StateManager.M);
-        t.add(ripples).width(328 * StateManager.M).height(66 * StateManager.M).center().padRight(100 * StateManager.M);
-        t.add(playButton).width(68 * StateManager.M).height(68 * StateManager.M).center().padRight(50 * StateManager.M);//.padLeft(50 * StateManager.M);
+        t.add(label1).expand().left().padLeft(50 * StateManager.M).padTop(50 * StateManager.M);
+        t.add(ripples).width(328 * StateManager.M).height(66 * StateManager.M).padTop(50 * StateManager.M);
+        t.add(play).width(68 * StateManager.M).height(68 * StateManager.M).padTop(50 * StateManager.M);;
         t.row();
-        t.add(line).width(700 * StateManager.M).center().expandX().padLeft(600 * StateManager.M);
+        t.add(line).width(750 * StateManager.M).padLeft(100 * StateManager.M).padTop(50 * StateManager.M);
 
         posts.add(t).width(750 * StateManager.M).height(140 * StateManager.M);
         posts.row();
-
-//        t.setDebug(true);
     }
 
     @Override
@@ -176,5 +156,23 @@ public class Sec1 extends Sec1Shell {
     @Override
     public void dispose() {
 
+    }
+
+    private void pullData(){
+
+    }
+
+    private void pullCommentsFromServer(){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        java.util.List<Long> commentKeys = thisPost.getComments();
+
+        boolean isUpdated = true;
+
+        for(long key: commentKeys){
+            MComment model = ms.getModel(key);
+            if(model.getAudio().size() > 0){
+                //TODO add comment
+            }
+        }
     }
 }

@@ -1,20 +1,24 @@
 package client.pages.other;
 
+import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMusic;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetTime;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import driver.GameLoop;
+import server.model.media.MImage;
+import server.model.media.MMusic;
 import tools.AudioTools.AudioManager;
+import com.badlogic.gdx.graphics.Texture;
 
 import static client.singletons.StateManager.M;
 /**
@@ -35,27 +39,49 @@ public class NowPlaying extends NowPlayingShell {
     private Label currentTime;
     private long iterations;
 
+    private MMusic post;
 
     private ImageButton pauseButton;
     private ImageButton playButton;
 
-    public NowPlaying(State previousState){
+    public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
         verbose = false;
+        this.post = post;
         init();
     }
 
-    public NowPlaying(State previousState, boolean verbose){
-        this(previousState);
-        this.verbose = true;
+    public NowPlaying(State previousState, MMusic post , boolean verbose){
+        this(previousState, post);
+        this.verbose = verbose;
         iterations = 0;
+    }
+
+    protected void initAlbumArt(){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+
+        MImage image = ms.getModel(post.getAlbumArt());
+
+        byte [] bytes = image.getImage();
+
+        Pixmap px = new Pixmap(bytes, 0, bytes.length);
+
+        Texture albumArt = new Texture(px);
+        px.dispose();
+
+        Image picture = new Image(albumArt);
+
+        picture.setBounds((50)*M, (1160 - 655)*M, (655)*M, (655)*M);
+
+        stage.addActor(picture);
+
     }
 
 
     @Override
     protected void init() {
         super.init();
-
+        initAlbumArt();
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
@@ -84,10 +110,10 @@ public class NowPlaying extends NowPlayingShell {
 
         stage.addActor(playButton);
 
-        ExecuteToTempState commentEx = new ExecuteToTempState(new Comment(this, "title", "subtitle"));
+        ExecuteToTempState commentEx = new ExecuteToTempState(new Comment(this, post));
         addImageButton("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
-        ExecuteToTempState secEx = new ExecuteToTempState(new Sec1(this, "title", "subtitle"));
+        ExecuteToTempState secEx = new ExecuteToTempState(new Sec1(this, post));
         addImageButton("NowPlaying/1S@", secEx, 230, 0, 290, 117);
 
         initializeSlider();

@@ -167,24 +167,29 @@ public class VeryBeginningInitializer extends Talkers{
         MImage artist3 = ImageManagerFactory.createImageManager().createNewImage("ArtistProfiles//JustinBieber.png");
         MImage artist4 = ImageManagerFactory.createImageManager().createNewImage("ArtistProfiles//JustinTimberlake.png");
         MImage artist5 = ImageManagerFactory.createImageManager().createNewImage("ArtistProfiles//KanyeWest.png");
+        MImage artist6 = ImageManagerFactory.createImageManager().createNewImage("ArtistProfiles//TheWeeknd.png");
+
 
         artist1.setName("AdamLevine's Profile Pic");
         artist2.setName("EdSheeran's Profile Pic");
         artist3.setName("JustinBieber's Profile Pic");
         artist4.setName("JustinTimberlake's Profile Pic");
         artist5.setName("KanyeWest's Profile Pic");
+        artist6.setName("The Weekend's Profile Pic");
 
         artist1.setKey(100L);
         artist2.setKey(101L);
         artist3.setKey(102L);
         artist4.setKey(103L);
         artist5.setKey(104L);
+        artist6.setKey(105L);
 
         modelStorage.pushModel(artist1);
         modelStorage.pushModel(artist2);
         modelStorage.pushModel(artist3);
         modelStorage.pushModel(artist4);
         modelStorage.pushModel(artist5);
+        modelStorage.pushModel(artist6);
     }
 
     private void pushMBands(){
@@ -193,7 +198,7 @@ public class VeryBeginningInitializer extends Talkers{
         for(String artist: artistMap.keySet()){
             MBand mBand = new MBand();
 
-            if(artist.equals("Adam Levine")){
+            if(artist.equals("Maroon 5")){
                 mBand.setKey(12000L);
                 mBand.setDescription("Adam Noah Levine is an American singer, songwriter, multi-instrumentalist and actor. He is the lead vocalist for the Los Angeles pop rock band Maroon 5.");
                 mBand.setBandImage(100L);
@@ -217,6 +222,11 @@ public class VeryBeginningInitializer extends Talkers{
                 mBand.setKey(12004L);
                 mBand.setDescription("Kanye Omari West is an American hip hop recording artist, songwriter, record producer, fashion designer, and entrepreneur.");
                 mBand.setBandImage(104L);
+            } else
+            if(artist.equals("The Weeknd")){
+                mBand.setKey(12005L);
+                mBand.setDescription("Abęl Makkonen Tesfaye, known professionally by his stage name The Weeknd, is a Canadian singer, songwriter and record producer. In late 2010, Tesfaye anonymously uploaded several songs to YouTube under the name \"The Weeknd\".");
+                mBand.setBandImage(105L);
             }
             else{
                 throw new NoSuchElementException();
@@ -286,6 +296,7 @@ public class VeryBeginningInitializer extends Talkers{
         for(User friend: ft.getAllFriends()){
             pt.init(friend);
             pt.update(0);
+
         }
     }
 }

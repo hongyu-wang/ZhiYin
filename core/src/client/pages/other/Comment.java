@@ -3,12 +3,24 @@ package client.pages.other;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MMusic;
+import server.model.media.MText;
+import server.model.social.MComment;
+import server.model.social.MDiaryPost;
+import server.model.social.MPost;
+import java.util.List;
+
+import server.model.user.User;
+import server.model.user.UserProfile;
+import tools.utilities.Utils;
 
 import static client.singletons.StateManager.M;
 
@@ -16,6 +28,9 @@ import static client.singletons.StateManager.M;
  * Created by blobbydude24 on 2016-03-28.
  */
 public class Comment extends CommentShell {
+    private MPost thisPost;
+
+    private List<Long> currentComments;
 
     private State previousState;
 
@@ -27,10 +42,24 @@ public class Comment extends CommentShell {
     private ScrollPane scrollpane;
     private Table comments;
 
-    public Comment(State previousState, String title, String subtitle){
+    public Comment(State previousState, MMusic post){
         this.previousState = previousState;
-        this.title = title;
-        this.subtitle = subtitle;
+
+        this.thisPost = post;
+        currentComments = Utils.<Long>newList();
+        this.title = post.getTitle();
+        this.subtitle = post.getArtist();
+        init();
+    }
+
+
+    public Comment(State previousState, MDiaryPost post){
+        this.previousState = previousState;
+        this.thisPost = post;
+        currentComments = Utils.<Long>newList();
+        this.title = post.getTitle();
+        MText tempText = ModelStorageFactory.createModelStorage().getModel(post.getText());
+        this.subtitle = tempText.getText();
         init();
     }
 
@@ -72,6 +101,7 @@ public class Comment extends CommentShell {
         table.row();
         table.add(label2).expand();
         stage.addActor(table);
+
     }
 
     private void addMessageField(){
@@ -82,7 +112,7 @@ public class Comment extends CommentShell {
         stage.addActor(messageField);
     }
 
-    private void addComment(String name, String time, String comment){
+    public void addComment(String name, String time, String comment){
         Table t = new Table();
         Label label1 = new Label(name, SkinSingleton.getInstance());
         Label label2 = new Label(time, SkinSingleton.getInstance());
@@ -124,9 +154,108 @@ public class Comment extends CommentShell {
 
     public void update(float fy){
         stage.act();
+
+        pullData();
     }
 
     public String getMessage(){
         return messageField.getText();
+    }
+
+    private void pullData(){
+        pullCommentsFromServer();
+    }
+
+    private void pullCommentsFromServer(){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        List<Long> commentKeys = thisPost.getComments();
+
+        boolean isUpdated = true;
+
+        for(long key: commentKeys){
+            if(!currentComments.contains(key)){
+                if(!isUpdated){
+                    continue;
+                }
+
+                MComment comment = ms.getModel(key);
+
+                if(comment.getAudio().size() > 0){
+                    continue;
+                }
+                String text = comment.getText();
+
+                User user = ms.getModel(comment.getCreator());
+                UserProfile profile = ms.getModel(user.getProfile());
+
+                addComment(profile.getUsername(), String.valueOf(System.currentTimeMillis()), text);
+
+                currentComments.add(key);
+            }
+        }
+    }
+
+    public MPost getThisPost() {
+        return thisPost;
+    }
+
+    public void setThisPost(MPost thisPost) {
+        this.thisPost = thisPost;
+    }
+
+    public List<Long> getCurrentComments() {
+        return currentComments;
+    }
+
+    public void setCurrentComments(List<Long> currentComments) {
+        this.currentComments = currentComments;
+    }
+
+    public State getPreviousState() {
+        return previousState;
+    }
+
+    public void setPreviousState(State previousState) {
+        this.previousState = previousState;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public TextField getMessageField() {
+        return messageField;
+    }
+
+    public void setMessageField(TextField messageField) {
+        this.messageField = messageField;
+    }
+
+    public ScrollPane getScrollpane() {
+        return scrollpane;
+    }
+
+    public void setScrollpane(ScrollPane scrollpane) {
+        this.scrollpane = scrollpane;
+    }
+
+    public Table getComments() {
+        return comments;
+    }
+
+    public void setComments(Table comments) {
+        this.comments = comments;
     }
 }

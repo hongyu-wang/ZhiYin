@@ -1,9 +1,11 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.conversation.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 
@@ -24,14 +26,20 @@ public class Diary2 extends Diary2Shell{
     }
 
     protected void init() {
+
         super.init();
 
         addTitleField();
         addBodyField();
 
         Button postButton = new Button(this);
+
         postButton.setBounds(750 - 117, 1217, 117, 117);
         //Go to a Diary4 without an image
+
+        Executable e = new ExecuteSendDiaryPost(this);
+
+        postButton.setExecutable(e);
 
         String title = getTitle();
         String body = getBody();
