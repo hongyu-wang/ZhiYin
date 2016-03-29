@@ -3,16 +3,16 @@ package client.pages.friends;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.conversation.ExecutePushMessage;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
+import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
@@ -97,13 +97,20 @@ public class Friends2 extends Friends2Shell{
         ExecutableMultiplexer em2 = new ExecutableMultiplexer();
         em2.addExecutable(new ExecuteRemoveDragButton(button));
         em2.addExecutable(new ExecuteRemoveImage(image));
-        button.setReleaseExecutable(em2);
-        button.setDragExecutable(em2);
+        em2.addExecutable(new ExecuteRecord(false, this));
 
-        Button sendButton = new Button(ModelStorageFactory.createModelStorage());
+        ExecutableMultiplexer em4 = new ExecutableMultiplexer();
+        em4.addExecutable(new ExecuteRemoveDragButton(button));
+        em4.addExecutable(new ExecuteRemoveImage(image));
+        em4.addExecutable(new ExecuteRecord(true, this));
+
+
+        button.setReleaseExecutable(em2);
+        button.setDragExecutable(em4);
+
+        Button sendButton = new Button(this);
         sendButton.setBounds(604 + 1, 31, 122, 60);
         ExecutableMultiplexer em3 = new ExecutableMultiplexer();
-        em3.addExecutable(new ExecutePushMessage(this));
         em3.addExecutable(new ExecuteSendMessage(this));
         em3.addExecutable(new ExecuteReset(this));
         sendButton.setExecutable(em3);
@@ -121,8 +128,6 @@ public class Friends2 extends Friends2Shell{
         add(recordButton);
 
         initititititit();
-
-        scrollpane.layout();
     }
 
 

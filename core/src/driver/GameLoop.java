@@ -8,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import tools.AudioTools.AudioCreator;
 
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
@@ -21,7 +20,6 @@ public class GameLoop extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-		//AudioCreator.initializeAll();
 		stateManager = StateManager.getInstance();
 		Pages.initLogin();
         stateManager.changeState(Pages.LOGIN);

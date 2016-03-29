@@ -2,14 +2,11 @@ package tools.AudioTools;
 
 import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import org.robovm.apple.avfoundation.AVAsset;
 import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVMetadataItem;
 import org.robovm.apple.foundation.*;
 import server.model.media.MAudio;
-import server.model.media.MImage;
 import server.model.media.MMusic;
 import server.model.media.MSnapShot;
 import tools.utilities.Utils;
@@ -36,31 +33,11 @@ public final class AudioCreator {
 
     private static long audioKey = 9000L;
 
-    private static Map<String, Long> albumToKey;
-
     public static Map<String,MMusic> songNameToMMusic;
 
     public static Map<String, List<MMusic>> artistToMMusic;
 
     public static void initializeAll(){
-
-        albumToKey = Utils.newMap();
-        albumToKey.put("Songs About Jane",8000L);
-        albumToKey.put("Purpose (Deluxe Edition)",8001L);
-        albumToKey.put("The 20/20 Experience",8002L);
-        albumToKey.put("Yeezus",8003L);
-        albumToKey.put("Beauty Behind The Madness",8004L);
-        albumToKey.put("X (Wembley Edition)",8005L);
-
-
-        for(String s : albumToKey.keySet()){
-            MImage albumArt = new MImage();
-            albumArt.setName(s);
-            albumArt.setImage("Thumbnails/"+s+".jpg");
-            albumArt.setKey(albumToKey.get(s));
-            ms.pushModel(albumArt);
-        }
-
 
         songNameToMMusic = Utils.newMap();
         artistToMMusic = Utils.newMap();
@@ -79,9 +56,7 @@ public final class AudioCreator {
                 File mp3 = new File(new File(filePath), f.toString());
                 NSURL url = new NSURL(mp3.toURI().toString());
                 MMusic m = createMMusicFromFilePath(url);
-                assert(m.getAlbumArt()!=0L);
-
-                //ms.pushModel(m);
+                ms.pushModel(m);
 
                 songNameToMMusic.put(m.getArtist(), m);
                 if (!artistToMMusic.containsKey(m.getArtist())) {
@@ -90,8 +65,6 @@ public final class AudioCreator {
                 List<MMusic> temp = artistToMMusic.get(m.getArtist());
                 temp.add(m);
                 artistToMMusic.put(m.getArtist(), temp);
-
-                //1mS0C00lz - paul's password
             }
         }
 
@@ -128,7 +101,7 @@ public final class AudioCreator {
         music.setKey(musicKey);
         musicKey++;
         music = getMetaData(filePath);
-        //ms.pushModel(music);
+        ms.pushModel(music);
         return music;
     }
 
@@ -159,7 +132,7 @@ public final class AudioCreator {
             e.printStackTrace();
         }
 
-        //ms.pushModel(song);
+        ms.pushModel(song);
         return song;
     }
 
@@ -170,17 +143,11 @@ public final class AudioCreator {
             if(item.getCommonKey().toString().equals("title")) {
                 music.setName(item.getStringValue());
             }
-            if(item.getCommonKey().toString().equals("albumName")) {
+            if(item.getCommonKey().toString().equals("albumName"))
                 music.setAlbum(item.getStringValue());
-                System.out.println(item.getStringValue());
-                music.setAlbumArt(albumToKey.get(item.getStringValue()));
-                System.out.println(music.getAlbumArt() + " " + item.getStringValue());
-            }
 
             if(item.getCommonKey().toString().equals("artist"))
                 music.setArtist(item.getStringValue());
-
-
         }
         return music;
     }

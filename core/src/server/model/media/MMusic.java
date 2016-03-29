@@ -1,6 +1,5 @@
 package server.model.media;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import server.model.social.MPost;
 import server.model.structureModels.ServerModel;
 
@@ -18,8 +17,6 @@ public class MMusic extends MPost {
      * The key to the audio.
      */
     long audioKey;
-
-    //long albumArt;
 
     long albumArt;
 
