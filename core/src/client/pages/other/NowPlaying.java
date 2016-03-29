@@ -2,14 +2,19 @@ package client.pages.other;
 
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMusic;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetTime;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealChangeListener;
+import driver.GameLoop;
+import tools.AudioTools.AudioManager;
 
 import static client.singletons.StateManager.M;
 /**
@@ -26,6 +31,10 @@ public class NowPlaying extends NowPlayingShell {
     private State previousState;
     private Slider slider;
     private boolean verbose;
+    private Label totalTime;
+    private Label currentTime;
+    private long iterations;
+
 
     private ImageButton pauseButton;
     private ImageButton playButton;
@@ -39,6 +48,7 @@ public class NowPlaying extends NowPlayingShell {
     public NowPlaying(State previousState, boolean verbose){
         this(previousState);
         this.verbose = true;
+        iterations = 0;
     }
 
 
@@ -58,6 +68,7 @@ public class NowPlaying extends NowPlayingShell {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 pause();
+                new ExecutePlayMusic().execute();
             }
         });
 
@@ -67,10 +78,11 @@ public class NowPlaying extends NowPlayingShell {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 play();
+                new ExecutePlayMusic().execute();
             }
         });
 
-        stage.addActor(pauseButton);
+        stage.addActor(playButton);
 
         ExecuteToTempState commentEx = new ExecuteToTempState(new Comment(this, "title", "subtitle"));
         addImageButton("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
@@ -79,6 +91,8 @@ public class NowPlaying extends NowPlayingShell {
         addImageButton("NowPlaying/1S@", secEx, 230, 0, 290, 117);
 
         initializeSlider();
+
+        addMusicLabels();
     }
 
     private void pause(){
@@ -105,17 +119,59 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     public void update(float dt){
         super.update(dt);
-        executeMoveSlider.execute();
+        if (iterations%5 == 0)
+            executeMoveSlider.execute();
+        updateMusicLabels(AudioManager.getTime());
+        iterations ++;
     }
 
     public void initializeSlider(){
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
-        slider.setBounds((int) (M * 180), (int) (M * 400), (int) (M * 410), 10);
-        ZhiYinRealChangeListener zhiYinRealChangeListener;
-        slider.addListener(zhiYinRealChangeListener = new ZhiYinRealChangeListener(new TestExecutable("eylmao")));
-        executeMoveSlider = new ExecuteMoveSlider(slider, zhiYinRealChangeListener);
+        Table table = new Table();
+        table.add(slider).minWidth(660*M);
+        table.setBounds(45 * M, 400 * M, 660 * M, 10);
 
-        stage.addActor(slider);
+
+
+
+        slider.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                new ExecuteSetTime(slider).execute();
+            }
+        });
+        executeMoveSlider = new ExecuteMoveSlider(slider, this);
+
+        stage.addActor(table);
     }
+
+
+    private void addMusicLabels(){
+        currentTime = new Label("0:00", SkinSingleton.getInstance());
+        totalTime = new Label("", SkinSingleton.getInstance());
+        currentTime.setBounds(60 * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
+        totalTime.setBounds((GameLoop.WIDTH - 100 - totalTime.getPrefWidth()) * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
+        stage.addActor(totalTime);
+        stage.addActor(currentTime);
+    }
+
+    public static String convertToMinutes(double timeInSeconds){
+        int time = (int)timeInSeconds;
+
+        int minutes = time/60;
+        int seconds = time%60;
+        if (seconds < 10)
+            return minutes+":0"+seconds;
+        return minutes+":"+seconds;
+    }
+
+    public void updateMusicLabels(double time){
+        currentTime.setText(convertToMinutes(time));
+
+        String total = convertToMinutes(AudioManager.trackLength());
+        totalTime.setText(total);
+    }
+
+
 
 }

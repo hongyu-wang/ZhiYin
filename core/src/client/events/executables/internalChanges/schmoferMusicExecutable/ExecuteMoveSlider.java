@@ -1,8 +1,8 @@
 package client.events.executables.internalChanges.schmoferMusicExecutable;
 
+import client.pages.other.NowPlaying;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealChangeListener;
 import tools.AudioTools.AudioManager;
 
 /**
@@ -11,16 +11,19 @@ import tools.AudioTools.AudioManager;
  */
 public class ExecuteMoveSlider implements Executable{
     private Slider slider;
-    private ZhiYinRealChangeListener zrcl;
-    public ExecuteMoveSlider(Slider slider, ZhiYinRealChangeListener zrcl){
+    private NowPlaying nowPlaying;
+
+    public ExecuteMoveSlider(Slider slider, NowPlaying nowPlaying) {
         this.slider = slider;
-        this.zrcl = zrcl;
+        this.nowPlaying = nowPlaying;
     }
 
     @Override
     public void execute() {
+
         slider.setValue((float)(AudioManager.getTime()/AudioManager.trackLength()*100));
-        zrcl.setChange();
+
+
 
     }
 }

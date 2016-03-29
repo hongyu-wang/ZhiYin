@@ -16,9 +16,6 @@ public abstract class NowPlayingShell extends State{
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("NowPlaying/NowPlayingBG.png"));
-        background.setBounds(0, 0, GameLoop.WIDTH * StateManager.M, GameLoop.HEIGHT * StateManager.M);
-        stage.addActor(background);
 
         //        Dimensions of the picture are 655 x 655
         Button picture = new Button(this);

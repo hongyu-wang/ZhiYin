@@ -5,6 +5,7 @@ import org.robovm.apple.avfoundation.AVAudioSession;
 import org.robovm.apple.avfoundation.AVAudioSessionCategory;
 import org.robovm.apple.foundation.NSData;
 import org.robovm.apple.foundation.NSErrorException;
+import org.robovm.apple.foundation.NSTimer;
 import server.model.media.MAudio;
 
 /**
@@ -19,6 +20,8 @@ public class AudioPlayer {
     private AVAudioPlayer player2;
     boolean snapShot = false;
     private static AVAudioSession session = AVAudioSession.getSharedInstance();
+
+    private NSTimer timer;
 
     private MAudio currentSong;
     private static AudioPlayer singleInstance = new AudioPlayer();
@@ -40,8 +43,9 @@ public class AudioPlayer {
         snapShot = true;
 
         try {
-            player2 = new AVAudioPlayer(new NSData(song.getmData()));
-            player1 = new AVAudioPlayer(new NSData(voice.getmData()));
+            player2 = new AVAudioPlayer(new NSData(voice.getmData()));
+            player1 = new AVAudioPlayer(new NSData(song.getmData()));
+            player1.setCurrentTime(startTime);
         } catch (NSErrorException e) {
             e.printStackTrace();
         }

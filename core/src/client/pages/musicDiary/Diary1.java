@@ -17,6 +17,8 @@ import server.model.user.User;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserProfile;
 import server.services.factories.ImageManagerFactory;
+import java.util.List;
+import tools.utilities.Utils;
 
 /**
  * This is the first music diary page as given in the
@@ -25,6 +27,8 @@ import server.services.factories.ImageManagerFactory;
  * Created by Hongyu Wang on 3/9/2016.
  */
 public class Diary1 extends Diary1Shell {
+
+    private List<Long> currentDiaries;
 
     private ScrollPane scrollpane;
 
@@ -41,13 +45,13 @@ public class Diary1 extends Diary1Shell {
         table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100* StateManager.M);
         table.top();
 
+        currentDiaries = Utils.newList();
+
         scrollpane = new ScrollPane(table);
 
         scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
 
         stage.addActor(scrollpane);
-
-        getPostsFromServer();
     }
 
     public void addPost(MDiaryPost thisPost, String creator){
@@ -84,7 +88,7 @@ public class Diary1 extends Diary1Shell {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
-                new ExecuteToTempState(new Diary4(thisPost, "title", "")).execute();
+                new ExecuteToTempState(new Diary4(thisPost)).execute();
             }
         });
 
@@ -106,6 +110,8 @@ public class Diary1 extends Diary1Shell {
     @Override
     public void update(float dt){
         super.update(dt);
+
+        getPostsFromServer();
     }
 
     private void getPostsFromServer(){
@@ -123,13 +129,30 @@ public class Diary1 extends Diary1Shell {
         ModelStorage ms = ModelStorageFactory.createModelStorage();
         UserDiaryContent diaryContent = ms.getModel(user.getDiary());
 
+        boolean isUpdated = true;
+
         for(long key: diaryContent.getDiaryKeys()){
-            MDiaryPost post = ms.getModel(key);
-            UserProfile profile = ms.getModel(user.getProfile());
+            if(!currentDiaries.contains(key)) {
+                if(ms.getModel(key) == null){
+                    ms.requestModelFromServer(key);
+                    isUpdated = false;
+                }
+                MDiaryPost post = ms.getModel(key);
+                if(ms.getModel(post.getText())== null){
+                    ms.requestModelFromServer(post.getText());
+                    isUpdated = false;
+                }
 
-            String username = profile.getUsername();
+                if(!isUpdated)
+                    continue;
+                UserProfile profile = ms.getModel(user.getProfile());
 
-            addPost(post, username);
+                String username = profile.getUsername();
+
+                addPost(post, username);
+
+                currentDiaries.add(key);
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ public class StateManager implements Disposable, Updatable, Drawable {
         return ourInstance;
     }
 
-    public static final float M = 0.5F;
+    public static final float M = .5F;
     public static final float WIDTH = 750 * M;
     public static final float HEIGHT = 1334 * M;
 
