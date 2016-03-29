@@ -107,7 +107,7 @@ public class AudioRecorder {
         avar.record();
     }
 
-    public NSData stopRecording(){
+    public MAudio stopRecording(){
         running = false;
         try {
             session.setActive(false);
@@ -121,7 +121,7 @@ public class AudioRecorder {
         //MAudio voice = new MAudio();
         //voice.setmData(mData);
         avar.dispose();
-        return mData;
+        return AudioCreator.createMAudio(mData);
     }
 
     public boolean isRecording(){
