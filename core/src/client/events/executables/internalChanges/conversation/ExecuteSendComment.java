@@ -39,7 +39,6 @@ public class ExecuteSendComment implements Executable {
 
         String userText = commentPage.getMessage();
 
-        MText text = TextManagerFactory.createTextManager().createText(userText, 0);
 
         long userKey = ms.getMainUser().getKey();
         User mainUser = ms.getModel(userKey);
@@ -47,6 +46,7 @@ public class ExecuteSendComment implements Executable {
 
         MComment comment = CommentManagerFactory.createCommentManager().createComment(Utils.newList(), Utils.newList(),
                 Utils.newList(), System.currentTimeMillis(), userText, userKey);
+        comment.setKey(ms.generateKey());
 
         commentKeys.add(comment.getKey());
 
@@ -54,7 +54,6 @@ public class ExecuteSendComment implements Executable {
 
         commentKeys.add(comment.getKey());
 
-        ms.pushModel(text);
         ms.pushModel(comment);
         ms.pushModel(post);
     }

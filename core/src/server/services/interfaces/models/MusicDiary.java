@@ -11,7 +11,7 @@ import server.model.user.User;
  */
 public interface MusicDiary {
 
-    MDiaryPost createDiaryPost(User user, MImage image, MMusic music, String title, MText description);
+    MDiaryPost createDiaryPost(User user, long image, long music, String title, long description);
 
     /**Modify the audio.
      *

@@ -17,7 +17,8 @@ import static client.singletons.StateManager.M;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class Diary2 extends Diary2Shell{
+public class
+Diary2 extends Diary2Shell{
     private TextField titleField;
     private TextField bodyField;
 

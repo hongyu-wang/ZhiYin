@@ -35,13 +35,13 @@ public class MusicDiaryImplementation implements MusicDiary {
 //        return diaryPost;
 //    }
     @Override
-    public MDiaryPost createDiaryPost(User user, MImage image, MMusic music, String title, MText description){
+    public MDiaryPost createDiaryPost(User user, long image, long music, String title, long description){
         MDiaryPost diaryPost = new MDiaryPost();
         diaryPost.setCreator(user.getKey());
-        diaryPost.setImageKey(image.getKey());
-        diaryPost.setMusicKey(music.getKey());
+        diaryPost.setImageKey(image);
+        diaryPost.setMusicKey(music);
         diaryPost.setTitle(title);
-        diaryPost.setText(description.getKey());
+        diaryPost.setText(description);
 
         return diaryPost;
     }
