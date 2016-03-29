@@ -1,7 +1,5 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import driver.GameLoop;
 import server.model.media.MImage;
 import server.model.user.*;
@@ -51,8 +49,8 @@ public class VeryBeginningInitializer extends Talkers{
         }
 
         //Images
-        for(int i = 0; i < 3; i++)
-            modelStorage.requestModelFromServer(key++);
+//        for(int i = 0; i < 3; i++)
+//            modelStorage.requestModelFromServer(key++);
 
         //Audio
 //        for(int i = 0; i < 3; i++)
@@ -66,7 +64,7 @@ public class VeryBeginningInitializer extends Talkers{
         for(int i = 0; i < 3; i++)
             modelStorage.requestModelFromServer(key++);
 
-
+        //Conversations
         for(int i = 0; i < 3 ; i++){
             modelStorage.requestModelFromServer(key++);
         }
@@ -76,7 +74,7 @@ public class VeryBeginningInitializer extends Talkers{
 
     @Override
     public void push() {
-        if(GameLoop.ISMAC){
+        if(GameLoop.ISPHONE){
             return;
         }
         MImage image1 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Alice_After_The_War.png");

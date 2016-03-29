@@ -123,7 +123,6 @@ public class Login extends State {
         if (vb.isUpdated()) {
             Pages.initClass();
             new ExecuteChangePage(Pages.HOME).execute();
-            vb.push();
 
         }
         else{

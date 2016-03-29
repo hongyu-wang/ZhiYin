@@ -1,6 +1,8 @@
 package driver;
 
 import client.pageStorage.Pages;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
+import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -15,7 +17,7 @@ public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
 
-	public static final boolean ISMAC = true;
+	public static final boolean ISPHONE = false;
 
 	public static final int WIDTH = 750;
 
@@ -25,6 +27,9 @@ public class GameLoop extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+        VeryBeginningInitializer vb = TalkerFactory.VeryBeginningInitializer();
+        vb.push();
+
 		stateManager = StateManager.getInstance();
 		Pages.initLogin();
         stateManager.changeState(Pages.LOGIN);
@@ -57,7 +62,11 @@ public class GameLoop extends ApplicationAdapter {
 		FileHandle file = Gdx.files.internal("myProfile.jpg");
 		byte[] byteArray = file.readBytes();
 		Pixmap newMap = new Pixmap(byteArray,0, byteArray.length);
+
 		Texture please = new Texture(newMap);
+		testTexture.dispose();
+		please.dispose();
+        newMap.dispose();
 
 
 

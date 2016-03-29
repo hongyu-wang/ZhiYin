@@ -96,7 +96,11 @@ public class Friends4 extends Friends4Shell{
                 if (pt.isUpdated()) {
                     String friendName = pt.getName();
 
-                    Image image = new Image(new Texture(new Pixmap(pt.getProfileImage(), 0 ,pt.getProfileImage().length)));
+                    Pixmap map = new Pixmap(pt.getProfileImage(), 0 ,pt.getProfileImage().length);
+
+                    Image image = new Image(new Texture(map));
+
+                    map.dispose();
 
                     addFriend(friendName, image);
                 }
