@@ -40,8 +40,9 @@ public class AudioPlayer {
         snapShot = true;
 
         try {
-            player2 = new AVAudioPlayer(new NSData(song.getmData()));
-            player1 = new AVAudioPlayer(new NSData(voice.getmData()));
+            player2 = new AVAudioPlayer(new NSData(voice.getmData()));
+            player1 = new AVAudioPlayer(new NSData(song.getmData()));
+            player1.setCurrentTime(startTime);
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
