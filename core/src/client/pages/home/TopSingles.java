@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
+import tools.AudioTools.AudioCreator;
 
 /**
  *
@@ -34,6 +35,16 @@ public class TopSingles extends TopSinglesShell{
         table.top();
 
         //table.setDebug(true);
+
+        int i = 0;
+
+        for (String name : AudioCreator.songNameToMMusic.keySet()){
+
+            addSingle(name, AudioCreator.songNameToMMusic.get(name));
+
+            if (i >= 10) break;
+        }
+
 
         stage.addActor(table);
     }
