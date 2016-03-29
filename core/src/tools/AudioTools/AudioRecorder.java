@@ -132,10 +132,10 @@ public class AudioRecorder {
         avar.record(1);
     }
 
-    public NSData getCurrentMData(){
+    public MAudio getCurrentMData(){
         avar.stop();
         avar.release();
-        return fm.getContentsAtPath(filePath.getPath());
+        return AudioCreator.createMAudio(fm.getContentsAtPath(filePath.getPath()));
     }
 
 }
