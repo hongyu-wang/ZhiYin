@@ -89,7 +89,7 @@ public class Home extends HomeShell {
             else
                 addNewRelease(temporary.getArtist(), temporary.getName(), temporary);
 
-            if (i == 3){
+            if (i == 2){
                 isTopSingle = true;
             }
             i++;
@@ -132,13 +132,19 @@ public class Home extends HomeShell {
 
         s.add(i2);
         s.add(t);
+        final ExecutableMultiplexer em = new ExecutableMultiplexer();
 
-        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
+        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
+        ExecuteSetMusic esm = new ExecuteSetMusic(music);
+
+        em.addExecutable(e);
+        em.addExecutable(esm);
+
 
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                e.execute();
+                esm.execute();
             }
         });
 

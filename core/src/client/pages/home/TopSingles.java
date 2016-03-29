@@ -38,13 +38,13 @@ public class TopSingles extends TopSinglesShell{
 
         int i = 0;
 
-        for (String name : AudioCreator.songNameToMMusic.keySet()){
+       /* for (String name : AudioCreator.songNameToMMusic.keySet()){
 
             addSingle(name, AudioCreator.songNameToMMusic.get(name));
 
             if (i >= 10) break;
             i++;
-        }
+        }*/
 
 
         stage.addActor(table);
