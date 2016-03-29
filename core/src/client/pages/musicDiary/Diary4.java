@@ -47,10 +47,10 @@ public class Diary4 extends Diary4Shell{
 
     protected void init(){
         super.init();
-        ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, title, content));
+        ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, thisPost));
         addImageButton("Diary/Comment@", toComment, 420, 100, 140, 140);
 
-        ExecuteToTempState toSec = new ExecuteToTempState(new Sec1(this, title, content));
+        ExecuteToTempState toSec = new ExecuteToTempState(new Sec1(this, thisPost));
         addImageButton("Diary/Sec@", toSec, 590, 100, 140, 140);
 
         Table table = new Table();
