@@ -3,21 +3,14 @@ package client.pages.friends;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
-import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
-import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteAddPlayMessage;
-import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
-import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetSave;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
@@ -90,7 +83,28 @@ public class Friends2 extends Friends2Shell{
 
         stage.addActor(scrollpane);
 
-        setUpRecord();
+
+        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
+
+        DragButton button = new DragButton(this, (int)(500*M));
+        button.setBounds(0, 12341234, 1234, 1234);
+
+        image.setBounds(32 * M, 98 * M, (750 - 64) * M, 236 * M);
+
+
+        ExecutableMultiplexer em2 = new ExecutableMultiplexer();
+        em2.addExecutable(new ExecuteRemoveDragButton(button));
+        em2.addExecutable(new ExecuteRemoveImage(image));
+        //em2.addExecutable(new ExecuteRecord(false, this));
+
+        ExecutableMultiplexer em4 = new ExecutableMultiplexer();
+        em4.addExecutable(new ExecuteRemoveDragButton(button));
+        em4.addExecutable(new ExecuteRemoveImage(image));
+        //em4.addExecutable(new ExecuteRecord(true, this));
+
+
+        button.setReleaseExecutable(em2);
+        button.setDragExecutable(em4);
 
         Button sendButton = new Button(this);
         sendButton.setBounds(604 + 1, 31, 122, 60);
@@ -102,61 +116,19 @@ public class Friends2 extends Friends2Shell{
 
         updatePage = new ExecuteUpdateMessages(this);
 
-
-
-        initititititit();
-    }
-
-
-    private void setUpRecord(){
-
-        DragButton button = new DragButton(this, (int)(500*M));
-
-        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
-
-        ExecuteRecord record = new ExecuteRecord(this);
-
+        add(button);
         Button recordButton = new Button(this);
         recordButton.setBounds(32, 31, 122, 60);
         ExecutableMultiplexer em = new ExecutableMultiplexer();
-        em.addExecutable(new ExecuteAddDragButton(button, 32, 98, 750 - 64, 236));
+        em.addExecutable(new ExecuteAddDragButton(button, 32, 98, 750-64, 236));
         em.addExecutable(new ExecuteAddImage(stage, image));
-        em.addExecutable(new TestExecutable("recorded"));
-        em.addExecutable(record);
         recordButton.setExecutable(em);
         add(recordButton);
 
+        initititititit();
 
-        button.setBounds(0, 12341234, 1234, 1234);
-
-        image.setBounds(32 * M, 98 * M, (750 - 64) * M, 236 * M);
-
-
-        ExecutableMultiplexer release = new ExecutableMultiplexer();
-        release.addExecutable(new ExecuteRemoveDragButton(button));
-        release.addExecutable(new ExecuteRemoveImage(image));
-        release.addExecutable(new ExecuteSetSave(record));
-        release.addExecutable(new TestExecutable("released"));
-        //em.addExecutable(new ExecuteAddPlayMessage(this));
-        release.addExecutable(record);
-
-
-        ExecutableMultiplexer drag = new ExecutableMultiplexer();
-        drag.addExecutable(new ExecuteRemoveDragButton(button));
-        drag.addExecutable(new ExecuteRemoveImage(image));
-        drag.addExecutable(new TestExecutable("Dragged"));
-        drag.addExecutable(record);
-
-
-        button.setReleaseExecutable(release);
-        button.setDragExecutable(drag);
-
-
-        add(button);
-
+        scrollpane.layout();
     }
-
-
 
 
 
@@ -164,7 +136,6 @@ public class Friends2 extends Friends2Shell{
         table.add(box.getStack()).width(240).padTop(28).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
         table.row().expandX();
         scrollpane.layout();
-        table.layout();
         scrollpane.setScrollPercentY(110);
         stage.act();
     }

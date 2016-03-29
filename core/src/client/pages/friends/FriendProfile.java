@@ -5,6 +5,7 @@ import client.events.executables.internalChanges.updatePageExecutables.ExecuteCh
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.musicDiary.Diary4;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -105,7 +106,8 @@ public class FriendProfile extends FriendProfileShell {
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.DIARY1).execute();
+                //TODO Temporary diary post, MDiary is null.
+                new ExecuteToTempState(new Diary4(null, "Title", "Content Title"));
             }
         });
 
