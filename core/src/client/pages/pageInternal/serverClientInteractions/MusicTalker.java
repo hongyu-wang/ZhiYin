@@ -126,7 +126,7 @@ public class MusicTalker extends Talkers{
         mImage = modelStorage.getModel(mMusic.getAlbumArt());
 
         if(mImage != null){
-            image = mImage.getImage();
+            //image = mImage.getImage();
         }
 
         //SOCIAL MEDIA

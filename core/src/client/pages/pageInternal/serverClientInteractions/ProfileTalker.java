@@ -19,7 +19,7 @@ public class ProfileTalker extends Talkers{
     //--Interface Fields
 
     //Getters and Setters
-    public String getProfileImage() {
+    public byte[] getProfileImage() {
         return currentProfile.getProfileImage();
     }
 
@@ -96,12 +96,12 @@ public class ProfileTalker extends Talkers{
         private UserProfile profile;
 
         //--Interface Fields
-        private String profileImage;
+        private byte[] profileImage;
         private String name;
         private String description;
 
         //Getters and Setters
-        public String getProfileImage() {
+        public byte[] getProfileImage() {
             return profileImage;
         }
 

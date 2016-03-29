@@ -144,7 +144,7 @@ public class DiaryTalker extends Talkers{
 
             MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
             if(postImage != null)
-                image = postImage.getImage();
+                //image = postImage.getImage();
 
             music = modelStorage.getModel(this.diaryPost.getMusicKey());
             userRecording = modelStorage.getModel(this.diaryPost.getAudioKey());
@@ -170,7 +170,7 @@ public class DiaryTalker extends Talkers{
             MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
 
             postText.setText(text);
-            postImage.setImage(image);
+            //postImage.setImage(image);
 
             diaryPost.setMusicKey(music.getKey());
             diaryPost.setAudioKey(userRecording.getKey());
