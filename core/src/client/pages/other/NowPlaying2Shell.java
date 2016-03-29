@@ -13,10 +13,6 @@ public abstract class NowPlaying2Shell extends State {
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("NowPlaying/NowPlayingBG.png"));
-        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
-        stage.addActor(background);
-
         Button picture = new Button(this);
         picture.setBounds(50, 1160 - 655, 655, 655);
         picture.setExecutable(new TestExecutable("picture"));
