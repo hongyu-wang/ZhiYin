@@ -9,6 +9,7 @@ import client.pageStorage.Pages;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,6 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
 import tools.AudioTools.AudioCreator;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 
 /**
@@ -42,19 +46,7 @@ public class Home extends HomeShell {
         Image i1 = new Image(new Texture("Home/NewRelease@" + StateManager.M + ".png"));
         final ImageButton b1 = new ImageButton(i1.getDrawable());
 
-        final ExecutableMultiplexer em = new ExecutableMultiplexer();
-//        em.addExecutable(new ExecuteSetMusic((AudioCreator.songNameToMMusic.get("Sorry"))));
 
-        final ExecuteToTempState etts = new ExecuteToTempState(new NowPlaying(this, AudioCreator.songNameToMMusic.get("Sorry")));
-
-        em.addExecutable(etts);
-
-        b1.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                em.execute();
-            }
-        });
 
         newRelease.add(b1);
 
@@ -84,8 +76,26 @@ public class Home extends HomeShell {
 
         stage.addActor(scrollpane);
 
-        //pullDataFromServer();
-        //table.setDebug(true);
+        int i = 0;
+        TreeMap<String, MMusic> map = AudioCreator.songNameToMMusic;
+
+        boolean isTopSingle = false;
+        for (String str : map.keySet()){
+            MMusic temporary = map.get(str);
+
+            if (isTopSingle)
+                addTopSingle(temporary.getArtist(), temporary.getName(), temporary);
+
+            else
+                addNewRelease(temporary.getArtist(), temporary.getName(), temporary);
+
+            if (i == 3){
+                isTopSingle = true;
+            }
+            i++;
+        }
+
+
 
     }
 

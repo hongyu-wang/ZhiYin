@@ -17,11 +17,6 @@ public abstract class NowPlayingShell extends State{
         super.init();
 
 
-        //        Dimensions of the picture are 655 x 655
-        Button picture = new Button(this);
-        picture.setBounds(50, 1160 - 655, 655, 655);
-        picture.setExecutable(new TestExecutable("picture"));
-        add(picture);
 
 
         TestExecutable likeEx = new TestExecutable("like");

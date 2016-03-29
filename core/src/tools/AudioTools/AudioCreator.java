@@ -38,11 +38,11 @@ public final class AudioCreator {
 
     private static Map<String, Long> albumToKey;
 
-    public static Map<String,MMusic> songNameToMMusic;
+    public static TreeMap<String,MMusic> songNameToMMusic;
 
-    public static Map<String, List<MMusic>> artistToMMusic;
+    public static TreeMap<String, List<MMusic>> artistToMMusic;
 
-    public static Map<Long, MAudio> keyToMAudio = new TreeMap<Long,MAudio>();
+    public static TreeMap<Long, MAudio> keyToMAudio = new TreeMap<Long,MAudio>();
 
     public static void initializeAll(){
 
