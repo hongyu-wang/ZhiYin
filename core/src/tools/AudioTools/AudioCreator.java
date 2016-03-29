@@ -69,7 +69,7 @@ public final class AudioCreator {
         artistToMMusic = Utils.newMap();
 
 
-        String filePath = "/Users/kevin/desktop/ZhiYin/android/assets/MusicAssets";
+        String filePath = "/Users/Paul/ZhiYin/android/assets/MusicAssets";
 
         NSArray urls = new NSArray();
         try {
@@ -100,7 +100,7 @@ public final class AudioCreator {
 
 
         //Artists: The Weeknd, Justin Bieber, Justin Timberlake, Ed Sheeran, Maroon 5, Kanye West
-
+        System.out.println("done");
 
     }
 

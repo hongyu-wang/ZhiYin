@@ -7,6 +7,7 @@ import org.robovm.apple.foundation.NSData;
 import org.robovm.apple.foundation.NSErrorException;
 import server.model.media.MAudio;
 import tools.AudioTools.AudioCreator;
+import tools.AudioTools.AudioPlayer;
 import tools.AudioTools.AudioRecorder;
 
 /**
@@ -31,22 +32,25 @@ public class ExecuteRecord implements Executable {
 
     @Override
     public void execute() {
-
+        AudioPlayer ap = AudioPlayer.getInstance();
         AudioRecorder ar = AudioRecorder.getInstance();
         if(!ar.isRecording()) {
-            try {
-                ar.prepareToRecord();
-                ar.startRecording();
-            } catch (NSErrorException e) {
-                e.printStackTrace();
-            }
 
-        }else{
+            System.out.println("starting record");
+            ar.prepareToRecord();
+            ar.startRecording();
+
+        }else {
+            System.out.println("done recording");
             MAudio audio = ar.stopRecording();
+            if (ap.isPlaying())
+                ap.stop();
+
             if (save){
                 ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
                 MessageBox soundbox = new MessageBox(epma, 1);
                 friends2.addMessage(soundbox);
+                System.out.println("music set");
             }
 
 

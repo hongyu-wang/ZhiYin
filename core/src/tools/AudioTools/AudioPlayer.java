@@ -5,27 +5,7 @@ import org.robovm.apple.avfoundation.AVAudioSession;
 import org.robovm.apple.avfoundation.AVAudioSessionCategory;
 import org.robovm.apple.foundation.NSData;
 import org.robovm.apple.foundation.NSErrorException;
-import org.robovm.apple.foundation.NSURL;
 import server.model.media.MAudio;
-import org.robovm.apple.audiotoolbox.AudioQueue;
-import org.robovm.apple.audiotoolbox.AudioQueueBuffer;
-import org.robovm.apple.audiotoolbox.AudioQueueParam;
-import org.robovm.apple.coreaudio.AudioFormat;
-import org.robovm.apple.coreaudio.AudioFormatFlags;
-import org.robovm.apple.coreaudio.AudioStreamBasicDescription;
-import org.robovm.apple.corefoundation.OSStatusException;
-import org.robovm.rt.bro.Bro;
-import org.robovm.rt.bro.Struct;
-import org.robovm.rt.bro.annotation.Callback;
-import org.robovm.rt.bro.annotation.Pointer;
-import org.robovm.rt.bro.ptr.BytePtr;
-import org.robovm.rt.bro.ptr.FunctionPtr;
-import org.robovm.rt.bro.ptr.VoidPtr;
-import server.model.media.MMusic;
-import server.model.media.MSnapShot;
-
-import java.lang.reflect.Method;
-import java.util.Vector;
 
 /**
  * Created by Kevin on 3/10/2016.
@@ -35,10 +15,10 @@ public class AudioPlayer {
 
     private boolean running = false;
 
-    AVAudioPlayer player1;
-    AVAudioPlayer player2;
-    boolean snapShot;
-    AVAudioSession session = AVAudioSession.getSharedInstance();
+    private AVAudioPlayer player1;
+    private AVAudioPlayer player2;
+    boolean snapShot = false;
+    private static AVAudioSession session = AVAudioSession.getSharedInstance();
 
     private MAudio currentSong;
     private static AudioPlayer singleInstance = new AudioPlayer();
@@ -54,7 +34,7 @@ public class AudioPlayer {
 
 
     public void setSongSnapShot(MAudio voice, MAudio song, double startTime){
-
+        currentSong = voice;
         player1.dispose();
         player2.dispose();
         snapShot = true;
@@ -70,8 +50,8 @@ public class AudioPlayer {
     }
 
     public void setSong(MAudio audio){
-
-            player1.dispose();
+        currentSong = audio;
+        player1.dispose();
         if(snapShot)
             player2.dispose();
         snapShot = false;
@@ -86,9 +66,11 @@ public class AudioPlayer {
     public void prepareToPlay() {
         try {
             session.setActive(true);
+            session.setCategory(AVAudioSessionCategory.PlayAndRecord);
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
+
         player1.prepareToPlay();
         player1.setDelegate(player1.getDelegate());
         if(snapShot) {
@@ -99,12 +81,6 @@ public class AudioPlayer {
 
     public void play(){
         running = true;
-        try {
-            session.setCategory(AVAudioSessionCategory.Playback);
-        } catch (NSErrorException e) {
-            e.printStackTrace();
-        }
-
         player1.play();
         if(snapShot)
             player2.play();
@@ -142,6 +118,10 @@ public class AudioPlayer {
     }
 
     public boolean isPlaying(){
+        if(!running)
+            return false;
+        running = player1.isPlaying();
+
         return running;
     }
 
