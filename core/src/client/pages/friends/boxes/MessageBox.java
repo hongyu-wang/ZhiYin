@@ -60,12 +60,12 @@ public class MessageBox {
         Label text = new Label(message, SkinSingleton.getInstance());
         text.setWrap(true);
 
-        text.setWidth(240 * StateManager.M);
+        text.setWidth(230 * StateManager.M);
         text.pack();
         float height = text.getHeight() + 40;
 
         table1.add(image).width(480 * StateManager.M).height(height * StateManager.M);
-        table2.add(text).expand().center().left().padLeft(10*StateManager.M).width(480 * StateManager.M);
+        table2.add(text).expand().center().left().padLeft(10*StateManager.M).width(460 * StateManager.M);
 
         stack.add(table1);
         stack.add(table2);
