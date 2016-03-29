@@ -1,12 +1,21 @@
 package client.pages.musicDiary;
 
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MImage;
+import server.model.social.MDiaryPost;
+import server.model.user.User;
+import server.model.user.UserDiaryContent;
+import server.model.user.UserProfile;
 
 /**
  * This is the first music diary page as given in the
@@ -37,21 +46,16 @@ public class Diary1 extends Diary1Shell {
 
         stage.addActor(scrollpane);
 
-        addPost("Person1", "Title1", "TimeStamp1");
-        addPost("Person2", "Title2", "TimeStamp2");
-        addPost("Person3", "Title3", "TimeStamp3");
-        addPost("Person4", "Title4", "TimeStamp4");
-        addPost("Person5", "Title5", "TimeStamp5");
-        addPost("Person6", "Title6", "TimeStamp6");
-        addPost("Person7", "Title7", "TimeStamp7");
-        addPost("Person8", "Title8", "TimeStamp8");
-        addPost("Person9", "Title9", "TimeStamp9");
-        addPost("Person10", "Title10", "TimeStamp10");
-        addPost("Person11", "Title11", "TimeStamp11");
-        addPost("Person12", "Title12", "TimeStamp12");
+
     }
 
-    public void addPost(String name, String timestamp, String title){
+    public void addPost(MDiaryPost thisPost, String creator){
+        String title = thisPost.getTitle();
+
+        String name = creator;
+
+        String timestamp = String.valueOf(thisPost.getTimeStamp());
+
         Stack s = new Stack();
 
         Table t = new Table();
@@ -75,9 +79,13 @@ public class Diary1 extends Diary1Shell {
         s.add(t);
 
         // Goes to a Diary4 without content or image
+        MImage image = ModelStorageFactory.createModelStorage().getModel(thisPost.getImageKey());
+        Pixmap pixmap = new Pixmap(image.getImage(), 0, image.getImage().length);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
+
                 new ExecuteToTempState(new Diary4("title", "", null)).execute();
             }
         });
@@ -96,5 +104,27 @@ public class Diary1 extends Diary1Shell {
 
     }
 
+    private void getPostsFromServer(){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        User user1 = ms.getModel(1);
+        User user2 = ms.getModel(2);
+        User user3 = ms.getModel(3);
+
+
+    }
+
+    private void updateFromServer(User user){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        UserDiaryContent diaryContent = ms.getModel(user.getDiary());
+
+        for(long key: diaryContent.getDiaryKeys()){
+            MDiaryPost post = ms.getModel(key);
+            UserProfile profile = ms.getModel(user.getProfile());
+
+            String username = profile.getUsername();
+
+            addPost(post, username);
+        }
+    }
 
 }

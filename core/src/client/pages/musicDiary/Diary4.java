@@ -8,6 +8,7 @@ import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import server.model.social.MDiaryPost;
 
 /**
  * Diary4 page.
@@ -15,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
  * Created by Hongyu Wang on 3/19/2016.
  */
 public class Diary4 extends Diary4Shell{
+    MDiaryPost thisPost;
+
 
     private String title;
     private String content;
