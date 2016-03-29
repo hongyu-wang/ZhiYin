@@ -12,7 +12,6 @@ import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRe
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
@@ -122,6 +121,8 @@ public class Friends2 extends Friends2Shell{
         add(recordButton);
 
         initititititit();
+
+        scrollpane.layout();
     }
 
 
