@@ -27,9 +27,6 @@ public class GameLoop extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-        VeryBeginningInitializer vb = TalkerFactory.VeryBeginningInitializer();
-        vb.push();
-
 		stateManager = StateManager.getInstance();
 		Pages.initLogin();
         stateManager.changeState(Pages.LOGIN);

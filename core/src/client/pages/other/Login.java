@@ -61,6 +61,10 @@ public class Login extends State {
             }
             vb = TalkerFactory.VeryBeginningInitializer();
             vb.init(text);
+
+            ModelStorage.ipAddress = password.getText();
+
+            vb.push();
             vb.pull();
             checkPull = true;
             for (Actor act : stage.getActors()) {
@@ -70,8 +74,6 @@ public class Login extends State {
             label = new Label("", SkinSingleton.getInstance());
             label.setPosition(50, StateManager.HEIGHT - 100);
             stage.addActor(label);
-
-            ModelStorage.ipAddress = password.getText();
         }
     }
 
