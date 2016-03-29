@@ -19,9 +19,8 @@ public class ExecuteMoveSlider implements Executable{
 
     @Override
     public void execute() {
-        //TODO FOR ROBOVM slider.setValue((float)(AudioManager.getTime()/AudioManager.trackLength()*100));
+        slider.setValue((float)(AudioManager.getTime()/AudioManager.trackLength()*100));
         zrcl.setChange();
-        slider.setValue(slider.getValue() + 1);
 
     }
 }
