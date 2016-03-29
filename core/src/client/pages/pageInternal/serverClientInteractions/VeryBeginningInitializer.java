@@ -4,6 +4,7 @@ import driver.GameLoop;
 import server.model.media.MImage;
 import server.model.user.*;
 import server.services.factories.ImageManagerFactory;
+import tools.AudioTools.AudioCreator;
 
 /**
  * Created by Hongyu Wang on 3/20/2016.
@@ -85,6 +86,8 @@ public class VeryBeginningInitializer extends Talkers{
 
     @Override
     public void push() {
+
+        AudioCreator.initializeAll();
 
         MImage image1 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Alice_After_The_War.png");
         MImage image2 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Benny_After_The_War.png");

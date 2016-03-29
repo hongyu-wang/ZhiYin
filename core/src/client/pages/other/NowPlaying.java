@@ -31,9 +31,9 @@ public class NowPlaying extends NowPlayingShell {
     private State previousState;
     private Slider slider;
     private boolean verbose;
-
+    private Label totalTime;
     private Label currentTime;
-
+    private long iterations;
 
 
     private ImageButton pauseButton;
@@ -48,6 +48,7 @@ public class NowPlaying extends NowPlayingShell {
     public NowPlaying(State previousState, boolean verbose){
         this(previousState);
         this.verbose = true;
+        iterations = 0;
     }
 
 
@@ -118,7 +119,10 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     public void update(float dt){
         super.update(dt);
-        executeMoveSlider.execute();
+        if (iterations%5 == 0)
+            executeMoveSlider.execute();
+        updateMusicLabels(AudioManager.getTime());
+        iterations ++;
     }
 
     public void initializeSlider(){
@@ -144,9 +148,7 @@ public class NowPlaying extends NowPlayingShell {
 
     private void addMusicLabels(){
         currentTime = new Label("0:00", SkinSingleton.getInstance());
-        String total = convertToMinutes(AudioManager.trackLength());
-
-        Label totalTime = new Label(total, SkinSingleton.getInstance());
+        totalTime = new Label("", SkinSingleton.getInstance());
         currentTime.setBounds(60 * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
         totalTime.setBounds((GameLoop.WIDTH - 100 - totalTime.getPrefWidth()) * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
         stage.addActor(totalTime);
@@ -165,6 +167,9 @@ public class NowPlaying extends NowPlayingShell {
 
     public void updateMusicLabels(double time){
         currentTime.setText(convertToMinutes(time));
+
+        String total = convertToMinutes(AudioManager.trackLength());
+        totalTime.setText(total);
     }
 
 

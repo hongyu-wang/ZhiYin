@@ -18,7 +18,7 @@ public class ExecuteSetTime implements Executable{
 
     @Override
     public void execute() {
-
+        System.out.println('a');
         double trackLength = AudioManager.trackLength();
         double percent = slider.getPercent();
 

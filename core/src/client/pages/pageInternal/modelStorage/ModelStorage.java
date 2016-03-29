@@ -23,7 +23,7 @@ public class ModelStorage {
     private Map<String, Long> username_key;
     private SerialGenerator generator;
 
-    public static String ipAddress = null;
+    public static String ipAddress = "localhost";
 
     ModelStorage(){
         models = new HashMap<Long, ServerModel>();

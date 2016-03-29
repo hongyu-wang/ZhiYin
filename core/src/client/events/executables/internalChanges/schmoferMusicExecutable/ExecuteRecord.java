@@ -17,31 +17,24 @@ import tools.AudioTools.AudioRecorder;
  */
 public class ExecuteRecord implements Executable {
 
+    private ModelStorage ms;
     private boolean save;
     private Friends2 friends2;
 
-    MAudio m;
-
     public ExecuteRecord(Friends2 friends2){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        ms = ModelStorageFactory.createModelStorage();
         this.friends2 = friends2;
         save = false;
-        m = (MAudio)(ms.getModel(9000L));
     }
-
 
     public void setSave(){
         save = true;
     }
 
-
-
     @Override
     public void execute() {
-
-
-        AudioPlayer ap = AudioPlayer.getInstance();
         AudioRecorder ar = AudioRecorder.getInstance();
+
         if(!ar.isRecording()) {
 
             System.out.println("starting record");
@@ -51,18 +44,15 @@ public class ExecuteRecord implements Executable {
         }else {
             System.out.println("done recording");
             MAudio audio = ar.stopRecording();
-            if (ap.isPlaying())
-                ap.stop();
+            ms.pushModel(audio);
+            System.out.println(audio.getKey());
 
             if (save){
-
-
-
-                ExecutePlayMAudio epma = new ExecutePlayMAudio(m);
+                ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
                 MessageBox soundbox = new MessageBox(epma, 1);
                 friends2.addMessage(soundbox);
                 System.out.println("music set");
-                System.out.println(m.getTrackLength());
+
             }
 
 

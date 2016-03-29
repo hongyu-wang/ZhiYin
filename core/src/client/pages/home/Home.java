@@ -1,5 +1,7 @@
 package client.pages.home;
 
+import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetMusic;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.events.executables.internalChanges.TestExecutable;
@@ -13,6 +15,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import tools.AudioTools.AudioCreator;
 
 
 /**
@@ -38,12 +41,17 @@ public class Home extends HomeShell {
         Image i1 = new Image(new Texture("Home/NewRelease@" + StateManager.M + ".png"));
         final ImageButton b1 = new ImageButton(i1.getDrawable());
 
+        final ExecutableMultiplexer em = new ExecutableMultiplexer();
+        em.addExecutable(new ExecuteSetMusic((AudioCreator.songNameToMMusic.get("Sorry"))));
+
         final ExecuteToTempState etts = new ExecuteToTempState(new NowPlaying(this));
+
+        em.addExecutable(etts);
 
         b1.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                etts.execute();
+                em.execute();
             }
         });
 

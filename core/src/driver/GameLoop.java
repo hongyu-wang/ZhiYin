@@ -29,7 +29,7 @@ public class GameLoop extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-		AudioCreator.initializeAll();
+
 		stateManager = StateManager.getInstance();
 		Pages.initLogin();
         stateManager.changeState(Pages.LOGIN);

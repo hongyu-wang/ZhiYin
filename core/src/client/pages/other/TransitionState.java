@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
  * Created by Hongyu Wang on 3/28/2016.
  */
 public class TransitionState extends State {
-    private static final float TOTAL_DELAY = 10;
+    private static final float TOTAL_DELAY = 2;
     private float delay;
     private State state;
 
@@ -36,7 +36,7 @@ public class TransitionState extends State {
         float delay2 = Math.abs(delay);
         if (delay > TOTAL_DELAY) delay = TOTAL_DELAY;
 
-        Gdx.gl.glClearColor(delay2*0.2F/TOTAL_DELAY, delay2*0.2F/TOTAL_DELAY, delay2*0.2F/TOTAL_DELAY, 1);
+        Gdx.gl.glClearColor(delay2*0.01F/TOTAL_DELAY, delay2*0.01F/TOTAL_DELAY, delay2*0.01F/TOTAL_DELAY, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (delay == TOTAL_DELAY){

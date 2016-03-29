@@ -22,7 +22,7 @@ public class ExecuteMoveSlider implements Executable{
     public void execute() {
 
         slider.setValue((float)(AudioManager.getTime()/AudioManager.trackLength()*100));
-        nowPlaying.updateMusicLabels(AudioManager.getTime());
+
 
 
     }
