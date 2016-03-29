@@ -68,7 +68,7 @@ public class ProfileTalker extends Talkers{
 
     @Override
     public boolean isUpdated() {
-        return super.checkOriginalUpdate();
+        return currentProfile.isUpdated();
     }
 
     @Override
@@ -160,6 +160,18 @@ public class ProfileTalker extends Talkers{
         public boolean isUpdated() {
             boolean updated = super.checkOriginalUpdate();
 
+            if(this.name == null){
+                return false;
+            }
+
+            if(this.description == null){
+                return false;
+            }
+
+            if(this.profileImage == null){
+                return false;
+            }
+
             super.setWaiting(!updated);
 
             return updated;
@@ -171,6 +183,11 @@ public class ProfileTalker extends Talkers{
             profile = modelStorage.getModel(user.getProfile());
 
             MImage image = modelStorage.getModel(profile.getImageKey());
+
+            if(image == null){
+                modelStorage.requestModelFromServer(profile.getImageKey());
+                return;
+            }
 
             name = profile.getUsername();
             description = profile.getDescription();

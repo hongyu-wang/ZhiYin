@@ -114,7 +114,9 @@ public class Diary1 extends Diary1Shell {
         User user2 = ms.getModel(2);
         User user3 = ms.getModel(3);
 
-
+        updateFromServer(user1);
+        updateFromServer(user2);
+        updateFromServer(user3);
     }
 
     private void updateFromServer(User user){

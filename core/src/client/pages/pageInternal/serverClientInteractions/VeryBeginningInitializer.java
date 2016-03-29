@@ -69,6 +69,12 @@ public class VeryBeginningInitializer extends Talkers{
             modelStorage.requestModelFromServer(key++);
         }
 
+        //DiaryPostsw
+        for(int i = 0; i < 3 ; i++){
+            modelStorage.requestModelFromServer(key++);
+        }
+
+
         totalOriginalModels = key;
     }
 

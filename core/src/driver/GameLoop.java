@@ -10,6 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import server.model.media.MMusic;
 
 import java.nio.ByteBuffer;
 
@@ -17,7 +18,7 @@ public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
 
-	public static final boolean ISPHONE = false;
+	public static final boolean ISPHONE = true;
 
 	public static final int WIDTH = 750;
 
@@ -34,8 +35,6 @@ public class GameLoop extends ApplicationAdapter {
         primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
         primary.update();
-
-
 
 
     }
