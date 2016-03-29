@@ -105,9 +105,10 @@ public class VirtualDatabase {
         UserProfile profile2 = (UserProfile)data.get(user2.getProfile());
         UserProfile profile3 = (UserProfile)data.get(user3.getProfile());
 
-//        profile1.setImageKey(image1.getKey());
-//        profile2.setImageKey(image2.getKey());
-//        profile3.setImageKey(image3.getKey());
+        profile1.setImageKey(-11L);
+        profile2.setImageKey(-12L);
+        profile3.setImageKey(-13L);
+
     }
 
     private void initSocialData(){
@@ -122,24 +123,6 @@ public class VirtualDatabase {
         MText alice_text = generateText("My name is Alice and I love this song.");
         MText benny_text = generateText("My name is Benny and I love this song.");
         MText cindy_text = generateText("My name is Benny and I love this song.");
-
-        MImage image1 = new MImage();
-        MImage image2 = new MImage();
-        MImage image3 = new MImage();
-
-        image1.setName("Song Picture 1");
-        image2.setName("Song Picture 2");
-        image3.setName("Song Picture 3");
-
-        image1.setKey(2999999);
-        image2.setKey(5999999);
-        image3.setKey(8999999);
-
-        data.put(image1.getKey(), image1);
-        data.put(image2.getKey(), image2);
-        data.put(image3.getKey(), image3);
-
-        //TODO change image code.
 
         generateStaticDiaryPost("Title1", user1, alice_text.getKey(), 2999999, 10000);
         generateStaticDiaryPost("Title2", user2, benny_text.getKey(), 5999999, 10001);

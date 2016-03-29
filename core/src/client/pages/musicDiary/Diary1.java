@@ -16,6 +16,7 @@ import server.model.social.MDiaryPost;
 import server.model.user.User;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserProfile;
+import server.services.factories.ImageManagerFactory;
 
 /**
  * This is the first music diary page as given in the
@@ -46,7 +47,7 @@ public class Diary1 extends Diary1Shell {
 
         stage.addActor(scrollpane);
 
-
+        getPostsFromServer();
     }
 
     public void addPost(MDiaryPost thisPost, String creator){
@@ -79,20 +80,18 @@ public class Diary1 extends Diary1Shell {
         s.add(t);
 
         // Goes to a Diary4 without content or image
-        MImage image = ModelStorageFactory.createModelStorage().getModel(thisPost.getImageKey());
-        Pixmap pixmap = new Pixmap(image.getImage(), 0, image.getImage().length);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
-
-                new ExecuteToTempState(new Diary4("title", "", null)).execute();
+                new ExecuteToTempState(new Diary4(thisPost, "title", "")).execute();
             }
         });
 
         table.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
         table.row();
     }
+
 
     @Override
     public void reset() {
@@ -102,6 +101,11 @@ public class Diary1 extends Diary1Shell {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public void update(float dt){
+        super.update(dt);
     }
 
     private void getPostsFromServer(){
@@ -126,5 +130,4 @@ public class Diary1 extends Diary1Shell {
             addPost(post, username);
         }
     }
-
 }

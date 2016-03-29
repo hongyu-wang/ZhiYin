@@ -1,6 +1,11 @@
 package client.pages.pageInternal.serverClientInteractions;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import driver.GameLoop;
+import server.model.media.MImage;
 import server.model.user.*;
+import server.services.factories.ImageManagerFactory;
 
 /**
  * Created by Hongyu Wang on 3/20/2016.
@@ -71,7 +76,24 @@ public class VeryBeginningInitializer extends Talkers{
 
     @Override
     public void push() {
-        return;
+        if(GameLoop.ISMAC){
+            return;
+        }
+        MImage image1 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Alice_After_The_War.png");
+        MImage image2 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Benny_After_The_War.png");
+        MImage image3 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Cindy_After_The_War.png");
+
+        image1.setKey(-13L);
+        image2.setKey(-12L);
+        image3.setKey(-11L);
+
+        image1.setName("Alice's Profile");
+        image2.setName("Benny's Profile");
+        image3.setName("Cindy's Profile");
+
+        modelStorage.pushModel(image1);
+        modelStorage.pushModel(image2);
+        modelStorage.pushModel(image3);
     }
 
     @Override

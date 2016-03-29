@@ -14,6 +14,9 @@ import java.nio.ByteBuffer;
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
+
+	public static final boolean ISMAC = false;
+
 	public static final int WIDTH = 750;
 
 	public static final int HEIGHT = 1334;
