@@ -8,6 +8,7 @@ import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import server.model.social.MDiaryPost;
 
 /**
  * Diary4 page.
@@ -15,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
  * Created by Hongyu Wang on 3/19/2016.
  */
 public class Diary4 extends Diary4Shell{
+    MDiaryPost thisPost;
+
 
     private String title;
     private String content;
@@ -28,6 +31,7 @@ public class Diary4 extends Diary4Shell{
     }
 
     protected void init(){
+        super.init();
         ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, title, content));
         addImageButton("Diary/Comment@", toComment, 420, 100, 140, 140);
 

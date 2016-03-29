@@ -9,7 +9,6 @@ import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAd
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
-import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
@@ -128,6 +127,8 @@ public class Friends2 extends Friends2Shell{
         add(recordButton);
 
         initititititit();
+
+        scrollpane.layout();
     }
 
 
