@@ -66,7 +66,7 @@ public final class AudioCreator {
             albumArt.setImage(fh.readBytes());
 
             albumArt.setName(s);
-            //ms.pushModel(albumArt);
+            ms.pushModel(albumArt);
         }
 
         //Top Singles, Tagged
@@ -135,7 +135,7 @@ public final class AudioCreator {
         music.setKey(musicKey);
         musicKey++;
         music.setComments(Utils.newList());
-        //ms.pushModel(music);
+        ms.pushModel(music);
 
         return music;
     }
@@ -167,7 +167,7 @@ public final class AudioCreator {
             e.printStackTrace();
         }
 
-        //ms.pushModel(song);
+        ms.pushModel(song);
         keyToMAudio.put(audioKey,song);
         audioKey++;
         return song;
