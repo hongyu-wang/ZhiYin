@@ -2,12 +2,17 @@ package client.pages.home;
 
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.ArtistProfile;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MImage;
+import server.model.soundCloud.MBand;
+import server.services.factories.ImageManagerFactory;
 
 import static client.singletons.StateManager.M;
 
@@ -49,23 +54,21 @@ public class Artist extends ArtistShell {
         scrollpane.setScrollingDisabled(true, false);
 
         stage.addActor(scrollpane);
-
-        addArtist(new Image(new Texture("Artist/Artist1.png")), "Artist1");
-        addArtist(new Image(new Texture("Artist/Artist2.png")), "Artist2");
-        addArtist(new Image(new Texture("Artist/Artist3.png")), "Artist3");
-        addArtist(new Image(new Texture("Artist/Artist4.png")), "Artist4");
-        addArtist(new Image(new Texture("Artist/Artist5.png")), "Artist5");
-        addArtist(new Image(new Texture("Artist/Artist1.png")), "Artist1");
-        addArtist(new Image(new Texture("Artist/Artist2.png")), "Artist2");
-        addArtist(new Image(new Texture("Artist/Artist3.png")), "Artist3");
-        addArtist(new Image(new Texture("Artist/Artist4.png")), "Artist4");
-        addArtist(new Image(new Texture("Artist/Artist5.png")), "Artist5");
     }
 
-    public void addArtist(Image profilePic, String artistName){
+    public void addArtist(MBand band){
         Stack right = new Stack();
 
-        String description = "Here is a sentence that is a description of the artist and stuff and bleh and stuff and bleh and stuff and bleh and more stuff and more bleh.";
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+
+        MImage profileImage = ms.getModel(band.getBandImage());
+
+        Image profilePic = ImageManagerFactory.createImageManager().mImageToImage(profileImage);
+
+        String artistName = band.getName();
+
+        String description = band.getDescription();
+
         final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, profilePic, artistName, description));
         right.addListener(new ClickListener() {
             @Override
@@ -113,6 +116,8 @@ public class Artist extends ArtistShell {
         super.update(fy);
 
         searchField.getText();//TODO something
+
+        pullData();
     }
 
 
@@ -121,4 +126,17 @@ public class Artist extends ArtistShell {
 
     }
 
+    private void pullData(){
+        pullArtistsFromServer();
+    }
+
+    private void pullArtistsFromServer(){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        MBand mb;
+
+        for(long i = 12000; i < 1206; i++){
+            mb = ms.getModel(i);
+            addArtist(mb);
+        }
+    }
 }
