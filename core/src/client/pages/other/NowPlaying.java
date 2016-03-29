@@ -83,7 +83,7 @@ public class NowPlaying extends NowPlayingShell {
             }
         });
 
-        stage.addActor(pauseButton);
+        stage.addActor(playButton);
 
         ExecuteToTempState commentEx = new ExecuteToTempState(new Comment(this, "title", "subtitle"));
         addImageButton("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
