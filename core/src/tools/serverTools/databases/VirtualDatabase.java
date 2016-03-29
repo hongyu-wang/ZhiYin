@@ -105,9 +105,9 @@ public class VirtualDatabase {
         UserProfile profile2 = (UserProfile)data.get(user2.getProfile());
         UserProfile profile3 = (UserProfile)data.get(user3.getProfile());
 
-        profile1.setImageKey(-11L);
-        profile2.setImageKey(-12L);
-        profile3.setImageKey(-13L);
+        profile1.setImageKey(1000001L);
+        profile2.setImageKey(1000002L);
+        profile3.setImageKey(1000003L);
 
     }
 

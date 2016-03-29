@@ -81,9 +81,9 @@ public class VeryBeginningInitializer extends Talkers{
         MImage image2 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Benny_After_The_War.png");
         MImage image3 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Cindy_After_The_War.png");
 
-        image1.setKey(-13L);
-        image2.setKey(-12L);
-        image3.setKey(-11L);
+        image1.setKey(1000001L);
+        image2.setKey(1000002L);
+        image3.setKey(1000003L);
 
         image1.setName("Alice's Profile");
         image2.setName("Benny's Profile");

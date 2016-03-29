@@ -60,7 +60,6 @@ public class PostObject implements Net.HttpResponseListener {
         //httpPost.setHeader("X-Parse-REST-API-Key", asspp_key);
         String jString = "";
         try {
-
             jString = objectMapper.writeValueAsString(model);
         }catch(Exception e){
             System.out.println(e);
@@ -76,7 +75,7 @@ public class PostObject implements Net.HttpResponseListener {
 
     @Override
     public void cancelled() {
-
+        System.out.println("POSTOBJECT CANCELLED: " + className);
     }
 
     @Override
