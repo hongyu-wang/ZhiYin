@@ -7,6 +7,7 @@ import server.model.structureModels.ServerModel;
 import server.model.user.*;
 import tools.AudioTools.AudioCreator;
 import tools.serverTools.generators.SerialGenerator;
+import tools.utilities.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -195,16 +196,19 @@ public class VirtualDatabase {
         conversations.setConvoKeys(new ArrayList<Long>());
 
         //ActivityLog Attributes
-        log.setLog(new ArrayList<String>());
+        log.setLog(Utils.<String>newList());
 
         //UploadedContent Attributes
-        content.setPostKeys(new ArrayList<Long>());
+        content.setPostKeys(Utils.<Long>newList());
 
         //DiaryContent Attributes
-        diary.setDiaryKeys(new ArrayList<Long>());
+        diary.setDiaryKeys(Utils.<Long>newList());
 
         //User friends.
-        List<Long> friendList = new ArrayList<Long>();
+        List<Long> friendList = Utils.newList();
+
+        //User artists
+        List<Long> bandList = Utils.newList();
 
         //Assign to user.
         user.setProfile(profile.getKey());
@@ -213,6 +217,7 @@ public class VirtualDatabase {
         user.setContent(content.getKey());
         user.setDiary(diary.getKey());
         user.setFriendKeys(friendList);
+        user.setBandKeys(bandList);
 
         //Put into database.
         data.put(user.getKey(), user);

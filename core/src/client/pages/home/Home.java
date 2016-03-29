@@ -42,7 +42,7 @@ public class Home extends HomeShell {
         final ImageButton b1 = new ImageButton(i1.getDrawable());
 
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
-        em.addExecutable(new ExecuteSetMusic((AudioCreator.songNameToMMusic.get("Sorry"))));
+//        em.addExecutable(new ExecuteSetMusic((AudioCreator.songNameToMMusic.get("Sorry"))));
 
         final ExecuteToTempState etts = new ExecuteToTempState(new NowPlaying(this));
 

@@ -93,14 +93,6 @@ public class FriendProfile extends FriendProfileShell {
         scrollpane2.setBounds(50 * StateManager.M,  350 * StateManager.M, 700 * StateManager.M, 150 * StateManager.M);
         stage.addActor(scrollpane2);
 
-
-
-        addFollowing(new Image(new Texture("Artist/Artist1.png")));
-        addFollowing(new Image(new Texture("Artist/Artist2.png")));
-        addFollowing(new Image(new Texture("Artist/Artist3.png")));
-        addFollowing(new Image(new Texture("Artist/Artist4.png")));
-        addFollowing(new Image(new Texture("Artist/Artist5.png")));
-
     }
 
     private void addPost(MDiaryPost thisPost, String post){
@@ -172,7 +164,7 @@ public class FriendProfile extends FriendProfileShell {
             if(!currentArtists.contains(key)){
                 MBand artist = ms.getModel(key);
 
-                MImage image = ms.getModel(artist.getBandImage());
+                MImage image = ms.getModel(/* artist.getBandImage() */ 101L);
 
                 Image artistImage = ImageManagerFactory.createImageManager().mImageToImage(image);
 

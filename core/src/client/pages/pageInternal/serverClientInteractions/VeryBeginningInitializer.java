@@ -120,7 +120,7 @@ public class VeryBeginningInitializer extends Talkers{
         pushProfileImages();
         pushDiaryImages();
         pushArtistImages();
-        pushMBands();
+//        pushMBands();
 
         GameLoop.ISPUSHING = true;
     }
