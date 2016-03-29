@@ -401,24 +401,6 @@ windowtest
   orig: 43, 43
   offset: 0, 0
   index: -1
-windowtest2
-  rotate: false
-  xy: 1288, 212
-  size: 43, 43
-  split: 34, 8, 41, 1
-  pad: 34, 8, 32, 10
-  orig: 43, 43
-  offset: 0, 0
-  index: -1
-windowtest
-  rotate: false
-  xy: 1288, 212
-  size: 43, 43
-  split: 6, 10, 8, 10
-  pad: 10, 10, 10, 10
-  orig: 43, 43
-  offset: 0, 0
-  index: -1
 windowtest132
   rotate: false
   xy: 1288, 212
@@ -434,6 +416,24 @@ windowtest5
   size: 43, 43
   split: 0, 3, 35, 7
   pad: 31, 10, 31, 10
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+windowtest2
+  rotate: false
+  xy: 1288, 212
+  size: 43, 43
+  split: 34, 8, 41, 1
+  pad: 34, 8, 32, 10
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+windowtest
+  rotate: false
+  xy: 1288, 212
+  size: 43, 43
+  split: 6, 10, 8, 10
+  pad: 10, 10, 10, 10
   orig: 43, 43
   offset: 0, 0
   index: -1
