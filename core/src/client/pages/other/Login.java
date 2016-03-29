@@ -2,7 +2,6 @@ package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.events.ActionEvent;
-import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.loginExecutable.ExecuteLogin;
 import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
@@ -13,16 +12,13 @@ import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import client.stateInterfaces.Executable;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.graphics.Texture;
 import driver.GameLoop;
+
 import static client.singletons.StateManager.M;
 
 /**

@@ -89,7 +89,7 @@ public class Tagged extends TaggedShell {
         s.add(t);
 
         //TODO fix this
-        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, picture, artistName));
+        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, picture, artistName, "description"));
 
         s.addListener(new ClickListener() {
             @Override
