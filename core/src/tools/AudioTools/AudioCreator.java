@@ -42,6 +42,8 @@ public final class AudioCreator {
 
     public static Map<String, List<MMusic>> artistToMMusic;
 
+    public static Map<Long, MAudio> keyToMAudio = new TreeMap<Long,MAudio>();
+
     public static void initializeAll(){
 
         albumToKey = Utils.newMap();
@@ -64,7 +66,7 @@ public final class AudioCreator {
             albumArt.setImage(fh.readBytes());
 
             albumArt.setName(s);
-            ms.pushModel(albumArt);
+            //ms.pushModel(albumArt);
         }
         //Top Singles, Tagged
 
@@ -86,7 +88,7 @@ public final class AudioCreator {
                 NSURL url = new NSURL(mp3.toURI().toString());
                 MMusic m = createMMusicFromFilePath(url);
                 assert(m.getAlbumArt()!=0L);
-                songNameToMMusic.put(m.getArtist(), m);
+                songNameToMMusic.put(m.getName(), m);
                 if (!artistToMMusic.containsKey(m.getArtist())) {
                     artistToMMusic.put(m.getArtist(), new ArrayList<MMusic>());
                 }
@@ -100,6 +102,7 @@ public final class AudioCreator {
 
 
         //Artists: The Weeknd, Justin Bieber, Justin Timberlake, Ed Sheeran, Maroon 5, Kanye West
+        System.out.println(songNameToMMusic.get("On Sight").getMusicKey());
         System.out.println("done");
 
     }
@@ -132,7 +135,7 @@ public final class AudioCreator {
         music.setKey(musicKey);
         musicKey++;
         music.setComments(Utils.newList());
-        ms.pushModel(music);
+        //ms.pushModel(music);
 
         return music;
     }
@@ -152,7 +155,7 @@ public final class AudioCreator {
         MAudio song = new MAudio();
 
         song.setKey(audioKey);
-        audioKey++;
+
         song.setmData(data.getBytes());
         AVAudioPlayer temp;
         try {
@@ -164,7 +167,9 @@ public final class AudioCreator {
             e.printStackTrace();
         }
 
-        ms.pushModel(song);
+        //ms.pushModel(song);
+        keyToMAudio.put(audioKey,song);
+        audioKey++;
         return song;
     }
 

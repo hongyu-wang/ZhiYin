@@ -5,7 +5,9 @@ import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.stateInterfaces.Executable;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
+import tools.AudioTools.AudioCreator;
 import tools.AudioTools.AudioManager;
+import tools.AudioTools.AudioPlayer;
 
 /**
  *
@@ -27,12 +29,13 @@ public class ExecuteSetMusic implements Executable {
     @Override
     public void execute() {
         ModelStorage ms = ModelStorageFactory.createModelStorage();
-        MAudio audioFile = ms.getModel(mMusic.getMusicKey());
+        MAudio audioFile = AudioCreator.keyToMAudio.get(mMusic.getMusicKey());
 
         if (audioFile == null){
             ms.requestModelFromServer(mMusic.getMusicKey());
             System.out.println("KEVIN YOU'RE FUCKING STUPID FROM: EXECUTE SET MUSIC");
         }else{
+            System.out.println("worked");
             AudioManager.changeMusic(audioFile);
         }
 

@@ -11,6 +11,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import server.model.media.MMusic;
+import tools.AudioTools.AudioCreator;
 
 import java.nio.ByteBuffer;
 
@@ -28,6 +29,7 @@ public class GameLoop extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+		AudioCreator.initializeAll();
 		stateManager = StateManager.getInstance();
 		Pages.initLogin();
         stateManager.changeState(Pages.LOGIN);

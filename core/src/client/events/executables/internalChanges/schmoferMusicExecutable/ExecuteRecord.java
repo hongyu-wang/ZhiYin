@@ -2,6 +2,8 @@ package client.events.executables.internalChanges.schmoferMusicExecutable;
 
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.stateInterfaces.Executable;
 import org.robovm.apple.foundation.NSData;
 import org.robovm.apple.foundation.NSErrorException;
@@ -18,9 +20,13 @@ public class ExecuteRecord implements Executable {
     private boolean save;
     private Friends2 friends2;
 
+    MAudio m;
+
     public ExecuteRecord(Friends2 friends2){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
         this.friends2 = friends2;
         save = false;
+        m = (MAudio)(ms.getModel(9000L));
     }
 
 
@@ -32,6 +38,8 @@ public class ExecuteRecord implements Executable {
 
     @Override
     public void execute() {
+
+
         AudioPlayer ap = AudioPlayer.getInstance();
         AudioRecorder ar = AudioRecorder.getInstance();
         if(!ar.isRecording()) {
@@ -47,10 +55,14 @@ public class ExecuteRecord implements Executable {
                 ap.stop();
 
             if (save){
-                ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
+
+
+
+                ExecutePlayMAudio epma = new ExecutePlayMAudio(m);
                 MessageBox soundbox = new MessageBox(epma, 1);
                 friends2.addMessage(soundbox);
                 System.out.println("music set");
+                System.out.println(m.getTrackLength());
             }
 
 
