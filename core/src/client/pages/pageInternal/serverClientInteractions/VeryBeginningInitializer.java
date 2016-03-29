@@ -85,9 +85,7 @@ public class VeryBeginningInitializer extends Talkers{
 
     @Override
     public void push() {
-        if(GameLoop.ISPHONE){
-            return;
-        }
+
         MImage image1 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Alice_After_The_War.png");
         MImage image2 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Benny_After_The_War.png");
         MImage image3 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Cindy_After_The_War.png");
@@ -99,10 +97,6 @@ public class VeryBeginningInitializer extends Talkers{
         image1.setName("Alice's Profile");
         image2.setName("Benny's Profile");
         image3.setName("Cindy's Profile");
-
-        modelStorage.pushModel(image1);
-        modelStorage.pushModel(image2);
-        modelStorage.pushModel(image3);
 
         MImage image4 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Alice_After_The_War.png");
         MImage image5 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Benny_After_The_War.png");
@@ -119,6 +113,12 @@ public class VeryBeginningInitializer extends Talkers{
         modelStorage.pushModel(image4);
         modelStorage.pushModel(image5);
         modelStorage.pushModel(image6);
+
+        modelStorage.pushModel(image1);
+        modelStorage.pushModel(image2);
+        modelStorage.pushModel(image3);
+
+        GameLoop.ISPUSHING = true;
     }
 
     private void pushImages(){
