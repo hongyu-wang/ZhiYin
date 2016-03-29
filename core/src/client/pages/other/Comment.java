@@ -3,12 +3,21 @@ package client.pages.other;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
+import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MMusic;
+import server.model.media.MText;
+import server.model.social.MDiaryPost;
+import server.model.social.MPost;
+import java.util.List;
+
+import tools.utilities.Utils;
 
 import static client.singletons.StateManager.M;
 
@@ -16,6 +25,9 @@ import static client.singletons.StateManager.M;
  * Created by blobbydude24 on 2016-03-28.
  */
 public class Comment extends CommentShell {
+    private MPost thisPost;
+
+    private List<Long> currentComments;
 
     private State previousState;
 
@@ -27,10 +39,24 @@ public class Comment extends CommentShell {
     private ScrollPane scrollpane;
     private Table comments;
 
-    public Comment(State previousState, String title, String subtitle){
+    public Comment(State previousState, MMusic post){
         this.previousState = previousState;
-        this.title = title;
-        this.subtitle = subtitle;
+
+        this.thisPost = post;
+        currentComments = Utils.<Long>newList();
+        this.title = post.getTitle();
+        this.subtitle = post.getArtist();
+        init();
+    }
+
+
+    public Comment(State previousState, MDiaryPost post){
+        this.previousState = previousState;
+        this.thisPost = post;
+        currentComments = Utils.<Long>newList();
+        this.title = post.getTitle();
+        MText tempText = ModelStorageFactory.createModelStorage().getModel(post.getText());
+        this.subtitle = tempText.getText();
         init();
     }
 
@@ -128,5 +154,24 @@ public class Comment extends CommentShell {
 
     public String getMessage(){
         return messageField.getText();
+    }
+
+    private void pullData(){
+
+    }
+
+    private void pullCommentsFromServer(){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        List<Long> commentKeys = thisPost.getComments();
+
+        boolean isUpdated = true;
+
+        for(long key: commentKeys){
+            if(!currentComments.contains(key)){
+
+
+                currentComments.add(key);
+            }
+        }
     }
 }

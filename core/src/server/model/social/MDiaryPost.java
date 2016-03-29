@@ -11,18 +11,9 @@ import server.model.media.*;
  * Created by Kevin Zheng on 2016-03-02.
  */
 public class MDiaryPost extends MPost {
-    private String title;
     private long audioKey;
     private long imageKey;
     private long musicKey;
-
-    /**Returns the title of the MusicDiary.
-     *
-     * @return  The title of the diary.
-     */
-    public String getTitle(){
-        return title;
-    }
 
     /**Returns the audioKey of the MusicDiary.
      *
@@ -47,8 +38,6 @@ public class MDiaryPost extends MPost {
     public long getMusicKey(){
         return this.musicKey;
     }
-
-    public void setTitle(String title){ this.title = title; }
 
     public void setAudioKey(long audioKey){
         this.audioKey = audioKey;
