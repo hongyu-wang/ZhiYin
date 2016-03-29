@@ -15,10 +15,9 @@ import tools.serverTools.generators.Tags;
  */
 public class RequestObject implements Net.HttpResponseListener {
     private ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
+    private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
     private Object rOjbect;
-    private int runMax = 100000000;
-    private int runTime = 0;
 
     public static RequestObject newInstance(){
         return new RequestObject();
@@ -34,7 +33,6 @@ public class RequestObject implements Net.HttpResponseListener {
         // LibGDX NET CLASS
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
         httpGet.setUrl("http://"+ModelStorage.ipAddress+":8081/webservice/getServerModel/" + key);
-        httpGet.setTimeOut(runMax);
         //httpGet.setHeader("Content-Type", "application/json");
         //httpGet.setHeader("X-Parse-Application-Id", app_id);
         //httpGet.setHeader("X-Parse-REST-API-Key", app_key);
@@ -51,12 +49,14 @@ public class RequestObject implements Net.HttpResponseListener {
         try {
             String json = httpResponse.getResultAsString();
             int tag = Integer.parseInt(json.substring(json.length()-4));
+            System.out.println(tag+1);
             String className = Tags.ID_TAGS.getName(tag);
+            System.out.println(className);
             json = json.substring(0, json.length()-4);
             rOjbect = objectMapper.readValue(json, Class.forName(className));
             modelStorage.setModelFromServer((ServerModel)rOjbect);
         } catch (Exception e) {
-
+            System.out.println(e);
         }
     }
 

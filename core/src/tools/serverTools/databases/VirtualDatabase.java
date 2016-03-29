@@ -123,12 +123,13 @@ public class VirtualDatabase {
         generateConversation(user1, user3);
         generateConversation(user2, user3);
 
-        MText alice_text = generateText("");
-        MText benny_text = generateText("");
-        MText cindy_text = generateText("");
+        MText alice_text = generateText("My name is Alice and I love this song.");
+        MText benny_text = generateText("My name is Benny and I love this song.");
+        MText cindy_text = generateText("My name is Benny and I love this song.");
 
-//        generateDiaryPost("Title", user1, alice_text, generateTestImage("ImageName", "ImagePath"), /*music*/ null);
-
+        generateStaticDiaryPost("Title1", user1, alice_text.getKey(), 2999999, 10000);
+        generateStaticDiaryPost("Title2", user2, benny_text.getKey(), 5999999, 10001);
+        generateStaticDiaryPost("Title3", user3, cindy_text.getKey(), 8999999, 10002);
     }
 
 
@@ -320,8 +321,18 @@ public class VirtualDatabase {
         data.put(one_two.getKey(), one_two);
     }
 
-    private void generateDiaryPost(String title, User creator, MText description, MImage image, MMusic music){
-        MDiaryPost diaryPost = MusicDiaryFactory.createMusicDiary().createDiaryPost(creator, image, music, title, description);
+    private void generateStaticDiaryPost(String title, User creator, long description, long image, long music){
+        MDiaryPost diaryPost = new MDiaryPost();
+
+        diaryPost.setTitle(title);
+
+        diaryPost.setCreator(creator.getKey());
+
+        diaryPost.setText(description);
+
+        diaryPost.setImageKey(image);
+
+        diaryPost.setMusicKey(music);
 
         diaryPost.setKey(generator.generateSerial());
 
