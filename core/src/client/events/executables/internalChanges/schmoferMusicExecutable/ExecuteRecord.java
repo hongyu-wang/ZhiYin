@@ -21,6 +21,7 @@ public class ExecuteRecord implements Executable {
     private boolean save;
     private Friends2 friends2;
 
+
     public ExecuteRecord(Friends2 friends2){
         ms = ModelStorageFactory.createModelStorage();
         this.friends2 = friends2;
@@ -49,7 +50,7 @@ public class ExecuteRecord implements Executable {
 
             if (save){
                 ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
-                MessageBox soundbox = new MessageBox(epma, 1);
+                MessageBox soundbox = new MessageBox(epma, 1, audio);
                 friends2.addMessage(soundbox);
                 System.out.println("music set");
 

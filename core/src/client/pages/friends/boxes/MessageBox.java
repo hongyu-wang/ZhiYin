@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import server.model.media.MAudio;
 
 
 /**
@@ -23,6 +24,8 @@ public class MessageBox {
 
     private Stack stack;
     private int byUser;
+    private MAudio workingMAudio;
+
 
     /**
      *
@@ -39,9 +42,11 @@ public class MessageBox {
      * @param e The executable associated with the button.
      * @param byUser See above.
      */
-    public MessageBox(Executable e, int byUser){
+    public MessageBox(Executable e, int byUser, MAudio audio){
         initTable(byUser);
         initSoundBox(e);
+        this.workingMAudio = audio;
+
     }
 
     private void initTable(int byUser){
@@ -111,4 +116,11 @@ public class MessageBox {
         return this.byUser;
     }
 
+    public MAudio getWorkingMAudio() {
+        return workingMAudio;
+    }
+
+    public boolean hasAudio(){
+        return workingMAudio != null;
+    }
 }
