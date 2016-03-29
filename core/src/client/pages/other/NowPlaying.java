@@ -2,6 +2,8 @@ package client.pages.other;
 
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMusic;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetTime;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -58,6 +60,7 @@ public class NowPlaying extends NowPlayingShell {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 pause();
+                new ExecutePlayMusic().execute();
             }
         });
 
@@ -67,6 +70,7 @@ public class NowPlaying extends NowPlayingShell {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 play();
+                new ExecutePlayMusic().execute();
             }
         });
 
@@ -112,7 +116,7 @@ public class NowPlaying extends NowPlayingShell {
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
         slider.setBounds((int) (M * 180), (int) (M * 400), (int) (M * 410), 10);
         ZhiYinRealChangeListener zhiYinRealChangeListener;
-        slider.addListener(zhiYinRealChangeListener = new ZhiYinRealChangeListener(new TestExecutable("eylmao")));
+        slider.addListener(zhiYinRealChangeListener = new ZhiYinRealChangeListener(new ExecuteSetTime(slider)));
         executeMoveSlider = new ExecuteMoveSlider(slider, zhiYinRealChangeListener);
 
         stage.addActor(slider);
