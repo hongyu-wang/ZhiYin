@@ -43,6 +43,7 @@ public class TopSingles extends TopSinglesShell{
             addSingle(name, AudioCreator.songNameToMMusic.get(name));
 
             if (i >= 10) break;
+            i++;
         }
 
 

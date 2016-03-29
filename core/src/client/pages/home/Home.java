@@ -93,6 +93,9 @@ public class Home extends HomeShell {
                 isTopSingle = true;
             }
             i++;
+            if (i >= 6){
+                break;
+            }
         }
 
 
