@@ -59,10 +59,11 @@ public class NowPlaying extends NowPlayingShell {
 
     protected void initAlbumArt(){
         ModelStorage ms = ModelStorageFactory.createModelStorage();
-
+        
         MImage image = ms.getModel(post.getAlbumArt());
 
         byte [] bytes = image.getImage();
+
 
         Pixmap px = new Pixmap(bytes, 0, bytes.length);
 

@@ -3,6 +3,7 @@ package client.pages.other;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
@@ -13,17 +14,18 @@ import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
 import server.model.media.MText;
 import server.model.social.MComment;
 import server.model.social.MDiaryPost;
 import server.model.social.MPost;
-import server.model.structureModels.ServerModel;
 import tools.utilities.Utils;
 
-import java.util.*;
 import java.util.List;
 
 import static client.singletons.StateManager.M;
@@ -132,17 +134,25 @@ public class Sec1 extends Sec1Shell {
     }
 
     public void addPost(String name, String time){
-        Table t = new Table();
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
         Image ripples = new Image(new Texture("Friends4/Ripples0@" + StateManager.M + ".png"));
-        Image play = new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png"));
+        ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png")).getDrawable());
+        final Executable e = new TestExecutable("play");
+        playButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                e.execute();
+            }
+        });
+
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 
-        t.add(label1).expand().left().padLeft(50 * StateManager.M).padTop(50 * StateManager.M);
-        t.add(ripples).width(328 * StateManager.M).height(66 * StateManager.M).padTop(50 * StateManager.M);
-        t.add(play).width(68 * StateManager.M).height(68 * StateManager.M).padTop(50 * StateManager.M);;
+        Table t = new Table();
+        t.add(label1).expand().center().left().padLeft(50 * StateManager.M);
+        t.add(ripples).width(328 * StateManager.M).height(66 * StateManager.M).center().padRight(100 * StateManager.M);
+        t.add(playButton).width(68 * StateManager.M).height(68 * StateManager.M).center().padRight(50 * StateManager.M);//.padLeft(50 * StateManager.M);
         t.row();
-        t.add(line).width(750 * StateManager.M).padLeft(100 * StateManager.M).padTop(50 * StateManager.M);
+        t.add(line).width(700 * StateManager.M).center().expandX().padLeft(600 * StateManager.M);
 
         posts.add(t).width(750 * StateManager.M).height(140 * StateManager.M);
         posts.row();

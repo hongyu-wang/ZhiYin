@@ -67,10 +67,11 @@ public class ModelStorage {
      * @return      True if it sucessfully pushed to server.
      */
     public void pushModel(ServerModel model){
+
+        models.put(model.getKey(), model);
         if(!GameLoop.ISPUSHING){
             return;
         }
-        models.put(model.getKey(), model);
         PostObject.newInstance().addModel(model, model.getClass().getCanonicalName());
     }
 
