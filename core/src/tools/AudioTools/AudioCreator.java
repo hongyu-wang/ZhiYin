@@ -2,8 +2,8 @@ package tools.AudioTools;
 
 import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import org.robovm.apple.avfoundation.AVAsset;
 import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVMetadataItem;
@@ -16,7 +16,6 @@ import tools.utilities.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +55,10 @@ public final class AudioCreator {
         for(String s : albumToKey.keySet()){
             MImage albumArt = new MImage();
             albumArt.setKey(albumToKey.get(s));
-            albumArt.setImage("Thumbnails/"+s+".jpg");
+
+            FileHandle fh = Gdx.files.internal("Thumbnails/"+s+".jpg");
+
+            albumArt.setImage(fh.readBytes());
             albumArt.setName(s);
             ms.pushModel(albumArt);
         }

@@ -1,14 +1,10 @@
 package tools.serverTools.databases;
 
-import com.badlogic.gdx.graphics.Texture;
 import server.model.media.*;
 import server.model.social.MConversation;
 import server.model.social.MDiaryPost;
 import server.model.structureModels.ServerModel;
 import server.model.user.*;
-import server.services.factories.MusicDiaryFactory;
-import server.services.factories.TextManagerFactory;
-import server.services.interfaces.models.TextManager;
 import tools.AudioTools.AudioCreator;
 import tools.serverTools.generators.SerialGenerator;
 
@@ -73,9 +69,9 @@ public class VirtualDatabase {
         //TODO created all media here.
 
         //Image
-        MImage image1 = generateTestImage("Alice's Profile", "UserProfiles//Alice_After_The_War.png");// TODO path
-        MImage image2 = generateTestImage("Benny's Profile", "UserProfiles//Benny_After_The_War.png");// TODO path
-        MImage image3 = generateTestImage("Cindy's Profile", "UserProfiles//Cindy_After_The_War.png");// TODO path
+//        MImage image1 = generateTestImage("Alice's Profile", "UserProfiles//Alice_After_The_War.png");// TODO path
+//        MImage image2 = generateTestImage("Benny's Profile", "UserProfiles//Benny_After_The_War.png");// TODO path
+//        MImage image3 = generateTestImage("Cindy's Profile", "UserProfiles//Cindy_After_The_War.png");// TODO path
 
         //Audio
 //        MAudio audio1 = generateTestAudio("Audio_1.mp3");// TODO path
@@ -109,9 +105,9 @@ public class VirtualDatabase {
         UserProfile profile2 = (UserProfile)data.get(user2.getProfile());
         UserProfile profile3 = (UserProfile)data.get(user3.getProfile());
 
-        profile1.setImageKey(image1.getKey());
-        profile2.setImageKey(image2.getKey());
-        profile3.setImageKey(image3.getKey());
+//        profile1.setImageKey(image1.getKey());
+//        profile2.setImageKey(image2.getKey());
+//        profile3.setImageKey(image3.getKey());
     }
 
     private void initSocialData(){
@@ -138,10 +134,6 @@ public class VirtualDatabase {
         image1.setKey(2999999);
         image2.setKey(5999999);
         image3.setKey(8999999);
-
-        image1.setImage("UserProfiles//Alice_After_The_War.png");
-        image2.setImage("UserProfiles//Benny_After_The_War.png");
-        image3.setImage("UserProfiles//Cindy_After_The_War.png");
 
         data.put(image1.getKey(), image1);
         data.put(image2.getKey(), image2);
@@ -272,7 +264,7 @@ public class VirtualDatabase {
 
         image.setName(name);
 
-        image.setImage(path);
+//        image.setImage(path);
 
         image.setName(name);
 

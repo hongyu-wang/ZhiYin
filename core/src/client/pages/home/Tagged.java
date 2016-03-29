@@ -41,15 +41,24 @@ public class Tagged extends TaggedShell {
         tagName.setPosition(250, 1217);
         stage.addActor(tagName);
 
+        Table tagTable = new Table();
+        tagTable.setBounds(117 * StateManager.M, 1217 * StateManager.M, 633 * StateManager.M, 117 * StateManager.M);
+        stage.addActor(tagTable);
+
+        Label tagLabel = new Label(tag, SkinSingleton.getInstance());
+        tagTable.add(tagLabel).expand();
+
         table = new Table();
-        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1000* StateManager.M);
+        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100* StateManager.M);
         table.top();
 
         scrollpane = new ScrollPane(table);
 
-        scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1000 * StateManager.M);
+        scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
 
         stage.addActor(scrollpane);
+
+        //scrollpane.layout();
 
         addArtist("Artist/Artist1.png", "Artist1");
         addArtist("Artist/Artist2.png", "Artist2");
@@ -69,10 +78,10 @@ public class Tagged extends TaggedShell {
         Image picture = new Image(new Texture(picturePath));
 
         //t.add(picture).expand().left().padLeft(50 * StateManager.M);
-        t.add(single).expand().left().padLeft(10 * StateManager.M);
+        t.add(single).expand().left().padLeft(50 * StateManager.M).padTop(50 * StateManager.M);
         t.add(i).expand().right().padRight(50 * StateManager.M);
         t.row();
-        t.add(line);
+        t.add(line).width(750 * StateManager.M).padLeft(100 * StateManager.M).padTop(50 * StateManager.M);
 
         Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
 
@@ -91,6 +100,8 @@ public class Tagged extends TaggedShell {
 
         table.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
         table.row();
+
+        //scrollpane.layout();
     }
 
     @Override
