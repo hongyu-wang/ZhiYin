@@ -24,11 +24,15 @@ public class MyProfile extends MyProfileShell {
 
     private String name;
 
-    private Image image;
+    private Image profilePic;
 
+    //private ArrayList<Image> artistImages = new ArrayList<>();
+    //private ArrayList<ImageButton> artistButtons = new ArrayList<>();
+    //private ArrayList<ImageButton> removeButtons = new ArrayList<>();
 
     public MyProfile(){
 //        pull from server for name and image
+
         init();
     }
 
@@ -65,11 +69,11 @@ public class MyProfile extends MyProfileShell {
         addPost("post4");
         addPost("post5");
 
-        addFollowing(new Image(new Texture("Artist/Artist1.png")));
-        addFollowing(new Image(new Texture("Artist/Artist2.png")));
-        addFollowing(new Image(new Texture("Artist/Artist3.png")));
-        addFollowing(new Image(new Texture("Artist/Artist4.png")));
-        addFollowing(new Image(new Texture("Artist/Artist5.png")));
+//        (new Image(new Texture("Artist/Artist1.png")));
+//        addFollowing(new Image(new Texture("Artist/Artist2.png")));
+//        addFollowing(new Image(new Texture("Artist/Artist3.png")));
+//        addFollowing(new Image(new Texture("Artist/Artist4.png")));
+//        addFollowing(new Image(new Texture("Artist/Artist5.png")));
 
     }
 
@@ -103,9 +107,27 @@ public class MyProfile extends MyProfileShell {
         table.row();
     }
 
-    public void addFollowing(Image image){
-        following.add(image).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
-    }
+//    public void follow(ArtistProfile profile){
+//        ImageButton artistButton = new ImageButton(profile.getImage().getDrawable());
+//        artistButton.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                new ExecuteToTempState(profile).execute();
+//            }
+//        });
+//
+//        ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
+//        artistButton.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                artistButton.remove();
+//                removeButton.remove();
+//            }
+//        });
+//
+//        following.add(removeButton).width(56 * StateManager.M).height(56 * StateManager.M).padRight(50 * StateManager.M);
+//        following.add(artistButton).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
+//    }
 
     @Override
     public void reset() {

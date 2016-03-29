@@ -45,13 +45,16 @@ public class Artist extends ArtistShell {
         table.top();
 
         scrollpane = new ScrollPane(table);
-
         scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1000 * StateManager.M);
+        scrollpane.setScrollingDisabled(true, false);
 
         stage.addActor(scrollpane);
 
-        //table.setDebug(true);
-
+        addArtist(new Image(new Texture("Artist/Artist1.png")), "Artist1");
+        addArtist(new Image(new Texture("Artist/Artist2.png")), "Artist2");
+        addArtist(new Image(new Texture("Artist/Artist3.png")), "Artist3");
+        addArtist(new Image(new Texture("Artist/Artist4.png")), "Artist4");
+        addArtist(new Image(new Texture("Artist/Artist5.png")), "Artist5");
         addArtist(new Image(new Texture("Artist/Artist1.png")), "Artist1");
         addArtist(new Image(new Texture("Artist/Artist2.png")), "Artist2");
         addArtist(new Image(new Texture("Artist/Artist3.png")), "Artist3");
@@ -60,83 +63,35 @@ public class Artist extends ArtistShell {
     }
 
     public void addArtist(Image profilePic, String artistName){
-        // Create picTable
-        Table picTable = new Table();
-        table.add(picTable).width(50*M).height(150*M);
-        picTable.add(profilePic).width(50*M).height(50*M).expandY().padTop(50*M);
+        Stack right = new Stack();
 
-        // Create stack rest
-        Stack rest = new Stack();
-        rest.setSize(650*M, 150*M);
-
-        // Add BlackBG to rest
-        Table restTable1 = new Table();
-        restTable1.add(new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png")));
-        rest.add(restTable1);
-
-        // Add table with artist name and enter picture to rest
-        Table restTable2 = new Table();
-        Label artistLabel = new Label(artistName, SkinSingleton.getInstance());
-        Image enter = new Image(new Texture("Home/Enter@" + M + ".png"));
-        restTable2.add(artistLabel).expandX().left().padLeft(10*M).padTop(50*M);
-        restTable2.add(enter).width(16*M).height(26*M).expandX().right().padRight(50*M).padTop(50*M);
-        rest.add(restTable2);
-
-        // Add picTable and rest to artistTable
-        Table artistTable = new Table();
-        artistTable.top();
-        artistTable.add(picTable).width(50*M).height(150 * M);
-        artistTable.add(rest).width(650*M).height(150*M);
-        artistTable.row();
-        artistTable.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(700*M).expandX().padLeft(50*M).padTop(50*M);
-
-        // Add click functionality for artistTable
-        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, profilePic, artistName));
-        artistTable.addListener(new ClickListener() {
+        String description = "Here is a sentence that is a description of the artist and stuff and bleh and stuff and bleh and stuff and bleh and more stuff and more bleh.";
+        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, profilePic, artistName, description));
+        right.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 e.execute();
             }
         });
 
-        // Add artistTable to table
-        table.add(artistTable).width(700*M).height(200*M);
+        Table t1 = new Table();
+        t1.add(new Image(new Texture("Home/BlackBG@" + M + ".png"))).width(600 * M).height(150*M);
+        right.add(t1);
 
+        Table t2 = new Table();
+        t2.add(new Label(artistName, SkinSingleton.getInstance())).expand().center().left().padLeft(50*M);
+        t2.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26*M).expand().center().right().padRight(50*M);
+        right.add(t2);
 
-//        Stack s = new Stack();
-//
-//        Table t = new Table();
-//        t.top();
-//
-//        Label single = new Label(artistName, SkinSingleton.getInstance());
-//        Image enter = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
-//        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
-//
-//        t.add(profilePic);//.width(50 * StateManager.M).height(50 * StateManager.M);//expandX().left().padLeft(50 * StateManager.M).padTop(50 * StateManager.M);
-////        t.add(single).expandX().left().padLeft(10 * StateManager.M).padTop(50 * StateManager.M);
-////        t.add(enter).width(16 * StateManager.M).height(26 * StateManager.M).expandX().right().padRight(50 * StateManager.M).padTop(50 * StateManager.M);
-////        t.row();
-////        t.add(line).width(700 * StateManager.M).expandX().padLeft(50 * StateManager.M).padTop(50 * StateManager.M);
-//
-//        Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
-//        i2.setSize(750 * StateManager.M, 300 * StateManager.M);
-//
-//        //s.add(i2);
-//        s.add(t);
-//        //t.setSize(750 * StateManager.M, 300 * StateManager.M);
-//
-//        //TODO fix this
-//        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, profilePic, artistName));
-//
-//        s.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                e.execute();
-//            }
-//        });
-//
-//        table.add(s).width(750 * StateManager.M).height(300 * StateManager.M);
-//        table.row();
+        Table artistTable = new Table();
+        artistTable.top();
+        artistTable.add(profilePic).width(100*M).height(100*M).expand().center().padLeft(50*M);
+        artistTable.add(right).width(600*M).height(150*M);
+
+        table.add(artistTable).width(750*M).height(150*M);
+        table.row();
+        table.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M);
+        table.row();
     }
 
     @Override
