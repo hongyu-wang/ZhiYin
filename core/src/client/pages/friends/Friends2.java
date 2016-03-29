@@ -3,6 +3,7 @@ package client.pages.friends;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.conversation.ExecuteSendAudioMessage;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
@@ -149,16 +150,14 @@ public class Friends2 extends Friends2Shell{
 
     }
 
-
-
-
-
     public void addMessage(MessageBox box){
         table.add(box.getStack()).width(480 * StateManager.M).padTop(56 * StateManager.M).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
         table.row().expandX();
         scrollpane.layout();
         scrollpane.setScrollPercentY(110);
         stage.act();
+
+        new ExecuteSendAudioMessage(this, box).execute();
     }
 
     @Override
