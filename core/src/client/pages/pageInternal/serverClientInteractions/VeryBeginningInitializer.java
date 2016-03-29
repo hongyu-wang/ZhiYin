@@ -115,12 +115,12 @@ public class VeryBeginningInitializer extends Talkers{
     @Override
     public void push() {
 
-//        AudioCreator.initializeAll();
+        AudioCreator.initializeAll();
 
         pushProfileImages();
         pushDiaryImages();
         pushArtistImages();
-//        pushMBands();
+        pushMBands();
 
         GameLoop.ISPUSHING = true;
     }
