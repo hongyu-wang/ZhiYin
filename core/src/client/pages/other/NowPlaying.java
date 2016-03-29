@@ -1,5 +1,6 @@
 package client.pages.other;
 
+import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMusic;
@@ -7,6 +8,8 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Executable;
+import client.tools.Delay;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -29,6 +32,9 @@ public class NowPlaying extends NowPlayingShell {
     private Slider slider;
     private boolean verbose;
 
+    private Delay delay;
+
+
     private ImageButton pauseButton;
     private ImageButton playButton;
 
@@ -47,6 +53,8 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     protected void init() {
         super.init();
+
+        delay = new Delay(10);
 
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
@@ -109,17 +117,38 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     public void update(float dt){
         super.update(dt);
-        executeMoveSlider.execute();
+        if (delay.isCompleted())
+            executeMoveSlider.execute();
+
+        delay.tick();
     }
 
     public void initializeSlider(){
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
         slider.setBounds((int) (M * 180), (int) (M * 400), (int) (M * 410), 10);
         ZhiYinRealChangeListener zhiYinRealChangeListener;
-        slider.addListener(zhiYinRealChangeListener = new ZhiYinRealChangeListener(new ExecuteSetTime(slider)));
+        ExecutableMultiplexer em = new ExecutableMultiplexer();
+        em.addExecutable(this::resetDelay);
+        em.addExecutable(new ExecuteSetTime(slider));
+        /* TODO If the shit here doesn't work, uncomment this.
+        em.addExecutable(new Executable(){
+
+            @Override
+            public void execute() {
+                resetDelay();
+            }
+        });*/
+
+
+
+        slider.addListener(zhiYinRealChangeListener = new ZhiYinRealChangeListener(em));
         executeMoveSlider = new ExecuteMoveSlider(slider, zhiYinRealChangeListener);
 
         stage.addActor(slider);
     }
 
+
+    public void resetDelay() {
+        delay.reset();
+    }
 }
