@@ -98,6 +98,7 @@ public class Comment extends CommentShell {
         table.row();
         table.add(label2).expand();
         stage.addActor(table);
+
     }
 
     private void addMessageField(){
