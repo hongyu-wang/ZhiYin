@@ -27,6 +27,11 @@ public class MMessage extends ServerModel {
     private long timeStamp;
 
     /**
+     * Long key of audio.
+     */
+    private long audioKey;
+
+    /**
      * Id of users who have seen the message
      */
     private List<Long> seenBy;
@@ -63,4 +68,11 @@ public class MMessage extends ServerModel {
         this.timeStamp = timeStamp;
     }
 
+    public long getAudioKey() {
+        return audioKey;
+    }
+
+    public void setAudioKey(long audioKey) {
+        this.audioKey = audioKey;
+    }
 }
