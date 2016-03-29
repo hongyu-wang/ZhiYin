@@ -3,8 +3,6 @@ package client.pages.friends;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.TestExecutable;
-import client.events.executables.internalChanges.conversation.ExecutePushMessage;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
@@ -90,56 +88,68 @@ public class Friends2 extends Friends2Shell{
 
         stage.addActor(scrollpane);
 
+        setUpRecord();
 
-        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
-
-        DragButton button = new DragButton(this, (int)(500*M));
-        button.setBounds(0, 12341234, 1234, 1234);
-
-        image.setBounds(32 * M, 98 * M, (750 - 64) * M, 236 * M);
-
-
-        ExecuteRecord er = new ExecuteRecord(this);
-
-        ExecutableMultiplexer em2 = new ExecutableMultiplexer();
-        em2.addExecutable(new ExecuteRemoveDragButton(button));
-        em2.addExecutable(new ExecuteRemoveImage(image));
-        em2.addExecutable(new TestExecutable("FUCK THIS LIFE 2"));
-        em2.addExecutable(new ExecuteSetSave(er));
-
-        ExecutableMultiplexer em4 = new ExecutableMultiplexer();
-        em4.addExecutable(new ExecuteRemoveDragButton(button));
-        em4.addExecutable(new ExecuteRemoveImage(image));
-        em4.addExecutable(new TestExecutable("FUCK THIS LIFE 3"));
-
-
-        button.setReleaseExecutable(em2);
-        button.setDragExecutable(em4);
-
-        Button sendButton = new Button(ModelStorageFactory.createModelStorage());
+        Button sendButton = new Button(this);
         sendButton.setBounds(604 + 1, 31, 122, 60);
         ExecutableMultiplexer em3 = new ExecutableMultiplexer();
-        em3.addExecutable(new ExecutePushMessage(this));
         em3.addExecutable(new ExecuteSendMessage(this));
         em3.addExecutable(new ExecuteReset(this));
-        em3.addExecutable(er);
         sendButton.setExecutable(em3);
         add(sendButton);
 
         updatePage = new ExecuteUpdateMessages(this);
 
-        add(button);
-        Button recordButton = new Button(this);
-        recordButton.setBounds(32, 31, 122, 60);
-        ExecutableMultiplexer em = new ExecutableMultiplexer();
-        em.addExecutable(new ExecuteAddDragButton(button, 32, 98, 750-64, 236));
-        em.addExecutable(new ExecuteAddImage(stage, image));
-        em.addExecutable(new TestExecutable("FUCK THIS LIFE"));
-        recordButton.setExecutable(em);
-        add(recordButton);
+
 
         initititititit();
     }
+
+
+    private void setUpRecord(){
+
+        DragButton button = new DragButton(this, (int)(500*M));
+
+        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
+
+        ExecuteRecord record = new ExecuteRecord(this);
+
+        Button recordButton = new Button(this);
+        recordButton.setBounds(32, 31, 122, 60);
+        ExecutableMultiplexer em = new ExecutableMultiplexer();
+        em.addExecutable(new ExecuteAddDragButton(button, 32, 98, 750 - 64, 236));
+        em.addExecutable(new ExecuteAddImage(stage, image));
+        em.addExecutable(record);
+        recordButton.setExecutable(em);
+        add(recordButton);
+
+
+        button.setBounds(0, 12341234, 1234, 1234);
+
+        image.setBounds(32 * M, 98 * M, (750 - 64) * M, 236 * M);
+
+
+        ExecutableMultiplexer release = new ExecutableMultiplexer();
+        release.addExecutable(new ExecuteRemoveDragButton(button));
+        release.addExecutable(new ExecuteRemoveImage(image));
+        release.addExecutable(new ExecuteSetSave(record));
+
+
+        ExecutableMultiplexer drag = new ExecutableMultiplexer();
+        drag.addExecutable(new ExecuteRemoveDragButton(button));
+        drag.addExecutable(new ExecuteRemoveImage(image));
+
+
+
+        button.setReleaseExecutable(release);
+        button.setDragExecutable(drag);
+
+
+        add(button);
+
+    }
+
+
 
 
 
