@@ -18,6 +18,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by Kevin on 3/11/2016.
@@ -55,18 +56,20 @@ public final class AudioCreator {
         for(String s : albumToKey.keySet()){
             MImage albumArt = new MImage();
             albumArt.setKey(albumToKey.get(s));
-
-            FileHandle fh = Gdx.files.internal("Thumbnails/"+s+".jpg");
+            String q = s;
+            if(q.equals("The 20/20 Experience"))
+                q = "The 20:20 Experience";
+            FileHandle fh = Gdx.files.internal("Thumbnails/"+q+".jpg");
 
             albumArt.setImage(fh.readBytes());
 
             albumArt.setName(s);
             ms.pushModel(albumArt);
         }
+        //Top Singles, Tagged
 
-
-        songNameToMMusic = Utils.newMap();
-        artistToMMusic = Utils.newMap();
+        songNameToMMusic = new TreeMap<String,MMusic>();
+        artistToMMusic = new TreeMap<String, List<MMusic>>();
 
 
         String filePath = "/Users/Paul/ZhiYin/android/assets/MusicAssets";
@@ -83,9 +86,6 @@ public final class AudioCreator {
                 NSURL url = new NSURL(mp3.toURI().toString());
                 MMusic m = createMMusicFromFilePath(url);
                 assert(m.getAlbumArt()!=0L);
-
-                //ms.pushModel(m);
-
                 songNameToMMusic.put(m.getArtist(), m);
                 if (!artistToMMusic.containsKey(m.getArtist())) {
                     artistToMMusic.put(m.getArtist(), new ArrayList<MMusic>());
@@ -126,12 +126,14 @@ public final class AudioCreator {
 
     public static MMusic createMMusicFromFilePath(NSURL filePath){
         MAudio audio = createMAudio(NSData.read(filePath));
-        MMusic music = new MMusic();
+
+        MMusic music = getMetaData(filePath);
         music.setMusicKey(audio.getKey());
         music.setKey(musicKey);
         musicKey++;
-        music = getMetaData(filePath);
-        //ms.pushModel(music);
+        music.setComments(Utils.newList());
+        ms.pushModel(music);
+
         return music;
     }
 
@@ -162,7 +164,7 @@ public final class AudioCreator {
             e.printStackTrace();
         }
 
-        //ms.pushModel(song);
+        ms.pushModel(song);
         return song;
     }
 
