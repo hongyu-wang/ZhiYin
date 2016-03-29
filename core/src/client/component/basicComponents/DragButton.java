@@ -19,18 +19,21 @@ public class DragButton extends Component implements Dragable {
     private Executable dragExecute, releaseExecute, returnExecutable;
     private ActionMonitor monitor;
     private float limit;
+    private boolean disable;
     private boolean playAnimation;
     private static long begin;
     public boolean remove = false;
     public DragButton(ActionMonitor monitor, int limit) {
         this.monitor = monitor;
         this.limit = limit * M;
+
     }
 
     @Override
     protected void init() {
         playAnimation = false;
         begin = 0;
+        disable = false;
     }
 
     public void draw(Batch sb, float parentAlpha) {
@@ -49,20 +52,23 @@ public class DragButton extends Component implements Dragable {
 
     public void drag(){
         returnExecutable = dragExecute;
-        if (InputListener.getInstance().getMouseY() > limit)
+        if (InputListener.getInstance().getMouseY() > limit && !disable) {
             monitor.actionPerformed(new ActionEvent(this));
+            disable = true;
+        }
     }
 
     public void release(){
-        System.out.println(System.currentTimeMillis() - begin);
-        if (System.currentTimeMillis() - begin > 200){
+        if (System.currentTimeMillis() - begin > 200 && !disable){
 
             returnExecutable = releaseExecute;
 
             monitor.actionPerformed(new ActionEvent(this));
-        } else{
+            disable = true;
+        } else if (!disable){
             returnExecutable = dragExecute;
             monitor.actionPerformed((new ActionEvent(this)));
+            disable = true;
 
         }
     }
@@ -92,6 +98,10 @@ public class DragButton extends Component implements Dragable {
     @Override
     public void update(float dt) {
 
+    }
+
+    public void reset(){
+        disable = false;
     }
 
     public static void setBegin(long begin) {
