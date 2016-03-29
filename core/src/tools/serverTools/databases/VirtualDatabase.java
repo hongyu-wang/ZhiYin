@@ -36,6 +36,7 @@ public class VirtualDatabase {
         initUserData();
         initMediaData();
         initSocialData();
+        initHashtags();
     }
 
     private void initUserData(){
@@ -63,6 +64,70 @@ public class VirtualDatabase {
 
         user3.getFriendKeys().add(user1.getKey());
         user3.getFriendKeys().add(user2.getKey());
+    }
+
+    private void initHashtags(){
+
+        //TODO add music keys
+
+        MHashtag hashtag1 = new MHashtag();
+        hashtag1.setKey(20000);
+        hashtag1.setHashtag("Sorry");
+
+        MHashtag hashtag2 = new MHashtag();
+        hashtag2.setKey(20001);
+        hashtag2.setHashtag("MissingU");
+
+        MHashtag hashtag3 = new MHashtag();
+        hashtag3.setKey(20002);
+        hashtag3.setHashtag("Weeknd");
+
+        MHashtag hashtag4 = new MHashtag();
+        hashtag4.setKey(20003);
+        hashtag4.setHashtag("RnB");
+
+        MHashtag hashtag5 = new MHashtag();
+        hashtag5.setKey(20004);
+        hashtag5.setHashtag("Pop");
+
+        MHashtag hashtag6 = new MHashtag();
+        hashtag5.setKey(20005);
+        hashtag5.setHashtag("M5");
+
+        MHashtag hashtag7 = new MHashtag();
+        hashtag5.setKey(20006);
+        hashtag5.setHashtag("Bieber");
+
+        MHashtag hashtag8 = new MHashtag();
+        hashtag5.setKey(20007);
+        hashtag5.setHashtag("Kanye");
+
+        MHashtag hashtag9 = new MHashtag();
+        hashtag5.setKey(20008);
+        hashtag5.setHashtag("Ed");
+
+        MHashtag hashtag10 = new MHashtag();
+        hashtag5.setKey(20009);
+        hashtag5.setHashtag("LoveYourself");
+
+
+
+
+
+
+
+        data.put(hashtag1.getKey(),hashtag1);
+        data.put(hashtag2.getKey(),hashtag2);
+        data.put(hashtag3.getKey(),hashtag3);
+        data.put(hashtag4.getKey(),hashtag4);
+        data.put(hashtag5.getKey(),hashtag5);
+        data.put(hashtag6.getKey(),hashtag6);
+        data.put(hashtag7.getKey(),hashtag7);
+        data.put(hashtag8.getKey(),hashtag8);
+        data.put(hashtag9.getKey(),hashtag9);
+        data.put(hashtag10.getKey(),hashtag10);
+
+
     }
 
     private void initMediaData(){
@@ -252,6 +317,7 @@ public class VirtualDatabase {
         image.setName(name);
 
         data.put(image.getKey(), image);
+
 
         return image;
     }
