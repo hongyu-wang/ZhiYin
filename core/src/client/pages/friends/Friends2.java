@@ -10,6 +10,8 @@ import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAd
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
+import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.modelStorage.ModelStorage;
@@ -98,8 +100,16 @@ public class Friends2 extends Friends2Shell{
         ExecutableMultiplexer em2 = new ExecutableMultiplexer();
         em2.addExecutable(new ExecuteRemoveDragButton(button));
         em2.addExecutable(new ExecuteRemoveImage(image));
+        em2.addExecutable(new ExecuteRecord(false, this));
+
+        ExecutableMultiplexer em4 = new ExecutableMultiplexer();
+        em4.addExecutable(new ExecuteRemoveDragButton(button));
+        em4.addExecutable(new ExecuteRemoveImage(image));
+        em4.addExecutable(new ExecuteRecord(true, this));
+
+
         button.setReleaseExecutable(em2);
-        button.setDragExecutable(em2);
+        button.setDragExecutable(em4);
 
         Button sendButton = new Button(ModelStorageFactory.createModelStorage());
         sendButton.setBounds(604 + 1, 31, 122, 60);
