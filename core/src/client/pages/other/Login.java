@@ -122,8 +122,9 @@ public class Login extends State {
         vb.update(0);
         if (vb.isUpdated()) {
             Pages.initClass();
-
             new ExecuteChangePage(Pages.HOME).execute();
+            vb.push();
+
         }
         else{
             vb.pull();

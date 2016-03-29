@@ -50,6 +50,8 @@ public class MessageBox {
 
         //stack.setX((32 + 214 * byUser) * StateManager.M);
         stack.setWidth(480 * StateManager.M);
+
+        stack.layout();
     }
 
     private void initTextBox(String message){
@@ -71,6 +73,8 @@ public class MessageBox {
         stack.add(table2);
 
         stack.setHeight(height * StateManager.M);
+
+        stack.layout();
     }
 
     private void initSoundBox(final Executable e){
@@ -95,6 +99,8 @@ public class MessageBox {
         table.add(image3).expand().right().padRight(25 * StateManager.M);
 
         stack.add(table);
+
+        stack.layout();
     }
 
     public Stack getStack(){

@@ -9,6 +9,7 @@ import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -95,7 +96,7 @@ public class Friends4 extends Friends4Shell{
                 if (pt.isUpdated()) {
                     String friendName = pt.getName();
 
-                    Image image = new Image(new Texture(pt.getProfileImage()));
+                    Image image = new Image(new Texture(new Pixmap(pt.getProfileImage(), 0 ,pt.getProfileImage().length)));
 
                     addFriend(friendName, image);
                 }

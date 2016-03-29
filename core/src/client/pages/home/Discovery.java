@@ -1,11 +1,14 @@
 package client.pages.home;
 
 
-import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import static client.singletons.StateManager.M;
@@ -65,10 +68,11 @@ public class Discovery extends DiscoveryShell {
     public void addTag(String tagName){
 //        Label tag = new Label(tag, SkinSingleton.getInstance());
         TextButton tag = new TextButton(tagName, SkinSingleton.getInstance());
+        final ExecuteToTempState e = new ExecuteToTempState(new Tagged(this, tagName));
         tag.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new TestExecutable("tagName").execute();
+                e.execute();
             }
         });
 

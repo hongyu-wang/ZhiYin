@@ -2,8 +2,8 @@ package tools.AudioTools;
 
 import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import org.robovm.apple.avfoundation.AVAsset;
 import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVMetadataItem;
@@ -16,7 +16,6 @@ import tools.utilities.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +54,13 @@ public final class AudioCreator {
 
         for(String s : albumToKey.keySet()){
             MImage albumArt = new MImage();
+            albumArt.setKey(albumToKey.get(s));
+
+            FileHandle fh = Gdx.files.internal("Thumbnails/"+s+".jpg");
+
+            albumArt.setImage(fh.readBytes());
+            albumArt.setName(s);
+            ms.pushModel(albumArt);
         }
 
 
@@ -62,7 +68,7 @@ public final class AudioCreator {
         artistToMMusic = Utils.newMap();
 
 
-        String filePath = "/Users/kevin/desktop/ZhiYin/android/assets/MusicAssets";
+        String filePath = "/Users/Paul/ZhiYin/android/assets/MusicAssets";
 
         NSArray urls = new NSArray();
         try {
@@ -93,7 +99,7 @@ public final class AudioCreator {
 
 
         //Artists: The Weeknd, Justin Bieber, Justin Timberlake, Ed Sheeran, Maroon 5, Kanye West
-
+        System.out.println("done");
 
     }
 

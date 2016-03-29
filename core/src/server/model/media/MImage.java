@@ -15,7 +15,7 @@ public class MImage extends ServerModel {
     /**
      * The buffered image.
      */
-    String image;
+    byte[] image;
 
     /**Returns the name or title of this image.
      *
@@ -29,7 +29,7 @@ public class MImage extends ServerModel {
      *
      * @return  The image in a Texture.
      */
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
@@ -37,7 +37,7 @@ public class MImage extends ServerModel {
         this.name = name;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

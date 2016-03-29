@@ -5,13 +5,18 @@ import client.singletons.MainBatch;
 import client.singletons.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import java.nio.ByteBuffer;
 
 public class GameLoop extends ApplicationAdapter {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
+
+	public static final boolean ISMAC = true;
+
 	public static final int WIDTH = 750;
 
 	public static final int HEIGHT = 1334;
@@ -43,8 +48,21 @@ public class GameLoop extends ApplicationAdapter {
 
 
         spriteBatch.setProjectionMatrix(primary.combined);
+		Texture testTexture = new Texture(Gdx.files.internal("myProfile.jpg"));
+//		TextureData textData = testTexture.getTextureData();
+//		textData.prepare();
+//		Pixmap map = textData.consumePixmap();
+//		ByteBuffer byteBuffer  = map.getPixels();
+//		byte[] byteArray = byteBuffer.array();
+		FileHandle file = Gdx.files.internal("myProfile.jpg");
+		byte[] byteArray = file.readBytes();
+		Pixmap newMap = new Pixmap(byteArray,0, byteArray.length);
+		Texture please = new Texture(newMap);
+
+
 
 		spriteBatch.begin();
+
 		stateManager.draw();
 		stateManager.update(Gdx.graphics.getDeltaTime());
 		spriteBatch.end();
