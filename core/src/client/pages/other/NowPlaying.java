@@ -128,6 +128,7 @@ public class NowPlaying extends NowPlayingShell {
         slider.setBounds((int) (M * 180), (int) (M * 400), (int) (M * 410), 10);
         ZhiYinRealChangeListener zhiYinRealChangeListener;
         ExecutableMultiplexer em = new ExecutableMultiplexer();
+        em.addExecutable(this::resetDelay);
         em.addExecutable(new ExecuteSetTime(slider));
         /* TODO If the shit here doesn't work, uncomment this.
         em.addExecutable(new Executable(){
@@ -138,7 +139,7 @@ public class NowPlaying extends NowPlayingShell {
             }
         });*/
 
-        em.addExecutable(this::resetDelay);
+
 
         slider.addListener(zhiYinRealChangeListener = new ZhiYinRealChangeListener(em));
         executeMoveSlider = new ExecuteMoveSlider(slider, zhiYinRealChangeListener);
