@@ -24,14 +24,11 @@ public class Artist extends ArtistShell {
 
     private Table table;
 
-    private Image image;
-
     public Artist(){
         init();
     }
 
     public Artist(Image image){
-        this.image = image;
         init();
     }
 

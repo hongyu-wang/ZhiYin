@@ -79,7 +79,7 @@ public class Sec1 extends Sec1Shell {
         Image label = new Image(new Texture("Other/HoldToRecord@" + StateManager.M + ".png"));
         label.setPosition(260 * M, 65 * M);
 
-        DragButton dragButton = new DragButton(this, (int)(400 * StateManager.M));
+        DragButton dragButton = new DragButton(this, 280);
         dragButton.setBounds(0, 0, 0, 0);
         ExecutableMultiplexer em = new ExecutableMultiplexer();
         em.addExecutable(new ExecuteRemoveDragButton(dragButton));

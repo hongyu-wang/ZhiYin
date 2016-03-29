@@ -1,9 +1,7 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
-import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
 import client.pages.pageInternal.modelStorage.ModelStorage;
@@ -16,16 +14,15 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MImage;
-import server.model.media.MText;
 import server.model.social.MDiaryPost;
 import server.model.soundCloud.MBand;
 import server.model.user.User;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserProfile;
-import java.util.List;
-
 import server.services.factories.ImageManagerFactory;
 import tools.utilities.Utils;
+
+import java.util.List;
 
 /**
  * Created by blobbydude24 on 2016-03-21.
@@ -152,7 +149,7 @@ public class FriendProfile extends FriendProfileShell {
         ModelStorage ms = ModelStorageFactory.createModelStorage();
         User user = ms.getModel(ms.getUserKeyByName(name));
 
-        updateArtistsFromServer(user);
+//        updateArtistsFromServer(user);
         updateDiariesFromServer(user);
     }
 

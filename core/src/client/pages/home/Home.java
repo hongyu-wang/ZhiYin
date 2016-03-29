@@ -4,23 +4,15 @@ import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetMusic;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
-import client.events.executables.internalChanges.TestExecutable;
 import client.pageStorage.Pages;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import com.badlogic.gdx.Audio;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
-import tools.AudioTools.AudioCreator;
-
-import java.util.Map;
-import java.util.TreeMap;
 
 
 /**
@@ -76,27 +68,27 @@ public class Home extends HomeShell {
 
         stage.addActor(scrollpane);
 
-        int i = 0;
-        TreeMap<String, MMusic> map = AudioCreator.songNameToMMusic;
-
-        boolean isTopSingle = false;
-        for (String str : map.keySet()){
-            MMusic temporary = map.get(str);
-
-            if (isTopSingle)
-                addTopSingle(temporary.getArtist(), temporary.getName(), temporary);
-
-            else
-                addNewRelease(temporary.getArtist(), temporary.getName(), temporary);
-
-            if (i == 2){
-                isTopSingle = true;
-            }
-            i++;
-            if (i >= 6){
-                break;
-            }
-        }
+//        int i = 0;
+//        TreeMap<String, MMusic> map = AudioCreator.songNameToMMusic;
+//
+//        boolean isTopSingle = false;
+//        for (String str : map.keySet()){
+//            MMusic temporary = map.get(str);
+//
+//            if (isTopSingle)
+//                addTopSingle(temporary.getArtist(), temporary.getName(), temporary);
+//
+//            else
+//                addNewRelease(temporary.getArtist(), temporary.getName(), temporary);
+//
+//            if (i == 2){
+//                isTopSingle = true;
+//            }
+//            i++;
+//            if (i >= 6){
+//                break;
+//            }
+//        }
 
 
 

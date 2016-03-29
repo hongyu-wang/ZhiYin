@@ -1,13 +1,21 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
+import client.component.basicComponents.DragButton;
+import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.conversation.ExecuteSendDiaryPost;
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
 import client.singletons.SkinSingleton;
+import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import server.model.media.MAudio;
 
 import static client.singletons.StateManager.M;
 
@@ -22,6 +30,8 @@ Diary2 extends Diary2Shell{
     private TextField titleField;
     private TextField bodyField;
 
+    private MAudio audio;
+
     public Diary2(){
         init();
     }
@@ -34,16 +44,40 @@ Diary2 extends Diary2Shell{
         addBodyField();
 
         Button postButton = new Button(this);
-
         postButton.setBounds(750 - 117, 1217, 117, 117);
-        //Go to a Diary4 without an image
-
         Executable e = new ExecuteSendDiaryPost(this);
-
         postButton.setExecutable(e);
 
-        String title = getTitle();
-        String body = getBody();
+
+        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
+        image.setBounds(32 * M, 240 * M, 694 * M, 236 * M);
+
+        DragButton dragButton = new DragButton(this, 360);
+        dragButton.setBounds(0, 0, 0, 0);
+        ExecutableMultiplexer em = new ExecutableMultiplexer();
+        em.addExecutable(new ExecuteRemoveDragButton(dragButton));
+        em.addExecutable(new ExecuteRemoveImage(image));
+        dragButton.setDragExecutable(em);
+
+        ExecutableMultiplexer em2 = new ExecutableMultiplexer();
+        em2.addExecutable(new ExecuteRemoveDragButton(dragButton));
+        em2.addExecutable(new ExecuteRemoveImage(image));
+        // TODO make a new Diary4 using title, body, audio
+        //em2.addExecutable(new ExecuteToTempState(new Diary4()));
+        dragButton.setReleaseExecutable(em2);
+        add(dragButton);
+
+        Button holdToRecordButton = new Button(this);
+        holdToRecordButton.setBounds(0, 0, 268, 264);
+        ExecutableMultiplexer recordEx = new ExecutableMultiplexer();
+        recordEx.addExecutable(new ExecuteAddDragButton(dragButton, 26, 130, 698, 236));
+        recordEx.addExecutable(new ExecuteAddImage(stage, image));
+        holdToRecordButton.setExecutable(recordEx);
+
+        add(holdToRecordButton);
+
+//        String title = getTitle();
+//        String body = getBody();
 //        Diary4 d = new Diary4(title, body, null);
 //        Executable e = new ExecuteToTempState(d);
 //        postButton.setExecutable(e);
@@ -80,6 +114,10 @@ Diary2 extends Diary2Shell{
 
     public String getBody(){
         return bodyField.getText();
+    }
+
+    public MAudio getMAudio(){
+        return this.audio;
     }
 
 

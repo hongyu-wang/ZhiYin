@@ -5,20 +5,17 @@ import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import server.model.media.MImage;
 import server.model.social.MDiaryPost;
 import server.model.user.User;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserProfile;
-import server.services.factories.ImageManagerFactory;
-import java.util.List;
 import tools.utilities.Utils;
+
+import java.util.List;
 
 /**
  * This is the first music diary page as given in the
@@ -111,7 +108,7 @@ public class Diary1 extends Diary1Shell {
     public void update(float dt){
         super.update(dt);
 
-        getPostsFromServer();
+//        getPostsFromServer();
     }
 
     private void getPostsFromServer(){

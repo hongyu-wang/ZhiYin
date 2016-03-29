@@ -1,8 +1,6 @@
 package client.events.executables.internalChanges.schmoferMusicExecutable;
 
-import client.events.executables.internalChanges.TestExecutable;
 import client.pages.friends.Friends2;
-import client.pages.friends.boxes.MessageBox;
 import client.stateInterfaces.Executable;
 
 /**
@@ -17,8 +15,8 @@ public class ExecuteAddPlayMessage implements Executable {
 
     @Override
     public void execute() {
-        MessageBox soundbox = new MessageBox(new TestExecutable("Fuck"), 1);
-        friends2.addMessage(soundbox);
+//        MessageBox soundbox = new MessageBox(new TestExecutable("Fuck"), 1);
+//        friends2.addMessage(soundbox);
 
     }
 }

@@ -3,12 +3,10 @@ package client.pages.pageInternal.serverClientInteractions;
 import driver.GameLoop;
 import server.model.media.MImage;
 import server.model.media.MMusic;
-import server.model.media.MText;
 import server.model.soundCloud.MBand;
 import server.model.structureModels.ServerModel;
-import server.model.user.*;
+import server.model.user.User;
 import server.services.factories.ImageManagerFactory;
-import server.services.factories.TextManagerFactory;
 import tools.AudioTools.AudioCreator;
 import tools.utilities.Utils;
 
@@ -115,12 +113,12 @@ public class VeryBeginningInitializer extends Talkers{
     @Override
     public void push() {
 
-        AudioCreator.initializeAll();
+//+        AudioCreator.initializeAll();
 
         pushProfileImages();
         pushDiaryImages();
         pushArtistImages();
-        pushMBands();
+//        pushMBands();
 
         GameLoop.ISPUSHING = true;
     }

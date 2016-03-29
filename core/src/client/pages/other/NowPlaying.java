@@ -1,6 +1,5 @@
 package client.pages.other;
 
-import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMusic;
@@ -11,6 +10,7 @@ import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -18,7 +18,6 @@ import driver.GameLoop;
 import server.model.media.MImage;
 import server.model.media.MMusic;
 import tools.AudioTools.AudioManager;
-import com.badlogic.gdx.graphics.Texture;
 
 import static client.singletons.StateManager.M;
 /**
@@ -82,7 +81,7 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     protected void init() {
         super.init();
-        initAlbumArt();
+//        initAlbumArt();
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
