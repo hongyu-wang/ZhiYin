@@ -3,9 +3,11 @@ package client.pages.friends;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.conversation.ExecuteSendAudioMessage;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteCancelRecording;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
@@ -101,39 +103,25 @@ public class Friends2 extends Friends2Shell{
 
 
     private void setUpRecord(){
+        //This section initializes the DragButton
         Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
         DragButton dragButton = new DragButton(this, (int)(500*M), image, getStage());
+        dragButton.setInitialBounds(32, 98, 750 - 64, 236);
+        dragButton.setReleaseExecutable(new ExecuteSendAudioMessage(this));
+        dragButton.setDragExecutable(new ExecuteCancelRecording());
+        add(dragButton);
+        //---------------------------------------------------------------------------------
 
-
-
-        ExecuteRecord record = new ExecuteRecord(this);
-
+        //This section initializes the RecordButton
         Button recordButton = new Button(this);
         recordButton.setBounds(32, 31, 122, 60);
-        dragButton.setInitialBounds(32, 98, 750 - 64, 236);
+
         ExecutableMultiplexer em = new ExecutableMultiplexer();
-        em.addExecutable(record);
+        em.addExecutable(new ExecuteRecord());
         em.addExecutable(new ExecuteAddDragButton(dragButton));
-        recordButton.setExecutable(record);
+        recordButton.setExecutable(em);
         add(recordButton);
-
-
-
-        ExecutableMultiplexer release = new ExecutableMultiplexer();
-        release.addExecutable(record);
-
-
-
-        ExecutableMultiplexer drag = new ExecutableMultiplexer();
-        drag.addExecutable(record);
-
-
-
-        dragButton.setReleaseExecutable(release);
-        dragButton.setDragExecutable(record);
-
-
-        add(dragButton);
+        //---------------------------------------------------------------------------------
 
     }
 
