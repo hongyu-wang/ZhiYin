@@ -110,7 +110,7 @@ public class Sec1 extends Sec1Shell {
         stage.addActor(table);
     }
 
-    public void addPost(MComment comment){
+    public void addPost(String name, String time){
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
         Image ripples = new Image(new Texture("Friends4/Ripples0@" + StateManager.M + ".png"));
         ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png")).getDrawable());
