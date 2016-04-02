@@ -37,7 +37,7 @@ public class GameLoop extends ApplicationAdapter {
         primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
         primary.update();
-
+		AudioCreator.initializeAllWindows();
 
     }
 
@@ -51,20 +51,7 @@ public class GameLoop extends ApplicationAdapter {
 
 
         spriteBatch.setProjectionMatrix(primary.combined);
-		Texture testTexture = new Texture(Gdx.files.internal("myProfile.jpg"));
-//		TextureData textData = testTexture.getTextureData();
-//		textData.prepare();
-//		Pixmap map = textData.consumePixmap();
-//		ByteBuffer byteBuffer  = map.getPixels();
-//		byte[] byteArray = byteBuffer.array();
-		FileHandle file = Gdx.files.internal("myProfile.jpg");
-		byte[] byteArray = file.readBytes();
-		Pixmap newMap = new Pixmap(byteArray,0, byteArray.length);
 
-		Texture please = new Texture(newMap);
-		testTexture.dispose();
-		please.dispose();
-        newMap.dispose();
 
 
 

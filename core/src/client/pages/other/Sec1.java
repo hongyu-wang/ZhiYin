@@ -2,12 +2,8 @@ package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
-import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
-import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
-import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
-import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.pages.pageInternal.modelStorage.ModelStorage;
@@ -79,29 +75,15 @@ public class Sec1 extends Sec1Shell {
         Image label = new Image(new Texture("Other/HoldToRecord@" + StateManager.M + ".png"));
         label.setPosition(260 * M, 65 * M);
 
-        DragButton dragButton = new DragButton(this, 280);
-        dragButton.setBounds(0, 0, 0, 0);
-        ExecutableMultiplexer em = new ExecutableMultiplexer();
-        em.addExecutable(new ExecuteRemoveDragButton(dragButton));
-        em.addExecutable(new ExecuteRemoveImage(image));
-        em.addExecutable(new ExecuteAddImage(stage, label));
-        dragButton.setDragExecutable(em);
+        DragButton dragButton = new DragButton(this, 280, image, getStage());
+        dragButton.setInitialBounds(26, 130, 698, 236);
 
-        ExecutableMultiplexer em2 = new ExecutableMultiplexer();
-        em2.addExecutable(new ExecuteRemoveDragButton(dragButton));
-        em2.addExecutable(new ExecuteRemoveImage(image));
-        em2.addExecutable(new ExecuteAddImage(stage, label));
-        em2.addExecutable(new ExecuteToTempState(new Sec2(this, previousState)));
-        dragButton.setReleaseExecutable(em2);
+        dragButton.setReleaseExecutable(new ExecuteToTempState(new Sec2(this, previousState)));
         add(dragButton);
 
         Button holdToRecordButton = new Button(this);
         holdToRecordButton.setBounds(26, 57, 698, 58);
-        ExecutableMultiplexer recordEx = new ExecutableMultiplexer();
-        recordEx.addExecutable(new ExecuteAddDragButton(dragButton, 26, 130, 698, 236));
-        recordEx.addExecutable(new ExecuteAddImage(stage, image));
-        recordEx.addExecutable(new ExecuteRemoveImage(label));
-        holdToRecordButton.setExecutable(recordEx);
+        holdToRecordButton.setExecutable(new ExecuteAddDragButton(dragButton));
 
         stage.addActor(label);
         add(holdToRecordButton);

@@ -34,7 +34,6 @@ public class Friends4 extends Friends4Shell{
         scrollpane = new ScrollPane(table);
         scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
         stage.addActor(scrollpane);
-
         talkerAddFriends();
     }
 
@@ -74,6 +73,7 @@ public class Friends4 extends Friends4Shell{
     public void reset() {
 
     }
+
 
     @Override
     public void dispose() {

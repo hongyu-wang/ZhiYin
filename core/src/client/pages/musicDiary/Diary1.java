@@ -99,6 +99,8 @@ public class Diary1 extends Diary1Shell {
 
     }
 
+
+
     @Override
     public void dispose() {
 
@@ -108,7 +110,7 @@ public class Diary1 extends Diary1Shell {
     public void update(float dt){
         super.update(dt);
 
-//        getPostsFromServer();
+        getPostsFromServer();
     }
 
     private void getPostsFromServer(){

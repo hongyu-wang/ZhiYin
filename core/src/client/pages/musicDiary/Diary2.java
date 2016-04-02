@@ -5,9 +5,6 @@ import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.conversation.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
-import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
-import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
-import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
@@ -50,29 +47,21 @@ Diary2 extends Diary2Shell{
 
 
         Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
-        image.setBounds(32 * M, 240 * M, 694 * M, 236 * M);
 
-        DragButton dragButton = new DragButton(this, 360);
-        dragButton.setBounds(0, 0, 0, 0);
-        ExecutableMultiplexer em = new ExecutableMultiplexer();
-        em.addExecutable(new ExecuteRemoveDragButton(dragButton));
-        em.addExecutable(new ExecuteRemoveImage(image));
-        dragButton.setDragExecutable(em);
+        DragButton dragButton = new DragButton(this, 360, image, getStage());
+        dragButton.setInitialBounds(26, 130, 698, 236);
 
-        ExecutableMultiplexer em2 = new ExecutableMultiplexer();
-        em2.addExecutable(new ExecuteRemoveDragButton(dragButton));
-        em2.addExecutable(new ExecuteRemoveImage(image));
+        //TODO setup dragbutton.
+
+
         // TODO make a new Diary4 using title, body, audio
         //em2.addExecutable(new ExecuteToTempState(new Diary4()));
-        dragButton.setReleaseExecutable(em2);
+
         add(dragButton);
 
         Button holdToRecordButton = new Button(this);
         holdToRecordButton.setBounds(0, 0, 268, 264);
-        ExecutableMultiplexer recordEx = new ExecutableMultiplexer();
-        recordEx.addExecutable(new ExecuteAddDragButton(dragButton, 26, 130, 698, 236));
-        recordEx.addExecutable(new ExecuteAddImage(stage, image));
-        holdToRecordButton.setExecutable(recordEx);
+        holdToRecordButton.setExecutable(new ExecuteAddDragButton(dragButton));
 
         add(holdToRecordButton);
 

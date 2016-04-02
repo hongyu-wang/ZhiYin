@@ -88,6 +88,8 @@ public class Discovery extends DiscoveryShell {
         addSearchField();
     }
 
+
+
     private void addSearchField(){
         searchField = new WorkingTextArea("Search...", SkinSingleton.getInstance());
         searchField.setPosition((26 + 1) * M, 1146 * M);

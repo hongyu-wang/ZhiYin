@@ -133,6 +133,8 @@ public class FriendProfile extends FriendProfileShell {
 
     }
 
+
+
     @Override
     public void dispose() {
 

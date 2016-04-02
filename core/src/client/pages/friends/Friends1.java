@@ -28,7 +28,6 @@ public class Friends1 extends Friends1Shell{
         stage.addActor(table);
 
         //table.setDebug(true);
-
         talkerAddFriends();
     }
 
@@ -42,6 +41,8 @@ public class Friends1 extends Friends1Shell{
     public void reset() {
 
     }
+
+
 
     @Override
     public void dispose() {

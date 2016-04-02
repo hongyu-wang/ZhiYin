@@ -136,7 +136,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         ImageButton imageButton = new ImageButton(image.getDrawable());
         imageButton.setBounds(x * StateManager.M, y * StateManager.M, width * StateManager.M, height * StateManager.M);
         final Executable executable = e;
-        imageButton.addListener(new ClickListener(){
+        imageButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 executable.execute();
@@ -203,14 +203,5 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
 
 
-
-    /**
-     * This is the super pull data from server method. This should never get implemented here.
-     *
-     * HOWEVER, I don't want it to be abstract cause yes.
-     */
-    public void pullDataFromServer(){
-
-    }
 }
 

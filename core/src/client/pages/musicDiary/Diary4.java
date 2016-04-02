@@ -28,8 +28,7 @@ public class Diary4 extends Diary4Shell{
     private Image image;
 
     public Diary4(MDiaryPost thisPost){
-        this.title = title;
-        this.content = content;
+
         this.thisPost = thisPost;
 
         initImage();
@@ -79,4 +78,6 @@ public class Diary4 extends Diary4Shell{
     public void reset() {
 
     }
+
+
 }

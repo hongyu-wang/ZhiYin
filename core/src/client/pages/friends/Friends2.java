@@ -6,9 +6,6 @@ import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
-import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddImage;
-import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveDragButton;
-import client.events.executables.internalChanges.dragButtonExecutables.ExecuteRemoveImage;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetSave;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
@@ -104,51 +101,42 @@ public class Friends2 extends Friends2Shell{
 
 
     private void setUpRecord(){
-
-        DragButton button = new DragButton(this, (int)(500*M));
-
         Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
+        DragButton dragButton = new DragButton(this, (int)(500*M), image, getStage());
+
+
 
         ExecuteRecord record = new ExecuteRecord(this);
 
         Button recordButton = new Button(this);
         recordButton.setBounds(32, 31, 122, 60);
+        dragButton.setInitialBounds(32, 98, 750 - 64, 236);
         ExecutableMultiplexer em = new ExecutableMultiplexer();
-        em.addExecutable(new ExecuteAddDragButton(button, 32, 98, 750 - 64, 236));
-        em.addExecutable(new ExecuteAddImage(stage, image));
         em.addExecutable(record);
-        recordButton.setExecutable(em);
+        em.addExecutable(new ExecuteAddDragButton(dragButton));
+        recordButton.setExecutable(record);
         add(recordButton);
 
 
-        button.setBounds(0, 12341234, 1234, 1234);
-
-        image.setBounds(32 * M, 98 * M, (750 - 64) * M, 236 * M);
-
 
         ExecutableMultiplexer release = new ExecutableMultiplexer();
-        release.addExecutable(new ExecuteRemoveDragButton(button));
-        release.addExecutable(new ExecuteRemoveImage(image));
         release.addExecutable(new ExecuteSetSave(record));
         release.addExecutable(record);
 
 
+
         ExecutableMultiplexer drag = new ExecutableMultiplexer();
-        drag.addExecutable(new ExecuteRemoveDragButton(button));
-        drag.addExecutable(new ExecuteRemoveImage(image));
-        drag.addExecutable(new ExecuteSetSave(record));
         drag.addExecutable(record);
 
 
 
-        button.setReleaseExecutable(release);
-        button.setDragExecutable(drag);
+        dragButton.setReleaseExecutable(release);
+        dragButton.setDragExecutable(record);
 
 
-        add(button);
+        add(dragButton);
 
     }
-
 
 
 
@@ -171,6 +159,7 @@ public class Friends2 extends Friends2Shell{
 
         stage.addActor(messageField);
     }
+
 
     @Override
     public void dispose() {

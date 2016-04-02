@@ -3,7 +3,9 @@ package tools.AudioTools;
 import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
+import org.apache.commons.io.FileUtils;
 import org.robovm.apple.avfoundation.AVAsset;
 import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVMetadataItem;
@@ -15,10 +17,7 @@ import server.model.media.MSnapShot;
 import tools.utilities.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by Kevin on 3/11/2016.
@@ -28,9 +27,9 @@ import java.util.TreeMap;
  */
 public final class AudioCreator {
 
-    private static ModelStorage ms = ModelStorageFactory.createModelStorage();;
+    private static ModelStorage ms = ModelStorageFactory.createModelStorage();
 
-    private static NSFileManager fm = new NSFileManager();
+    private static NSFileManager fm;
 
     private static long musicKey = 10000L;
 
@@ -44,8 +43,25 @@ public final class AudioCreator {
 
     public static TreeMap<Long, MAudio> keyToMAudio = new TreeMap<Long,MAudio>();
 
-    public static void initializeAll(){
+    public static void initializeAllWindows(){
+        File path = new File("../MusicAssets");
 
+        File [] files = path.listFiles();
+        assert files != null;
+        for (File file : files) {
+            if (file.isFile()) {
+
+            }
+        }
+
+
+        songNameToMMusic = new TreeMap<>();
+        artistToMMusic = new TreeMap<>();
+
+
+    }
+
+    public static void initailizeAlbums(){
         albumToKey = Utils.newMap();
         albumToKey.put("Songs About Jane",8000L);
         albumToKey.put("Purpose (Deluxe Edition)",8001L);
@@ -53,8 +69,6 @@ public final class AudioCreator {
         albumToKey.put("Yeezus",8003L);
         albumToKey.put("Beauty Behind The Madness",8004L);
         albumToKey.put("X (Wembley Edition)",8005L);
-
-
         for(String s : albumToKey.keySet()){
             MImage albumArt = new MImage();
             albumArt.setKey(albumToKey.get(s));
@@ -68,6 +82,14 @@ public final class AudioCreator {
             albumArt.setName(s);
             ms.pushModel(albumArt);
         }
+
+    }
+
+
+    public static void initializeAllMac(){
+        fm = new NSFileManager();
+
+
 
         //Top Singles, Tagged
         songNameToMMusic = new TreeMap<String,MMusic>();

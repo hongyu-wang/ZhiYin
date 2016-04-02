@@ -25,19 +25,7 @@ public abstract class Friends1Shell extends State {
         friendsButton.setBounds(375, 1217, 375, 117);
         friendsButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS4));
         add(friendsButton);
-//
-//        Button createGroupButton = new Button(this);
-//        createGroupButton.setBounds(0, 117 * 2, 750, 117);
-//        createGroupButton.setExecutable(new TestExecutable("create group"));
-//        add(createGroupButton);
-//
-//        Button recordButton = new Button(this);
-//        recordButton.setBounds(0, 117, 750, 117);
-//        ExecutableMultiplexer exe = new ExecutableMultiplexer();
-//        exe.addExecutable(new ExecuteChangePage(Pages.FRIENDS2));
-//        exe.addExecutable(new ExecuteBeginTime());
-//        recordButton.setExecutable(exe);
-//        add(recordButton);
+
 
         setBottomBar();
     }

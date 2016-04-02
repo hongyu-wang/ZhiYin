@@ -147,6 +147,8 @@ public class Comment extends CommentShell {
         addMessageField();
     }
 
+
+
     @Override
     public void dispose() {
 

@@ -9,6 +9,8 @@ import client.stateInterfaces.Dragable;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import static client.singletons.StateManager.M;
 
@@ -21,12 +23,19 @@ public class DragButton extends Component implements Dragable {
     private float limit;
     private boolean disable;
     private boolean playAnimation;
-    private static long begin;
+    private long begin;
     public boolean remove = false;
-    public DragButton(ActionMonitor monitor, int limit) {
+    private Image image;
+    private Stage stage;
+
+    private float iniX, iniY, iniWidth, iniHeight;
+
+    public DragButton(ActionMonitor monitor, int limit, Image image, Stage stage) {
         this.monitor = monitor;
         this.limit = limit * M;
-
+        this.image = image;
+        this.stage = stage;
+        hide();
     }
 
     @Override
@@ -34,6 +43,25 @@ public class DragButton extends Component implements Dragable {
         playAnimation = false;
         begin = 0;
         disable = false;
+    }
+
+
+    public void show(){
+        this.setBounds(iniX, iniY, iniWidth, iniHeight);
+        stage.addActor(image);
+        begin = System.currentTimeMillis();
+        reset();
+    }
+
+    private void hide(){
+        this.setBounds(0, 0, 0, 0);
+        image.remove();
+    }
+
+
+    public void setInitialBounds(float x, float y, float width, float height){
+        iniX = x*M; iniY = y*M; iniWidth = width*M; iniHeight = height*M;
+        image.setBounds(iniX, iniY, iniWidth, iniHeight);
     }
 
     public void draw(Batch sb, float parentAlpha) {
@@ -55,6 +83,8 @@ public class DragButton extends Component implements Dragable {
         if (InputListener.getInstance().getMouseY() > limit && !disable) {
             monitor.actionPerformed(new ActionEvent(this));
             disable = true;
+            setBounds(0, 0, 0, 0);
+            hide();
         }
     }
 
@@ -63,14 +93,18 @@ public class DragButton extends Component implements Dragable {
 
             returnExecutable = releaseExecute;
 
-            monitor.actionPerformed(new ActionEvent(this));
-            disable = true;
         } else if (!disable){
             returnExecutable = dragExecute;
-            monitor.actionPerformed((new ActionEvent(this)));
-            disable = true;
+
 
         }
+        monitor.actionPerformed((new ActionEvent(this)));
+        disable = true;
+        hide();
+    }
+
+    private void reset(){
+        disable = false;
     }
 
     @Override
@@ -81,6 +115,7 @@ public class DragButton extends Component implements Dragable {
 
     @Override
     public void setDragExecutable(Executable e) {
+
         dragExecute = e;
     }
 
@@ -100,11 +135,6 @@ public class DragButton extends Component implements Dragable {
 
     }
 
-    public void reset(){
-        disable = false;
-    }
 
-    public static void setBegin(long begin) {
-        DragButton.begin = begin;
-    }
+
 }

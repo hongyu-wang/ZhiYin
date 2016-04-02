@@ -13,6 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
+import tools.AudioTools.AudioCreator;
+
+import java.util.TreeMap;
 
 
 /**
@@ -68,30 +71,35 @@ public class Home extends HomeShell {
 
         stage.addActor(scrollpane);
 
-//        int i = 0;
-//        TreeMap<String, MMusic> map = AudioCreator.songNameToMMusic;
-//
-//        boolean isTopSingle = false;
-//        for (String str : map.keySet()){
-//            MMusic temporary = map.get(str);
-//
-//            if (isTopSingle)
-//                addTopSingle(temporary.getArtist(), temporary.getName(), temporary);
-//
-//            else
-//                addNewRelease(temporary.getArtist(), temporary.getName(), temporary);
-//
-//            if (i == 2){
-//                isTopSingle = true;
-//            }
-//            i++;
-//            if (i >= 6){
-//                break;
-//            }
-//        }
+        initMusic();
 
 
 
+
+    }
+
+    private void initMusic(){
+        int i = 0;
+        TreeMap<String, MMusic> map = AudioCreator.songNameToMMusic;
+
+        boolean isTopSingle = false;
+        for (String str : map.keySet()){
+            MMusic temporary = map.get(str);
+
+            if (isTopSingle)
+                addTopSingle(temporary.getArtist(), temporary.getName(), temporary);
+
+            else
+                addNewRelease(temporary.getArtist(), temporary.getName(), temporary);
+
+            if (i == 2){
+                isTopSingle = true;
+            }
+            i++;
+            if (i >= 6){
+                break;
+            }
+        }
     }
 
     public void addNewRelease(String artistName, String songName, MMusic music){
@@ -162,44 +170,6 @@ public class Home extends HomeShell {
 
     }
 
-    @Override
-    public void pullDataFromServer() {
-
-//        Music song1 = Gdx.audio.newMusic(Gdx.files.internal("..//MusicAssets//Avril Lavigne - Fly.mp3"));
-//
-//        Music song2 = Gdx.audio.newMusic(Gdx.files.internal("..//MusicAssets//Imagine Dragons - 30 Lives (iTunes Session).mp3"));
-//
-//        Music song3 = Gdx.audio.newMusic(Gdx.files.internal("..//MusicAssets//Bruno Mars - The Lazy Song.mp3"));
-//
-//        Music song4 = Gdx.audio.newMusic(Gdx.files.internal("..//MusicAssets//Katy Perry - Hot N Cold.mp3"));
-//
-//        Music song5 = Gdx.audio.newMusic(Gdx.files.internal("..//MusicAssets//Lorde - Royals.mp3"));
-//
-//        Music song6 = Gdx.audio.newMusic(Gdx.files.internal("..//MusicAssets//Lorde - Team.mp3"));
-//
-//        addNewRelease("Avril Lavigne", "Fly", song1);
-//        addNewRelease("Imagine Dragons", "30 Lives", song2);
-//        addNewRelease("Bruno Mars", "The Lazy Song", song3);
-//        addTopSingle("Katy Perry", "Hot N Cold", song4);
-//        addTopSingle("Lorde", "Royals", song5);
-//        addTopSingle("Lorde", "Team", song6);
 
 
-        /*
-        TODO This is the HOME Server pull page.
-
-        Things that you need to pull
-
-        1. First, you need to pull 3 singles.
-        2. You need to pull their name, and also the artist that wrote them.
-        3. You also need to pull the MAudio associated with this song.
-        4. Place the MA
-        5. After you pull these things, you need to call:
-                addTopSingle(String name, String songName)
-
-
-
-       */
-
-    }
 }

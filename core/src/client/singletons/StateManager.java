@@ -11,6 +11,10 @@ import client.stateInterfaces.Updatable;
  * Created by Hongyu Wang on 3/7/2016.
  */
 public class StateManager implements Disposable, Updatable, Drawable {
+
+    private static final boolean WINDOWS = false;
+    private static final boolean MAC = true;
+
     /**
      * The current instance of StateManager
      */
@@ -27,6 +31,12 @@ public class StateManager implements Disposable, Updatable, Drawable {
     public static final float M = .5F;
     public static final float WIDTH = 750 * M;
     public static final float HEIGHT = 1334 * M;
+
+
+    public static final boolean os = WINDOWS;
+
+
+
 
     /**
      * This is the current state within the statemanager.
@@ -62,11 +72,6 @@ public class StateManager implements Disposable, Updatable, Drawable {
         currentState = state;
         currentState.reset();
         InputListener.setListener(state);
-    }
-
-    public void noResetChangeState(Pages page){
-        currentState = page.getStateReference();
-        InputListener.setListener(currentState);
     }
 
 
