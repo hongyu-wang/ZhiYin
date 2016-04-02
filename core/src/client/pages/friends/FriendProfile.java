@@ -148,7 +148,7 @@ public class FriendProfile extends FriendProfileShell {
     }
 
     private void pullData(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         User user = localDatabase.getModel(localDatabase.getUserKeyByName(name));
 
         updateArtistsFromServer(user);
@@ -156,7 +156,7 @@ public class FriendProfile extends FriendProfileShell {
     }
 
     private void updateArtistsFromServer(User user){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         List<Long> bandKeys = user.getBandKeys();
 
         for(long key: bandKeys){
@@ -176,7 +176,7 @@ public class FriendProfile extends FriendProfileShell {
 
 
     private void updateDiariesFromServer(User user){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
 
         boolean isUpdated = true;

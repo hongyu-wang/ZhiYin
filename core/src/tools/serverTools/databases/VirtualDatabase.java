@@ -78,9 +78,6 @@ public class VirtualDatabase {
     }
 
     private void initHashtags(){
-
-        //TODO add music keys
-
         MHashtag hashtag1 = new MHashtag();
         hashtag1.setKey(20000);
         hashtag1.setHashtag("Sorry");
@@ -137,27 +134,24 @@ public class VirtualDatabase {
         data.put(hashtag8.getKey(),hashtag8);
         data.put(hashtag9.getKey(),hashtag9);
         data.put(hashtag10.getKey(),hashtag10);
-
-
     }
 
     private void initMediaData(){
-        //TODO created all media here.
 
         //Image
-//        MImage image1 = generateTestImage("Alice's Profile", "UserProfiles//Alice_After_The_War.png");// TODO path
-//        MImage image2 = generateTestImage("Benny's Profile", "UserProfiles//Benny_After_The_War.png");// TODO path
-//        MImage image3 = generateTestImage("Cindy's Profile", "UserProfiles//Cindy_After_The_War.png");// TODO path
+//        MImage image1 = generateTestImage("Alice's Profile", "UserProfiles//Alice_After_The_War.png");
+//        MImage image2 = generateTestImage("Benny's Profile", "UserProfiles//Benny_After_The_War.png");
+//        MImage image3 = generateTestImage("Cindy's Profile", "UserProfiles//Cindy_After_The_War.png");
 
         //Audio
-//        MAudio audio1 = generateTestAudio("Audio_1.mp3");// TODO path
-//        MAudio audio2 = generateTestAudio("Audio_2.mp3");// TODO path
-//        MAudio audio3 = generateTestAudio("Audio_3.mp3");// TODO path
+//        MAudio audio1 = generateTestAudio("Audio_1.mp3");
+//        MAudio audio2 = generateTestAudio("Audio_2.mp3");
+//        MAudio audio3 = generateTestAudio("Audio_3.mp3");
 
         //Music
-//        MMusic music1 = generateTestMusic("Music_1", audio1);// TODO path
-//        MMusic music2 = generateTestMusic("Music_2", audio2);// TODO path
-//        MMusic music3 = generateTestMusic("Music_3", audio3);// TODO path
+//        MMusic music1 = generateTestMusic("Music_1", audio1);
+//        MMusic music2 = generateTestMusic("Music_2", audio2);
+//        MMusic music3 = generateTestMusic("Music_3", audio3);
 
         //Hashtag
         MHashtag tag1 = generateTestHashtags("#Happy");
@@ -172,7 +166,6 @@ public class VirtualDatabase {
 //        music_tag2.add(music2.getKey());
 //        music_tag3.add(music3.getKey());
 
-        //TODO add media to users here.
         User user1 = (User)data.get(1L);
         User user2 = (User)data.get(2L);
         User user3 = (User)data.get(3L);

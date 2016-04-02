@@ -15,7 +15,7 @@ public class ExecutePlayMAudio implements Executable{
     private LocalDatabase localDatabase;
 
     public ExecutePlayMAudio(MAudio mAudio){
-        localDatabase = LocalDatabaseFactory.createModelStorage();
+        localDatabase = LocalDatabaseFactory.createLocalDatabase();
         this.mAudio = localDatabase.getModel(mAudio.getKey());
         System.out.println("created");
     }

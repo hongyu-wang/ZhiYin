@@ -17,7 +17,7 @@ public class UserContentManagerImplementation implements UserContentManager {
 //        userContent.setPostKeys(keys);
 //
 //        return userContent;
-//        //TODO request from server.
+//
 //    }
 
     @Override

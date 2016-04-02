@@ -1,9 +1,6 @@
-package client.events.executables.internalChanges.conversation;
+package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.musicDiary.Diary2;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
-import client.stateInterfaces.Executable;
 import server.model.media.MText;
 import server.model.social.MDiaryPost;
 import server.model.user.User;
@@ -17,7 +14,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-29.
  */
-public class ExecuteSendDiaryPost implements Executable {
+public class ExecuteSendDiaryPost implements ExecutePush {
     Diary2 diary2;
 
     public ExecuteSendDiaryPost(Diary2 diary2){
@@ -26,7 +23,6 @@ public class ExecuteSendDiaryPost implements Executable {
 
     @Override
     public void execute() {
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
 
         User mainUser = localDatabase.getMainUser();
         UserDiaryContent userDiaryContent  = localDatabase.getModel(mainUser.getDiary());
@@ -38,7 +34,6 @@ public class ExecuteSendDiaryPost implements Executable {
         MText diaryBody = TextManagerFactory.createTextManager().createText(diary2.getBody(), 0);
         diaryBody.setKey(localDatabase.generateKey());
 
-        //TODO FIx all dis shit
         MDiaryPost diary = MusicDiaryFactory.createMusicDiary().createDiaryPost(mainUser, -1, -1, diaryTitle, diaryBody.getKey());
 
         diary.setKey(localDatabase.generateKey());

@@ -1,9 +1,6 @@
-package client.events.executables.internalChanges.conversation;
+package client.events.executables.internalChanges.serverInteractions;
 
-import client.pages.other.Comment;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
-import client.stateInterfaces.Executable;
+import client.pages.other.Sec1;
 import server.model.social.MComment;
 import server.model.social.MPost;
 import server.model.user.User;
@@ -16,32 +13,28 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Kevin Zheng on 2016-03-29.
+ * Created by Kevin Zheng on 2016-04-02.
  */
-public class ExecuteSendComment implements Executable {
-    private Comment commentPage;
-    public ExecuteSendComment(Comment commentPage){
-        this.commentPage = commentPage;
-    }
+public class ExecuteSendAudioComment implements ExecutePush {
+    private Sec1 sec1;
 
+    public ExecuteSendAudioComment(Sec1 sec1){
+        this.sec1 = sec1;
+    }
 
     @Override
     public void execute() {
 
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
-
-        MPost post = commentPage.getThisPost();
+        MPost post = sec1.getThisPost();
 
         List<Long> commentKeys = post.getComments();
-
-        String userText = commentPage.getMessage();
 
         long userKey = localDatabase.getMainUser().getKey();
         User mainUser = localDatabase.getModel(userKey);
         UserProfile userProfile = localDatabase.getModel(mainUser.getProfile());
 
         MComment comment = CommentManagerFactory.createCommentManager().createComment(Utils.<Long>newList(), Utils.<Long>newList(),
-                Utils.<Long>newList(), System.currentTimeMillis(), userText, userKey);
+                Utils.<Long>newList(), System.currentTimeMillis(), "", userKey);
         comment.setKey(localDatabase.generateKey());
 
         commentKeys.add(comment.getKey());
@@ -50,9 +43,11 @@ public class ExecuteSendComment implements Executable {
         Date df = new Date(comment.getTimeStamp());
         String timestamp = sdf.format(df);
 
-        commentPage.addComment(userProfile.getUsername(), timestamp, userText);
+        sec1.addPost(userProfile.getUsername(), timestamp);
 
-        commentPage.getCurrentComments().add(comment.getKey());
+        sec1.getCurrentComments().add(comment.getKey());
+
+        //TODO change it to add music;
 
         localDatabase.pushModel(comment);
         localDatabase.pushModel(post);

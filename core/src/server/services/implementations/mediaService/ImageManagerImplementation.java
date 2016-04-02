@@ -24,7 +24,6 @@ public class ImageManagerImplementation implements ImageManager {
 //        image.setImage(imageContent);
 //
 //        return image;
-//        //TODO request from server.
 //    }
 
 

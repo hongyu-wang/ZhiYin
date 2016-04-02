@@ -1,6 +1,6 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.conversation.ExecuteSendComment;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSendComment;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import tools.serverTools.databases.LocalDatabase;
@@ -56,7 +56,7 @@ public class Comment extends CommentShell {
         this.thisPost = post;
         currentComments = Utils.<Long>newList();
         this.title = post.getTitle();
-        MText tempText = LocalDatabaseFactory.createModelStorage().getModel(post.getText());
+        MText tempText = LocalDatabaseFactory.createLocalDatabase().getModel(post.getText());
         this.subtitle = tempText.getText();
         init();
     }
@@ -166,7 +166,7 @@ public class Comment extends CommentShell {
     }
 
     private void pullCommentsFromServer(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         List<Long> commentKeys = thisPost.getComments();
 
         boolean isUpdated = true;

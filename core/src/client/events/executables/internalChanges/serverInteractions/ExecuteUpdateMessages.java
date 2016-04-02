@@ -1,4 +1,4 @@
-package client.events.executables.internalChanges.conversation;
+package client.events.executables.internalChanges.serverInteractions;
 
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.pages.friends.Friends2;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-24.
  */
-public class ExecuteUpdateMessages implements Executable {
+public class ExecuteUpdateMessages implements ExecuteUpdate {
     private Friends2 friend2;
 
     public ExecuteUpdateMessages(Friends2 friend2){
@@ -25,7 +25,7 @@ public class ExecuteUpdateMessages implements Executable {
 
     @Override
     public void execute() {
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
 
         MConversation conversation = localDatabase.getModel(friend2.getConversation());
 
@@ -65,8 +65,6 @@ public class ExecuteUpdateMessages implements Executable {
                                 MessageBox box = new MessageBox(epma, 1, audio);
 
                                 friend2.getMessageKeys().add(mMessage.getKey());
-
-                                friend2.getAudioKeys().add(audio.getKey());
 
                                 friend2.addMessage(box);
                             }

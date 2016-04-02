@@ -15,11 +15,9 @@ public class TextManagerImplementation implements TextManager {
 //
 //        int type = 0;
 //        text.setType(type);
-//        //TODO request from server.
 //
 //        String textString = null;
 //        text.setText(textString);
-//        //TODO request from server.
 //
 //        return text;
 //    }
@@ -28,7 +26,7 @@ public class TextManagerImplementation implements TextManager {
     public MText createText(String message, int type){
         MText text = new MText();
 
-        text.setKey(LocalDatabaseFactory.createModelStorage().generateKey());
+        text.setKey(LocalDatabaseFactory.createLocalDatabase().generateKey());
 
         text.setText(message);
 
@@ -41,13 +39,11 @@ public class TextManagerImplementation implements TextManager {
     public MText modifyType(MText text, int type) {
         text.setType(type);
         return text;
-        //TODO request change to server.
     }
 
     @Override
     public MText modifyText(MText text, String textString) {
         text.setText(textString);
         return text;
-        //TODO request change to server.
     }
 }

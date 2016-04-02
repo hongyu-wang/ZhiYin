@@ -27,7 +27,7 @@ import java.util.*;
 public final class AudioCreator implements Constants {
 
 
-    private static LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+    private static LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
 
     private static NSFileManager fm;
 

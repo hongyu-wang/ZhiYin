@@ -82,7 +82,6 @@ public class MusicTalker extends Talkers{
             localDatabase.requestModelFromServer(key);
         }
 
-        //TODO Hashtags
     }
 
     @Override

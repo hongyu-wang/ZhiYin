@@ -11,14 +11,14 @@ public class LocalDatabaseFactory {
 
     private LocalDatabaseFactory(){}
 
-    public static LocalDatabase createModelStorage(){
+    public static LocalDatabase createLocalDatabase(){
         if(localDatabase == null){
             localDatabase = new LocalDatabase();
         }
         return localDatabase;
     }
 
-    public static LocalDatabase createModelStorage(User user){
+    public static LocalDatabase createLocalDatabase(User user){
         if(localDatabase == null){
             localDatabase = new LocalDatabase(user);
         }

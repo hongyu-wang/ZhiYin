@@ -56,7 +56,7 @@ public class Artist extends ArtistShell {
     public void addArtist(MBand band){
         Stack right = new Stack();
 
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
 
         MImage profileImage = localDatabase.getModel(/*band.getBandImage()*/ 101L);
 
@@ -128,7 +128,7 @@ public class Artist extends ArtistShell {
     }
 
     private void pullArtistsFromServer(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         MBand mb;
 
         for(long i = 12000; i < 12006; i++){

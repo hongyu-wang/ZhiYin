@@ -18,6 +18,7 @@ import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import server.model.media.MAudio;
 import server.model.social.MConversation;
 import tools.utilities.Utils;
 
@@ -27,13 +28,10 @@ public class Friends2 extends Friends2Shell{
     //Stuff
     private long conversation;
     private List<Long> messageKeys = Utils.<Long>newList();
-    private List<Long> audioKeys = Utils.<Long>newList();
 
     public List<Long> getMessageKeys() {
         return messageKeys;
     }
-
-    public List<Long> getAudioKeys() { return audioKeys; }
 
     public long getConversation() {
         return conversation;
@@ -169,12 +167,27 @@ public class Friends2 extends Friends2Shell{
 
         stage.act(); //This bug tho
 
-        messageField.getText();//TODO something
+        messageField.getText();
         if (counter%10 == 0){
             this.updatePage.execute();
         }
         counter ++;
     }
+
+    public void addAudioMessage(MAudio audio, int userType){
+        ExecutePlayMAudio executePlayMAudio = new ExecutePlayMAudio(audio);
+        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio);
+
+        this.addMessage(soundBox);
+    }
+
+    public void addTextMessage(String text, int userType){
+        MessageBox box = new MessageBox(text, userType);
+
+        this.addMessage(box);
+    }
+
+
 
     public String getMessage(){
         return messageField.getText();
