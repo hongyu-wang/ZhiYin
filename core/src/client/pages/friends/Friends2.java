@@ -152,7 +152,7 @@ public class Friends2 extends Friends2Shell{
         scrollpane.setScrollPercentY(110);
         stage.act();
 
-        new ExecuteSendAudioMessage(this, box).execute();
+        //new ExecuteSendAudioMessage(this, box).execute();
     }
 
     @Override

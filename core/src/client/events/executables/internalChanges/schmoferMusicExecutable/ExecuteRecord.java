@@ -12,7 +12,6 @@ import tools.AudioTools.AudioRecorder;
  * Created by Hongyu Wang on 3/28/2016.
  */
 public class ExecuteRecord implements Executable {
-    private static boolean RECORD = false;
     private LocalDatabase localDatabase;
     private boolean save;
     private Friends2 friends2;
@@ -30,32 +29,31 @@ public class ExecuteRecord implements Executable {
 
     @Override
     public void execute() {
-        if (RECORD) {
-            AudioRecorder ar = AudioRecorder.getInstance();
+        AudioRecorder ar = AudioRecorder.getInstance();
 
-            if (!ar.isRecording()) {
+        if (!ar.isRecording()) {
 
-                System.out.println("starting record");
-                ar.prepareToRecord();
-                ar.startRecording();
+            System.out.println("starting record");
+            ar.prepareToRecord();
+            ar.startRecording();
 
-            } else {
-                System.out.println("done recording");
-                MAudio audio = ar.stopRecording();
-                localDatabase.pushModel(audio);
-                System.out.println(audio.getKey());
+        } else {
+            System.out.println("done recording");
+            MAudio audio = ar.stopRecording();
+            localDatabase.pushModel(audio);
+            System.out.println(audio.getKey());
 
-                if (save) {
-                    ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
-                    MessageBox soundbox = new MessageBox(epma, 1, audio);
-                    friends2.addMessage(soundbox);
-                    System.out.println("music set");
-
-                }
-
+            if (save) {
+                ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
+                MessageBox soundbox = new MessageBox(epma, 1, audio);
+                friends2.addMessage(soundbox);
+                //TODO fix this
 
             }
+
+
         }
+
 
     }
 
