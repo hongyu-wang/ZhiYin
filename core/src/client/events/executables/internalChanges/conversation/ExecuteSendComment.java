@@ -1,22 +1,18 @@
 package client.events.executables.internalChanges.conversation;
 
-import client.pages.friends.boxes.MessageBox;
 import client.pages.other.Comment;
 import client.pages.pageInternal.modelStorage.ModelStorage;
 import client.pages.pageInternal.modelStorage.ModelStorageFactory;
 import client.stateInterfaces.Executable;
-import server.model.media.MText;
 import server.model.social.MComment;
-import server.model.social.MConversation;
-import server.model.social.MMessage;
 import server.model.social.MPost;
 import server.model.user.User;
 import server.model.user.UserProfile;
 import server.services.factories.CommentManagerFactory;
-import server.services.factories.MessageManagerFactory;
-import server.services.factories.TextManagerFactory;
 import tools.utilities.Utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +27,7 @@ public class ExecuteSendComment implements Executable {
 
     @Override
     public void execute() {
+
         ModelStorage ms = ModelStorageFactory.createModelStorage();
 
         MPost post = commentPage.getThisPost();
@@ -39,20 +36,23 @@ public class ExecuteSendComment implements Executable {
 
         String userText = commentPage.getMessage();
 
-
         long userKey = ms.getMainUser().getKey();
         User mainUser = ms.getModel(userKey);
         UserProfile userProfile = ms.getModel(mainUser.getProfile());
 
-        MComment comment = CommentManagerFactory.createCommentManager().createComment(Utils.newList(), Utils.newList(),
-                Utils.newList(), System.currentTimeMillis(), userText, userKey);
+        MComment comment = CommentManagerFactory.createCommentManager().createComment(Utils.<Long>newList(), Utils.<Long>newList(),
+                Utils.<Long>newList(), System.currentTimeMillis(), userText, userKey);
         comment.setKey(ms.generateKey());
 
         commentKeys.add(comment.getKey());
 
-        commentPage.addComment(userProfile.getUsername(), ""+System.currentTimeMillis(), userText);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
+        Date df = new Date(comment.getTimeStamp());
+        String timestamp = sdf.format(df);
 
-        commentKeys.add(comment.getKey());
+        commentPage.addComment(userProfile.getUsername(), timestamp, userText);
+
+        commentPage.getCurrentComments().add(comment.getKey());
 
         ms.pushModel(comment);
         ms.pushModel(post);
