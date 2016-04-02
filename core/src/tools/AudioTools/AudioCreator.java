@@ -149,7 +149,6 @@ public final class AudioCreator {
 
     public static MSnapShot createSnapShot(long voice, long song,int start, int end){
         MSnapShot ss = new MSnapShot();
-        ss.setKey(localDatabase.generateKey());
         ss.setMessage(voice);
         ss.setSong(song);
         ss.setStartTime(start);

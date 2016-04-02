@@ -21,7 +21,6 @@ public class ConversationManagerImplementation implements ConversationManager {
     @Override
     public MConversation createConversation(List<Long> users) {
         MConversation newConvo = new MConversation();
-        newConvo.setKey(LocalDatabaseFactory.createLocalDatabase().generateKey());
 
         newConvo.setParticipants(users);
         newConvo.setMessageList(Utils.<Long>newList());

@@ -26,8 +26,6 @@ public class TextManagerImplementation implements TextManager {
     public MText createText(String message, int type){
         MText text = new MText();
 
-        text.setKey(LocalDatabaseFactory.createLocalDatabase().generateKey());
-
         text.setText(message);
 
         text.setType(type);

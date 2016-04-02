@@ -37,6 +37,7 @@ public class ExecuteSendMessage implements ExecutePush {
         text.setKey(localDatabase.generateKey());
 
         MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), localDatabase.getMainUser().getKey(), -1L);
+        message.setKey(localDatabase.generateKey());
 
         messageKeys.add(message.getKey());
 

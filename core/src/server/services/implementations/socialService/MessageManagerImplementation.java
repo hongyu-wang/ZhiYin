@@ -20,7 +20,6 @@ public class MessageManagerImplementation implements MessageManager {
     @Override
     public MMessage createMessage(long text, long timeStamp, long creator, long audio) {
         MMessage message = new MMessage();
-        message.setKey(LocalDatabaseFactory.createLocalDatabase().generateKey());
         message.setCreator(creator);
         message.setAudioKey(audio);
         message.setText(text);
