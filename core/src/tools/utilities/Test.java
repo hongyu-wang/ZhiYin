@@ -1,7 +1,7 @@
 package tools.utilities;
 
-import client.pages.pageInternal.modelStorage.LocalDatabase;
-import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 

@@ -1,6 +1,6 @@
 package server.webservices;
 
-import client.pages.pageInternal.modelStorage.LocalDatabase;
+import tools.serverTools.databases.LocalDatabase;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.utils.JsonReader;

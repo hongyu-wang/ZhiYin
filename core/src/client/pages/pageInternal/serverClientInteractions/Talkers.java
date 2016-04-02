@@ -1,7 +1,7 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import client.pages.pageInternal.modelStorage.LocalDatabase;
-import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import client.stateInterfaces.Updatable;
 import server.model.user.User;
 

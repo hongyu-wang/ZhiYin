@@ -1,6 +1,6 @@
 package server.services.implementations.socialService;
 
-import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import server.model.social.MMessage;
 import server.services.interfaces.models.MessageManager;
 import tools.utilities.Utils;

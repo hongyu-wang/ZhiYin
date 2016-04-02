@@ -2,8 +2,8 @@ package client.events.executables.internalChanges.conversation;
 
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.LocalDatabase;
-import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
 import server.model.media.MText;
 import server.model.social.MConversation;

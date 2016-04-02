@@ -6,8 +6,8 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetTime;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
-import client.pages.pageInternal.modelStorage.LocalDatabase;
-import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;

@@ -1,8 +1,8 @@
 package client.pages.musicDiary;
 
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
-import client.pages.pageInternal.modelStorage.LocalDatabase;
-import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;

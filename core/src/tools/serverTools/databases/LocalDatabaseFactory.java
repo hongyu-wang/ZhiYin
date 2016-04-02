@@ -1,6 +1,7 @@
-package client.pages.pageInternal.modelStorage;
+package tools.serverTools.databases;
 
 import server.model.user.User;
+import tools.serverTools.databases.LocalDatabase;
 
 /**
  * Created by Kevin Zheng on 2016-03-19.

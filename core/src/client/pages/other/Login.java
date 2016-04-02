@@ -7,7 +7,7 @@ import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveBu
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
-import client.pages.pageInternal.modelStorage.LocalDatabase;
+import tools.serverTools.databases.LocalDatabase;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.SkinSingleton;

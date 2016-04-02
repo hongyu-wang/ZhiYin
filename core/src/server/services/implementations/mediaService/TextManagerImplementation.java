@@ -1,6 +1,6 @@
 package server.services.implementations.mediaService;
 
-import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import server.model.media.MText;
 import server.services.interfaces.models.TextManager;
 

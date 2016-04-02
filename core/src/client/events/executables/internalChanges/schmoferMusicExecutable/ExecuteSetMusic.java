@@ -1,7 +1,7 @@
 package client.events.executables.internalChanges.schmoferMusicExecutable;
 
-import client.pages.pageInternal.modelStorage.LocalDatabase;
-import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
