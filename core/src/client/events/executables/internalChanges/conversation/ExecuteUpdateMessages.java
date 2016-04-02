@@ -41,7 +41,7 @@ public class ExecuteUpdateMessages implements Executable {
 
                 if(mMessage != null) {
                     long textKey = mMessage.getText();
-                    if (mMessage.getText() == -1L) {
+                    if (mMessage.getText() != -1L) {
                         if(ms.getModel(mMessage.getText()) != null){
                             if(updated) {
                                 String text = ms.<MText>getModel(textKey).getText();
@@ -64,8 +64,11 @@ public class ExecuteUpdateMessages implements Executable {
                                 ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
                                 MessageBox box = new MessageBox(epma, 1, audio);
 
-                                friend2.addMessage(box);
                                 friend2.getMessageKeys().add(mMessage.getKey());
+
+                                friend2.getAudioKeys().add(audio.getKey());
+
+                                friend2.addMessage(box);
                             }
                         }
                         else{
