@@ -70,8 +70,8 @@ public class Home extends HomeShell {
         scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
 
         stage.addActor(scrollpane);
-
-        initMusic();
+        if (os == MAC)
+            initMusic();
 
 
 

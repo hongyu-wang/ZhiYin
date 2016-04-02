@@ -13,17 +13,14 @@ import tools.AudioTools.AudioRecorder;
  * Created by Hongyu Wang on 3/28/2016.
  */
 public class ExecuteRecord implements Executable {
-    private AudioRecorder ar;
 
-    public ExecuteRecord(){
-        ar = AudioRecorder.getInstance();
-    }
 
     @Override
     public void execute() {
-
-        ar.prepareToRecord();
-        ar.startRecording();
-
+        if (os == MAC){
+            AudioRecorder ar = AudioRecorder.getInstance();
+            ar.prepareToRecord();
+            ar.startRecording();
+        }
     }
 }

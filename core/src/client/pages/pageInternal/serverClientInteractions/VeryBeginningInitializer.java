@@ -45,8 +45,11 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
     }
 
     public void init(String username){
-        AudioCreator.initializeAll();
-
+        if (os == MAC) {
+            AudioCreator.initializeAll();
+        }else{
+            AudioCreator.initializeAlbums();
+        }
 
 
         localDatabase.loginUser(username);
@@ -118,7 +121,6 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
     @Override
     public void push() {
 
-        AudioCreator.initializeAll();
 
         pushProfileImages();
         pushDiaryImages();
