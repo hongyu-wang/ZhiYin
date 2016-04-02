@@ -8,13 +8,13 @@ public class TalkerFactory {
     private static Talkers [] talkers = new Talkers[numberOfTalkers];
 
 
-    public static DiaryTalker getDiaryTalker(){
-        if (talkers[0] == null)
-            talkers[0] = new DiaryTalker();
-
-
-        return (DiaryTalker) talkers[0];
-    }
+//    public static DiaryTalker getDiaryTalker(){
+//        if (talkers[0] == null)
+//            talkers[0] = new DiaryTalker();
+//
+//
+//        return (DiaryTalker) talkers[0];
+//    }
 
     public static FriendTalker getFriendTalker(){
         if (talkers[1] == null)
@@ -30,12 +30,12 @@ public class TalkerFactory {
         return (ConversationTalker) talkers[2];
     }
 
-    public static MusicTalker getMusicTalker(){
-        if (talkers[3] == null)
-            talkers[3] = new MusicTalker();
-
-        return (MusicTalker) talkers[3];
-    }
+//    public static MusicTalker getMusicTalker(){
+//        if (talkers[3] == null)
+//            talkers[3] = new MusicTalker();
+//
+//        return (MusicTalker) talkers[3];
+//    }
 
     public static ProfileTalker getProfileTalker(){
         if (talkers[4] == null)
@@ -55,6 +55,4 @@ public class TalkerFactory {
 
         return (VeryBeginningInitializer) talkers[6];
     }
-
-
 }

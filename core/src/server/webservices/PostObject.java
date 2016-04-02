@@ -1,31 +1,18 @@
 package server.webservices;
 
+import tools.serverTools.databases.LocalDatabase;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import server.model.structureModels.ServerModel;
-import server.model.user.User;
 
 /**
  * Created by Hairuo on 2016-03-20.
  */
 
 
-        import com.badlogic.gdx.Gdx;
-        import com.badlogic.gdx.Net;
-        import com.badlogic.gdx.utils.JsonReader;
-        import com.badlogic.gdx.utils.JsonValue;
-        import com.fasterxml.jackson.databind.ObjectMapper;
-        import server.model.user.User;
 import tools.serverTools.generators.Tags;
-
-import javax.ws.rs.core.Response;
-        import java.io.BufferedReader;
-        import java.io.IOException;
-        import java.io.InputStreamReader;
-        import java.io.OutputStreamWriter;
 
 /**
  * Created by Hairuo on 2016-03-20.
@@ -51,14 +38,18 @@ public class PostObject implements Net.HttpResponseListener {
      */
     public void addModel(ServerModel model, String className){
         // LibGDX NET CLASS
-        ;
-        this.className = Tags.ID_TAGS.parseTag(className);
+
+        className = Tags.ID_TAGS.parseTag(className);
         Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpPost.setUrl("http://localhost:8081/webservice/postServerModel");
+        httpPost.setUrl("http://"+ LocalDatabase.ipAddress+":8081/webservice/postServerModel");
         //httpPost.setHeader("X-Parse-Application-Id", app_id);
-        //httpPost.setHeader("X-Parse-REST-API-Key", app_key);
-        Json json = new Json();
-        String jString = json.toJson(model+className);
+        //httpPost.setHeader("X-Parse-REST-API-Key", asspp_key);
+        String jString = "";
+        try {
+            jString = objectMapper.writeValueAsString(model);
+        }catch(Exception e){
+            System.out.println(e);
+        }
 
 
 
@@ -70,7 +61,7 @@ public class PostObject implements Net.HttpResponseListener {
 
     @Override
     public void cancelled() {
-
+        System.out.println("POSTOBJECT CANCELLED: " + className);
     }
 
     @Override

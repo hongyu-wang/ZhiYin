@@ -7,11 +7,13 @@
   <iosInfoPList>Info.plist.xml</iosInfoPList>
   <resources>
     <resource>
+
       <directory>../android/assets/Art Assets</directory>
       <includes>
-        <include>PictureFiles/**</include>
-        <include>SkinAssets/Skin1/**</include>
+
         <include>**</include>
+        <include>**/*</include>
+
       </includes>
       <skipPngCrush>true</skipPngCrush>
     </resource>
@@ -20,6 +22,7 @@
     </resource>
   </resources>
   <forceLinkClasses>
+
     <pattern>com.badlogic.gdx.scenes.scene2d.ui.*</pattern>
     <pattern>com.badlogic.gdx.graphics.g3d.particles.**</pattern>
     <pattern>com.android.okhttp.HttpHandler</pattern>

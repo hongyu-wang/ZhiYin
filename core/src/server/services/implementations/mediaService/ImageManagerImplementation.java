@@ -1,5 +1,10 @@
 package server.services.implementations.mediaService;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import server.model.media.MImage;
 import server.services.interfaces.models.ImageManager;
 
@@ -19,18 +24,29 @@ public class ImageManagerImplementation implements ImageManager {
 //        image.setImage(imageContent);
 //
 //        return image;
-//        //TODO request from server.
 //    }
 
 
     @Override
-    public MImage createNewImage(String path) throws IOException {
+    public Image mImageToImage(MImage mImage){
+        Image tempImage = null;
+        if(mImage != null) {
+            Pixmap pixmap = new Pixmap(mImage.getImage(), 0, mImage.getImage().length);
+
+            tempImage = new Image(new Texture(pixmap));
+
+            pixmap.dispose();
+        }
+        return tempImage;
+    }
+
+    @Override
+    public MImage createNewImage(String path){
         MImage image = new MImage();
 
-        long imageKey = 0;
-        //TODO GenerateKey.
-        image.setKey(imageKey);
-        //TODO Access phone to create image.
+        FileHandle fh = Gdx.files.internal(path);
+
+        image.setImage(fh.readBytes());
 
         return image;
     }

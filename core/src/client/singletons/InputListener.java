@@ -2,6 +2,7 @@ package client.singletons;
 
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.tools.Constants;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
@@ -17,7 +18,7 @@ import driver.GameLoop;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class InputListener implements InputProcessor {
+public class InputListener implements InputProcessor, Constants {
     /**
      * Our instance of InputListener as per the Singleton design pattern.
      */
@@ -103,17 +104,17 @@ public class InputListener implements InputProcessor {
         if (keycode == Input.Keys.NUM_1)
             stateManager.changeState(Pages.FRIENDS1);
 
-        if (keycode == Input.Keys.NUM_2)
-            stateManager.changeState(Pages.FRIENDS2);
+//        if (keycode == Input.Keys.NUM_2)
+//            stateManager.changeState(Pages.FRIENDS2);
 
-        if (keycode == Input.Keys.NUM_3)
-            stateManager.changeState(Pages.FRIENDS3);
+//        if (keycode == Input.Keys.NUM_3)
+//            stateManager.changeState(Pages.FRIENDS3);
 
         if (keycode == Input.Keys.NUM_4)
             stateManager.changeState(Pages.FRIENDS4);
 
-        if (keycode == Input.Keys.NUM_5)
-            stateManager.changeState(Pages.FRIENDS5);
+//        if (keycode == Input.Keys.NUM_5)
+//            stateManager.changeState(Pages.FRIENDS5);
 
         if (keycode == Input.Keys.Q)
             stateManager.changeState(Pages.DIARY1);
@@ -121,11 +122,9 @@ public class InputListener implements InputProcessor {
         if (keycode == Input.Keys.W)
             stateManager.changeState(Pages.DIARY2);
 
-        if (keycode == Input.Keys.E)
-            stateManager.changeState(Pages.DIARY3);
 
-        if (keycode == Input.Keys.R)
-            stateManager.changeState(Pages.DIARY4);
+//        if (keycode == Input.Keys.R)
+//            stateManager.changeState(Pages.DIARY4);
 
         if (keycode == Input.Keys.A)
             stateManager.changeState(Pages.HOME);
@@ -163,7 +162,7 @@ public class InputListener implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         mouseX = screenX;
-        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
+        mouseY = (int)(HEIGHT*StateManager.M) - screenY;
 
         System.out.println(mouseX + " " + mouseY);
         stateManager.receiveInput();
@@ -174,7 +173,7 @@ public class InputListener implements InputProcessor {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         mouseX = screenX;
-        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
+        mouseY = (int)(HEIGHT*StateManager.M) - screenY;
         stateManager.recieveRelease();
 
         return false;
@@ -183,7 +182,7 @@ public class InputListener implements InputProcessor {
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         mouseX = screenX;
-        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
+        mouseY = (int)(HEIGHT*StateManager.M) - screenY;
 
 
         stateManager.recieveDragged();

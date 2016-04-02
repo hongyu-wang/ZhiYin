@@ -5,7 +5,7 @@ import server.webclient.webErrors.WebRequestException;
 
 public interface AudioManager {
     /**
-     * Creates a new audio from Audio Tools.
+     * Creates a new audio from Audio MyProfile.
      *
      * @return
      */

@@ -14,7 +14,6 @@ public class MDiaryPost extends MPost {
     private long audioKey;
     private long imageKey;
     private long musicKey;
-    private long textKey;
 
     /**Returns the audioKey of the MusicDiary.
      *
@@ -40,14 +39,6 @@ public class MDiaryPost extends MPost {
         return this.musicKey;
     }
 
-    /**Returns the textKey of the MusicDiary.
-     *
-     * @return  The textKey.
-     */
-    public long getTextKey(){
-        return this.textKey;
-    }
-
     public void setAudioKey(long audioKey){
         this.audioKey = audioKey;
     }
@@ -58,9 +49,5 @@ public class MDiaryPost extends MPost {
 
     public void setMusicKey(long musicKey){
         this.musicKey = musicKey;
-    }
-
-    public void setTextKey(long textKey){
-        this.textKey = textKey;
     }
 }

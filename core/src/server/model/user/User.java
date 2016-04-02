@@ -43,6 +43,11 @@ public class User extends ServerModel {
      */
     private List<Long> friendKeys;
 
+    /**
+     * The keys to the bands.
+     */
+    private List<Long> bandKeys;
+
     /**Gets all basic user information.
      *
      * @return  The userProfile containing info.
@@ -91,7 +96,11 @@ public class User extends ServerModel {
         return friendKeys;
     }
 
-
+    /**Gets the list of all band keys.
+     *
+     * @return  The list of all band keys.
+     */
+    public List<Long> getBandKeys() { return bandKeys; }
 
     // SETTERS
     public void setProfile(long profileKey) {
@@ -112,4 +121,5 @@ public class User extends ServerModel {
     public void setFriendKeys(List<Long> friendKeys) {
         this.friendKeys = friendKeys;
     }
+    public void setBandKeys(List<Long> bandKeys) { this.bandKeys = bandKeys; }
 }

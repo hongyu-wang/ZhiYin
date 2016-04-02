@@ -4,13 +4,17 @@ import client.pages.State;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
+import client.tools.Constants;
 
 /**
  * This is essentially a card layout.
  *
  * Created by Hongyu Wang on 3/7/2016.
  */
-public class StateManager implements Disposable, Updatable, Drawable {
+public class StateManager implements Disposable, Updatable, Drawable, Constants {
+
+
+
     /**
      * The current instance of StateManager
      */
@@ -24,9 +28,13 @@ public class StateManager implements Disposable, Updatable, Drawable {
         return ourInstance;
     }
 
-    public static final float M = 0.5F;
-    public static final float WIDTH = 750 * M;
-    public static final float HEIGHT = 1334 * M;
+
+
+
+
+
+
+
 
     /**
      * This is the current state within the statemanager.
@@ -64,11 +72,6 @@ public class StateManager implements Disposable, Updatable, Drawable {
         InputListener.setListener(state);
     }
 
-    public void noResetChangeState(Pages page){
-        currentState = page.getStateReference();
-        InputListener.setListener(currentState);
-    }
-
 
 
     @Override
@@ -95,17 +98,17 @@ public class StateManager implements Disposable, Updatable, Drawable {
      * InputListener registers an input on the screen.
      */
     public void receiveInput(){
-        currentState.getInputController(State.SHELLINPUT).checkPressed();
+        currentState.getInputController().checkPressed();
 
     }
 
 
     public void recieveDragged(){
-        currentState.getInputController(State.SHELLINPUT).checkDragged();
+        currentState.getInputController().checkDragged();
     }
 
     public void recieveRelease(){
-        currentState.getInputController(State.SHELLINPUT).checkRelease();
+        currentState.getInputController().checkRelease();
     }
 
 }

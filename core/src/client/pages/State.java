@@ -2,14 +2,21 @@ package client.pages;
 
 import client.component.basicComponents.Button;
 import client.events.ActionEvent;
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.internalExceptions.NoExecutableException;
 import client.pageStorage.Pages;
 import client.pages.pageInternal.inputController.InputController;
 import client.singletons.MainBatch;
+import client.singletons.StateManager;
 import client.stateInterfaces.*;
+import client.tools.Constants;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -20,34 +27,16 @@ import java.util.Map;
  *
  * All pages should extend this.
  */
-public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor {
-    public static final String SHELLINPUT = "shell";
-    public static final String MOVEABLEINPUT = "moveable";
-    protected Stage stage;
+public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor, Constants {
 
-    /**
-     * This is the primary constructor of state.
-     * No parameters should ever get passed into this constructor.
-     */
-    public State(){
-        init();
-    }
+    protected Stage stage;
+    private InputController inputController;
+
 
     @Override
     public void update(float dt) {
         stage.act();
     }
-
-
-    /**
-     * This clears the stage of all actors. The main purpose of this
-     * is for the input multiplexer to work properly.
-     */
-    public void clearStage(){
-        stage.clear();
-    }
-
-    private Map<String, InputController> controllers;
 
 
 
@@ -60,11 +49,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     /**
      * This method will initialize all values as required within state
      */
-    public void init(){
+    protected void init(){
         components = Utils.newList();
-        controllers = Utils.newMap();
-        controllers.put(SHELLINPUT, new InputController());
-        controllers.put(MOVEABLEINPUT, new InputController());
+        inputController = new InputController();
         stage = new Stage();
 
     }
@@ -78,35 +65,77 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      */
     public void add(Actor c){
         if (c instanceof Performable)
-            controllers.get(SHELLINPUT).add((Performable) c);
+            inputController.add((Performable) c);
         components.add(c);
+    }
+
+    /**
+     * NO ONE ELSE EVER USE THIS METHOD PLSPSLSPLSLSLPSPLSPLPSPLSSPLSPLSLPSL
+     * THIS METHOD IS CALLED. ULTIMATE
+     * Mom's SPAGETTHI.
+     * NEVER EVER EVER EVER EVER EVER USE THIS!!!!!!!!!!!!!!!!!!!!!!
+     * OK? never ever ever ever ever ever everever ever everever ever everever ever everever ever everever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * ever ever ever
+     * Use this fucking method.
+     * @param c thing.
+     */
+    @Deprecated
+    public void remove(Performable c){
+        components.remove(c);
+        inputController.remove(c);
     }
 
     /**
      * Create and add the buttons for the bottom bar.
      */
     protected void setBottomBar(){
-        // 59 + 117 + 55 + 117 + 55 + 117 + 55 + 117 + 58
-
         Button homeButton = new Button(this);
-        homeButton.setBounds((59) + 1, 0, 117, 117);
+        homeButton.setBounds(0, 0, 210, 117);
         homeButton.setExecutable(new ExecuteChangePage(Pages.HOME));
         add(homeButton);
 
         Button diaryButton = new Button(this);
-        diaryButton.setBounds((59 + 117 + 55) + 1, 0, 117, 117);
+        diaryButton.setBounds(210, 0, 180, 117);
         diaryButton.setExecutable(new ExecuteChangePage(Pages.DIARY1));
         add(diaryButton);
 
         Button friendsButton = new Button(this);
-        friendsButton.setBounds((59 + 117*2 + 55*2) + 1, 0, 117, 117);
+        friendsButton.setBounds(390, 0, 160, 117);
         friendsButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
         add(friendsButton);
 
         Button toolsButton = new Button(this);
-        toolsButton.setBounds((59 + 117*3 + 55*3) + 1, 0, 117, 117);
-        toolsButton.setExecutable(new ExecuteChangePage(Pages.TOOLS));
+        toolsButton.setBounds(550, 0, 200, 117);
+        toolsButton.setExecutable(new ExecuteChangePage(Pages.MYPROFILE));
         add(toolsButton);
+    }
+
+    protected ImageButton createImageButton(String imagePath, Executable e, int x, int y, int width, int height ){
+        Image image = new Image(new Texture(imagePath + StateManager.M + ".png"));
+        ImageButton imageButton = new ImageButton(image.getDrawable());
+        imageButton.setBounds(x * StateManager.M, y * StateManager.M, width * StateManager.M, height * StateManager.M);
+        final Executable executable = e;
+        imageButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                executable.execute();
+            }
+        });
+
+        return imageButton;
+    }
+
+    protected void addImageButton(String imagePath, Executable e, int x, int y, int width, int height){
+        stage.addActor(createImageButton(imagePath, e, x, y, width, height));
     }
 
     /**
@@ -122,8 +151,6 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
         return deepCopy;
     }
-
-
 
     /**
      * This method will draw everything.
@@ -148,11 +175,11 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         }
     }
 
+    public abstract void reset();
 
 
-
-    public InputController getInputController(String FIXEDINPUT){
-        return controllers.get(FIXEDINPUT);
+    public InputController getInputController(){
+        return inputController;
     }
 
 
@@ -162,16 +189,6 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     }
 
 
-    public abstract void reset();
 
-
-    /**
-     * This is the super pull data from server method. This should never get implemented here.
-     *
-     * HOWEVER, I don't want it to be abstract
-     */
-    public void pullDataFromServer(){
-
-    }
 }
 

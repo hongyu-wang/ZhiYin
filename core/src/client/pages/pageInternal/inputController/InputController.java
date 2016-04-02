@@ -12,7 +12,6 @@ import java.util.List;
  * This is the input controller class.
  * This is here in order to encapsulate input information away from the current
  * state class.
- *
  * Created by Hongyu Wang on 3/13/2016.
  */
 public class InputController {
@@ -32,6 +31,10 @@ public class InputController {
     public void add(Performable p){
         pressables.add(p);
     }
+    public void remove(Performable p){
+        pressables.remove(p);
+    }
+
 
     /**
      * This is the method that will get called
@@ -48,9 +51,10 @@ public class InputController {
     }
 
     public void checkDragged(){
-        for (Performable comp : pressables){
-            if (comp instanceof DragButton){
-                ((DragButton)comp).drag();
+        for (int i = 0; i < pressables.size(); i ++){
+            if (pressables.get(i) instanceof DragButton){
+                ((DragButton)pressables.get(i)).drag();
+
             }
         }
     }

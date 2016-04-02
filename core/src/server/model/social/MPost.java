@@ -10,6 +10,9 @@ import java.util.List;
  */
 public class MPost extends ServerModel {
 
+
+    protected String title;
+
     /**
      * Id of the user who created the post
      */
@@ -50,6 +53,12 @@ public class MPost extends ServerModel {
      */
     protected long timeStamp;
 
+
+    public String getTitle(){
+        return title;
+    }
+
+    public void setTitle(String title){ this.title = title; }
 
     public List<Long> getComments() {
         return comments;

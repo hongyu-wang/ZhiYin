@@ -16,7 +16,6 @@ public class MusicManagerImplementation implements MusicManager {
 //    public MMusic requestMusic(long key) {
 //        MMusic music = new MMusic();
 //        return music;
-//        //TODO request from server.
 //    }
 
     @Override

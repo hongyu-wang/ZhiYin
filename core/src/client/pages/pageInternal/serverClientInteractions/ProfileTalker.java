@@ -1,11 +1,10 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import com.badlogic.gdx.graphics.Texture;
 import server.model.media.MImage;
 import server.model.user.User;
 import server.model.user.UserProfile;
+import tools.utilities.Utils;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,14 +12,14 @@ import java.util.Map;
  * Created by Hongyu Wang on 3/20/2016.
  */
 public class ProfileTalker extends Talkers{
-    private static Map<User, Profile> userProfiles;
+    private static Map<Long, Profile> userProfiles = Utils.newMap();
 
     private Profile currentProfile;
 
     //--Interface Fields
 
     //Getters and Setters
-    public Texture getProfileImage() {
+    public byte[] getProfileImage() {
         return currentProfile.getProfileImage();
     }
 
@@ -42,12 +41,14 @@ public class ProfileTalker extends Talkers{
 
 
     public void init(User user){
-        if(userProfiles.keySet().contains(user)){
-            currentProfile = userProfiles.get(user);
+        if(userProfiles.keySet().contains(user.getKey())){
+            currentProfile = userProfiles.get(user.getKey());
         }
         else{
             currentProfile = new Profile();
             currentProfile.init(user);
+
+            userProfiles.put(user.getKey(), currentProfile);
         }
     }
 
@@ -67,7 +68,7 @@ public class ProfileTalker extends Talkers{
 
     @Override
     public boolean isUpdated() {
-        return super.checkOriginalUpdate();
+        return currentProfile.isUpdated();
     }
 
     @Override
@@ -95,12 +96,12 @@ public class ProfileTalker extends Talkers{
         private UserProfile profile;
 
         //--Interface Fields
-        private Texture profileImage;
+        private byte[] profileImage;
         private String name;
         private String description;
 
         //Getters and Setters
-        public Texture getProfileImage() {
+        public byte[] getProfileImage() {
             return profileImage;
         }
 
@@ -133,18 +134,17 @@ public class ProfileTalker extends Talkers{
         public void pull() {
             super.setWaiting(true);
 
-            profile = modelStorage.getModel(user.getProfile());
+            profile = localDatabase.getModel(user.getProfile());
 
-            modelStorage.requestModelFromServer(
-                    MImage.class.getName()
-                    , profile.getImageKey());
+            localDatabase.requestModelFromServer(
+                    profile.getImageKey());
         }
 
         @Override
         public void push() {
-            profile = modelStorage.getModel(user.getProfile());
+            profile = localDatabase.getModel(user.getProfile());
 
-            MImage image = modelStorage.getModel(profile.getImageKey());
+            MImage image = localDatabase.getModel(profile.getImageKey());
 
             //Set
             profile.setUsername(name);
@@ -152,13 +152,25 @@ public class ProfileTalker extends Talkers{
             image.setImage(this.profileImage);
 
             //Push
-            modelStorage.pushModel(profile);
-            modelStorage.pushModel(image);
+            localDatabase.pushModel(profile);
+            localDatabase.pushModel(image);
         }
 
         @Override
         public boolean isUpdated() {
             boolean updated = super.checkOriginalUpdate();
+
+            if(this.name == null){
+                return false;
+            }
+
+            if(this.description == null){
+                return false;
+            }
+
+            if(this.profileImage == null){
+                return false;
+            }
 
             super.setWaiting(!updated);
 
@@ -168,9 +180,14 @@ public class ProfileTalker extends Talkers{
 
         @Override
         public void update(float dt) {
-            profile = modelStorage.getModel(user.getProfile());
+            profile = localDatabase.getModel(user.getProfile());
 
-            MImage image = modelStorage.getModel(profile.getImageKey());
+            MImage image = localDatabase.getModel(profile.getImageKey());
+
+            if(image == null){
+                localDatabase.requestModelFromServer(profile.getImageKey());
+                return;
+            }
 
             name = profile.getUsername();
             description = profile.getDescription();

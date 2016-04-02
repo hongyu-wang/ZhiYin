@@ -8,10 +8,8 @@ import server.model.user.UserConversations;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserUploadedContent;
 import server.services.factories.ConversationManagerFactory;
-import server.services.factories.MusicPostManagerFactory;
 import tools.utilities.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,9 +45,9 @@ public class SocialContentTalker extends Talkers{
 
     @Override
     public void init() {
-        uConv = modelStorage.getModel(super.getMainUser().getConversations());
-        uConv = modelStorage.getModel(super.getMainUser().getContent());
-        uDiary = modelStorage.getModel(super.getMainUser().getDiary());
+        uConv = localDatabase.getModel(super.getMainUser().getConversations());
+        uCont = localDatabase.getModel(super.getMainUser().getContent());
+        uDiary = localDatabase.getModel(super.getMainUser().getDiary());
     }
 
     public void addNewConversation(List<User> friends){
@@ -76,21 +74,21 @@ public class SocialContentTalker extends Talkers{
     @Override
     public void pull() {
 
-        modelStorage.requestModelFromServer(UserConversations.class.getName(), super.getMainUser().getConversations());
-        modelStorage.requestModelFromServer(UserUploadedContent.class.getName(), super.getMainUser().getContent());
-        modelStorage.requestModelFromServer(UserDiaryContent.class.getName(), super.getMainUser().getDiary());
+        localDatabase.requestModelFromServer(super.getMainUser().getConversations());
+        localDatabase.requestModelFromServer(super.getMainUser().getContent());
+        localDatabase.requestModelFromServer(super.getMainUser().getDiary());
 
 
         for(long convoKey: uConv.getConvoKeys()){
-            modelStorage.requestModelFromServer(MConversation.class.getName(), convoKey);
+            localDatabase.requestModelFromServer(convoKey);
         }
 
         for(long musicKey: uCont.getPostKeys()){
-            modelStorage.requestModelFromServer(MMusicPost.class.getName(), musicKey);
+            localDatabase.requestModelFromServer(musicKey);
         }
 
         for(long diaryKey: uDiary.getDiaryKeys()){
-            modelStorage.requestModelFromServer(MDiaryPost.class.getName(), diaryKey);
+            localDatabase.requestModelFromServer(diaryKey);
         }
 
     }
@@ -114,9 +112,9 @@ public class SocialContentTalker extends Talkers{
                 uDiary.getDiaryKeys().add(diaryPost.getKey());
         }
         //Push
-        modelStorage.pushModel(uConv);
-        modelStorage.pushModel(uCont);
-        modelStorage.pushModel(uDiary);
+        localDatabase.pushModel(uConv);
+        localDatabase.pushModel(uCont);
+        localDatabase.pushModel(uDiary);
     }
 
     @Override
@@ -160,15 +158,15 @@ public class SocialContentTalker extends Talkers{
         List<MDiaryPost> newDiaryList = Utils.<MDiaryPost>newList();
 
         for(long key: uConv.getConvoKeys()){
-            newConversationList.add(modelStorage.<MConversation>getModel(key));
+            newConversationList.add(localDatabase.<MConversation>getModel(key));
         }
 
         for(long key: uCont.getPostKeys()){
-            newMusicList.add(modelStorage.<MMusicPost>getModel(key));
+            newMusicList.add(localDatabase.<MMusicPost>getModel(key));
         }
 
         for(long key: uDiary.getDiaryKeys()){
-            newDiaryList.add(modelStorage.<MDiaryPost>getModel(key));
+            newDiaryList.add(localDatabase.<MDiaryPost>getModel(key));
         }
 
         this.conversations = newConversationList;

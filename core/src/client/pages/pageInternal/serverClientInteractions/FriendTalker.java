@@ -1,14 +1,10 @@
 package client.pages.pageInternal.serverClientInteractions;
 
-import client.pages.pageInternal.serverClientInteractions.Talkers;
-import server.model.social.MConversation;
-import server.model.social.MMessage;
 import server.model.user.User;
-import server.model.user.UserConversations;
+import tools.utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Hongyu Wang on 3/20/2016.
@@ -28,7 +24,7 @@ public class FriendTalker extends Talkers {
 
     @Override
     public void init() {
-
+        friends = Utils.newList();
     }
 
     /*------------------------------------------------------------------------*/
@@ -39,10 +35,10 @@ public class FriendTalker extends Talkers {
      */
     @Override
     public void pull() {
-        modelStorage.requestModelFromServer(User.class.getName(), getMainUser().getKey());
+        localDatabase.requestModelFromServer(getMainUser().getKey());
 
         for(long key: super.getMainUser().getFriendKeys()){
-            modelStorage.requestModelFromServer(User.class.getName(), key);
+            localDatabase.requestModelFromServer(key);
         }
     }
 
@@ -62,7 +58,7 @@ public class FriendTalker extends Talkers {
         }
 
         //Push
-        modelStorage.pushModel(super.getMainUser());
+        localDatabase.pushModel(super.getMainUser());
     }
 
     /**Checks if all of the friends have been successfully pulled.
@@ -80,15 +76,16 @@ public class FriendTalker extends Talkers {
     }
 
     /**
-     * Updates the friends List from modelStorage.
+     * Updates the friends List from localDatabase.
      *
      * @param dt The rate of change of updating
      */
     @Override
     public void update(float dt) {
         List<User> newFriendList = new ArrayList<>();
-        for(long key: modelStorage.getMainUser().getFriendKeys()){
-            newFriendList.add(modelStorage.<User>getModel(key));
+        System.out.println(localDatabase.getMainUser());
+        for(long key: localDatabase.getMainUser().getFriendKeys()){
+            newFriendList.add(localDatabase.<User>getModel(key));
         }
 
         this.friends = newFriendList;

@@ -1,22 +1,29 @@
 package server.model.soundCloud;
 
+import server.model.structureModels.ServerModel;
+
 import java.util.List;
 
 /**
  * Band model
  * Contains all albums and songs of the band
  */
-public class MBand {
+public class MBand extends ServerModel {
 
     /**
      * Id of the MText representation of the name of the band
      */
-    private long name;
+    private String name;
 
     /**
      * Id of the MText representation of the description of the band
      */
-    private long description;
+    private String description;
+
+    /**
+     * The image of the band.
+     */
+    private long bandImage;
 
     /**
      * List of id's of all the albums that the band has created
@@ -29,19 +36,19 @@ public class MBand {
     private List<Long> songs;
 
 
-    public long getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(long name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public long getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(long description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -59,5 +66,13 @@ public class MBand {
 
     public void setSongs(List<Long> songs) {
         this.songs = songs;
+    }
+
+    public long getBandImage() {
+        return bandImage;
+    }
+
+    public void setBandImage(long bandImage) {
+        this.bandImage = bandImage;
     }
 }

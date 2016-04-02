@@ -1,7 +1,7 @@
 package client.pages.home;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
@@ -14,20 +14,20 @@ import driver.GameLoop;
  */
 public abstract class DiscoveryShell extends State {
 
-    public void init(){
+    protected void init(){
         super.init();
 
         Image background = new Image(new Texture("Home/DiscoveryBG.png"));
-        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
+        background.setBounds(0, 0, WIDTH* StateManager.M, HEIGHT* StateManager.M);
         stage.addActor(background);
 
         Button homeButton = new Button(this);
-        homeButton.setBounds(0, 1217, 250, 117);
+        homeButton.setBounds(0, 1217, 260, 117);
         homeButton.setExecutable(new ExecuteChangePage(Pages.HOME));
         add(homeButton);
 
         Button artistButton = new Button(this);
-        artistButton.setBounds(250 + 1, 1217, 250, 117);
+        artistButton.setBounds(260, 1217, 150, 117);
         artistButton.setExecutable(new ExecuteChangePage(Pages.ARTIST));
         add(artistButton);
     }

@@ -1,10 +1,9 @@
 package client.pages.home;
 
-import client.events.executables.internalChanges.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,15 +12,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MMusic;
+import tools.AudioTools.AudioCreator;
 
 /**
+ *
  * Created by blobbydude24 on 2016-03-23.
  */
 public class TopSingles extends TopSinglesShell{
 
     private Table table;
 
-    public void init(){
+    public TopSingles(){
+        init();
+    }
+
+    protected void init(){
         super.init();
 
         table = new Table();
@@ -29,12 +35,31 @@ public class TopSingles extends TopSinglesShell{
         table.top();
 
         //table.setDebug(true);
+        if (os == MAC)
+            addSingles();
+
 
         stage.addActor(table);
     }
 
 
-    public void addSingle(String songName, Music music){
+    private void addSingles(){
+        int i = 0;
+
+        for (String name : AudioCreator.songNameToMMusic.keySet()){
+
+            addSingle(name, AudioCreator.songNameToMMusic.get(name));
+
+            if (i >= 10) break;
+            i++;
+        }
+    }
+
+
+
+
+
+    public void addSingle(String songName, MMusic music){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -72,4 +97,6 @@ public class TopSingles extends TopSinglesShell{
     public void reset() {
 
     }
+
+
 }

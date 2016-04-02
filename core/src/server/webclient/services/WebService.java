@@ -38,11 +38,28 @@ public class WebService{
      */
     @GET
     @Path("/getServerModel/{param}")
-    @Produces("application/json")
-    public ServerModel getServerModel(@PathParam("param") Long key) {
+    @Produces("*/*")
+    public String getServerModel(@PathParam("param") Long key) {
         MockServer mockServer = ServerInteraction.getServer();
+        ServerModel model = mockServer.getModel(key);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String className = Tags.ID_TAGS.parseTag(model.getClass().getCanonicalName());
+        String jString = "";
+        try {
 
-        return mockServer.getModel(key);
+            jString = objectMapper.writeValueAsString(model);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return jString+className;
+    }
+
+    @GET
+    @Path("/getServerKey")
+    @Produces("application/json")
+    public Long getServerKey(){
+        MockServer mockServer = ServerInteraction.getServer();
+        return mockServer.getSerial();
     }
 
     /**
@@ -51,13 +68,12 @@ public class WebService{
      */
     @POST
     @Path("/postServerModel")
-    @Consumes("application/json")
+    @Consumes("*/*")
     public Response postServerModel(String json) {
         MockServer mockServer = ServerInteraction.getServer();
         ObjectMapper objectMapper = new ObjectMapper();
         ServerModel model = null;
         int tag = Integer.parseInt(json.substring(json.length()-4));
-        System.out.println(tag+1);
         String className = Tags.ID_TAGS.getName(tag);
         json = json.substring(0, json.length()-4);
 

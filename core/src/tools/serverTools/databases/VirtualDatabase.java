@@ -1,14 +1,14 @@
 package tools.serverTools.databases;
 
-import com.badlogic.gdx.graphics.Texture;
-import server.model.media.MAudio;
-import server.model.media.MHashtag;
-import server.model.media.MImage;
-import server.model.media.MMusic;
+import server.model.media.*;
+import server.model.social.MComment;
+import server.model.social.MConversation;
+import server.model.social.MDiaryPost;
 import server.model.structureModels.ServerModel;
 import server.model.user.*;
 import tools.AudioTools.AudioCreator;
 import tools.serverTools.generators.SerialGenerator;
+import tools.utilities.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ public class VirtualDatabase {
     private Map<Long, ServerModel> data;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
-    private SerialGenerator generator = SerialGenerator.getGenerator();
-    private SerialGenerator HVGenerator = SerialGenerator.getHGenerator(1000);
+    public SerialGenerator generator = SerialGenerator.getGenerator();
+    public SerialGenerator HVGenerator = SerialGenerator.getHGenerator(1000);
 
     public VirtualDatabase() throws IOException{
         init();
@@ -37,7 +37,8 @@ public class VirtualDatabase {
 
         initUserData();
         initMediaData();
-
+        initSocialData();
+        initHashtags();
     }
 
     private void initUserData(){
@@ -65,25 +66,92 @@ public class VirtualDatabase {
 
         user3.getFriendKeys().add(user1.getKey());
         user3.getFriendKeys().add(user2.getKey());
+
+        user1.getBandKeys().add(12000L);
+
+        user2.getBandKeys().add(12001L);
+        user2.getBandKeys().add(12002L);
+        user2.getBandKeys().add(12004L);
+
+        user3.getBandKeys().add(12002L);
+        user3.getBandKeys().add(12003L);
+    }
+
+    private void initHashtags(){
+        MHashtag hashtag1 = new MHashtag();
+        hashtag1.setKey(20000);
+        hashtag1.setHashtag("Sorry");
+
+        MHashtag hashtag2 = new MHashtag();
+        hashtag2.setKey(20001);
+        hashtag2.setHashtag("MissingU");
+
+        MHashtag hashtag3 = new MHashtag();
+        hashtag3.setKey(20002);
+        hashtag3.setHashtag("Weeknd");
+
+        MHashtag hashtag4 = new MHashtag();
+        hashtag4.setKey(20003);
+        hashtag4.setHashtag("RnB");
+
+        MHashtag hashtag5 = new MHashtag();
+        hashtag5.setKey(20004);
+        hashtag5.setHashtag("Pop");
+
+        MHashtag hashtag6 = new MHashtag();
+        hashtag5.setKey(20005);
+        hashtag5.setHashtag("M5");
+
+        MHashtag hashtag7 = new MHashtag();
+        hashtag5.setKey(20006);
+        hashtag5.setHashtag("Bieber");
+
+        MHashtag hashtag8 = new MHashtag();
+        hashtag5.setKey(20007);
+        hashtag5.setHashtag("Kanye");
+
+        MHashtag hashtag9 = new MHashtag();
+        hashtag5.setKey(20008);
+        hashtag5.setHashtag("Ed");
+
+        MHashtag hashtag10 = new MHashtag();
+        hashtag5.setKey(20009);
+        hashtag5.setHashtag("LoveYourself");
+
+
+
+
+
+
+
+        data.put(hashtag1.getKey(),hashtag1);
+        data.put(hashtag2.getKey(),hashtag2);
+        data.put(hashtag3.getKey(),hashtag3);
+        data.put(hashtag4.getKey(),hashtag4);
+        data.put(hashtag5.getKey(),hashtag5);
+        data.put(hashtag6.getKey(),hashtag6);
+        data.put(hashtag7.getKey(),hashtag7);
+        data.put(hashtag8.getKey(),hashtag8);
+        data.put(hashtag9.getKey(),hashtag9);
+        data.put(hashtag10.getKey(),hashtag10);
     }
 
     private void initMediaData(){
-        //TODO created all media here.
 
         //Image
-//        MImage image1 = generateTestImage("ProfilePic_1", "//");// TODO path
-//        MImage image2 = generateTestImage("ProfilePic_2", "//");// TODO path
-//        MImage image3 = generateTestImage("ProfilePic_3", "//");// TODO path
+//        MImage image1 = generateTestImage("Alice's Profile", "UserProfiles//Alice_After_The_War.png");
+//        MImage image2 = generateTestImage("Benny's Profile", "UserProfiles//Benny_After_The_War.png");
+//        MImage image3 = generateTestImage("Cindy's Profile", "UserProfiles//Cindy_After_The_War.png");
 
         //Audio
-//        MAudio audio1 = generateTestAudio("Audio_1.mp3");// TODO path
-//        MAudio audio2 = generateTestAudio("Audio_2.mp3");// TODO path
-//        MAudio audio3 = generateTestAudio("Audio_3.mp3");// TODO path
+//        MAudio audio1 = generateTestAudio("Audio_1.mp3");
+//        MAudio audio2 = generateTestAudio("Audio_2.mp3");
+//        MAudio audio3 = generateTestAudio("Audio_3.mp3");
 
         //Music
-//        MMusic music1 = generateTestMusic("Music_1", audio1);// TODO path
-//        MMusic music2 = generateTestMusic("Music_2", audio2);// TODO path
-//        MMusic music3 = generateTestMusic("Music_3", audio3);// TODO path
+//        MMusic music1 = generateTestMusic("Music_1", audio1);
+//        MMusic music2 = generateTestMusic("Music_2", audio2);
+//        MMusic music3 = generateTestMusic("Music_3", audio3);
 
         //Hashtag
         MHashtag tag1 = generateTestHashtags("#Happy");
@@ -98,7 +166,6 @@ public class VirtualDatabase {
 //        music_tag2.add(music2.getKey());
 //        music_tag3.add(music3.getKey());
 
-        //TODO add media to users here.
         User user1 = (User)data.get(1L);
         User user2 = (User)data.get(2L);
         User user3 = (User)data.get(3L);
@@ -107,10 +174,31 @@ public class VirtualDatabase {
         UserProfile profile2 = (UserProfile)data.get(user2.getProfile());
         UserProfile profile3 = (UserProfile)data.get(user3.getProfile());
 
-//        profile1.setImageKey(image1.getKey());
-//        profile2.setImageKey(image2.getKey());
-//        profile3.setImageKey(image3.getKey());
+        profile1.setImageKey(-11L);
+        profile2.setImageKey(-12L);
+        profile3.setImageKey(-13L);
+
     }
+
+    private void initSocialData(){
+        User user1 = (User)data.get(1L);
+        User user2 = (User)data.get(2L);
+        User user3 = (User)data.get(3L);
+
+        generateConversation(user1, user2);
+        generateConversation(user1, user3);
+        generateConversation(user2, user3);
+
+        MText alice_text = generateText("My name is Alice and I love this song.");
+        MText benny_text = generateText("My name is Benny and I love this song.");
+        MText cindy_text = generateText("My name is Benny and I love this song.");
+
+        generateStaticDiaryPost("Title1", user1, alice_text.getKey(), 2999999, 10000);
+        generateStaticDiaryPost("Title2", user2, benny_text.getKey(), 5999999, 10001);
+        generateStaticDiaryPost("Title3", user3, cindy_text.getKey(), 8999999, 10002);
+    }
+
+
 
 
     /**Gets a model from the database.
@@ -176,16 +264,19 @@ public class VirtualDatabase {
         conversations.setConvoKeys(new ArrayList<Long>());
 
         //ActivityLog Attributes
-        log.setLog(new ArrayList<String>());
+        log.setLog(Utils.<String>newList());
 
         //UploadedContent Attributes
-        content.setPostKeys(new ArrayList<Long>());
+        content.setPostKeys(Utils.<Long>newList());
 
         //DiaryContent Attributes
-        diary.setDiaryKeys(new ArrayList<Long>());
+        diary.setDiaryKeys(Utils.<Long>newList());
 
         //User friends.
-        List<Long> friendList = new ArrayList<Long>();
+        List<Long> friendList = Utils.newList();
+
+        //User artists
+        List<Long> bandList = Utils.newList();
 
         //Assign to user.
         user.setProfile(profile.getKey());
@@ -194,6 +285,7 @@ public class VirtualDatabase {
         user.setContent(content.getKey());
         user.setDiary(diary.getKey());
         user.setFriendKeys(friendList);
+        user.setBandKeys(bandList);
 
         //Put into database.
         data.put(user.getKey(), user);
@@ -228,9 +320,12 @@ public class VirtualDatabase {
 
         image.setName(name);
 
-        image.setImage(new Texture(path));
+//        image.setImage(path);
 
         image.setName(name);
+
+        data.put(image.getKey(), image);
+
 
         return image;
     }
@@ -239,6 +334,8 @@ public class VirtualDatabase {
         MAudio audio = AudioCreator.createFromFilePath(path);
 
         audio.setKey(generator.generateSerial());
+
+        data.put(audio.getKey(), audio);
 
         return audio;
     }
@@ -252,7 +349,89 @@ public class VirtualDatabase {
 
         music.setMusicKey(audio.getKey());
 
+        data.put(music.getKey(), music);
+
         return music;
+    }
+
+    private MText generateText(String message){
+        MText text = new MText();
+
+        text.setKey(generator.generateSerial());
+
+        text.setText(message);
+
+        text.setType(0);
+
+        data.put(text.getKey(), text);
+
+        return text;
+    }
+
+
+    private void generateConversation(User user1, User user2){
+        UserConversations convo_1 = (UserConversations)data.get(user1.getConversations());
+        UserConversations convo_2 = (UserConversations)data.get(user2.getConversations());
+
+        MConversation one_two = new MConversation();
+
+        one_two.setKey(generator.generateSerial());
+
+        one_two.setMessageList(new ArrayList<Long>());
+
+        List<Long> one = new ArrayList<Long>();
+
+        one.add(user1.getKey());
+        one.add(user2.getKey());
+
+        one_two.setParticipants(one);
+
+        convo_1.getConvoKeys().add(one_two.getKey());
+        convo_2.getConvoKeys().add(one_two.getKey());
+
+        data.put(one_two.getKey(), one_two);
+    }
+
+    private void generateStaticDiaryPost(String title, User creator, long description, long image, long music){
+        MDiaryPost diaryPost = new MDiaryPost();
+
+        diaryPost.setTitle(title);
+
+        diaryPost.setCreator(creator.getKey());
+
+        diaryPost.setText(description);
+
+        diaryPost.setImageKey(image);
+
+        diaryPost.setMusicKey(music);
+
+        diaryPost.setComments(Utils.<Long>newList());
+
+        generateComment(diaryPost, creator);
+
+        diaryPost.setKey(generator.generateSerial());
+
+        UserDiaryContent content = (UserDiaryContent) data.get(creator.getDiary());
+
+        content.getDiaryKeys().add(diaryPost.getKey());
+
+        data.put(diaryPost.getKey(), diaryPost);
+    }
+
+    private void generateComment(MDiaryPost post, User creator){
+        UserProfile profile = (UserProfile)data.get(creator.getProfile());
+
+        MComment comment = new MComment();
+        comment.setKey(generator.generateSerial());
+
+        comment.setCreator(creator.getKey());
+        comment.setText("I'm " + profile.getUsername() + ", this is a server comment.");
+        comment.setAudio(Utils.<Long>newList());
+        comment.setMusic(Utils.<Long>newList());
+        comment.setLikes(Utils.<Long>newList());
+
+        post.getComments().add(comment.getKey());
+        data.put(comment.getKey(), comment);
     }
 
 }

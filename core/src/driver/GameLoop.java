@@ -1,36 +1,41 @@
 package driver;
 
 import client.pageStorage.Pages;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
+import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
+import client.tools.Constants;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import server.model.media.MMusic;
+import tools.AudioTools.AudioCreator;
 
-public class GameLoop extends ApplicationAdapter {
+import java.nio.ByteBuffer;
+
+public class GameLoop extends ApplicationAdapter  {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
-	public static final int WIDTH = 750;
 
-	public static final int HEIGHT = 1334;
+	public static boolean ISPUSHING = true;
+
+
 
     private static OrthographicCamera primary;
 
 	@Override
 	public void create() {
-		stateManager = StateManager.getInstance();
-        Pages.initLogin();
 
+		stateManager = StateManager.getInstance();
+		Pages.initLogin();
         stateManager.changeState(Pages.LOGIN);
 		spriteBatch = MainBatch.getInstance();
-        primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
+        primary = new OrthographicCamera(StateManager.WIDTH*StateManager.M, StateManager.HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
         primary.update();
-
-
-
 
     }
 
@@ -45,7 +50,11 @@ public class GameLoop extends ApplicationAdapter {
 
         spriteBatch.setProjectionMatrix(primary.combined);
 
+
+
+
 		spriteBatch.begin();
+
 		stateManager.draw();
 		stateManager.update(Gdx.graphics.getDeltaTime());
 		spriteBatch.end();

@@ -4,29 +4,45 @@ import client.pages.friends.boxes.FriendBox;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
+import client.singletons.StateManager;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import server.model.user.User;
 
 import java.util.List;
 
 public class Friends1 extends Friends1Shell{
+
+    private Table table;
+
+    public Friends1(){
+        init();
+    }
+
     public void init(){
         super.init();
 
-        pullDataFromServer();
+        table = new Table();
+        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 *  StateManager.M);
+        table.top();
+
+        stage.addActor(table);
+
+        //table.setDebug(true);
+        talkerAddFriends();
     }
 
-    public void addFriendBox(int status, String name, int multiplier){
-        FriendBox box = new FriendBox(1334 - 117 * multiplier, status, name);
-        stage.addActor(box.getTable());
 
+    public void addBox(FriendBox box){
+        table.add(box.getStack()).width(750 * StateManager.M).height(117 * StateManager.M);
+        table.row();
     }
-
-
 
     @Override
     public void reset() {
 
     }
+
+
 
     @Override
     public void dispose() {
@@ -38,17 +54,21 @@ public class Friends1 extends Friends1Shell{
 
     }
 
-
-    public void pullDataFromServer(){
+    private void talkerAddFriends(){
         FriendTalker ft = TalkerFactory.getFriendTalker();
         ProfileTalker pt = TalkerFactory.getProfileTalker();
 
-        ft.update(0);
-        List<User> users = ft.getAllFriends();
-        for (int i = 2; i < 5; i ++){
-            pt.init(users.get(i-2));
-            pt.update(0);
-            addFriendBox(1, pt.getName(), i);
+        if(ft.isUpdated()) {
+            for (User friend: ft.getAllFriends()) {
+                pt.init(friend);
+                pt.update(0);
+                if (pt.isUpdated()) {
+
+                    String friendName = pt.getName();
+
+                    addBox(new FriendBox(1, friendName));
+                }
+            }
         }
     }
 }

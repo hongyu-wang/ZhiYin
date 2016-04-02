@@ -13,48 +13,26 @@ import driver.GameLoop;
  */
 public abstract class NowPlayingShell extends State{
 
-    public void init(){
+    protected void init(){
         super.init();
-        Image background = new Image(new Texture("Now Playing.png"));
-        background.setBounds(0, 0, GameLoop.WIDTH * StateManager.M, GameLoop.HEIGHT * StateManager.M);
-        stage.addActor(background);
 
-        Button rewindButton = new Button(this);
-        rewindButton.setBounds(170 + 1, 246, 53, 46);
-        rewindButton.setExecutable(new TestExecutable("rewind"));
-        add(rewindButton);
 
-        Button fastForwardButton = new Button(this);
-        fastForwardButton.setBounds(535 + 1, 246, 53, 46);
-        fastForwardButton.setExecutable(new TestExecutable("fast forward"));
-        add(fastForwardButton);
 
-        Button b1 = new Button(this);
-        b1.setBounds(0 + 1, 0, 230, 117);
-        b1.setExecutable(new TestExecutable("b1"));
-        add(b1);
 
-        Button b2 = new Button(this);
-        b2.setBounds(230 + 1, 0, 290, 117);
-        b2.setExecutable(new TestExecutable("b2"));
-        add(b2);
+        TestExecutable likeEx = new TestExecutable("like");
+        addImageButton("NowPlaying/Like@", likeEx, 562, 1240, 144, 54);
 
-        Button b3 = new Button(this);
-        b3.setBounds(520 + 1, 0, 230, 117);
-        b3.setExecutable(new TestExecutable("b3"));
-        add(b3);
 
-        Button upVoteButton = new Button(this);
-        upVoteButton.setBounds(562 + 1, 1240, 144, 54);
-        upVoteButton.setExecutable(new TestExecutable("up vote"));
-        add(upVoteButton);
+        TestExecutable rewindEx = new TestExecutable("rewind");
+        addImageButton("NowPlaying/Rewind@", rewindEx, 170, 246, 53, 46);
 
-//        Dimensions of the picture are 655 x 655
-//        Button picture = new Button(this);
-//        picture.setBounds(50 + 1, 1160 - 655, 655, 655);
-//        picture.setExecutable(new TestExecutable("picture"));
-//        add(picture);
+        TestExecutable forwardEx = new TestExecutable("forward");
+        addImageButton("NowPlaying/Forward@", forwardEx, 535, 246, 53, 46);
+
+        TestExecutable shareEx = new TestExecutable("share");
+        addImageButton("NowPlaying/Share@", shareEx, 520, 0, 230, 117);
     }
+
 
     @Override
     public void dispose() {

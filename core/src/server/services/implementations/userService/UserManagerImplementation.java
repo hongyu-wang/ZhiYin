@@ -30,17 +30,11 @@ public class UserManagerImplementation implements UserManager {
 //        user.setKey(userKey);
 //
 //        long userContent = 0;
-//        //TODO request from server.
 //        long conversations = 0;
-//        //TODO request from server.
 //        long diary = 0;
-//        //TODO request from server.
 //        long log = 0;
-//        //TODO request from server.
 //        long profile = 0;
-//        //TODO request from server.
 //        List<Long> friends = null;
-//        //TODO request from server
 //
 //        user.setContent(userContent);
 //        user.setConversations(conversations);
@@ -55,7 +49,6 @@ public class UserManagerImplementation implements UserManager {
     public User createNewUser(String user, String pass){
         User newUser = new User();
         return newUser;
-        //TODO request from server.
     }
 
 }

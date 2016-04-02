@@ -15,7 +15,7 @@ public interface MessageManager {
      * @param creator   the id of the user that created it
      * @return a message containing the inputed data
      */
-    public MMessage createMessage(long text, long timeStamp, long creator);
+    public MMessage createMessage(long text, long timeStamp, long creator, long audio);
 
     /**
      * Edits the text of a message

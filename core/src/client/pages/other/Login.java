@@ -1,17 +1,23 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.ExecuteChangePage;
+import client.component.basicComponents.Button;
+import client.events.ActionEvent;
+import client.events.executables.internalChanges.loginExecutable.ExecuteLogin;
+import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
+import tools.serverTools.databases.LocalDatabase;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 
 /**
  * #Login Page
@@ -21,6 +27,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class Login extends State {
     private int delta = 0;
     private int delta2 = 0;
+    private WorkingTextArea username;
+    private WorkingTextArea password;
+    private ExecuteRemoveButton erb;
+
     public static final String NAME1 = "Alice";
     public static final String NAME2 = "Benny";
     public static final String NAME3 = "Cindy";
@@ -29,55 +39,91 @@ public class Login extends State {
     private Label label;
     private boolean checkPull;
     private VeryBeginningInitializer vb;
-    @Override
-    public void init() {
-        super.init();
-        final WorkingTextArea wta = new WorkingTextArea("", SkinSingleton.getInstance());
-        final TextButton button = new TextButton("Login", SkinSingleton.getInstance());
-        button.setBounds(0, StateManager.HEIGHT - 100, StateManager.WIDTH, 100);
-        button.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                String text = wta.getText().trim();
-                if (text.equals(NAME1) || text.equals(NAME2) || text.equals(NAME3)) {
 
-                    vb = TalkerFactory.VeryBeginningInitializer();
-                    vb.init(text);
-                    vb.pull();
-                    checkPull = true;
-                    button.remove();
-                    label = new Label("", SkinSingleton.getInstance());
-                    label.setPosition(50, StateManager.HEIGHT - 100);
-                    stage.addActor(label);
 
-                    wta.remove();
-                    Pages.initClass();
-                }
-            }
-        });
-        wta.setBounds(0, StateManager.HEIGHT - 200, StateManager.WIDTH, 100);
-        stage.addActor(wta);
-        stage.addActor(button);
+    public Login(){
+        init();
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        super.actionPerformed(e);
+        String text = username.getText().trim();
+        if (text.equals(NAME1) || text.equals(NAME2) || text.equals(NAME3)) {
+            for (Actor act : stage.getActors()){
+                act.remove();
+            }
+            vb = TalkerFactory.VeryBeginningInitializer();
+            vb.init(text);
+
+            LocalDatabase.ipAddress = password.getText();
+
+            vb.push();
+            vb.pull();
+            checkPull = true;
+            for (Actor act : stage.getActors()) {
+                act.remove();
+            }
+            erb.execute();
+            label = new Label("", SkinSingleton.getInstance());
+            label.setPosition(50, StateManager.HEIGHT - 100);
+            stage.addActor(label);
+        }
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+
+        initializeComponents();
+    }
+
+    private void initializeComponents(){
+        Image image = new Image(new Texture("Artboards//Log in.png"));
+        image.setBounds(0, 0, WIDTH * M, HEIGHT * M);
+        stage.addActor(image);
+        username = new WorkingTextArea("username", SkinSingleton.getInstance());
+        password = new WorkingTextArea("localhost", SkinSingleton.getInstance());
+
+        username.setBounds(102 * M, (HEIGHT - 798 - 72) * M, 545 * M, 72 * M);
+        password.setBounds(102 * M, (HEIGHT - 910 - 72) * M, 545 * M, 72 * M);
+
+        stage.addActor(username);
+        stage.addActor(password);
+
+        Button button = new Button(this);
+
+        button.setExecutable(new ExecuteLogin());
+        erb = new ExecuteRemoveButton(button);
+        button.setBounds(302, HEIGHT - 1079 - 77, 153, 77);
+        add(button);
+    }
 
     @Override
     public void update(float dt) {
         super.update(dt);
+
         if (checkPull){
             if (delta%100 == 0) {
 
 
-                label.setText(stuff[delta2%(stuff.length)]);
-                delta2++;
-
+                pullFromServer();
             }
-
-            if (vb.isUpdated())
-                new ExecuteChangePage(Pages.HOME).execute();
         }
         delta ++;
 
+    }
+
+    private void pullFromServer(){
+        vb.update(0);
+        if (vb.isUpdated()) {
+            Pages.initClass();
+            new ExecuteChangePage(Pages.HOME).execute();
+
+        }
+        else{
+            vb.pull();
+        }
     }
 
     @Override
@@ -88,5 +134,10 @@ public class Login extends State {
     @Override
     public void dispose() {
 
+    }
+
+
+    public void setText(String str){
+        label.setText(str);
     }
 }

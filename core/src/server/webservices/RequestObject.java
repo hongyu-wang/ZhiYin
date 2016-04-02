@@ -1,23 +1,23 @@
 package server.webservices;
 
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.utils.JsonReader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import server.model.structureModels.ServerModel;
+import tools.serverTools.generators.Tags;
 
 
 /**
  * A singleton used to request models from the server
  */
 public class RequestObject implements Net.HttpResponseListener {
-    private ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
+    private LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
     private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
     private Object rOjbect;
-    private String className;
 
     public static RequestObject newInstance(){
         return new RequestObject();
@@ -27,14 +27,12 @@ public class RequestObject implements Net.HttpResponseListener {
     /**
      * Retrieves a model from the server
      *
-     * @param className name of the class of the model
      * @param key       id key of the model
      */
-    public void getModel(String className, long key) {
+    public void getModel(long key) {
         // LibGDX NET CLASS
-        this.className = className;
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("http://localhost:8081/webservice/getServerModel/" + key);
+        httpGet.setUrl("http://"+ LocalDatabase.ipAddress+":8081/webservice/getServerModel/" + key);
         //httpGet.setHeader("Content-Type", "application/json");
         //httpGet.setHeader("X-Parse-Application-Id", app_id);
         //httpGet.setHeader("X-Parse-REST-API-Key", app_key);
@@ -48,11 +46,15 @@ public class RequestObject implements Net.HttpResponseListener {
 
     @Override
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
-        final int statusCode = httpResponse.getStatus().getStatusCode();
         try {
-            rOjbect = objectMapper.readValue(httpResponse.getResultAsString(), Class.forName(className));
-            modelStorage.setModelFromServer((ServerModel)rOjbect);
-            String line = "lol";
+            String json = httpResponse.getResultAsString();
+            int tag = Integer.parseInt(json.substring(json.length()-4));
+            System.out.println(tag+1);
+            String className = Tags.ID_TAGS.getName(tag);
+            System.out.println(className);
+            json = json.substring(0, json.length()-4);
+            rOjbect = objectMapper.readValue(json, Class.forName(className));
+            localDatabase.setModelFromServer((ServerModel)rOjbect);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -36,7 +36,7 @@ public enum Tags {
         classes = new String[]{
                 User.class.getName(),
                 UserActivityLog.class.getName(),
-                UserActivityLog.class.getName(),
+                UserDiaryContent.class.getName(),
                 UserConversations.class.getName(),
                 UserProfile.class.getName(),
                 UserUploadedContent.class.getName(),
@@ -70,7 +70,8 @@ public enum Tags {
     }
 
     public String parseTag(String className){
-        String tag = tags.get(className);
+        String tag = ids.get(className).toString();
+
         while(tag.length() < 4){
             tag = "0" + tag;
         }
