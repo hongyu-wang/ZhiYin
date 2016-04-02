@@ -98,17 +98,17 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
      * InputListener registers an input on the screen.
      */
     public void receiveInput(){
-        currentState.getInputController(State.SHELLINPUT).checkPressed();
+        currentState.getInputController().checkPressed();
 
     }
 
 
     public void recieveDragged(){
-        currentState.getInputController(State.SHELLINPUT).checkDragged();
+        currentState.getInputController().checkDragged();
     }
 
     public void recieveRelease(){
-        currentState.getInputController(State.SHELLINPUT).checkRelease();
+        currentState.getInputController().checkRelease();
     }
 
 }

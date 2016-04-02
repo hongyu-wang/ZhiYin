@@ -2,6 +2,7 @@ package client.singletons;
 
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.tools.Constants;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
@@ -17,7 +18,7 @@ import driver.GameLoop;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class InputListener implements InputProcessor {
+public class InputListener implements InputProcessor, Constants {
     /**
      * Our instance of InputListener as per the Singleton design pattern.
      */
@@ -161,7 +162,7 @@ public class InputListener implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         mouseX = screenX;
-        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
+        mouseY = (int)(HEIGHT*StateManager.M) - screenY;
 
         System.out.println(mouseX + " " + mouseY);
         stateManager.receiveInput();
@@ -172,7 +173,7 @@ public class InputListener implements InputProcessor {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         mouseX = screenX;
-        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
+        mouseY = (int)(HEIGHT*StateManager.M) - screenY;
         stateManager.recieveRelease();
 
         return false;
@@ -181,7 +182,7 @@ public class InputListener implements InputProcessor {
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         mouseX = screenX;
-        mouseY = (int)(GameLoop.HEIGHT*StateManager.M) - screenY;
+        mouseY = (int)(HEIGHT*StateManager.M) - screenY;
 
 
         stateManager.recieveDragged();

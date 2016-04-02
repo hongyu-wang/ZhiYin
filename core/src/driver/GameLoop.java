@@ -16,7 +16,7 @@ import tools.AudioTools.AudioCreator;
 
 import java.nio.ByteBuffer;
 
-public class GameLoop extends ApplicationAdapter implements Constants {
+public class GameLoop extends ApplicationAdapter  {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
 
@@ -33,7 +33,7 @@ public class GameLoop extends ApplicationAdapter implements Constants {
 		Pages.initLogin();
         stateManager.changeState(Pages.LOGIN);
 		spriteBatch = MainBatch.getInstance();
-        primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
+        primary = new OrthographicCamera(StateManager.WIDTH*StateManager.M, StateManager.HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
         primary.update();
 

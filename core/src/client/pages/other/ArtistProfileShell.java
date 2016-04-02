@@ -15,7 +15,7 @@ public abstract class ArtistProfileShell extends State {
         super.init();
 
         Image background = new Image(new Texture("Other/ArtistProfileBG.png"));
-        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
+        background.setBounds(0, 0, WIDTH* StateManager.M, HEIGHT* StateManager.M);
         stage.addActor(background);
     }
 

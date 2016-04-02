@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
-import driver.GameLoop;
+
 
 /**
  * #Login Page
@@ -80,13 +80,13 @@ public class Login extends State {
 
     private void initializeComponents(){
         Image image = new Image(new Texture("Artboards//Log in.png"));
-        image.setBounds(0, 0, GameLoop.WIDTH * M, GameLoop.HEIGHT * M);
+        image.setBounds(0, 0, WIDTH * M, HEIGHT * M);
         stage.addActor(image);
         username = new WorkingTextArea("username", SkinSingleton.getInstance());
         password = new WorkingTextArea("localhost", SkinSingleton.getInstance());
 
-        username.setBounds(102 * M, (GameLoop.HEIGHT - 798 - 72) * M, 545 * M, 72 * M);
-        password.setBounds(102 * M, (GameLoop.HEIGHT - 910 - 72) * M, 545 * M, 72 * M);
+        username.setBounds(102 * M, (HEIGHT - 798 - 72) * M, 545 * M, 72 * M);
+        password.setBounds(102 * M, (HEIGHT - 910 - 72) * M, 545 * M, 72 * M);
 
         stage.addActor(username);
         stage.addActor(password);
@@ -95,7 +95,7 @@ public class Login extends State {
 
         button.setExecutable(new ExecuteLogin());
         erb = new ExecuteRemoveButton(button);
-        button.setBounds(302, GameLoop.HEIGHT - 1079 - 77, 153, 77);
+        button.setBounds(302, HEIGHT - 1079 - 77, 153, 77);
         add(button);
     }
 

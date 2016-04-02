@@ -7,9 +7,9 @@ package client.tools;
 public interface Constants {
     float M = 0.5F;
 
-    float WIDTH = 750*M;
+    int WIDTH = 750;
 
-    float HEIGHT = 1334*M;
+    int HEIGHT = 1334;
 
     boolean WINDOWS = false;
 

@@ -15,7 +15,7 @@ public abstract class Sec2Shell extends State{
         super.init();
 
         Image background = new Image(new Texture("Other/Sec2BG.png"));
-        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
+        background.setBounds(0, 0, WIDTH* StateManager.M, HEIGHT* StateManager.M);
         stage.addActor(background);
     }
 }

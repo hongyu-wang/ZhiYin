@@ -28,27 +28,15 @@ import java.util.Map;
  * All pages should extend this.
  */
 public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor, Constants {
-    public static final String SHELLINPUT = "shell";
-    public static final String MOVEABLEINPUT = "moveable";
-    protected Stage stage;
 
+    protected Stage stage;
+    private InputController inputController;
 
 
     @Override
     public void update(float dt) {
         stage.act();
     }
-
-
-    /**
-     * This clears the stage of all actors. The main purpose of this
-     * is for the input multiplexer to work properly.
-     */
-    public void clearStage(){
-        stage.clear();
-    }
-
-    private Map<String, InputController> controllers;
 
 
 
@@ -63,9 +51,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      */
     protected void init(){
         components = Utils.newList();
-        controllers = Utils.newMap();
-        controllers.put(SHELLINPUT, new InputController());
-        controllers.put(MOVEABLEINPUT, new InputController());
+        inputController = new InputController();
         stage = new Stage();
 
     }
@@ -79,14 +65,14 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      */
     public void add(Actor c){
         if (c instanceof Performable)
-            controllers.get(SHELLINPUT).add((Performable) c);
+            inputController.add((Performable) c);
         components.add(c);
     }
 
     /**
      * NO ONE ELSE EVER USE THIS METHOD PLSPSLSPLSLSLPSPLSPLPSPLSSPLSPLSLPSL
      * THIS METHOD IS CALLED. ULTIMATE
-     * SPAGETTHI.
+     * Mom's SPAGETTHI.
      * NEVER EVER EVER EVER EVER EVER USE THIS!!!!!!!!!!!!!!!!!!!!!!
      * OK? never ever ever ever ever ever everever ever everever ever everever ever everever ever everever ever ever
      * ever ever ever
@@ -105,8 +91,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     @Deprecated
     public void remove(Performable c){
         components.remove(c);
-        controllers.get(SHELLINPUT).remove(c);
+        inputController.remove(c);
     }
+
     /**
      * Create and add the buttons for the bottom bar.
      */
@@ -191,8 +178,8 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     public abstract void reset();
 
 
-    public InputController getInputController(String FIXEDINPUT){
-        return controllers.get(FIXEDINPUT);
+    public InputController getInputController(){
+        return inputController;
     }
 
 

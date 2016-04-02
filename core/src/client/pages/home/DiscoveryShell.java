@@ -18,7 +18,7 @@ public abstract class DiscoveryShell extends State {
         super.init();
 
         Image background = new Image(new Texture("Home/DiscoveryBG.png"));
-        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
+        background.setBounds(0, 0, WIDTH* StateManager.M, HEIGHT* StateManager.M);
         stage.addActor(background);
 
         Button homeButton = new Button(this);

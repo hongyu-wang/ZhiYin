@@ -4,7 +4,7 @@ import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import driver.GameLoop;
+
 
 /**
  * Created by blobbydude24 on 2016-03-21.
@@ -14,7 +14,7 @@ public abstract class MyProfileShell extends State {
         super.init();
 
         Image background = new Image(new Texture("Other/MyProfileBG.png"));
-        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
+        background.setBounds(0, 0, WIDTH* StateManager.M, HEIGHT* StateManager.M);
         stage.addActor(background);
 
         setBottomBar();

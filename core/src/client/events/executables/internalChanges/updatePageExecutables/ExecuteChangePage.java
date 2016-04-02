@@ -24,7 +24,7 @@ public class ExecuteChangePage implements Executable{
 
     @Override
     public void execute() {
-        StateManager.getInstance().toTemporaryState(new TransitionState(page.getStateReference()));
+        StateManager.getInstance().changeState(page);
 
     }
 }

@@ -18,7 +18,7 @@ public abstract class Friends4Shell extends State {
         super.init();
 
         Image background = new Image(new Texture("Friends/Friends4BG.png"));
-        background.setBounds(0, 0, GameLoop.WIDTH* StateManager.M, GameLoop.HEIGHT* StateManager.M);
+        background.setBounds(0, 0, WIDTH* StateManager.M, HEIGHT* StateManager.M);
         stage.addActor(background);
 
         Button messagesButton = new Button(this);

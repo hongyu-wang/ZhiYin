@@ -1,5 +1,6 @@
 package client.pages.pageInternal.serverClientInteractions;
 
+import client.tools.Constants;
 import driver.GameLoop;
 import server.model.media.MImage;
 import server.model.media.MMusic;
@@ -10,9 +11,7 @@ import server.services.factories.ImageManagerFactory;
 import tools.AudioTools.AudioCreator;
 import tools.utilities.Utils;
 
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  * AlbumsArt: 8000
@@ -35,7 +34,7 @@ import java.util.NoSuchElementException;
  *
  * Created by Hongyu Wang on 3/20/2016.
  */
-public class VeryBeginningInitializer extends Talkers{
+public class VeryBeginningInitializer extends Talkers implements Constants {
 
     /*------------------------------------------------------------------------*/
 
@@ -46,6 +45,10 @@ public class VeryBeginningInitializer extends Talkers{
     }
 
     public void init(String username){
+        AudioCreator.initializeAll();
+
+
+
         localDatabase.loginUser(username);
 
         TalkerFactory.getFriendTalker().init();
@@ -195,16 +198,21 @@ public class VeryBeginningInitializer extends Talkers{
     private void pushMBands(){
         Map<String, List<MMusic>> artistMap = AudioCreator.artistToMMusic;
 
-//        String[] artists = {
-//                "Maroon 5",
-//                "Ed Sheeran",
-//                "Justin Bieber",
-//                "Justin Timberlake",
-//                "Kanye West",
-//                "The Weeknd"
-//        };
+        String[] artists = {
+                "Maroon 5",
+                "Ed Sheeran",
+                "Justin Bieber",
+                "Justin Timberlake",
+                "Kanye West",
+                "The Weeknd"
+        };
                 //TODO remove robovm;
-        for(String artist: artistMap.keySet()){
+
+        Iterator<String> it = os == WINDOWS ? Arrays.asList(artists).iterator() : artistMap.keySet().iterator();
+
+        while (it.hasNext()){
+            String artist = it.next();
+
             MBand mBand = new MBand();
 
             if(artist.equals("Maroon 5")){

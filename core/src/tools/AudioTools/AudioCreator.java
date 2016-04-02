@@ -1,5 +1,6 @@
 package tools.AudioTools;
 
+import client.tools.Constants;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import com.badlogic.gdx.Gdx;
@@ -23,7 +24,7 @@ import java.util.*;
  * A class that gives the capability to create an MAudio object from an audio file.
  *
  */
-public final class AudioCreator {
+public final class AudioCreator implements Constants {
 
 
     private static LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
@@ -41,6 +42,14 @@ public final class AudioCreator {
     public static TreeMap<String, List<MMusic>> artistToMMusic;
 
     public static TreeMap<Long, MAudio> keyToMAudio = new TreeMap<Long,MAudio>();
+
+    public static void initializeAll() {
+        initializeAlbums();
+        if (os == WINDOWS)
+            initializeAllWindows();
+        else
+            initializeAllMac();
+    }
 
     public static void initializeAllWindows(){
         File path = new File("../MusicAssets");
@@ -60,14 +69,14 @@ public final class AudioCreator {
 
     }
 
-    public static void initailizeAlbums(){
+    public static void initializeAlbums(){
         albumToKey = Utils.newMap();
         albumToKey.put("Songs About Jane",8000L);
         albumToKey.put("Purpose (Deluxe Edition)",8001L);
         albumToKey.put("The 20/20 Experience",8002L);
         albumToKey.put("Yeezus",8003L);
-        albumToKey.put("Beauty Behind The Madness",8004L);
-        albumToKey.put("X (Wembley Edition)",8005L);
+        albumToKey.put("Beauty Behind The Madness", 8004L);
+        albumToKey.put("X (Wembley Edition)", 8005L);
         for(String s : albumToKey.keySet()){
             MImage albumArt = new MImage();
             albumArt.setKey(albumToKey.get(s));
@@ -216,7 +225,5 @@ public final class AudioCreator {
         return music;
     }
 
-    public static void initializeAll() {
 
-    }
 }

@@ -176,7 +176,7 @@ public class NowPlaying extends NowPlayingShell {
         currentTime = new Label("0:00", SkinSingleton.getInstance());
         totalTime = new Label("", SkinSingleton.getInstance());
         currentTime.setBounds(60 * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
-        totalTime.setBounds((GameLoop.WIDTH - 100 - totalTime.getPrefWidth()) * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
+        totalTime.setBounds((WIDTH - 100 - totalTime.getPrefWidth()) * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
         stage.addActor(totalTime);
         stage.addActor(currentTime);
     }
