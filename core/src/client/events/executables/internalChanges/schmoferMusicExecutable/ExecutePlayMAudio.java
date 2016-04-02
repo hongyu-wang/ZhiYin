@@ -1,10 +1,9 @@
 package client.events.executables.internalChanges.schmoferMusicExecutable;
 
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
 import server.model.media.MAudio;
-import tools.AudioTools.AudioManager;
 import tools.AudioTools.AudioPlayer;
 
 /**
@@ -13,11 +12,11 @@ import tools.AudioTools.AudioPlayer;
 public class ExecutePlayMAudio implements Executable{
 
     private MAudio mAudio;
-    private ModelStorage ms;
+    private LocalDatabase localDatabase;
 
     public ExecutePlayMAudio(MAudio mAudio){
-        ms = ModelStorageFactory.createModelStorage();
-        this.mAudio = ms.getModel(mAudio.getKey());
+        localDatabase = LocalDatabaseFactory.createModelStorage();
+        this.mAudio = localDatabase.getModel(mAudio.getKey());
         System.out.println("created");
     }
 

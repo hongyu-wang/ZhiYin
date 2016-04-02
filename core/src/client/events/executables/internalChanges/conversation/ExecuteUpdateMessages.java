@@ -3,8 +3,8 @@ package client.events.executables.internalChanges.conversation;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
 import server.model.media.MAudio;
 import server.model.media.MText;
@@ -25,11 +25,11 @@ public class ExecuteUpdateMessages implements Executable {
 
     @Override
     public void execute() {
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
 
-        MConversation conversation = ms.getModel(friend2.getConversation());
+        MConversation conversation = localDatabase.getModel(friend2.getConversation());
 
-        ms.requestModelFromServer(friend2.getConversation());
+        localDatabase.requestModelFromServer(friend2.getConversation());
 
         List<Long> messageKeys = conversation.getMessageList();
 
@@ -37,29 +37,29 @@ public class ExecuteUpdateMessages implements Executable {
 
         for(long key :messageKeys){
             if(!friend2.getMessageKeys().contains(key)){
-                MMessage mMessage = ms.<MMessage>getModel(key);
+                MMessage mMessage = localDatabase.<MMessage>getModel(key);
 
                 if(mMessage != null) {
                     long textKey = mMessage.getText();
                     if (mMessage.getText() != -1L) {
-                        if(ms.getModel(mMessage.getText()) != null){
+                        if(localDatabase.getModel(mMessage.getText()) != null){
                             if(updated) {
-                                String text = ms.<MText>getModel(textKey).getText();
+                                String text = localDatabase.<MText>getModel(textKey).getText();
 
-                                MessageBox box = new MessageBox(text, getWriter(ms, (int) mMessage.getCreator()));
+                                MessageBox box = new MessageBox(text, getWriter(localDatabase, (int) mMessage.getCreator()));
                                 friend2.addMessage(box);
                                 friend2.getMessageKeys().add(mMessage.getKey());
                             }
                         }
                         else{
-                            ms.requestModelFromServer(textKey);
+                            localDatabase.requestModelFromServer(textKey);
                             updated = false;
                         }
                     }
                     else{
-                        if(ms.getModel(mMessage.getAudioKey()) != null){
+                        if(localDatabase.getModel(mMessage.getAudioKey()) != null){
                             if(updated) {
-                                MAudio audio = ms.getModel(mMessage.getAudioKey());
+                                MAudio audio = localDatabase.getModel(mMessage.getAudioKey());
 
                                 ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
                                 MessageBox box = new MessageBox(epma, 1, audio);
@@ -72,13 +72,13 @@ public class ExecuteUpdateMessages implements Executable {
                             }
                         }
                         else{
-                            ms.requestModelFromServer(mMessage.getAudioKey());
+                            localDatabase.requestModelFromServer(mMessage.getAudioKey());
                             updated = false;
                         }
                     }
                 }
                 else{
-                    ms.requestModelFromServer(key);
+                    localDatabase.requestModelFromServer(key);
                     updated = false;
                 }
             }
@@ -87,8 +87,8 @@ public class ExecuteUpdateMessages implements Executable {
 
 
 
-    private int getWriter(ModelStorage ms, int user){
-        if(user == ms.getMainUser().getKey()){
+    private int getWriter(LocalDatabase localDatabase, int user){
+        if(user == localDatabase.getMainUser().getKey()){
             return 1;
         }
 

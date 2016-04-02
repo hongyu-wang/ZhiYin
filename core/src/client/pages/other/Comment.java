@@ -3,14 +3,12 @@ package client.pages.other;
 import client.events.executables.internalChanges.conversation.ExecuteSendComment;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
 import server.model.media.MText;
 import server.model.social.MComment;
@@ -23,8 +21,6 @@ import tools.utilities.Utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import static client.singletons.StateManager.M;
 
 /**
  * Created by blobbydude24 on 2016-03-28.
@@ -60,7 +56,7 @@ public class Comment extends CommentShell {
         this.thisPost = post;
         currentComments = Utils.<Long>newList();
         this.title = post.getTitle();
-        MText tempText = ModelStorageFactory.createModelStorage().getModel(post.getText());
+        MText tempText = LocalDatabaseFactory.createModelStorage().getModel(post.getText());
         this.subtitle = tempText.getText();
         init();
     }
@@ -170,7 +166,7 @@ public class Comment extends CommentShell {
     }
 
     private void pullCommentsFromServer(){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
         List<Long> commentKeys = thisPost.getComments();
 
         boolean isUpdated = true;
@@ -181,7 +177,7 @@ public class Comment extends CommentShell {
                     continue;
                 }
 
-                MComment comment = ms.getModel(key);
+                MComment comment = localDatabase.getModel(key);
 
                 if(comment.getAudio().size() > 0){
                     continue;
@@ -189,8 +185,8 @@ public class Comment extends CommentShell {
 
                 String text = comment.getText();
 
-                User user = ms.getModel(comment.getCreator());
-                UserProfile profile = ms.getModel(user.getProfile());
+                User user = localDatabase.getModel(comment.getCreator());
+                UserProfile profile = localDatabase.getModel(user.getProfile());
 
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
                 Date df = new Date(comment.getTimeStamp());

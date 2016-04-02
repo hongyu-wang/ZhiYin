@@ -1,11 +1,9 @@
 package tools.AudioTools;
 
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
-import org.apache.commons.io.FileUtils;
 import org.robovm.apple.avfoundation.AVAsset;
 import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVMetadataItem;
@@ -28,7 +26,7 @@ import java.util.*;
 public final class AudioCreator {
 
 
-    private static ModelStorage ms = ModelStorageFactory.createModelStorage();
+    private static LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
 
     private static NSFileManager fm;
 
@@ -81,7 +79,7 @@ public final class AudioCreator {
             albumArt.setImage(fh.readBytes());
             assert(albumArt.getImage()!=null);
             albumArt.setName(s);
-            ms.pushModel(albumArt);
+            localDatabase.pushModel(albumArt);
         }
 
     }
@@ -158,7 +156,7 @@ public final class AudioCreator {
         music.setKey(musicKey);
         musicKey++;
         music.setComments(Utils.<Long>newList());
-        ms.pushModel(music);
+        localDatabase.pushModel(music);
 
         return music;
     }
@@ -166,7 +164,7 @@ public final class AudioCreator {
 
     public static MSnapShot createSnapShot(long voice, long song,int start, int end){
         MSnapShot ss = new MSnapShot();
-        ss.setKey(ms.generateKey());
+        ss.setKey(localDatabase.generateKey());
         ss.setMessage(voice);
         ss.setSong(song);
         ss.setStartTime(start);
@@ -190,7 +188,7 @@ public final class AudioCreator {
             e.printStackTrace();
         }
 
-        ms.pushModel(song);
+        localDatabase.pushModel(song);
         keyToMAudio.put(audioKey, song);
         audioKey++;
         return song;

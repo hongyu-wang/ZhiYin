@@ -2,8 +2,8 @@ package client.pages.home;
 
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.ArtistProfile;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,8 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MImage;
 import server.model.soundCloud.MBand;
 import server.services.factories.ImageManagerFactory;
-
-import static client.singletons.StateManager.M;
 
 /**
  * This is the third home diary page as given in the
@@ -58,9 +56,9 @@ public class Artist extends ArtistShell {
     public void addArtist(MBand band){
         Stack right = new Stack();
 
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
 
-        MImage profileImage = ms.getModel(/*band.getBandImage()*/ 101L);
+        MImage profileImage = localDatabase.getModel(/*band.getBandImage()*/ 101L);
 
         Image profilePic = ImageManagerFactory.createImageManager().mImageToImage(profileImage);
 
@@ -133,11 +131,11 @@ public class Artist extends ArtistShell {
     }
 
     private void pullArtistsFromServer(){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
         MBand mb;
 
         for(long i = 12000; i < 12006; i++){
-            mb = ms.getModel(i);
+            mb = localDatabase.getModel(i);
             addArtist(mb);
         }
     }

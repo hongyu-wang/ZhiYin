@@ -4,7 +4,6 @@ import driver.GameLoop;
 import server.model.media.MImage;
 import server.model.media.MMusic;
 import server.model.soundCloud.MBand;
-import server.model.soundCloud.MMusicAlbum;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.services.factories.ImageManagerFactory;
@@ -47,7 +46,7 @@ public class VeryBeginningInitializer extends Talkers{
     }
 
     public void init(String username){
-        modelStorage.loginUser(username);
+        localDatabase.loginUser(username);
 
         TalkerFactory.getFriendTalker().init();
     }
@@ -64,51 +63,51 @@ public class VeryBeginningInitializer extends Talkers{
 
         //Users
         for(int i = 0; i < 3; i++) {
-            modelStorage.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
         }
 
         //UserContents
         for(int i = 0; i < 3; i++) {
-            modelStorage.requestModelFromServer(key++);
-            modelStorage.requestModelFromServer(key++);
-            modelStorage.requestModelFromServer(key++);
-            modelStorage.requestModelFromServer(key++);
-            modelStorage.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
         }
 
         //Images
 //        for(int i = 0; i < 3; i++)
-//            modelStorage.requestModelFromServer(key++);
+//            localDatabase.requestModelFromServer(key++);
 
         //Audio
 //        for(int i = 0; i < 3; i++)
-//            modelStorage.requestModelFromServer(MAudio.class.getName(), key++);
+//            localDatabase.requestModelFromServer(MAudio.class.getName(), key++);
 
         //Music
 //        for(int i = 0; i < 3; i++)
-//            modelStorage.requestModelFromServer(MMusic.class.getName(), key++);
+//            localDatabase.requestModelFromServer(MMusic.class.getName(), key++);
 
         //Hashtag
         for(int i = 0; i < 3; i++)
-            modelStorage.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
 
         //Conversations
         for(int i = 0; i < 3 ; i++){
-            modelStorage.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
         }
 
         //Text
         for(int i = 0; i < 3 ; i++){
-            modelStorage.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
         }
 
         //DiaryPosts
         for(int i = 0; i < 6 ; i++){
-            modelStorage.requestModelFromServer(key++);
+            localDatabase.requestModelFromServer(key++);
         }
 
         //TODO LMAO
-//        modelStorage.requestModelFromServer(3000001);
+//        localDatabase.requestModelFromServer(3000001);
 
         totalOriginalModels = key;
     }
@@ -139,9 +138,9 @@ public class VeryBeginningInitializer extends Talkers{
         image2.setName("Benny's Profile");
         image3.setName("Cindy's Profile");
 
-        modelStorage.pushModel(image1);
-        modelStorage.pushModel(image2);
-        modelStorage.pushModel(image3);
+        localDatabase.pushModel(image1);
+        localDatabase.pushModel(image2);
+        localDatabase.pushModel(image3);
     }
 
     private void pushDiaryImages(){
@@ -157,9 +156,9 @@ public class VeryBeginningInitializer extends Talkers{
         image5.setName("Benny's Profile");
         image6.setName("Cindy's Profile");
 
-        modelStorage.pushModel(image4);
-        modelStorage.pushModel(image5);
-        modelStorage.pushModel(image6);
+        localDatabase.pushModel(image4);
+        localDatabase.pushModel(image5);
+        localDatabase.pushModel(image6);
     }
 
     private void pushArtistImages(){
@@ -185,12 +184,12 @@ public class VeryBeginningInitializer extends Talkers{
         artist5.setKey(104L);
         artist6.setKey(105L);
 
-        modelStorage.pushModel(artist1);
-        modelStorage.pushModel(artist2);
-        modelStorage.pushModel(artist3);
-        modelStorage.pushModel(artist4);
-        modelStorage.pushModel(artist5);
-        modelStorage.pushModel(artist6);
+        localDatabase.pushModel(artist1);
+        localDatabase.pushModel(artist2);
+        localDatabase.pushModel(artist3);
+        localDatabase.pushModel(artist4);
+        localDatabase.pushModel(artist5);
+        localDatabase.pushModel(artist6);
     }
 
     private void pushMBands(){
@@ -251,7 +250,7 @@ public class VeryBeginningInitializer extends Talkers{
             mBand.setAlbums(Utils.<Long>newList());
             mBand.setName(artist);
 
-            modelStorage.pushModel(mBand);
+            localDatabase.pushModel(mBand);
         }
     }
 

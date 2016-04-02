@@ -4,7 +4,6 @@ package client.pages.pageInternal.serverClientInteractions;
 //--PRIVATE HELPER CLASS
 
 import server.model.media.MAudio;
-import server.model.media.MText;
 import server.model.social.MComment;
 
 /**PRIVATE HELPER CLASS FOR COMMENTS
@@ -31,8 +30,8 @@ public class CommentTalker extends Talkers {
     public void pull() {
         super.setWaiting(true);
 
-//        modelStorage.requestModelFromServer(mComment.getText());
-        modelStorage.requestModelFromServer(mComment.getAudio().get(0));
+//        localDatabase.requestModelFromServer(mComment.getText());
+        localDatabase.requestModelFromServer(mComment.getAudio().get(0));
     }
 
     @Override
@@ -56,11 +55,11 @@ public class CommentTalker extends Talkers {
 
     @Override
     public void update(float dt) {
-//        MText userText = modelStorage.getModel(mComment.getText());
+//        MText userText = localDatabase.getModel(mComment.getText());
 
 //        text = userText.getText();
 
-        audio = modelStorage.getModel(mComment.getAudio().get(0));
+        audio = localDatabase.getModel(mComment.getAudio().get(0));
 
 
     }

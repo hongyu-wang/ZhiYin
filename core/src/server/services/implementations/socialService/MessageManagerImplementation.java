@@ -1,6 +1,6 @@
 package server.services.implementations.socialService;
 
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import server.model.social.MMessage;
 import server.services.interfaces.models.MessageManager;
 import tools.utilities.Utils;
@@ -20,7 +20,7 @@ public class MessageManagerImplementation implements MessageManager {
     @Override
     public MMessage createMessage(long text, long timeStamp, long creator) {
         MMessage message = new MMessage();
-        message.setKey(ModelStorageFactory.createModelStorage().generateKey());
+        message.setKey(LocalDatabaseFactory.createModelStorage().generateKey());
         message.setCreator(creator);
         message.setText(text);
         message.setTimeStamp(timeStamp);

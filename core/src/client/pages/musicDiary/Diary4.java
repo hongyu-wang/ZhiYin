@@ -3,8 +3,8 @@ package client.pages.musicDiary;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.Comment;
 import client.pages.other.Sec1;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -75,13 +75,13 @@ public class Diary4 extends Diary4Shell{
 
 
     private void populateFromServer(){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
-        MText text = ms.getModel(thisPost.getText());
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        MText text = localDatabase.getModel(thisPost.getText());
 
         this.title = thisPost.getTitle();
         this.content = text.getText();
 
-        MImage image = ms.getModel(thisPost.getImageKey());
+        MImage image = localDatabase.getModel(thisPost.getImageKey());
         this.image = ImageManagerFactory.createImageManager().mImageToImage(image);
     }
 

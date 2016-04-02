@@ -1,6 +1,6 @@
 package server.services.implementations.socialService;
 
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import server.model.social.MConversation;
 import server.services.interfaces.models.ConversationManager;
 import tools.utilities.Utils;
@@ -21,7 +21,7 @@ public class ConversationManagerImplementation implements ConversationManager {
     @Override
     public MConversation createConversation(List<Long> users) {
         MConversation newConvo = new MConversation();
-        newConvo.setKey(ModelStorageFactory.createModelStorage().generateKey());
+        newConvo.setKey(LocalDatabaseFactory.createModelStorage().generateKey());
 
         newConvo.setParticipants(users);
         newConvo.setMessageList(Utils.<Long>newList());

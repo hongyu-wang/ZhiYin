@@ -6,8 +6,8 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetTime;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,7 +19,6 @@ import server.model.media.MImage;
 import server.model.media.MMusic;
 import tools.AudioTools.AudioManager;
 
-import static client.singletons.StateManager.M;
 /**
  * This is the now playing page as given in the
  * art assets folder.
@@ -57,9 +56,9 @@ public class NowPlaying extends NowPlayingShell {
     }
 
     protected void initAlbumArt(){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
         
-        MImage image = ms.getModel(post.getAlbumArt());
+        MImage image = localDatabase.getModel(post.getAlbumArt());
 
         byte [] bytes = image.getImage();
 

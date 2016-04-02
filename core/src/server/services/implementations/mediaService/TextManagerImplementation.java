@@ -1,11 +1,8 @@
 package server.services.implementations.mediaService;
 
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import server.model.media.MText;
 import server.services.interfaces.models.TextManager;
-import server.webclient.WebServiceClient;
-import server.webclient.services.WebService;
-import server.webclient.webErrors.WebRequestException;
 
 /**
  * Created by Kevin Zheng on 2016-03-07.
@@ -31,7 +28,7 @@ public class TextManagerImplementation implements TextManager {
     public MText createText(String message, int type){
         MText text = new MText();
 
-        text.setKey(ModelStorageFactory.createModelStorage().generateKey());
+        text.setKey(LocalDatabaseFactory.createModelStorage().generateKey());
 
         text.setText(message);
 

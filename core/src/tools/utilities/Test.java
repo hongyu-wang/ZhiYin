@@ -1,7 +1,7 @@
 package tools.utilities;
 
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 
@@ -9,7 +9,7 @@ import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializ
  * Created by Kevin Zheng on 2016-03-23.
  */
 public class Test {
-    static ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
+    static LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
     static VeryBeginningInitializer vbi;
     static long key = 0;
     public static void main(String [] args){

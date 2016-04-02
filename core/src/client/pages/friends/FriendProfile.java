@@ -4,8 +4,8 @@ import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
@@ -148,22 +148,22 @@ public class FriendProfile extends FriendProfileShell {
     }
 
     private void pullData(){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
-        User user = ms.getModel(ms.getUserKeyByName(name));
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        User user = localDatabase.getModel(localDatabase.getUserKeyByName(name));
 
         updateArtistsFromServer(user);
         updateDiariesFromServer(user);
     }
 
     private void updateArtistsFromServer(User user){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
         List<Long> bandKeys = user.getBandKeys();
 
         for(long key: bandKeys){
             if(!currentArtists.contains(key)){
-                MBand artist = ms.getModel(key);
+                MBand artist = localDatabase.getModel(key);
 
-                MImage image = ms.getModel(/* artist.getBandImage() */ 101L);
+                MImage image = localDatabase.getModel(/* artist.getBandImage() */ 101L);
 
                 Image artistImage = ImageManagerFactory.createImageManager().mImageToImage(image);
 
@@ -176,26 +176,26 @@ public class FriendProfile extends FriendProfileShell {
 
 
     private void updateDiariesFromServer(User user){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
-        UserDiaryContent diaryContent = ms.getModel(user.getDiary());
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
 
         boolean isUpdated = true;
 
         for(long key: diaryContent.getDiaryKeys()){
             if(!currentDiaries.contains(key)) {
-                if(ms.getModel(key) == null){
-                    ms.requestModelFromServer(key);
+                if(localDatabase.getModel(key) == null){
+                    localDatabase.requestModelFromServer(key);
                     isUpdated = false;
                 }
-                MDiaryPost post = ms.getModel(key);
-                if(ms.getModel(post.getText())== null){
-                    ms.requestModelFromServer(post.getText());
+                MDiaryPost post = localDatabase.getModel(key);
+                if(localDatabase.getModel(post.getText())== null){
+                    localDatabase.requestModelFromServer(post.getText());
                     isUpdated = false;
                 }
 
                 if(!isUpdated)
                     continue;
-                UserProfile profile = ms.getModel(user.getProfile());
+                UserProfile profile = localDatabase.getModel(user.getProfile());
 
                 String username = profile.getUsername();
 

@@ -74,12 +74,12 @@ public class MusicTalker extends Talkers{
     public void pull() {
         super.setWaiting(true);
 
-        modelStorage.requestModelFromServer(mMusic.getAlbumArt());
-        modelStorage.requestModelFromServer(mMusic.getMusicKey());
+        localDatabase.requestModelFromServer(mMusic.getAlbumArt());
+        localDatabase.requestModelFromServer(mMusic.getMusicKey());
 
         //SOCIAL MEDIA
         for(long key : mMusic.getComments()){
-            modelStorage.requestModelFromServer(key);
+            localDatabase.requestModelFromServer(key);
         }
 
         //TODO Hashtags
@@ -122,8 +122,8 @@ public class MusicTalker extends Talkers{
         album = mMusic.getAlbum();
         artist = mMusic.getArtist();
 
-        music = modelStorage.getModel(mMusic.getMusicKey());
-        mImage = modelStorage.getModel(mMusic.getAlbumArt());
+        music = localDatabase.getModel(mMusic.getMusicKey());
+        mImage = localDatabase.getModel(mMusic.getAlbumArt());
 
         if(mImage != null){
             //image = mImage.getImage();
@@ -134,7 +134,7 @@ public class MusicTalker extends Talkers{
         List<MComment> newAudioComments = Utils.newList();
 
         for(long key: mMusic.getComments()){
-            MComment comment = modelStorage.getModel(key);
+            MComment comment = localDatabase.getModel(key);
             updateComments(newComments, newAudioComments, comment);
         }
 

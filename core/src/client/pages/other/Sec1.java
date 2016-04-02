@@ -6,8 +6,8 @@ import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
@@ -23,8 +23,6 @@ import server.model.social.MPost;
 import tools.utilities.Utils;
 
 import java.util.List;
-
-import static client.singletons.StateManager.M;
 
 /**
  * Created by blobbydude24 on 2016-03-28.
@@ -60,7 +58,7 @@ public class Sec1 extends Sec1Shell {
         this.thisPost = post;
         currentComments = Utils.<Long>newList();
         this.title = post.getTitle();
-        MText tempText = ModelStorageFactory.createModelStorage().getModel(post.getText());
+        MText tempText = LocalDatabaseFactory.createModelStorage().getModel(post.getText());
         this.subtitle = tempText.getText();
         init();
     }
@@ -150,13 +148,13 @@ public class Sec1 extends Sec1Shell {
     }
 
     private void pullCommentsFromServer(){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
         java.util.List<Long> commentKeys = thisPost.getComments();
 
         boolean isUpdated = true;
 
         for(long key: commentKeys){
-            MComment model = ms.getModel(key);
+            MComment model = localDatabase.getModel(key);
             if(model.getAudio().size() > 0){
                 //TODO add comment
             }

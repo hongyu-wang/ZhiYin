@@ -138,27 +138,27 @@ public class DiaryTalker extends Talkers{
          */
         @Override
         public void update(float dt) {
-            MText postText = modelStorage.getModel(this.diaryPost.getText());
+            MText postText = localDatabase.getModel(this.diaryPost.getText());
             if(postText != null)
                 text = postText.getText();
 
-            MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
+            MImage postImage = localDatabase.getModel(this.diaryPost.getAudioKey());
             if(postImage != null)
                 //image = postImage.getImage();
 
-            music = modelStorage.getModel(this.diaryPost.getMusicKey());
-            userRecording = modelStorage.getModel(this.diaryPost.getAudioKey());
+            music = localDatabase.getModel(this.diaryPost.getMusicKey());
+            userRecording = localDatabase.getModel(this.diaryPost.getAudioKey());
         }
 
         @Override
         public void pull() {
-            modelStorage.requestModelFromServer(diaryPost.getImageKey());
-            modelStorage.requestModelFromServer(diaryPost.getText());
-            modelStorage.requestModelFromServer(diaryPost.getMusicKey());
-            modelStorage.requestModelFromServer(diaryPost.getAudioKey());
+            localDatabase.requestModelFromServer(diaryPost.getImageKey());
+            localDatabase.requestModelFromServer(diaryPost.getText());
+            localDatabase.requestModelFromServer(diaryPost.getMusicKey());
+            localDatabase.requestModelFromServer(diaryPost.getAudioKey());
 
             for(long key: diaryPost.getComments()){
-                modelStorage.requestModelFromServer(key);
+                localDatabase.requestModelFromServer(key);
             }
         }
 
@@ -166,8 +166,8 @@ public class DiaryTalker extends Talkers{
         public void push() {
 
             //Text, Texture, Music, Audio
-            MText postText = modelStorage.getModel(this.diaryPost.getText());
-            MImage postImage = modelStorage.getModel(this.diaryPost.getAudioKey());
+            MText postText = localDatabase.getModel(this.diaryPost.getText());
+            MImage postImage = localDatabase.getModel(this.diaryPost.getAudioKey());
 
             postText.setText(text);
             //postImage.setImage(image);
@@ -181,11 +181,11 @@ public class DiaryTalker extends Talkers{
 
                 diaryPost.getComments().add(comment.getKey());
 
-                modelStorage.pushModel(comment);
+                localDatabase.pushModel(comment);
             }
-            modelStorage.pushModel(postText);
-            modelStorage.pushModel(postImage);
-            modelStorage.pushModel(diaryPost);
+            localDatabase.pushModel(postText);
+            localDatabase.pushModel(postImage);
+            localDatabase.pushModel(diaryPost);
         }
 
         @Override

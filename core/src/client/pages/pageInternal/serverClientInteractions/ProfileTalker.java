@@ -134,17 +134,17 @@ public class ProfileTalker extends Talkers{
         public void pull() {
             super.setWaiting(true);
 
-            profile = modelStorage.getModel(user.getProfile());
+            profile = localDatabase.getModel(user.getProfile());
 
-            modelStorage.requestModelFromServer(
+            localDatabase.requestModelFromServer(
                     profile.getImageKey());
         }
 
         @Override
         public void push() {
-            profile = modelStorage.getModel(user.getProfile());
+            profile = localDatabase.getModel(user.getProfile());
 
-            MImage image = modelStorage.getModel(profile.getImageKey());
+            MImage image = localDatabase.getModel(profile.getImageKey());
 
             //Set
             profile.setUsername(name);
@@ -152,8 +152,8 @@ public class ProfileTalker extends Talkers{
             image.setImage(this.profileImage);
 
             //Push
-            modelStorage.pushModel(profile);
-            modelStorage.pushModel(image);
+            localDatabase.pushModel(profile);
+            localDatabase.pushModel(image);
         }
 
         @Override
@@ -180,12 +180,12 @@ public class ProfileTalker extends Talkers{
 
         @Override
         public void update(float dt) {
-            profile = modelStorage.getModel(user.getProfile());
+            profile = localDatabase.getModel(user.getProfile());
 
-            MImage image = modelStorage.getModel(profile.getImageKey());
+            MImage image = localDatabase.getModel(profile.getImageKey());
 
             if(image == null){
-                modelStorage.requestModelFromServer(profile.getImageKey());
+                localDatabase.requestModelFromServer(profile.getImageKey());
                 return;
             }
 

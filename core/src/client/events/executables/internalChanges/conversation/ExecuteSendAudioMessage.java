@@ -2,15 +2,12 @@ package client.events.executables.internalChanges.conversation;
 
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
 import server.model.media.MAudio;
-import server.model.media.MText;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
-import server.services.factories.MessageManagerFactory;
-import server.services.factories.TextManagerFactory;
 
 import java.util.List;
 
@@ -29,12 +26,12 @@ public class ExecuteSendAudioMessage implements Executable {
 
     @Override
     public void execute() {
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
 
-        MConversation conversation = ms.getModel(friend2.getConversation());
+        MConversation conversation = localDatabase.getModel(friend2.getConversation());
 
         if(conversation == null){
-            ms.requestModelFromServer(friend2.getConversation());
+            localDatabase.requestModelFromServer(friend2.getConversation());
             return;
         }
 
@@ -49,9 +46,9 @@ public class ExecuteSendAudioMessage implements Executable {
 
         MMessage message = new MMessage();
 
-        message.setKey(ms.generateKey());
+        message.setKey(localDatabase.generateKey());
 
-        message.setCreator(ms.getMainUser().getKey());
+        message.setCreator(localDatabase.getMainUser().getKey());
 
         message.setAudioKey(audio.getKey());
 
@@ -61,8 +58,8 @@ public class ExecuteSendAudioMessage implements Executable {
 
         friend2.getMessageKeys().add(message.getKey());
 
-        ms.pushModel(audio);
-        ms.pushModel(message);
-        ms.pushModel(conversation);
+        localDatabase.pushModel(audio);
+        localDatabase.pushModel(message);
+        localDatabase.pushModel(conversation);
     }
 }

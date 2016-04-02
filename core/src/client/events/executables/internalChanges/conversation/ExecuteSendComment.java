@@ -1,8 +1,8 @@
 package client.events.executables.internalChanges.conversation;
 
 import client.pages.other.Comment;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
 import server.model.social.MComment;
 import server.model.social.MPost;
@@ -28,7 +28,7 @@ public class ExecuteSendComment implements Executable {
     @Override
     public void execute() {
 
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
 
         MPost post = commentPage.getThisPost();
 
@@ -36,13 +36,13 @@ public class ExecuteSendComment implements Executable {
 
         String userText = commentPage.getMessage();
 
-        long userKey = ms.getMainUser().getKey();
-        User mainUser = ms.getModel(userKey);
-        UserProfile userProfile = ms.getModel(mainUser.getProfile());
+        long userKey = localDatabase.getMainUser().getKey();
+        User mainUser = localDatabase.getModel(userKey);
+        UserProfile userProfile = localDatabase.getModel(mainUser.getProfile());
 
         MComment comment = CommentManagerFactory.createCommentManager().createComment(Utils.<Long>newList(), Utils.<Long>newList(),
                 Utils.<Long>newList(), System.currentTimeMillis(), userText, userKey);
-        comment.setKey(ms.generateKey());
+        comment.setKey(localDatabase.generateKey());
 
         commentKeys.add(comment.getKey());
 
@@ -54,7 +54,7 @@ public class ExecuteSendComment implements Executable {
 
         commentPage.getCurrentComments().add(comment.getKey());
 
-        ms.pushModel(comment);
-        ms.pushModel(post);
+        localDatabase.pushModel(comment);
+        localDatabase.pushModel(post);
     }
 }

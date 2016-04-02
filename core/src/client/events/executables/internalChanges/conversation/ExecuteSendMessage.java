@@ -2,8 +2,8 @@ package client.events.executables.internalChanges.conversation;
 
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
 import server.model.media.MText;
 import server.model.social.MConversation;
@@ -25,12 +25,12 @@ public class ExecuteSendMessage implements Executable {
 
     @Override
     public void execute() {
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
 
-        MConversation conversation = ms.getModel(friend2.getConversation());
+        MConversation conversation = localDatabase.getModel(friend2.getConversation());
 
         if(conversation == null){
-            ms.requestModelFromServer(friend2.getConversation());
+            localDatabase.requestModelFromServer(friend2.getConversation());
             return;
         }
 
@@ -40,7 +40,7 @@ public class ExecuteSendMessage implements Executable {
 
         MText text = TextManagerFactory.createTextManager().createText(userText, 0);
 
-        MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), ms.getMainUser().getKey());
+        MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), localDatabase.getMainUser().getKey());
 
         messageKeys.add(message.getKey());
 
@@ -48,8 +48,8 @@ public class ExecuteSendMessage implements Executable {
 
         friend2.getMessageKeys().add(message.getKey());
 
-        ms.pushModel(text);
-        ms.pushModel(message);
-        ms.pushModel(conversation);
+        localDatabase.pushModel(text);
+        localDatabase.pushModel(message);
+        localDatabase.pushModel(conversation);
     }
 }

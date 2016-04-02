@@ -1,8 +1,8 @@
 package client.pages.musicDiary;
 
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -116,10 +116,10 @@ public class Diary1 extends Diary1Shell {
     }
 
     private void getPostsFromServer(){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
-        User user1 = ms.getModel(1);
-        User user2 = ms.getModel(2);
-        User user3 = ms.getModel(3);
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        User user1 = localDatabase.getModel(1);
+        User user2 = localDatabase.getModel(2);
+        User user3 = localDatabase.getModel(3);
 
         updateFromServer(user1);
         updateFromServer(user2);
@@ -127,26 +127,26 @@ public class Diary1 extends Diary1Shell {
     }
 
     private void updateFromServer(User user){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
-        UserDiaryContent diaryContent = ms.getModel(user.getDiary());
+        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
 
         boolean isUpdated = true;
 
         for(long key: diaryContent.getDiaryKeys()){
             if(!currentDiaries.contains(key)) {
-                if(ms.getModel(key) == null){
-                    ms.requestModelFromServer(key);
+                if(localDatabase.getModel(key) == null){
+                    localDatabase.requestModelFromServer(key);
                     isUpdated = false;
                 }
-                MDiaryPost post = ms.getModel(key);
-                if(ms.getModel(post.getText())== null){
-                    ms.requestModelFromServer(post.getText());
+                MDiaryPost post = localDatabase.getModel(key);
+                if(localDatabase.getModel(post.getText())== null){
+                    localDatabase.requestModelFromServer(post.getText());
                     isUpdated = false;
                 }
 
                 if(!isUpdated)
                     continue;
-                UserProfile profile = ms.getModel(user.getProfile());
+                UserProfile profile = localDatabase.getModel(user.getProfile());
 
                 String username = profile.getUsername();
 

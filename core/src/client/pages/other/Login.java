@@ -7,7 +7,7 @@ import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveBu
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
-import client.pages.pageInternal.modelStorage.ModelStorage;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.SkinSingleton;
@@ -18,8 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import driver.GameLoop;
-
-import static client.singletons.StateManager.M;
 
 /**
  * #Login Page
@@ -58,7 +56,7 @@ public class Login extends State {
             vb = TalkerFactory.VeryBeginningInitializer();
             vb.init(text);
 
-            ModelStorage.ipAddress = password.getText();
+            LocalDatabase.ipAddress = password.getText();
 
             vb.push();
             vb.pull();

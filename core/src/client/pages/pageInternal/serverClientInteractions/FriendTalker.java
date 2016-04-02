@@ -35,10 +35,10 @@ public class FriendTalker extends Talkers {
      */
     @Override
     public void pull() {
-        modelStorage.requestModelFromServer(getMainUser().getKey());
+        localDatabase.requestModelFromServer(getMainUser().getKey());
 
         for(long key: super.getMainUser().getFriendKeys()){
-            modelStorage.requestModelFromServer(key);
+            localDatabase.requestModelFromServer(key);
         }
     }
 
@@ -58,7 +58,7 @@ public class FriendTalker extends Talkers {
         }
 
         //Push
-        modelStorage.pushModel(super.getMainUser());
+        localDatabase.pushModel(super.getMainUser());
     }
 
     /**Checks if all of the friends have been successfully pulled.
@@ -76,16 +76,16 @@ public class FriendTalker extends Talkers {
     }
 
     /**
-     * Updates the friends List from modelStorage.
+     * Updates the friends List from localDatabase.
      *
      * @param dt The rate of change of updating
      */
     @Override
     public void update(float dt) {
         List<User> newFriendList = new ArrayList<>();
-        System.out.println(modelStorage.getMainUser());
-        for(long key: modelStorage.getMainUser().getFriendKeys()){
-            newFriendList.add(modelStorage.<User>getModel(key));
+        System.out.println(localDatabase.getMainUser());
+        for(long key: localDatabase.getMainUser().getFriendKeys()){
+            newFriendList.add(localDatabase.<User>getModel(key));
         }
 
         this.friends = newFriendList;

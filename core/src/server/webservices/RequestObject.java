@@ -1,7 +1,7 @@
 package server.webservices;
 
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.utils.JsonReader;
@@ -14,7 +14,7 @@ import tools.serverTools.generators.Tags;
  * A singleton used to request models from the server
  */
 public class RequestObject implements Net.HttpResponseListener {
-    private ModelStorage modelStorage = ModelStorageFactory.createModelStorage();
+    private LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
     private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
     private Object rOjbect;
@@ -32,7 +32,7 @@ public class RequestObject implements Net.HttpResponseListener {
     public void getModel(long key) {
         // LibGDX NET CLASS
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("http://"+ModelStorage.ipAddress+":8081/webservice/getServerModel/" + key);
+        httpGet.setUrl("http://"+ LocalDatabase.ipAddress+":8081/webservice/getServerModel/" + key);
         //httpGet.setHeader("Content-Type", "application/json");
         //httpGet.setHeader("X-Parse-Application-Id", app_id);
         //httpGet.setHeader("X-Parse-REST-API-Key", app_key);
@@ -54,7 +54,7 @@ public class RequestObject implements Net.HttpResponseListener {
             System.out.println(className);
             json = json.substring(0, json.length()-4);
             rOjbect = objectMapper.readValue(json, Class.forName(className));
-            modelStorage.setModelFromServer((ServerModel)rOjbect);
+            localDatabase.setModelFromServer((ServerModel)rOjbect);
         } catch (Exception e) {
             System.out.println(e);
         }

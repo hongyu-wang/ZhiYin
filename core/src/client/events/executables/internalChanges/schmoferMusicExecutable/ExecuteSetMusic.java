@@ -1,13 +1,12 @@
 package client.events.executables.internalChanges.schmoferMusicExecutable;
 
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
 import tools.AudioTools.AudioCreator;
 import tools.AudioTools.AudioManager;
-import tools.AudioTools.AudioPlayer;
 
 /**
  *
@@ -17,16 +16,16 @@ public class ExecuteSetMusic implements Executable {
 
     private MMusic mMusic;
     private MAudio audioFile;
-    private ModelStorage ms;
+    private LocalDatabase localDatabase;
     /**
      * Constructor for all Schmofer based music executables
      *
      * @param m the relevant MMusic from the server.
      */
     public ExecuteSetMusic(MMusic m) {
-        ms = ModelStorageFactory.createModelStorage();
+        localDatabase = LocalDatabaseFactory.createModelStorage();
         mMusic = m;
-        //audioFile = ms.getModel(mMusic.getMusicKey());
+        //audioFile = localDatabase.getModel(mMusic.getMusicKey());
         audioFile = AudioCreator.keyToMAudio.get(m.getMusicKey());
     }
 
@@ -34,7 +33,7 @@ public class ExecuteSetMusic implements Executable {
     public void execute() {
 
         if (audioFile == null){
-            ms.getModel(mMusic.getMusicKey());
+            localDatabase.getModel(mMusic.getMusicKey());
             System.out.println("KEVIN YOU'RE FUCKING STUPID FROM: EXECUTE SET MUSIC");
         }else{
             System.out.println("worked");

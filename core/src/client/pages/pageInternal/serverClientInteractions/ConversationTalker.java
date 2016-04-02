@@ -91,10 +91,10 @@ public class ConversationTalker extends Talkers {
     }
 
     public int indexByFriend(String friendName){
-        int friendKey = (int) modelStorage.getUserKeyByName(friendName);
+        int friendKey = (int) localDatabase.getUserKeyByName(friendName);
 
 
-        switch((int)modelStorage.getMainUser().getKey()){
+        switch((int) localDatabase.getMainUser().getKey()){
             case 1:
                 if(friendKey == 2){
                     return 0;
@@ -184,7 +184,7 @@ public class ConversationTalker extends Talkers {
         public void newMessage(String userText){
             MText text = TextManagerFactory.createTextManager().createText(userText, 0);
 
-            MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), modelStorage.getMainUser().getKey());
+            MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), localDatabase.getMainUser().getKey());
 
             MessageHelper messageHelper = new MessageHelper();
 
@@ -209,11 +209,11 @@ public class ConversationTalker extends Talkers {
             super.setWaiting(true);
 
             for(long key: conversation.getMessageList()){
-                modelStorage.requestModelFromServer(key);
+                localDatabase.requestModelFromServer(key);
             }
 
             for(long key: conversation.getParticipants()){
-                modelStorage.requestModelFromServer(key);
+                localDatabase.requestModelFromServer(key);
             }
         }
 
@@ -229,11 +229,11 @@ public class ConversationTalker extends Talkers {
                 text.setType(0);
                 text.setText(messages.get(message.getKey()));
 
-                modelStorage.pushModel(text);
-                modelStorage.pushModel(message);
+                localDatabase.pushModel(text);
+                localDatabase.pushModel(message);
             }
 
-            modelStorage.pushModel(conversation);
+            localDatabase.pushModel(conversation);
         }
 
         @Override
@@ -286,12 +286,12 @@ public class ConversationTalker extends Talkers {
 
             //Add Participants
             for(long key: conversation.getParticipants()) {
-                newUserList.add(modelStorage.<User>getModel(key));
+                newUserList.add(localDatabase.<User>getModel(key));
             }
 
             //Add Messages
             for(long key: conversation.getMessageList()){
-                newMessageList.add(modelStorage.<MMessage>getModel(key));
+                newMessageList.add(localDatabase.<MMessage>getModel(key));
             }
 
             mMessages = newMessageList;
@@ -369,8 +369,8 @@ public class ConversationTalker extends Talkers {
             public void pull() {
                 super.setWaiting(true);
 
-                modelStorage.requestModelFromServer(mMessage.getText());
-                modelStorage.requestModelFromServer(mMessage.getCreator());
+                localDatabase.requestModelFromServer(mMessage.getText());
+                localDatabase.requestModelFromServer(mMessage.getCreator());
             }
 
             @Override
@@ -395,8 +395,8 @@ public class ConversationTalker extends Talkers {
 
             @Override
             public void update(float dt) {
-                text = modelStorage.getModel(mMessage.getText());
-                creator = modelStorage.getModel(mMessage.getCreator());
+                text = localDatabase.getModel(mMessage.getText());
+                creator = localDatabase.getModel(mMessage.getCreator());
 
                 if(text != null)
                     message = text.getText();

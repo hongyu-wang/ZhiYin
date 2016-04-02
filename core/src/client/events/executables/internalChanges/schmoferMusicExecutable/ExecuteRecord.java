@@ -2,14 +2,10 @@ package client.events.executables.internalChanges.schmoferMusicExecutable;
 
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.modelStorage.ModelStorage;
-import client.pages.pageInternal.modelStorage.ModelStorageFactory;
+import client.pages.pageInternal.modelStorage.LocalDatabase;
+import client.pages.pageInternal.modelStorage.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
-import org.robovm.apple.foundation.NSData;
-import org.robovm.apple.foundation.NSErrorException;
 import server.model.media.MAudio;
-import tools.AudioTools.AudioCreator;
-import tools.AudioTools.AudioPlayer;
 import tools.AudioTools.AudioRecorder;
 
 /**
@@ -17,13 +13,13 @@ import tools.AudioTools.AudioRecorder;
  */
 public class ExecuteRecord implements Executable {
     private static boolean RECORD = false;
-    private ModelStorage ms;
+    private LocalDatabase localDatabase;
     private boolean save;
     private Friends2 friends2;
 
 
     public ExecuteRecord(Friends2 friends2){
-        ms = ModelStorageFactory.createModelStorage();
+        localDatabase = LocalDatabaseFactory.createModelStorage();
         this.friends2 = friends2;
         save = false;
     }
@@ -46,7 +42,7 @@ public class ExecuteRecord implements Executable {
             } else {
                 System.out.println("done recording");
                 MAudio audio = ar.stopRecording();
-                ms.pushModel(audio);
+                localDatabase.pushModel(audio);
                 System.out.println(audio.getKey());
 
                 if (save) {

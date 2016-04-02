@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * Created by Hongyu Wang on 3/19/2016.
  */
-public class ModelStorage {
+public class LocalDatabase {
     private long user;
     private Map<Long, ServerModel> models;
     private Map<String, Long> hashtag_key;
@@ -25,7 +25,7 @@ public class ModelStorage {
 
     public static String ipAddress = "localhost";
 
-    ModelStorage(){
+    LocalDatabase(){
         models = new HashMap<Long, ServerModel>();
         hashtag_key = new HashMap<String, Long>();
         username_key = new HashMap<String, Long>();
@@ -34,7 +34,7 @@ public class ModelStorage {
         generator = SerialGenerator.getGenerator();
     }
 
-    ModelStorage(User user){
+    LocalDatabase(User user){
         this.user = user.getKey();
         models = new HashMap<Long, ServerModel>();
         models.put(user.getKey(), user);
