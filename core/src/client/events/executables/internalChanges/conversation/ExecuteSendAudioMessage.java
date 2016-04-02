@@ -29,15 +29,16 @@ public class ExecuteSendAudioMessage implements Executable {
 
     @Override
     public void execute() {
-        if(!messageBox.hasAudio()){
-            return;
-        }
         ModelStorage ms = ModelStorageFactory.createModelStorage();
 
         MConversation conversation = ms.getModel(friend2.getConversation());
 
         if(conversation == null){
             ms.requestModelFromServer(friend2.getConversation());
+            return;
+        }
+
+        if(friend2.getAudioKeys().contains(messageBox.getWorkingMAudio().getKey())){
             return;
         }
 

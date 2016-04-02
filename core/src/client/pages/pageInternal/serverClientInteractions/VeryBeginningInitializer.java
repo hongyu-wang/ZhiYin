@@ -4,6 +4,7 @@ import driver.GameLoop;
 import server.model.media.MImage;
 import server.model.media.MMusic;
 import server.model.soundCloud.MBand;
+import server.model.soundCloud.MMusicAlbum;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.services.factories.ImageManagerFactory;
@@ -102,10 +103,12 @@ public class VeryBeginningInitializer extends Talkers{
         }
 
         //DiaryPosts
-        for(int i = 0; i < 3 ; i++){
+        for(int i = 0; i < 6 ; i++){
             modelStorage.requestModelFromServer(key++);
         }
 
+        //TODO LMAO
+//        modelStorage.requestModelFromServer(3000001);
 
         totalOriginalModels = key;
     }
@@ -113,12 +116,13 @@ public class VeryBeginningInitializer extends Talkers{
     @Override
     public void push() {
 
+        //TODO robovm
 //+        AudioCreator.initializeAll();
 
         pushProfileImages();
         pushDiaryImages();
         pushArtistImages();
-//        pushMBands();
+        pushMBands();
 
         GameLoop.ISPUSHING = true;
     }
@@ -191,9 +195,18 @@ public class VeryBeginningInitializer extends Talkers{
     }
 
     private void pushMBands(){
-        Map<String, List<MMusic>> artistMap = AudioCreator.artistToMMusic;
+//        Map<String, List<MMusic>> artistMap = AudioCreator.artistToMMusic;
 
-        for(String artist: artistMap.keySet()){
+        String[] artists = {
+                "Maroon 5",
+                "Ed Sheeran",
+                "Justin Bieber",
+                "Justin Timberlake",
+                "Kanye West",
+                "The Weeknd"
+        };
+                //TODO remove robovm;
+        for(String artist: artists){
             MBand mBand = new MBand();
 
             if(artist.equals("Maroon 5")){
@@ -230,12 +243,28 @@ public class VeryBeginningInitializer extends Talkers{
                 throw new NoSuchElementException();
             }
 
-            mBand.setAlbums(Utils.<Long>newList());
+            /*
             mBand.setSongs(getKeys(artistMap.get(artist)));
+            mBand.setAlbums(getAlbums(artistMap.get(artist)));
+             */
+
+            mBand.setSongs(Utils.<Long>newList());
+            mBand.setAlbums(Utils.<Long>newList());
             mBand.setName(artist);
 
             modelStorage.pushModel(mBand);
         }
+    }
+
+    private List<Long> getAlbums(List<MMusic> modelList){
+        List<Long> keyList = Utils.newList();
+//        List<String, MMusicAlbum> album;
+
+        for(MMusic music: modelList){
+            music.getAlbum();
+        }
+
+        return keyList;
     }
 
     private List<Long> getKeys(List<MMusic> modelList){

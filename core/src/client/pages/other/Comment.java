@@ -1,6 +1,6 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.conversation.ExecuteSendComment;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.pages.pageInternal.modelStorage.ModelStorage;
@@ -16,11 +16,13 @@ import server.model.media.MText;
 import server.model.social.MComment;
 import server.model.social.MDiaryPost;
 import server.model.social.MPost;
-import java.util.List;
-
 import server.model.user.User;
 import server.model.user.UserProfile;
 import tools.utilities.Utils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import static client.singletons.StateManager.M;
 
@@ -80,14 +82,14 @@ public class Comment extends CommentShell {
         scrollpane.setBounds(0, 122 * StateManager.M, 750 * StateManager.M, 878 * StateManager.M);
         stage.addActor(scrollpane);
 
-        TestExecutable sendEx = new TestExecutable("send");
+        ExecuteSendComment sendEx = new ExecuteSendComment(this);
         ImageButton sendButton = createImageButton("Other/Send@", sendEx, 604, 32, 122, 60);
-        sendButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                send();
-            }
-        });
+//        sendButton.addListener(new ClickListener(){
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                send();
+//            }
+//        });
         stage.addActor(sendButton);
     }
 
@@ -101,7 +103,6 @@ public class Comment extends CommentShell {
         table.row();
         table.add(label2).expand();
         stage.addActor(table);
-
     }
 
     private void addMessageField(){
@@ -185,12 +186,17 @@ public class Comment extends CommentShell {
                 if(comment.getAudio().size() > 0){
                     continue;
                 }
+
                 String text = comment.getText();
 
                 User user = ms.getModel(comment.getCreator());
                 UserProfile profile = ms.getModel(user.getProfile());
 
-                addComment(profile.getUsername(), String.valueOf(System.currentTimeMillis()), text);
+                SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
+                Date df = new Date(comment.getTimeStamp());
+                String timestamp = sdf.format(df);
+
+                addComment(profile.getUsername(), timestamp, text);
 
                 currentComments.add(key);
             }

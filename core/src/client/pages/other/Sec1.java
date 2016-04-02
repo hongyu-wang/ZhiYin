@@ -96,11 +96,6 @@ public class Sec1 extends Sec1Shell {
         scrollpane = new ScrollPane(posts);
         scrollpane.setBounds(0, 200 * StateManager.M, 750 * StateManager.M, 800 * StateManager.M);
         stage.addActor(scrollpane);
-
-        addPost("name", "time");
-        addPost("name", "time");
-        addPost("name", "time");
-        addPost("name", "time");
     }
 
     private void initTable(){
@@ -115,7 +110,7 @@ public class Sec1 extends Sec1Shell {
         stage.addActor(table);
     }
 
-    public void addPost(String name, String time){
+    public void addPost(MComment comment){
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
         Image ripples = new Image(new Texture("Friends4/Ripples0@" + StateManager.M + ".png"));
         ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png")).getDrawable());

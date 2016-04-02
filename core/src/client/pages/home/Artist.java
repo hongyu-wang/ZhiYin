@@ -51,6 +51,8 @@ public class Artist extends ArtistShell {
         scrollpane.setScrollingDisabled(true, false);
 
         stage.addActor(scrollpane);
+
+        pullData();
     }
 
     public void addArtist(MBand band){
@@ -58,7 +60,7 @@ public class Artist extends ArtistShell {
 
         ModelStorage ms = ModelStorageFactory.createModelStorage();
 
-        MImage profileImage = ms.getModel(band.getBandImage());
+        MImage profileImage = ms.getModel(/*band.getBandImage()*/ 101L);
 
         Image profilePic = ImageManagerFactory.createImageManager().mImageToImage(profileImage);
 
@@ -115,7 +117,9 @@ public class Artist extends ArtistShell {
         super.update(fy);
 
         searchField.getText();//TODO something
+
         pullData();
+
     }
 
 
@@ -132,7 +136,7 @@ public class Artist extends ArtistShell {
         ModelStorage ms = ModelStorageFactory.createModelStorage();
         MBand mb;
 
-        for(long i = 12000; i < 1206; i++){
+        for(long i = 12000; i < 12006; i++){
             mb = ms.getModel(i);
             addArtist(mb);
         }
