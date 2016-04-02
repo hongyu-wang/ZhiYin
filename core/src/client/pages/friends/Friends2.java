@@ -3,12 +3,10 @@ package client.pages.friends;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.conversation.ExecuteSendAudioMessage;
 import client.events.executables.internalChanges.conversation.ExecuteSendMessage;
 import client.events.executables.internalChanges.conversation.ExecuteUpdateMessages;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
-import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetSave;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
@@ -22,8 +20,6 @@ import server.model.social.MConversation;
 import tools.utilities.Utils;
 
 import java.util.List;
-
-import static client.singletons.StateManager.M;
 
 public class Friends2 extends Friends2Shell{
     //Stuff
@@ -124,7 +120,6 @@ public class Friends2 extends Friends2Shell{
 
 
         ExecutableMultiplexer release = new ExecutableMultiplexer();
-        release.addExecutable(new ExecuteSetSave(record));
         release.addExecutable(record);
 
 

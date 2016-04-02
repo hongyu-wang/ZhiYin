@@ -1,7 +1,12 @@
 package client.events.executables.internalChanges.conversation;
 
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
+import client.pageStorage.Pages;
+import client.pages.State;
 import client.pages.friends.Friends2;
+import client.pages.friends.Friends4;
 import client.pages.friends.boxes.MessageBox;
+import tools.AudioTools.AudioRecorder;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
@@ -12,54 +17,65 @@ import server.model.social.MMessage;
 import java.util.List;
 
 /**
+ *
  * Created by Kevin Zheng on 2016-03-29.
  */
 public class ExecuteSendAudioMessage implements Executable {
-    private Friends2 friend2;
-    private MessageBox messageBox;
+    private Friends2 page;
 
 
-    public ExecuteSendAudioMessage(Friends2 friends2, MessageBox messageBox){
-        this.friend2 = friends2;
-        this.messageBox = messageBox;
+    public ExecuteSendAudioMessage(Friends2 friends2){
+        this.page = friends2;
+
     }
+
 
     @Override
     public void execute() {
+        MAudio audio = AudioRecorder.getInstance().stopRecording(); //TODO This is the MAudio that you want
         LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
 
-        MConversation conversation = localDatabase.getModel(friend2.getConversation());
-
-        if(conversation == null){
-            localDatabase.requestModelFromServer(friend2.getConversation());
-            return;
-        }
-
-        if(friend2.getAudioKeys().contains(messageBox.getWorkingMAudio().getKey())){
-            return;
-        }
-
-        List<Long> messageKeys = conversation.getMessageList();
-
-
-        MAudio audio = messageBox.getWorkingMAudio();
-
-        MMessage message = new MMessage();
-
-        message.setKey(localDatabase.generateKey());
-
-        message.setCreator(localDatabase.getMainUser().getKey());
-
-        message.setAudioKey(audio.getKey());
-
-        message.setText(-1L);
-
-        messageKeys.add(message.getKey());
-
-        friend2.getMessageKeys().add(message.getKey());
-
         localDatabase.pushModel(audio);
-        localDatabase.pushModel(message);
-        localDatabase.pushModel(conversation);
+
+
+
+
+
+
+
+
+        //TODO replace this with the messagebox
+        ExecutePlayMAudio executePlayMAudio = new ExecutePlayMAudio(audio);
+        MessageBox soundBox = new MessageBox(executePlayMAudio, 1, audio);
+
+
+
+//      MConversation conversation = localDatabase.getModel(page.getConversation());
+//        if(conversation == null){
+//            localDatabase.requestModelFromServer(page.getConversation());
+//            return;
+//        }
+        //TODO push the audio message to server
+//        List<Long> messageKeys = conversation.getMessageList();
+//
+//
+//
+//        MMessage message = new MMessage();
+//
+//        message.setKey(localDatabase.generateKey());
+//
+//        message.setCreator(localDatabase.getMainUser().getKey());
+//
+//        message.setAudioKey(mAudio.getKey());
+//
+//        message.setText(-1L);
+//
+//        messageKeys.add(message.getKey());
+//
+//        page.getMessageKeys().add(message.getKey());
+//
+//
+//        localDatabase.pushModel(message);
+//        localDatabase.pushModel(conversation);
     }
 }
