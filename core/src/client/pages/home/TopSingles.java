@@ -35,7 +35,8 @@ public class TopSingles extends TopSinglesShell{
         table.top();
 
         //table.setDebug(true);
-        addSingles();
+        if (os == MAC)
+            addSingles();
 
 
         stage.addActor(table);

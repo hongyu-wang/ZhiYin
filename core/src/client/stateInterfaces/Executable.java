@@ -1,6 +1,6 @@
 package client.stateInterfaces;
 
-import client.pages.State;
+import client.tools.Constants;
 
 /**
  * This is the primary "Executable" interface.
@@ -9,7 +9,7 @@ import client.pages.State;
  *
  * Created by Hongyu Wang on 3/10/2016.
  */
-public interface Executable {
+public interface Executable extends Constants {
 
     /**
      * This is the default execute method that all

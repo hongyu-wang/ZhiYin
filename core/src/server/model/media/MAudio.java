@@ -20,6 +20,12 @@ public class MAudio extends ServerModel {
 
     private byte[] mData;
 
+
+    public MAudio(){
+
+    }
+
+
     public byte[] getmData() {
         return mData;
     }
