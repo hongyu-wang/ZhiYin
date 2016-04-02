@@ -115,9 +115,6 @@ public class Artist extends ArtistShell {
         super.update(fy);
 
         searchField.getText();//TODO something
-
-        pullData();
-
     }
 
 
