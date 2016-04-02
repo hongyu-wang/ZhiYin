@@ -1,6 +1,7 @@
 package tools.serverTools.databases;
 
 import server.model.media.*;
+import server.model.social.MComment;
 import server.model.social.MConversation;
 import server.model.social.MDiaryPost;
 import server.model.structureModels.ServerModel;
@@ -411,6 +412,10 @@ public class VirtualDatabase {
 
         diaryPost.setMusicKey(music);
 
+        diaryPost.setComments(Utils.<Long>newList());
+
+        generateComment(diaryPost, creator);
+
         diaryPost.setKey(generator.generateSerial());
 
         UserDiaryContent content = (UserDiaryContent) data.get(creator.getDiary());
@@ -419,4 +424,21 @@ public class VirtualDatabase {
 
         data.put(diaryPost.getKey(), diaryPost);
     }
+
+    private void generateComment(MDiaryPost post, User creator){
+        UserProfile profile = (UserProfile)data.get(creator.getProfile());
+
+        MComment comment = new MComment();
+        comment.setKey(generator.generateSerial());
+
+        comment.setCreator(creator.getKey());
+        comment.setText("I'm " + profile.getUsername() + ", this is a server comment.");
+        comment.setAudio(Utils.<Long>newList());
+        comment.setMusic(Utils.<Long>newList());
+        comment.setLikes(Utils.<Long>newList());
+
+        post.getComments().add(comment.getKey());
+        data.put(comment.getKey(), comment);
+    }
+
 }

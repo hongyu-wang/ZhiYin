@@ -13,12 +13,12 @@ public interface SerialGenerator {
 
     /**Returns a general type.
      *
-     * @return  Incre
-     * mentalSerialGen
+     * @return  IncrementalSerialGen
      */
     static SerialGenerator getGenerator(){
         return new IncrementSerialGen();
     }
+
 
     static SerialGenerator getHGenerator(long start) {
         return new HighValueSerialGen(start);

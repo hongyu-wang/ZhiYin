@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import server.model.media.MImage;
+import server.model.media.MText;
 import server.model.social.MDiaryPost;
 import server.services.factories.ImageManagerFactory;
 
@@ -28,20 +29,11 @@ public class Diary4 extends Diary4Shell{
     private Image image;
 
     public Diary4(MDiaryPost thisPost){
-        this.title = title;
-        this.content = content;
         this.thisPost = thisPost;
 
-        initImage();
+        populateFromServer();
 
         init();
-    }
-
-    private void initImage(){
-        ModelStorage ms = ModelStorageFactory.createModelStorage();
-        MImage image = ms.getModel(thisPost.getImageKey());
-
-        this.image = ImageManagerFactory.createImageManager().mImageToImage(image);
     }
 
 
@@ -60,7 +52,7 @@ public class Diary4 extends Diary4Shell{
         label2.setWidth(750 * StateManager.M);
         table.add(label1).expand();
         table.row();
-        table.add(label2).width(750);
+        table.add(label2).width(750*StateManager.M);
 
         if(image != null){
             table.row();
@@ -78,5 +70,16 @@ public class Diary4 extends Diary4Shell{
     @Override
     public void reset() {
 
+    }
+
+    private void populateFromServer(){
+        ModelStorage ms = ModelStorageFactory.createModelStorage();
+        MText text = ms.getModel(thisPost.getText());
+
+        this.title = thisPost.getTitle();
+        this.content = text.getText();
+
+        MImage image = ms.getModel(thisPost.getImageKey());
+        this.image = ImageManagerFactory.createImageManager().mImageToImage(image);
     }
 }

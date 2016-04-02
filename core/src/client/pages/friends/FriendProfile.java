@@ -149,7 +149,7 @@ public class FriendProfile extends FriendProfileShell {
         ModelStorage ms = ModelStorageFactory.createModelStorage();
         User user = ms.getModel(ms.getUserKeyByName(name));
 
-//        updateArtistsFromServer(user);
+        updateArtistsFromServer(user);
         updateDiariesFromServer(user);
     }
 
