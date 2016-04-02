@@ -27,6 +27,7 @@ import java.util.*;
  */
 public final class AudioCreator {
 
+
     private static ModelStorage ms = ModelStorageFactory.createModelStorage();
 
     private static NSFileManager fm;
@@ -190,7 +191,7 @@ public final class AudioCreator {
         }
 
         ms.pushModel(song);
-        keyToMAudio.put(audioKey,song);
+        keyToMAudio.put(audioKey, song);
         audioKey++;
         return song;
     }
@@ -215,5 +216,9 @@ public final class AudioCreator {
 
         }
         return music;
+    }
+
+    public static void initializeAll() {
+
     }
 }

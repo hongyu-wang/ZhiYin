@@ -116,8 +116,7 @@ public class VeryBeginningInitializer extends Talkers{
     @Override
     public void push() {
 
-        //TODO robovm
-//+        AudioCreator.initializeAll();
+        AudioCreator.initializeAll();
 
         pushProfileImages();
         pushDiaryImages();
@@ -195,18 +194,18 @@ public class VeryBeginningInitializer extends Talkers{
     }
 
     private void pushMBands(){
-//        Map<String, List<MMusic>> artistMap = AudioCreator.artistToMMusic;
+        Map<String, List<MMusic>> artistMap = AudioCreator.artistToMMusic;
 
-        String[] artists = {
-                "Maroon 5",
-                "Ed Sheeran",
-                "Justin Bieber",
-                "Justin Timberlake",
-                "Kanye West",
-                "The Weeknd"
-        };
+//        String[] artists = {
+//                "Maroon 5",
+//                "Ed Sheeran",
+//                "Justin Bieber",
+//                "Justin Timberlake",
+//                "Kanye West",
+//                "The Weeknd"
+//        };
                 //TODO remove robovm;
-        for(String artist: artists){
+        for(String artist: artistMap.keySet()){
             MBand mBand = new MBand();
 
             if(artist.equals("Maroon 5")){

@@ -9,6 +9,7 @@ import client.pages.pageInternal.inputController.InputController;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
 import client.stateInterfaces.*;
+import client.tools.Constants;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -26,7 +27,7 @@ import java.util.Map;
  *
  * All pages should extend this.
  */
-public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor {
+public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor, Constants {
     public static final String SHELLINPUT = "shell";
     public static final String MOVEABLEINPUT = "moveable";
     protected Stage stage;

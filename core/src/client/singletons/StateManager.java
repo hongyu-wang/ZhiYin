@@ -4,16 +4,16 @@ import client.pages.State;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
+import client.tools.Constants;
 
 /**
  * This is essentially a card layout.
  *
  * Created by Hongyu Wang on 3/7/2016.
  */
-public class StateManager implements Disposable, Updatable, Drawable {
+public class StateManager implements Disposable, Updatable, Drawable, Constants {
 
-    private static final boolean WINDOWS = false;
-    private static final boolean MAC = true;
+
 
     /**
      * The current instance of StateManager
@@ -28,12 +28,10 @@ public class StateManager implements Disposable, Updatable, Drawable {
         return ourInstance;
     }
 
-    public static final float M = .5F;
-    public static final float WIDTH = 750 * M;
-    public static final float HEIGHT = 1334 * M;
 
 
-    public static final boolean os = WINDOWS;
+
+
 
 
 

@@ -5,6 +5,7 @@ import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.MainBatch;
 import client.singletons.StateManager;
+import client.tools.Constants;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -15,15 +16,13 @@ import tools.AudioTools.AudioCreator;
 
 import java.nio.ByteBuffer;
 
-public class GameLoop extends ApplicationAdapter {
+public class GameLoop extends ApplicationAdapter implements Constants {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
 
 	public static boolean ISPUSHING = true;
 
-	public static final int WIDTH = 750;
 
-	public static final int HEIGHT = 1334;
 
     private static OrthographicCamera primary;
 
@@ -37,7 +36,6 @@ public class GameLoop extends ApplicationAdapter {
         primary = new OrthographicCamera(WIDTH*StateManager.M, HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
         primary.update();
-		AudioCreator.initializeAllWindows();
 
     }
 
