@@ -1,6 +1,8 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileArtists;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileDiary;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
@@ -30,6 +32,15 @@ import java.util.List;
 public class FriendProfile extends FriendProfileShell {
     private List<Long> currentDiaries;
     private List<Long> currentArtists;
+
+    public List<Long> getCurrentArtists() {
+        return currentArtists;
+    }
+
+    public List<Long> getCurrentDiaries() {
+        return currentDiaries;
+    }
+
 
     private State previousState;
 
@@ -62,6 +73,13 @@ public class FriendProfile extends FriendProfileShell {
     protected void init(){
         super.init();
 
+        //----ServerUpdates-------//
+
+        new ExecuteUpdateProfileArtists(this, name);
+        new ExecuteUpdateProfileDiary(this, name);
+
+        //----ServerUpdates-------//
+
         Button backButton = new Button(this);
         backButton.setBounds(0, 1217, 117, 117);
         backButton.setExecutable(new ExecuteToTempState(previousState));
@@ -92,7 +110,7 @@ public class FriendProfile extends FriendProfileShell {
 
     }
 
-    private void addPost(MDiaryPost thisPost, String post){
+    public void addPost(MDiaryPost thisPost, String post){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -124,7 +142,7 @@ public class FriendProfile extends FriendProfileShell {
         table.row();
     }
 
-    private void addFollowing(Image image){
+    public void addFollowing(Image image){
         following.add(image).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
     }
 
@@ -139,53 +157,5 @@ public class FriendProfile extends FriendProfileShell {
     @Override
     public void update(float dt) {
         super.update(dt);
-
-        pullData();
-    }
-
-    private void pullData(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
-        User user = localDatabase.getModel(localDatabase.getUserKeyByName(name));
-
-        updateArtistsFromServer(user);
-        updateDiariesFromServer(user);
-    }
-
-    private void updateArtistsFromServer(User user){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
-        List<Long> bandKeys = user.getBandKeys();
-
-        for(long key: bandKeys){
-            if(!currentArtists.contains(key)){
-                MBand artist = localDatabase.getModel(key);
-
-                MImage image = localDatabase.getModel(artist.getBandImage());
-
-                Image artistImage = ImageManagerFactory.createImageManager().mImageToImage(image);
-
-                addFollowing(artistImage);
-
-                currentArtists.add(key);
-            }
-        }
-    }
-
-
-    private void updateDiariesFromServer(User user){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
-        UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
-
-        for(long key: diaryContent.getDiaryKeys()){
-            if(!currentDiaries.contains(key)) {
-                MDiaryPost post = localDatabase.getModel(key);
-                UserProfile profile = localDatabase.getModel(user.getProfile());
-
-                String username = profile.getUsername();
-
-                addPost(post, post.getTitle());
-
-                currentDiaries.add(key);
-            }
-        }
     }
 }

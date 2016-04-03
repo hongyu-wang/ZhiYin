@@ -17,7 +17,7 @@ import java.util.*;
  * AlbumsArt: 8000
  * Audio: 9000
  * Music: 10000
- * Hashtag: 11000
+ * Hashtag: 20000
  * MBand: 12000
  *
  * TempMusic: -420
@@ -110,6 +110,10 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         //ServerState
         for(int i = 0; i < 3 ; i++){
             localDatabase.requestModelFromServer(key++);
+        }
+
+        for(long i = 20000; i < 20010; i++){
+            localDatabase.requestModelFromServer(i);
         }
 
         totalOriginalModels = key;
