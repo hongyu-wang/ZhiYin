@@ -83,7 +83,7 @@ public class WebService{
     public Response postServerModel(String json) {
         MockServer mockServer = ServerInteraction.getServer();
         ObjectMapper objectMapper = new ObjectMapper();
-        ServerModel[] models = null;
+        String[] models = null;
 
 //        ServerModel model = null;
 //        int tag = Integer.parseInt(json.substring(json.length()-4));
@@ -92,9 +92,16 @@ public class WebService{
 
         try {
             //Class name = Class.forName(className);
-            models = objectMapper.readValue(json, ServerModel[].class);
-            for(ServerModel model : models) {
-                mockServer.setModel(model);
+            Class newClass = String[].class;
+            models = (String[])objectMapper.readValue(json, newClass);
+            for(String model : models) {
+                ServerModel realModel;
+                int tag = Integer.parseInt(model.substring(model.length()-4));
+                String className = Tags.ID_TAGS.getName(tag);
+                model = model.substring(0, model.length()-4);
+                Class name = Class.forName(className);
+                realModel = (ServerModel)objectMapper.readValue(model, name);
+                mockServer.setModel(realModel);
             }
         } catch (Exception e) {
             e.printStackTrace();
