@@ -33,7 +33,13 @@ public class ServerTalker extends Talkers {
 
     @Override
     public void pull() {
-        repull();
+        if (pulledKeys.isEmpty()) {
+            this.setWaiting(true);
+            requestUpdate();
+        }
+        else{
+//                repull();
+        }
     }
 
     @Override
@@ -51,14 +57,12 @@ public class ServerTalker extends Talkers {
         if(pulledKeys == null){
             localDatabase.initServerTalker();
         }
+        if(this.isWaiting()&&pulledKeys.isEmpty()){
+            updatePages();
+            this.setWaiting(false);
+        }
         if(waitCounter%100 == 0) {
-            if (pulledKeys.isEmpty()) {
-                updatePages();
-                requestUpdate();
-            }
-            else{
-//                this.pull();
-            }
+            this.pull();
         }
         waitCounter++;
     }

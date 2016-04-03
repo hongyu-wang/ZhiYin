@@ -44,22 +44,33 @@ public class MyProfile extends MyProfileShell {
 
     public MyProfile(){
 //        pull from server for name and image
-
         init();
     }
 
+    private void serverInit(){
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
+        UserProfile userProfile = localDatabase.getModel(localDatabase.getMainUser().getProfile());
+        MImage mImage = localDatabase.getModel(userProfile.getImageKey());
+
+        this.name = userProfile.getUsername();
+        this.profilePic = ImageManagerFactory.createImageManager().mImageToImage(mImage);
+    }
+
+
 
     protected void init(){
+
         super.init();
+        serverInit();
 
-//        Label label = new Label(name, SkinSingleton.getInstance());
-//        label.setPosition(310 * StateManager.M, 1050 * StateManager.M);
-//        stage.addActor(label);
+        Label label = new Label(name, SkinSingleton.getInstance());
+        label.setPosition(310 * StateManager.M, 1050 * StateManager.M);
+        stage.addActor(label);
 
-//        if(image != null) {
-//            image.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
-//            stage.addActor(image);
-//        }
+        if(profilePic != null) {
+            profilePic.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
+            stage.addActor(profilePic);
+        }
 
         table = new Table();
         table.top();
