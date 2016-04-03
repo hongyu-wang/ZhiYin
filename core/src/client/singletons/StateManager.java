@@ -1,6 +1,7 @@
 package client.singletons;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
@@ -77,6 +78,8 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
     @Override
     public void update(float dt) {
         currentState.update(dt);
+
+        TalkerFactory.getServerTalker().update(dt);
     }
 
     @Override

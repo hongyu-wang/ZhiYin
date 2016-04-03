@@ -1,6 +1,7 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.other.Sec1;
+import server.model.media.MAudio;
 import server.model.social.MComment;
 import server.model.social.MPost;
 import server.model.user.User;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-04-02.
  */
-public class ExecuteSendAudioComment implements ExecutePush {
+public class ExecuteSendAudioComment implements ExecuteServer {
     private Sec1 sec1;
 
     public ExecuteSendAudioComment(Sec1 sec1){

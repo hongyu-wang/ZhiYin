@@ -6,10 +6,13 @@ import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteCancelRecording;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSendAudioComment;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
+import server.model.media.MAudio;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
@@ -95,8 +98,9 @@ public class Sec1 extends Sec1Shell {
         dragButton.setReleaseExecutable(new ExecutableMultiplexer(
                 new ExecuteToTempState(
                         new Sec2(this, previousState)
-                        //TODO ADD THE MAUDIO STUFF HERE.
-                )
+
+                    ),
+                new ExecuteSendAudioComment(this)
                 )
         );
         add(dragButton);
@@ -151,9 +155,6 @@ public class Sec1 extends Sec1Shell {
             }
         });
 
-
-
-
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 
         Table t = new Table();
@@ -166,6 +167,12 @@ public class Sec1 extends Sec1Shell {
         posts.add(t).width(750 * StateManager.M).height(140 * StateManager.M);
         posts.row();
     }
+
+    public void addAudioComment(String name, String time, MAudio audio){
+        ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
+        addPost(name, time, epma);
+    }
+
 
     @Override
     public void reset() {

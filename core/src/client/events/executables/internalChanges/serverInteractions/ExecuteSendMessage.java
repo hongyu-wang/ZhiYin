@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-24.
  */
-public class ExecuteSendMessage implements ExecutePush {
+public class ExecuteSendMessage implements ExecuteServer {
     private Friends2 friend2;
 
     public ExecuteSendMessage(Friends2 friend2){
