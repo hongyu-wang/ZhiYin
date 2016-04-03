@@ -1,5 +1,6 @@
 package server.webclient.services;
 
+import com.sun.corba.se.spi.activation.Server;
 import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import server.services.interfaces.models.UserProfileManager;
@@ -66,10 +67,12 @@ public class WebService{
 
     @GET
     @Path("/update")
-    @Produces("*/*")
-    public List<Long> update(){
+    @Produces("application/json")
+    public Long[] update(){
         MockServer mockServer = ServerInteraction.getServer();
-        return mockServer.getUpdates();
+        List<Long> list = mockServer.getUpdates();
+
+        return list.toArray(new Long[list.size()]);
     }
 
     /**
@@ -82,7 +85,8 @@ public class WebService{
     public Response postServerModel(String json) {
         MockServer mockServer = ServerInteraction.getServer();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<ServerModel> models = null;
+        String[] models = null;
+
 //        ServerModel model = null;
 //        int tag = Integer.parseInt(json.substring(json.length()-4));
 //        String className = Tags.ID_TAGS.getName(tag);
@@ -90,18 +94,20 @@ public class WebService{
 
         try {
             //Class name = Class.forName(className);
-            models = objectMapper.readValue(json, List.class);
-            for(ServerModel model : models) {
-                mockServer.setModel(model);
+            Class newClass = String[].class;
+            models = (String[])objectMapper.readValue(json, newClass);
+            for(String model : models) {
+                ServerModel realModel;
+                int tag = Integer.parseInt(model.substring(model.length()-4));
+                String className = Tags.ID_TAGS.getName(tag);
+                model = model.substring(0, model.length()-4);
+                Class name = Class.forName(className);
+                realModel = (ServerModel)objectMapper.readValue(model, name);
+                mockServer.setModel(realModel);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return Response.status(Response.Status.OK).build();
-
     }
-
-
-
 }

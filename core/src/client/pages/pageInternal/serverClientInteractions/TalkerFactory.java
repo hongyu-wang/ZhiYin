@@ -4,10 +4,8 @@ package client.pages.pageInternal.serverClientInteractions;
  * Created by Hongyu Wang on 3/22/2016.
  */
 public class TalkerFactory {
-    private static final int numberOfTalkers = 7;
+    private static final int numberOfTalkers = 8;
     private static Talkers [] talkers = new Talkers[numberOfTalkers];
-
-
 //    public static DiaryTalker getDiaryTalker(){
 //        if (talkers[0] == null)
 //            talkers[0] = new DiaryTalker();
@@ -54,5 +52,11 @@ public class TalkerFactory {
             talkers[6] = new VeryBeginningInitializer();
 
         return (VeryBeginningInitializer) talkers[6];
+    }
+    public static ServerTalker getServerTalker(){
+        if (talkers[7] == null)
+            talkers[7] = new ServerTalker();
+
+        return (ServerTalker) talkers[7];
     }
 }

@@ -120,17 +120,19 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
 
     @Override
     public void push() {
+        List<ServerModel> models = Utils.newList();
 
+        pushProfileImages(models);
+        pushDiaryImages(models);
+        pushArtistImages(models);
+        pushMBands(models);
 
-        pushProfileImages();
-        pushDiaryImages();
-        pushArtistImages();
-        pushMBands();
+        localDatabase.pushModel(models.toArray(new ServerModel[models.size()]));
 
         GameLoop.ISPUSHING = true;
     }
 
-    private void pushProfileImages(){
+    private void pushProfileImages(List<ServerModel> models){
         MImage image1 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Alice_After_The_War.png");
         MImage image2 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Benny_After_The_War.png");
         MImage image3 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Cindy_After_The_War.png");
@@ -143,12 +145,12 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         image2.setName("Benny's Profile");
         image3.setName("Cindy's Profile");
 
-        localDatabase.pushModel(image1);
-        localDatabase.pushModel(image2);
-        localDatabase.pushModel(image3);
+        models.add(image1);
+        models.add(image2);
+        models.add(image3);
     }
 
-    private void pushDiaryImages(){
+    private void pushDiaryImages(List<ServerModel> models){
         MImage image4 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Alice_After_The_War.png");
         MImage image5 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Benny_After_The_War.png");
         MImage image6 = ImageManagerFactory.createImageManager().createNewImage("UserProfiles//Cindy_After_The_War.png");
@@ -161,12 +163,12 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         image5.setName("Benny's Profile");
         image6.setName("Cindy's Profile");
 
-        localDatabase.pushModel(image4);
-        localDatabase.pushModel(image5);
-        localDatabase.pushModel(image6);
+        models.add(image4);
+        models.add(image5);
+        models.add(image6);
     }
 
-    private void pushArtistImages(){
+    private void pushArtistImages(List<ServerModel> models){
         MImage artist1 = ImageManagerFactory.createImageManager().createNewImage("ArtistProfiles//AdamLevine.png");
         MImage artist2 = ImageManagerFactory.createImageManager().createNewImage("ArtistProfiles//EdSheeran.png");
         MImage artist3 = ImageManagerFactory.createImageManager().createNewImage("ArtistProfiles//JustinBieber.png");
@@ -189,15 +191,15 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         artist5.setKey(104L);
         artist6.setKey(105L);
 
-        localDatabase.pushModel(artist1);
-        localDatabase.pushModel(artist2);
-        localDatabase.pushModel(artist3);
-        localDatabase.pushModel(artist4);
-        localDatabase.pushModel(artist5);
-        localDatabase.pushModel(artist6);
+        models.add(artist1);
+        models.add(artist2);
+        models.add(artist3);
+        models.add(artist4);
+        models.add(artist5);
+        models.add(artist6);
     }
 
-    private void pushMBands(){
+    private void pushMBands(List<ServerModel> models){
         Map<String, List<MMusic>> artistMap = AudioCreator.artistToMMusic;
 
         String[] artists = {
@@ -260,7 +262,7 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
             mBand.setAlbums(Utils.<Long>newList());
             mBand.setName(artist);
 
-            localDatabase.pushModel(mBand);
+            models.add(mBand);
         }
     }
 
@@ -331,7 +333,6 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         for(User friend: ft.getAllFriends()){
             pt.init(friend);
             pt.update(0);
-
         }
     }
 }

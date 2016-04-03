@@ -219,21 +219,22 @@ public class ConversationTalker extends Talkers {
 
         @Override
         public void push() {
-            for (MMessage message : mMessages) {
-                if(message == null){
-                    continue;
-                }
-
-                MText text = new MText();
-                text.setKey(message.getText());
-                text.setType(0);
-                text.setText(messages.get(message.getKey()));
-
-                localDatabase.pushModel(text);
-                localDatabase.pushModel(message);
-            }
-
-            localDatabase.pushModel(conversation);
+//            for (MMessage message : mMessages) {
+//                if(message == null){
+//                    continue;
+//                }
+//
+//                MText text = new MText();
+//                text.setKey(message.getText());
+//                text.setType(0);
+//                text.setText(messages.get(message.getKey()));
+//
+//
+//                localDatabase.pushModel(text);
+//                localDatabase.pushModel(message);
+//            }
+//
+//            localDatabase.pushModel(conversation);
         }
 
         @Override

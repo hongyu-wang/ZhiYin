@@ -96,25 +96,25 @@ public class SocialContentTalker extends Talkers{
     @Override
     public void push() {
 
-        //Set
-        for(MConversation conversation: conversations){
-            if(!uConv.getConvoKeys().contains(conversation.getKey()))
-                uConv.getConvoKeys().add(conversation.getKey());
-        }
-
-        for(MMusicPost musicPost: musicPosts){
-            if(!uCont.getPostKeys().contains(musicPost.getKey()))
-                uCont.getPostKeys().add(musicPost.getKey());
-        }
-
-        for(MDiaryPost diaryPost: diaryPosts){
-            if(!uDiary.getDiaryKeys().contains(diaryPost.getKey()))
-                uDiary.getDiaryKeys().add(diaryPost.getKey());
-        }
-        //Push
-        localDatabase.pushModel(uConv);
-        localDatabase.pushModel(uCont);
-        localDatabase.pushModel(uDiary);
+//        //Set
+//        for(MConversation conversation: conversations){
+//            if(!uConv.getConvoKeys().contains(conversation.getKey()))
+//                uConv.getConvoKeys().add(conversation.getKey());
+//        }
+//
+//        for(MMusicPost musicPost: musicPosts){
+//            if(!uCont.getPostKeys().contains(musicPost.getKey()))
+//                uCont.getPostKeys().add(musicPost.getKey());
+//        }
+//
+//        for(MDiaryPost diaryPost: diaryPosts){
+//            if(!uDiary.getDiaryKeys().contains(diaryPost.getKey()))
+//                uDiary.getDiaryKeys().add(diaryPost.getKey());
+//        }
+//        //Push
+//        localDatabase.pushModel(uConv);
+//        localDatabase.pushModel(uCont);
+//        localDatabase.pushModel(uDiary);
     }
 
     @Override

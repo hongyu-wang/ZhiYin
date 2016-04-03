@@ -1,5 +1,6 @@
 package tools.AudioTools;
 
+import server.model.structureModels.ServerModel;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import com.badlogic.gdx.Gdx;
@@ -36,18 +37,15 @@ public final class AudioCreator {
 
     private static Map<String, Long> albumToKey;
 
-    public static TreeMap<String,MMusic> songNameToMMusic;
+    public static TreeMap<String, MMusic> songNameToMMusic;
 
     public static TreeMap<String, List<MMusic>> artistToMMusic;
 
     public static TreeMap<Long, MAudio> keyToMAudio = new TreeMap<Long,MAudio>();
 
-
-
+    private static List<ServerModel> models = Utils.newList();
 
     public static void initializeAlbums(){
-
-
         albumToKey = Utils.newMap();
         albumToKey.put("Songs About Jane",8000L);
         albumToKey.put("Purpose (Deluxe Edition)",8001L);
@@ -65,11 +63,13 @@ public final class AudioCreator {
             albumArt.setImage(fh.readBytes());
             assert(albumArt.getImage()!=null);
             albumArt.setName(s);
-            localDatabase.pushModel(albumArt);
 
-
+            models.add(albumArt);
         }
 
+
+
+        AudioCreator.pushList();
     }
 
 
@@ -108,12 +108,19 @@ public final class AudioCreator {
             }
         }
 
+        AudioCreator.pushList();
 
         //Artists: The Weeknd, Justin Bieber, Justin Timberlake, Ed Sheeran, Maroon 5, Kanye West
         System.out.println(songNameToMMusic.get("On Sight").getMusicKey());
         System.out.println("done");
 
     }
+
+    private static void pushList(){
+        localDatabase.pushModel(models.toArray(new ServerModel[models.size()]));
+        models.clear();
+    }
+
 
     private AudioCreator(){
 
@@ -143,7 +150,7 @@ public final class AudioCreator {
         music.setKey(musicKey);
         musicKey++;
         music.setComments(Utils.<Long>newList());
-        localDatabase.pushModel(music);
+        models.add(music);
 
         return music;
     }
@@ -174,7 +181,7 @@ public final class AudioCreator {
             e.printStackTrace();
         }
 
-        localDatabase.pushModel(song);
+        models.add(song);
         keyToMAudio.put(audioKey, song);
         audioKey++;
         return song;

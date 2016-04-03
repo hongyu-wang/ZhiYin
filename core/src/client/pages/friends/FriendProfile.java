@@ -163,7 +163,7 @@ public class FriendProfile extends FriendProfileShell {
             if(!currentArtists.contains(key)){
                 MBand artist = localDatabase.getModel(key);
 
-                MImage image = localDatabase.getModel(/* artist.getBandImage() */ 101L);
+                MImage image = localDatabase.getModel(artist.getBandImage());
 
                 Image artistImage = ImageManagerFactory.createImageManager().mImageToImage(image);
 
@@ -183,18 +183,7 @@ public class FriendProfile extends FriendProfileShell {
 
         for(long key: diaryContent.getDiaryKeys()){
             if(!currentDiaries.contains(key)) {
-                if(localDatabase.getModel(key) == null){
-                    localDatabase.requestModelFromServer(key);
-                    isUpdated = false;
-                }
                 MDiaryPost post = localDatabase.getModel(key);
-                if(localDatabase.getModel(post.getText())== null){
-                    localDatabase.requestModelFromServer(post.getText());
-                    isUpdated = false;
-                }
-
-                if(!isUpdated)
-                    continue;
                 UserProfile profile = localDatabase.getModel(user.getProfile());
 
                 String username = profile.getUsername();

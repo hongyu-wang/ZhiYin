@@ -1,9 +1,11 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.friends.Friends2;
+import client.tools.Constants;
 import server.model.media.MText;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
+import server.model.structureModels.ServerModel;
 import server.services.factories.MessageManagerFactory;
 import server.services.factories.TextManagerFactory;
 
@@ -12,7 +14,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-24.
  */
-public class ExecuteSendMessage implements ExecutePush {
+public class ExecuteSendMessage implements ExecuteServer {
     private Friends2 friend2;
 
     public ExecuteSendMessage(Friends2 friend2){
@@ -21,7 +23,6 @@ public class ExecuteSendMessage implements ExecutePush {
 
     @Override
     public void execute() {
-
         MConversation conversation = localDatabase.getModel(friend2.getConversation());
 
         if(conversation == null){
@@ -30,22 +31,40 @@ public class ExecuteSendMessage implements ExecutePush {
         }
 
         List<Long> messageKeys = conversation.getMessageList();
-
         String userText = friend2.getMessage();
-
-        MText text = TextManagerFactory.createTextManager().createText(userText, 0);
-        text.setKey(localDatabase.generateKey());
-
-        MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), localDatabase.getMainUser().getKey(), -1L);
-        message.setKey(localDatabase.generateKey());
-
+        MText text = generateText(userText);
+        MMessage message = generateMMessage(text);
         messageKeys.add(message.getKey());
 
         friend2.getMessageKeys().add(message.getKey());
+        friend2.addTextMessage(userText, 1, Constants.getCurrentTimestamp(message.getTimeStamp()));
 
-        friend2.addTextMessage(userText, 1);
-        localDatabase.pushModel(text);
-        localDatabase.pushModel(message);
-        localDatabase.pushModel(conversation);
+        ServerModel[] pushList = {
+                text,
+                message,
+                conversation
+        };
+
+        localDatabase.pushModel(pushList);
+    }
+
+    private MText generateText(String message){
+        MText text = TextManagerFactory.createTextManager().createText(message, 0);
+        text.setKey(localDatabase.generateKey());
+
+        return text;
+    }
+
+    private MMessage generateMMessage(MText mText){
+        long text = mText.getKey();
+        long timestamp = System.currentTimeMillis();
+        long creator = localDatabase.getMainUser().getKey();
+        long audioKey = -1L;
+        MMessage message = MessageManagerFactory.createMessageManager()
+                .createMessage(text, timestamp, creator, audioKey);
+
+        message.setKey(localDatabase.generateKey());
+
+        return message;
     }
 }

@@ -1,12 +1,15 @@
 package tools.serverTools.databases;
 
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import driver.GameLoop;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.webservices.PostObject;
 import server.webservices.RequestObject;
 import server.webservices.ServerKeyObject;
+import server.webservices.UpdateObject;
 import tools.serverTools.generators.SerialGenerator;
+import tools.utilities.Utils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +22,8 @@ import java.util.Map;
  */
 public class LocalDatabase {
     private long user;
+    private int pullCount;
+    private List<Long> pulledKeys;
     private Map<Long, ServerModel> models;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
@@ -26,19 +31,48 @@ public class LocalDatabase {
 
     public static String ipAddress = "localhost";
 
-    LocalDatabase(){
-        models = new HashMap<Long, ServerModel>();
-        hashtag_key = new HashMap<String, Long>();
-        username_key = new HashMap<String, Long>();
+    /**Returns a pre generated serial key from the server.
+     *
+     * @return
+     */
+    public long generateKey(){
+        long key = user*3000000;
 
+        return key + generator.generateSerial();
+    }
+
+
+    LocalDatabase(){
+        pullCount = 0;
+        models = Utils.newMap();
+        hashtag_key = Utils.newMap();
+        username_key = Utils.newMap();
+        pulledKeys = Utils.newList();
 //        unassignedKeys = new ArrayList<Long>();
         generator = SerialGenerator.getGenerator();
     }
 
-    LocalDatabase(User user){
-        this.user = user.getKey();
-        models = new HashMap<Long, ServerModel>();
-        models.put(user.getKey(), user);
+    public void initServerTalker(){
+        TalkerFactory.getServerTalker().init(pulledKeys);
+    }
+
+
+    /**Sets the prime user of this app.
+     *
+     * @param username  The username.
+     * @return          True if the login was successful.
+     */
+    public boolean loginUser(String username){
+        user = getUserKeyByName(username);
+        return true;
+    }
+
+    /**Returns the owner of the app.
+     *
+     * @return  The user data of the owner.
+     */
+    public User getMainUser(){
+        return (User)models.get(user);
     }
 
     /**Returns the model based on a key.
@@ -64,28 +98,106 @@ public class LocalDatabase {
      *
      * If it fails to send it to the server the system will return false;
      *
-     * @param model The new model.
-     * @return      True if it sucessfully pushed to server.
+     * @param modelList The new model.
+     * @return          True if it sucessfully pushed to server.
      */
-    public void pushModel(ServerModel model){
-
-        models.put(model.getKey(), model);
+    public void pushModel(ServerModel[] modelList){
+        for(ServerModel model: modelList){
+            models.put(model.getKey(), model);
+        }
         if(!GameLoop.ISPUSHING){
             return;
         }
-        PostObject.newInstance().addModel(model, model.getClass().getCanonicalName());
+        PostObject.newInstance().addModel(modelList);
     }
 
-    /**Sets the prime user of this app.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*Server Thread methods*/
+    //------------------------------------------------------------------------//
+    /**Requests a new model of className from the server.
      *
-     * @param username  The username.
-     * @return          True if the login was successful.
+     * @param key
      */
-    public boolean loginUser(String username){
-        user = getUserKeyByName(username);
-        return true;
+    public void requestModelFromServer(long key){
+        RequestObject.newInstance().getModel(key);
+        if(!pulledKeys.contains(key))
+            pulledKeys.add(key);
     }
 
+    /**Updates the server based on the list of updated keys sent from the server.
+     *
+     * @param serverKeys
+     */
+    public void updateFromServerbyList(Long[] serverKeys){
+        for(int i = pullCount; i < serverKeys.length; i ++){
+            if(pulledKeys.contains(serverKeys[i])){
+                continue;
+            }
+            else{
+                requestModelFromServer(serverKeys[i]);
+            }
+        }
+        pullCount = serverKeys.length;
+    }
+
+    /**Call this to update models within this class.
+     *
+     * @param model The updated model.
+     */
+    public void setModelFromServer(ServerModel model){
+        models.put(model.getKey(), model);
+
+        if(pulledKeys.contains(model.getKey())){
+            pulledKeys.remove(model.getKey());
+        }
+    }
+
+    /**Place the newly request server key in here.
+     *
+     * @param key
+     */
+    public void putGeneratedKey(long key){
+        //unassignedKeys.add(key);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*Get models by name.*/
+    //------------------------------------------------------------------------//
+
+    /**Returns the user's key based on a username.
+     *
+     * @param username
+     * @return
+     */
     public long getUserKeyByName(String username){
         if(username.equals("Alice")){
             return 1;
@@ -100,7 +212,11 @@ public class LocalDatabase {
         throw new IndexOutOfBoundsException("Incorrect username.");
     }
 
-
+    /**Gets a hashtag by name.
+     *
+     * @param hashtag
+     * @return
+     */
     public long getHashtagByName(String hashtag){
 //        try{
 //            MHashtag tag = this.getModel(WebServiceClient.getHashtagByName(hashtag));
@@ -113,59 +229,5 @@ public class LocalDatabase {
 
         // FIXME: 2016-04-02
         return 0;
-    }
-
-    /**Returns the owner of the app.
-     *
-     * @return  The user data of the owner.
-     */
-    public User getMainUser(){
-        return (User)models.get(user);
-    }
-
-    /**Requests a new model of className from the server.
-     *
-     * @param key
-     */
-    public void requestModelFromServer(long key){
-        RequestObject.newInstance().getModel(key);
-    }
-
-    /**Returns a pre generated serial key from the server.
-     *
-     * @return
-     */
-    public long generateKey(){
-        long key = user*3000000;
-
-        return key + generator.generateSerial();
-    }
-
-    private void replenishKeys(int num){
-        for(int i = 0; i < num; i++){
-            ServerKeyObject.getInstance(this).getKey();
-        }
-    }
-
-    public void updateFromServerbyList(List<Long> updatedKeys){
-
-    }
-
-
-
-    /**Call this to update models within this class.
-     *
-     * @param model The updated model.
-     */
-    public void setModelFromServer(ServerModel model){
-        models.put(model.getKey(), model);
-    }
-
-    /**Place the newly request server key in here.
-     *
-     * @param key
-     */
-    public void putGeneratedKey(long key){
-//        unassignedKeys.add(key);
     }
 }
