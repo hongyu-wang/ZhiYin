@@ -11,17 +11,15 @@ import tools.AudioTools.AudioManager;
  */
 public class ExecuteMoveSlider implements Executable{
     private Slider slider;
-    private NowPlaying nowPlaying;
 
-    public ExecuteMoveSlider(Slider slider, NowPlaying nowPlaying) {
+    public ExecuteMoveSlider(Slider slider) {
         this.slider = slider;
-        this.nowPlaying = nowPlaying;
     }
 
     @Override
     public void execute() {
-
-        slider.setValue((float)(AudioManager.getTime()/AudioManager.trackLength()*100));
+        if (os == MAC)
+            slider.setValue((float)(AudioManager.getTime()/AudioManager.trackLength()*100));
 
 
 
