@@ -67,9 +67,9 @@ public class WebService{
     @GET
     @Path("/update")
     @Produces("*/*")
-    public List<Long> update(){
+    public Long[] update(){
         MockServer mockServer = ServerInteraction.getServer();
-        return mockServer.getUpdates();
+        return (Long[])mockServer.getUpdates().toArray();
     }
 
     /**
@@ -83,6 +83,7 @@ public class WebService{
         MockServer mockServer = ServerInteraction.getServer();
         ObjectMapper objectMapper = new ObjectMapper();
         List<ServerModel> models = null;
+
 //        ServerModel model = null;
 //        int tag = Integer.parseInt(json.substring(json.length()-4));
 //        String className = Tags.ID_TAGS.getName(tag);
