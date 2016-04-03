@@ -4,6 +4,7 @@ import client.pages.other.Sec1;
 import server.model.media.MAudio;
 import server.model.social.MComment;
 import server.model.social.MPost;
+import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.model.user.UserProfile;
 import server.services.factories.CommentManagerFactory;
@@ -44,13 +45,20 @@ public class ExecuteSendAudioComment implements ExecuteServer {
         Date df = new Date(comment.getTimeStamp());
         String timestamp = sdf.format(df);
 
+
+
+
         sec1.addPost(userProfile.getUsername(), timestamp, null);
 
         sec1.getCurrentComments().add(comment.getKey());
 
         //TODO change it to add music;
 
-        localDatabase.pushModel(comment);
-        localDatabase.pushModel(post);
+        ServerModel[] pushList = {
+                comment,
+                post
+        };
+
+        localDatabase.pushModel(pushList);
     }
 }

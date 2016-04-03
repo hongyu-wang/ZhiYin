@@ -4,6 +4,7 @@ import client.pages.friends.Friends2;
 import server.model.media.MText;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
+import server.model.structureModels.ServerModel;
 import server.services.factories.MessageManagerFactory;
 import server.services.factories.TextManagerFactory;
 
@@ -44,8 +45,13 @@ public class ExecuteSendMessage implements ExecuteServer {
         friend2.getMessageKeys().add(message.getKey());
 
         friend2.addTextMessage(userText, 1);
-        localDatabase.pushModel(text);
-        localDatabase.pushModel(message);
-        localDatabase.pushModel(conversation);
+
+        ServerModel[] pushList = {
+                text,
+                message,
+                conversation
+        };
+
+        localDatabase.pushModel(pushList);
     }
 }

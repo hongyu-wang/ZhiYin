@@ -98,15 +98,17 @@ public class LocalDatabase {
      *
      * If it fails to send it to the server the system will return false;
      *
-     * @param model The new model.
-     * @return      True if it sucessfully pushed to server.
+     * @param modelList The new model.
+     * @return          True if it sucessfully pushed to server.
      */
-    public void pushModel(ServerModel model){
-        models.put(model.getKey(), model);
+    public void pushModel(ServerModel[] modelList){
+        for(ServerModel model: modelList){
+            models.put(model.getKey(), model);
+        }
         if(!GameLoop.ISPUSHING){
             return;
         }
-        PostObject.newInstance().addModel(model, model.getClass().getCanonicalName());
+        PostObject.newInstance().addModel(modelList);
     }
 
 

@@ -62,7 +62,6 @@ public class NowPlaying extends NowPlayingShell {
 
         byte [] bytes = image.getImage();
 
-
         Pixmap px = new Pixmap(bytes, 0, bytes.length);
 
         Texture albumArt = new Texture(px);

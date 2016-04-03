@@ -70,7 +70,9 @@ public class WebService{
     @Produces("application/json")
     public Long[] update(){
         MockServer mockServer = ServerInteraction.getServer();
-        return (Long[])mockServer.getUpdates().toArray();
+        List<Long> list = mockServer.getUpdates();
+
+        return list.toArray(new Long[list.size()]);
     }
 
     /**

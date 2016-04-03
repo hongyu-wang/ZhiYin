@@ -142,18 +142,18 @@ public class ProfileTalker extends Talkers{
 
         @Override
         public void push() {
-            profile = localDatabase.getModel(user.getProfile());
-
-            MImage image = localDatabase.getModel(profile.getImageKey());
-
-            //Set
-            profile.setUsername(name);
-            profile.setDescription(description);
-            image.setImage(this.profileImage);
-
-            //Push
-            localDatabase.pushModel(profile);
-            localDatabase.pushModel(image);
+//            profile = localDatabase.getModel(user.getProfile());
+//
+//            MImage image = localDatabase.getModel(profile.getImageKey());
+//
+//            //Set
+//            profile.setUsername(name);
+//            profile.setDescription(description);
+//            image.setImage(this.profileImage);
+//
+//            //Push
+//            localDatabase.pushModel(profile);
+//            localDatabase.pushModel(image);
         }
 
         @Override

@@ -3,6 +3,7 @@ package client.events.executables.internalChanges.serverInteractions;
 import client.pages.musicDiary.Diary2;
 import server.model.media.MText;
 import server.model.social.MDiaryPost;
+import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.model.user.UserDiaryContent;
 import server.services.factories.MusicDiaryFactory;
@@ -42,8 +43,12 @@ public class ExecuteSendDiaryPost implements ExecuteServer {
 
         UserDiaryManagerFactory.createUserDiaryManager().addDiaryPost(userDiaryContent, diary);
 
-        localDatabase.pushModel(diary);
-        localDatabase.pushModel(userDiaryContent);
+        ServerModel[] pushList = {
+                diary,
+                userDiaryContent
+        };
+
+        localDatabase.pushModel(pushList);
     }
 
 }

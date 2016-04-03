@@ -51,14 +51,14 @@ public class FriendTalker extends Talkers {
     @Override
     public void push() {
 
-        //Set
-        for(User friend: friends){
-            if(!super.getMainUser().getFriendKeys().contains(friend.getKey()))
-                super.getMainUser().getFriendKeys().add(friend.getKey());
-        }
-
-        //Push
-        localDatabase.pushModel(super.getMainUser());
+//        //Set
+//        for(User friend: friends){
+//            if(!super.getMainUser().getFriendKeys().contains(friend.getKey()))
+//                super.getMainUser().getFriendKeys().add(friend.getKey());
+//        }
+//
+//        //Push
+//        localDatabase.pushModel(super.getMainUser());
     }
 
     /**Checks if all of the friends have been successfully pulled.

@@ -3,6 +3,7 @@ package client.events.executables.internalChanges.serverInteractions;
 import client.pages.other.Comment;
 import server.model.social.MComment;
 import server.model.social.MPost;
+import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.model.user.UserProfile;
 import server.services.factories.CommentManagerFactory;
@@ -49,7 +50,11 @@ public class ExecuteSendComment implements ExecuteServer {
         commentPage.reset();
         commentPage.getCurrentComments().add(comment.getKey());
 
-        localDatabase.pushModel(comment);
-        localDatabase.pushModel(post);
+        ServerModel[] pushList = {
+                comment,
+                post
+        };
+
+        localDatabase.pushModel(pushList);
     }
 }
