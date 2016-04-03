@@ -54,17 +54,11 @@ public class MockServer {
      */
     public void setModel(ServerModel model){
         database.setModel(model);
-        database.getUpdatedKeys().add(model.getKey());
     }
 
-    public List<ServerModel> getUpdates(long size){
-        List<Long> updatedKeys = database.getUpdatedKeys();
-        List<ServerModel> rList = Utils.newList();
-        for(Long key : database.getUpdatedKeys().subList((int)size, updatedKeys.size())){
-            rList.add(database.getModel(key));
-        }
-
-        return rList;
+    
+    public List<Long> getUpdates(){
+        return database.getUpdatedKeys();
     }
 
 }
