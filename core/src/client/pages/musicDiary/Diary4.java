@@ -68,10 +68,7 @@ public class Diary4 extends Diary4Shell{
 
     }
 
-    @Override
-    public void reset() {
 
-    }
 
 
     private void populateFromServer(){

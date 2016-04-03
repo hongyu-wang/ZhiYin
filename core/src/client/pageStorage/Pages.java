@@ -56,7 +56,6 @@ public enum Pages {
 
             if (page != null && page != Pages.LOGIN) {
                 try {
-                    System.out.println("name: " + page.name);
                     page.stateReference = (State) ClassReflection.forName("client.pages." + page.name).getDeclaredConstructor().newInstance();
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | ReflectionException e) {
                     e.printStackTrace();

@@ -179,10 +179,7 @@ public class Home extends HomeShell {
 
     }
 
-    @Override
-    public void reset() {
 
-    }
 
 
 

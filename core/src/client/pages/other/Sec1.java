@@ -167,10 +167,6 @@ public class Sec1 extends Sec1Shell {
         posts.row();
     }
 
-    @Override
-    public void reset() {
-
-    }
 
     @Override
     public void dispose() {

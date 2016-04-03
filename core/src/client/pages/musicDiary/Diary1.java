@@ -96,10 +96,6 @@ public class Diary1 extends Diary1Shell {
     }
 
 
-    @Override
-    public void reset() {
-
-    }
 
     @Override
     public void dispose() {
