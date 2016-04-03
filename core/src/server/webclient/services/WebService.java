@@ -82,19 +82,22 @@ public class WebService{
     public Response postServerModel(String json) {
         MockServer mockServer = ServerInteraction.getServer();
         ObjectMapper objectMapper = new ObjectMapper();
-        ServerModel model = null;
-        int tag = Integer.parseInt(json.substring(json.length()-4));
-        String className = Tags.ID_TAGS.getName(tag);
-        json = json.substring(0, json.length()-4);
+        List<ServerModel> models = null;
+//        ServerModel model = null;
+//        int tag = Integer.parseInt(json.substring(json.length()-4));
+//        String className = Tags.ID_TAGS.getName(tag);
+//        json = json.substring(0, json.length()-4);
 
         try {
-            Class name = Class.forName(className);
-            model = (ServerModel)objectMapper.readValue(json, name);
+            //Class name = Class.forName(className);
+            models = objectMapper.readValue(json, List.class);
+            for(ServerModel model : models) {
+                mockServer.setModel(model);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        mockServer.setModel(model);
         return Response.status(Response.Status.OK).build();
 
     }
