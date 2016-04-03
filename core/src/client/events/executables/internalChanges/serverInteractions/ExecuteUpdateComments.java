@@ -2,6 +2,8 @@ package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.other.Comment;
 import client.pages.other.Sec1;
+import client.tools.Constants;
+import server.model.media.MAudio;
 import server.model.social.MComment;
 import server.model.social.MPost;
 import server.model.user.User;
@@ -34,17 +36,14 @@ public class ExecuteUpdateComments extends ExecuteUpdate {
 
         for(long key: commentKeys){
             MComment comment = localDatabase.getModel(key);
+            User user = localDatabase.getModel(comment.getCreator());
+            UserProfile profile = localDatabase.getModel(user.getProfile());
 
-            if(comment.getAudio().size() > 0) {
+            if(comment.getAudio().size() == 0) {
                 if (!commentPage.getCurrentComments().contains(comment.getKey())) {
                     String text = comment.getText();
 
-                    User user = localDatabase.getModel(comment.getCreator());
-                    UserProfile profile = localDatabase.getModel(user.getProfile());
-
-                    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
-                    Date df = new Date(comment.getTimeStamp());
-                    String timestamp = sdf.format(df);
+                    String timestamp = Constants.getCurrentTimestamp(comment.getTimeStamp());
 
                     commentPage.addComment(profile.getUsername(), timestamp, text);
 
@@ -52,8 +51,14 @@ public class ExecuteUpdateComments extends ExecuteUpdate {
                 }
             }
             else{
-                if(sec1.getCurrentComments().contains(comment.getKey())){
+                if(!sec1.getCurrentComments().contains(comment.getKey())){
+                    MAudio audio = localDatabase.getModel(comment.getAudio().get(0));
 
+                    String timestamp = Constants.getCurrentTimestamp(comment.getTimeStamp());
+
+                    sec1.addPost(profile.getUsername(), timestamp, audio);
+
+                    sec1.getCurrentComments().add(key);
                 }
             }
         }
