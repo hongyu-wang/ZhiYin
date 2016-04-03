@@ -45,13 +45,6 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
     }
 
     public void init(String username){
-        if (os == MAC) {
-            AudioCreator.initializeAll();
-        }else{
-            AudioCreator.initializeAlbums();
-        }
-
-
         localDatabase.loginUser(username);
 
         TalkerFactory.getFriendTalker().init();
@@ -123,6 +116,12 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
     @Override
     public void push() {
         List<ServerModel> models = Utils.newList();
+
+        if (os == MAC) {
+            AudioCreator.initializeAll();
+        }else{
+            AudioCreator.initializeAlbums();
+        }
 
         pushProfileImages(models);
         pushDiaryImages(models);
