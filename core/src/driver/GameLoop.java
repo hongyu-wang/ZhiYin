@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import server.model.media.MMusic;
 import tools.AudioTools.AudioCreator;
+import tools.serverTools.databases.LocalDatabaseFactory;
 
 import java.nio.ByteBuffer;
 
@@ -42,24 +43,16 @@ public class GameLoop extends ApplicationAdapter  {
 	@Override
 	public void render () {
 
-
-
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
         spriteBatch.setProjectionMatrix(primary.combined);
-
-
-
 
 		spriteBatch.begin();
 
 		stateManager.draw();
 		stateManager.update(Gdx.graphics.getDeltaTime());
 		spriteBatch.end();
-
-
 	}
 
     @Override

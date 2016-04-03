@@ -66,7 +66,7 @@ public class WebService{
 
     @GET
     @Path("/update")
-    @Produces("*/*")
+    @Produces("application/json")
     public Long[] update(){
         MockServer mockServer = ServerInteraction.getServer();
         return (Long[])mockServer.getUpdates().toArray();

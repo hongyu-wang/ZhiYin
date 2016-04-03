@@ -1,5 +1,8 @@
 package client.tools;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * Created by Hongyu Wang on 4/2/2016.
@@ -16,4 +19,10 @@ public interface Constants {
     boolean MAC = true;
 
     boolean os = WINDOWS;
+
+    static String getCurrentTimestamp(long time){
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
+        Date df = new Date(time);
+        return sdf.format(df);
+    }
 }

@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import tools.utilities.Utils;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * This is the superclass of all States.

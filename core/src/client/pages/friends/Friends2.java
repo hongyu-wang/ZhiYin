@@ -169,9 +169,6 @@ public class Friends2 extends Friends2Shell{
         stage.act(); //This bug tho
 
         messageField.getText();
-        if (counter%10 == 0){
-            this.updatePage.execute();
-        }
         counter ++;
     }
 

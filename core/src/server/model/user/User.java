@@ -39,6 +39,10 @@ public class User extends ServerModel {
      */
     private long contentKey;
     /**
+     * The current key number of the generator.
+     */
+    private long currentKey;
+    /**
      * The keys to the friends.
      */
     private List<Long> friendKeys;
@@ -122,4 +126,12 @@ public class User extends ServerModel {
         this.friendKeys = friendKeys;
     }
     public void setBandKeys(List<Long> bandKeys) { this.bandKeys = bandKeys; }
+
+    public long getCurrentKey() {
+        return currentKey;
+    }
+
+    public void setCurrentKey(long currentKey) {
+        this.currentKey = currentKey;
+    }
 }

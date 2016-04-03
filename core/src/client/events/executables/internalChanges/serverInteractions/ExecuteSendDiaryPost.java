@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-29.
  */
-public class ExecuteSendDiaryPost implements ExecutePush {
+public class ExecuteSendDiaryPost implements ExecuteServer {
     Diary2 diary2;
 
     public ExecuteSendDiaryPost(Diary2 diary2){

@@ -8,13 +8,11 @@ import server.model.media.MAudio;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
 
-import java.util.List;
-
 /**
  *
  * Created by Kevin Zheng on 2016-03-29.
  */
-public class ExecuteSendAudioMessage implements ExecutePush {
+public class ExecuteSendAudioMessage implements ExecuteServer {
     private Friends2 friend2;
 
 

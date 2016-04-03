@@ -30,11 +30,12 @@ public class Sec2 extends Sec2Shell {
         ExecuteToTempState discard = new ExecuteToTempState(sec1);
         ImageButton discardButton = createImageButton("Other/Discard@", discard, 36, 57, 340, 73);
 
-        TestExecutable send = new TestExecutable("send");
+        final TestExecutable send = new TestExecutable("send");
         ImageButton sendButton = createImageButton("Other/Send2@", send, 36 + 340, 57, 339, 73);
         sendButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                sec1.addPost("name", "time", send/*TODO fix*/);
                 new ExecuteToTempState(sec1).execute();
             }
         });

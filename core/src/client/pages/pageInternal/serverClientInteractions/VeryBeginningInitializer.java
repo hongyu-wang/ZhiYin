@@ -331,7 +331,6 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         for(User friend: ft.getAllFriends()){
             pt.init(friend);
             pt.update(0);
-
         }
     }
 }

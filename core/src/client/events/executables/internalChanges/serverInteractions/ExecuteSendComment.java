@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-29.
  */
-public class ExecuteSendComment implements ExecutePush {
+public class ExecuteSendComment implements ExecuteServer {
     private Comment commentPage;
     public ExecuteSendComment(Comment commentPage){
         this.commentPage = commentPage;
