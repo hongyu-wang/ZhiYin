@@ -48,7 +48,12 @@ public class LocalDatabase {
     }
 
     public MServerKey getKeyState(){
-        return (MServerKey) models.get(this.getMainUser().getKeyState());
+        try{
+            return (MServerKey) models.get(this.getMainUser().getKeyState());
+        }
+        catch(NullPointerException e){
+            return null;
+        }
     }
 
     LocalDatabase(){
@@ -116,7 +121,9 @@ public class LocalDatabase {
         if(!GameLoop.ISPUSHING){
             return;
         }
-        modelList.add(this.getKeyState());
+        if(this.getKeyState() != null) {
+            modelList.add(this.getKeyState());
+        }
         PostObject.newInstance().addModel(modelList.toArray(new ServerModel[modelList.size()]));
     }
 
