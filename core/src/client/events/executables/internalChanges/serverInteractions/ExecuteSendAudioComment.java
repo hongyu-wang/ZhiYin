@@ -44,6 +44,9 @@ public class ExecuteSendAudioComment implements ExecuteServer {
         Date df = new Date(comment.getTimeStamp());
         String timestamp = sdf.format(df);
 
+
+
+
         sec1.addPost(userProfile.getUsername(), timestamp, null);
 
         sec1.getCurrentComments().add(comment.getKey());
