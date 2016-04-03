@@ -5,6 +5,7 @@ import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.serverInteractions.ExecuteServer;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.singletons.SkinSingleton;
@@ -42,7 +43,7 @@ Diary2 extends Diary2Shell{
 
         Button postButton = new Button(this);
         postButton.setBounds(750 - 117, 1217, 117, 117);
-        Executable e = new ExecuteSendDiaryPost(this);
+        ExecuteServer e = new ExecuteSendDiaryPost(this);
         postButton.setExecutable(e);
         add(postButton);
 
