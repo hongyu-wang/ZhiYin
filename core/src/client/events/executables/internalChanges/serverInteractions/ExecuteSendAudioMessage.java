@@ -1,7 +1,9 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.friends.Friends2;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import server.model.structureModels.ServerModel;
+import server.model.user.UserConversations;
 import server.services.factories.AudioManagerFactory;
 import server.services.factories.MessageManagerFactory;
 import tools.AudioTools.AudioRecorder;
@@ -18,10 +20,19 @@ import java.util.List;
  */
 public class ExecuteSendAudioMessage implements ExecuteServer {
     private Friends2 friend2;
+    private long conversation;
+    private List<Long> messageKeys;
 
 
     public ExecuteSendAudioMessage(Friends2 friends2){
+        UserConversations userConversations = localDatabase.getModel(localDatabase.getMainUser().getConversations());
+        List<Long> convoList = userConversations.getConvoKeys();
+
         this.friend2 = friends2;
+
+        this.conversation = convoList.get(TalkerFactory.getMessagesTalker().indexByFriend(friend2.getFriendName()));
+
+        this.messageKeys = friend2.getMessageKeys();
     }
 
 
@@ -37,14 +48,8 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
         }
 
 
-        MConversation conversation = localDatabase.getModel(friend2.getConversation());
+        MConversation conversation = localDatabase.getModel(this.conversation);
         /*---------------------------------------------------------------------------*/
-
-
-        if(conversation == null){
-            localDatabase.requestModelFromServer(friend2.getConversation());
-            return;
-        }// FIXME: 2016-04-02
 
         MMessage message = generateMMessage(audio);
 
@@ -53,8 +58,6 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
         friend2.getMessageKeys().add(message.getKey());
         friend2.addAudioMessage(audio, 1);
 
-
-        //------------------Pushing.
         List<ServerModel> pushList = Utils.newList();
 
         pushList.add(audio);

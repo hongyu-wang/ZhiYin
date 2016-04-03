@@ -1,11 +1,13 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.friends.Friends2;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.tools.Constants;
 import server.model.media.MText;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
 import server.model.structureModels.ServerModel;
+import server.model.user.UserConversations;
 import server.services.factories.MessageManagerFactory;
 import server.services.factories.TextManagerFactory;
 import tools.utilities.Utils;
@@ -18,19 +20,22 @@ import java.util.List;
  */
 public class ExecuteSendMessage implements ExecuteServer {
     private Friends2 friend2;
+    private long conversation;
+    private List<Long> messageKeys;
 
     public ExecuteSendMessage(Friends2 friend2){
         this.friend2 = friend2;
+        UserConversations userConversations = localDatabase.getModel(localDatabase.getMainUser().getConversations());
+        List<Long> convoList = userConversations.getConvoKeys();
+
+        this.conversation = convoList.get(TalkerFactory.getMessagesTalker().indexByFriend(friend2.getFriendName()));
+
+        this.messageKeys = friend2.getMessageKeys();
     }
 
     @Override
     public void execute() {
-        MConversation conversation = localDatabase.getModel(friend2.getConversation());
-
-        if(conversation == null){
-            localDatabase.requestModelFromServer(friend2.getConversation());
-            return;
-        }
+        MConversation conversation = localDatabase.getModel(this.conversation);
 
         List<Long> messageKeys = conversation.getMessageList();
         String userText = friend2.getMessage();

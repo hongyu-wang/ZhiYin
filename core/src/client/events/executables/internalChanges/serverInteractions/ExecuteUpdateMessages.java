@@ -6,6 +6,7 @@ import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.Talkers;
 import client.tools.Constants;
+import server.model.user.UserConversations;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import client.stateInterfaces.Executable;
@@ -15,6 +16,7 @@ import server.model.social.MConversation;
 import server.model.social.MMessage;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
+import tools.utilities.Utils;
 
 import java.util.List;
 
@@ -23,21 +25,30 @@ import java.util.List;
  */
 public class ExecuteUpdateMessages extends ExecuteUpdate {
     private Friends2 friend2;
+    private long conversation;
+    private List<Long> messageKeys;
 
     public ExecuteUpdateMessages(Friends2 friend2){
+
+
+        UserConversations userConversations = localDatabase.getModel(localDatabase.getMainUser().getConversations());
+        List<Long> convoList = userConversations.getConvoKeys();
+
         this.friend2 = friend2;
 
-        TalkerFactory.getServerTalker().addExecutable(this);
+        this.conversation = convoList.get(TalkerFactory.getMessagesTalker().indexByFriend(friend2.getFriendName()));
+
+        this.messageKeys = friend2.getMessageKeys();
     }
 
     @Override
     public void execute() {
-        MConversation conversation = localDatabase.getModel(friend2.getConversation());
+        MConversation conversation = localDatabase.getModel(this.conversation);
         MessageBox box;
 
         //New Code
         for(long key : conversation.getMessageList()){
-            if(!friend2.getMessageKeys().contains(key)){
+            if(!messageKeys.contains(key)){
                 MMessage mMessage = localDatabase.<MMessage>getModel(key);
                 long textKey = mMessage.getText();
 
@@ -54,7 +65,7 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
                 }
 
                 friend2.addMessage(box);
-                friend2.getMessageKeys().add(mMessage.getKey());
+                messageKeys.add(mMessage.getKey());
             }
         }
     }

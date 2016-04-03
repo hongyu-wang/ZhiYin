@@ -57,6 +57,7 @@ public class Login extends State {
             vb.init(text);
 
             LocalDatabase.ipAddress = password.getText();
+            vb.push();
             vb.pull();
             checkPull = true;
             for (Actor act : stage.getActors()) {
@@ -113,7 +114,6 @@ public class Login extends State {
     private void pullFromServer(){
         vb.update(0);
         if (vb.isUpdated()) {
-            vb.push();
             Pages.initClass();
             new ExecuteChangePage(Pages.HOME).execute();
 

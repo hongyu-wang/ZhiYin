@@ -26,17 +26,12 @@ import tools.utilities.Utils;
 import java.util.List;
 
 public class Friends2 extends Friends2Shell{
-    //Stuff
-    private long conversation;
-    private List<Long> messageKeys = Utils.<Long>newList();
+    private List<Long> messageKeys;
 
-    public List<Long> getMessageKeys() {
+    public List<Long> getMessageKeys(){
         return messageKeys;
     }
 
-    public long getConversation() {
-        return conversation;
-    }
 
     private ScrollPane scrollpane;
     private TextField messageField;
@@ -46,25 +41,22 @@ public class Friends2 extends Friends2Shell{
     }
 
     private String friendName;
+
+
+    public String getFriendName(){
+        return friendName;
+    }
+
     private Table table;
 
     public Friends2(String friendName){
         this.friendName = friendName;
+        this.messageKeys = Utils.newList();
         init();
 
     }
 
     private void initititititit(){
-        SocialContentTalker sct = TalkerFactory.getSocialContentTalker();
-
-        sct.init();
-        sct.update(0);
-
-        List<MConversation> convoList = sct.getConversations();
-
-        int userKey = TalkerFactory.getMessagesTalker().indexByFriend(friendName);
-
-        conversation = convoList.get(userKey).getKey();
     }
 
     protected void init(){
@@ -92,8 +84,6 @@ public class Friends2 extends Friends2Shell{
         em3.addExecutable(new ExecuteReset(this));
         sendButton.setExecutable(em3);
         add(sendButton);
-
-        initititititit();
     }
 
     private void setUpRecord(){
