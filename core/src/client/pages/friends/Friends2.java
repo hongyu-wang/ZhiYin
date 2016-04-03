@@ -128,7 +128,7 @@ public class Friends2 extends Friends2Shell{
 
 
     public void addMessage(MessageBox box){
-        table.add(box.getStack()).width(480 * StateManager.M).padTop(56 * StateManager.M).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
+        table.add(box.getTable()).width(480 * StateManager.M).padTop(56 * StateManager.M).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
         table.row().expandX();
         scrollpane.layout();
         scrollpane.setScrollPercentY(100);
@@ -177,13 +177,13 @@ public class Friends2 extends Friends2Shell{
 
     public void addAudioMessage(MAudio audio, int userType){
         ExecutePlayMAudio executePlayMAudio = new ExecutePlayMAudio(audio);
-        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio);
+        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio, "timestamp");
 
         this.addMessage(soundBox);
     }
 
     public void addTextMessage(String text, int userType){
-        MessageBox box = new MessageBox(text, userType);
+        MessageBox box = new MessageBox(text, userType, "timestamp");
 
         this.addMessage(box);
     }

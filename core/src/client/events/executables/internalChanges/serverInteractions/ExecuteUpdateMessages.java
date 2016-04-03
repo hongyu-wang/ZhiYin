@@ -3,13 +3,12 @@ package client.events.executables.internalChanges.serverInteractions;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
-import client.stateInterfaces.Executable;
 import server.model.media.MAudio;
 import server.model.media.MText;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class ExecuteUpdateMessages implements ExecuteUpdate {
                             if(updated) {
                                 String text = localDatabase.<MText>getModel(textKey).getText();
 
-                                MessageBox box = new MessageBox(text, getWriter(localDatabase, (int) mMessage.getCreator()));
+                                MessageBox box = new MessageBox(text, getWriter(localDatabase, (int) mMessage.getCreator()), "timestamp");
                                 friend2.addMessage(box);
                                 friend2.getMessageKeys().add(mMessage.getKey());
                             }
@@ -62,7 +61,7 @@ public class ExecuteUpdateMessages implements ExecuteUpdate {
                                 MAudio audio = localDatabase.getModel(mMessage.getAudioKey());
 
                                 ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
-                                MessageBox box = new MessageBox(epma, 1, audio);
+                                MessageBox box = new MessageBox(epma, 1, audio, "timestamp");
 
                                 friend2.getMessageKeys().add(mMessage.getKey());
 
