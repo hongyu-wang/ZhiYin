@@ -29,10 +29,10 @@ public class UpdateObject implements Net.HttpResponseListener {
      * Retrieves a model from the server
      *
      */
-    public void update(long size) {
-        // LibGDX NET CLASS
+    public void update() {
+        //LibGDX NET CLASS
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("http://"+ LocalDatabase.ipAddress+":8081/webservice/update/"+size);
+        httpGet.setUrl("http://"+ LocalDatabase.ipAddress+":8081/webservice/update");
         //httpGet.setHeader("Content-Type", "application/json");
         //httpGet.setHeader("X-Parse-Application-Id", app_id);
         //httpGet.setHeader("X-Parse-REST-API-Key", app_key);
@@ -49,9 +49,7 @@ public class UpdateObject implements Net.HttpResponseListener {
         try {
             String json = httpResponse.getResultAsString();
             List rOjbect = objectMapper.readValue(json, List.class);
-            for(Object r : rOjbect) {
-                localDatabase.setModelFromServer((ServerModel) r);
-            }
+            localDatabase.updateFromServerbyList(rOjbect);
         } catch (Exception e) {
             System.out.println(e);
         }

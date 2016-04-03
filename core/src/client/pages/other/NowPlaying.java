@@ -52,6 +52,7 @@ public class NowPlaying extends NowPlayingShell {
         this(previousState, post);
         this.verbose = verbose;
         iterations = 0;
+
     }
 
     protected void initAlbumArt(){
@@ -68,8 +69,8 @@ public class NowPlaying extends NowPlayingShell {
         px.dispose();
 
         Image picture = new Image(albumArt);
-
-        picture.setBounds((50)*M, (1160 - 655)*M, (655)*M, (655)*M);
+        picture.setColor(1, 1, 1, 0.7F);
+        picture.setBounds((50)*M, (1160 - 655) * M, (655)*M, (655)*M);
 
         stage.addActor(picture);
 
@@ -79,7 +80,7 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     protected void init() {
         super.init();
-//        initAlbumArt();
+        initAlbumArt();
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
@@ -146,7 +147,8 @@ public class NowPlaying extends NowPlayingShell {
         super.update(dt);
         if (iterations%5 == 0)
             executeMoveSlider.execute();
-        updateMusicLabels(AudioManager.getTime());
+        if (os == MAC)
+            updateMusicLabels(AudioManager.getTime());
         iterations ++;
     }
 
@@ -165,7 +167,7 @@ public class NowPlaying extends NowPlayingShell {
                 new ExecuteSetTime(slider).execute();
             }
         });
-        executeMoveSlider = new ExecuteMoveSlider(slider, this);
+        executeMoveSlider = new ExecuteMoveSlider(slider);
 
         stage.addActor(table);
     }

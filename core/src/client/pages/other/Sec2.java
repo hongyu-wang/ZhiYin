@@ -35,7 +35,6 @@ public class Sec2 extends Sec2Shell {
         sendButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                sec1.addPost("name", "time");
                 new ExecuteToTempState(sec1).execute();
             }
         });

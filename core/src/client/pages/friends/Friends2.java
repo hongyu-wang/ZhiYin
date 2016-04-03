@@ -131,7 +131,7 @@ public class Friends2 extends Friends2Shell{
         table.add(box.getStack()).width(480 * StateManager.M).padTop(56 * StateManager.M).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
         table.row().expandX();
         scrollpane.layout();
-        scrollpane.setScrollPercentY(110);
+        scrollpane.setScrollPercentY(100);
         stage.act();
 
         //new ExecuteSendAudioMessage(this, box).execute();

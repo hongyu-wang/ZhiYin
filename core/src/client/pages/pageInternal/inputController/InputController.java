@@ -1,6 +1,7 @@
 package client.pages.pageInternal.inputController;
 
 import client.component.basicComponents.DragButton;
+import client.internalExceptions.NoExecutableException;
 import client.stateInterfaces.Performable;
 import client.stateInterfaces.Pressable;
 import tools.utilities.Utils;
@@ -50,7 +51,7 @@ public class InputController {
 
     }
 
-    public void checkDragged(){
+    public void checkDragged() {
         for (int i = 0; i < pressables.size(); i ++){
             if (pressables.get(i) instanceof DragButton){
                 ((DragButton)pressables.get(i)).drag();
@@ -59,7 +60,7 @@ public class InputController {
         }
     }
 
-    public void checkRelease(){
+    public void checkRelease() {
         for (Performable comp : pressables){
             if (comp instanceof DragButton){
                 ((DragButton)comp).release();
