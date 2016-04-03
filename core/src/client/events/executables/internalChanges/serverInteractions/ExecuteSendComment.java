@@ -50,10 +50,11 @@ public class ExecuteSendComment implements ExecuteServer {
         commentPage.reset();
         commentPage.getCurrentComments().add(comment.getKey());
 
-        ServerModel[] pushList = {
-                comment,
-                post
-        };
+        //------------------Pushing.
+        List<ServerModel> pushList = Utils.newList();
+
+        pushList.add(comment);
+        pushList.add(post);
 
         localDatabase.pushModel(pushList);
     }

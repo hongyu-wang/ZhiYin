@@ -1,6 +1,7 @@
 package tools.serverTools.databases;
 
 import server.model.media.*;
+import server.model.serverKey.MServerKey;
 import server.model.social.MComment;
 import server.model.social.MConversation;
 import server.model.social.MDiaryPost;
@@ -244,6 +245,7 @@ public class VirtualDatabase {
                 new UserUploadedContent();
         UserDiaryContent diary =
                 new UserDiaryContent();
+        MServerKey serverKey = new MServerKey();
 
         //Set Keys.
         user.setKey(
@@ -257,6 +259,8 @@ public class VirtualDatabase {
         content.setKey(
                 generator.generateSerial());
         diary.setKey(
+                generator.generateSerial());
+        serverKey.setKey(
                 generator.generateSerial());
 
         //ArtistProfile Attributes
@@ -282,6 +286,9 @@ public class VirtualDatabase {
         //User artists
         List<Long> bandList = Utils.newList();
 
+        //ServerState
+        serverKey.setCurrentKey(0L);
+
         //Assign to user.
         user.setProfile(profile.getKey());
         user.setConversations(conversations.getKey());
@@ -290,6 +297,7 @@ public class VirtualDatabase {
         user.setDiary(diary.getKey());
         user.setFriendKeys(friendList);
         user.setBandKeys(bandList);
+        user.setKeyState(serverKey.getKey());
 
         //Put into database.
         data.put(user.getKey(), user);
@@ -298,6 +306,7 @@ public class VirtualDatabase {
         data.put(log.getKey(), log);
         data.put(content.getKey(), content);
         data.put(diary.getKey(), diary);
+        data.put(serverKey.getKey(), serverKey);
     }
 
     private MHashtag generateTestHashtags(String hashtag){

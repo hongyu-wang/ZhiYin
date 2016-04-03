@@ -101,8 +101,6 @@ public class Diary1 extends Diary1Shell {
 
     }
 
-
-
     @Override
     public void dispose() {
 
@@ -130,22 +128,9 @@ public class Diary1 extends Diary1Shell {
         LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
 
-        boolean isUpdated = true;
-
         for(long key: diaryContent.getDiaryKeys()){
             if(!currentDiaries.contains(key)) {
-                if(localDatabase.getModel(key) == null){
-                    localDatabase.requestModelFromServer(key);
-                    isUpdated = false;
-                }
                 MDiaryPost post = localDatabase.getModel(key);
-                if(localDatabase.getModel(post.getText())== null){
-                    localDatabase.requestModelFromServer(post.getText());
-                    isUpdated = false;
-                }
-
-                if(!isUpdated)
-                    continue;
                 UserProfile profile = localDatabase.getModel(user.getProfile());
 
                 String username = profile.getUsername();

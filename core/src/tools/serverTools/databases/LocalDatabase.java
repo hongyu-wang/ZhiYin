@@ -2,6 +2,7 @@ package tools.serverTools.databases;
 
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import driver.GameLoop;
+import server.model.serverKey.MServerKey;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.webservices.PostObject;
@@ -37,10 +38,23 @@ public class LocalDatabase {
      */
     public long generateKey(){
         long key = user*3000000;
+        MServerKey keyState = this.getKeyState();
+        if(generator == null){
+            generator = SerialGenerator.getHGenerator(keyState.getCurrentKey());
+        }
 
+        keyState.setCurrentKey(keyState.getCurrentKey() + 1);
         return key + generator.generateSerial();
     }
 
+    public MServerKey getKeyState(){
+        try {
+            return (MServerKey) models.get(this.getMainUser().getKeyState());
+        }
+        catch(NullPointerException e){
+            return null;
+        }
+    }
 
     LocalDatabase(){
         pullCount = 0;
@@ -49,7 +63,6 @@ public class LocalDatabase {
         username_key = Utils.newMap();
         pulledKeys = Utils.newList();
 //        unassignedKeys = new ArrayList<Long>();
-        generator = SerialGenerator.getGenerator();
     }
 
     public void initServerTalker(){
@@ -101,14 +114,17 @@ public class LocalDatabase {
      * @param modelList The new model.
      * @return          True if it sucessfully pushed to server.
      */
-    public void pushModel(ServerModel[] modelList){
+    public void pushModel(List<ServerModel> modelList){
         for(ServerModel model: modelList){
             models.put(model.getKey(), model);
         }
         if(!GameLoop.ISPUSHING){
             return;
         }
-        PostObject.newInstance().addModel(modelList);
+        if(this.getKeyState() != null) {
+            modelList.add(this.getKeyState());
+        }
+        PostObject.newInstance().addModel(modelList.toArray(new ServerModel[modelList.size()]));
     }
 
 

@@ -9,6 +9,7 @@ import server.model.user.UserDiaryContent;
 import server.services.factories.MusicDiaryFactory;
 import server.services.factories.TextManagerFactory;
 import server.services.factories.UserDiaryManagerFactory;
+import tools.utilities.Utils;
 
 import java.util.List;
 
@@ -32,11 +33,12 @@ public class ExecuteSendDiaryPost implements ExecuteServer {
 
         userDiaryContent.getDiaryKeys().add(diary.getKey());
 
-        ServerModel[] pushList = {
-                diary,
-                diaryBody,
-                userDiaryContent
-        };
+        //------------------Pushing.
+        List<ServerModel> pushList = Utils.newList();
+
+        pushList.add(diary);
+        pushList.add(diaryBody);
+        pushList.add(userDiaryContent);
 
         localDatabase.pushModel(pushList);
     }

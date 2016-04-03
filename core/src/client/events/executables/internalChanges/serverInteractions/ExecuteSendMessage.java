@@ -8,7 +8,9 @@ import server.model.social.MMessage;
 import server.model.structureModels.ServerModel;
 import server.services.factories.MessageManagerFactory;
 import server.services.factories.TextManagerFactory;
+import tools.utilities.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,11 +41,12 @@ public class ExecuteSendMessage implements ExecuteServer {
         friend2.getMessageKeys().add(message.getKey());
         friend2.addTextMessage(userText, 1, Constants.getCurrentTimestamp(message.getTimeStamp()));
 
-        ServerModel[] pushList = {
-                text,
-                message,
-                conversation
-        };
+        //------------------Pushing.
+        List<ServerModel> pushList = Utils.newList();
+
+        pushList.add(text);
+        pushList.add(message);
+        pushList.add(conversation);
 
         localDatabase.pushModel(pushList);
     }

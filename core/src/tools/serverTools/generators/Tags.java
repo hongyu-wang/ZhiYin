@@ -1,6 +1,7 @@
 package tools.serverTools.generators;
 
 import server.model.media.*;
+import server.model.serverKey.MServerKey;
 import server.model.social.*;
 import server.model.soundCloud.MBand;
 import server.model.soundCloud.MMusicAlbum;
@@ -56,6 +57,7 @@ public enum Tags {
                 MGroup.class.getName(),
                 MMessage.class.getName(),
                 MPost.class.getName(),
+                MServerKey.class.getName()
         };
 
         Map<Integer, String> tag = new HashMap<>();

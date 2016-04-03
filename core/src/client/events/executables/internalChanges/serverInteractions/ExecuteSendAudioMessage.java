@@ -8,6 +8,9 @@ import tools.AudioTools.AudioRecorder;
 import server.model.media.MAudio;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
+import tools.utilities.Utils;
+
+import java.util.List;
 
 /**
  *
@@ -50,11 +53,13 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
         friend2.getMessageKeys().add(message.getKey());
         friend2.addAudioMessage(audio, 1);
 
-        ServerModel[] pushList = {
-                audio,
-                message,
-                conversation
-        };
+
+        //------------------Pushing.
+        List<ServerModel> pushList = Utils.newList();
+
+        pushList.add(audio);
+        pushList.add(message);
+        pushList.add(conversation);
 
         localDatabase.pushModel(pushList);
     }

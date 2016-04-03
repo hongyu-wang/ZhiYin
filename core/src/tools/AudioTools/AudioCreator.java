@@ -117,7 +117,7 @@ public final class AudioCreator {
     }
 
     private static void pushList(){
-        localDatabase.pushModel(models.toArray(new ServerModel[models.size()]));
+        localDatabase.pushModel(models);
         models.clear();
     }
 

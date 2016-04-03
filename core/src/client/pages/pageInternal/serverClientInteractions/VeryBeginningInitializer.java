@@ -112,8 +112,10 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
             localDatabase.requestModelFromServer(key++);
         }
 
-        //TODO LMAO
-//        localDatabase.requestModelFromServer(3000001);
+        //ServerState
+        for(int i = 0; i < 3 ; i++){
+            localDatabase.requestModelFromServer(key++);
+        }
 
         totalOriginalModels = key;
     }
@@ -127,7 +129,7 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         pushArtistImages(models);
         pushMBands(models);
 
-        localDatabase.pushModel(models.toArray(new ServerModel[models.size()]));
+        localDatabase.pushModel(models);
 
         GameLoop.ISPUSHING = true;
     }

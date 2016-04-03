@@ -54,10 +54,11 @@ public class ExecuteSendAudioComment implements ExecuteServer {
 
         //TODO change it to add music;
 
-        ServerModel[] pushList = {
-                comment,
-                post
-        };
+        //------------------Pushing.
+        List<ServerModel> pushList = Utils.newList();
+
+        pushList.add(comment);
+        pushList.add(post);
 
         localDatabase.pushModel(pushList);
     }
