@@ -89,7 +89,7 @@ public class MyProfile extends MyProfileShell {
     }
 
     // FIXME: 2016-04-03 Point to diary post.
-    public void addPost(MDiaryPost diaryPost){
+    public void addPost(final MDiaryPost diaryPost){
         Stack s = new Stack();
 
         Table t = new Table();
@@ -122,8 +122,8 @@ public class MyProfile extends MyProfileShell {
     }
 
     //TODO FIXME: 2016-04-03 Uncomment.
-    public void follow(ArtistProfile profile){
-        ImageButton artistButton = new ImageButton(profile.getImage().getDrawable());
+    public void follow(final ArtistProfile profile){
+        final ImageButton artistButton = new ImageButton(profile.getImage().getDrawable());
         artistButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -131,7 +131,7 @@ public class MyProfile extends MyProfileShell {
             }
         });
 
-        ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
+        final ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
         artistButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -144,20 +144,13 @@ public class MyProfile extends MyProfileShell {
         following.add(artistButton).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
     }
 
-    @Override
-    public void reset() {
-
-    }
 
     @Override
     public void dispose() {
 
     }
 
-    @Override
-    public void update(float dt) {
-        stage.act();
-    }
+
 
 //    private void pullData(){
 //        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();

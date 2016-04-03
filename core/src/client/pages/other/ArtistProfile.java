@@ -123,10 +123,7 @@ public class ArtistProfile extends ArtistProfileShell {
         return artistName;
     }
 
-    @Override
-    public void reset() {
 
-    }
 
     public void update(float dt){
         stage.act();

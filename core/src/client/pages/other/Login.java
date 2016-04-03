@@ -123,10 +123,7 @@ public class Login extends State {
         }
     }
 
-    @Override
-    public void reset() {
 
-    }
 
     @Override
     public void dispose() {

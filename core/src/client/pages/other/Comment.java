@@ -139,6 +139,7 @@ public class Comment extends CommentShell {
 
     @Override
     public void reset() {
+        super.reset();
         messageField.remove();
         addMessageField();
     }

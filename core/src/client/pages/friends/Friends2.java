@@ -114,14 +114,13 @@ public class Friends2 extends Friends2Shell{
         table.row().expandX();
         scrollpane.layout();
         scrollpane.setScrollPercentY(100);
-        stage.act();
 
         //new ExecuteSendAudioMessage(this, box).execute();
     }
 
     @Override
     public void reset() {
-
+        super.reset();
         messageField.remove();
         messageField = new WorkingTextArea("Message...", SkinSingleton.getInstance());
         messageField.setPosition(174 * M, 31 * M);
@@ -144,14 +143,6 @@ public class Friends2 extends Friends2Shell{
         stage.addActor(messageField);
     }
 
-    @Override
-    public void update(float fy){
-        super.update(fy);
-
-        stage.act(); //This bug tho
-
-        messageField.getText();
-    }
 
     public void addAudioMessage(MAudio audio, int userType){
         ExecutePlayMAudio executePlayMAudio = new ExecutePlayMAudio(audio);

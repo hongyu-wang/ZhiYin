@@ -26,8 +26,5 @@ public abstract class MyProfileShell extends State {
 
     }
 
-    @Override
-    public void update(float dt) {
 
-    }
 }

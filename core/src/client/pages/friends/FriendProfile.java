@@ -128,10 +128,6 @@ public class FriendProfile extends FriendProfileShell {
         following.add(image).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
     }
 
-    @Override
-    public void reset() {
-
-    }
 
 
 

@@ -37,20 +37,11 @@ public class Friends1 extends Friends1Shell{
         table.row();
     }
 
-    @Override
-    public void reset() {
-
-    }
 
 
 
     @Override
     public void dispose() {
-
-    }
-
-    @Override
-    public void update(float dt) {
 
     }
 

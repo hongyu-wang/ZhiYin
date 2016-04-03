@@ -11,9 +11,11 @@ import client.singletons.StateManager;
 import client.stateInterfaces.*;
 import client.tools.Constants;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -30,11 +32,14 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
     protected Stage stage;
     private InputController inputController;
-
+    private boolean beenReset;
+    private Action transitionAction;
 
     @Override
     public void update(float dt) {
-        stage.act();
+
+        stage.act(dt);
+        beenReset = true;
     }
 
 
@@ -52,7 +57,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         components = Utils.newList();
         inputController = new InputController();
         stage = new Stage();
+        stage.addAction(transitionAction = Actions.sequence(Actions.alpha(0), Actions.fadeIn(1)));
 
+        beenReset = false;
     }
 
     /**
@@ -155,11 +162,13 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * This method will draw everything.
      */
     public void draw(){
-        if (stage.getActors().size != 0) {
-            stage.draw();
-        }
-        for (Actor actor : components){
-            actor.draw(MainBatch.getInstance(), 1);
+        if (beenReset) {
+            if (stage.getActors().size != 0) {
+                stage.draw();
+            }
+            for (Actor actor : components) {
+                actor.draw(MainBatch.getInstance(), 1);
+            }
         }
     }
 
@@ -174,7 +183,10 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         }
     }
 
-    public abstract void reset();
+    public void reset(){
+        transitionAction.restart();
+        beenReset = false;
+    }
 
 
     public InputController getInputController(){
@@ -187,6 +199,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         return stage;
     }
 
+    public String toString(){
+        return this.getClass().getName();
+    }
 
 
 }

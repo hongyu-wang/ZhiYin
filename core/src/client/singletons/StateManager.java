@@ -13,7 +13,7 @@ import client.tools.Constants;
  * Created by Hongyu Wang on 3/7/2016.
  */
 public class StateManager implements Disposable, Updatable, Drawable, Constants {
-
+    private boolean transition = false;
 
 
     /**
@@ -59,25 +59,25 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
      * @param page the page within the Pages enum
      */
     public void changeState(Pages page){
-        //TODO remove this.
-        System.out.println(page);
-        currentState = page.getStateReference();
-        currentState.reset();
-        InputListener.setListener(currentState);
+        toTemporaryState(page.getStateReference());
     }
 
 
     public void toTemporaryState(State state){
+        transition = true;
+        System.out.println(state); //TODO Remove this print statement
         currentState = state;
         currentState.reset();
         InputListener.setListener(state);
+        transition = false;
     }
 
 
 
     @Override
     public void update(float dt) {
-        currentState.update(dt);
+        if (!transition)
+            currentState.update(dt);
 
         TalkerFactory.getServerTalker().update(dt);
     }
