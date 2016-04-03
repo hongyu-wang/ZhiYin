@@ -7,6 +7,7 @@ import server.model.media.MAudio;
 import tools.AudioTools.AudioPlayer;
 
 /**
+ *
  * Created by Hongyu Wang on 3/28/2016.
  */
 public class ExecutePlayMAudio implements Executable{
@@ -23,24 +24,22 @@ public class ExecutePlayMAudio implements Executable{
 
     @Override
     public void execute() {
-        AudioPlayer audioPlayer = AudioPlayer.getInstance();
-        System.out.println('b');
-        if (audioPlayer.getCurrentAudio() == mAudio){
-            System.out.println('a');
-            if (audioPlayer.isPlaying())
-                audioPlayer.pause();
-            else {
+        if (os == MAC) {
+            AudioPlayer audioPlayer = AudioPlayer.getInstance();
+            if (audioPlayer.getCurrentAudio() == mAudio) {
+                if (audioPlayer.isPlaying())
+                    audioPlayer.pause();
+                else {
+                    audioPlayer.prepareToPlay();
+                    audioPlayer.play();
+                }
+
+
+            } else {
+                audioPlayer.setSong(mAudio);
                 audioPlayer.prepareToPlay();
                 audioPlayer.play();
             }
-
-
-        } else{
-            audioPlayer.setSong(mAudio);
-            System.out.println("song set");
-            audioPlayer.prepareToPlay();
-            System.out.println("prepared");
-            audioPlayer.play();
         }
 
 
