@@ -55,9 +55,6 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
 
                 friend2.addMessage(box);
                 friend2.getMessageKeys().add(mMessage.getKey());
-
-                friend2.getMessageKeys().add(mMessage.getKey());
-                friend2.addMessage(box);
             }
         }
     }

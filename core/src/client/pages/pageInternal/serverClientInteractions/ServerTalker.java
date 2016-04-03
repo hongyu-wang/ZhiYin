@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ServerTalker extends Talkers {
     private List<Long> pulledKeys;
-    private int waitCounter = 0;
+    private int waitCounter = 1;
     private List<ExecuteUpdate> executables;
 
     @Deprecated

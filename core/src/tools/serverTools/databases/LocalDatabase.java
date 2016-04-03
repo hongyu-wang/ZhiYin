@@ -136,7 +136,8 @@ public class LocalDatabase {
      */
     public void requestModelFromServer(long key){
         RequestObject.newInstance().getModel(key);
-        pulledKeys.add(key);
+        if(!pulledKeys.contains(key))
+            pulledKeys.add(key);
     }
 
     /**Updates the server based on the list of updated keys sent from the server.

@@ -49,7 +49,7 @@ public class PostObject implements Net.HttpResponseListener {
 
         try {
             for (int i = 0; i < model.length; i++) {
-                postList[i] = objectMapper.writeValueAsString(model)+Tags.ID_TAGS.parseTag(model.getClass().getCanonicalName());
+                postList[i] = objectMapper.writeValueAsString(model[i])+Tags.ID_TAGS.parseTag(model[i].getClass().getCanonicalName());
             }
             postString = objectMapper.writeValueAsString(postList);
         }catch(Exception e){

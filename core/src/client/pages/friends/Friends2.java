@@ -179,8 +179,8 @@ public class Friends2 extends Friends2Shell{
         this.addMessage(soundBox);
     }
 
-    public void addTextMessage(String text, int userType){
-        MessageBox box = new MessageBox(text, userType, "timestamp");
+    public void addTextMessage(String text, int userType, String timestamp){
+        MessageBox box = new MessageBox(text, userType, timestamp);
 
         this.addMessage(box);
     }
