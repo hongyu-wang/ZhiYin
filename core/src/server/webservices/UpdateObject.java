@@ -29,10 +29,10 @@ public class UpdateObject implements Net.HttpResponseListener {
      * Retrieves a model from the server
      *
      */
-    public void update(Long[] alreadyUpdated) {
+    public void update(long size) {
         // LibGDX NET CLASS
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("http://"+ LocalDatabase.ipAddress+":8081/webservice/update/"+alreadyUpdated);
+        httpGet.setUrl("http://"+ LocalDatabase.ipAddress+":8081/webservice/update/"+size);
         //httpGet.setHeader("Content-Type", "application/json");
         //httpGet.setHeader("X-Parse-Application-Id", app_id);
         //httpGet.setHeader("X-Parse-REST-API-Key", app_key);
