@@ -26,19 +26,21 @@ public class TagParser {
 
     /**
      * This is a test main.
-     * @param args  Fuck.
+     * @param args  Main args man.
      */
     public static void main (String args []){
         String input = "";
         Scanner in = new Scanner(System.in);
-
+        String regex = "";
         while (!input.equals("exit")){
             input = in.nextLine();
+            regex = in.nextLine();
+            Pattern checkRegex = Pattern.compile(regex);
+            Matcher regexMatcher = checkRegex.matcher(input);
 
-            for (TagParser tag : checkForTag(input)){
-                System.out.println(tag);
+            while (regexMatcher.find()){
+                System.out.println(regexMatcher.group());
             }
-
 
         }
     }

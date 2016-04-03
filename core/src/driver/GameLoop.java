@@ -4,6 +4,7 @@ import client.pageStorage.Pages;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.MainBatch;
+import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import client.tools.Constants;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -11,6 +12,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+
 import server.model.media.MMusic;
 import tools.AudioTools.AudioCreator;
 import tools.serverTools.databases.LocalDatabaseFactory;
@@ -53,6 +57,7 @@ public class GameLoop extends ApplicationAdapter  {
 		stateManager.draw();
 		stateManager.update(Gdx.graphics.getDeltaTime());
 		spriteBatch.end();
+
 	}
 
     @Override

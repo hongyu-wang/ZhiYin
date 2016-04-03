@@ -2,8 +2,11 @@ package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
+import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.pageStorage.Pages;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
@@ -41,6 +44,7 @@ Diary2 extends Diary2Shell{
         postButton.setBounds(750 - 117, 1217, 117, 117);
         Executable e = new ExecuteSendDiaryPost(this);
         postButton.setExecutable(e);
+        add(postButton);
 
 
         Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
@@ -53,6 +57,9 @@ Diary2 extends Diary2Shell{
 
         // TODO make a new Diary4 using title, body, audio
         //em2.addExecutable(new ExecuteToTempState(new Diary4()));
+
+
+
 
         add(dragButton);
 

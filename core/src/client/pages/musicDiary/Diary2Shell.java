@@ -1,6 +1,7 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
@@ -62,10 +63,7 @@ public abstract class Diary2Shell extends State {
 //        discardButton.setExecutable(new ExecuteChangePage(Pages.DIARY1));
 //        add(discardButton);
 //
-//        Button postButton = new Button(this);
-//        postButton.setBounds(375 + 1, 0, 375, 117);
-//        postButton.setExecutable(new TestExecutable("post"));
-//        add(postButton);
+
     }
 
     @Override
