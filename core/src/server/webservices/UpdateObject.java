@@ -16,7 +16,7 @@ import java.util.List;
  * A singleton used to request models from the server
  */
 public class UpdateObject implements Net.HttpResponseListener {
-    private LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+    private LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
     private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
 
