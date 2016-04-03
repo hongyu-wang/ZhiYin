@@ -9,6 +9,7 @@ import server.webservices.ServerKeyObject;
 import tools.serverTools.generators.SerialGenerator;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**A storage object of all model types the user client will need.
@@ -146,6 +147,9 @@ public class LocalDatabase {
         }
     }
 
+    public void updateFromServerbyList(List<Long> updatedKeys){
+
+    }
 
 
 
