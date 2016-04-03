@@ -48,7 +48,7 @@ public class UpdateObject implements Net.HttpResponseListener {
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
         try {
             String json = httpResponse.getResultAsString();
-            List rOjbect = objectMapper.readValue(json, List.class);
+            Long[] rOjbect = objectMapper.readValue(json, Long[].class);
             localDatabase.updateFromServerbyList(rOjbect);
         } catch (Exception e) {
             System.out.println(e);
