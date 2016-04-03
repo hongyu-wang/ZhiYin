@@ -1,6 +1,7 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.friends.Friends2;
+import server.services.factories.AudioManagerFactory;
 import server.services.factories.MessageManagerFactory;
 import tools.AudioTools.AudioRecorder;
 import server.model.media.MAudio;
@@ -22,9 +23,18 @@ public class ExecuteSendAudioMessage implements ExecutePush {
     }
 
 
+
+
     @Override
     public void execute() {
-        MAudio audio = AudioRecorder.getInstance().stopRecording(); //TODO This is the MAudio that you want
+        MAudio audio;
+        if (os == MAC)
+            audio = AudioRecorder.getInstance().stopRecording(); //TODO This is the MAudio that you want
+        else{
+            audio = AudioManagerFactory.createAudioManager().createMockAudio();
+        }
+
+
         MConversation conversation = localDatabase.getModel(friend2.getConversation());
         /*---------------------------------------------------------------------------*/
 

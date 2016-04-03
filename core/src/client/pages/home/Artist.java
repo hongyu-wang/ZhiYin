@@ -58,7 +58,7 @@ public class Artist extends ArtistShell {
 
         LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
 
-        MImage profileImage = localDatabase.getModel(/*band.getBandImage()*/ 101L);
+        MImage profileImage = localDatabase.getModel(band.getBandImage());
 
         Image profilePic = ImageManagerFactory.createImageManager().mImageToImage(profileImage);
 
