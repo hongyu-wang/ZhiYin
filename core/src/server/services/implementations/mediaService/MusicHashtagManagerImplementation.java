@@ -11,7 +11,6 @@ public class MusicHashtagManagerImplementation implements MusicHashtagManager {
     public long requestAuthenticationKey(String hashtagName) {
         long hashtagKey = 0;
         return hashtagKey;
-        //TODO Request from server.
     }
 
 //    @Override
@@ -23,23 +22,21 @@ public class MusicHashtagManagerImplementation implements MusicHashtagManager {
 //        hashtag.setMusicKeys(keys);
 //
 //        return hashtag;
-//        //TODO Request from server.
 //    }
 
     @Override
     public void pushHashTag(MHashtag hashtag) {
-        //TODO Push to server.
+
     }
 
     @Override
     public MHashtag createNewHashTag(String hashtagName) {
         MHashtag hashtag = new MHashtag();
 
-        long hashtagKey = 0;
-        hashtag.setKey(hashtagKey);
-        //TODO Generate key.
-
-        hashtag.setHashtag(hashtagName);
+//        long hashtagKey = 0;
+//        hashtag.setKey(hashtagKey);
+//
+//        hashtag.setHashtag(hashtagName);
 
         return hashtag;
     }

@@ -116,7 +116,7 @@ public class Diary1 extends Diary1Shell {
     }
 
     private void getPostsFromServer(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         User user1 = localDatabase.getModel(1);
         User user2 = localDatabase.getModel(2);
         User user3 = localDatabase.getModel(3);
@@ -127,7 +127,7 @@ public class Diary1 extends Diary1Shell {
     }
 
     private void updateFromServer(User user){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
 
         boolean isUpdated = true;

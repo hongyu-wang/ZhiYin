@@ -14,7 +14,7 @@ import tools.serverTools.generators.Tags;
  * A singleton used to request models from the server
  */
 public class RequestObject implements Net.HttpResponseListener {
-    private LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+    private LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
     private JsonReader reader = new JsonReader();
     private ObjectMapper objectMapper = new ObjectMapper();
     private Object rOjbect;

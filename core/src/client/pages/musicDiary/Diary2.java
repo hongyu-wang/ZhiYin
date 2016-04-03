@@ -2,8 +2,7 @@ package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
-import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.conversation.ExecuteSendDiaryPost;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
@@ -13,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import server.model.media.MAudio;
-
-import static client.singletons.StateManager.M;
 
 /**
  * This is the second music diary page as given in the

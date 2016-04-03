@@ -29,8 +29,18 @@ import java.util.List;
  */
 public class Sec1 extends Sec1Shell {
     private MPost thisPost;
-    private ImageButton holdToRecordButton;
+
+    public List<Long> getCurrentComments() {
+        return currentComments;
+    }
+
     private List<Long> currentComments;
+
+    public MPost getThisPost(){
+        return thisPost;
+    }
+
+    private ImageButton holdToRecordButton;
 
     private State previousState;
 
@@ -58,7 +68,7 @@ public class Sec1 extends Sec1Shell {
         this.thisPost = post;
         currentComments = Utils.<Long>newList();
         this.title = post.getTitle();
-        MText tempText = LocalDatabaseFactory.createModelStorage().getModel(post.getText());
+        MText tempText = LocalDatabaseFactory.createLocalDatabase().getModel(post.getText());
         this.subtitle = tempText.getText();
         init();
     }
@@ -148,7 +158,7 @@ public class Sec1 extends Sec1Shell {
     }
 
     private void pullCommentsFromServer(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         java.util.List<Long> commentKeys = thisPost.getComments();
 
         boolean isUpdated = true;

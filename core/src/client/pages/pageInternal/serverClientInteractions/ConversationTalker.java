@@ -184,7 +184,7 @@ public class ConversationTalker extends Talkers {
         public void newMessage(String userText){
             MText text = TextManagerFactory.createTextManager().createText(userText, 0);
 
-            MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), localDatabase.getMainUser().getKey());
+            MMessage message = MessageManagerFactory.createMessageManager().createMessage(text.getKey(), System.currentTimeMillis(), localDatabase.getMainUser().getKey(), -1L);
 
             MessageHelper messageHelper = new MessageHelper();
 

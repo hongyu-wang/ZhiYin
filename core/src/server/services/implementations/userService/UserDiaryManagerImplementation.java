@@ -17,13 +17,11 @@ public class UserDiaryManagerImplementation implements UserDiaryManager {
 //        diary.setDiaryKeys(keys);
 //
 //        return diary;
-//        //TODO request from server
 //    }
 
     @Override
     public UserDiaryContent addDiaryPost(UserDiaryContent diary, MDiaryPost diaryPost) {
         diary.getDiaryKeys().add(diaryPost.getKey());
         return diary;
-        //TODO request change to server
     }
 }

@@ -1,8 +1,6 @@
 package client.events.executables.internalChanges.updatePageExecutables;
 
 import client.pageStorage.Pages;
-import client.pages.State;
-import client.pages.other.TransitionState;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 

@@ -31,7 +31,7 @@ public class WebServiceClient {
         String url = serverIP + "webservice/putServerModel/{param}";
 
 
-    }//TODO implement
+    }
 
     public static long getUserByName(String username) throws WebRequestException{
         String url = serverIP + "userservice/getUserByName/{param}";
@@ -39,7 +39,7 @@ public class WebServiceClient {
         long key = 0;
 
         return key;
-    }//TODO implement
+    }
 
     public static long getHashtagByName(String hashtag) throws WebRequestException{
         String url = serverIP + "hashtagservice/getHashtagByName/{param}";
@@ -47,7 +47,7 @@ public class WebServiceClient {
         long key = 0;
 
         return key;
-    }//TODO implement
+    }
 
     public static long getSerial() throws WebRequestException{
         String url = serverIP + "webservice/getSerial/";
@@ -55,7 +55,7 @@ public class WebServiceClient {
         long key = 0;
 
         return key;
-    }//TODO implement
+    }
 
     public static void main(String args[]) throws Exception {
         getServerModel(1);

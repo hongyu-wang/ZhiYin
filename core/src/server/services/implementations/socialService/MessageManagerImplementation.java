@@ -18,10 +18,10 @@ public class MessageManagerImplementation implements MessageManager {
      * @return a message containing the inputed data
      */
     @Override
-    public MMessage createMessage(long text, long timeStamp, long creator) {
+    public MMessage createMessage(long text, long timeStamp, long creator, long audio) {
         MMessage message = new MMessage();
-        message.setKey(LocalDatabaseFactory.createModelStorage().generateKey());
         message.setCreator(creator);
+        message.setAudioKey(audio);
         message.setText(text);
         message.setTimeStamp(timeStamp);
         message.setSeenBy(Utils.<Long>newList());
@@ -36,7 +36,6 @@ public class MessageManagerImplementation implements MessageManager {
 //     */
 //    @Override
 //    public MMessage getMessage(long key) {
-//        //TODO Implement this stuff
 //        return null;
 //    }
 

@@ -23,7 +23,7 @@ public class ExecuteSetMusic implements Executable {
      * @param m the relevant MMusic from the server.
      */
     public ExecuteSetMusic(MMusic m) {
-        localDatabase = LocalDatabaseFactory.createModelStorage();
+        localDatabase = LocalDatabaseFactory.createLocalDatabase();
         mMusic = m;
         //audioFile = localDatabase.getModel(mMusic.getMusicKey());
         audioFile = AudioCreator.keyToMAudio.get(m.getMusicKey());

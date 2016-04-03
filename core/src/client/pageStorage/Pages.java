@@ -82,4 +82,5 @@ public enum Pages {
     public String toString(){
         return name;
     }
+
 }

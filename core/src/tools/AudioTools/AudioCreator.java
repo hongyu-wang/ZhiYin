@@ -24,10 +24,10 @@ import java.util.*;
  * A class that gives the capability to create an MAudio object from an audio file.
  *
  */
-public final class AudioCreator implements Constants {
+public final class AudioCreator {
 
 
-    private static LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+    private static LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
 
     private static NSFileManager fm;
 
@@ -43,31 +43,8 @@ public final class AudioCreator implements Constants {
 
     public static TreeMap<Long, MAudio> keyToMAudio = new TreeMap<Long,MAudio>();
 
-    public static void initializeAll() {
-        initializeAlbums();
-        if (os == WINDOWS)
-            initializeAllWindows();
-        else
-            initializeAllMac();
-    }
-
-    public static void initializeAllWindows(){
-        File path = new File("../MusicAssets");
-
-        File [] files = path.listFiles();
-        assert files != null;
-        for (File file : files) {
-            if (file.isFile()) {
-
-            }
-        }
 
 
-        songNameToMMusic = new TreeMap<>();
-        artistToMMusic = new TreeMap<>();
-
-
-    }
 
     public static void initializeAlbums(){
         albumToKey = Utils.newMap();
@@ -94,11 +71,10 @@ public final class AudioCreator implements Constants {
     }
 
 
-    public static void initializeAllMac(){
+    public static void initializeAll(){
         fm = new NSFileManager();
 
-
-
+        initializeAlbums();
         //Top Singles, Tagged
         songNameToMMusic = new TreeMap<String,MMusic>();
         artistToMMusic = new TreeMap<String, List<MMusic>>();
@@ -173,7 +149,6 @@ public final class AudioCreator implements Constants {
 
     public static MSnapShot createSnapShot(long voice, long song,int start, int end){
         MSnapShot ss = new MSnapShot();
-        ss.setKey(localDatabase.generateKey());
         ss.setMessage(voice);
         ss.setSong(song);
         ss.setStartTime(start);

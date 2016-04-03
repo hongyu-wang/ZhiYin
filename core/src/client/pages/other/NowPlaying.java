@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import driver.GameLoop;
 import server.model.media.MImage;
 import server.model.media.MMusic;
 import tools.AudioTools.AudioManager;
@@ -56,7 +55,7 @@ public class NowPlaying extends NowPlayingShell {
     }
 
     protected void initAlbumArt(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         
         MImage image = localDatabase.getModel(post.getAlbumArt());
 

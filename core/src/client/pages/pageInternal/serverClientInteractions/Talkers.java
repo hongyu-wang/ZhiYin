@@ -10,7 +10,7 @@ import server.model.user.User;
  */
 public abstract class Talkers implements Updatable{
     protected static long totalOriginalModels;
-    protected static LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+    protected static LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
 
     private boolean waiting = false;
 

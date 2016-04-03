@@ -9,7 +9,7 @@ import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializ
  * Created by Kevin Zheng on 2016-03-23.
  */
 public class Test {
-    static LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+    static LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
     static VeryBeginningInitializer vbi;
     static long key = 0;
     public static void main(String [] args){

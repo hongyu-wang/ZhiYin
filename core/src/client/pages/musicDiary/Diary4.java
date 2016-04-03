@@ -75,7 +75,7 @@ public class Diary4 extends Diary4Shell{
 
 
     private void populateFromServer(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createModelStorage();
+        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         MText text = localDatabase.getModel(thisPost.getText());
 
         this.title = thisPost.getTitle();

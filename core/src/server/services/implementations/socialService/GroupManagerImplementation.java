@@ -97,7 +97,6 @@ public class GroupManagerImplementation implements GroupManager {
 //     */
 //    @Override
 //    public MGroup getGroup(long key) {
-//        //TODO implement this
 //        return null;
 //    }
 }
