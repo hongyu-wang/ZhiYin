@@ -37,7 +37,7 @@ public class PostObject implements Net.HttpResponseListener {
      *
      * @param model     model to be posted
      */
-    public void addModel(ArrayList<ServerModel> model){
+    public void addModel(ServerModel[] model){
         // LibGDX NET CLASS
 
         Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);

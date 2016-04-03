@@ -1,5 +1,6 @@
 package server.webclient.services;
 
+import com.sun.corba.se.spi.activation.Server;
 import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import server.services.interfaces.models.UserProfileManager;
@@ -82,7 +83,7 @@ public class WebService{
     public Response postServerModel(String json) {
         MockServer mockServer = ServerInteraction.getServer();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<ServerModel> models = null;
+        ServerModel[] models = null;
 
 //        ServerModel model = null;
 //        int tag = Integer.parseInt(json.substring(json.length()-4));
@@ -91,7 +92,7 @@ public class WebService{
 
         try {
             //Class name = Class.forName(className);
-            models = objectMapper.readValue(json, List.class);
+            models = objectMapper.readValue(json, ServerModel[].class);
             for(ServerModel model : models) {
                 mockServer.setModel(model);
             }
