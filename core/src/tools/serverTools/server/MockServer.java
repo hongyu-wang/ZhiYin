@@ -54,6 +54,7 @@ public class MockServer {
      */
     public void setModel(ServerModel model){
         database.setModel(model);
+        database.getUpdatedKeys().add(model.getKey());
     }
 
     public List<ServerModel> getUpdates(List<Long> alreadyUpdated){
