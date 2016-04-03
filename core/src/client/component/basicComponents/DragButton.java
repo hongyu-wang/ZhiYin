@@ -2,6 +2,7 @@ package client.component.basicComponents;
 
 import client.component.Component;
 import client.events.ActionEvent;
+import client.internalExceptions.NoExecutableException;
 import client.singletons.InputListener;
 import client.singletons.ShapeCreater;
 import client.stateInterfaces.ActionMonitor;
@@ -80,30 +81,26 @@ public class DragButton extends Component implements Dragable {
         spriteBatch.begin();
     }
 
-    public void drag(){
+    public void drag() {
         returnExecutable = dragExecute;
         if (InputListener.getInstance().getMouseY() > limit && !disable) {
-            monitor.actionPerformed(new ActionEvent(this));
-            disable = true;
-            setBounds(0, 0, 0, 0);
-            hide();
+            push();
         }
     }
 
-    public void release(){
-        if (System.currentTimeMillis() - begin > 200 && !disable){
-            returnExecutable = releaseExecute;
+    public void release() {
+        if (!disable) {
+            if (System.currentTimeMillis() - begin > 200) {
+                returnExecutable = releaseExecute;
+            } else {
+                returnExecutable = dragExecute;
+            }
             push();
-
-        } else if (!disable){
-            returnExecutable = dragExecute;
-            push();
-
         }
 
     }
 
-    private void push(){
+    private void push() {
         monitor.actionPerformed((new ActionEvent(this)));
         disable = true;
         hide();
@@ -114,7 +111,9 @@ public class DragButton extends Component implements Dragable {
     }
 
     @Override
-    public Executable getExecutable() {
+    public Executable getExecutable() throws NoExecutableException {
+        if (returnExecutable == null)
+            throw new NoExecutableException();
         return returnExecutable;
     }
 

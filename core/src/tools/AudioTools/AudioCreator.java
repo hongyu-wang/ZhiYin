@@ -1,6 +1,5 @@
 package tools.AudioTools;
 
-import client.tools.Constants;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import com.badlogic.gdx.Gdx;
@@ -47,6 +46,8 @@ public final class AudioCreator {
 
 
     public static void initializeAlbums(){
+
+
         albumToKey = Utils.newMap();
         albumToKey.put("Songs About Jane",8000L);
         albumToKey.put("Purpose (Deluxe Edition)",8001L);
@@ -61,11 +62,12 @@ public final class AudioCreator {
             if(q.equals("The 20/20 Experience"))
                 q = "The 20:20 Experience";
             FileHandle fh = Gdx.files.internal("Thumbnails/"+q+".jpg");
-
             albumArt.setImage(fh.readBytes());
             assert(albumArt.getImage()!=null);
             albumArt.setName(s);
             localDatabase.pushModel(albumArt);
+
+
         }
 
     }

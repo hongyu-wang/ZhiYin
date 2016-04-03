@@ -5,6 +5,7 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
+import client.pages.State;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
@@ -41,6 +42,19 @@ public class Home extends HomeShell {
         Image i1 = new Image(new Texture("Home/NewRelease@" + StateManager.M + ".png"));
         final ImageButton b1 = new ImageButton(i1.getDrawable());
 
+        if (os == WINDOWS) {
+            MMusic temporary = new MMusic();
+            temporary.setAlbumArt(8000L);
+            temporary.setName("Test");
+
+            State tempState = new NowPlaying(this, temporary);
+            b1.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    new ExecuteToTempState(tempState).execute();
+                }
+            });
+        }
 
 
         newRelease.add(b1);

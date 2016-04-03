@@ -43,7 +43,7 @@ public class ExecuteSendAudioComment implements ExecutePush {
         Date df = new Date(comment.getTimeStamp());
         String timestamp = sdf.format(df);
 
-        sec1.addPost(userProfile.getUsername(), timestamp);
+        sec1.addPost(userProfile.getUsername(), timestamp, null);
 
         sec1.getCurrentComments().add(comment.getKey());
 

@@ -52,6 +52,7 @@ public class NowPlaying extends NowPlayingShell {
         this(previousState, post);
         this.verbose = verbose;
         iterations = 0;
+
     }
 
     protected void initAlbumArt(){
@@ -69,7 +70,7 @@ public class NowPlaying extends NowPlayingShell {
 
         Image picture = new Image(albumArt);
 
-        picture.setBounds((50)*M, (1160 - 655)*M, (655)*M, (655)*M);
+        picture.setBounds((50)*M, (1160 - 655) * M, (655)*M, (655)*M);
 
         stage.addActor(picture);
 
@@ -79,7 +80,7 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     protected void init() {
         super.init();
-//        initAlbumArt();
+        initAlbumArt();
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
@@ -165,7 +166,7 @@ public class NowPlaying extends NowPlayingShell {
                 new ExecuteSetTime(slider).execute();
             }
         });
-        executeMoveSlider = new ExecuteMoveSlider(slider, this);
+        executeMoveSlider = new ExecuteMoveSlider(slider);
 
         stage.addActor(table);
     }

@@ -2,8 +2,12 @@ package client.pages.other;
 
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
+import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteCancelRecording;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import tools.serverTools.databases.LocalDatabase;
@@ -86,12 +90,26 @@ public class Sec1 extends Sec1Shell {
         DragButton dragButton = new DragButton(this, 280, image, getStage());
         dragButton.setInitialBounds(26, 130, 698, 236);
 
-        dragButton.setReleaseExecutable(new ExecuteToTempState(new Sec2(this, previousState)));
+        dragButton.setDragExecutable(new ExecuteCancelRecording());
+
+        dragButton.setReleaseExecutable(new ExecutableMultiplexer(
+                new ExecuteToTempState(
+                        new Sec2(this, previousState)
+                        //TODO ADD THE MAUDIO STUFF HERE.
+                )
+                )
+        );
         add(dragButton);
 
         Button holdToRecordButton = new Button(this);
         holdToRecordButton.setBounds(26, 57, 698, 58);
-        holdToRecordButton.setExecutable(new ExecuteAddDragButton(dragButton));
+
+        holdToRecordButton.setExecutable(new ExecutableMultiplexer(
+                        new ExecuteAddDragButton(dragButton),
+                        new ExecuteRecord()
+                )
+
+        );
 
         stage.addActor(label);
         add(holdToRecordButton);
@@ -106,6 +124,8 @@ public class Sec1 extends Sec1Shell {
         stage.addActor(scrollpane);
     }
 
+
+
     private void initTable(){
         Label label1 = new Label(title, SkinSingleton.getInstance());
         Label label2 = new Label(subtitle, SkinSingleton.getInstance());
@@ -118,17 +138,21 @@ public class Sec1 extends Sec1Shell {
         stage.addActor(table);
     }
 
-    public void addPost(String name, String time){
+    public void addPost(String name, String time, Executable ex){
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
         Image ripples = new Image(new Texture("Friends4/Ripples0@" + StateManager.M + ".png"));
         ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png")).getDrawable());
-        final Executable e = new TestExecutable("play");
+
+
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                e.execute();
+                ex.execute();
             }
         });
+
+
+
 
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 

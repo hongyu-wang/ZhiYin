@@ -116,11 +116,4 @@ public class MessageBox {
         return this.byUser;
     }
 
-    public MAudio getWorkingMAudio() {
-        return workingMAudio;
-    }
-
-    public boolean hasAudio(){
-        return workingMAudio != null;
-    }
 }
