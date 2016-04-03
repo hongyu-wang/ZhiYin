@@ -18,13 +18,13 @@ import server.model.media.MAudio;
  * Contains a stack of actors. Used in Friends4.
  */
 public class MessageBox {
-    public static final int THEIR_MESSAGE = 0;
-    public static final int OUR_MESSAGE = 1;
     //private static float y = 1334; // -56 each time
 
     private Stack stack;
+    private Table table;
     private int byUser;
     private MAudio workingMAudio;
+    private String timestamp;
 
 
     /**
@@ -33,6 +33,7 @@ public class MessageBox {
      * @param byUser 0 means not by user, 1 means is by user.
      */
     public MessageBox(String message, int byUser, String timestamp){
+        this.timestamp = timestamp;
         initTable(byUser);
         initTextBox(message, timestamp);
     }
@@ -43,20 +44,21 @@ public class MessageBox {
      * @param byUser See above.
      */
     public MessageBox(Executable e, int byUser, MAudio audio, String timestamp){
+        this.timestamp = timestamp;
+        this.workingMAudio = audio;
         initTable(byUser);
         initSoundBox(e, timestamp);
-        this.workingMAudio = audio;
-
     }
 
     private void initTable(int byUser){
         this.byUser = byUser;
         this.stack = new Stack();
+        this.table = new Table();
 
         //stack.setX((32 + 214 * byUser) * StateManager.M);
         stack.setWidth(480 * StateManager.M);
 
-        stack.layout();
+        table.layout();
     }
 
     private void initTextBox(String message, String timestamp){
@@ -72,8 +74,6 @@ public class MessageBox {
         float height = text.getHeight() + 40;
 
         table1.add(image).width(480 * StateManager.M).height(height * StateManager.M);
-        table2.add(new Label(timestamp, SkinSingleton.getInstance()));
-        table2.row();
         table2.add(text).expand().center().left().padLeft(10*StateManager.M).width(460 * StateManager.M);
 
         stack.add(table1);
@@ -91,8 +91,6 @@ public class MessageBox {
         stack.add(image);
 
         Table table = new Table();
-        table.add(new Label(timestamp, SkinSingleton.getInstance()));
-        table.row();
 
         Image image2 = new Image(new Texture("Friends4/Play" + byUser + "@" + StateManager.M + ".png"));
         final ImageButton button = new ImageButton(image2.getDrawable());
@@ -112,8 +110,13 @@ public class MessageBox {
         stack.layout();
     }
 
-    public Stack getStack(){
-        return this.stack;
+    public Table getTable(){
+        Label label = new Label(timestamp, SkinSingleton.getInstance());
+        label.setColor(0.5f, 0.5f, 0.5f, 1);
+        table.add(label).expandX().left();
+        table.row();
+        table.add(stack);
+        return table;
     }
 
     public int getByUser(){

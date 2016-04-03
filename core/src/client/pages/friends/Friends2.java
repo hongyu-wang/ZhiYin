@@ -128,7 +128,7 @@ public class Friends2 extends Friends2Shell{
 
 
     public void addMessage(MessageBox box){
-        table.add(box.getStack()).width(480 * StateManager.M).padTop(56 * StateManager.M).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
+        table.add(box.getTable()).width(480 * StateManager.M).padTop(56 * StateManager.M).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
         table.row().expandX();
         scrollpane.layout();
         scrollpane.setScrollPercentY(100);
