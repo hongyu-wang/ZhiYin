@@ -4,19 +4,15 @@ import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
-import client.events.executables.internalChanges.serverInteractions.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.serverInteractions.ExecuteServer;
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
-import client.pageStorage.Pages;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
-import server.model.media.MAudio;
 
 /**
  * This is the second music diary page as given in the
@@ -76,8 +72,17 @@ Diary2 extends Diary2Shell{
         holdToRecordButton.setExecutable(new ExecutableMultiplexer(
                 new ExecuteAddDragButton(dragButton)
         ));
-
         add(holdToRecordButton);
+
+        Button pictureButton = new Button(this);
+        pictureButton.setBounds(268, 0, 221, 264);
+        pictureButton.setExecutable(new TestExecutable("picture"));
+        add(pictureButton);
+
+        Button videoButton = new Button(this);
+        videoButton.setBounds(489, 0, 261, 264);
+        videoButton.setExecutable(new TestExecutable("video"));
+        add(videoButton);
 
     }
 
