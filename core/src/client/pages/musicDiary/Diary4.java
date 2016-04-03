@@ -1,19 +1,23 @@
 package client.pages.musicDiary;
 
+import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pages.State;
 import client.pages.other.Comment;
 import client.pages.other.Sec1;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import server.model.media.MAudio;
 import server.model.media.MImage;
 import server.model.media.MText;
 import server.model.social.MDiaryPost;
 import server.services.factories.ImageManagerFactory;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 
 /**
  * Diary4 page.
@@ -23,13 +27,16 @@ import server.services.factories.ImageManagerFactory;
 public class Diary4 extends Diary4Shell{
     MDiaryPost thisPost;
 
+    private State previousState;
 
+    private ScrollPane scrollpane;
     private String title;
     private String content;
     private Image image;
+    private MAudio audio;
 
-    public Diary4(MDiaryPost thisPost){
-
+    public Diary4(State previousState, MDiaryPost thisPost){
+        this.previousState = previousState;
         this.thisPost = thisPost;
 
         populateFromServer();
@@ -37,30 +44,54 @@ public class Diary4 extends Diary4Shell{
         init();
     }
 
-
-    protected void init(){
+    protected void init() {
         super.init();
+
+        ExecuteToTempState changePage = new ExecuteToTempState(previousState);
+        addImageButton("NowPlaying/Back@", changePage, 0, 1217, 117, 117);
+
+        //if(audio != null){
+            TestExecutable playAudio = new TestExecutable("play audio");
+            addImageButton("Diary/Play@", playAudio, 0, 0, 250, 250);
+        //}
+
         ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, thisPost));
-        addImageButton("Diary/Comment@", toComment, 420, 100, 140, 140);
+        addImageButton("Diary/Comment@", toComment, 250, 0, 250, 250);
 
         ExecuteToTempState toSec = new ExecuteToTempState(new Sec1(this, thisPost));
-        addImageButton("Diary/Sec@", toSec, 590, 100, 140, 140);
+        addImageButton("Diary/Sec@", toSec, 500, 0, 250, 250);
 
         Table table = new Table();
+        table.top();
+
+//        Label label1 = new Label("Title string that should be long enough to wrap several times; testing purposes only. Also plz work.", SkinSingleton.getInstance());
         Label label1 = new Label(title, SkinSingleton.getInstance());
+        label1.setWrap(true);
+        label1.setWidth(700*M);
+        table.add(label1).width(700*M).padLeft(50*M).padTop(50*M);
+        table.row();
+
+        table.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M).padTop(50*M);
+        table.row();
+
+//        Label label2 = new Label("What you are reading right now is a very long string that I typed just to test our diary4 page;" +
+//                "hopefully this is long enough for the text to wrap several times. Also plz work.", SkinSingleton.getInstance());
         Label label2 = new Label(content, SkinSingleton.getInstance());
         label2.setWrap(true);
-        label2.setWidth(750 * StateManager.M);
-        table.add(label1).expand();
-        table.row();
-        table.add(label2).width(750*StateManager.M);
+        label2.setWidth(700*M);
+        table.add(label2).width(700*M).padLeft(50 * M).padTop(50 * M);
 
         if(image != null){
             table.row();
-            table.add(image);
+            table.add(image).width(750*M).height(750/image.getWidth() * image.getHeight() * M).padTop(50 * M);
         }
 
-        stage.addActor(table);
+        scrollpane = new ScrollPane(table);
+        scrollpane.setBounds(0, 250 * M, 750 * M, 967 * M);
+        stage.addActor(scrollpane);
+
+        scrollpane.setScrollingDisabled(true, false);
+        //table.setDebug(true);
     }
 
     @Override
@@ -71,6 +102,11 @@ public class Diary4 extends Diary4Shell{
     @Override
     public void reset() {
 
+    }
+
+    @Override
+    public void update(float dt){
+        stage.act();
     }
 
 

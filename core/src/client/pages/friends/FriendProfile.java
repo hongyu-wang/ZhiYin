@@ -111,7 +111,7 @@ public class FriendProfile extends FriendProfileShell {
         s.add(i2);
         s.add(t);
 
-        final Executable e = new ExecuteToTempState(new Diary4(thisPost));
+        final Executable e = new ExecuteToTempState(new Diary4(this, thisPost));
 
         s.addListener(new ClickListener() {
             @Override

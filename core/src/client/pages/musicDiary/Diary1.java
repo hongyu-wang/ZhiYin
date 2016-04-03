@@ -83,11 +83,11 @@ public class Diary1 extends Diary1Shell {
         final MDiaryPost currentPost = thisPost;
 
         // Goes to a Diary4 without content or image
+        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, currentPost));
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
-                new ExecuteToTempState(new Diary4(currentPost)).execute();
+                e.execute();
             }
         });
 

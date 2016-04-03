@@ -1,8 +1,6 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
-import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
 import client.singletons.SkinSingleton;
@@ -10,19 +8,13 @@ import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MImage;
 import server.model.social.MDiaryPost;
-import server.model.soundCloud.MBand;
-import server.model.user.User;
-import server.model.user.UserDiaryContent;
 import server.model.user.UserProfile;
 import server.services.factories.ImageManagerFactory;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
-
-import java.util.*;
 
 /**
  * Created by blobbydude24 on 2016-03-21.
@@ -110,10 +102,11 @@ public class MyProfile extends MyProfileShell {
         s.add(i2);
         s.add(t);
 
+        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost));
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteToTempState(new Diary4(diaryPost)).execute();
+                e.execute();
             }
         });
 
