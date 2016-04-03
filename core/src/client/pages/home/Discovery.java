@@ -84,6 +84,7 @@ public class Discovery extends DiscoveryShell {
 
     @Override
     public void reset() {
+        super.reset();
         searchField.remove();
         addSearchField();
     }

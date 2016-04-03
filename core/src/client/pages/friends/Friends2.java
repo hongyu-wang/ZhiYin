@@ -10,17 +10,12 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendAudioMessage;
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendMessage;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateMessages;
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteReset;
 import client.pages.friends.boxes.MessageBox;
-import client.pages.pageInternal.serverClientInteractions.SocialContentTalker;
-import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
-import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import server.model.media.MAudio;
-import server.model.social.MConversation;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -81,7 +76,6 @@ public class Friends2 extends Friends2Shell{
         sendButton.setBounds(604 + 1, 31, 122, 60);
         ExecutableMultiplexer em3 = new ExecutableMultiplexer();
         em3.addExecutable(new ExecuteSendMessage(this));
-        em3.addExecutable(new ExecuteReset(this));
         sendButton.setExecutable(em3);
         add(sendButton);
     }
@@ -114,14 +108,13 @@ public class Friends2 extends Friends2Shell{
         table.row().expandX();
         scrollpane.layout();
         scrollpane.setScrollPercentY(100);
-        stage.act();
 
         //new ExecuteSendAudioMessage(this, box).execute();
     }
 
     @Override
     public void reset() {
-
+        super.reset();
         messageField.remove();
         messageField = new WorkingTextArea("Message...", SkinSingleton.getInstance());
         messageField.setPosition(174 * M, 31 * M);
@@ -144,18 +137,10 @@ public class Friends2 extends Friends2Shell{
         stage.addActor(messageField);
     }
 
-    @Override
-    public void update(float fy){
-        super.update(fy);
 
-        stage.act(); //This bug tho
-
-        messageField.getText();
-    }
-
-    public void addAudioMessage(MAudio audio, int userType){
+    public void addAudioMessage(MAudio audio, int userType, String timestamp){
         ExecutePlayMAudio executePlayMAudio = new ExecutePlayMAudio(audio);
-        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio, "timestamp");
+        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio, timestamp);
 
         this.addMessage(soundBox);
     }

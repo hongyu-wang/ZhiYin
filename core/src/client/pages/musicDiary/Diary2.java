@@ -93,6 +93,7 @@ Diary2 extends Diary2Shell{
 
     @Override
     public void reset() {
+        super.reset();
         titleField.remove();
         addTitleField();
         bodyField.remove();

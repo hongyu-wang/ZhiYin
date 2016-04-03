@@ -1,7 +1,6 @@
 package client.events.executables.internalChanges.updatePageExecutables;
 
 import client.pages.State;
-import client.pages.other.TransitionState;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 
@@ -18,6 +17,6 @@ public class ExecuteToTempState implements Executable {
 
     @Override
     public void execute() {
-        StateManager.getInstance().toTemporaryState(new TransitionState(state));
+        StateManager.getInstance().toTemporaryState(state);
     }
 }

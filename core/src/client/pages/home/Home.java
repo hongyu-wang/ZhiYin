@@ -35,6 +35,15 @@ public class Home extends HomeShell {
         init();
     }
 
+    private MMusic generateTestMMusic(){
+        MMusic temporary = new MMusic();
+        temporary.setKey(-420L);
+        temporary.setAlbumArt(8000L);
+        temporary.setName("Test");
+
+        return temporary;
+    }
+
     protected void init() {
         super.init();
 
@@ -43,10 +52,7 @@ public class Home extends HomeShell {
         final ImageButton b1 = new ImageButton(i1.getDrawable());
 
         if (os == WINDOWS) {
-            MMusic temporary = new MMusic();
-            temporary.setAlbumArt(8000L);
-            temporary.setName("Test");
-
+            MMusic temporary = generateTestMMusic();
             State tempState = new NowPlaying(this, temporary);
             b1.addListener(new ClickListener() {
                 @Override
@@ -55,7 +61,6 @@ public class Home extends HomeShell {
                 }
             });
         }
-
 
         newRelease.add(b1);
 
@@ -71,7 +76,6 @@ public class Home extends HomeShell {
         });
 
         topSingles.add(b2);
-
 
         table = new Table();
         table.add(newRelease);
@@ -179,10 +183,7 @@ public class Home extends HomeShell {
 
     }
 
-    @Override
-    public void reset() {
 
-    }
 
 
 

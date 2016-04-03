@@ -158,13 +158,13 @@ public class VirtualDatabase {
 //        MMusic music3 = generateTestMusic("Music_3", audio3);
 
         //Hashtag
-        MHashtag tag1 = generateTestHashtags("#Happy");
-        MHashtag tag2 = generateTestHashtags("#Sad");
-        MHashtag tag3 = generateTestHashtags("#Love");
-
-        List<Long> music_tag1 = tag1.getMusicKeys();
-        List<Long> music_tag2 = tag2.getMusicKeys();
-        List<Long> music_tag3 = tag3.getMusicKeys();
+//        MHashtag tag1 = generateTestHashtags("#Happy");
+//        MHashtag tag2 = generateTestHashtags("#Sad");
+//        MHashtag tag3 = generateTestHashtags("#Love");
+//
+//        List<Long> music_tag1 = tag1.getMusicKeys();
+//        List<Long> music_tag2 = tag2.getMusicKeys();
+//        List<Long> music_tag3 = tag3.getMusicKeys();
 
 //        music_tag1.add(music1.getKey());
 //        music_tag2.add(music2.getKey());

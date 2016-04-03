@@ -11,9 +11,12 @@ import client.singletons.StateManager;
 import client.stateInterfaces.*;
 import client.tools.Constants;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -31,12 +34,10 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     protected Stage stage;
     private InputController inputController;
 
-
     @Override
     public void update(float dt) {
-        stage.act();
+        stage.act(dt);
     }
-
 
 
     /**
@@ -158,9 +159,10 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         if (stage.getActors().size != 0) {
             stage.draw();
         }
-        for (Actor actor : components){
+        for (Actor actor : components) {
             actor.draw(MainBatch.getInstance(), 1);
         }
+
     }
 
 
@@ -174,7 +176,10 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         }
     }
 
-    public abstract void reset();
+    public void reset(){
+
+
+    }
 
 
     public InputController getInputController(){
@@ -187,6 +192,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         return stage;
     }
 
+    public String toString(){
+        return this.getClass().getName();
+    }
 
 
 }

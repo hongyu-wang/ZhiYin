@@ -32,7 +32,7 @@ public class ExecuteSendAudioComment implements ExecuteServer {
         MAudio audio;
 
         if (os == MAC)
-            audio = AudioRecorder.getInstance().stopRecording(); //TODO This is the MAudio that you want
+            audio = AudioRecorder.getInstance().stopRecording();
         else{
             audio = AudioManagerFactory.createAudioManager().createMockAudio();
         }
@@ -45,9 +45,7 @@ public class ExecuteSendAudioComment implements ExecuteServer {
         User mainUser = localDatabase.getModel(userKey);
         UserProfile userProfile = localDatabase.getModel(mainUser.getProfile());
 
-        MComment comment = CommentManagerFactory.createCommentManager().createComment(Utils.<Long>newList(), Utils.<Long>newList(),
-                Utils.<Long>newList(), System.currentTimeMillis(), "", userKey);
-        comment.setKey(localDatabase.generateKey());
+        MComment comment = generateComment(userKey, audio.getKey());
 
         commentKeys.add(comment.getKey());
 
@@ -66,4 +64,16 @@ public class ExecuteSendAudioComment implements ExecuteServer {
 
         localDatabase.pushModel(pushList);
     }
+
+    private MComment generateComment(long userKey, long audioKey){
+        MComment comment = CommentManagerFactory.createCommentManager().createComment(Utils.<Long>newList(), Utils.<Long>newList(),
+                Utils.<Long>newList(), System.currentTimeMillis(), "", userKey);
+
+        comment.getAudio().add(audioKey);
+
+        comment.setKey(localDatabase.generateKey());
+
+        return comment;
+    }
+
 }

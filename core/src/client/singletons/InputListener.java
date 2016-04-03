@@ -86,8 +86,12 @@ public class InputListener implements InputProcessor, Constants {
 
     }
 
-    public static void setListener(State state){
+    public static void prepare(){
         im.clear();
+    }
+
+    public static void setListener(State state){
+        prepare();
         im.addProcessor(state.getStage());
         im.addProcessor(InputListener.getInstance());
         Gdx.input.setInputProcessor(im);
@@ -100,50 +104,6 @@ public class InputListener implements InputProcessor, Constants {
 
     @Override
     public boolean keyDown(int keycode) {
-
-        if (keycode == Input.Keys.NUM_1)
-            stateManager.changeState(Pages.FRIENDS1);
-
-//        if (keycode == Input.Keys.NUM_2)
-//            stateManager.changeState(Pages.FRIENDS2);
-
-//        if (keycode == Input.Keys.NUM_3)
-//            stateManager.changeState(Pages.FRIENDS3);
-
-        if (keycode == Input.Keys.NUM_4)
-            stateManager.changeState(Pages.FRIENDS4);
-
-//        if (keycode == Input.Keys.NUM_5)
-//            stateManager.changeState(Pages.FRIENDS5);
-
-        if (keycode == Input.Keys.Q)
-            stateManager.changeState(Pages.DIARY1);
-
-        if (keycode == Input.Keys.W)
-            stateManager.changeState(Pages.DIARY2);
-
-
-//        if (keycode == Input.Keys.R)
-//            stateManager.changeState(Pages.DIARY4);
-
-        if (keycode == Input.Keys.A)
-            stateManager.changeState(Pages.HOME);
-
-        if (keycode == Input.Keys.S)
-            stateManager.changeState(Pages.ARTIST);
-
-        if (keycode == Input.Keys.D)
-            stateManager.changeState(Pages.DISCOVERY);
-
-//        if (keycode == Input.Keys.X)
-//            stateManager.changeState(Pages.NOWPLAYING);
-//
-//        if (keycode == Input.Keys.C)
-//            stateManager.changeState(Pages.NOWPLAYING2);
-
-//        if (keycode == Input.Keys.Z)
-//            stateManager.changeState(Pages.PROFILE);
-
 
         return false;
     }
@@ -164,7 +124,7 @@ public class InputListener implements InputProcessor, Constants {
         mouseX = screenX;
         mouseY = (int)(HEIGHT*StateManager.M) - screenY;
 
-        System.out.println(mouseX + " " + mouseY);
+        //TODO Yes. System.out.println(mouseX + " " + mouseY);
         stateManager.receiveInput();
 
         return false;

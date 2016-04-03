@@ -69,10 +69,7 @@ public class Friends4 extends Friends4Shell{
         table.row();
     }
 
-    @Override
-    public void reset() {
 
-    }
 
 
     @Override
@@ -80,10 +77,6 @@ public class Friends4 extends Friends4Shell{
 
     }
 
-    @Override
-    public void update(float dt) {
-        stage.act();
-    }
 
     private void talkerAddFriends(){
         FriendTalker ft = TalkerFactory.getFriendTalker();

@@ -2,6 +2,7 @@ package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.friends.Friends2;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
+import client.tools.Constants;
 import server.model.structureModels.ServerModel;
 import server.model.user.UserConversations;
 import server.services.factories.AudioManagerFactory;
@@ -21,8 +22,6 @@ import java.util.List;
 public class ExecuteSendAudioMessage implements ExecuteServer {
     private Friends2 friend2;
     private long conversation;
-    private List<Long> messageKeys;
-
 
     public ExecuteSendAudioMessage(Friends2 friends2){
         UserConversations userConversations = localDatabase.getModel(localDatabase.getMainUser().getConversations());
@@ -31,22 +30,16 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
         this.friend2 = friends2;
 
         this.conversation = convoList.get(TalkerFactory.getMessagesTalker().indexByFriend(friend2.getFriendName()));
-
-        this.messageKeys = friend2.getMessageKeys();
     }
-
-
-
 
     @Override
     public void execute() {
         MAudio audio;
         if (os == MAC)
-            audio = AudioRecorder.getInstance().stopRecording(); //TODO This is the MAudio that you want
+            audio = AudioRecorder.getInstance().stopRecording();
         else{
             audio = AudioManagerFactory.createAudioManager().createMockAudio();
         }
-
 
         MConversation conversation = localDatabase.getModel(this.conversation);
         /*---------------------------------------------------------------------------*/
@@ -56,7 +49,7 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
         conversation.getMessageList().add(message.getKey());
 
         friend2.getMessageKeys().add(message.getKey());
-        friend2.addAudioMessage(audio, 1);
+        friend2.addAudioMessage(audio, 1, Constants.getCurrentTimestamp(message.getTimeStamp()));
 
         List<ServerModel> pushList = Utils.newList();
 

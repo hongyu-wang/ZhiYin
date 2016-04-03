@@ -11,8 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.soundCloud.MBand;
 
-import static client.singletons.StateManager.M;
-
 /**
  * This is the profile page as given in the
  * art assets folder.
@@ -35,7 +33,7 @@ public class ArtistProfile extends ArtistProfileShell {
 
     public ArtistProfile(State previousState, MBand mBand, Image image){
         this.previousState = previousState;
-        this.profilePic = image;
+        this.profilePic = new Image(image.getDrawable());
         this.artistName = mBand.getName();
         this.description = mBand.getDescription();
         init();
@@ -123,10 +121,7 @@ public class ArtistProfile extends ArtistProfileShell {
         return artistName;
     }
 
-    @Override
-    public void reset() {
 
-    }
 
     public void update(float dt){
         stage.act();

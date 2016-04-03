@@ -6,6 +6,9 @@ import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 /**
  * This is essentially a card layout.
@@ -13,7 +16,6 @@ import client.tools.Constants;
  * Created by Hongyu Wang on 3/7/2016.
  */
 public class StateManager implements Disposable, Updatable, Drawable, Constants {
-
 
 
     /**
@@ -59,8 +61,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
      * @param page the page within the Pages enum
      */
     public void changeState(Pages page){
-        //TODO remove this.
-        System.out.println(page);
         currentState = page.getStateReference();
         currentState.reset();
         InputListener.setListener(currentState);
@@ -69,14 +69,30 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
     public void toTemporaryState(State state){
         currentState = state;
+        killActions();
         currentState.reset();
-        InputListener.setListener(state);
+
+    }
+
+    private void killActions(){
+        InputListener.prepare();
+        Action action = Actions.sequence(
+                Actions.alpha(0),
+
+                Actions.fadeIn(0.5F),
+
+                Actions.run(
+                        () -> InputListener.setListener(currentState)
+                )
+        );
+        currentState.getStage().addAction(action);
     }
 
 
 
     @Override
     public void update(float dt) {
+
         currentState.update(dt);
 
         TalkerFactory.getServerTalker().update(dt);

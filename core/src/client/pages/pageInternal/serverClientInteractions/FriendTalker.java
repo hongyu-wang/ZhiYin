@@ -83,7 +83,6 @@ public class FriendTalker extends Talkers {
     @Override
     public void update(float dt) {
         List<User> newFriendList = new ArrayList<>();
-        System.out.println(localDatabase.getMainUser());
         for(long key: localDatabase.getMainUser().getFriendKeys()){
             newFriendList.add(localDatabase.<User>getModel(key));
         }

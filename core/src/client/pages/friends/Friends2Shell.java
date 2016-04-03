@@ -32,10 +32,6 @@ public abstract class Friends2Shell extends State {
 
     }
 
-    @Override
-    public void update(float dt) {
-
-    }
 
 
 }

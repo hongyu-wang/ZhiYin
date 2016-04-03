@@ -6,6 +6,7 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetTime;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
+import client.stateInterfaces.Executable;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
@@ -69,7 +70,7 @@ public class NowPlaying extends NowPlayingShell {
 
         Image picture = new Image(albumArt);
         picture.setColor(1, 1, 1, 0.7F);
-        picture.setBounds((50)*M, (1160 - 655) * M, (655)*M, (655)*M);
+        picture.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
 
         stage.addActor(picture);
 
@@ -83,7 +84,7 @@ public class NowPlaying extends NowPlayingShell {
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-        ExecuteToTempState showCommentsEx = new ExecuteToTempState(new NowPlaying2(previousState, this));
+        Executable showCommentsEx = new TestExecutable("fuck");
         addImageButton("NowPlaying/ShowComments@", showCommentsEx, 607, 1063, 51, 51);
 
         TestExecutable pauseEx = new TestExecutable("pause");
@@ -129,10 +130,6 @@ public class NowPlaying extends NowPlayingShell {
         stage.addActor(pauseButton);
     }
 
-    @Override
-    public void reset() {
-
-    }
 
 
     @Override

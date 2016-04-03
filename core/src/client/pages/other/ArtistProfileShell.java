@@ -19,10 +19,7 @@ public abstract class ArtistProfileShell extends State {
         stage.addActor(background);
     }
 
-    @Override
-    public void reset() {
 
-    }
 
 
     @Override

@@ -26,19 +26,13 @@ import java.util.List;
 public class ExecuteUpdateMessages extends ExecuteUpdate {
     private Friends2 friend2;
     private long conversation;
-    private List<Long> messageKeys;
 
     public ExecuteUpdateMessages(Friends2 friend2){
-
-
         UserConversations userConversations = localDatabase.getModel(localDatabase.getMainUser().getConversations());
         List<Long> convoList = userConversations.getConvoKeys();
 
         this.friend2 = friend2;
-
         this.conversation = convoList.get(TalkerFactory.getMessagesTalker().indexByFriend(friend2.getFriendName()));
-
-        this.messageKeys = friend2.getMessageKeys();
     }
 
     @Override
@@ -48,7 +42,7 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
 
         //New Code
         for(long key : conversation.getMessageList()){
-            if(!messageKeys.contains(key)){
+            if(!friend2.getMessageKeys().contains(key)){
                 MMessage mMessage = localDatabase.<MMessage>getModel(key);
                 long textKey = mMessage.getText();
 
@@ -65,7 +59,7 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
                 }
 
                 friend2.addMessage(box);
-                messageKeys.add(mMessage.getKey());
+                friend2.getMessageKeys().add(mMessage.getKey());
             }
         }
     }

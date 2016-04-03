@@ -94,6 +94,7 @@ public class Artist extends ArtistShell {
 
     @Override
     public void reset() {
+        super.reset();
         searchField.remove();
         addSearchField();
     }

@@ -89,10 +89,6 @@ public class Tagged extends TaggedShell {
         songs.row();
     }
 
-    @Override
-    public void reset() {
-
-    }
 
 
 

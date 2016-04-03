@@ -1,6 +1,7 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.other.Comment;
+import client.tools.Constants;
 import server.model.social.MComment;
 import server.model.social.MPost;
 import server.model.structureModels.ServerModel;
@@ -25,8 +26,7 @@ public class ExecuteSendComment implements ExecuteServer {
 
     @Override
     public void execute() {
-
-        MPost post = commentPage.getThisPost();
+        MPost post = localDatabase.getModel(commentPage.getThisPost());
 
         List<Long> commentKeys = post.getComments();
 
@@ -42,15 +42,13 @@ public class ExecuteSendComment implements ExecuteServer {
 
         commentKeys.add(comment.getKey());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
-        Date df = new Date(comment.getTimeStamp());
-        String timestamp = sdf.format(df);
+        String timestamp = Constants.getCurrentTimestamp(comment.getTimeStamp());
 
         commentPage.addComment(userProfile.getUsername(), timestamp, userText);
-        commentPage.reset();
         commentPage.getCurrentComments().add(comment.getKey());
+        commentPage.reset();
 
-        //------------------Pushing.
+        //------------------Pushing---
         List<ServerModel> pushList = Utils.newList();
 
         pushList.add(comment);

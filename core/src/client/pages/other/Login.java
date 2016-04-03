@@ -7,6 +7,7 @@ import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveBu
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import tools.serverTools.databases.LocalDatabase;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
@@ -26,7 +27,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
  */
 public class Login extends State {
     private int delta = 0;
-    private int delta2 = 0;
     private WorkingTextArea username;
     private WorkingTextArea password;
     private ExecuteRemoveButton erb;
@@ -34,15 +34,16 @@ public class Login extends State {
     public static final String NAME1 = "Alice";
     public static final String NAME2 = "Benny";
     public static final String NAME3 = "Cindy";
-    public static final String message = "Loading Loading. Loading.. Loading...";
-    public static final String [] stuff = message.split(" ");
     private Label label;
     private boolean checkPull;
     private VeryBeginningInitializer vb;
 
 
+
     public Login(){
         init();
+
+
     }
 
     @Override
@@ -53,12 +54,12 @@ public class Login extends State {
             for (Actor act : stage.getActors()){
                 act.remove();
             }
+            LocalDatabase.ipAddress = password.getText();
+
             vb = TalkerFactory.VeryBeginningInitializer();
             vb.init(text);
-
-            LocalDatabase.ipAddress = password.getText();
-            vb.push();
             vb.pull();
+            vb.push();
             checkPull = true;
             for (Actor act : stage.getActors()) {
                 act.remove();
@@ -73,12 +74,11 @@ public class Login extends State {
     @Override
     protected void init() {
         super.init();
-
         initializeComponents();
     }
 
     private void initializeComponents(){
-        Image image = new Image(new Texture("Artboards//Log in.png"));
+        Image image = new Image(new Texture("Artboards//LoginPage.png"));
         image.setBounds(0, 0, WIDTH * M, HEIGHT * M);
         stage.addActor(image);
         username = new WorkingTextArea("Alice", SkinSingleton.getInstance());
@@ -116,17 +116,13 @@ public class Login extends State {
         if (vb.isUpdated()) {
             Pages.initClass();
             new ExecuteChangePage(Pages.HOME).execute();
-
         }
         else{
             vb.pull();
         }
     }
 
-    @Override
-    public void reset() {
 
-    }
 
     @Override
     public void dispose() {

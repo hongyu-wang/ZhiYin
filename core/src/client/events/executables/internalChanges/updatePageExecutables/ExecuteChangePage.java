@@ -12,6 +12,7 @@ import client.stateInterfaces.Executable;
  * into a specific enumeration.
  *
  * Created by Hongyu Wang on 3/11/2016.
+ *
  */
 public class ExecuteChangePage implements Executable{
     protected Pages page;

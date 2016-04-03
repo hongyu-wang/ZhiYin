@@ -93,10 +93,7 @@ public class TopSingles extends TopSinglesShell{
 
     }
 
-    @Override
-    public void reset() {
 
-    }
 
 
 }

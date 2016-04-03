@@ -128,10 +128,6 @@ public class FriendProfile extends FriendProfileShell {
         following.add(image).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
     }
 
-    @Override
-    public void reset() {
-
-    }
 
 
 
@@ -178,8 +174,6 @@ public class FriendProfile extends FriendProfileShell {
     private void updateDiariesFromServer(User user){
         LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
-
-        boolean isUpdated = true;
 
         for(long key: diaryContent.getDiaryKeys()){
             if(!currentDiaries.contains(key)) {

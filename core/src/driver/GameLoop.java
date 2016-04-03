@@ -41,9 +41,9 @@ public class GameLoop extends ApplicationAdapter  {
         spriteBatch.setProjectionMatrix(primary.combined);
 
 		spriteBatch.begin();
-
-		stateManager.draw();
 		stateManager.update(Gdx.graphics.getDeltaTime());
+		stateManager.draw();
+
 		spriteBatch.end();
 	}
 

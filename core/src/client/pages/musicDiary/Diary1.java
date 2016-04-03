@@ -1,5 +1,6 @@
 package client.pages.musicDiary;
 
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateAllDiaries;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
@@ -27,6 +28,10 @@ public class Diary1 extends Diary1Shell {
 
     private List<Long> currentDiaries;
 
+    public List<Long> getCurrentDiaries(){
+        return currentDiaries;
+    }
+
     private ScrollPane scrollpane;
 
     private Table table;
@@ -49,6 +54,9 @@ public class Diary1 extends Diary1Shell {
         scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
 
         stage.addActor(scrollpane);
+
+        //Updates from server.
+        new ExecuteUpdateAllDiaries(this);
     }
 
     public void addPost(MDiaryPost thisPost, String creator){
@@ -96,10 +104,6 @@ public class Diary1 extends Diary1Shell {
     }
 
 
-    @Override
-    public void reset() {
-
-    }
 
     @Override
     public void dispose() {
@@ -109,36 +113,7 @@ public class Diary1 extends Diary1Shell {
     @Override
     public void update(float dt){
         super.update(dt);
-
-        getPostsFromServer();
     }
 
-    private void getPostsFromServer(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
-        User user1 = localDatabase.getModel(1);
-        User user2 = localDatabase.getModel(2);
-        User user3 = localDatabase.getModel(3);
 
-        updateFromServer(user1);
-        updateFromServer(user2);
-        updateFromServer(user3);
-    }
-
-    private void updateFromServer(User user){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
-        UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
-
-        for(long key: diaryContent.getDiaryKeys()){
-            if(!currentDiaries.contains(key)) {
-                MDiaryPost post = localDatabase.getModel(key);
-                UserProfile profile = localDatabase.getModel(user.getProfile());
-
-                String username = profile.getUsername();
-
-                addPost(post, username);
-
-                currentDiaries.add(key);
-            }
-        }
-    }
 }

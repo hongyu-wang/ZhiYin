@@ -46,10 +46,6 @@ public class Sec2 extends Sec2Shell {
         stage.addActor(sendButton);
     }
 
-    @Override
-    public void reset() {
-
-    }
 
     @Override
     public void dispose() {
