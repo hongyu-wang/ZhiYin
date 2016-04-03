@@ -41,16 +41,16 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
                 MMessage mMessage = localDatabase.<MMessage>getModel(key);
                 long textKey = mMessage.getText();
 
-
+                int byUser = getWriter((int) mMessage.getCreator());
 
                 if(mMessage.getText() != -1L) {
                     String text = localDatabase.<MText>getModel(textKey).getText();
-                    box = new MessageBox(text, getWriter(localDatabase, (int) mMessage.getCreator()), Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
+                    box = new MessageBox(text, byUser, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
                 }
                 else{
                     MAudio audio = localDatabase.getModel(mMessage.getAudioKey());
                     ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
-                    box = new MessageBox(epma, 2, audio, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
+                    box = new MessageBox(epma, byUser, audio, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
                 }
 
                 friend2.addMessage(box);
@@ -62,7 +62,7 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
         }
     }
 
-    private int getWriter(LocalDatabase localDatabase, int user){
+    private int getWriter(int user){
         if(user == localDatabase.getMainUser().getKey()){
             return 1;
         }

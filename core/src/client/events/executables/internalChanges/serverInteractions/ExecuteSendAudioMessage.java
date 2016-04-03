@@ -1,6 +1,7 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.friends.Friends2;
+import server.model.structureModels.ServerModel;
 import server.services.factories.AudioManagerFactory;
 import server.services.factories.MessageManagerFactory;
 import tools.AudioTools.AudioRecorder;
@@ -49,9 +50,13 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
         friend2.getMessageKeys().add(message.getKey());
         friend2.addAudioMessage(audio, 1);
 
-        localDatabase.pushModel(audio);
-        localDatabase.pushModel(message);
-        localDatabase.pushModel(conversation);
+        ServerModel[] pushList = {
+                audio,
+                message,
+                conversation
+        };
+
+        localDatabase.pushModel(pushList);
     }
 
     private MMessage generateMMessage(MAudio audio){

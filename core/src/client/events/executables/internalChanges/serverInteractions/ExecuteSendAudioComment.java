@@ -4,6 +4,7 @@ import client.pages.other.Sec1;
 import server.model.media.MAudio;
 import server.model.social.MComment;
 import server.model.social.MPost;
+import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.model.user.UserProfile;
 import server.services.factories.CommentManagerFactory;
@@ -50,7 +51,11 @@ public class ExecuteSendAudioComment implements ExecuteServer {
 
         //TODO change it to add music;
 
-        localDatabase.pushModel(comment);
-        localDatabase.pushModel(post);
+        ServerModel[] pushList = {
+                comment,
+                post
+        };
+
+        localDatabase.pushModel(pushList);
     }
 }
