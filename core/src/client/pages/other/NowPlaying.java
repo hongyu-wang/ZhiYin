@@ -69,7 +69,7 @@ public class NowPlaying extends NowPlayingShell {
         px.dispose();
 
         Image picture = new Image(albumArt);
-
+        picture.setColor(1, 1, 1, 0.7F);
         picture.setBounds((50)*M, (1160 - 655) * M, (655)*M, (655)*M);
 
         stage.addActor(picture);
@@ -147,7 +147,8 @@ public class NowPlaying extends NowPlayingShell {
         super.update(dt);
         if (iterations%5 == 0)
             executeMoveSlider.execute();
-        updateMusicLabels(AudioManager.getTime());
+        if (os == MAC)
+            updateMusicLabels(AudioManager.getTime());
         iterations ++;
     }
 
