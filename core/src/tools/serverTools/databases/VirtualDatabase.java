@@ -219,6 +219,7 @@ public class VirtualDatabase {
      */
     public void setModel(ServerModel model){
         data.put(model.getKey(), model);
+        updatedKeys.add(model.getKey());
     }
 
     /**Returns the key of the user based on a username.
