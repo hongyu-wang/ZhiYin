@@ -177,13 +177,13 @@ public class Friends2 extends Friends2Shell{
 
     public void addAudioMessage(MAudio audio, int userType){
         ExecutePlayMAudio executePlayMAudio = new ExecutePlayMAudio(audio);
-        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio);
+        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio, "timestamp");
 
         this.addMessage(soundBox);
     }
 
     public void addTextMessage(String text, int userType){
-        MessageBox box = new MessageBox(text, userType);
+        MessageBox box = new MessageBox(text, userType, "timestamp");
 
         this.addMessage(box);
     }

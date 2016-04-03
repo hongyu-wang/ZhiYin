@@ -14,8 +14,6 @@ import server.model.structureModels.ServerModel;
 
 import tools.serverTools.generators.Tags;
 
-import java.util.ArrayList;
-
 /**
  * Created by Hairuo on 2016-03-20.
  */
@@ -36,10 +34,12 @@ public class PostObject implements Net.HttpResponseListener {
      * Posts a model to the server
      *
      * @param model     model to be posted
+     * @param className name of the class of the model
      */
-    public void addModel(ArrayList<ServerModel> model){
+    public void addModel(ServerModel model, String className){
         // LibGDX NET CLASS
 
+        className = Tags.ID_TAGS.parseTag(className);
         Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
         httpPost.setUrl("http://"+ LocalDatabase.ipAddress+":8081/webservice/postServerModel");
         //httpPost.setHeader("X-Parse-Application-Id", app_id);
@@ -54,7 +54,7 @@ public class PostObject implements Net.HttpResponseListener {
 
 
 
-        httpPost.setContent(jString);
+        httpPost.setContent(jString+className);
         Gdx.net.sendHttpRequest(httpPost,this);
     }
 

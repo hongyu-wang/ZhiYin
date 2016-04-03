@@ -32,9 +32,9 @@ public class MessageBox {
      * @param message The message in the box.
      * @param byUser 0 means not by user, 1 means is by user.
      */
-    public MessageBox(String message, int byUser){
+    public MessageBox(String message, int byUser, String timestamp){
         initTable(byUser);
-        initTextBox(message);
+        initTextBox(message, timestamp);
     }
 
     /**
@@ -42,9 +42,9 @@ public class MessageBox {
      * @param e The executable associated with the button.
      * @param byUser See above.
      */
-    public MessageBox(Executable e, int byUser, MAudio audio){
+    public MessageBox(Executable e, int byUser, MAudio audio, String timestamp){
         initTable(byUser);
-        initSoundBox(e);
+        initSoundBox(e, timestamp);
         this.workingMAudio = audio;
 
     }
@@ -59,7 +59,7 @@ public class MessageBox {
         stack.layout();
     }
 
-    private void initTextBox(String message){
+    private void initTextBox(String message, String timestamp){
         Table table1 = new Table();
         Image image = new Image(new Texture("Friends4/Bubble" + byUser + "@" + StateManager.M + ".png"));
 
@@ -72,6 +72,8 @@ public class MessageBox {
         float height = text.getHeight() + 40;
 
         table1.add(image).width(480 * StateManager.M).height(height * StateManager.M);
+        table2.add(new Label(timestamp, SkinSingleton.getInstance()));
+        table2.row();
         table2.add(text).expand().center().left().padLeft(10*StateManager.M).width(460 * StateManager.M);
 
         stack.add(table1);
@@ -82,13 +84,15 @@ public class MessageBox {
         stack.layout();
     }
 
-    private void initSoundBox(final Executable e){
+    private void initSoundBox(final Executable e, String timestamp){
         stack.setHeight(128 * StateManager.M);
 
         Image image = new Image(new Texture("Friends4/Bubble" + byUser + "@" + StateManager.M + ".png"));
         stack.add(image);
 
         Table table = new Table();
+        table.add(new Label(timestamp, SkinSingleton.getInstance()));
+        table.row();
 
         Image image2 = new Image(new Texture("Friends4/Play" + byUser + "@" + StateManager.M + ".png"));
         final ImageButton button = new ImageButton(image2.getDrawable());
