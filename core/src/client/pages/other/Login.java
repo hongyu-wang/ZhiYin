@@ -54,12 +54,12 @@ public class Login extends State {
             for (Actor act : stage.getActors()){
                 act.remove();
             }
+            LocalDatabase.ipAddress = password.getText();
+
             vb = TalkerFactory.VeryBeginningInitializer();
             vb.init(text);
-
-            LocalDatabase.ipAddress = password.getText();
-            vb.push();
             vb.pull();
+            vb.push();
             checkPull = true;
             for (Actor act : stage.getActors()) {
                 act.remove();
@@ -116,7 +116,6 @@ public class Login extends State {
         if (vb.isUpdated()) {
             Pages.initClass();
             new ExecuteChangePage(Pages.HOME).execute();
-
         }
         else{
             vb.pull();

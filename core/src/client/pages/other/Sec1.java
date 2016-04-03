@@ -172,22 +172,4 @@ public class Sec1 extends Sec1Shell {
     public void dispose() {
 
     }
-
-    private void pullData(){
-
-    }
-
-    private void pullCommentsFromServer(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
-        java.util.List<Long> commentKeys = thisPost.getComments();
-
-        boolean isUpdated = true;
-
-        for(long key: commentKeys){
-            MComment model = localDatabase.getModel(key);
-            if(model.getAudio().size() > 0){
-                //TODO add comment
-            }
-        }
-    }
 }

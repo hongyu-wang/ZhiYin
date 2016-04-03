@@ -1,6 +1,7 @@
 package client.pages.other;
 
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendComment;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateComments;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import tools.serverTools.databases.LocalDatabase;
@@ -26,7 +27,7 @@ import java.util.List;
  * Created by blobbydude24 on 2016-03-28.
  */
 public class Comment extends CommentShell {
-    private MPost thisPost;
+    private long thisPost;
 
     private List<Long> currentComments;
 
@@ -43,7 +44,7 @@ public class Comment extends CommentShell {
     public Comment(State previousState, MMusic post){
         this.previousState = previousState;
 
-        this.thisPost = post;
+        this.thisPost = post.getKey();
         currentComments = Utils.<Long>newList();
         this.title = post.getTitle();
         this.subtitle = post.getArtist();
@@ -53,7 +54,7 @@ public class Comment extends CommentShell {
 
     public Comment(State previousState, MDiaryPost post){
         this.previousState = previousState;
-        this.thisPost = post;
+        this.thisPost = post.getKey();
         currentComments = Utils.<Long>newList();
         this.title = post.getTitle();
         MText tempText = LocalDatabaseFactory.createLocalDatabase().getModel(post.getText());
@@ -63,6 +64,9 @@ public class Comment extends CommentShell {
 
     public void init(){
         super.init();
+
+        //Required to update from server.
+//        new ExecuteUpdateComments(this);
 
         addMessageField();
 
@@ -166,37 +170,13 @@ public class Comment extends CommentShell {
     }
 
     private void pullCommentsFromServer(){
-        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
-        List<Long> commentKeys = thisPost.getComments();
 
-        for(long key: commentKeys){
-            if(!currentComments.contains(key)){
-
-                MComment comment = localDatabase.getModel(key);
-
-                if(comment.getAudio().size() > 0){
-                    continue;
-                }
-
-                String text = comment.getText();
-
-                User user = localDatabase.getModel(comment.getCreator());
-                UserProfile profile = localDatabase.getModel(user.getProfile());
-
-                SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
-                Date df = new Date(comment.getTimeStamp());
-                String timestamp = sdf.format(df);
-
-                addComment(profile.getUsername(), timestamp, text);
-
-                currentComments.add(key);
-            }
-        }
     }
 
-    public MPost getThisPost() {
+    public long getThisPost(){
         return thisPost;
     }
+
 
     public List<Long> getCurrentComments() {
         return currentComments;

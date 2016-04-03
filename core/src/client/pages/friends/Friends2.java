@@ -138,9 +138,9 @@ public class Friends2 extends Friends2Shell{
     }
 
 
-    public void addAudioMessage(MAudio audio, int userType){
+    public void addAudioMessage(MAudio audio, int userType, String timestamp){
         ExecutePlayMAudio executePlayMAudio = new ExecutePlayMAudio(audio);
-        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio, "timestamp");
+        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio, timestamp);
 
         this.addMessage(soundBox);
     }

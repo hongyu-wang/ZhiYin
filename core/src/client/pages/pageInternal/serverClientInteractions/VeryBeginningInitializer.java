@@ -20,6 +20,8 @@ import java.util.*;
  * Hashtag: 11000
  * MBand: 12000
  *
+ * TempMusic: -420
+ *
  * ProfileImages: -11
  *                -12
  *                -13
@@ -87,8 +89,8 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
 //            localDatabase.requestModelFromServer(MMusic.class.getName(), key++);
 
         //Hashtag
-        for(int i = 0; i < 3; i++)
-            localDatabase.requestModelFromServer(key++);
+//        for(int i = 0; i < 3; i++)
+//            localDatabase.requestModelFromServer(key++);
 
         //Conversations
         for(int i = 0; i < 3 ; i++){

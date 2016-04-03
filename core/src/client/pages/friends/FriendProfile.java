@@ -175,8 +175,6 @@ public class FriendProfile extends FriendProfileShell {
         LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
 
-        boolean isUpdated = true;
-
         for(long key: diaryContent.getDiaryKeys()){
             if(!currentDiaries.contains(key)) {
                 MDiaryPost post = localDatabase.getModel(key);

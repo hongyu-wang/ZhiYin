@@ -1,5 +1,6 @@
 package client.pages.musicDiary;
 
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateComments;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.Comment;
 import client.pages.other.Sec1;
@@ -29,22 +30,24 @@ public class Diary4 extends Diary4Shell{
     private Image image;
 
     public Diary4(MDiaryPost thisPost){
-
         this.thisPost = thisPost;
-
         populateFromServer();
-
         init();
     }
 
-
     protected void init(){
         super.init();
-        ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, thisPost));
+        Comment comments = new Comment(this, thisPost);
+        Sec1 secComments = new Sec1(this, thisPost);
+
+        ExecuteToTempState toComment = new ExecuteToTempState(comments);
         addImageButton("Diary/Comment@", toComment, 420, 100, 140, 140);
 
-        ExecuteToTempState toSec = new ExecuteToTempState(new Sec1(this, thisPost));
+        ExecuteToTempState toSec = new ExecuteToTempState(secComments);
         addImageButton("Diary/Sec@", toSec, 590, 100, 140, 140);
+
+        //Pulls from server.
+        new ExecuteUpdateComments(comments, secComments);
 
         Table table = new Table();
         Label label1 = new Label(title, SkinSingleton.getInstance());
