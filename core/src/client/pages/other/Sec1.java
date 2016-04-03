@@ -99,8 +99,7 @@ public class Sec1 extends Sec1Shell {
                 new ExecuteToTempState(
                         new Sec2(this, previousState)
 
-                    ),
-                new ExecuteSendAudioComment(this)
+                    )
                 )
         );
         add(dragButton);
@@ -142,12 +141,12 @@ public class Sec1 extends Sec1Shell {
         stage.addActor(table);
     }
 
-    public void addPost(String name, String time, Executable ex){
+    public void addPost(String name, String time, MAudio audio){
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
         Image ripples = new Image(new Texture("Friends4/Ripples0@" + StateManager.M + ".png"));
         ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png")).getDrawable());
 
-
+        final ExecutePlayMAudio ex = new ExecutePlayMAudio(audio);
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -167,12 +166,6 @@ public class Sec1 extends Sec1Shell {
         posts.add(t).width(750 * StateManager.M).height(140 * StateManager.M);
         posts.row();
     }
-
-    public void addAudioComment(String name, String time, MAudio audio){
-        ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
-        addPost(name, time, epma);
-    }
-
 
     @Override
     public void reset() {

@@ -1,6 +1,7 @@
 package client.pages.other;
 
 import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSendAudioComment;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -35,10 +36,11 @@ public class Sec2 extends Sec2Shell {
         sendButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                sec1.addPost("name", "time", send/*TODO fix*/);
                 new ExecuteToTempState(sec1).execute();
+                new ExecuteSendAudioComment(sec1).execute();
             }
         });
+
 
         stage.addActor(discardButton);
         stage.addActor(sendButton);
