@@ -10,7 +10,9 @@ import tools.AudioTools.AudioRecorder;
 public class ExecuteCancelRecording implements Executable {
     @Override
     public void execute() {
-        AudioRecorder ar = AudioRecorder.getInstance();
-        ar.stopRecording();
+        if (os == MAC) {
+            AudioRecorder ar = AudioRecorder.getInstance();
+            ar.stopRecording();
+        }
     }
 }

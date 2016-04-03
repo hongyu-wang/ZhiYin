@@ -11,6 +11,7 @@ import tools.serverTools.generators.SerialGenerator;
 import tools.utilities.Utils;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ public class VirtualDatabase {
     private Map<Long, ServerModel> data;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
+    private List<Long> updatedKeys;
     public SerialGenerator generator = SerialGenerator.getGenerator();
     public SerialGenerator HVGenerator = SerialGenerator.getHGenerator(1000);
 
@@ -34,6 +36,7 @@ public class VirtualDatabase {
         this.username_key = new HashMap<>();
         this.hashtag_key = new HashMap<>();
         this.data = new HashMap<>();
+        this.updatedKeys = Utils.<Long>newList();
 
         initUserData();
         initMediaData();
@@ -216,6 +219,7 @@ public class VirtualDatabase {
      */
     public void setModel(ServerModel model){
         data.put(model.getKey(), model);
+        updatedKeys.add(model.getKey());
     }
 
     /**Returns the key of the user based on a username.
@@ -434,4 +438,7 @@ public class VirtualDatabase {
         data.put(comment.getKey(), comment);
     }
 
+    public List<Long> getUpdatedKeys() {
+        return updatedKeys;
+    }
 }

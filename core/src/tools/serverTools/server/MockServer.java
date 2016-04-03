@@ -4,8 +4,10 @@ import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import tools.serverTools.databases.VirtualDatabase;
 import tools.serverTools.generators.SerialGenerator;
+import tools.utilities.Utils;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Kevin Zheng on 2016-03-09.
@@ -46,12 +48,23 @@ public class MockServer {
         return database.getModel(key);
     }
 
-    /**Pushes the model into the databse.
+    /**Pushes the model into the database.
      *
      * @param model
      */
     public void setModel(ServerModel model){
         database.setModel(model);
+    }
+
+    
+    public List<ServerModel> getUpdates(long size){
+        List<Long> updatedKeys = database.getUpdatedKeys();
+        List<ServerModel> rList = Utils.newList();
+        for(Long key : database.getUpdatedKeys().subList((int)size, updatedKeys.size())){
+            rList.add(database.getModel(key));
+        }
+
+        return rList;
     }
 
 }

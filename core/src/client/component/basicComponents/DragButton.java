@@ -36,17 +36,19 @@ public class DragButton extends Component implements Dragable {
         this.image = image;
         this.stage = stage;
         hide();
+
     }
 
     @Override
     protected void init() {
-        playAnimation = false;
+        playAnimation = true;
         begin = 0;
-        disable = false;
+        disable = true;
     }
 
 
     public void show(){
+        disable = false;
         this.setBounds(iniX, iniY, iniWidth, iniHeight);
         stage.addActor(image);
         begin = System.currentTimeMillis();
@@ -60,8 +62,8 @@ public class DragButton extends Component implements Dragable {
 
 
     public void setInitialBounds(float x, float y, float width, float height){
-        iniX = x*M; iniY = y*M; iniWidth = width*M; iniHeight = height*M;
-        image.setBounds(iniX, iniY, iniWidth, iniHeight);
+        iniX = x; iniY = y; iniWidth = width; iniHeight = height;
+        image.setBounds(iniX * M, iniY * M, iniWidth * M, iniHeight * M);
     }
 
     public void draw(Batch sb, float parentAlpha) {
@@ -90,14 +92,18 @@ public class DragButton extends Component implements Dragable {
 
     public void release(){
         if (System.currentTimeMillis() - begin > 200 && !disable){
-
             returnExecutable = releaseExecute;
+            push();
 
         } else if (!disable){
             returnExecutable = dragExecute;
-
+            push();
 
         }
+
+    }
+
+    private void push(){
         monitor.actionPerformed((new ActionEvent(this)));
         disable = true;
         hide();

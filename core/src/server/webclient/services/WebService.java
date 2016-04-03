@@ -18,6 +18,8 @@ import server.model.user.User;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author rsang
@@ -60,6 +62,14 @@ public class WebService{
     public Long getServerKey(){
         MockServer mockServer = ServerInteraction.getServer();
         return mockServer.getSerial();
+    }
+
+    @GET
+    @Path("/update/{param}")
+    @Produces("*/*")
+    public List<ServerModel> getServerKey(@PathParam("param") long size){
+        MockServer mockServer = ServerInteraction.getServer();
+        return mockServer.getUpdates(size);
     }
 
     /**

@@ -9,5 +9,6 @@ public interface AudioManager {
      *
      * @return
      */
-    public MAudio createAudio(String path) throws WebRequestException;
+    MAudio createAudio(String path) throws WebRequestException;
+    MAudio createMockAudio();
 }
