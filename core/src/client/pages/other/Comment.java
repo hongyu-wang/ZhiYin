@@ -35,7 +35,7 @@ public class Comment extends CommentShell {
     private String title;
     private String subtitle;
 
-    private TextField messageField;
+    private WorkingTextArea messageField;
 
     private ScrollPane scrollpane;
     private Table comments;
@@ -131,7 +131,6 @@ public class Comment extends CommentShell {
 
     private void send(){
         String message = getMessage();
-        System.out.println("message: " + message);
         if(!message.equals("")){
             addComment("name", "time", message);
             reset();
@@ -243,9 +242,6 @@ public class Comment extends CommentShell {
         return messageField;
     }
 
-    public void setMessageField(TextField messageField) {
-        this.messageField = messageField;
-    }
 
     public ScrollPane getScrollpane() {
         return scrollpane;

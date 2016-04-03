@@ -11,9 +11,15 @@ import java.util.List;
 public class ExecutableMultiplexer implements Executable {
 
     private List<Executable> executableList;
-
     public ExecutableMultiplexer(){
         executableList = tools.utilities.Utils.newList();
+    }
+
+    public ExecutableMultiplexer(Executable...executables){
+        this();
+        for (Executable ex : executables){
+            executableList.add(ex);
+        }
     }
 
     public void addExecutable(Executable executable){
@@ -21,16 +27,8 @@ public class ExecutableMultiplexer implements Executable {
     }
 
 
-    public Executable [] getAllChildren(){
-        return executableList.toArray(new Executable[executableList.size()]);
-    }
-
-
-
     @Override
     public void execute() {
-        for (Executable ex : executableList){
-            ex.execute();
-        }
+        executableList.forEach(client.stateInterfaces.Executable::execute);
     }
 }

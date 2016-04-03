@@ -1,14 +1,16 @@
 package client.stateInterfaces;
 
+import client.internalExceptions.NoExecutableException;
+
 /**
  * Created by Hongyu Wang on 3/20/2016.
  */
 public interface Dragable extends Performable{
 
 
-    void drag();
+    void drag() throws NoExecutableException;
 
-    void release();
+    void release() throws NoExecutableException;
 
 
 

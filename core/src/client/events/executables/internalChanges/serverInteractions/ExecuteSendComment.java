@@ -46,7 +46,7 @@ public class ExecuteSendComment implements ExecutePush {
         String timestamp = sdf.format(df);
 
         commentPage.addComment(userProfile.getUsername(), timestamp, userText);
-
+        commentPage.reset();
         commentPage.getCurrentComments().add(comment.getKey());
 
         localDatabase.pushModel(comment);

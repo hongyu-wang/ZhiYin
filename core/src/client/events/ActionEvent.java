@@ -38,20 +38,7 @@ public class ActionEvent {
         return source;
     }
 
-    /**
-     * the get all children here returns the All of the performable's children executables
-     * @return Executable [] of all executables within the action event.
-     *
-     * @throws NoExecutableException Thrown iff the source has no executable.
-     */
-    public Executable [] getAllChildren() throws NoExecutableException {
-        Executable e = source.getExecutable();
 
-        if (e instanceof ExecutableMultiplexer){
-            return ((ExecutableMultiplexer)e).getAllChildren();
-        }
-        return new Executable[]{source.getExecutable()};
-    }
 
 
 }

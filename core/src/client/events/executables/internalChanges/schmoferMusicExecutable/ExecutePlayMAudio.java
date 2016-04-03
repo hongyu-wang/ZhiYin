@@ -40,6 +40,8 @@ public class ExecutePlayMAudio implements Executable{
                 audioPlayer.prepareToPlay();
                 audioPlayer.play();
             }
+        } else{
+            System.out.println("Windows Play");
         }
 
 
