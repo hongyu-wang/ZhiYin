@@ -37,7 +37,7 @@ public final class AudioCreator {
 
     private static Map<String, Long> albumToKey;
 
-    public static TreeMap<String,MMusic> songNameToMMusic;
+    public static TreeMap<String, MMusic> songNameToMMusic;
 
     public static TreeMap<String, List<MMusic>> artistToMMusic;
 
@@ -45,10 +45,7 @@ public final class AudioCreator {
 
     private static List<ServerModel> models = Utils.newList();
 
-
     public static void initializeAlbums(){
-
-
         albumToKey = Utils.newMap();
         albumToKey.put("Songs About Jane",8000L);
         albumToKey.put("Purpose (Deluxe Edition)",8001L);

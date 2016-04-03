@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.soundCloud.MBand;
 
 import static client.singletons.StateManager.M;
 
@@ -32,11 +33,11 @@ public class ArtistProfile extends ArtistProfileShell {
     private Table songs;
 
 
-    public ArtistProfile(State previousState, Image profilePic, String artistName, String description){
+    public ArtistProfile(State previousState, MBand mBand, Image image){
         this.previousState = previousState;
-        this.profilePic = new Image(profilePic.getDrawable());
-        this.artistName = artistName;
-        this.description = description;
+        this.profilePic = image;
+        this.artistName = mBand.getName();
+        this.description = mBand.getDescription();
         init();
     }
 

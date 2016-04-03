@@ -1,8 +1,10 @@
 package client.pages.other;
 
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.musicDiary.Diary4;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -56,8 +58,6 @@ public class MyProfile extends MyProfileShell {
         this.profilePic = ImageManagerFactory.createImageManager().mImageToImage(mImage);
     }
 
-
-
     protected void init(){
 
         super.init();
@@ -86,27 +86,17 @@ public class MyProfile extends MyProfileShell {
         scrollpane2.setBounds(50 * StateManager.M,  350 * StateManager.M, 700 * StateManager.M, 150 * StateManager.M);
         stage.addActor(scrollpane2);
 
-        addPost("post1");
-        addPost("post2");
-        addPost("post3");
-        addPost("post4");
-        addPost("post5");
-
-//        (new Image(new Texture("Artist/Artist1.png")));
-//        addFollowing(new Image(new Texture("Artist/Artist2.png")));
-//        addFollowing(new Image(new Texture("Artist/Artist3.png")));
-//        addFollowing(new Image(new Texture("Artist/Artist4.png")));
-//        addFollowing(new Image(new Texture("Artist/Artist5.png")));
-
     }
 
     // FIXME: 2016-04-03 Point to diary post.
-    public void addPost(String post){
+    public void addPost(MDiaryPost diaryPost){
         Stack s = new Stack();
 
         Table t = new Table();
 
-        Label single = new Label(post, SkinSingleton.getInstance());
+        String title = diaryPost.getTitle();
+
+        Label single = new Label(title, SkinSingleton.getInstance());
         Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
         Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
 
@@ -123,7 +113,7 @@ public class MyProfile extends MyProfileShell {
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.DIARY1).execute();
+                new ExecuteToTempState(new Diary4(diaryPost)).execute();
             }
         });
 
@@ -132,27 +122,27 @@ public class MyProfile extends MyProfileShell {
     }
 
     //TODO FIXME: 2016-04-03 Uncomment.
-//    public void follow(ArtistProfile profile){
-//        ImageButton artistButton = new ImageButton(profile.getImage().getDrawable());
-//        artistButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                new ExecuteToTempState(profile).execute();
-//            }
-//        });
-//
-//        ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
-//        artistButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                artistButton.remove();
-//                removeButton.remove();
-//            }
-//        });
-//
-//        following.add(removeButton).width(56 * StateManager.M).height(56 * StateManager.M).padRight(50 * StateManager.M);
-//        following.add(artistButton).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
-//    }
+    public void follow(ArtistProfile profile){
+        ImageButton artistButton = new ImageButton(profile.getImage().getDrawable());
+        artistButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                new ExecuteToTempState(profile).execute();
+            }
+        });
+
+        ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
+        artistButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                artistButton.remove();
+                removeButton.remove();
+            }
+        });
+
+        following.add(removeButton).width(56 * StateManager.M).height(56 * StateManager.M).padRight(50 * StateManager.M);
+        following.add(artistButton).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
+    }
 
     @Override
     public void reset() {
@@ -176,7 +166,7 @@ public class MyProfile extends MyProfileShell {
 //        updateArtistsFromServer(user);
 //        updateDiariesFromServer(user);
 //    }
-
+//
 //    private void updateArtistsFromServer(User user){
 //        LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
 //        java.util.List<Long> bandKeys = user.getBandKeys();

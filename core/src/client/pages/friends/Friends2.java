@@ -38,7 +38,6 @@ public class Friends2 extends Friends2Shell{
         return conversation;
     }
 
-
     private ScrollPane scrollpane;
     private TextField messageField;
 
@@ -46,8 +45,6 @@ public class Friends2 extends Friends2Shell{
         return scrollpane;
     }
 
-    private Executable updatePage;
-    private long counter;
     private String friendName;
     private Table table;
 
@@ -73,6 +70,9 @@ public class Friends2 extends Friends2Shell{
     protected void init(){
         super.init();
 
+        //Required for updating this page from another source.
+        new ExecuteUpdateMessages(this);
+
         addMessageField();
 
         table = new Table();
@@ -93,13 +93,8 @@ public class Friends2 extends Friends2Shell{
         sendButton.setExecutable(em3);
         add(sendButton);
 
-        updatePage = new ExecuteUpdateMessages(this);
-
-
-
         initititititit();
     }
-
 
     private void setUpRecord(){
         //This section initializes the DragButton
@@ -123,9 +118,6 @@ public class Friends2 extends Friends2Shell{
         //---------------------------------------------------------------------------------
 
     }
-
-
-
 
     public void addMessage(MessageBox box){
         table.add(box.getTable()).width(480 * StateManager.M).padTop(56 * StateManager.M).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
@@ -169,7 +161,6 @@ public class Friends2 extends Friends2Shell{
         stage.act(); //This bug tho
 
         messageField.getText();
-        counter ++;
     }
 
     public void addAudioMessage(MAudio audio, int userType){
@@ -184,8 +175,6 @@ public class Friends2 extends Friends2Shell{
 
         this.addMessage(box);
     }
-
-
 
     public String getMessage(){
         return messageField.getText();
