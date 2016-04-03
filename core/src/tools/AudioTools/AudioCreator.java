@@ -66,11 +66,13 @@ public final class AudioCreator {
             albumArt.setImage(fh.readBytes());
             assert(albumArt.getImage()!=null);
             albumArt.setName(s);
+
             models.add(albumArt);
-
-
         }
 
+
+
+        AudioCreator.pushList();
     }
 
 
@@ -108,7 +110,6 @@ public final class AudioCreator {
                 //1mS0C00lz - paul's password
             }
         }
-
 
         AudioCreator.pushList();
 
