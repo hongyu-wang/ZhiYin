@@ -48,7 +48,7 @@ public class MockServer {
         return database.getModel(key);
     }
 
-    /**Pushes the model into the databse.
+    /**Pushes the model into the database.
      *
      * @param model
      */
@@ -56,14 +56,9 @@ public class MockServer {
         database.setModel(model);
     }
 
-    public List<ServerModel> getUpdates(List<Long> alreadyUpdated){
-        List<ServerModel> rList = Utils.newList();
-        for(Long l : database.getUpdatedKeys()){
-            if(!alreadyUpdated.contains(l)){
-                rList.add(database.getModel(l));
-            }
-        }
-        return rList;
+    
+    public List<Long> getUpdates(){
+        return database.getUpdatedKeys();
     }
 
 }

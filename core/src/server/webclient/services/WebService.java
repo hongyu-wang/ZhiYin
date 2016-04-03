@@ -65,11 +65,11 @@ public class WebService{
     }
 
     @GET
-    @Path("/update/{param}")
+    @Path("/update")
     @Produces("*/*")
-    public List<ServerModel> getServerKey(@PathParam("param") Long[] alreadyUpdated){
+    public List<Long> update(){
         MockServer mockServer = ServerInteraction.getServer();
-        return mockServer.getUpdates(Arrays.asList(alreadyUpdated));
+        return mockServer.getUpdates();
     }
 
     /**
