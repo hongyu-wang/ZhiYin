@@ -1,14 +1,18 @@
 package client.pages.home;
 
 import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateHashtagSongs;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
+import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MMusic;
 
 import static client.singletons.StateManager.M;
 
@@ -25,9 +29,15 @@ public class Tagged extends TaggedShell {
 
     private State previousState;
 
+    private ExecuteUpdate update;
+
     public Tagged(State previousState, String tag){
         this.previousState = previousState;
         this.tag = tag;
+
+        //Required for server updating.
+        this.update = new ExecuteUpdateHashtagSongs(this, tag);
+
         init();
     }
 
@@ -57,17 +67,11 @@ public class Tagged extends TaggedShell {
 
         scrollpane.setScrollingDisabled(true, false);
 
-        addSong("Song1");
-        addSong("Song2");
-        addSong("Song3");
-        addSong("Song4");
-        addSong("Song5");
-        addSong("Song6");
-        addSong("Song7");
-        addSong("Song8");
     }
 
-    public void addSong(String songName){
+    public void addSong(MMusic music){
+        String songName = music.getName();
+
         Table table = new Table();
         table.add(new Label(songName, SkinSingleton.getInstance())).expand().left().padLeft(50 * M);
         table.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26*M).expand().right().padRight(50 * M);
@@ -78,10 +82,11 @@ public class Tagged extends TaggedShell {
         s.add(new Image(new Texture("Home/BlackBG@" + M + ".png")));
         s.add(table);
 
+        final ExecuteToTempState ex = new ExecuteToTempState(new NowPlaying(this, music));
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new TestExecutable("NowPlaying").execute();
+                ex.execute();
             }
         });
 

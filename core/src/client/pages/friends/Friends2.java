@@ -9,6 +9,7 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendAudioMessage;
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendMessage;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateMessages;
 import client.pages.friends.boxes.MessageBox;
 import client.singletons.SkinSingleton;
@@ -44,6 +45,10 @@ public class Friends2 extends Friends2Shell{
 
     private Table table;
 
+
+
+    private ExecuteUpdate update;
+
     public Friends2(String friendName){
         this.friendName = friendName;
         this.messageKeys = Utils.newList();
@@ -58,7 +63,7 @@ public class Friends2 extends Friends2Shell{
         super.init();
 
         //Required for updating this page from another source.
-        new ExecuteUpdateMessages(this);
+        this.update = new ExecuteUpdateMessages(this);
 
         addMessageField();
 

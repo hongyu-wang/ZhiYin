@@ -46,7 +46,6 @@ public class ExecuteUpdateComments extends ExecuteUpdate {
                     String timestamp = Constants.getCurrentTimestamp(comment.getTimeStamp());
 
                     commentPage.addComment(profile.getUsername(), timestamp, text);
-
                     commentPage.getCurrentComments().add(key);
                 }
             }

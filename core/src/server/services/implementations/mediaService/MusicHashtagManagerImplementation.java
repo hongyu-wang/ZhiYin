@@ -2,6 +2,7 @@ package server.services.implementations.mediaService;
 
 import server.model.media.MHashtag;
 import server.services.interfaces.models.MusicHashtagManager;
+import tools.utilities.Utils;
 
 /**
  * Created by Kevin Zheng on 2016-03-04.
@@ -33,6 +34,7 @@ public class MusicHashtagManagerImplementation implements MusicHashtagManager {
     public MHashtag createNewHashTag(String hashtagName) {
         MHashtag hashtag = new MHashtag();
 
+        hashtag.setMusicKeys(Utils.<Long>newList());
 //        long hashtagKey = 0;
 //        hashtag.setKey(hashtagKey);
 //

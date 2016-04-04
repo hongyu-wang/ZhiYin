@@ -6,12 +6,14 @@ import server.webservices.UpdateObject;
 import tools.utilities.Utils;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by Kevin Zheng on 2016-04-02.
  */
 public class ServerTalker extends Talkers {
-    private List<Long> pulledKeys;
+    private Set<Long> pulledKeys;
     private int waitCounter = 1;
     private List<ExecuteUpdate> executables;
 
@@ -21,15 +23,14 @@ public class ServerTalker extends Talkers {
 
     }
 
-    public void init(List<Long> pullKeys){
+    public void init(Set<Long> pullKeys){
         this.pulledKeys = pullKeys;
-        this.executables = Utils.newList();
+        this.executables = new CopyOnWriteArrayList<>();
     }
 
     public void addExecutable(ExecuteUpdate updater){
         executables.add(updater);
     }
-
 
     @Override
     public void pull() {

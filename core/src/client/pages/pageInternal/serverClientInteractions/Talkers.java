@@ -53,6 +53,10 @@ public abstract class Talkers implements Updatable{
             if (localDatabase.getModel(i) == null)
                 return false;
         }
+        for(long i = 20000; i < 20010; i++){
+            if (localDatabase.getModel(i) == null)
+                return false;
+        }
         return true;
     }
 

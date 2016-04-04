@@ -1,6 +1,8 @@
 package client.pages.other;
 
 import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateArtistSongs;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -9,7 +11,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MMusic;
 import server.model.soundCloud.MBand;
+import tools.utilities.Utils;
+import java.util.List;
 
 /**
  * This is the profile page as given in the
@@ -18,6 +23,11 @@ import server.model.soundCloud.MBand;
  * Created by Hongyu Wang on 3/9/2016.
  */
 public class ArtistProfile extends ArtistProfileShell {
+    private List<Long> musicKeys;
+
+    public List<Long> getMusicKeys() {
+        return musicKeys;
+    }
 
     private State previousState;
 
@@ -30,12 +40,17 @@ public class ArtistProfile extends ArtistProfileShell {
 
     private Table songs;
 
+    private ExecuteUpdate update;
 
     public ArtistProfile(State previousState, MBand mBand, Image image){
         this.previousState = previousState;
         this.profilePic = new Image(image.getDrawable());
         this.artistName = mBand.getName();
         this.description = mBand.getDescription();
+        this.musicKeys = Utils.newList();
+
+        this.update = new ExecuteUpdateArtistSongs(this, mBand);
+
         init();
     }
 
@@ -80,18 +95,11 @@ public class ArtistProfile extends ArtistProfileShell {
         scrollpane = new ScrollPane(songs);
         scrollpane.setBounds(0, 200*M, 750*M, 700*M);
         stage.addActor(scrollpane);
-
-        addSong("Song1");
-        addSong("Song2");
-        addSong("Song3");
-        addSong("Song4");
-        addSong("Song5");
-        addSong("Song6");
-        addSong("Song7");
-        addSong("Song8");
     }
 
-    public void addSong(String songName){
+    public void addSong(MMusic song){
+        String songName = song.getName();
+
         Table table = new Table();
         table.add(new Label(songName, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
         table.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26*M).expand().right().padRight(50*M);

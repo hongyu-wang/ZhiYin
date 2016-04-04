@@ -50,10 +50,10 @@ public class Diary4 extends Diary4Shell{
         ExecuteToTempState changePage = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", changePage, 0, 1217, 117, 117);
 
-        //if(audio != null){
+        if(audio != null){
             TestExecutable playAudio = new TestExecutable("play audio");
             addImageButton("Diary/Play@", playAudio, 0, 0, 250, 250);
-        //}
+        }
 
         ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, thisPost));
         addImageButton("Diary/Comment@", toComment, 250, 0, 250, 250);
@@ -119,6 +119,7 @@ public class Diary4 extends Diary4Shell{
 
         MImage image = localDatabase.getModel(thisPost.getImageKey());
         this.image = ImageManagerFactory.createImageManager().mImageToImage(image);
-    }
 
+        this.audio = localDatabase.getModel(thisPost.getAudioKey());
+    }
 }

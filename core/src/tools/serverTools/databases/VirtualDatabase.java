@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /** *
  * Created by Kevin Zheng on 2016-03-09.
@@ -34,9 +35,9 @@ public class VirtualDatabase {
     }
 
     public void init() throws IOException{
-        this.username_key = new HashMap<>();
-        this.hashtag_key = new HashMap<>();
-        this.data = new HashMap<>();
+        this.username_key = new ConcurrentHashMap<>();
+        this.hashtag_key = new ConcurrentHashMap<>();
+        this.data = new ConcurrentHashMap<>();
         this.updatedKeys = Utils.<Long>newList();
 
         initUserData();
@@ -82,50 +83,25 @@ public class VirtualDatabase {
     }
 
     private void initHashtags(){
-        MHashtag hashtag1 = new MHashtag();
-        hashtag1.setKey(20000);
-        hashtag1.setHashtag("Sorry");
+        MHashtag hashtag1 = generateHashtags("Sorry", 20000);
 
-        MHashtag hashtag2 = new MHashtag();
-        hashtag2.setKey(20001);
-        hashtag2.setHashtag("MissingU");
+        MHashtag hashtag2 = generateHashtags("MissingU", 20001);
 
-        MHashtag hashtag3 = new MHashtag();
-        hashtag3.setKey(20002);
-        hashtag3.setHashtag("Weeknd");
+        MHashtag hashtag3 = generateHashtags("Weeknd", 20002);
 
-        MHashtag hashtag4 = new MHashtag();
-        hashtag4.setKey(20003);
-        hashtag4.setHashtag("RnB");
+        MHashtag hashtag4 = generateHashtags("RnB", 20003);
 
-        MHashtag hashtag5 = new MHashtag();
-        hashtag5.setKey(20004);
-        hashtag5.setHashtag("Pop");
+        MHashtag hashtag5 = generateHashtags("Pop", 20004);
 
-        MHashtag hashtag6 = new MHashtag();
-        hashtag5.setKey(20005);
-        hashtag5.setHashtag("M5");
+        MHashtag hashtag6 = generateHashtags("M5", 20005);
 
-        MHashtag hashtag7 = new MHashtag();
-        hashtag5.setKey(20006);
-        hashtag5.setHashtag("Bieber");
+        MHashtag hashtag7 = generateHashtags("Bieber", 20006);
 
-        MHashtag hashtag8 = new MHashtag();
-        hashtag5.setKey(20007);
-        hashtag5.setHashtag("Kanye");
+        MHashtag hashtag8 = generateHashtags("Kanye", 20007);
 
-        MHashtag hashtag9 = new MHashtag();
-        hashtag5.setKey(20008);
-        hashtag5.setHashtag("Ed");
+        MHashtag hashtag9 = generateHashtags("Ed", 20008);
 
-        MHashtag hashtag10 = new MHashtag();
-        hashtag5.setKey(20009);
-        hashtag5.setHashtag("LoveYourself");
-
-
-
-
-
+        MHashtag hashtag10 = generateHashtags("LoveYourself", 20009);
 
 
         data.put(hashtag1.getKey(),hashtag1);
@@ -140,24 +116,34 @@ public class VirtualDatabase {
         data.put(hashtag10.getKey(),hashtag10);
     }
 
+    private MHashtag generateHashtags(String tag, long key){
+        MHashtag hashtag = new MHashtag();
+        hashtag.setKey(key);
+        hashtag.setHashtag(tag);
+        hashtag.setMusicKeys(Utils.newList());
+
+        return hashtag;
+    }
+
+
     private void initMediaData(){
 
-        //Image
+//        Image
 //        MImage image1 = generateTestImage("Alice's Profile", "UserProfiles//Alice_After_The_War.png");
 //        MImage image2 = generateTestImage("Benny's Profile", "UserProfiles//Benny_After_The_War.png");
 //        MImage image3 = generateTestImage("Cindy's Profile", "UserProfiles//Cindy_After_The_War.png");
-
-        //Audio
+//
+//        Audio
 //        MAudio audio1 = generateTestAudio("Audio_1.mp3");
 //        MAudio audio2 = generateTestAudio("Audio_2.mp3");
 //        MAudio audio3 = generateTestAudio("Audio_3.mp3");
-
-        //Music
+//
+//        Music
 //        MMusic music1 = generateTestMusic("Music_1", audio1);
 //        MMusic music2 = generateTestMusic("Music_2", audio2);
 //        MMusic music3 = generateTestMusic("Music_3", audio3);
-
-        //Hashtag
+//
+//        Hashtag
 //        MHashtag tag1 = generateTestHashtags("#Happy");
 //        MHashtag tag2 = generateTestHashtags("#Sad");
 //        MHashtag tag3 = generateTestHashtags("#Love");
@@ -165,7 +151,7 @@ public class VirtualDatabase {
 //        List<Long> music_tag1 = tag1.getMusicKeys();
 //        List<Long> music_tag2 = tag2.getMusicKeys();
 //        List<Long> music_tag3 = tag3.getMusicKeys();
-
+//
 //        music_tag1.add(music1.getKey());
 //        music_tag2.add(music2.getKey());
 //        music_tag3.add(music3.getKey());

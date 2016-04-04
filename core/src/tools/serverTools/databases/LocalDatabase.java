@@ -2,9 +2,12 @@ package tools.serverTools.databases;
 
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import driver.GameLoop;
+import server.model.media.MHashtag;
 import server.model.serverKey.MServerKey;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
+import server.services.factories.MusicHashtagManagerFactory;
+import server.services.interfaces.models.MusicHashtagManager;
 import server.webservices.PostObject;
 import server.webservices.RequestObject;
 import server.webservices.ServerKeyObject;
@@ -15,6 +18,8 @@ import tools.utilities.Utils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**A storage object of all model types the user client will need.
  *
@@ -24,13 +29,32 @@ import java.util.Map;
 public class LocalDatabase {
     private long user;
     private int pullCount;
-    private List<Long> pulledKeys;
+    private Set<Long> pulledKeys;
     private Map<Long, ServerModel> models;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
     private SerialGenerator generator;
 
     public static String ipAddress = "localhost";
+
+    private String[] hashtags = {
+            "Sorry",
+            "MissingU",
+            "Weeknd",
+            "RnB",
+            "Pop",
+            "M5",
+            "Bieber",
+            "Kanye",
+            "Ed",
+            "LoveYourself"
+    };
+
+    private String[] usernames = {
+            "Alice",
+            "Benny",
+            "Cindy"
+    };
 
     /**Returns a pre generated serial key from the server.
      *
@@ -61,9 +85,25 @@ public class LocalDatabase {
         models = Utils.newMap();
         hashtag_key = Utils.newMap();
         username_key = Utils.newMap();
-        pulledKeys = Utils.newList();
+        pulledKeys = new ConcurrentSkipListSet<>();
 //        unassignedKeys = new ArrayList<Long>();
+        initStringMaps();
     }
+
+    private void initStringMaps(){
+        long i = 1;
+        for(String name: usernames){
+            username_key.put(name, i);
+            i++;
+        }
+
+        i = 20000L;
+        for(String tag: hashtags){
+            hashtag_key.put(tag, i);
+            i++;
+        }
+    }
+
 
     public void initServerTalker(){
         TalkerFactory.getServerTalker().init(pulledKeys);
@@ -215,18 +255,20 @@ public class LocalDatabase {
      * @return
      */
     public long getUserKeyByName(String username){
-        if(username.equals("Alice")){
-            return 1;
+        if(username_key.containsKey(username)){
+            return username_key.get(username);
         }
-        if(username.equals("Benny")){
-            return 2;
-        }
-        if(username.equals("Cindy")){
-            return 3;
-        }
-
         throw new IndexOutOfBoundsException("Incorrect username.");
     }
+
+    public Set<String> getHashtags(){
+        return hashtag_key.keySet();
+    }
+
+    public Set<String> getUsernames(){
+        return username_key.keySet();
+    }
+
 
     /**Gets a hashtag by name.
      *
@@ -234,16 +276,24 @@ public class LocalDatabase {
      * @return
      */
     public long getHashtagByName(String hashtag){
-//        try{
-//            MHashtag tag = this.getModel(WebServiceClient.getHashtagByName(hashtag));
-//            return tag;
-//        }
-//        catch(WebRequestException e){
-//            System.out.println("Unable to get hashtag.");
-//        }
-//        return null;
-
-        // FIXME: 2016-04-02
-        return 0;
+        if(hashtag_key.containsKey(hashtag)){
+            return hashtag_key.get(hashtag);
+        }
+        else{
+//            return newHashtag(hashtag);
+            throw new IndexOutOfBoundsException("Incorrect username.");
+        }
     }
+
+    private long newHashtag(String hashtag){
+        MHashtag newHashtag = MusicHashtagManagerFactory.createMusicHashtagManager().createNewHashTag(hashtag);
+        newHashtag.setKey(generateKey());
+        hashtag_key.put(newHashtag.getHashtagName(), newHashtag.getKey());
+        List<ServerModel> pushList = Utils.newList();
+        pushList.add(newHashtag);
+        this.pushModel(pushList);
+
+        return newHashtag.getKey();
+    }
+
 }

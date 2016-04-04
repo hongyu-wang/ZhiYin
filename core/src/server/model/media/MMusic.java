@@ -1,13 +1,12 @@
 package server.model.media;
 
-import server.model.social.MPost;
-import server.model.structureModels.ServerModel;
+import server.model.soundCloud.MMusicPost;
 
 /**
  *
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class MMusic extends MPost {
+public class MMusic extends MMusicPost {
     /**
      * The name of the music.
      */

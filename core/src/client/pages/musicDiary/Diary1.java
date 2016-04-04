@@ -1,5 +1,6 @@
 package client.pages.musicDiary;
 
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateAllDiaries;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import tools.serverTools.databases.LocalDatabase;
@@ -36,6 +37,8 @@ public class Diary1 extends Diary1Shell {
 
     private Table table;
 
+    private ExecuteUpdate update;
+
     public Diary1(){
         init();
     }
@@ -56,7 +59,7 @@ public class Diary1 extends Diary1Shell {
         stage.addActor(scrollpane);
 
         //Updates from server.
-        new ExecuteUpdateAllDiaries(this);
+        this.update = new ExecuteUpdateAllDiaries(this);
     }
 
     public void addPost(MDiaryPost thisPost, String creator){

@@ -1,6 +1,7 @@
 package client.pages.friends;
 
 import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileArtists;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileDiary;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
@@ -54,6 +55,9 @@ public class FriendProfile extends FriendProfileShell {
 
     private Image image;
 
+    private ExecuteUpdate update1;
+    private ExecuteUpdate update2;
+
     public FriendProfile(State previousState, String name){
         this.previousState = previousState;
         this.name = name;
@@ -75,8 +79,8 @@ public class FriendProfile extends FriendProfileShell {
 
         //----ServerUpdates-------//
 
-        new ExecuteUpdateProfileArtists(this, name);
-        new ExecuteUpdateProfileDiary(this, name);
+        this.update1 = new ExecuteUpdateProfileArtists(this, name);
+        this.update2 = new ExecuteUpdateProfileDiary(this, name);
 
         //----ServerUpdates-------//
 

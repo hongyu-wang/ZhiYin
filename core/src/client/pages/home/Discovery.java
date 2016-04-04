@@ -1,6 +1,8 @@
 package client.pages.home;
 
 
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateTags;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
@@ -26,6 +28,8 @@ public class Discovery extends DiscoveryShell {
 
     private TextField searchField;
 
+    private ExecuteUpdate update;
+
     public Discovery(){
         init();
     }
@@ -43,26 +47,7 @@ public class Discovery extends DiscoveryShell {
 
         numTags = 0;
 
-        addTag("tag1");
-        addTag("tag2");
-        addTag("tag3");
-        addTag("tag4");
-        addTag("tag5");
-        addTag("tag6");
-        addTag("tag7");
-        addTag("tag8");
-        addTag("tag9");
-        addTag("tag10");
-        addTag("tag11");
-        addTag("tag12");
-        addTag("tag13");
-        addTag("tag14");
-        addTag("tag15");
-        addTag("tag16");
-        addTag("tag17");
-        addTag("tag18");
-        addTag("tag19");
-        addTag("tag20");
+        this.update = new ExecuteUpdateTags(this);
     }
 
     public void addTag(String tagName){

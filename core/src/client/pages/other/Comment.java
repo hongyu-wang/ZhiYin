@@ -65,9 +65,6 @@ public class Comment extends CommentShell {
     public void init(){
         super.init();
 
-        //Required to update from server.
-//        new ExecuteUpdateComments(this);
-
         addMessageField();
 
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);

@@ -1,13 +1,17 @@
 package tools.serverTools.server;
 
 import server.model.media.MText;
+import server.model.social.MConversation;
 import server.model.structureModels.ServerModel;
 import tools.serverTools.databases.VirtualDatabase;
 import tools.serverTools.generators.SerialGenerator;
 import tools.utilities.Utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Kevin Zheng on 2016-03-09.
@@ -53,7 +57,26 @@ public class MockServer {
      * @param model
      */
     public void setModel(ServerModel model){
+        if(model instanceof MConversation){
+            ServerModel databaseModel = database.getModel(model.getKey());
+            if(databaseModel != null){
+                MConversation convo1 = (MConversation)model;
+                MConversation convo2 = (MConversation)databaseModel;
+
+                ((MConversation) model).setMessageList(union(convo1.getMessageList(), convo2.getMessageList()));
+            }
+        }
+
         database.setModel(model);
+    }
+
+    private <T> List<T> union(List<T> list1, List<T> list2) {
+        Set<T> set = new HashSet<T>();
+
+        set.addAll(list1);
+        set.addAll(list2);
+
+        return new ArrayList<T>(set);
     }
 
     
