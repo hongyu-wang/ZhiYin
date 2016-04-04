@@ -3,6 +3,7 @@ package client.events.executables.internalChanges.serverInteractions;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
+import client.pages.pageInternal.serverClientInteractions.ServerTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.Talkers;
 import client.tools.Constants;
@@ -28,11 +29,8 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
     private long conversation;
 
     public ExecuteUpdateMessages(Friends2 friend2){
-        UserConversations userConversations = localDatabase.getModel(localDatabase.getMainUser().getConversations());
-        List<Long> convoList = userConversations.getConvoKeys();
-
         this.friend2 = friend2;
-        this.conversation = convoList.get(TalkerFactory.getMessagesTalker().indexByFriend(friend2.getFriendName()));
+        this.conversation = ServerTalker.getConversationByFriend(friend2.getFriendName()).getKey();
     }
 
     @Override

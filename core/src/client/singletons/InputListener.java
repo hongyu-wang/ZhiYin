@@ -102,11 +102,7 @@ public class InputListener implements InputProcessor, Constants {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.RIGHT){
-            StateManager.getInstance().translateStage(-1);
-        }else if (keycode == Input.Keys.LEFT){
-            StateManager.getInstance().translateStage(1);
-        }
+
         return false;
     }
 

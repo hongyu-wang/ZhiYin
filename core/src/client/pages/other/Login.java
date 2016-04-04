@@ -7,7 +7,7 @@ import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveBu
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import tools.serverTools.databases.LocalDatabase;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
@@ -15,9 +15,6 @@ import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 
 
 /**
@@ -83,6 +80,7 @@ public class Login extends State {
         stage.addActor(image);
         username = new WorkingTextArea("Alice", SkinSingleton.getInstance());
         password = new WorkingTextArea("localhost", SkinSingleton.getInstance());
+
 
         username.setBounds(102 * M, (HEIGHT - 798 - 72) * M, 545 * M, 72 * M);
         password.setBounds(102 * M, (HEIGHT - 910 - 72) * M, 545 * M, 72 * M);

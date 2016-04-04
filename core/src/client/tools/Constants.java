@@ -28,4 +28,10 @@ public interface Constants {
         Date df = new Date(time);
         return sdf.format(df);
     }
+
+
+    int RECIEVED_READ = 1;
+    int RECIEVED_UNREAD = 2;
+    int SENT_READ = 3;
+    int SENT_UNREAD = 4;
 }

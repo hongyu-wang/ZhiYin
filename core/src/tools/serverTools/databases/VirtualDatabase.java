@@ -375,9 +375,6 @@ public class VirtualDatabase {
 
 
     private void generateConversation(User user1, User user2){
-        UserConversations convo_1 = (UserConversations)data.get(user1.getConversations());
-        UserConversations convo_2 = (UserConversations)data.get(user2.getConversations());
-
         MConversation one_two = new MConversation();
 
         one_two.setKey(generator.generateSerial());
@@ -388,11 +385,20 @@ public class VirtualDatabase {
 
         one.add(user1.getKey());
         one.add(user2.getKey());
-
         one_two.setParticipants(one);
+
+        List<Long> seenbyList = Utils.newList();
+        seenbyList.add(user1.getKey());
+        seenbyList.add(user2.getKey());
+        one_two.setSeenBy(seenbyList);
+
+        UserConversations convo_1 = (UserConversations)data.get(user1.getConversations());
+        UserConversations convo_2 = (UserConversations)data.get(user2.getConversations());
 
         convo_1.getConvoKeys().add(one_two.getKey());
         convo_2.getConvoKeys().add(one_two.getKey());
+
+
 
         data.put(one_two.getKey(), one_two);
     }
