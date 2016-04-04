@@ -125,6 +125,7 @@ public class MyProfile extends MyProfileShell implements Profile {
 
     //TODO FIXME: 2016-04-03 Uncomment.
     public void follow(final ArtistProfile profile){
+        Stack s = new Stack();
         final ImageButton artistButton = new ImageButton(profile.getImage().getDrawable());
         artistButton.addListener(new ClickListener() {
             @Override
@@ -132,6 +133,7 @@ public class MyProfile extends MyProfileShell implements Profile {
                 new ExecuteToTempState(profile).execute();
             }
         });
+
 
         final ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
         artistButton.addListener(new ClickListener() {
