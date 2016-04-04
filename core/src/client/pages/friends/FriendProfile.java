@@ -6,6 +6,7 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteUpdat
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
+import client.stateInterfaces.Profile;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
@@ -29,7 +30,7 @@ import java.util.List;
 /**
  * Created by blobbydude24 on 2016-03-21.
  */
-public class FriendProfile extends FriendProfileShell {
+public class FriendProfile extends FriendProfileShell implements Profile {
     private List<Long> currentDiaries;
     private List<Long> currentArtists;
 
