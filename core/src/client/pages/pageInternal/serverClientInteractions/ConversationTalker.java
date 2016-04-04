@@ -90,42 +90,6 @@ public class ConversationTalker extends Talkers {
         return currentConversation.isWaiting();
     }
 
-    public int indexByFriend(String friendName){
-        int friendKey = (int) localDatabase.getUserKeyByName(friendName);
-
-
-        switch((int) localDatabase.getMainUser().getKey()){
-            case 1:
-                if(friendKey == 2){
-                    return 0;
-                }
-                else if(friendKey == 3){
-                    return 1;
-                }
-                break;
-
-            case 2:
-                if(friendKey == 1){
-                    return 0;
-                }
-                else if(friendKey == 3) {
-                    return 1;
-                }
-                break;
-
-            case 3:
-                if(friendKey == 1) {
-                    return 0;
-                }
-                else if(friendKey == 2) {
-                    return 1;
-                }
-                break;
-        }
-
-        throw new IndexOutOfBoundsException("You didn't enter a correct user");
-    }
-
 
 
 

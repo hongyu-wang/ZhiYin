@@ -1,12 +1,14 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.friends.Friends2;
+import client.pages.pageInternal.serverClientInteractions.ServerTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.tools.Constants;
 import server.model.media.MText;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
 import server.model.structureModels.ServerModel;
+import server.model.user.User;
 import server.model.user.UserConversations;
 import server.services.factories.MessageManagerFactory;
 import server.services.factories.TextManagerFactory;
@@ -21,30 +23,23 @@ import java.util.List;
 public class ExecuteSendMessage implements ExecuteServer {
     private Friends2 friend2;
     private long conversation;
-    private List<Long> messageKeys;
 
     public ExecuteSendMessage(Friends2 friend2){
         this.friend2 = friend2;
-        UserConversations userConversations = localDatabase.getModel(localDatabase.getMainUser().getConversations());
-        List<Long> convoList = userConversations.getConvoKeys();
-
-        this.conversation = convoList.get(TalkerFactory.getMessagesTalker().indexByFriend(friend2.getFriendName()));
-
-        this.messageKeys = friend2.getMessageKeys();
+        this.conversation = ServerTalker.getConversationByFriend(friend2.getFriendName()).getKey();
     }
 
     @Override
     public void execute() {
         MConversation conversation = localDatabase.getModel(this.conversation);
-
-        List<Long> messageKeys = conversation.getMessageList();
-        String userText = friend2.getMessage();
-        MText text = generateText(userText);
+        MText text = generateText(friend2.getMessage());
         MMessage message = generateMMessage(text);
-        messageKeys.add(message.getKey());
+
+        conversation.setSeenBy(generateSeenByList(localDatabase.getMainUser()));
+        conversation.getMessageList().add(message.getKey());
 
         friend2.getMessageKeys().add(message.getKey());
-        friend2.addTextMessage(userText, 1, Constants.getCurrentTimestamp(message.getTimeStamp()));
+        friend2.addTextMessage(text.getText(), 1, Constants.getCurrentTimestamp(message.getTimeStamp()));
 
         //------------------Pushing.
         List<ServerModel> pushList = Utils.newList();
@@ -55,6 +50,14 @@ public class ExecuteSendMessage implements ExecuteServer {
 
         localDatabase.pushModel(pushList);
     }
+
+    private List<Long> generateSeenByList(User user){
+        List<Long> list = Utils.newList();
+        list.add(user.getKey());
+
+        return list;
+    }
+
 
     private MText generateText(String message){
         MText text = TextManagerFactory.createTextManager().createText(message, 0);

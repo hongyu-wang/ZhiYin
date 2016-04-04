@@ -1,5 +1,8 @@
 package client.pages.friends.boxes;
 
+import client.events.executables.internalChanges.serverInteractions.ExecuteSeenBy;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSeenByMe;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.friends.Friends2;
 import client.singletons.SkinSingleton;
@@ -22,6 +25,10 @@ public class FriendBox{
     private Table table;
     private Image currentIcon;
     private String friendName;
+
+    private int state = 1;
+
+    private ExecuteUpdate update;
     /**
      *
      * @param iconNum The number representing an icon.
@@ -33,6 +40,8 @@ public class FriendBox{
         addIcon(iconNum);
         addLabel(friendName);
         addButton();
+
+        this.update = new ExecuteSeenBy(this, friendName);
     }
 
     private void initTable(){
@@ -70,6 +79,7 @@ public class FriendBox{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 new ExecuteToTempState(f2).execute();
+                new ExecuteSeenByMe(friendName, update).execute();
             }
         });
 
@@ -84,5 +94,13 @@ public class FriendBox{
         this.currentIcon = image;
 
         table.add(currentIcon).padLeft(60 * StateManager.M);
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }
