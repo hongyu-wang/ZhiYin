@@ -50,10 +50,10 @@ public class ExecuteSeenBy extends ExecuteUpdate {
 
     private void comparePosters(long lastPoster, int stateValue_MainUser, int stateValue_Friend){
         if(lastPoster == localDatabase.getMainUser().getKey()){
-            friend.setState(SENT_UNREAD);
+            friend.setState(stateValue_MainUser);
         }
         else if(lastPoster == localDatabase.getUserKeyByName(friendName)){
-            friend.setState(RECIEVED_UNREAD);
+            friend.setState(stateValue_Friend);
         }
     }
 
