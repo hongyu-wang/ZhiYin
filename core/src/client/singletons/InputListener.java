@@ -1,13 +1,11 @@
 package client.singletons;
 
-import client.pageStorage.Pages;
 import client.pages.State;
 import client.tools.Constants;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import driver.GameLoop;
 
 /**
  * This is the InputListener class.
@@ -104,9 +102,14 @@ public class InputListener implements InputProcessor, Constants {
 
     @Override
     public boolean keyDown(int keycode) {
-
+        if (keycode == Input.Keys.RIGHT){
+            StateManager.getInstance().translateStage(-1);
+        }else if (keycode == Input.Keys.LEFT){
+            StateManager.getInstance().translateStage(1);
+        }
         return false;
     }
+
 
     @Override
     public boolean keyUp(int keycode) {
@@ -134,7 +137,7 @@ public class InputListener implements InputProcessor, Constants {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         mouseX = screenX;
         mouseY = (int)(HEIGHT*StateManager.M) - screenY;
-        stateManager.recieveRelease();
+        stateManager.receiveRelease();
 
         return false;
     }
@@ -145,7 +148,7 @@ public class InputListener implements InputProcessor, Constants {
         mouseY = (int)(HEIGHT*StateManager.M) - screenY;
 
 
-        stateManager.recieveDragged();
+        stateManager.receiveDragged();
         return false;
     }
 
