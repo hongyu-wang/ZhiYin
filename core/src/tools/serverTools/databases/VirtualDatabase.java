@@ -13,10 +13,8 @@ import tools.utilities.Utils;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Field;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /** *
@@ -202,11 +200,31 @@ public class VirtualDatabase {
 
     /**Sets a model into the database.
      *
-     * @param model The model.
+     * @param newModel The model.
      */
-    public void setModel(ServerModel model){
-        data.put(model.getKey(), model);
-        updatedKeys.add(model.getKey());
+    public void setModel(ServerModel newModel){
+        Field[] newFields = newModel.getClass().getDeclaredFields();
+        Field[] oldFields = newModel.getClass().getDeclaredFields();
+        ServerModel oldModel = data.get(newModel.getKey());
+        try {
+            for (int i = 0; i < newFields.length; i++) {
+                Object valueNew = newFields[i].get(newModel);
+                Object valueOld = oldFields[i].get(oldModel);
+                if(valueNew instanceof List){
+                    List valueOldList = (List)valueOld;
+                    List valueNewList = (List)valueNew;
+                    List newMergedList = this.union(valueNewList, valueOldList);
+                    oldFields[i].set(oldModel, newMergedList);
+                }else{
+                    oldFields[i].set(oldModel, valueNew);
+                }
+
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        //data.put(oldModel.getKey(), oldModel);
+        updatedKeys.add(oldModel.getKey());
     }
 
     /**Returns the key of the user based on a username.
@@ -435,5 +453,14 @@ public class VirtualDatabase {
 
     public List<Long> getUpdatedKeys() {
         return updatedKeys;
+    }
+
+    private <T> List<T> union(List<T> list1, List<T> list2) {
+        Set<T> set = new HashSet<T>();
+
+        set.addAll(list1);
+        set.addAll(list2);
+
+        return new ArrayList<T>(set);
     }
 }
