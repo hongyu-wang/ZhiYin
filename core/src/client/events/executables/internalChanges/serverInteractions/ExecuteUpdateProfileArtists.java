@@ -1,6 +1,6 @@
 package client.events.executables.internalChanges.serverInteractions;
 
-import client.pages.friends.FriendProfile;
+import client.stateInterfaces.Profile;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import server.model.media.MImage;
 import server.model.soundCloud.MBand;
@@ -11,11 +11,11 @@ import server.services.factories.ImageManagerFactory;
  * Created by Kevin Zheng on 2016-04-03.
  */
 public class ExecuteUpdateProfileArtists extends ExecuteUpdate {
-    private FriendProfile friendProfile;
+    private Profile profile;
     private String name;
 
-    public ExecuteUpdateProfileArtists(FriendProfile friendProfile, String name) {
-        this.friendProfile = friendProfile;
+    public ExecuteUpdateProfileArtists(Profile profile, String name) {
+        this.profile = profile;
         this.name = name;
     }
 
@@ -29,20 +29,17 @@ public class ExecuteUpdateProfileArtists extends ExecuteUpdate {
         java.util.List<Long> bandKeys = user.getBandKeys();
 
         for(long key: bandKeys){
-            if(!friendProfile.getCurrentArtists().contains(key)){
+            if(!profile.getCurrentArtists().contains(key)){
                 MBand artist = localDatabase.getModel(key);
 
                 MImage image = localDatabase.getModel(artist.getBandImage());
 
                 Image artistImage = ImageManagerFactory.createImageManager().mImageToImage(image);
 
-                friendProfile.addFollowing(artistImage);
+                profile.addFollowing(artist, artistImage);
 
-                friendProfile.getCurrentArtists().add(key);
+                profile.getCurrentArtists().add(key);
             }
         }
     }
-
-
-
 }

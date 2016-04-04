@@ -1,6 +1,7 @@
 package client.pages.other;
 
 import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.serverInteractions.ExecuteFollowArtist;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateArtistSongs;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
@@ -41,6 +42,7 @@ public class ArtistProfile extends ArtistProfileShell {
     private Table songs;
 
     private ExecuteUpdate update;
+    private ExecuteFollowArtist followEx;
 
     public ArtistProfile(State previousState, MBand mBand, Image image){
         this.previousState = previousState;
@@ -50,6 +52,7 @@ public class ArtistProfile extends ArtistProfileShell {
         this.musicKeys = Utils.newList();
 
         this.update = new ExecuteUpdateArtistSongs(this, mBand);
+        this.followEx = new ExecuteFollowArtist(this, mBand);
 
         init();
     }
@@ -61,8 +64,7 @@ public class ArtistProfile extends ArtistProfileShell {
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-        TestExecutable followEx = new TestExecutable("follow");
-        addImageButton("Other/Follow@",followEx, 500, 70, 218, 82);
+        addImageButton("Other/Follow@", followEx, 500, 70, 218, 82);
 
 
 //        Table table = new Table();
