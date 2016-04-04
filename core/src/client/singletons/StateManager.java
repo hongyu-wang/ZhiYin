@@ -101,6 +101,7 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
     @Override
     public void draw() {
         currentState.draw();
+        //translateStage(1);
     }
 
 
@@ -122,12 +123,15 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
     }
 
 
-    public void recieveDragged(){
+    public void receiveDragged(){
         currentState.getInputController().checkDragged();
     }
 
-    public void recieveRelease(){
+    public void receiveRelease(){
         currentState.getInputController().checkRelease();
     }
 
+    public void translateStage(int dir) {
+        currentState.getStage().getCamera().translate(dir*1F, 0, 0);
+    }
 }

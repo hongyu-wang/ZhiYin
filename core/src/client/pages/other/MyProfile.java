@@ -5,6 +5,7 @@ import client.pages.State;
 import client.pages.musicDiary.Diary4;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import client.stateInterfaces.Profile;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * Created by blobbydude24 on 2016-03-21.
  */
-public class MyProfile extends MyProfileShell {
+public class MyProfile extends MyProfileShell implements Profile {
     private List<Long> currentDiaries;
     private List<Long> currentArtists;
 

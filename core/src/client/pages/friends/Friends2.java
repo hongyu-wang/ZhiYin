@@ -56,8 +56,7 @@ public class Friends2 extends Friends2Shell{
 
     }
 
-    private void initititititit(){
-    }
+
 
     protected void init(){
         super.init();
@@ -81,6 +80,7 @@ public class Friends2 extends Friends2Shell{
         sendButton.setBounds(604 + 1, 31, 122, 60);
         ExecutableMultiplexer em3 = new ExecutableMultiplexer();
         em3.addExecutable(new ExecuteSendMessage(this));
+        em3.addExecutable(this::reset);
         sendButton.setExecutable(em3);
         add(sendButton);
     }

@@ -10,6 +10,9 @@ import java.util.Date;
 public interface Constants {
     float M = 0.5F;
 
+    int LEFT = -1;
+    int RIGHT = 1;
+
     int WIDTH = 750;
 
     int HEIGHT = 1334;
