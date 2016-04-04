@@ -1,10 +1,15 @@
 package client.pages.other;
 
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileArtists;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileDiary;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
+import client.pages.home.Artist;
 import client.pages.musicDiary.Diary4;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import client.stateInterfaces.Executable;
 import client.stateInterfaces.Profile;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,11 +18,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MImage;
 import server.model.social.MDiaryPost;
+import server.model.soundCloud.MBand;
 import server.model.user.User;
 import server.model.user.UserProfile;
 import server.services.factories.ImageManagerFactory;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
+import tools.utilities.Utils;
+
 import java.util.List;
 
 
@@ -25,6 +33,16 @@ import java.util.List;
  * Created by blobbydude24 on 2016-03-21.
  */
 public class MyProfile extends MyProfileShell implements Profile {
+    @Override
+    public List<Long> getCurrentDiaries() {
+        return currentDiaries;
+    }
+
+    @Override
+    public List<Long> getCurrentArtists() {
+        return currentArtists;
+    }
+
     private List<Long> currentDiaries;
     private List<Long> currentArtists;
 
@@ -39,6 +57,9 @@ public class MyProfile extends MyProfileShell implements Profile {
     private String name;
 
     private Image profilePic;
+
+    private ExecuteUpdate update1;
+    private ExecuteUpdate update2;
 
     //private ArrayList<Image> artistImages = new ArrayList<>();
     //private ArrayList<ImageButton> artistButtons = new ArrayList<>();
@@ -57,6 +78,12 @@ public class MyProfile extends MyProfileShell implements Profile {
 
         this.name = userProfile.getUsername();
         this.profilePic = ImageManagerFactory.createImageManager().mImageToImage(mImage);
+
+        currentArtists = Utils.newList();
+        currentDiaries = Utils.newList();
+
+        update1 = new ExecuteUpdateProfileArtists(this, name);
+        update2 = new ExecuteUpdateProfileDiary(this, name);
     }
 
     protected void init(){
@@ -89,7 +116,7 @@ public class MyProfile extends MyProfileShell implements Profile {
 
     }
 
-    // FIXME: 2016-04-03 Point to diary post.
+    @Override
     public void addPost(final MDiaryPost diaryPost){
         Stack s = new Stack();
 
@@ -123,13 +150,15 @@ public class MyProfile extends MyProfileShell implements Profile {
         table.row();
     }
 
-    //TODO FIXME: 2016-04-03 Uncomment.
-    public void follow(final ArtistProfile profile){
-        final ImageButton artistButton = new ImageButton(profile.getImage().getDrawable());
+    @Override
+    public void addFollowing(MBand artist, Image image){
+        final ImageButton artistButton = new ImageButton(image.getDrawable());
+        final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image));
+
         artistButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteToTempState(profile).execute();
+                ex.execute();
             }
         });
 

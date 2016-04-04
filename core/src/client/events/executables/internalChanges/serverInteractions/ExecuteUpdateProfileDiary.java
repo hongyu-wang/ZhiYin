@@ -1,6 +1,7 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.friends.FriendProfile;
+import client.stateInterfaces.Profile;
 import server.model.social.MDiaryPost;
 import server.model.user.User;
 import server.model.user.UserDiaryContent;
@@ -9,10 +10,10 @@ import server.model.user.UserDiaryContent;
  * Created by Kevin Zheng on 2016-04-03.
  */
 public class ExecuteUpdateProfileDiary extends ExecuteUpdate {
-    private FriendProfile friendProfile;
+    private Profile friendProfile;
     private String name;
 
-    public ExecuteUpdateProfileDiary(FriendProfile friendProfile, String name) {
+    public ExecuteUpdateProfileDiary(Profile friendProfile, String name) {
         this.friendProfile = friendProfile;
         this.name = name;
     }
@@ -43,7 +44,7 @@ public class ExecuteUpdateProfileDiary extends ExecuteUpdate {
                 if(!isUpdated)
                     continue;
 
-                friendProfile.addPost(post, post.getTitle());
+                friendProfile.addPost(post);
 
                 friendProfile.getCurrentDiaries().add(key);
             }
