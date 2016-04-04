@@ -37,10 +37,16 @@ public class NowPlaying extends NowPlayingShell {
     private Label currentTime;
     private long iterations;
 
+
+
     private MMusic post;
 
     private ImageButton pauseButton;
     private ImageButton playButton;
+    private ImageButton create;
+    private ImageButton showComments;
+    private Image filter;
+    private Image picture;
 
     public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
@@ -49,12 +55,7 @@ public class NowPlaying extends NowPlayingShell {
         init();
     }
 
-    public NowPlaying(State previousState, MMusic post , boolean verbose){
-        this(previousState, post);
-        this.verbose = verbose;
-        iterations = 0;
 
-    }
 
     protected void initAlbumArt(){
         LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
@@ -68,8 +69,13 @@ public class NowPlaying extends NowPlayingShell {
         Texture albumArt = new Texture(px);
         px.dispose();
 
-        Image picture = new Image(albumArt);
-        picture.setColor(1, 1, 1, 0.7F);
+        filter = new Image(new Texture("Filter.png"));
+
+        filter.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
+
+        picture = new Image(albumArt);
+        filter.setColor(1, 1, 1, 0.2F);
+
         picture.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
 
         stage.addActor(picture);
@@ -80,12 +86,18 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     protected void init() {
         super.init();
+
+        TestExecutable rewindEx = new TestExecutable("rewind");
+        addImageButton("NowPlaying/Rewind@", rewindEx, 170, 246, 53, 46);
+
+        TestExecutable forwardEx = new TestExecutable("forward");
+        addImageButton("NowPlaying/Forward@", forwardEx, 535, 246, 53, 46);
+
         initAlbumArt();
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-        Executable showCommentsEx = new TestExecutable("fuck");
-        addImageButton("NowPlaying/ShowComments@", showCommentsEx, 607, 1063, 51, 51);
+
 
         TestExecutable pauseEx = new TestExecutable("pause");
         pauseButton = createImageButton("NowPlaying/Pause@", pauseEx, 288, 177, 180, 180);
@@ -118,6 +130,43 @@ public class NowPlaying extends NowPlayingShell {
         initializeSlider();
 
         addMusicLabels();
+
+        initializeComments();
+    }
+
+    private void initializeComments(){
+        Executable addCommentEx = new TestExecutable("fuckJerryXu");
+        create = createImageButton("NowPlaying/AddComment@", addCommentEx, 537, 1063, 51, 51);
+
+        Executable showCommentsEx = new Executable(){
+            @Override
+            public void execute() {
+
+                setUpScrollingComments();
+                verbose = !verbose;
+
+            }
+        };
+
+        filter = new Image(new Texture("Filter.png"));
+        showComments = createImageButton("NowPlaying/ShowComments@", showCommentsEx, 607, 1063, 51, 51);
+        stage.addActor(showComments);
+
+    }
+
+    private void setUpScrollingComments() {
+        if (!verbose) {
+            stage.addActor(create);
+            showComments.remove();
+            picture.remove();
+            stage.addActor(filter);
+            stage.addActor(showComments);
+            stage.addActor(create);
+        } else{
+            filter.remove();
+            create.remove();
+            stage.addActor(picture);
+        }
     }
 
     private void pause(){

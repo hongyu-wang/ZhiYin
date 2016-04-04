@@ -1,6 +1,11 @@
 package com.badlogic.gdx.scenes.scene2d.ui;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealClickListener;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.IntArray;
 
+import java.lang.reflect.Field;
 
 
 /**
@@ -13,6 +18,11 @@ public class WorkingTextArea extends TextArea {
         super(text, skin);
 
         addListener(new ZhiYinRealClickListener(this));
+    }
+
+    protected WorkingTextArea(String text, Skin skin, boolean test) {
+        super(text, skin);
+
     }
 
 
@@ -49,6 +59,9 @@ public class WorkingTextArea extends TextArea {
         }
         return new int[] {left, right};
     }
+
+
+
 
     protected int letterUnderCursor (float x) {
         if (linesBreak.size > 0) {

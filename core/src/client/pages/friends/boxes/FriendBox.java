@@ -14,10 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class FriendBox{
 
-    public static final int RECIEVED_READ = 1;
-    public static final int RECIEVED_UNREAD = 2;
-    public static final int SENT_READ = 3;
-    public static final int SENT_UNREAD = 4;
+
 
     private Table table;
     private Image currentIcon;
