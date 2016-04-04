@@ -260,15 +260,17 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
                 throw new NoSuchElementException();
             }
 
-            /*
-            mBand.setSongs(getKeys(artistMap.get(artist)));
-            mBand.setAlbums(getAlbums(artistMap.get(artist)));
-             */
+            if(os == MAC) {
+                mBand.setSongs(getKeys(artistMap.get(artist)));
+//                mBand.setAlbums(getAlbums(artistMap.get(artist)));
+                mBand.setAlbums(Utils.<Long>newList());
+            }
+            else {
+                mBand.setSongs(Utils.<Long>newList());
+                mBand.setAlbums(Utils.<Long>newList());
+            }
 
-            mBand.setSongs(Utils.<Long>newList());
-            mBand.setAlbums(Utils.<Long>newList());
             mBand.setName(artist);
-
             models.add(mBand);
         }
     }
