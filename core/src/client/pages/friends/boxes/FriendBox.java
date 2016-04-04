@@ -23,7 +23,7 @@ public class FriendBox{
     private Image currentIcon;
     private String friendName;
 
-    private int state = 1;
+    private int state = 0;
 
     private ExecuteUpdate update;
     /**
