@@ -87,7 +87,7 @@ public class LocalDatabase {
     }
 
     private void initStringMaps(){
-        long i = 1;
+        long i = 1L;
         for(String name: usernames){
             username_key.put(name, i);
             i++;

@@ -15,8 +15,6 @@ public class GameLoop extends ApplicationAdapter  {
 
 	public static boolean INITIALPUSH = true;
 
-
-
     private static OrthographicCamera primary;
 
 	@Override
