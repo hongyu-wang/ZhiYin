@@ -17,6 +17,11 @@ public interface Constants {
 
     int HEIGHT = 1334;
 
+    int RECIEVED_READ = 1;
+    int RECIEVED_UNREAD = 2;
+    int SENT_READ = 3;
+    int SENT_UNREAD = 4;
+
     boolean WINDOWS = false;
 
     boolean MAC = true;
@@ -30,8 +35,6 @@ public interface Constants {
     }
 
 
-    int RECIEVED_READ = 1;
-    int RECIEVED_UNREAD = 2;
-    int SENT_READ = 3;
-    int SENT_UNREAD = 4;
+
+
 }

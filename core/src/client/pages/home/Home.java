@@ -53,7 +53,7 @@ public class Home extends HomeShell {
 
         if (os == WINDOWS) {
             MMusic temporary = generateTestMMusic();
-            State tempState = new NowPlaying(this, temporary);
+            final State tempState = new NowPlaying(this, temporary);
             b1.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -153,7 +153,7 @@ public class Home extends HomeShell {
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
 
         ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
-        ExecuteSetMusic esm = new ExecuteSetMusic(music);
+        final ExecuteSetMusic esm = new ExecuteSetMusic(music);
 
         em.addExecutable(e);
         em.addExecutable(esm);
