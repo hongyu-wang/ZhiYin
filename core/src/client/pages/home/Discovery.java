@@ -13,8 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import static client.singletons.StateManager.M;
-
 /**
  * This is the fourth home diary page as given in the
  * art assets folder.
@@ -40,7 +38,7 @@ public class Discovery extends DiscoveryShell {
         addSearchField();
 
         table = new Table();
-        table.setBounds(0, 0, 750 * StateManager.M, 1134 * StateManager.M);
+        table.setBounds(50, 0, 650 * StateManager.M, 1134 * StateManager.M);
         table.top();
 
         stage.addActor(table);
@@ -61,10 +59,13 @@ public class Discovery extends DiscoveryShell {
             }
         });
 
-        if(numTags++ % 5 == 0){
-            table.row().padTop(50 * StateManager.M);
-        }
+//        if(numTags++ % 5 == 0){
+//            table.row().padTop(50 * StateManager.M);
+//        }
+        table.setDebug(true);
         table.add(tag).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
+
+        table.layout();
     }
 
     @Override
