@@ -13,7 +13,7 @@ public class GameLoop extends ApplicationAdapter  {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
 
-	public static boolean ISPUSHING = true;
+	public static boolean INITIALPUSH = true;
 
 
 

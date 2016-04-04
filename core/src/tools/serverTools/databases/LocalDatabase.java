@@ -7,15 +7,11 @@ import server.model.serverKey.MServerKey;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.services.factories.MusicHashtagManagerFactory;
-import server.services.interfaces.models.MusicHashtagManager;
 import server.webservices.PostObject;
 import server.webservices.RequestObject;
-import server.webservices.ServerKeyObject;
-import server.webservices.UpdateObject;
 import tools.serverTools.generators.SerialGenerator;
 import tools.utilities.Utils;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -158,7 +154,7 @@ public class LocalDatabase {
         for(ServerModel model: modelList){
             models.put(model.getKey(), model);
         }
-        if(!GameLoop.ISPUSHING){
+        if(!GameLoop.INITIALPUSH){
             return;
         }
         if(this.getKeyState() != null) {

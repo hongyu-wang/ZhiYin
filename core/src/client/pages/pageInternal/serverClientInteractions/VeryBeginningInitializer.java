@@ -136,7 +136,7 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
 
         localDatabase.pushModel(models);
 
-        GameLoop.ISPUSHING = true;
+        GameLoop.INITIALPUSH = true;
     }
 
     private void pushProfileImages(List<ServerModel> models){
