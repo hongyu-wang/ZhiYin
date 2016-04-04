@@ -16,8 +16,17 @@ import java.util.regex.*;
  * Created by Hongyu Wang on 3/29/2016.
  */
 public class TagParser {
-    public static final String [] allTags = {
-        "happy", "sad"
+    private static String [] hashtags = {
+        "Sorry",
+        "MissingU",
+        "Weeknd",
+        "RnB",
+        "Pop",
+        "M5",
+        "Bieber",
+        "Kanye",
+        "Ed",
+        "LoveYourself"
     };
 
     private int startIndex, endIndex;
@@ -57,7 +66,7 @@ public class TagParser {
 
 
     private static boolean checkValid(String tag){
-        for (String str : allTags){
+        for (String str : hashtags){
             if (str.equals(tag)) {
                 return true;
             }
