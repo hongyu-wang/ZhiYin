@@ -205,7 +205,11 @@ public class LocalDatabase {
                 requestModelFromServer(serverKeys[i]);
             }
         }
-        pullCount = serverKeys.length;
+        if(pullCount == serverKeys.length){
+            TalkerFactory.getServerTalker().notWaiting();
+        }else{
+            pullCount = serverKeys.length;
+        }
     }
 
     /**Call this to update models within this class.

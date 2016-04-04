@@ -7,10 +7,7 @@ import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAd
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteCancelRecording;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
-import client.events.executables.internalChanges.serverInteractions.ExecuteSendAudioMessage;
-import client.events.executables.internalChanges.serverInteractions.ExecuteSendMessage;
-import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
-import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateMessages;
+import client.events.executables.internalChanges.serverInteractions.*;
 import client.pages.friends.boxes.MessageBox;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
@@ -128,6 +125,10 @@ public class Friends2 extends Friends2Shell{
         stage.addActor(messageField);
     }
 
+    @Override
+    public void update(float dt){
+        super.update(dt);
+    }
 
     @Override
     public void dispose() {

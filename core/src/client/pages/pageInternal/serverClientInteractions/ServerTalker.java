@@ -2,6 +2,9 @@ package client.pages.pageInternal.serverClientInteractions;
 
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.stateInterfaces.Executable;
+import server.model.social.MConversation;
+import server.model.user.User;
+import server.model.user.UserConversations;
 import server.webservices.UpdateObject;
 import tools.utilities.Utils;
 
@@ -68,6 +71,11 @@ public class ServerTalker extends Talkers {
         waitCounter++;
     }
 
+    public void notWaiting(){
+        this.setWaiting(false);
+    }
+
+
     private void requestUpdate(){
         UpdateObject.newInstance().update();
         waitCounter = 0;
@@ -83,5 +91,49 @@ public class ServerTalker extends Talkers {
         for(long key : pulledKeys){
             localDatabase.requestModelFromServer(key);
         }
+    }
+
+    public static MConversation getConversationByFriend(String friendName){
+        User user = localDatabase.getMainUser();
+        UserConversations userConversations = localDatabase.getModel(user.getConversations());
+        List<Long> convoList = userConversations.getConvoKeys();
+
+        return localDatabase.getModel(convoList.get(indexByFriend(friendName)));
+    }
+
+
+    private static int indexByFriend(String friendName){
+        int friendKey = (int) localDatabase.getUserKeyByName(friendName);
+
+        switch((int) localDatabase.getMainUser().getKey()){
+            case 1:
+                if(friendKey == 2){
+                    return 0;
+                }
+                else if(friendKey == 3){
+                    return 1;
+                }
+                break;
+
+            case 2:
+                if(friendKey == 1){
+                    return 0;
+                }
+                else if(friendKey == 3) {
+                    return 1;
+                }
+                break;
+
+            case 3:
+                if(friendKey == 1) {
+                    return 0;
+                }
+                else if(friendKey == 2) {
+                    return 1;
+                }
+                break;
+        }
+
+        throw new IndexOutOfBoundsException("You didn't enter a correct user");
     }
 }
