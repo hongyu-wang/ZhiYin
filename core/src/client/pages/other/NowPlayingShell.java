@@ -19,15 +19,6 @@ public abstract class NowPlayingShell extends State{
 
 
 
-        TestExecutable likeEx = new TestExecutable("like");
-        addImageButton("NowPlaying/Like@", likeEx, 562, 1240, 144, 54);
-
-
-        TestExecutable rewindEx = new TestExecutable("rewind");
-        addImageButton("NowPlaying/Rewind@", rewindEx, 170, 246, 53, 46);
-
-        TestExecutable forwardEx = new TestExecutable("forward");
-        addImageButton("NowPlaying/Forward@", forwardEx, 535, 246, 53, 46);
 
         TestExecutable shareEx = new TestExecutable("share");
         addImageButton("NowPlaying/Share@", shareEx, 520, 0, 230, 117);
