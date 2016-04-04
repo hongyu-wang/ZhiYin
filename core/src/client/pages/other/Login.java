@@ -55,7 +55,7 @@ public class Login extends State {
             LocalDatabase.ipAddress = password.getText();
 
             vb = TalkerFactory.VeryBeginningInitializer();
-            vb.init(text);
+            vb.init(text.substring(0, 1).toUpperCase() + text.substring(1));
             vb.pull();
             vb.push();
             checkPull = true;
