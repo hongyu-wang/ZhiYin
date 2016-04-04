@@ -84,6 +84,7 @@ public class VirtualDatabase {
 
     private void initHashtags(){
         MHashtag hashtag1 = generateHashtags("Sorry", 20000);
+//        addMusic(hashtag1, /*TODO some Long*/ 0L);
 
         MHashtag hashtag2 = generateHashtags("MissingU", 20001);
 
@@ -115,6 +116,11 @@ public class VirtualDatabase {
         data.put(hashtag9.getKey(),hashtag9);
         data.put(hashtag10.getKey(),hashtag10);
     }
+
+    private void addMusic(MHashtag tag, long musicKey){
+        tag.getMusicKeys().add(musicKey);
+    }
+
 
     private MHashtag generateHashtags(String tag, long key){
         MHashtag hashtag = new MHashtag();
