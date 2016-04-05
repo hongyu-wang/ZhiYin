@@ -14,12 +14,20 @@ public class ExecutePlayHashtag implements Executable {
     private long tag;
 
     public ExecutePlayHashtag(String tag){
-        this.tag = LocalDatabaseFactory.createLocalDatabase().getHashtagByName(tag);
+        try {
+            this.tag = LocalDatabaseFactory.createLocalDatabase().getHashtagByName(tag);
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("You have entered an invalid hashtag.");
+        }
     }
 
     @Override
     public void execute() {
         MHashtag tag = LocalDatabaseFactory.createLocalDatabase().getModel(this.tag);
+        if(tag == null){
+            return;
+        }
         int num = (int) (Math.random()*tag.getMusicKeys().size());
 
         MMusic music = LocalDatabaseFactory.createLocalDatabase().getModel(tag.getMusicKeys().get(num));

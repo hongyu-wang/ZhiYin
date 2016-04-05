@@ -34,16 +34,16 @@ public class LocalDatabase {
     public static String ipAddress = "localhost";
 
     private String[] hashtags = {
-            "Sorry",
-            "MissingU",
-            "Weeknd",
-            "RnB",
-            "Pop",
-            "M5",
-            "Bieber",
-            "Kanye",
-            "Ed",
-            "LoveYourself"
+            "#Sorry",
+            "#MissingU",
+            "#Weeknd",
+            "#RnB",
+            "#Pop",
+            "#M5",
+            "#Bieber",
+            "#Kanye",
+            "#Ed",
+            "#LoveYourself"
     };
 
     private String[] usernames = {

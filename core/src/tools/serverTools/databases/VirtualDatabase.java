@@ -83,26 +83,26 @@ public class VirtualDatabase {
     }
 
     private void initHashtags(){
-        MHashtag hashtag1 = generateHashtags("Sorry", 20000);
+        MHashtag hashtag1 = generateHashtags("#Sorry", 20000);
 //        addMusic(hashtag1, /*TODO some Long*/ 0L);
 
-        MHashtag hashtag2 = generateHashtags("MissingU", 20001);
+        MHashtag hashtag2 = generateHashtags("#MissingU", 20001);
 
-        MHashtag hashtag3 = generateHashtags("Weeknd", 20002);
+        MHashtag hashtag3 = generateHashtags("#Weeknd", 20002);
 
-        MHashtag hashtag4 = generateHashtags("RnB", 20003);
+        MHashtag hashtag4 = generateHashtags("#RnB", 20003);
 
-        MHashtag hashtag5 = generateHashtags("Pop", 20004);
+        MHashtag hashtag5 = generateHashtags("#Pop", 20004);
 
-        MHashtag hashtag6 = generateHashtags("M5", 20005);
+        MHashtag hashtag6 = generateHashtags("#M5", 20005);
 
-        MHashtag hashtag7 = generateHashtags("Bieber", 20006);
+        MHashtag hashtag7 = generateHashtags("#Bieber", 20006);
 
-        MHashtag hashtag8 = generateHashtags("Kanye", 20007);
+        MHashtag hashtag8 = generateHashtags("#Kanye", 20007);
 
-        MHashtag hashtag9 = generateHashtags("Ed", 20008);
+        MHashtag hashtag9 = generateHashtags("#Ed", 20008);
 
-        MHashtag hashtag10 = generateHashtags("LoveYourself", 20009);
+        MHashtag hashtag10 = generateHashtags("#LoveYourself", 20009);
 
 
         data.put(hashtag1.getKey(),hashtag1);
