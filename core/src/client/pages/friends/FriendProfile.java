@@ -7,23 +7,16 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteUpdat
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
-import client.stateInterfaces.Profile;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
+import client.pages.other.ArtistProfile;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
+import client.stateInterfaces.Profile;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import server.model.media.MImage;
 import server.model.social.MDiaryPost;
 import server.model.soundCloud.MBand;
-import server.model.user.User;
-import server.model.user.UserDiaryContent;
-import server.model.user.UserProfile;
-import server.services.factories.ImageManagerFactory;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -55,6 +48,7 @@ public class FriendProfile extends FriendProfileShell implements Profile {
     private Table following;
 
     private String name;
+    private String description;
 
     private Image image;
 
@@ -69,8 +63,12 @@ public class FriendProfile extends FriendProfileShell implements Profile {
 
     public FriendProfile(State previousState, String name, Image image){
         this.previousState = previousState;
+
+        //TODO replace these values with values from server
         this.name = name;
         this.image = image;
+        this.description = "here is a really long description that I am typing just to test wrapping of the words, as well as scrollpane vertical scrolling;" +
+                "more redundant words are being typed right now and stuff and stuff and stuff and more stuff and more stuff and more stuff and more stuff";
 
         currentDiaries = Utils.newList();
         currentArtists = Utils.newList();
@@ -92,12 +90,22 @@ public class FriendProfile extends FriendProfileShell implements Profile {
         backButton.setExecutable(new ExecuteToTempState(previousState));
         add(backButton);
 
-        Label label = new Label(name, SkinSingleton.getInstance());
-        label.setPosition(310 * StateManager.M, 1050 * StateManager.M);
-        stage.addActor(label);
+        Table t = new Table();
+        t.setBounds(300*M, 1000*M, 450*M, 167*M);
+        t.top();
+        t.add(new Label(name, SkinSingleton.getInstance())).width(450*M);
+        t.row();
+
+        Label descriptionLabel = new Label(description, SkinSingleton.getInstance());
+        descriptionLabel.setWrap(true);
+        t.add(descriptionLabel).width(450*M).expandX().left();
+
+        ScrollPane s = new ScrollPane(t);
+        s.setBounds(300*M, 1000*M, 450*M, 167*M);
+        stage.addActor(s);
 
         if(image != null) {
-            image.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
+            image.setBounds(50*M, 967*M, 200*M, 200*M);
             stage.addActor(image);
         }
 
@@ -105,41 +113,33 @@ public class FriendProfile extends FriendProfileShell implements Profile {
         table.top();
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0,  570 * StateManager.M, 750 * StateManager.M, 250 * StateManager.M);
+        scrollpane.setBounds(0,  570*M, 750*M, 250*M);
         stage.addActor(scrollpane);
 
         following = new Table();
         following.top();
 
         scrollpane2 = new ScrollPane(following);
-        scrollpane2.setBounds(50 * StateManager.M,  350 * StateManager.M, 700 * StateManager.M, 150 * StateManager.M);
+        scrollpane2.setBounds(50*M,  350*M, 700*M, 150*M);
         stage.addActor(scrollpane2);
 
     }
 
-    public void addPost(final MDiaryPost thisPost){
-        Stack s = new Stack();
+    @Override
+    public void addPost(final MDiaryPost diaryPost){
+        String title = diaryPost.getTitle();
 
         Table t = new Table();
-
-        String post = thisPost.getTitle();
-
-        Label single = new Label(post, SkinSingleton.getInstance());
-        Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
-        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
-
-        t.add(single).padLeft(10 * StateManager.M);
-        t.add(i).expand().right().padRight(50 * StateManager.M);
+        t.add(new Label(title, SkinSingleton.getInstance())).expand().left().padLeft(50 * M);
+        t.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26 * M).expand().right().padRight(50*M);
         t.row();
-        t.add(line);
+        t.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50 * M);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
-
-        s.add(i2);
+        Stack s = new Stack();
+        s.add(new Image(new Texture("Home/BlackBG@" + M + ".png")));
         s.add(t);
 
-        final Executable e = new ExecuteToTempState(new Diary4(this, thisPost));
-
+        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost));
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -147,13 +147,21 @@ public class FriendProfile extends FriendProfileShell implements Profile {
             }
         });
 
-        table.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
+        table.add(s).width(750*M).height(110*M);
         table.row();
     }
 
     public void addFollowing(MBand artist, Image image){
+        ImageButton artistButton = new ImageButton(image.getDrawable());
+        final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image));
+        artistButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ex.execute();
+            }
+        });
 
-        following.add(image).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
+        following.add(artistButton).width(150*M).height(150*M).padRight(50*M);
     }
 
     @Override

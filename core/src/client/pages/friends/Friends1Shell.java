@@ -7,7 +7,6 @@ import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import driver.GameLoop;
 
 /**
  * The shell for the Friends1 state.
@@ -25,7 +24,6 @@ public abstract class Friends1Shell extends State {
         friendsButton.setBounds(375, 1217, 375, 117);
         friendsButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS4));
         add(friendsButton);
-
 
         setBottomBar();
     }
