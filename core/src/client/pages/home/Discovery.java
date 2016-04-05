@@ -71,7 +71,7 @@ public class Discovery extends DiscoveryShell {
         float initWidth = table.getWidth();
         Cell cell = table.add(actor).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
 
-        System.out.println("initWidth: " + initWidth);
+        //System.out.println("initWidth: " + initWidth);
 
         if(table.getWidth() > initWidth){
             System.out.println("width: " + table.getWidth());
