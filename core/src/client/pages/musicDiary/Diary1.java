@@ -56,12 +56,10 @@ public class Diary1 extends Diary1Shell {
         this.update = new ExecuteUpdateAllDiaries(this);
     }
 
-    public void addPost(MDiaryPost thisPost, String creator){
+    public void addPost(MDiaryPost thisPost, String creator, String timestamp){
         String title = thisPost.getTitle();
 
         String name = creator;
-
-        String timestamp = String.valueOf(thisPost.getTimeStamp());
 
         Stack s = new Stack();
 

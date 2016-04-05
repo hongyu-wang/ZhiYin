@@ -1,6 +1,7 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.musicDiary.Diary1;
+import client.tools.Constants;
 import server.model.social.MDiaryPost;
 import server.model.social.MPost;
 import server.model.user.User;
@@ -55,7 +56,7 @@ public class ExecuteUpdateAllDiaries extends ExecuteUpdate{
 
                 String username = profile.getUsername();
 
-                diary1.addPost(post, username);
+                diary1.addPost(post, username, Constants.getCurrentTimestamp(post.getTimeStamp()));
 
                 diary1.getCurrentDiaries().add(post.getKey());
             }
