@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
+ *
  * Created by Hongyu Wang on 3/21/2016.
  */
 public class CommentWindow {
@@ -25,7 +26,6 @@ public class CommentWindow {
     }
 
     private void init(){
-        initializeWorkingTextArea();
         initializeButton();
         initializeWindow();
     }
@@ -40,11 +40,7 @@ public class CommentWindow {
         window.add(table);
     }
 
-    private void initializeWorkingTextArea(){
-        wta = new WorkingTextArea("", SkinSingleton.getInstance());
-        wta.setPrefRows(10);
-        wta.setPrefRows(10);
-    }
+
 
     private void initializeButton(){
         cancelButton = new TextButton("Cancel", SkinSingleton.getInstance());
