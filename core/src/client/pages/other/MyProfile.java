@@ -176,8 +176,6 @@ public class MyProfile extends MyProfileShell implements Profile {
                     exUnFollow.execute();
                     update1.execute();
                     //TODO take out the removes and re-add the artists, minus the one being removed (MBand artist)
-                    artistButton.remove();
-                    removeButton.remove();
                 }
                 else{
                     System.out.println("artist");

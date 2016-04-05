@@ -2,7 +2,9 @@ package client.events.executables.internalChanges.serverInteractions;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import server.model.soundCloud.MBand;
+import server.model.structureModels.ServerModel;
 import server.model.user.User;
+import tools.utilities.Utils;
 
 import java.util.List;
 
@@ -28,5 +30,9 @@ public class ExecuteUnFollowArtist implements ExecuteServer {
 
         currentArtists.clear();
         table.reset();
+
+        List<ServerModel> pushList = Utils.newList();
+        pushList.add(user);
+        localDatabase.pushModel(pushList);
     }
 }
