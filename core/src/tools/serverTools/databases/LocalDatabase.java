@@ -63,6 +63,8 @@ public class LocalDatabase {
             generator = SerialGenerator.getHGenerator(keyState.getCurrentKey());
         }
 
+
+
         keyState.setCurrentKey(keyState.getCurrentKey() + 1);
         return key + generator.generateSerial();
     }

@@ -52,10 +52,8 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         TalkerFactory.getFriendTalker().init();
     }
 
+
     /*------------------------------------------------------------------------*/
-
-
-
     @Override
     public void pull() {
         super.setWaiting(true);

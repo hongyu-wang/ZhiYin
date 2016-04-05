@@ -112,10 +112,11 @@ public class ArtistProfile extends ArtistProfileShell {
         s.add(new Image(new Texture("Home/BlackBG@" + M + ".png")));
         s.add(table);
 
+        final ExecuteToTempState ex = new ExecuteToTempState(new NowPlaying(this, song));
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new TestExecutable("NowPlaying").execute();
+                ex.execute();
             }
         });
 
