@@ -1,5 +1,9 @@
 package client.pages.other;
 
+import client.component.basicComponents.Button;
+import client.component.basicComponents.ConfirmDialog;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
 import client.events.executables.internalChanges.serverInteractions.*;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
@@ -21,7 +25,7 @@ import server.services.factories.ImageManagerFactory;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
-import client.component.basicComponents.Button;
+
 import java.util.List;
 
 
@@ -90,14 +94,24 @@ public class MyProfile extends MyProfileShell implements Profile {
         super.init();
         serverInit();
 
-        Label label = new Label(name, SkinSingleton.getInstance());
-        label.setPosition(310*M, 1050*M);
-        stage.addActor(label);
-
         if(profilePic != null) {
             profilePic.setBounds(50*M, 967*M, 200*M, 200*M);
             stage.addActor(profilePic);
         }
+
+        Table t = new Table();
+        t.setBounds(300*M, 1000*M, 450*M, 167*M);
+        t.top();
+        t.add(new Label(name, SkinSingleton.getInstance())).width(450*M);
+        t.row();
+
+        Label descriptionLabel = new Label(description, SkinSingleton.getInstance());
+        descriptionLabel.setWrap(true);
+        t.add(descriptionLabel).width(450*M).expandX().left();
+
+        ScrollPane s = new ScrollPane(t);
+        s.setBounds(300*M, 1000*M, 450*M, 167*M);
+        stage.addActor(s);
 
         table = new Table();
         table.top();
@@ -111,6 +125,7 @@ public class MyProfile extends MyProfileShell implements Profile {
 
         scrollpane2 = new ScrollPane(following);
         scrollpane2.setBounds(50*M,  350*M, 700*M, 150*M);
+        //scrollpane2.setScrollingDisabled(false, true);
         stage.addActor(scrollpane2);
         setUpWindow();
 
@@ -150,24 +165,16 @@ public class MyProfile extends MyProfileShell implements Profile {
 
     @Override
     public void addPost(final MDiaryPost diaryPost){
-        Stack s = new Stack();
-
-        Table t = new Table();
-
         String title = diaryPost.getTitle();
 
-        Label single = new Label(title, SkinSingleton.getInstance());
-        Image i = new Image(new Texture("Home/Enter@" + M + ".png"));
-        Image line = new Image(new Texture("Home/Line@" + M + ".png"));
-
-        t.add(single).expand().left().padLeft(10*M);
-        t.add(i).expand().right().padRight(50*M);
+        Table t = new Table();
+        t.add(new Label(title, SkinSingleton.getInstance())).expand().left().padLeft(50 * M);
+        t.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26 * M).expand().right().padRight(50*M);
         t.row();
-        t.add(line);
+        t.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@" + M + ".png"));
-
-        s.add(i2);
+        Stack s = new Stack();
+        s.add(new Image(new Texture("Home/BlackBG@" + M + ".png")));
         s.add(t);
 
         final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost));
@@ -191,7 +198,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         final ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
 
         Table artistTable = new Table();
-        artistTable.add(artistButton).width(150*M).height(150*M);
+        artistTable.add(image).width(150*M).height(150*M);
         s.add(artistTable);
 
         Table removeTable = new Table();
@@ -221,6 +228,8 @@ public class MyProfile extends MyProfileShell implements Profile {
 
         t.add(s);
         following.add(t).width(150*M).height(150*M).padLeft(50*M);
+
+        // Do not call scrollpane2.layout(). This will cause the artists to appear vertically instead of horizontally.
     }
 
 
