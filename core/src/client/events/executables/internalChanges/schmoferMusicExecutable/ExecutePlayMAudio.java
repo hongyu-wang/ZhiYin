@@ -12,21 +12,23 @@ import tools.AudioTools.AudioPlayer;
  */
 public class ExecutePlayMAudio implements Executable{
 
-    private MAudio mAudio;
+    private long mAudioKey;
     private LocalDatabase localDatabase;
 
     public ExecutePlayMAudio(MAudio mAudio){
-        localDatabase = LocalDatabaseFactory.createLocalDatabase();
-        this.mAudio = localDatabase.getModel(mAudio.getKey());
-        System.out.println("created");
+        this.localDatabase = LocalDatabaseFactory.createLocalDatabase();
+        this.mAudioKey = mAudio.getKey();
     }
 
 
     @Override
     public void execute() {
         if (os == MAC) {
+            MAudio mAudio = localDatabase.getModel(mAudioKey);
             AudioPlayer audioPlayer = AudioPlayer.getInstance();
-            if (audioPlayer.getCurrentAudio() == mAudio) {
+
+            if (audioPlayer.getCurrentAudio()!= null || audioPlayer.getCurrentAudio().getKey() == mAudio.getKey()) {
+
                 if (audioPlayer.isPlaying())
                     audioPlayer.pause();
                 else {
@@ -34,12 +36,13 @@ public class ExecutePlayMAudio implements Executable{
                     audioPlayer.play();
                 }
 
+            } else{
 
-            } else {
                 audioPlayer.setSong(mAudio);
                 audioPlayer.prepareToPlay();
                 audioPlayer.play();
             }
+
         } else{
             System.out.println("Windows Play");
         }

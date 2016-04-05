@@ -1,87 +1,114 @@
 package com.badlogic.gdx.scenes.scene2d.ui;
+import client.singletons.StateManager;
+import client.tools.Constants;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.IntArray;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+
+import static client.tools.Constants.os;
 
 
 /**
  *
  * Created by Hongyu Wang on 3/20/2016.
  */
-public class WorkingTextArea extends TextArea {
+public class WorkingTextArea extends TextArea implements Constants {
 
     public WorkingTextArea(String text, Skin skin) {
         super(text, skin);
 
         addListener(new ZhiYinRealClickListener(this));
+        addListener(new TextAreaListener(){
+            @Override
+            public boolean keyTyped(InputEvent event, char character) {
+                if (character == 13){
+                    resetText();
+                }
+                return false;
+            }
+        });
+
     }
+
 
     protected WorkingTextArea(String text, Skin skin, boolean test) {
         super(text, skin);
 
     }
 
-
-
-    String insert (int position, CharSequence text, String to) {
-        if (to.length() == 0) return text.toString();
-        try {
-            return to.substring(0, position) + text + to.substring(position, to.length());
-        }catch (StringIndexOutOfBoundsException e) {
-            System.out.println(text);
-            System.out.println(to);
-        }
-        return to;
-    }
-
-    @Override
-    protected int[] wordUnderCursor (int at) {
-        String text = this.text;
-        int start = at, right = text.length(), left = 0, index = start;
-        for (; index < right; index++) {
-            if (!isWordCharacter(text.charAt(index))) {
-                right = index;
-                break;
-            }
-        }
-        for (index = start - 1; index > -1; index--) {
-            if (index >= text.length()){
-                continue;
-            }
-            if (!isWordCharacter(text.charAt(index))) {
-                left = index + 1;
-                break;
-            }
-        }
-        return new int[] {left, right};
+    protected void resetText(){
+        this.text.trim();
+        this.updateDisplayText();
     }
 
 
 
+//    String insert (int position, CharSequence text, String to) {
+//        if (to.length() == 0) return text.toString();
+//        try {
+//            return to.substring(0, position) + text + to.substring(position, to.length());
+//        }catch (StringIndexOutOfBoundsException e) {
+//            System.out.println(text);
+//            System.out.println(to);
+//        }
+//        return to;
+//    }
 
-    protected int letterUnderCursor (float x) {
-        if (linesBreak.size > 0) {
-            if (cursorLine * 2 >= linesBreak.size) {
-                return text.length();
-            } else {
-                float[] glyphPositions = this.glyphPositions.items;
-                int start = linesBreak.items[cursorLine * 2];
-                x += glyphPositions[start];
-                int end = linesBreak.items[cursorLine * 2 + 1];
-                int i = start;
-                for (; i <= end; i++)
-                    if (glyphPositions[i] > x) break;
-                if (i >= glyphPositions.length)
-                    return Math.max(0, i - 1);
-                if (glyphPositions[i] - x <= x - glyphPositions[i - 1]) return i;
-                return Math.max(0, i - 1);
-            }
-        } else {
-            return 0;
-        }
-    }
+//    @Override
+//    protected int[] wordUnderCursor (int at) {
+//        String text = this.text;
+//        int start = at, right = text.length(), left = 0, index = start;
+//        for (; index < right; index++) {
+//            if (!isWordCharacter(text.charAt(index))) {
+//                right = index;
+//                break;
+//            }
+//        }
+//        for (index = start - 1; index > -1; index--) {
+//            if (index >= text.length()){
+//                continue;
+//            }
+//            if (!isWordCharacter(text.charAt(index))) {
+//                left = index + 1;
+//                break;
+//            }
+//        }
+//        return new int[] {left, right};
+//    }
+
+
+
+//
+//    protected int letterUnderCursor (float x) {
+//        if (linesBreak.size > 0) {
+//            if (cursorLine * 2 >= linesBreak.size) {
+//                return text.length();
+//            } else {
+//                float[] glyphPositions = this.glyphPositions.items;
+//                int start = linesBreak.items[cursorLine * 2];
+//                x += glyphPositions[start];
+//                int end = linesBreak.items[cursorLine * 2 + 1];
+//                int i = start;
+//                for (; i <= end; i++)
+//                    if (glyphPositions[i] > x) break;
+//                if (i >= glyphPositions.length)
+//                    return Math.max(0, i - 1);
+//                if (glyphPositions[i] - x <= x - glyphPositions[i - 1]) return i;
+//                return Math.max(0, i - 1);
+//            }
+//        } else {
+//            return 0;
+//        }
+//    }
 }

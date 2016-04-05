@@ -29,6 +29,7 @@ import org.robovm.rt.bro.*;
 import org.robovm.rt.bro.ptr.*;
 import server.model.media.MAudio;
 import server.model.media.MMusic;
+import tools.serverTools.databases.LocalDatabaseFactory;
 
 public class AudioRecorder {
 
@@ -105,10 +106,10 @@ public class AudioRecorder {
             avar.setDelegate(avar.getDelegate());
             avar.setMeteringEnabled(true);
             session.setCategory(AVAudioSessionCategory.PlayAndRecord);
-            System.out.println("session set");
+
             session.setActive(true);
             avar.prepareToRecord();
-            System.out.println(filePath.toString());
+
         }catch(NSErrorException e){
             e.printStackTrace();
         }
@@ -140,7 +141,9 @@ public class AudioRecorder {
 
         assert(mData!=null);
 
-        return AudioCreator.createMAudio(mData);
+        MAudio audio = AudioCreator.createMAudio(mData);
+        audio.setKey(LocalDatabaseFactory.createLocalDatabase().generateKey());
+        return audio;
     }
 
     public boolean isRecording(){

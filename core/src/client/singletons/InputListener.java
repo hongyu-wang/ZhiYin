@@ -119,11 +119,11 @@ public class InputListener implements InputProcessor, Constants {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
         mouseX = screenX;
-        mouseY = (int)(HEIGHT*StateManager.M) - screenY;
 
-        //TODO Yes. System.out.println(mouseX + " " + mouseY);
+        mouseY = Gdx.graphics.getHeight() - screenY;
+
+        System.out.println(mouseX + " " + mouseY);
         stateManager.receiveInput();
 
         return false;
@@ -132,7 +132,9 @@ public class InputListener implements InputProcessor, Constants {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         mouseX = screenX;
-        mouseY = (int)(HEIGHT*StateManager.M) - screenY;
+        //mouseY = (int)(HEIGHT*StateManager.M) - screenY;
+        mouseY = screenY;
+
         stateManager.receiveRelease();
 
         return false;

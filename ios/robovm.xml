@@ -6,6 +6,14 @@
   <target>ios</target>
   <iosInfoPList>Info.plist.xml</iosInfoPList>
   <resources>
+
+    <resource>
+      <directory>../android/assets/MusicAssets</directory>
+      <includes>
+        <include>**</include>
+      </includes>
+    </resource>
+
     <resource>
 
       <directory>../android/assets/Art Assets</directory>
