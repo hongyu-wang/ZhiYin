@@ -23,6 +23,8 @@ public class Controller {
     private static UIViewController uivc;
     private static UIView uw;
 
+    private boolean cancelled = false;
+
     private Controller() {
         initWithCameraRoll();
 

@@ -197,8 +197,6 @@ public class NowPlaying extends State {
                 new TestExecutable("fuck")
         );
         Image im = new Image(new Texture("NowPlaying/Share@"+M+".png"));
-        System.out.println(im.getPrefWidth());
-        System.out.println(im.getPrefHeight());
         im.setBounds((520 + 115 - 30)* M, (117/2 - 26) * M, im.getPrefWidth(), im.getPrefHeight());
         stage.addActor(im);
 

@@ -13,10 +13,10 @@ import tools.utilities.Utils;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /** *
@@ -208,11 +208,48 @@ public class VirtualDatabase {
 
     /**Sets a model into the database.
      *
-     * @param model The model.
+     * @param newModel The model.
      */
-    public void setModel(ServerModel model){
-        data.put(model.getKey(), model);
-        updatedKeys.add(model.getKey());
+    public void setModel(ServerModel newModel){
+        if(data.containsKey(newModel.getKey())) {
+            Field[] newFields = newModel.getClass().getDeclaredFields();
+            ServerModel oldModel = data.get(newModel.getKey());
+            try {
+                for (int i = 0; i < newFields.length; i++) {
+
+                    String newName = newFields[i].getName();
+                    newName = newName.substring(0,1).toUpperCase()+newName.substring(1);
+
+
+                    Method getMethodNew = newModel.getClass().getMethod("get"+newName);
+                    Method getMethodOld = oldModel.getClass().getMethod("get"+newName);
+
+
+                    Object newObj = getMethodNew.invoke(newModel);
+                    Object oldObj = getMethodOld.invoke(oldModel);
+
+                    Class objectClass = newObj.getClass();
+
+                    if(objectClass.equals(ArrayList.class)){
+                        objectClass = List.class;
+                    }
+
+                    if (newObj instanceof List) {
+                        Method setMethodNew = newModel.getClass().getMethod("set"+newName, objectClass);
+                        List valueOldList = (List) newObj;
+                        List valueNewList = (List) oldObj;
+                        List newMergedList = this.union(valueNewList, valueOldList);
+                        setMethodNew.invoke(newModel, newMergedList);
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        data.put(newModel.getKey(), newModel);
+
+        //data.put(oldModel.getKey(), oldModel);
+        updatedKeys.add(newModel.getKey());
     }
 
     /**Returns the key of the user based on a username.
@@ -447,5 +484,14 @@ public class VirtualDatabase {
 
     public List<Long> getUpdatedKeys() {
         return updatedKeys;
+    }
+
+    private <T> List<T> union(List<T> list1, List<T> list2) {
+        Set<T> set = new HashSet<T>();
+
+        set.addAll(list1);
+        set.addAll(list2);
+
+        return new ArrayList<T>(set);
     }
 }

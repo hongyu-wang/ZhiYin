@@ -1,8 +1,5 @@
 package client.tools;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-
-import javax.swing.text.html.HTML;
 import java.util.*;
 import java.util.regex.*;
 

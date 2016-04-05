@@ -8,6 +8,7 @@ import server.model.structureModels.ServerModel;
 import server.model.user.UserConversations;
 import server.services.factories.AudioManagerFactory;
 import server.services.factories.MessageManagerFactory;
+import tools.AudioTools.AudioPlayer;
 import tools.AudioTools.AudioRecorder;
 import server.model.media.MAudio;
 import server.model.social.MConversation;
@@ -32,8 +33,9 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
     @Override
     public void execute() {
         MAudio audio;
-        if (os == MAC)
+        if (os == MAC) {
             audio = AudioRecorder.getInstance().stopRecording();
+        }
         else{
             audio = AudioManagerFactory.createAudioManager().createMockAudio();
         }
@@ -50,7 +52,6 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
         pushList.add(audio);
         pushList.add(message);
         pushList.add(conversation);
-
         localDatabase.pushModel(pushList);
 
         friend2.getMessageKeys().add(message.getKey());

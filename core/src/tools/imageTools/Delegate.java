@@ -1,6 +1,7 @@
 package tools.imageTools;
 
 import client.singletons.StateManager;
+import client.tools.ImageParser;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -16,18 +17,15 @@ class Delegate extends UINavigationControllerDelegateAdapter implements UIImageP
 
         assert(image != null);
         byte[] bytes = image.toPNGData().getBytes();
-        //Pixmap temp = new Pixmap(bytes,0,bytes.length);
-        //Texture draw = new Texture(temp);
-        //temp.dispose();
-        //Image im = new Image(draw);
-        //im.setBounds(0,0,100,100);
-        //StateManager.getInstance().currentState.getStage().addActor(im);
-        //Controller.getInstance().closeCameraRoll();
+        ImageParser.setUpImage(bytes, false);
+        Controller.getInstance().closeCameraRoll();
         System.out.println("finished picking media");
     }
 
     @Override
     public void didCancel(UIImagePickerController uiImagePickerController) {
+
+        ImageParser.setUpImage(null, true);
         Controller.getInstance().closeCameraRoll();
         System.out.println("canceled");
     }
