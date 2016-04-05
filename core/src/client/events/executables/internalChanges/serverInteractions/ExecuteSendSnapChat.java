@@ -26,7 +26,13 @@ public class ExecuteSendSnapChat implements ExecuteServer {
 
     @Override
     public void execute() {
-        MSnapShot snapShot = getSnapshot(localDatabase.getMainUser());
+        AudioPlayer audioPlayer = AudioPlayer.getInstance();
+        AudioRecorder audioRecorder = AudioRecorder.getInstance();
+
+        MAudio song = audioPlayer.getCurrentAudio();
+        MAudio userRecording = audioRecorder.stopRecording();
+
+        MSnapShot snapShot = getSnapshot(localDatabase.getMainUser(), song, userRecording);
 
         User friend = localDatabase.getModel(localDatabase.getUserKeyByName(friendName));
         friend.setSnapChat(snapShot.getKey());
@@ -34,15 +40,11 @@ public class ExecuteSendSnapChat implements ExecuteServer {
         List<ServerModel> pushList = Utils.newList();
         pushList.add(friend);
         pushList.add(snapShot);
+        pushList.add(snapShot);
         localDatabase.pushModel(pushList);
     }
 
-    private MSnapShot getSnapshot(User user){
-        AudioPlayer audioPlayer = AudioPlayer.getInstance();
-        AudioRecorder audioRecorder = AudioRecorder.getInstance();
-
-        MAudio song = audioPlayer.getCurrentAudio();
-        MAudio userRecording = audioRecorder.stopRecording();
+    private MSnapShot getSnapshot(User user, MAudio song, MAudio userRecording){
 
         MSnapShot snapShot = AudioCreator.createSnapShot(userRecording.getKey(), song.getKey(), (int)time[0], (int)time[1]);
         snapShot.setKey(localDatabase.generateKey());
