@@ -9,7 +9,6 @@ import tools.AudioTools.AudioPlayer;
  */
 public class ExecuteStopSnapChat implements Executable{
 
-
     @Override
     public void execute() {
         double[] time = AudioPlayer.getInstance().stopSnapChatTime();

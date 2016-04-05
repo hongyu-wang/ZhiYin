@@ -1,4 +1,5 @@
 package client.singletons;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateSnapChatMessage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
@@ -35,12 +36,13 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
     }
 
 
+    public State getCurrentState() {
+        return currentState;
+    }
 
-
-
-
-
-
+    public void setCurrentState(State currentState) {
+        this.currentState = currentState;
+    }
 
     /**
      * This is the current state within the statemanager.
@@ -50,7 +52,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
     private StateManager(){
         init();
-
     }
 
 

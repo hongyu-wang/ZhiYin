@@ -18,6 +18,7 @@ import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.stateInterfaces.Executable;
 import server.model.user.User;
+import server.model.user.UserProfile;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
@@ -235,6 +236,11 @@ public class NowPlaying extends State {
             names.add(pt.getName());
             exs.add(new ExecuteSendSnapChat(pt.getName()));
         }
+
+        UserProfile profile = LocalDatabaseFactory.createLocalDatabase().getModel(LocalDatabaseFactory.createLocalDatabase().getMainUser().getProfile());
+
+        names.add(profile.getUsername());
+        exs.add(new ExecuteSendSnapChat(profile.getUsername()));
 
         ConfirmDialog confirmDialog = new ConfirmDialog(
                 "You've created a new snapshot!! Which of your friends do you want to send it to?",
