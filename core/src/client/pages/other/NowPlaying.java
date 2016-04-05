@@ -210,6 +210,7 @@ public class NowPlaying extends State {
         //-----------------------This is the share button that adds the drag button
         ExecutableMultiplexer em = new ExecutableMultiplexer(
                 new ExecuteAddDragButton(snapChat),
+                new ExecuteRecord(),
                 new ExecuteStartSnapChat()
         );
         Image im = new Image(new Texture("NowPlaying/Share@"+M+".png"));

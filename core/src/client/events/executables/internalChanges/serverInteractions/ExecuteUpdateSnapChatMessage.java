@@ -11,13 +11,10 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-04-05.
  */
 public class ExecuteUpdateSnapChatMessage extends ExecuteUpdate {
-    private Friends2 friend2;
     private long friend;
     private List<Long> snapChats;
 
-    public ExecuteUpdateSnapChatMessage(Friends2 friend2){
-        this.friend2 = friend2;
-        this.friend = localDatabase.getUserKeyByName(friend2.getFriendName());
+    public ExecuteUpdateSnapChatMessage(){
         snapChats = Utils.newList();
     }
 
