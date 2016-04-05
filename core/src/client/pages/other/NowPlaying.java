@@ -1,17 +1,24 @@
 package client.pages.other;
 
+import client.component.basicComponents.ConfirmDialog;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
-import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
-import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMusic;
-import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetTime;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
+import client.events.executables.internalChanges.schmoferMusicExecutable.*;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSendSnapChat;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateComments;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
+import client.pages.pageInternal.serverClientInteractions.FriendTalker;
+import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
+import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.stateInterfaces.Executable;
+import server.model.user.User;
+import server.model.user.UserProfile;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
@@ -24,6 +31,8 @@ import server.model.media.MImage;
 import server.model.media.MMusic;
 import tools.AudioTools.AudioManager;
 import client.component.basicComponents.Button;
+import tools.utilities.Utils;
+import java.util.List;
 
 
 /**
@@ -185,14 +194,23 @@ public class NowPlaying extends State {
         //TODO setup this button.
         DragButton snapChat = new DragButton(this, 250, new Image(new Texture("Friends/SwipeToDiscardButton@" + M + ".png")), getStage());
         snapChat.setInitialBounds(32, 135, 750 - 64, 236);
-        snapChat.setDragExecutable(new TestExecutable("Snap Chat Drag in NowPlaying"));
-        snapChat.setReleaseExecutable(new TestExecutable("Snap Chat Release in NowPlaying"));
+
+        ConfirmDialog dialog = setUpWindows();
+
+        ExecutableMultiplexer release = new ExecutableMultiplexer(
+                new ExecuteStopSnapChat(),
+                () -> stage.addActor(dialog.getWindow())
+        );
+
+        snapChat.setDragExecutable(new ExecuteStopSnapChat());
+        snapChat.setReleaseExecutable(release);
         add(snapChat);
 
         //-----------------------This is the share button that adds the drag button
         ExecutableMultiplexer em = new ExecutableMultiplexer(
                 new ExecuteAddDragButton(snapChat),
-                new TestExecutable("fuck")
+                new ExecuteRecord(),
+                new ExecuteStartSnapChat()
         );
         Image im = new Image(new Texture("NowPlaying/Share@"+M+".png"));
         im.setBounds((520 + 115 - 30)* M, (117/2 - 26) * M, im.getPrefWidth(), im.getPrefHeight());
@@ -204,6 +222,34 @@ public class NowPlaying extends State {
         add(shareButton);
     }
 
+    private ConfirmDialog setUpWindows(){
+
+        List<String> names = Utils.newList();
+        List<Executable> exs = Utils.newList();
+
+        FriendTalker ft = TalkerFactory.getFriendTalker();
+        ProfileTalker pt = TalkerFactory.getProfileTalker();
+        for(User friend: ft.getAllFriends()){
+            pt.init(friend);
+            names.add(pt.getName());
+            exs.add(new ExecuteSendSnapChat(pt.getName()));
+        }
+
+        UserProfile profile = LocalDatabaseFactory.createLocalDatabase().getModel(LocalDatabaseFactory.createLocalDatabase().getMainUser().getProfile());
+
+        names.add(profile.getUsername());
+        exs.add(new ExecuteSendSnapChat(profile.getUsername()));
+
+        ConfirmDialog confirmDialog = new ConfirmDialog(
+                "You've created a new snapshot!! Which of your friends do you want to send it to?",
+                names.toArray(new String[names.size()])
+        );
+        confirmDialog.setUpExecutables(
+                exs.toArray(new Executable[exs.size()])
+        );
+
+        return confirmDialog;
+    }
 
 
     private void initializeComments(){

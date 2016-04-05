@@ -1,6 +1,5 @@
 package client.pages.other;
 
-import client.component.basicComponents.Button;
 import client.component.basicComponents.ConfirmDialog;
 import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
 import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
@@ -25,7 +24,7 @@ import server.services.factories.ImageManagerFactory;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
-
+import client.component.basicComponents.Button;
 import java.util.List;
 
 
@@ -94,6 +93,10 @@ public class MyProfile extends MyProfileShell implements Profile {
         super.init();
         serverInit();
 
+        Label label = new Label(name, SkinSingleton.getInstance());
+        label.setPosition(310*M, 1050*M);
+        stage.addActor(label);
+
         if(profilePic != null) {
             profilePic.setBounds(50*M, 967*M, 200*M, 200*M);
             stage.addActor(profilePic);
@@ -137,13 +140,13 @@ public class MyProfile extends MyProfileShell implements Profile {
 
         ConfirmDialog confirmDialog = new ConfirmDialog(
                 "Where do you want your profile image from?",
-                "Gallery",
+                new String[]{"Gallery",
                 "Camera",
-                "Cancel"
+                "Cancel"}
         );
         confirmDialog.setUpExecutables(
-                new ExecuteOpenCameraRoll(),
-                new ExecuteOpenCamera()
+                new Executable[]{new ExecuteOpenCameraRoll(),
+                new ExecuteOpenCamera()}
         );
 
         button.setExecutable(
@@ -198,7 +201,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         final ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
 
         Table artistTable = new Table();
-        artistTable.add(image).width(150*M).height(150*M);
+        artistTable.add(artistButton).width(150*M).height(150*M);
         s.add(artistTable);
 
         Table removeTable = new Table();

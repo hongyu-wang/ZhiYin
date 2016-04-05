@@ -4,6 +4,7 @@ import client.component.basicComponents.Button;
 import client.events.ActionEvent;
 import client.events.executables.internalChanges.loginExecutable.ExecuteLogin;
 import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateSnapChatMessage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
@@ -114,6 +115,7 @@ public class Login extends State {
         vb.update(0);
         if (vb.isUpdated()) {
             Pages.initClass();
+            new ExecuteUpdateSnapChatMessage();
             new ExecuteChangePage(Pages.HOME).execute();
         }
         else{
