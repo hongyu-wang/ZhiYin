@@ -1,5 +1,7 @@
 package tools.imageTools;
 
+import client.pageStorage.Pages;
+import client.pages.other.MyProfile;
 import client.singletons.StateManager;
 import client.tools.ImageParser;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -17,9 +19,11 @@ class Delegate extends UINavigationControllerDelegateAdapter implements UIImageP
 
         assert(image != null);
         byte[] bytes = image.toPNGData().getBytes();
-        ImageParser.setUpImage(bytes, false);
+
         Controller.getInstance().closeCameraRoll();
+        ImageParser.setUpImage(bytes, false);
         System.out.println("finished picking media");
+        ((MyProfile)Pages.MYPROFILE.getStateReference()).attemptSetUpImage();
     }
 
     @Override

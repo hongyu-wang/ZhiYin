@@ -108,7 +108,13 @@ public final class AudioCreator {
         //Artists: The Weeknd, Justin Bieber, Justin Timberlake, Ed Sheeran, Maroon 5, Kanye West
         System.out.println(songNameToMMusic.get("On Sight").getMusicKey());
         System.out.println("done");
+        /*
 
+        System.out.println(songNameToMMusic.keySet().size());
+        for (String i : songNameToMMusic.keySet()){
+            System.out.println(i);
+            System.out.println(songNameToMMusic.get(i).getKey());
+        }*/
     }
 
     private static void pushList(){

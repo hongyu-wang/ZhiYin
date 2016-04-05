@@ -1,5 +1,10 @@
 package client.pages.other;
 
+import client.component.basicComponents.ConfirmDialog;
+import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileArtists;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileDiary;
@@ -9,6 +14,7 @@ import client.pages.musicDiary.Diary4;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
 import client.stateInterfaces.Profile;
+import client.tools.ImageParser;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -22,7 +28,7 @@ import server.services.factories.ImageManagerFactory;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
-
+import client.component.basicComponents.Button;
 import java.util.List;
 
 
@@ -48,6 +54,8 @@ public class MyProfile extends MyProfileShell implements Profile {
     private ScrollPane scrollpane;
     private ScrollPane scrollpane2;
 
+    private Window profilePicChooser;
+
     private Table table;
     private Table following;
 
@@ -58,7 +66,7 @@ public class MyProfile extends MyProfileShell implements Profile {
 
     private ExecuteUpdate update1;
     private ExecuteUpdate update2;
-
+    private UserProfile userProfile;
     //private ArrayList<Image> artistImages = new ArrayList<>();
     //private ArrayList<ImageButton> artistButtons = new ArrayList<>();
     //private ArrayList<ImageButton> removeButtons = new ArrayList<>();
@@ -71,12 +79,11 @@ public class MyProfile extends MyProfileShell implements Profile {
     private void serverInit(){
         LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         User user = localDatabase.getMainUser();
-        UserProfile userProfile = localDatabase.getModel(user.getProfile());
+        userProfile = localDatabase.getModel(user.getProfile());
         MImage mImage = localDatabase.getModel(userProfile.getImageKey());
 
         this.name = userProfile.getUsername();
-        this.description = "here is a really long description that I am typing just to test wrapping of the words, as well as scrollpane vertical scrolling;" +
-        "more redundant words are being typed right now and stuff and stuff and stuff and more stuff and more stuff and more stuff and more stuff";
+        this.description = userProfile.getDescription();
         this.profilePic = ImageManagerFactory.createImageManager().mImageToImage(mImage);
 
         currentArtists = Utils.newList();
@@ -112,8 +119,41 @@ public class MyProfile extends MyProfileShell implements Profile {
         scrollpane2 = new ScrollPane(following);
         scrollpane2.setBounds(50*M,  350*M, 700*M, 150*M);
         stage.addActor(scrollpane2);
+        setUpWindow();
 
     }
+
+    private void setUpWindow(){
+        Button button = new Button(this);
+        button.setBounds(280, 920, 80, 80);
+
+        ConfirmDialog confirmDialog = new ConfirmDialog(
+                "Where do you want your profile image from?",
+                "Gallery",
+                "Camera",
+                "Cancel"
+        );
+        confirmDialog.setUpExecutables(
+                new ExecuteOpenCameraRoll(),
+                new ExecuteOpenCamera()
+        );
+
+        button.setExecutable(
+                ()->stage.addActor(confirmDialog.getWindow())
+        );
+        add(button);
+    }
+
+    public void attemptSetUpImage(){
+        try{
+            Image image = ImageParser.getImage();
+            image.setBounds(50 * M, 967 * M, 200 * M, 200 * M);
+            stage.addActor(image);
+        } catch(IllegalStateException ex){
+            System.out.println("Your stupid.");
+        }
+    }
+
 
     @Override
     public void addPost(final MDiaryPost diaryPost){
