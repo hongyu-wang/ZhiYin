@@ -13,8 +13,8 @@ import tools.serverTools.databases.LocalDatabaseFactory;
 public class ExecutePlayHashtag implements Executable {
     private long tag;
 
-    public ExecutePlayHashtag(MHashtag tag){
-        this.tag = tag.getKey();
+    public ExecutePlayHashtag(String tag){
+        this.tag = LocalDatabaseFactory.createLocalDatabase().getHashtagByName(tag);
     }
 
     @Override
