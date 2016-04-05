@@ -35,7 +35,6 @@ public class MBand extends ServerModel {
      */
     private List<Long> songs;
 
-
     public String getName() {
         return name;
     }
@@ -52,6 +51,14 @@ public class MBand extends ServerModel {
         this.description = description;
     }
 
+    public long getBandImage() {
+        return bandImage;
+    }
+
+    public void setBandImage(long bandImage) {
+        this.bandImage = bandImage;
+    }
+
     public List<Long> getAlbums() {
         return albums;
     }
@@ -66,13 +73,5 @@ public class MBand extends ServerModel {
 
     public void setSongs(List<Long> songs) {
         this.songs = songs;
-    }
-
-    public long getBandImage() {
-        return bandImage;
-    }
-
-    public void setBandImage(long bandImage) {
-        this.bandImage = bandImage;
     }
 }

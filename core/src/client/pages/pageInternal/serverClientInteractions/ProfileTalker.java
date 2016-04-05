@@ -134,7 +134,7 @@ public class ProfileTalker extends Talkers{
         public void pull() {
             super.setWaiting(true);
 
-            profile = localDatabase.getModel(user.getProfile());
+            profile = localDatabase.getModel(user.getProfileKey());
 
             localDatabase.requestModelFromServer(
                     profile.getImageKey());
@@ -180,7 +180,7 @@ public class ProfileTalker extends Talkers{
 
         @Override
         public void update(float dt) {
-            profile = localDatabase.getModel(user.getProfile());
+            profile = localDatabase.getModel(user.getProfileKey());
 
             MImage image = localDatabase.getModel(profile.getImageKey());
 

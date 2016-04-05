@@ -18,7 +18,6 @@ public class MSnapShot extends ServerModel {
 
     private long creator;
 
-
     public long getMessage() {
         return message;
     }
@@ -50,7 +49,6 @@ public class MSnapShot extends ServerModel {
     public void setEndTime(int endTime) {
         this.endTime = endTime;
     }
-
 
     public long getCreator() {
         return creator;

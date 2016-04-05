@@ -38,7 +38,7 @@ public class MusicHashtagManagerImplementation implements MusicHashtagManager {
 //        long hashtagKey = 0;
 //        hashtag.setKey(hashtagKey);
 //
-//        hashtag.setHashtag(hashtagName);
+//        hashtag.setHashtagName(hashtagName);
 
         return hashtag;
     }

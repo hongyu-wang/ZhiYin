@@ -16,9 +16,10 @@ public class AudioPlayer {
 
     private boolean running = false;
 
-    private AVAudioPlayer player1;
-    private AVAudioPlayer player2;
-    boolean snapShot = false;
+    private AVAudioPlayer musicPlayer;
+    private AVAudioPlayer voicePlayer;
+    private AVAudioPlayer snapShotPlayer;
+    private boolean snapShot = false;
     private static AVAudioSession session = AVAudioSession.getSharedInstance();
 
     private NSTimer timer;
@@ -27,8 +28,9 @@ public class AudioPlayer {
     private static AudioPlayer singleInstance = new AudioPlayer();
 
     private AudioPlayer(){
-        player1 = new AVAudioPlayer();
-        player2 = new AVAudioPlayer();
+        musicPlayer = new AVAudioPlayer();
+        voicePlayer = new AVAudioPlayer();
+        snapShotPlayer = new AVAudioPlayer();
     }
 
     public static AudioPlayer getInstance(){
@@ -37,31 +39,36 @@ public class AudioPlayer {
 
 
     public void setSongSnapShot(MAudio voice, MAudio song, double startTime){
-        currentSong = voice;
-        player1.dispose();
-        player2.dispose();
+        currentSong = song;
+        //musicPlayer.dispose();
+        musicPlayer.stop();
+        voicePlayer.dispose();
+        snapShotPlayer.dispose();
         snapShot = true;
 
         try {
-            player2 = new AVAudioPlayer(new NSData(voice.getmData()));
-            player1 = new AVAudioPlayer(new NSData(song.getmData()));
-            player1.setCurrentTime(startTime);
+            voicePlayer = new AVAudioPlayer(new NSData(voice.getmData()));
+            snapShotPlayer = new AVAudioPlayer(new NSData(song.getmData()));
+            snapShotPlayer.setCurrentTime(startTime);
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
 
-        player1.setCurrentTime(startTime);
+
     }
 
     public void setSong(MAudio audio){
         currentSong = audio;
-        player1.dispose();
-        if(snapShot)
-            player2.dispose();
+        musicPlayer.dispose();
+        if(snapShot) {
+            voicePlayer.stop();
+            snapShotPlayer.stop();
+
+        }
         snapShot = false;
 
         try {
-            player1 = new AVAudioPlayer(new NSData(audio.getmData()));
+            musicPlayer = new AVAudioPlayer(new NSData(audio.getmData()));
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
@@ -75,35 +82,46 @@ public class AudioPlayer {
             e.printStackTrace();
         }
 
-        player1.prepareToPlay();
-        player1.setDelegate(player1.getDelegate());
+        musicPlayer.prepareToPlay();
+        musicPlayer.setDelegate(musicPlayer.getDelegate());
         if(snapShot) {
-            player2.prepareToPlay();
-            player2.setDelegate(player2.getDelegate());
+            voicePlayer.prepareToPlay();
+            voicePlayer.setDelegate(voicePlayer.getDelegate());
+            snapShotPlayer.prepareToPlay();
+            snapShotPlayer.setDelegate(snapShotPlayer.getDelegate());
         }
     }
 
     public void play(){
         running = true;
-        player1.play();
-        if(snapShot)
-            player2.play();
+
+        if(snapShot) {
+            voicePlayer.play();
+            snapShotPlayer.play();
+            return;
+        }
+
+
+        musicPlayer.play();
+
 
     }
 
-    public void playAtTime(int time){
-        player1.setCurrentTime((double)time);
-         if(snapShot)
-            player2.setCurrentTime(player2.getCurrentTime() + (double)time);
+    //public void playAtTime(int time){
+        //musicPlayer.setCurrentTime((double)time);
+         //if(snapShot)
+            //player2.setCurrentTime(player2.getCurrentTime() + (double)time);
 
-        play();
-    }
+        //play();
+    //}
 
     public void pause(){
         running = false;
-        player1.stop();
-        if(snapShot)
-            player2.stop();
+        musicPlayer.stop();
+        if(snapShot) {
+            voicePlayer.stop();
+            snapShotPlayer.stop();
+        }
 
     }
 
@@ -114,9 +132,12 @@ public class AudioPlayer {
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
-        player1.stop();
-        if(snapShot)
-            player2.stop();
+        if(snapShot) {
+            voicePlayer.stop();
+            snapShotPlayer.stop();
+        }
+        musicPlayer.stop();
+
 
 
     }
@@ -124,7 +145,9 @@ public class AudioPlayer {
     public boolean isPlaying(){
         if(!running)
             return false;
-        running = player1.isPlaying();
+        if(snapShot)
+            return voicePlayer.isPlaying();
+        running = musicPlayer.isPlaying();
 
         return running;
     }
@@ -136,11 +159,16 @@ public class AudioPlayer {
     }
 
     public double[] stopSnapChatTime(){
+
+
         time[1] = this.getCurrentTime();
 
         double[] timeArray = time;
 
         time = new double[]{0, 0};
+
+        for(double s : timeArray)
+            System.out.println(s);
 
         return timeArray;
     }
@@ -152,10 +180,14 @@ public class AudioPlayer {
     }
 
     public double getCurrentTime(){
-        return player1.getCurrentTime();
+        return musicPlayer.getCurrentTime();
     }
 
     public void setTime(double time){
-        player1.setCurrentTime(time);
+        musicPlayer.setCurrentTime(time);
     }
+
+    public boolean isPlayingSnapshot(){ return snapShot;}
+
+
 }

@@ -10,8 +10,6 @@ import server.model.user.UserProfile;
 import server.services.factories.CommentManagerFactory;
 import tools.utilities.Utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +32,7 @@ public class ExecuteSendComment implements ExecuteServer {
 
         long userKey = localDatabase.getMainUser().getKey();
         User mainUser = localDatabase.getModel(userKey);
-        UserProfile userProfile = localDatabase.getModel(mainUser.getProfile());
+        UserProfile userProfile = localDatabase.getModel(mainUser.getProfileKey());
 
         MComment comment = CommentManagerFactory.createCommentManager().createComment(Utils.<Long>newList(), Utils.<Long>newList(),
                 Utils.<Long>newList(), System.currentTimeMillis(), userText, userKey);

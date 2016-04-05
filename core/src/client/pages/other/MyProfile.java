@@ -75,7 +75,7 @@ public class MyProfile extends MyProfileShell implements Profile {
     private void serverInit(){
         LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         User user = localDatabase.getMainUser();
-        userProfile = localDatabase.getModel(user.getProfile());
+        userProfile = localDatabase.getModel(user.getProfileKey());
         MImage mImage = localDatabase.getModel(userProfile.getImageKey());
 
         this.name = userProfile.getUsername();

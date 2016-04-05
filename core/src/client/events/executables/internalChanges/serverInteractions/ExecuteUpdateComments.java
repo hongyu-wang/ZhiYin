@@ -8,13 +8,9 @@ import server.model.social.MComment;
 import server.model.social.MPost;
 import server.model.user.User;
 import server.model.user.UserProfile;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
 
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,7 +68,7 @@ public class ExecuteUpdateComments extends ExecuteUpdate {
 
     private void addTextComment(MComment comment){
         User user = localDatabase.getModel(comment.getCreator());
-        UserProfile profile = localDatabase.getModel(user.getProfile());
+        UserProfile profile = localDatabase.getModel(user.getProfileKey());
 
         String text = comment.getText();
 
@@ -84,7 +80,7 @@ public class ExecuteUpdateComments extends ExecuteUpdate {
 
     private void addAudioComment(MComment comment){
         User user = localDatabase.getModel(comment.getCreator());
-        UserProfile profile = localDatabase.getModel(user.getProfile());
+        UserProfile profile = localDatabase.getModel(user.getProfileKey());
 
 
         MAudio audio = localDatabase.getModel(comment.getAudio().get(0));

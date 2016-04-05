@@ -1,5 +1,6 @@
 package client.events.executables.internalChanges.serverInteractions;
 
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteStopSnapChat;
 import client.pages.other.NowPlaying;
 import server.model.media.MAudio;
 import server.model.media.MSnapShot;
@@ -49,6 +50,8 @@ public class ExecuteSendSnapChat implements ExecuteServer {
         MSnapShot snapShot = AudioCreator.createSnapShot(userRecording.getKey(), song.getKey(), (int)time[0], (int)time[1]);
         snapShot.setKey(localDatabase.generateKey());
         snapShot.setCreator(user.getKey());
+
+
 
         return snapShot;
     }

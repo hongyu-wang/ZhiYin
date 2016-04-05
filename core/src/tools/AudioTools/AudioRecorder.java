@@ -139,8 +139,6 @@ public class AudioRecorder {
 
         NSData mData = new NSData(fm.getContentsAtPath(filePath.getPath()));
 
-        assert(mData!=null);
-
         MAudio audio = AudioCreator.createMAudio(mData);
         audio.setKey(LocalDatabaseFactory.createLocalDatabase().generateKey());
         return audio;

@@ -51,28 +51,33 @@ public class WorkingTextArea extends TextArea implements Constants {
                 if (newLineAtEnd()){
 
                     resetText();
-                    WorkingTextArea.keyboardIsVisible = false;
-                    StateManager.getInstance().translateStage();
+                    if (WorkingTextArea.keyboardIsVisible) {
+                        WorkingTextArea.keyboardIsVisible = false;
+                        StateManager.getInstance().translateStage();
+                    }
                     return true;
                 }
                 return false;
             }
         });
-        setOnscreenKeyboard(new MyDefaultOnscreenKeyboard());
+        setOnscreenKeyboard(new OnscreenKeyboard() {
+            @Override
+            public void show(boolean visible) {
+                System.out.println(getY());
+                System.out.println(getHeight());
+                if (getY() - getHeight() < KEY_BOARD_HEIGHT) {
+                    WorkingTextArea.keyboardIsVisible = true;
+                }
+                StateManager.getInstance().translateStage();
+                Gdx.input.setOnscreenKeyboardVisible(visible);
+
+            }
+        });
 
 
     }
 
-    static public class MyDefaultOnscreenKeyboard extends DefaultOnscreenKeyboard {
 
-        @Override
-        public void show(boolean visible) {
-            WorkingTextArea.keyboardIsVisible = true;
-            StateManager.getInstance().translateStage();
-            Gdx.input.setOnscreenKeyboardVisible(visible);
-
-        }
-    }
 
 
     protected WorkingTextArea(String text, Skin skin, boolean test) {

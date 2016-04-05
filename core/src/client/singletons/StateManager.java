@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import tools.AudioTools.AudioPlayer;
 
 /**
  * This is essentially a card layout.
@@ -35,6 +36,7 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         return ourInstance;
     }
 
+    private static AudioPlayer ap = AudioPlayer.getInstance();
 
     public State getCurrentState() {
         return currentState;
@@ -100,6 +102,12 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         currentState.update(dt);
 
         TalkerFactory.getServerTalker().update(dt);
+
+
+
+        if(!ap.isPlaying() && ap.isPlayingSnapshot()) {
+            ap.stop();
+        }
     }
 
     @Override
@@ -140,11 +148,11 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
             if (WorkingTextArea.getKeyboardIsVisible()){
                 System.out.println(currentState.getStage().getCamera());
                 if (!stateUp)
-                    currentState.getStage().getCamera().translate(0, -400, 0);
+                    currentState.getStage().getCamera().translate(0, -KEY_BOARD_HEIGHT, 0);
                 stateUp = true;
             } else{
                 if (stateUp)
-                    currentState.getStage().getCamera().translate(0, 400, 0);
+                    currentState.getStage().getCamera().translate(0, KEY_BOARD_HEIGHT, 0);
                 stateUp = false;
             }
         }

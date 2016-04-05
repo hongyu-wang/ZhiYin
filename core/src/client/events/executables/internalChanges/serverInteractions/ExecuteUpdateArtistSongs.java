@@ -25,6 +25,7 @@ public class ExecuteUpdateArtistSongs extends ExecuteUpdate{
         if(os == MAC) {
             List<MMusic> musicList = AudioCreator.artistToMMusic.get(artist.getName());
 
+
             for (MMusic music : musicList) {
                 if (artistProfile.getMusicKeys().contains(music.getKey())) {
                     continue;

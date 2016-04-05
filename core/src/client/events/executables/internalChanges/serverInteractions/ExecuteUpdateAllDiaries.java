@@ -3,12 +3,9 @@ package client.events.executables.internalChanges.serverInteractions;
 import client.pages.musicDiary.Diary1;
 import client.tools.Constants;
 import server.model.social.MDiaryPost;
-import server.model.social.MPost;
 import server.model.user.User;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserProfile;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
 
 import java.util.Collections;
@@ -52,7 +49,7 @@ public class ExecuteUpdateAllDiaries extends ExecuteUpdate{
         for(MDiaryPost post: posts){
             if(!diary1.getCurrentDiaries().contains(post.getKey())) {
                 User user = localDatabase.getModel(post.getCreator());
-                UserProfile profile = localDatabase.getModel(user.getProfile());
+                UserProfile profile = localDatabase.getModel(user.getProfileKey());
 
                 String username = profile.getUsername();
 

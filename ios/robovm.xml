@@ -8,7 +8,7 @@
   <resources>
 
     <resource>
-      <directory>../android/assets/MusicAssets</directory>
+      <directory>../android/assets/massets</directory>
       <includes>
         <include>**</include>
       </includes>

@@ -13,8 +13,6 @@ import server.services.factories.CommentManagerFactory;
 import tools.AudioTools.AudioRecorder;
 import tools.utilities.Utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,7 +41,7 @@ public class ExecuteSendAudioComment implements ExecuteServer {
 
         long userKey = localDatabase.getMainUser().getKey();
         User mainUser = localDatabase.getModel(userKey);
-        UserProfile userProfile = localDatabase.getModel(mainUser.getProfile());
+        UserProfile userProfile = localDatabase.getModel(mainUser.getProfileKey());
 
         MComment comment = generateComment(userKey, audio.getKey());
 

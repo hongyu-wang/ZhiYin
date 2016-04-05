@@ -75,7 +75,7 @@ public final class AudioCreator {
 
     public static void initializeAll(){
         fm = new NSFileManager();
-
+        int count=0;
         initializeAlbums();
         //Top Singles, Tagged
         songNameToMMusic = new TreeMap<String,MMusic>();
@@ -84,6 +84,8 @@ public final class AudioCreator {
         List<String> urls = NSBundle.getMainBundle().findResourcesPaths("mp3",null);
 
         for(String f : urls) {
+
+
             if(!f.toString().equals(".DS_Store")) {
                 File mp3 = new File(f);
                 NSURL url = new NSURL(mp3.toURI().toString());
@@ -96,6 +98,7 @@ public final class AudioCreator {
                 List<MMusic> temp = artistToMMusic.get(m.getArtist());
                 temp.add(m);
                 artistToMMusic.put(m.getArtist(), temp);
+                count++;
 
 
 
@@ -106,8 +109,8 @@ public final class AudioCreator {
         AudioCreator.pushList();
 
         //Artists: The Weeknd, Justin Bieber, Justin Timberlake, Ed Sheeran, Maroon 5, Kanye West
-        System.out.println(songNameToMMusic.get("On Sight").getMusicKey());
-        System.out.println("done");
+        //System.out.println(songNameToMMusic.get("On Sight").getMusicKey());
+        //System.out.println("done");
         /*
 
         System.out.println(songNameToMMusic.keySet().size());

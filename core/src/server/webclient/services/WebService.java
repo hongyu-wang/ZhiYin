@@ -1,6 +1,6 @@
 package server.webclient.services;
 
-import com.sun.corba.se.spi.activation.Server;
+
 import server.model.media.MText;
 import server.model.structureModels.ServerModel;
 import server.services.interfaces.models.UserProfileManager;

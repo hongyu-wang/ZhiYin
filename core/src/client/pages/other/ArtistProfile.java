@@ -1,5 +1,7 @@
 package client.pages.other;
 
+import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetMusic;
 import client.events.executables.internalChanges.serverInteractions.ExecuteFollowArtist;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateArtistSongs;
@@ -49,11 +51,13 @@ public class ArtistProfile extends ArtistProfileShell {
         this.artistName = mBand.getName();
         this.description = mBand.getDescription();
         this.musicKeys = Utils.newList();
-
+        songs = new Table();
         this.update = new ExecuteUpdateArtistSongs(this, mBand);
+
         this.followEx = new ExecuteFollowArtist(this, mBand);
 
         init();
+        //update.execute();
     }
 
 
@@ -112,11 +116,17 @@ public class ArtistProfile extends ArtistProfileShell {
         s.add(new Image(new Texture("Home/BlackBG@" + M + ".png")));
         s.add(table);
 
-        final ExecuteToTempState ex = new ExecuteToTempState(new NowPlaying(this, song));
+        final ExecutableMultiplexer em = new ExecutableMultiplexer();
+
+        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, song));
+        final ExecuteSetMusic esm = new ExecuteSetMusic(song);
+
+        em.addExecutable(e);
+        em.addExecutable(esm);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ex.execute();
+                em.execute();
             }
         });
 

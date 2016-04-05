@@ -6,8 +6,11 @@ import client.events.executables.internalChanges.loginExecutable.ExecuteLogin;
 import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateSnapChatMessage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
 import client.pages.State;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import tools.serverTools.databases.LocalDatabase;
@@ -29,11 +32,11 @@ public class Login extends State {
     private WorkingTextArea username;
     private WorkingTextArea password;
     private ExecuteRemoveButton erb;
-
+    boolean firstTime = true;
     public static final String NAME1 = "alice";
     public static final String NAME2 = "benny";
     public static final String NAME3 = "cindy";
-    private Label label;
+
     private boolean checkPull;
     private VeryBeginningInitializer vb;
 
@@ -64,8 +67,9 @@ public class Login extends State {
                 act.remove();
             }
             erb.execute();
-            label = new Label("", SkinSingleton.getInstance());
-            label.setPosition(50, StateManager.HEIGHT - 100);
+
+            label = new Label("Fuck", SkinSingleton.getInstance());
+            label.setPosition(0, 0);
             stage.addActor(label);
         }
     }
@@ -98,28 +102,35 @@ public class Login extends State {
         add(button);
     }
 
+    public static Label label = new Label("", SkinSingleton.getInstance());
+
     @Override
     public void update(float dt) {
         super.update(dt);
+        label.setText(delta+"");
 
         if (checkPull){
-            if (delta%100 == 0) {
+
+
+            if (delta%100 == 99) {
                 pullFromServer();
             }
         }
         delta ++;
 
     }
-
     private void pullFromServer(){
         vb.update(0);
         if (vb.isUpdated()) {
+
             Pages.initClass();
-            new ExecuteUpdateSnapChatMessage();
+
             new ExecuteChangePage(Pages.HOME).execute();
+
+//            new ExecuteUpdateSnapChatMessage();
         }
         else{
-            vb.pull();
+//            vb.pull();
         }
     }
 

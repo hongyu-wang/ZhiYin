@@ -3,10 +3,6 @@ package client.events.executables.internalChanges.serverInteractions;
 import client.component.basicComponents.ConfirmDialog;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMSnapShot;
-import client.pages.friends.Friends2;
-import client.pages.pageInternal.serverClientInteractions.FriendTalker;
-import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
-import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 import server.model.media.MSnapShot;
@@ -47,7 +43,7 @@ public class ExecuteUpdateSnapChatMessage extends ExecuteUpdate {
     }
 
     private ConfirmDialog setUpWindows(MSnapShot snapShot, User user){
-        UserProfile profile = localDatabase.getModel(user.getProfile());
+        UserProfile profile = localDatabase.getModel(user.getProfileKey());
         String name = profile.getUsername();
 
         String[] options = {

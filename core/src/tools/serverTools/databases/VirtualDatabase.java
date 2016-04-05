@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by Kevin Zheng on 2016-03-09.
  */
 public class VirtualDatabase {
-    private Map<Long, ServerModel> data;
+    public Map<Long, ServerModel> data;
     private Map<String, Long> hashtag_key;
     private Map<String, Long> username_key;
     private List<Long> updatedKeys;
@@ -118,9 +118,9 @@ public class VirtualDatabase {
         User user2 = (User)data.get(2L);
         User user3 = (User)data.get(3L);
 
-        UserProfile profile1 = (UserProfile)data.get(user1.getProfile());
-        UserProfile profile2 = (UserProfile)data.get(user2.getProfile());
-        UserProfile profile3 = (UserProfile)data.get(user3.getProfile());
+        UserProfile profile1 = (UserProfile)data.get(user1.getProfileKey());
+        UserProfile profile2 = (UserProfile)data.get(user2.getProfileKey());
+        UserProfile profile3 = (UserProfile)data.get(user3.getProfileKey());
 
         profile1.setImageKey(-11L);
         profile2.setImageKey(-12L);
@@ -271,7 +271,7 @@ public class VirtualDatabase {
         serverKey.setCurrentKey(0L);
 
         //Assign to user.
-        user.setProfile(profile.getKey());
+        user.setProfileKey(profile.getKey());
         user.setConversations(conversations.getKey());
         user.setLog(log.getKey());
         user.setContent(content.getKey());
@@ -295,7 +295,7 @@ public class VirtualDatabase {
 
         tag.setKey(generator.generateSerial());
 
-        tag.setHashtag(hashtag);
+        tag.setHashtagName(hashtag);
 
         tag.setMusicKeys(
                 new ArrayList<Long>()
@@ -419,7 +419,7 @@ public class VirtualDatabase {
     }
 
     private void generateComment(MDiaryPost post, User creator){
-        UserProfile profile = (UserProfile)data.get(creator.getProfile());
+        UserProfile profile = (UserProfile)data.get(creator.getProfileKey());
 
         MComment comment = new MComment();
         comment.setKey(generator.generateSerial());

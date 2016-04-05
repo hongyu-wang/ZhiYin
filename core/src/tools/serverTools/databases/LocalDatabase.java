@@ -86,6 +86,12 @@ public class LocalDatabase {
         pulledKeys = new ConcurrentSkipListSet<>();
 //        unassignedKeys = new ArrayList<Long>();
         initStringMaps();
+//        try {
+//            models = new VirtualDatabase().data;
+//        }
+//        catch(Exception e){
+//            System.out.println("Fuck");
+//        }
     }
 
     private void initStringMaps(){

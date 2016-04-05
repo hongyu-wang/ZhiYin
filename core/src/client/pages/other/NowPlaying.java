@@ -5,8 +5,6 @@ import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
-import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
-import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
 import client.events.executables.internalChanges.schmoferMusicExecutable.*;
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendSnapChat;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
@@ -235,7 +233,7 @@ public class NowPlaying extends State {
             exs.add(new ExecuteSendSnapChat(pt.getName()));
         }
 
-        UserProfile profile = LocalDatabaseFactory.createLocalDatabase().getModel(LocalDatabaseFactory.createLocalDatabase().getMainUser().getProfile());
+        UserProfile profile = LocalDatabaseFactory.createLocalDatabase().getModel(LocalDatabaseFactory.createLocalDatabase().getMainUser().getProfileKey());
 
         names.add(profile.getUsername());
         exs.add(new ExecuteSendSnapChat(profile.getUsername()));

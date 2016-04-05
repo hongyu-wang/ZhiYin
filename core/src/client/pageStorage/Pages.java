@@ -1,6 +1,8 @@
 package client.pageStorage;
 
 import client.pages.State;
+import client.pages.other.Login;
+import client.singletons.StateManager;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 
@@ -54,9 +56,8 @@ public enum Pages {
 
         for (Pages page : Pages.values()){
 
-            if (page != null && page != Pages.LOGIN) {
+            if (page != null && page != Pages.LOGIN ) {
                 try {
-                    System.out.println(page);
                     page.stateReference = (State) ClassReflection.forName("client.pages." + page.name).getDeclaredConstructor().newInstance();
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | ReflectionException e) {
                     e.printStackTrace();
