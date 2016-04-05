@@ -1,6 +1,5 @@
 package client.pages.other;
 
-import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.serverInteractions.ExecuteFollowArtist;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateArtistSongs;
@@ -15,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
 import server.model.soundCloud.MBand;
 import tools.utilities.Utils;
+
 import java.util.List;
 
 /**
@@ -81,15 +81,17 @@ public class ArtistProfile extends ArtistProfileShell {
         Table table = new Table();
         table.setBounds(300*M, 917*M, 450*M, 300*M);
         table.top();
-
         table.add(new Label(artistName, SkinSingleton.getInstance())).width(450*M);
         table.row();
+
         Label descriptionLabel = new Label(description, SkinSingleton.getInstance());
         descriptionLabel.setWrap(true);
-        descriptionLabel.setWidth(400*M);
+//        descriptionLabel.setWidth(400*M);
         table.add(descriptionLabel).width(450*M).expandX().left();
 
-        stage.addActor(table);
+        ScrollPane scrollpane = new ScrollPane(table);
+        scrollpane.setBounds(300*M, 917*M, 450 * M, 300 *M);
+        stage.addActor(scrollpane);
 
         songs = new Table();
         songs.top();

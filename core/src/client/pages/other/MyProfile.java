@@ -1,10 +1,5 @@
 package client.pages.other;
 
-import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.TestExecutable;
-import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
-import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileArtists;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileDiary;
@@ -12,10 +7,8 @@ import client.events.executables.internalChanges.updatePageExecutables.ExecuteTo
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 import client.stateInterfaces.Profile;
-import client.tools.ImageParser;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -98,12 +91,11 @@ public class MyProfile extends MyProfileShell implements Profile {
         serverInit();
 
         Label label = new Label(name, SkinSingleton.getInstance());
-        label.setPosition(310 * StateManager.M, 1050 * StateManager.M);
+        label.setPosition(310*M, 1050*M);
         stage.addActor(label);
 
         if(profilePic != null) {
-
-            profilePic.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
+            profilePic.setBounds(50*M, 967*M, 200*M, 200*M);
             stage.addActor(profilePic);
         }
 
@@ -111,65 +103,17 @@ public class MyProfile extends MyProfileShell implements Profile {
         table.top();
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0,  570 * StateManager.M, 750 * StateManager.M, 250 * StateManager.M);
+        scrollpane.setBounds(0,  570*M, 750*M, 250*M);
         stage.addActor(scrollpane);
 
         following = new Table();
         following.top();
 
         scrollpane2 = new ScrollPane(following);
-        scrollpane2.setBounds(50 * StateManager.M,  350 * StateManager.M, 700 * StateManager.M, 150 * StateManager.M);
+        scrollpane2.setBounds(50*M,  350*M, 700*M, 150*M);
         stage.addActor(scrollpane2);
 
-        Button button = new Button(this);
-        button.setBounds(280, 920, 80, 80);
-        Window window = new Window("Camera or Roll", SkinSingleton.getInstance());
-        TextButton camera;
-        TextButton roll;
-        window.add(
-                camera = new TextButton("Camera", SkinSingleton.getInstance())
-                ,
-                roll = new TextButton("Roll", SkinSingleton.getInstance())
-        );
-        window.setX(WIDTH*M/2 - window.getPrefWidth()/2);
-        window.setY(HEIGHT*M/2 + window.getPrefHeight()/2);
-        camera.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                new ExecuteOpenCamera().execute();
-                attemptSetUpImage();
-                window.remove();
-            }
-        });
-
-        roll.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                new ExecuteOpenCameraRoll().execute();
-                attemptSetUpImage();
-                window.remove();
-            }
-        });
-
-
-
-
-        //TODO Set up the options pane.
-        button.setExecutable(new ExecutableMultiplexer(
-                (Executable) () -> stage.addActor(window)));
-        add(button);
     }
-
-    private void attemptSetUpImage(){
-        try{
-            Image image = ImageParser.getImage();
-            image.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
-            stage.addActor(image);
-        } catch(IllegalStateException ex){
-            System.out.println("Your stupid.");
-        }
-    }
-
 
     @Override
     public void addPost(final MDiaryPost diaryPost){
@@ -180,15 +124,15 @@ public class MyProfile extends MyProfileShell implements Profile {
         String title = diaryPost.getTitle();
 
         Label single = new Label(title, SkinSingleton.getInstance());
-        Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
-        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
+        Image i = new Image(new Texture("Home/Enter@" + M + ".png"));
+        Image line = new Image(new Texture("Home/Line@" + M + ".png"));
 
-        t.add(single).expand().left().padLeft(10 * StateManager.M);
-        t.add(i).expand().right().padRight(50 * StateManager.M);
+        t.add(single).expand().left().padLeft(10*M);
+        t.add(i).expand().right().padRight(50*M);
         t.row();
         t.add(line);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
+        Image i2 = new Image(new Texture("Home/BlackBG@" + M + ".png"));
 
         s.add(i2);
         s.add(t);
@@ -201,33 +145,50 @@ public class MyProfile extends MyProfileShell implements Profile {
             }
         });
 
-        table.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
+        table.add(s).width(750*M).height(110*M);
         table.row();
     }
 
     @Override
     public void addFollowing(MBand artist, Image image){
+        Table t = new Table();
+        Stack s = new Stack();
+
         final ImageButton artistButton = new ImageButton(image.getDrawable());
-        final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image));
-
-        artistButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                ex.execute();
-            }
-        });
-
         final ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
-        artistButton.addListener(new ClickListener() {
+
+        Table artistTable = new Table();
+        artistTable.add(artistButton).width(150*M).height(150*M);
+        s.add(artistTable);
+
+        Table removeTable = new Table();
+        removeTable.add(removeButton).width(56*M).height(56*M).expand().top().right();
+        s.add(removeTable);
+
+        final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image));
+        s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                artistButton.remove();
-                removeButton.remove();
+                System.out.println("x: " + x);
+                System.out.println("y: " + y);
+                if(x >= 94*M && y>= 94*M) {
+                    System.out.println("remove");
+                    //TODO use these; they should work
+//                    following.reset();
+//                    currentArtists.clear();
+                    //TODO take out the removes and re-add the artists, minus the one being removed (MBand artist)
+                    artistButton.remove();
+                    removeButton.remove();
+                }
+                else{
+                    System.out.println("artist");
+                    ex.execute();
+                }
             }
         });
 
-        following.add(removeButton).width(56 * StateManager.M).height(56 * StateManager.M).padRight(50 * StateManager.M);
-        following.add(artistButton).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
+        t.add(s);
+        following.add(t).width(150*M).height(150*M).padLeft(50*M);
     }
 
 
