@@ -140,13 +140,13 @@ public class MyProfile extends MyProfileShell implements Profile {
 
         ConfirmDialog confirmDialog = new ConfirmDialog(
                 "Where do you want your profile image from?",
-                "Gallery",
+                new String[]{"Gallery",
                 "Camera",
-                "Cancel"
+                "Cancel"}
         );
         confirmDialog.setUpExecutables(
-                new ExecuteOpenCameraRoll(),
-                new ExecuteOpenCamera()
+                new Executable[]{new ExecuteOpenCameraRoll(),
+                new ExecuteOpenCamera()}
         );
 
         button.setExecutable(
