@@ -21,7 +21,7 @@ public class ConfirmDialog implements Constants{
     private TextButton [] buttons;
     private String title;
 
-    public ConfirmDialog(String title, String...options){
+    public ConfirmDialog(String title, String [] options){
 
 
         this.title = title;
@@ -37,6 +37,8 @@ public class ConfirmDialog implements Constants{
 
 
     }
+
+
 
     private void initWindow(){
         window = new Window("Confirm", SkinSingleton.getInstance());
@@ -69,7 +71,7 @@ public class ConfirmDialog implements Constants{
      * @param executables
      * @throws IllegalArgumentException If there are too many executables
      */
-    public void setUpExecutables(Executable...executables){
+    public void setUpExecutables(Executable [] executables){
         if (executables.length > buttons.length)
             throw new IllegalArgumentException();
 

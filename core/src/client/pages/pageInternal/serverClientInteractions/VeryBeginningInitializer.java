@@ -157,13 +157,17 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         MHashtag hashtag10 = generateHashtags("#LoveYourself", 20009);
 
         if(os == MAC){
+            for (String i : AudioCreator.artistToMMusic.keySet()){
+                System.out.println(i);
+            }
+
             hashtag1.getMusicKeys().add(10031L);
             hashtag2.getMusicKeys().add(10069L);
-            hashtag3.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Weeknd")));
+            hashtag3.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("The Weeknd")));
             hashtag4.getMusicKeys().add(10020L);
             hashtag5.getMusicKeys().add(10042L);
             hashtag6.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Maroon 5")));
-            hashtag7.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Bieber")));
+            hashtag7.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Justin Bieber")));
             hashtag8.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Kanye West")));
             hashtag9.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Ed Sheeran")));
             hashtag10.getMusicKeys().add(10035L);
@@ -338,7 +342,7 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
     }
 
     private List<Long> getKeys(List<MMusic> modelList){
-        List<Long> keyList = Utils.newList();
+        List<Long> keyList = Utils.<Long>newList();
         for(ServerModel model: modelList){
             keyList.add(model.getKey());
         }

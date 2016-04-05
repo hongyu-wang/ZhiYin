@@ -1,5 +1,8 @@
 package client.pages.other;
 
+import client.component.basicComponents.ConfirmDialog;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
 import client.events.executables.internalChanges.serverInteractions.*;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
