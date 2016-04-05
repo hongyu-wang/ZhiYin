@@ -14,6 +14,8 @@ import tools.utilities.Utils;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -209,28 +211,45 @@ public class VirtualDatabase {
      * @param newModel The model.
      */
     public void setModel(ServerModel newModel){
-        Field[] newFields = newModel.getClass().getDeclaredFields();
-        Field[] oldFields = newModel.getClass().getDeclaredFields();
-        ServerModel oldModel = data.get(newModel.getKey());
-        try {
-            for (int i = 0; i < newFields.length; i++) {
-                Object valueNew = newFields[i].get(newModel);
-                Object valueOld = oldFields[i].get(oldModel);
-                if(valueNew instanceof List){
-                    List valueOldList = (List)valueOld;
-                    List valueNewList = (List)valueNew;
-                    List newMergedList = this.union(valueNewList, valueOldList);
-                    oldFields[i].set(oldModel, newMergedList);
-                }else{
-                    oldFields[i].set(oldModel, valueNew);
-                }
+        if(data.containsKey(newModel.getKey())) {
+            Field[] newFields = newModel.getClass().getDeclaredFields();
+            ServerModel oldModel = data.get(newModel.getKey());
+            try {
+                for (int i = 0; i < newFields.length; i++) {
 
+                    String newName = newFields[i].getName();
+                    newName = newName.substring(0,1).toUpperCase()+newName.substring(1);
+
+
+                    Method getMethodNew = newModel.getClass().getMethod("get"+newName);
+                    Method getMethodOld = oldModel.getClass().getMethod("get"+newName);
+
+
+                    Object newObj = getMethodNew.invoke(newModel);
+                    Object oldObj = getMethodOld.invoke(oldModel);
+
+                    Class objectClass = newObj.getClass();
+
+                    if(objectClass.equals(ArrayList.class)){
+                        objectClass = List.class;
+                    }
+
+                    if (newObj instanceof List) {
+                        Method setMethodNew = newModel.getClass().getMethod("set"+newName, objectClass);
+                        List valueOldList = (List) newObj;
+                        List valueNewList = (List) oldObj;
+                        List newMergedList = this.union(valueNewList, valueOldList);
+                        setMethodNew.invoke(newModel, newMergedList);
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
-        }catch(Exception e){
-            System.out.println(e);
         }
+        data.put(newModel.getKey(), newModel);
+
         //data.put(oldModel.getKey(), oldModel);
-        updatedKeys.add(oldModel.getKey());
+        updatedKeys.add(newModel.getKey());
     }
 
     /**Returns the key of the user based on a username.

@@ -26,7 +26,7 @@ public interface Constants {
 
     boolean MAC = true;
 
-    boolean os = MAC;
+    boolean os = WINDOWS;
 
     static String getCurrentTimestamp(long time){
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
