@@ -81,18 +81,11 @@ public final class AudioCreator {
         songNameToMMusic = new TreeMap<String,MMusic>();
         artistToMMusic = new TreeMap<String, List<MMusic>>();
 
+        List<String> urls = NSBundle.getMainBundle().findResourcesPaths("mp3",null);
 
-        String filePath = "/Users/Paul/ZhiYin/android/assets/MusicAssets";
-
-        NSArray urls = new NSArray();
-        try {
-            urls = fm.getContentsOfDirectoryAtPath(filePath);
-        } catch (NSErrorException e) {
-            e.printStackTrace();
-        }
-        for(Object f : urls) {
+        for(String f : urls) {
             if(!f.toString().equals(".DS_Store")) {
-                File mp3 = new File(new File(filePath), f.toString());
+                File mp3 = new File(f);
                 NSURL url = new NSURL(mp3.toURI().toString());
                 MMusic m = createMMusicFromFilePath(url);
                 assert(m.getAlbumArt()!=0L);
@@ -103,6 +96,8 @@ public final class AudioCreator {
                 List<MMusic> temp = artistToMMusic.get(m.getArtist());
                 temp.add(m);
                 artistToMMusic.put(m.getArtist(), temp);
+
+
 
                 //1mS0C00lz - paul's password
             }
@@ -180,7 +175,6 @@ public final class AudioCreator {
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
-
         models.add(song);
         keyToMAudio.put(audioKey, song);
         audioKey++;

@@ -35,10 +35,12 @@ public class FriendProfile extends FriendProfileShell implements Profile {
     private List<Long> currentDiaries;
     private List<Long> currentArtists;
 
+    @Override
     public List<Long> getCurrentArtists() {
         return currentArtists;
     }
 
+    @Override
     public List<Long> getCurrentDiaries() {
         return currentDiaries;
     }
@@ -115,10 +117,12 @@ public class FriendProfile extends FriendProfileShell implements Profile {
 
     }
 
-    public void addPost(MDiaryPost thisPost, String post){
+    public void addPost(final MDiaryPost thisPost){
         Stack s = new Stack();
 
         Table t = new Table();
+
+        String post = thisPost.getTitle();
 
         Label single = new Label(post, SkinSingleton.getInstance());
         Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
@@ -147,12 +151,10 @@ public class FriendProfile extends FriendProfileShell implements Profile {
         table.row();
     }
 
-    public void addFollowing(Image image){
+    public void addFollowing(MBand artist, Image image){
+
         following.add(image).width(150 * StateManager.M).height(150 * StateManager.M).padRight(50 * StateManager.M);
     }
-
-
-
 
     @Override
     public void dispose() {

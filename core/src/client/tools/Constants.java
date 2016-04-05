@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Hongyu Wang on 4/2/2016.
  */
 public interface Constants {
-    float M = 0.5F;
+    float M = 1.0F;
 
     int LEFT = -1;
     int RIGHT = 1;
@@ -17,15 +17,24 @@ public interface Constants {
 
     int HEIGHT = 1334;
 
+    int RECIEVED_READ = 1;
+    int RECIEVED_UNREAD = 2;
+    int SENT_READ = 3;
+    int SENT_UNREAD = 4;
+
     boolean WINDOWS = false;
 
     boolean MAC = true;
 
-    boolean os = WINDOWS;
+    boolean os = MAC;
 
     static String getCurrentTimestamp(long time){
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
         Date df = new Date(time);
         return sdf.format(df);
     }
+
+
+
+
 }

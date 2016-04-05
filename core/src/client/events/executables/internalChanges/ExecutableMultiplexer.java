@@ -29,6 +29,8 @@ public class ExecutableMultiplexer implements Executable {
 
     @Override
     public void execute() {
-        executableList.forEach(client.stateInterfaces.Executable::execute);
+        for (Executable ex : executableList){
+            ex.execute();
+        }
     }
 }

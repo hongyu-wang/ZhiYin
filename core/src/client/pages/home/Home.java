@@ -14,7 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
+import server.model.structureModels.ServerModel;
 import tools.AudioTools.AudioCreator;
+import tools.serverTools.databases.LocalDatabaseFactory;
+import tools.utilities.Utils;
+import java.util.List;
 
 import java.util.TreeMap;
 
@@ -40,6 +44,11 @@ public class Home extends HomeShell {
         temporary.setKey(-420L);
         temporary.setAlbumArt(8000L);
         temporary.setName("Test");
+        temporary.setComments(Utils.newList());
+
+        List<ServerModel> pushList = Utils.newList();
+        pushList.add(temporary);
+        LocalDatabaseFactory.createLocalDatabase().pushModel(pushList);
 
         return temporary;
     }
@@ -53,7 +62,7 @@ public class Home extends HomeShell {
 
         if (os == WINDOWS) {
             MMusic temporary = generateTestMMusic();
-            State tempState = new NowPlaying(this, temporary);
+            final State tempState = new NowPlaying(this, temporary);
             b1.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -153,7 +162,7 @@ public class Home extends HomeShell {
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
 
         ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
-        ExecuteSetMusic esm = new ExecuteSetMusic(music);
+        final ExecuteSetMusic esm = new ExecuteSetMusic(music);
 
         em.addExecutable(e);
         em.addExecutable(esm);
@@ -162,7 +171,7 @@ public class Home extends HomeShell {
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                esm.execute();
+                em.execute();
             }
         });
 

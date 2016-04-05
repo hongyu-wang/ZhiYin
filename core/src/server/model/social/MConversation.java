@@ -21,6 +21,8 @@ public class MConversation extends ServerModel {
      */
     private List<Long> participants;
 
+    private List<Long> seenBy;
+
     public List<Long> getMessageList() {
         return messageList;
     }
@@ -35,5 +37,13 @@ public class MConversation extends ServerModel {
 
     public void setParticipants(List<Long> participants) {
         this.participants = participants;
+    }
+
+    public List<Long> getSeenBy() {
+        return seenBy;
+    }
+
+    public void setSeenBy(List<Long> seenBy) {
+        this.seenBy = seenBy;
     }
 }

@@ -1,6 +1,7 @@
 package server.model.social;
 
 import server.model.structureModels.ServerModel;
+import server.model.structureModels.TimeStampObject;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * Comment model
  * Very similar to post right now
  */
-public class MComment extends ServerModel {
+public class MComment extends TimeStampObject {
 
     /**
      * Id of the MText representation of the comment
@@ -39,11 +40,6 @@ public class MComment extends ServerModel {
      * List of id's of the comments of the comment
      */
     private List<Long> comments;
-
-    /**
-     * Long representation of the timestamp of the comment
-     */
-    private long timeStamp;
 
     /**
      * Long representation of the creator
@@ -88,14 +84,6 @@ public class MComment extends ServerModel {
 
     public void setAudio(List<Long> audio) {
         Audio = audio;
-    }
-
-    public long getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
     }
 
     public List<Long> getComments() {

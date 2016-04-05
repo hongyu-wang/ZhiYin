@@ -1,12 +1,18 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.musicDiary.Diary1;
+import client.tools.Constants;
 import server.model.social.MDiaryPost;
+import server.model.social.MPost;
 import server.model.user.User;
 import server.model.user.UserDiaryContent;
 import server.model.user.UserProfile;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
+import tools.utilities.Utils;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Kevin Zheng on 2016-04-03.
@@ -24,24 +30,35 @@ public class ExecuteUpdateAllDiaries extends ExecuteUpdate{
         User user2 = localDatabase.getModel(2);
         User user3 = localDatabase.getModel(3);
 
-        updateFromServer(user1);
-        updateFromServer(user2);
-        updateFromServer(user3);
+        List<MDiaryPost> posts = Utils.newList();
+
+        updateFromServer(user1, posts);
+        updateFromServer(user2, posts);
+        updateFromServer(user3, posts);
+
+        Collections.sort(posts);
+
+        showOnScreen(posts);
     }
 
-    private void updateFromServer(User user){
+    private void updateFromServer(User user, List<MDiaryPost> posts){
         UserDiaryContent diaryContent = localDatabase.getModel(user.getDiary());
-
         for(long key: diaryContent.getDiaryKeys()){
-            if(!diary1.getCurrentDiaries().contains(key)) {
-                MDiaryPost post = localDatabase.getModel(key);
+            posts.add(localDatabase.getModel(key));
+        }
+    }
+
+    private void showOnScreen(List<MDiaryPost> posts){
+        for(MDiaryPost post: posts){
+            if(!diary1.getCurrentDiaries().contains(post.getKey())) {
+                User user = localDatabase.getModel(post.getCreator());
                 UserProfile profile = localDatabase.getModel(user.getProfile());
 
                 String username = profile.getUsername();
 
-                diary1.addPost(post, username);
+                diary1.addPost(post, username, Constants.getCurrentTimestamp(post.getTimeStamp()));
 
-                diary1.getCurrentDiaries().add(key);
+                diary1.getCurrentDiaries().add(post.getKey());
             }
         }
     }

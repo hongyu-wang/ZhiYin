@@ -82,6 +82,7 @@ public class VirtualDatabase {
 
     private void initHashtags(){
         MHashtag hashtag1 = generateHashtags("Sorry", 20000);
+//        addMusic(hashtag1, /*TODO some Long*/ 0L);
 
         MHashtag hashtag2 = generateHashtags("MissingU", 20001);
 
@@ -113,6 +114,11 @@ public class VirtualDatabase {
         data.put(hashtag9.getKey(),hashtag9);
         data.put(hashtag10.getKey(),hashtag10);
     }
+
+    private void addMusic(MHashtag tag, long musicKey){
+        tag.getMusicKeys().add(musicKey);
+    }
+
 
     private MHashtag generateHashtags(String tag, long key){
         MHashtag hashtag = new MHashtag();
@@ -387,9 +393,6 @@ public class VirtualDatabase {
 
 
     private void generateConversation(User user1, User user2){
-        UserConversations convo_1 = (UserConversations)data.get(user1.getConversations());
-        UserConversations convo_2 = (UserConversations)data.get(user2.getConversations());
-
         MConversation one_two = new MConversation();
 
         one_two.setKey(generator.generateSerial());
@@ -400,11 +403,20 @@ public class VirtualDatabase {
 
         one.add(user1.getKey());
         one.add(user2.getKey());
-
         one_two.setParticipants(one);
+
+        List<Long> seenbyList = Utils.newList();
+        seenbyList.add(user1.getKey());
+        seenbyList.add(user2.getKey());
+        one_two.setSeenBy(seenbyList);
+
+        UserConversations convo_1 = (UserConversations)data.get(user1.getConversations());
+        UserConversations convo_2 = (UserConversations)data.get(user2.getConversations());
 
         convo_1.getConvoKeys().add(one_two.getKey());
         convo_2.getConvoKeys().add(one_two.getKey());
+
+
 
         data.put(one_two.getKey(), one_two);
     }

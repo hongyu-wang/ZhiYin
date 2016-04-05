@@ -22,26 +22,29 @@ public class ExecuteUpdateArtistSongs extends ExecuteUpdate{
     @Override
     public void execute() {
         MBand artist = localDatabase.getModel(this.artist);
-//        List<MMusic> musicList = AudioCreator.artistToMMusic.get(artist.getName());
-//
-//        for(MMusic music : musicList){
-//            if(artistProfile.getMusicKeys().contains(music.getKey())){
-//                continue;
-//            }
-//
-//            artistProfile.addSong(music);
-//            artistProfile.getMusicKeys().add(music.getKey());
-//        }
+        if(os == MAC) {
+            List<MMusic> musicList = AudioCreator.artistToMMusic.get(artist.getName());
 
-        for(long key : artist.getSongs()){
-            MMusic music = localDatabase.getModel(key);
+            for (MMusic music : musicList) {
+                if (artistProfile.getMusicKeys().contains(music.getKey())) {
+                    continue;
+                }
 
-            if(artistProfile.getMusicKeys().contains(music.getKey())){
-                continue;
+                artistProfile.addSong(music);
+                artistProfile.getMusicKeys().add(music.getKey());
             }
+        }
+        else {
+            for (long key : artist.getSongs()) {
+                MMusic music = localDatabase.getModel(key);
 
-            artistProfile.addSong(music);
-            artistProfile.getMusicKeys().add(music.getKey());
+                if (artistProfile.getMusicKeys().contains(music.getKey())) {
+                    continue;
+                }
+
+                artistProfile.addSong(music);
+                artistProfile.getMusicKeys().add(music.getKey());
+            }
         }
     }
 }

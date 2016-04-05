@@ -8,14 +8,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.robovm.apple.foundation.NSBundle;
+
+import java.util.List;
 
 public class GameLoop extends ApplicationAdapter  {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
 
-	public static boolean ISPUSHING = true;
-
-
+	public static boolean INITIALPUSH = false;
 
     private static OrthographicCamera primary;
 
@@ -29,6 +30,9 @@ public class GameLoop extends ApplicationAdapter  {
         primary = new OrthographicCamera(StateManager.WIDTH*StateManager.M, StateManager.HEIGHT*StateManager.M);
         primary.translate(primary.viewportWidth / 2, primary.viewportHeight / 2);
         primary.update();
+
+
+
 
     }
 

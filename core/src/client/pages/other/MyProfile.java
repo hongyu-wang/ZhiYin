@@ -1,29 +1,52 @@
 package client.pages.other;
 
+import client.component.basicComponents.Button;
+import client.events.executables.internalChanges.ExecutableMultiplexer;
+import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileArtists;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileDiary;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import client.stateInterfaces.Executable;
 import client.stateInterfaces.Profile;
+import client.tools.ImageParser;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MImage;
 import server.model.social.MDiaryPost;
+import server.model.soundCloud.MBand;
 import server.model.user.User;
 import server.model.user.UserProfile;
 import server.services.factories.ImageManagerFactory;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
+import tools.utilities.Utils;
+
 import java.util.List;
+
 
 /**
  * Created by blobbydude24 on 2016-03-21.
  */
 public class MyProfile extends MyProfileShell implements Profile {
+    @Override
+    public List<Long> getCurrentDiaries() {
+        return currentDiaries;
+    }
+
+    @Override
+    public List<Long> getCurrentArtists() {
+        return currentArtists;
+    }
+
     private List<Long> currentDiaries;
     private List<Long> currentArtists;
 
@@ -36,8 +59,12 @@ public class MyProfile extends MyProfileShell implements Profile {
     private Table following;
 
     private String name;
+    private String description;
 
     private Image profilePic;
+
+    private ExecuteUpdate update1;
+    private ExecuteUpdate update2;
 
     //private ArrayList<Image> artistImages = new ArrayList<>();
     //private ArrayList<ImageButton> artistButtons = new ArrayList<>();
@@ -55,11 +82,18 @@ public class MyProfile extends MyProfileShell implements Profile {
         MImage mImage = localDatabase.getModel(userProfile.getImageKey());
 
         this.name = userProfile.getUsername();
+        this.description = "here is a really long description that I am typing just to test wrapping of the words, as well as scrollpane vertical scrolling;" +
+        "more redundant words are being typed right now and stuff and stuff and stuff and more stuff and more stuff and more stuff and more stuff";
         this.profilePic = ImageManagerFactory.createImageManager().mImageToImage(mImage);
+
+        currentArtists = Utils.newList();
+        currentDiaries = Utils.newList();
+
+        update1 = new ExecuteUpdateProfileArtists(this, name);
+        update2 = new ExecuteUpdateProfileDiary(this, name);
     }
 
     protected void init(){
-
         super.init();
         serverInit();
 
@@ -68,6 +102,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         stage.addActor(label);
 
         if(profilePic != null) {
+
             profilePic.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
             stage.addActor(profilePic);
         }
@@ -86,9 +121,57 @@ public class MyProfile extends MyProfileShell implements Profile {
         scrollpane2.setBounds(50 * StateManager.M,  350 * StateManager.M, 700 * StateManager.M, 150 * StateManager.M);
         stage.addActor(scrollpane2);
 
+        Button button = new Button(this);
+        button.setBounds(280, 920, 80, 80);
+        Window window = new Window("Camera or Roll", SkinSingleton.getInstance());
+        TextButton camera;
+        TextButton roll;
+        window.add(
+                camera = new TextButton("Camera", SkinSingleton.getInstance())
+                ,
+                roll = new TextButton("Roll", SkinSingleton.getInstance())
+        );
+        window.setX(WIDTH*M/2 - window.getPrefWidth()/2);
+        window.setY(HEIGHT*M/2 + window.getPrefHeight()/2);
+        camera.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                new ExecuteOpenCamera().execute();
+                attemptSetUpImage();
+                window.remove();
+            }
+        });
+
+        roll.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                new ExecuteOpenCameraRoll().execute();
+                attemptSetUpImage();
+                window.remove();
+            }
+        });
+
+
+
+
+        //TODO Set up the options pane.
+        button.setExecutable(new ExecutableMultiplexer(
+                (Executable) () -> stage.addActor(window)));
+        add(button);
     }
 
-    // FIXME: 2016-04-03 Point to diary post.
+    private void attemptSetUpImage(){
+        try{
+            Image image = ImageParser.getImage();
+            image.setBounds(50 * StateManager.M, 967 * StateManager.M, 200 * StateManager.M, 200 * StateManager.M);
+            stage.addActor(image);
+        } catch(IllegalStateException ex){
+            System.out.println("Your stupid.");
+        }
+    }
+
+
+    @Override
     public void addPost(final MDiaryPost diaryPost){
         Stack s = new Stack();
 
@@ -122,13 +205,15 @@ public class MyProfile extends MyProfileShell implements Profile {
         table.row();
     }
 
-    //TODO FIXME: 2016-04-03 Uncomment.
-    public void follow(final ArtistProfile profile){
-        final ImageButton artistButton = new ImageButton(profile.getImage().getDrawable());
+    @Override
+    public void addFollowing(MBand artist, Image image){
+        final ImageButton artistButton = new ImageButton(image.getDrawable());
+        final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image));
+
         artistButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteToTempState(profile).execute();
+                ex.execute();
             }
         });
 

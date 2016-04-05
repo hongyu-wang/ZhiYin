@@ -6,14 +6,10 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteUpdat
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
-import static client.singletons.StateManager.M;
 
 /**
  * This is the fourth home diary page as given in the
@@ -39,11 +35,15 @@ public class Discovery extends DiscoveryShell {
 
         addSearchField();
 
-        table = new Table();
-        table.setBounds(0, 0, 750 * StateManager.M, 1134 * StateManager.M);
-        table.top();
+        Table t = new Table();
+        t.setBounds(0, 0, 750 * StateManager.M, 1134 * StateManager.M);
+        t.add(table);
+        stage.addActor(t);
 
-        stage.addActor(table);
+        table = new Table();
+//        table.setBounds(0, 0, 750 * StateManager.M, 1134 * StateManager.M);
+        table.top();
+        table.setFillParent(true);
 
         numTags = 0;
 
@@ -61,10 +61,24 @@ public class Discovery extends DiscoveryShell {
             }
         });
 
-        if(numTags++ % 5 == 0){
-            table.row().padTop(50 * StateManager.M);
+        addWrapped(tag);
+
+        //table.layout();
+        table.setDebug(true);
+    }
+
+    private void addWrapped(Actor actor){
+        float initWidth = table.getWidth();
+        Cell cell = table.add(actor).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
+
+        //System.out.println("initWidth: " + initWidth);
+
+        if(table.getWidth() > initWidth){
+            System.out.println("width: " + table.getWidth());
+            table.removeActor(actor);
+            table.row();
+            table.add(actor).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
         }
-        table.add(tag).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
     }
 
     @Override

@@ -3,6 +3,7 @@ package client.events.executables.internalChanges.serverInteractions;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
+import client.pages.pageInternal.serverClientInteractions.ServerTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.Talkers;
 import client.tools.Constants;
@@ -18,6 +19,7 @@ import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,41 +30,56 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
     private long conversation;
 
     public ExecuteUpdateMessages(Friends2 friend2){
-        UserConversations userConversations = localDatabase.getModel(localDatabase.getMainUser().getConversations());
-        List<Long> convoList = userConversations.getConvoKeys();
-
         this.friend2 = friend2;
-        this.conversation = convoList.get(TalkerFactory.getMessagesTalker().indexByFriend(friend2.getFriendName()));
+        this.conversation = ServerTalker.getConversationByFriend(friend2.getFriendName()).getKey();
     }
 
     @Override
     public void execute() {
         MConversation conversation = localDatabase.getModel(this.conversation);
-        MessageBox box;
 
+        List<MMessage> messageList = Utils.newList();
+
+        this.getMessages(conversation, messageList);
+
+        Collections.sort(messageList);
+
+        for(MMessage message: messageList){
+            addMessageBox(message);
+        }
+    }
+
+    private void getMessages(MConversation conversation, List<MMessage> messages){
         //New Code
         for(long key : conversation.getMessageList()){
             if(!friend2.getMessageKeys().contains(key)){
-                MMessage mMessage = localDatabase.<MMessage>getModel(key);
-                long textKey = mMessage.getText();
-
-                int byUser = getWriter((int) mMessage.getCreator());
-
-                if(mMessage.getText() != -1L) {
-                    String text = localDatabase.<MText>getModel(textKey).getText();
-                    box = new MessageBox(text, byUser, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
-                }
-                else{
-                    MAudio audio = localDatabase.getModel(mMessage.getAudioKey());
-                    ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
-                    box = new MessageBox(epma, byUser, audio, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
-                }
-
-                friend2.addMessage(box);
-                friend2.getMessageKeys().add(mMessage.getKey());
+                messages.add(localDatabase.getModel(key));
             }
         }
     }
+
+
+    private void addMessageBox(MMessage mMessage){
+        MessageBox box;
+
+        long textKey = mMessage.getText();
+
+        int byUser = getWriter((int) mMessage.getCreator());
+
+        if(mMessage.getText() != -1L) {
+            String text = localDatabase.<MText>getModel(textKey).getText();
+            box = new MessageBox(text, byUser, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
+        }
+        else{
+            MAudio audio = localDatabase.getModel(mMessage.getAudioKey());
+            ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
+            box = new MessageBox(epma, byUser, audio, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
+        }
+
+        friend2.addMessage(box);
+        friend2.getMessageKeys().add(mMessage.getKey());
+    }
+
 
     private int getWriter(int user){
         if(user == localDatabase.getMainUser().getKey()){

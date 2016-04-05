@@ -3,18 +3,12 @@ package client.pages.musicDiary;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateAllDiaries;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.social.MDiaryPost;
-import server.model.user.User;
-import server.model.user.UserDiaryContent;
-import server.model.user.UserProfile;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -47,14 +41,14 @@ public class Diary1 extends Diary1Shell {
         super.init();
 
         table = new Table();
-        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100* StateManager.M);
+        table.setBounds(0, 117*M, 750*M, 1100*M);
         table.top();
 
         currentDiaries = Utils.newList();
 
         scrollpane = new ScrollPane(table);
 
-        scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
+        scrollpane.setBounds(0, 117*M, 750*M, 1100*M);
 
         stage.addActor(scrollpane);
 
@@ -62,31 +56,27 @@ public class Diary1 extends Diary1Shell {
         this.update = new ExecuteUpdateAllDiaries(this);
     }
 
-    public void addPost(MDiaryPost thisPost, String creator){
+    public void addPost(MDiaryPost thisPost, String creator, String timestamp){
         String title = thisPost.getTitle();
 
         String name = creator;
-
-        String timestamp = String.valueOf(thisPost.getTimeStamp());
 
         Stack s = new Stack();
 
         Table t = new Table();
 
         Label l1 = new Label(name, SkinSingleton.getInstance());
-        Label l2 = new Label(title, SkinSingleton.getInstance());
-        Label l3 = new Label(timestamp, SkinSingleton.getInstance());
+        Label l2 = new Label(timestamp, SkinSingleton.getInstance());
+        Label l3 = new Label(title, SkinSingleton.getInstance());
 
-        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
-
-        t.add(l1).expand().left().padLeft(50 * StateManager.M);
-        t.add(l2).expand().right().padRight(50 * StateManager.M);
-        t.row().padTop(10 * StateManager.M);
-        t.add(l3).expand().left().padLeft(50 * StateManager.M);
+        t.add(l1).expand().left().padLeft(50*M).padTop(50*M);
+        t.add(l2).expand().right().padRight(50*M).padTop(50*M);
+        t.row().padTop(10*M);
+        t.add(l3).expand().left().padLeft(50*M);
         t.row();
-        t.add(line).padTop(40 * StateManager.M);
+        t.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M).padTop(50*M);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
+        Image i2 = new Image(new Texture("Home/BlackBG@" + M + ".png"));
 
         s.add(i2);
         s.add(t);
@@ -102,7 +92,7 @@ public class Diary1 extends Diary1Shell {
             }
         });
 
-        table.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
+        table.add(s).width(750*M);
         table.row();
     }
 

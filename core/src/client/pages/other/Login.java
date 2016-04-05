@@ -7,7 +7,8 @@ import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveBu
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import tools.serverTools.databases.LocalDatabase;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
@@ -15,9 +16,6 @@ import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 
 
 /**
@@ -31,9 +29,9 @@ public class Login extends State {
     private WorkingTextArea password;
     private ExecuteRemoveButton erb;
 
-    public static final String NAME1 = "Alice";
-    public static final String NAME2 = "Benny";
-    public static final String NAME3 = "Cindy";
+    public static final String NAME1 = "alice";
+    public static final String NAME2 = "benny";
+    public static final String NAME3 = "cindy";
     private Label label;
     private boolean checkPull;
     private VeryBeginningInitializer vb;
@@ -49,7 +47,7 @@ public class Login extends State {
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
-        String text = username.getText().trim();
+        String text = username.getText().trim().toLowerCase();
         if (text.equals(NAME1) || text.equals(NAME2) || text.equals(NAME3)) {
             for (Actor act : stage.getActors()){
                 act.remove();
@@ -57,7 +55,7 @@ public class Login extends State {
             LocalDatabase.ipAddress = password.getText();
 
             vb = TalkerFactory.VeryBeginningInitializer();
-            vb.init(text);
+            vb.init(text.substring(0, 1).toUpperCase() + text.substring(1));
             vb.pull();
             vb.push();
             checkPull = true;
@@ -83,6 +81,7 @@ public class Login extends State {
         stage.addActor(image);
         username = new WorkingTextArea("Alice", SkinSingleton.getInstance());
         password = new WorkingTextArea("localhost", SkinSingleton.getInstance());
+
 
         username.setBounds(102 * M, (HEIGHT - 798 - 72) * M, 545 * M, 72 * M);
         password.setBounds(102 * M, (HEIGHT - 910 - 72) * M, 545 * M, 72 * M);

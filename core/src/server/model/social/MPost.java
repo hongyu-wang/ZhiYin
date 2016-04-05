@@ -1,6 +1,6 @@
 package server.model.social;
 
-import server.model.structureModels.ServerModel;
+import server.model.structureModels.TimeStampObject;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class MPost extends ServerModel {
+public class MPost extends TimeStampObject {
 
 
     protected String title;
@@ -47,11 +47,6 @@ public class MPost extends ServerModel {
      * List of id's of audio pieces that the post contains
      */
     protected List<Long> Audio;
-
-    /**
-     * Long representation of the timestamp of when the post was created
-     */
-    protected long timeStamp;
 
 
     public String getTitle(){
@@ -98,14 +93,6 @@ public class MPost extends ServerModel {
 
     public void setAudio(List<Long> audio) {
         Audio = audio;
-    }
-
-    public long getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
     }
 
     public List<Long> getLikes() {

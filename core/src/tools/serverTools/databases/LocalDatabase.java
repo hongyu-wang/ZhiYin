@@ -7,15 +7,11 @@ import server.model.serverKey.MServerKey;
 import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.services.factories.MusicHashtagManagerFactory;
-import server.services.interfaces.models.MusicHashtagManager;
 import server.webservices.PostObject;
 import server.webservices.RequestObject;
-import server.webservices.ServerKeyObject;
-import server.webservices.UpdateObject;
 import tools.serverTools.generators.SerialGenerator;
 import tools.utilities.Utils;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -67,6 +63,8 @@ public class LocalDatabase {
             generator = SerialGenerator.getHGenerator(keyState.getCurrentKey());
         }
 
+
+
         keyState.setCurrentKey(keyState.getCurrentKey() + 1);
         return key + generator.generateSerial();
     }
@@ -91,7 +89,7 @@ public class LocalDatabase {
     }
 
     private void initStringMaps(){
-        long i = 1;
+        long i = 1L;
         for(String name: usernames){
             username_key.put(name, i);
             i++;
@@ -158,7 +156,7 @@ public class LocalDatabase {
         for(ServerModel model: modelList){
             models.put(model.getKey(), model);
         }
-        if(!GameLoop.ISPUSHING){
+        if(!GameLoop.INITIALPUSH){
             return;
         }
         if(this.getKeyState() != null) {
@@ -209,7 +207,11 @@ public class LocalDatabase {
                 requestModelFromServer(serverKeys[i]);
             }
         }
-        pullCount = serverKeys.length;
+        if(pullCount == serverKeys.length){
+            TalkerFactory.getServerTalker().notWaiting();
+        }else{
+            pullCount = serverKeys.length;
+        }
     }
 
     /**Call this to update models within this class.

@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
  * Created by Hongyu Wang on 3/7/2016.
  */
 public class StateManager implements Disposable, Updatable, Drawable, Constants {
-
+    private boolean stateUp;
 
     /**
      * The current instance of StateManager
@@ -52,7 +52,7 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
 
     protected void init(){
-
+        stateUp = false;
     }
 
 
@@ -101,7 +101,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
     @Override
     public void draw() {
         currentState.draw();
-        //translateStage(1);
     }
 
 
@@ -131,7 +130,11 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         currentState.getInputController().checkRelease();
     }
 
-    public void translateStage(int dir) {
-        currentState.getStage().getCamera().translate(dir*1F, 0, 0);
+    public void translateStage() {
+        if (!stateUp)
+            currentState.getStage().getCamera().translate(0, -450, 0);
+        else
+            currentState.getStage().getCamera().translate(0, 450, 0);
+        stateUp = !stateUp;
     }
 }

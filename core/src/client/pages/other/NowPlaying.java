@@ -1,9 +1,14 @@
 package client.pages.other;
 
+import client.component.basicComponents.DragButton;
+import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMusic;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetTime;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateComments;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.stateInterfaces.Executable;
@@ -18,6 +23,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MImage;
 import server.model.media.MMusic;
 import tools.AudioTools.AudioManager;
+import client.component.basicComponents.Button;
+
 
 /**
  * This is the now playing page as given in the
@@ -28,7 +35,7 @@ import tools.AudioTools.AudioManager;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class NowPlaying extends NowPlayingShell {
+public class NowPlaying extends State {
     private ExecuteMoveSlider executeMoveSlider;
     private State previousState;
     private Slider slider;
@@ -37,10 +44,18 @@ public class NowPlaying extends NowPlayingShell {
     private Label currentTime;
     private long iterations;
 
+
     private MMusic post;
 
     private ImageButton pauseButton;
     private ImageButton playButton;
+    private ImageButton create;
+    private ImageButton showComments;
+    private Image filter;
+    private Image picture;
+
+    private ExecuteUpdate update1;
+    private ExecuteUpdate update2;
 
     public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
@@ -49,12 +64,7 @@ public class NowPlaying extends NowPlayingShell {
         init();
     }
 
-    public NowPlaying(State previousState, MMusic post , boolean verbose){
-        this(previousState, post);
-        this.verbose = verbose;
-        iterations = 0;
 
-    }
 
     protected void initAlbumArt(){
         LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
@@ -68,10 +78,16 @@ public class NowPlaying extends NowPlayingShell {
         Texture albumArt = new Texture(px);
         px.dispose();
 
-        Image picture = new Image(albumArt);
-        picture.setColor(1, 1, 1, 0.7F);
-        picture.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
 
+
+        filter = new Image(new Texture("Filter.png"));
+        filter.setColor(1, 1, 1, 0.9F);
+        filter.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
+
+
+
+        picture = new Image(albumArt);
+        picture.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
         stage.addActor(picture);
 
     }
@@ -80,13 +96,23 @@ public class NowPlaying extends NowPlayingShell {
     @Override
     protected void init() {
         super.init();
-        initAlbumArt();
+
+        //Standard Back Button Here.
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-        Executable showCommentsEx = new TestExecutable("fuck");
-        addImageButton("NowPlaying/ShowComments@", showCommentsEx, 607, 1063, 51, 51);
 
+
+
+        //-------------------------Sound Control System-----------------------------------------
+        //-----
+        TestExecutable rewindEx = new TestExecutable("rewind");  //TODO Implement Skip functionality here.
+        addImageButton("NowPlaying/Rewind@", rewindEx, 170, 246, 53, 46);
+
+        TestExecutable forwardEx = new TestExecutable("forward");
+        addImageButton("NowPlaying/Forward@", forwardEx, 535, 246, 53, 46);
+
+        //----
         TestExecutable pauseEx = new TestExecutable("pause");
         pauseButton = createImageButton("NowPlaying/Pause@", pauseEx, 288, 177, 180, 180);
         pauseButton.addListener(new ClickListener(){
@@ -99,7 +125,7 @@ public class NowPlaying extends NowPlayingShell {
 
         TestExecutable playEx = new TestExecutable("play");
         playButton = createImageButton("NowPlaying/Play@", playEx, 288, 177, 180, 180);
-        playButton.addListener(new ClickListener(){
+        playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 play();
@@ -108,26 +134,34 @@ public class NowPlaying extends NowPlayingShell {
         });
 
         stage.addActor(playButton);
+        //------------------------------------------------------------------------------------------
 
-        ExecuteToTempState commentEx = new ExecuteToTempState(new Comment(this, post));
+
+
+        //--------------------------------The Two Transition Buttons----------------------------------------------
+        Comment comment = new Comment(this, post);
+
+        Sec1 sec1 = new Sec1(this, post);
+
+        ExecuteToTempState commentEx = new ExecuteToTempState(comment);
         addImageButton("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
-        ExecuteToTempState secEx = new ExecuteToTempState(new Sec1(this, post));
+        ExecuteToTempState secEx = new ExecuteToTempState(sec1);
         addImageButton("NowPlaying/1S@", secEx, 230, 0, 290, 117);
+
+        this.update1 = new ExecuteUpdateComments(comment, sec1);
+
+        //---------------------------------------------------------------------------------------------
 
         initializeSlider();
 
         addMusicLabels();
-    }
 
-    private void pause(){
-        pauseButton.remove();
-        stage.addActor(playButton);
-    }
+        initializeComments();
 
-    private void play(){
-        playButton.remove();
-        stage.addActor(pauseButton);
+        initAlbumArt();
+
+        setUpSnapChat();
     }
 
 
@@ -147,6 +181,78 @@ public class NowPlaying extends NowPlayingShell {
             updateMusicLabels(AudioManager.getTime());
         iterations ++;
     }
+
+
+    private void setUpSnapChat(){
+        //TODO setup this button.
+        DragButton snapChat = new DragButton(this, 250, new Image(new Texture("Friends/SwipeToDiscardButton@" + M + ".png")), getStage());
+        snapChat.setInitialBounds(32, 135, 750 - 64, 236);
+        snapChat.setDragExecutable(new TestExecutable("Snap Chat Drag in NowPlaying"));
+        snapChat.setReleaseExecutable(new TestExecutable("Snap Chat Release in NowPlaying"));
+        add(snapChat);
+
+        //-----------------------This is the share button that adds the drag button
+        ExecutableMultiplexer em = new ExecutableMultiplexer(
+                new ExecuteAddDragButton(snapChat),
+                new TestExecutable("fuck")
+        );
+        Image im = new Image(new Texture("NowPlaying/Share@"+M+".png"));
+        im.setBounds((520 + 115 - 30)* M, (117/2 - 26) * M, im.getPrefWidth(), im.getPrefHeight());
+        stage.addActor(im);
+
+        Button shareButton = new Button(this);
+        shareButton.setBounds(520, 0, 230, 117);
+        shareButton.setExecutable(em);
+        add(shareButton);
+    }
+
+
+
+    private void initializeComments(){
+        Executable addCommentEx = new TestExecutable("addANewComment");
+        create = createImageButton("NowPlaying/AddComment@", addCommentEx, 537, 1063, 51, 51);
+
+        Executable showCommentsEx = () -> {
+
+            setUpScrollingComments();
+            verbose = !verbose;
+
+        };
+
+        showComments = createImageButton("NowPlaying/ShowComments@", showCommentsEx, 607, 1063, 51, 51);
+        stage.addActor(showComments);
+
+    }
+
+    private void setUpScrollingComments() {
+        if (!verbose) {
+            stage.addActor(create);
+            showComments.remove();
+            stage.addActor(filter);
+            stage.addActor(showComments);
+            stage.addActor(create);
+        } else{
+            filter.remove();
+            create.remove();
+            stage.addActor(picture);
+            showComments.remove();
+            stage.addActor(showComments);
+        }
+    }
+
+    private void pause(){
+        pauseButton.remove();
+        stage.addActor(playButton);
+    }
+
+    private void play(){
+        playButton.remove();
+        stage.addActor(pauseButton);
+    }
+
+
+
+
 
     public void initializeSlider(){
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
@@ -178,6 +284,13 @@ public class NowPlaying extends NowPlayingShell {
         stage.addActor(currentTime);
     }
 
+    public void updateMusicLabels(double time){
+        currentTime.setText(convertToMinutes(time));
+
+        String total = convertToMinutes(AudioManager.trackLength());
+        totalTime.setText(total);
+    }
+
     public static String convertToMinutes(double timeInSeconds){
         int time = (int)timeInSeconds;
 
@@ -188,12 +301,7 @@ public class NowPlaying extends NowPlayingShell {
         return minutes+":"+seconds;
     }
 
-    public void updateMusicLabels(double time){
-        currentTime.setText(convertToMinutes(time));
 
-        String total = convertToMinutes(AudioManager.trackLength());
-        totalTime.setText(total);
-    }
 
 
 

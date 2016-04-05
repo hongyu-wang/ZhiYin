@@ -10,8 +10,10 @@ import server.model.user.User;
 import server.model.user.UserProfile;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
+import tools.utilities.Utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -30,36 +32,69 @@ public class ExecuteUpdateComments extends ExecuteUpdate {
 
     @Override
     public void execute() {
+        List<MComment> textComments = Utils.newList();
+        List<MComment> audioComments = Utils.newList();
+
+        this.getComments(textComments, audioComments);
+
+        Collections.sort(textComments);
+        Collections.sort(audioComments);
+
+        for(MComment comment: textComments){
+            addTextComment(comment);
+        }
+
+        for(MComment comment: audioComments){
+            addAudioComment(comment);
+        }
+    }
+
+    private void getComments(List<MComment> textCommentList, List<MComment> audioCommentList){
         MPost thisPost = localDatabase.getModel(commentPage.getThisPost());
 
         List<Long> commentKeys = thisPost.getComments();
 
         for(long key: commentKeys){
             MComment comment = localDatabase.getModel(key);
-            User user = localDatabase.getModel(comment.getCreator());
-            UserProfile profile = localDatabase.getModel(user.getProfile());
 
             if(comment.getAudio().size() == 0) {
                 if (!commentPage.getCurrentComments().contains(comment.getKey())) {
-                    String text = comment.getText();
-
-                    String timestamp = Constants.getCurrentTimestamp(comment.getTimeStamp());
-
-                    commentPage.addComment(profile.getUsername(), timestamp, text);
-                    commentPage.getCurrentComments().add(key);
+                    textCommentList.add(comment);
                 }
             }
             else{
                 if(!sec1.getCurrentComments().contains(comment.getKey())){
-                    MAudio audio = localDatabase.getModel(comment.getAudio().get(0));
-
-                    String timestamp = Constants.getCurrentTimestamp(comment.getTimeStamp());
-
-                    sec1.addPost(profile.getUsername(), timestamp, audio);
-
-                    sec1.getCurrentComments().add(key);
+                    audioCommentList.add(comment);
                 }
             }
         }
     }
+
+    private void addTextComment(MComment comment){
+        User user = localDatabase.getModel(comment.getCreator());
+        UserProfile profile = localDatabase.getModel(user.getProfile());
+
+        String text = comment.getText();
+
+        String timestamp = Constants.getCurrentTimestamp(comment.getTimeStamp());
+
+        commentPage.addComment(profile.getUsername(), timestamp, text);
+        commentPage.getCurrentComments().add(comment.getKey());
+    }
+
+    private void addAudioComment(MComment comment){
+        User user = localDatabase.getModel(comment.getCreator());
+        UserProfile profile = localDatabase.getModel(user.getProfile());
+
+
+        MAudio audio = localDatabase.getModel(comment.getAudio().get(0));
+
+        String timestamp = Constants.getCurrentTimestamp(comment.getTimeStamp());
+
+        sec1.addPost(profile.getUsername(), timestamp, audio);
+        sec1.getCurrentComments().add(comment.getKey());
+    }
+
+
+
 }

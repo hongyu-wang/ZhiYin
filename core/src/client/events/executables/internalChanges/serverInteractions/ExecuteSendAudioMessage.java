@@ -1,12 +1,14 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.friends.Friends2;
+import client.pages.pageInternal.serverClientInteractions.ServerTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.tools.Constants;
 import server.model.structureModels.ServerModel;
 import server.model.user.UserConversations;
 import server.services.factories.AudioManagerFactory;
 import server.services.factories.MessageManagerFactory;
+import tools.AudioTools.AudioPlayer;
 import tools.AudioTools.AudioRecorder;
 import server.model.media.MAudio;
 import server.model.social.MConversation;
@@ -24,19 +26,16 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
     private long conversation;
 
     public ExecuteSendAudioMessage(Friends2 friends2){
-        UserConversations userConversations = localDatabase.getModel(localDatabase.getMainUser().getConversations());
-        List<Long> convoList = userConversations.getConvoKeys();
-
         this.friend2 = friends2;
-
-        this.conversation = convoList.get(TalkerFactory.getMessagesTalker().indexByFriend(friend2.getFriendName()));
+        this.conversation = ServerTalker.getConversationByFriend(friends2.getFriendName()).getKey();
     }
 
     @Override
     public void execute() {
         MAudio audio;
-        if (os == MAC)
+        if (os == MAC) {
             audio = AudioRecorder.getInstance().stopRecording();
+        }
         else{
             audio = AudioManagerFactory.createAudioManager().createMockAudio();
         }
@@ -48,16 +47,15 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
 
         conversation.getMessageList().add(message.getKey());
 
-        friend2.getMessageKeys().add(message.getKey());
-        friend2.addAudioMessage(audio, 1, Constants.getCurrentTimestamp(message.getTimeStamp()));
-
         List<ServerModel> pushList = Utils.newList();
 
         pushList.add(audio);
         pushList.add(message);
         pushList.add(conversation);
-
         localDatabase.pushModel(pushList);
+
+        friend2.getMessageKeys().add(message.getKey());
+        friend2.addAudioMessage(audio, 1, Constants.getCurrentTimestamp(message.getTimeStamp()));
     }
 
     private MMessage generateMMessage(MAudio audio){
