@@ -6,7 +6,6 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteUpdat
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -79,18 +78,17 @@ public class ArtistProfile extends ArtistProfileShell {
         stage.addActor(profilePic);
 
         Table table = new Table();
-        table.setBounds(300*M, 917*M, 450*M, 300*M);
+        table.setBounds(300*M, 917*M, 450*M, 250*M);
         table.top();
         table.add(new Label(artistName, SkinSingleton.getInstance())).width(450*M);
         table.row();
 
         Label descriptionLabel = new Label(description, SkinSingleton.getInstance());
         descriptionLabel.setWrap(true);
-//        descriptionLabel.setWidth(400*M);
         table.add(descriptionLabel).width(450*M).expandX().left();
 
         ScrollPane scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(300*M, 917*M, 450 * M, 300 *M);
+        scrollpane.setBounds(300*M, 917*M, 450*M, 250*M);
         stage.addActor(scrollpane);
 
         songs = new Table();
@@ -122,7 +120,7 @@ public class ArtistProfile extends ArtistProfileShell {
             }
         });
 
-        songs.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
+        songs.add(s).width(750*M).height(110*M);
         songs.row();
     }
 

@@ -35,15 +35,9 @@ public class Discovery extends DiscoveryShell {
 
         addSearchField();
 
-        Table t = new Table();
-        t.setBounds(0, 0, 750 * StateManager.M, 1134 * StateManager.M);
-        t.add(table);
-        stage.addActor(t);
-
         table = new Table();
-//        table.setBounds(0, 0, 750 * StateManager.M, 1134 * StateManager.M);
-        table.top();
-        table.setFillParent(true);
+        table.setBounds(0, 0, 750*M, 1134*M);
+        stage.addActor(table);
 
         numTags = 0;
 
@@ -51,7 +45,6 @@ public class Discovery extends DiscoveryShell {
     }
 
     public void addTag(String tagName){
-//        Label tag = new Label(tag, SkinSingleton.getInstance());
         TextButton tag = new TextButton(tagName, SkinSingleton.getInstance());
         final ExecuteToTempState e = new ExecuteToTempState(new Tagged(this, tagName));
         tag.addListener(new ClickListener() {
@@ -61,7 +54,8 @@ public class Discovery extends DiscoveryShell {
             }
         });
 
-        addWrapped(tag);
+        table.add(tag).top().padLeft(20*M).padRight(20*M);
+        //addWrapped(tag);
 
         //table.layout();
         table.setDebug(true);
@@ -77,6 +71,9 @@ public class Discovery extends DiscoveryShell {
             System.out.println("width: " + table.getWidth());
             table.removeActor(actor);
             table.row();
+            table.add(actor).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
+        }
+        else{
             table.add(actor).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
         }
     }

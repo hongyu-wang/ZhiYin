@@ -1,14 +1,11 @@
 package client.pages.friends;
 
 
-import SQLite.Profile;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
-import client.pages.friends.boxes.FriendBox;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -32,32 +29,23 @@ public class Friends4 extends Friends4Shell{
         table.top();
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
+        scrollpane.setBounds(0, 117*M, 750*M, 1100*M);
         stage.addActor(scrollpane);
         talkerAddFriends();
     }
 
     public void addFriend(String name, Image image){
-        Stack s = new Stack();
-
         Table t = new Table();
-
-        Label single = new Label(name, SkinSingleton.getInstance());
-        Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
-        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
-
-        t.add(single).padLeft(10 * StateManager.M);
-        t.add(i).expand().right().padRight(50 * StateManager.M);
+        t.add(new Label(name, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
+        t.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26 * M).expand().right().padRight(50*M);
         t.row();
-        t.add(line);
+        t.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750 * M).expandX().padLeft(50 * M);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
-
-        s.add(i2);
+        Stack s = new Stack();
+        s.add(new Image(new Texture("Home/BlackBG@" + M + ".png")));
         s.add(t);
 
         final ExecuteToTempState e = new ExecuteToTempState(new FriendProfile(this, name, image));
-
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -65,7 +53,7 @@ public class Friends4 extends Friends4Shell{
             }
         });
 
-        table.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
+        table.add(s).width(750*M);
         table.row();
     }
 

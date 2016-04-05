@@ -4,11 +4,8 @@ import client.pages.friends.boxes.FriendBox;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
-import client.singletons.StateManager;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import server.model.user.User;
-
-import java.util.List;
 
 public class Friends1 extends Friends1Shell{
 
@@ -22,7 +19,7 @@ public class Friends1 extends Friends1Shell{
         super.init();
 
         table = new Table();
-        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 *  StateManager.M);
+        table.setBounds(0, 117*M, 750*M, 1100*M);
         table.top();
 
         stage.addActor(table);
@@ -33,8 +30,7 @@ public class Friends1 extends Friends1Shell{
 
 
     public void addBox(FriendBox box){
-        table.add(box.getStack()).width(750 * StateManager.M).height(117 * StateManager.M);
-        table.row();
+        table.add(box.getTable()).width(750*M);
     }
 
 
