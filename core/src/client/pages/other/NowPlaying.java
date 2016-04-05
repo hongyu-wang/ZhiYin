@@ -1,5 +1,6 @@
 package client.pages.other;
 
+import client.component.basicComponents.Button;
 import client.component.basicComponents.ConfirmDialog;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
@@ -14,12 +15,8 @@ import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
-import client.stateInterfaces.Executable;
-import server.model.user.User;
-import server.model.user.UserProfile;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -27,9 +24,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MImage;
 import server.model.media.MMusic;
+import server.model.user.User;
+import server.model.user.UserProfile;
 import tools.AudioTools.AudioManager;
-import client.component.basicComponents.Button;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
+
 import java.util.List;
 
 
@@ -61,11 +62,14 @@ public class NowPlaying extends State {
     private Image filter;
     private Image picture;
 
+    private String songName;
+
     private ExecuteUpdate update1;
     private ExecuteUpdate update2;
 
     public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
+        this.songName = post.getName();
         verbose = false;
         this.post = post;
         init();
@@ -106,8 +110,10 @@ public class NowPlaying extends State {
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-
-
+        Table t = new Table();
+        t.setBounds(200*M, 1160*M, 350*M, 150*M);
+        t.add(new Label(songName, SkinSingleton.getInstance())).expand().center();
+        stage.addActor(t);
 
         //-------------------------Sound Control System-----------------------------------------
         //-----

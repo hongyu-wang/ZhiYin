@@ -72,8 +72,8 @@ public class Discovery extends DiscoveryShell {
         table.add(tag).width(tag.getWidth()).center();//.maxWidth(tag.getWidth());//.padLeft(20*M).padRight(20*M);
         currentWidth = currentWidth + tag.getWidth();// + 40*M;
 
-        System.out.println("tag width: " + tag.getWidth());
-        System.out.println("current width: " + currentWidth);
+//        System.out.println("tag width: " + tag.getWidth());
+//        System.out.println("current width: " + currentWidth);
     }
 
     @Override
