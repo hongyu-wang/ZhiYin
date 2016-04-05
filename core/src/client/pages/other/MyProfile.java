@@ -116,7 +116,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         table.top();
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0,  570*M, 750*M, 250*M);
+        scrollpane.setBounds(0, 570*M, 750*M, 250*M);
         stage.addActor(scrollpane);
 
         following = new Table();
