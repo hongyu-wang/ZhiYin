@@ -2,6 +2,7 @@ package client.pages.pageInternal.serverClientInteractions;
 
 import client.tools.Constants;
 import driver.GameLoop;
+import server.model.media.MHashtag;
 import server.model.media.MImage;
 import server.model.media.MMusic;
 import server.model.soundCloud.MBand;
@@ -110,10 +111,6 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
             localDatabase.requestModelFromServer(key++);
         }
 
-        for(long i = 20000; i < 20010; i++){
-            localDatabase.requestModelFromServer(i);
-        }
-
         totalOriginalModels = key;
     }
 
@@ -131,10 +128,66 @@ public class VeryBeginningInitializer extends Talkers implements Constants {
         pushDiaryImages(models);
         pushArtistImages(models);
         pushMBands(models);
+        pushHashtags(models);
 
         localDatabase.pushModel(models);
 
         GameLoop.INITIALPUSH = true;
+    }
+
+    private void pushHashtags(List<ServerModel> models){
+        MHashtag hashtag1 = generateHashtags("#Sorry", 20000);
+
+        MHashtag hashtag2 = generateHashtags("#MissingU", 20001);
+
+        MHashtag hashtag3 = generateHashtags("#Weeknd", 20002);
+
+        MHashtag hashtag4 = generateHashtags("#RnB", 20003);
+
+        MHashtag hashtag5 = generateHashtags("#Pop", 20004);
+
+        MHashtag hashtag6 = generateHashtags("#M5", 20005);
+
+        MHashtag hashtag7 = generateHashtags("#Bieber", 20006);
+
+        MHashtag hashtag8 = generateHashtags("#Kanye", 20007);
+
+        MHashtag hashtag9 = generateHashtags("#Ed", 20008);
+
+        MHashtag hashtag10 = generateHashtags("#LoveYourself", 20009);
+
+        if(os == MAC){
+            hashtag1.getMusicKeys().add(10031L);
+            hashtag2.getMusicKeys().add(10069L);
+            hashtag3.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Weeknd")));
+            hashtag4.getMusicKeys().add(10020L);
+            hashtag5.getMusicKeys().add(10042L);
+            hashtag6.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Maroon 5")));
+            hashtag7.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Bieber")));
+            hashtag8.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Kanye West")));
+            hashtag9.setMusicKeys(getKeys(AudioCreator.artistToMMusic.get("Ed Sheeran")));
+            hashtag10.getMusicKeys().add(10035L);
+        }
+
+        models.add(hashtag1);
+        models.add(hashtag2);
+        models.add(hashtag3);
+        models.add(hashtag4);
+        models.add(hashtag5);
+        models.add(hashtag6);
+        models.add(hashtag7);
+        models.add(hashtag8);
+        models.add(hashtag9);
+        models.add(hashtag10);
+    }
+
+    private MHashtag generateHashtags(String tag, long key){
+        MHashtag hashtag = new MHashtag();
+        hashtag.setKey(key);
+        hashtag.setHashtag(tag);
+        hashtag.setMusicKeys(Utils.<Long>newList());
+
+        return hashtag;
     }
 
     private void pushProfileImages(List<ServerModel> models){

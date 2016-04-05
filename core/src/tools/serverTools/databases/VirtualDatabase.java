@@ -43,7 +43,6 @@ public class VirtualDatabase {
         initUserData();
         initMediaData();
         initSocialData();
-        initHashtags();
     }
 
     private void initUserData(){
@@ -82,53 +81,8 @@ public class VirtualDatabase {
         user3.getBandKeys().add(12003L);
     }
 
-    private void initHashtags(){
-        MHashtag hashtag1 = generateHashtags("#Sorry", 20000);
-//        addMusic(hashtag1, /*TODO some Long*/ 0L);
-
-        MHashtag hashtag2 = generateHashtags("#MissingU", 20001);
-
-        MHashtag hashtag3 = generateHashtags("#Weeknd", 20002);
-
-        MHashtag hashtag4 = generateHashtags("#RnB", 20003);
-
-        MHashtag hashtag5 = generateHashtags("#Pop", 20004);
-
-        MHashtag hashtag6 = generateHashtags("#M5", 20005);
-
-        MHashtag hashtag7 = generateHashtags("#Bieber", 20006);
-
-        MHashtag hashtag8 = generateHashtags("#Kanye", 20007);
-
-        MHashtag hashtag9 = generateHashtags("#Ed", 20008);
-
-        MHashtag hashtag10 = generateHashtags("#LoveYourself", 20009);
-
-
-        data.put(hashtag1.getKey(),hashtag1);
-        data.put(hashtag2.getKey(),hashtag2);
-        data.put(hashtag3.getKey(),hashtag3);
-        data.put(hashtag4.getKey(),hashtag4);
-        data.put(hashtag5.getKey(),hashtag5);
-        data.put(hashtag6.getKey(),hashtag6);
-        data.put(hashtag7.getKey(),hashtag7);
-        data.put(hashtag8.getKey(),hashtag8);
-        data.put(hashtag9.getKey(),hashtag9);
-        data.put(hashtag10.getKey(),hashtag10);
-    }
-
     private void addMusic(MHashtag tag, long musicKey){
         tag.getMusicKeys().add(musicKey);
-    }
-
-
-    private MHashtag generateHashtags(String tag, long key){
-        MHashtag hashtag = new MHashtag();
-        hashtag.setKey(key);
-        hashtag.setHashtag(tag);
-        hashtag.setMusicKeys(Utils.newList());
-
-        return hashtag;
     }
 
 
