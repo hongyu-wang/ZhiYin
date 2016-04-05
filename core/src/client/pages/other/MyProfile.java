@@ -1,13 +1,6 @@
 package client.pages.other;
 
-import client.component.basicComponents.ConfirmDialog;
-import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.TestExecutable;
-import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
-import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
-import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
-import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileArtists;
-import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileDiary;
+import client.events.executables.internalChanges.serverInteractions.*;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
@@ -206,6 +199,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         s.add(removeTable);
 
         final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image));
+        final ExecuteServer exUnFollow = new ExecuteUnFollowArtist(following, artist, currentArtists);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -214,11 +208,9 @@ public class MyProfile extends MyProfileShell implements Profile {
                 if(x >= 94*M && y>= 94*M) {
                     System.out.println("remove");
                     //TODO use these; they should work
-//                    following.reset();
-//                    currentArtists.clear();
+                    exUnFollow.execute();
+                    update1.execute();
                     //TODO take out the removes and re-add the artists, minus the one being removed (MBand artist)
-                    artistButton.remove();
-                    removeButton.remove();
                 }
                 else{
                     System.out.println("artist");
