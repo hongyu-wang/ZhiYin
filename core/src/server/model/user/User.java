@@ -43,6 +43,10 @@ public class User extends ServerModel {
      */
     private long keyState;
     /**
+     * The current snapchat.
+     */
+    private long snapChat;
+    /**
      * The keys to the friends.
      */
     private List<Long> friendKeys;
@@ -133,5 +137,13 @@ public class User extends ServerModel {
 
     public void setKeyState(long keyState) {
         this.keyState = keyState;
+    }
+
+    public long getSnapChat() {
+        return snapChat;
+    }
+
+    public void setSnapChat(long snapChat) {
+        this.snapChat = snapChat;
     }
 }

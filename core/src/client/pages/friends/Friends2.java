@@ -14,6 +14,7 @@ import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import server.model.media.MAudio;
+import server.model.media.MSnapShot;
 import tools.utilities.Utils;
 
 import java.util.List;

@@ -4,6 +4,7 @@ import client.pages.other.NowPlaying;
 import server.model.media.MAudio;
 import server.model.media.MSnapShot;
 import server.model.structureModels.ServerModel;
+import server.model.user.User;
 import tools.AudioTools.AudioCreator;
 import tools.AudioTools.AudioPlayer;
 import tools.AudioTools.AudioRecorder;
@@ -15,24 +16,39 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-04-05.
  */
 public class ExecuteSendSnapChat implements ExecuteServer {
+    public static double[] time;
 
-    public ExecuteSendSnapChat(){
+    private String friendName;
+
+    public ExecuteSendSnapChat(String friendName){
+        this.friendName = friendName;
     }
 
     @Override
     public void execute() {
+        MSnapShot snapShot = getSnapshot(localDatabase.getMainUser());
+
+        User friend = localDatabase.getModel(localDatabase.getUserKeyByName(friendName));
+        friend.setSnapChat(snapShot.getKey());
+
+        List<ServerModel> pushList = Utils.newList();
+        pushList.add(friend);
+        pushList.add(snapShot);
+        localDatabase.pushModel(pushList);
+    }
+
+    private MSnapShot getSnapshot(User user){
         AudioPlayer audioPlayer = AudioPlayer.getInstance();
         AudioRecorder audioRecorder = AudioRecorder.getInstance();
 
         MAudio song = audioPlayer.getCurrentAudio();
-        double[] time = audioPlayer.stopSnapChatTime();
         MAudio userRecording = audioRecorder.stopRecording();
 
         MSnapShot snapShot = AudioCreator.createSnapShot(userRecording.getKey(), song.getKey(), (int)time[0], (int)time[1]);
         snapShot.setKey(localDatabase.generateKey());
+        snapShot.setCreator(user.getKey());
 
-        List<ServerModel> pushList = Utils.newList();
-        pushList.add(snapShot);
-        localDatabase.pushModel(pushList);
+        return snapShot;
     }
+
 }
