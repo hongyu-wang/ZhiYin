@@ -36,19 +36,13 @@ public class FriendBox{
      * @param friendName The friend's name.
      */
     public FriendBox(int iconNum, String friendName){
-        initTable(friendName);
+        this.friendName = friendName;
         setIcon(iconNum);
 
         this.update = new ExecuteSeenBy(this, friendName);
     }
 
-    private void initTable(String friendName){
-        this.table = new Table();
-        table.setWidth(750*M);
-        setTable(friendName);
-    }
-
-    private void setTable(String friendName){
+    private void setTable(){
         Stack right = new Stack();
 
         right.addListener(new ClickListener() {
@@ -73,6 +67,7 @@ public class FriendBox{
         artistTable.add(currentIcon).width(28 *M).height(36*M).expand().center().padLeft(50 * M);
         artistTable.add(right).width(650*M).height(110*M);
 
+        table = new Table();
         table.add(artistTable).width(750*M).height(110*M);
         table.row();
         table.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M);
@@ -87,13 +82,8 @@ public class FriendBox{
 
     public void setIcon(int iconNum){
         Image image = new Image(new Texture("Friends/Icon" + iconNum + "@" + M +".png"));
-
-//        if(currentIcon == null){
-//            table.add(image).width(28*M).height(36*M).left().padLeft(50*M);
-//        }
-//
-//        table.swapActor(currentIcon, image);
         currentIcon = image;
+        setTable();
     }
 
     public int getState() {

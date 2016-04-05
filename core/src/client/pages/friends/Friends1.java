@@ -31,6 +31,7 @@ public class Friends1 extends Friends1Shell{
 
     public void addBox(FriendBox box){
         table.add(box.getTable()).width(750*M);
+        table.row();
     }
 
 

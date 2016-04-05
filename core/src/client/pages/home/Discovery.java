@@ -38,7 +38,7 @@ public class Discovery extends DiscoveryShell {
         addSearchField();
 
         table = new Table();
-        table.top();
+        table.top().padTop(50*M);
         table.setBounds(0, 0, 750*M, 1134*M);
         stage.addActor(table);
 
@@ -56,7 +56,6 @@ public class Discovery extends DiscoveryShell {
                 e.execute();
             }
         });
-//        Label tag = new Label(tagName, SkinSingleton.getInstance());
 
         addWrapped(tag);
 

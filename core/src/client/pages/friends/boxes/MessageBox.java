@@ -86,7 +86,7 @@ public class MessageBox {
         Image image = new Image(new Texture("Friends4/Bubble" + byUser + "@" + StateManager.M + ".png"));
         stack.add(image);
 
-        Table table = new Table();
+        Table t = new Table();
 
         Image image2 = new Image(new Texture("Friends4/Play" + byUser + "@" + StateManager.M + ".png"));
         final ImageButton button = new ImageButton(image2.getDrawable());
@@ -96,12 +96,12 @@ public class MessageBox {
                 e.execute();
             }
         });
-        table.add(button).expand().left().padLeft(35 * StateManager.M);
+        t.add(button).expand().left().padLeft(35 * StateManager.M);
 
         Image image3 = new Image(new Texture("Friends4/Ripples" + byUser + "@" + StateManager.M + ".png"));
-        table.add(image3).expand().right().padRight(25 * StateManager.M);
+        t.add(image3).expand().right().padRight(25 * StateManager.M);
 
-        stack.add(table);
+        stack.add(t);
 
         //stack.layout();
     }
