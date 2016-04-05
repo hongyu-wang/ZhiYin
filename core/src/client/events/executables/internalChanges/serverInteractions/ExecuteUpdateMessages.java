@@ -19,6 +19,7 @@ import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,31 +37,49 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
     @Override
     public void execute() {
         MConversation conversation = localDatabase.getModel(this.conversation);
-        MessageBox box;
 
+        List<MMessage> messageList = Utils.newList();
+
+        this.getMessages(conversation, messageList);
+
+        Collections.sort(messageList);
+
+        for(MMessage message: messageList){
+            addMessageBox(message);
+        }
+    }
+
+    private void getMessages(MConversation conversation, List<MMessage> messages){
         //New Code
         for(long key : conversation.getMessageList()){
             if(!friend2.getMessageKeys().contains(key)){
-                MMessage mMessage = localDatabase.<MMessage>getModel(key);
-                long textKey = mMessage.getText();
-
-                int byUser = getWriter((int) mMessage.getCreator());
-
-                if(mMessage.getText() != -1L) {
-                    String text = localDatabase.<MText>getModel(textKey).getText();
-                    box = new MessageBox(text, byUser, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
-                }
-                else{
-                    MAudio audio = localDatabase.getModel(mMessage.getAudioKey());
-                    ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
-                    box = new MessageBox(epma, byUser, audio, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
-                }
-
-                friend2.addMessage(box);
-                friend2.getMessageKeys().add(mMessage.getKey());
+                messages.add(localDatabase.getModel(key));
             }
         }
     }
+
+
+    private void addMessageBox(MMessage mMessage){
+        MessageBox box;
+
+        long textKey = mMessage.getText();
+
+        int byUser = getWriter((int) mMessage.getCreator());
+
+        if(mMessage.getText() != -1L) {
+            String text = localDatabase.<MText>getModel(textKey).getText();
+            box = new MessageBox(text, byUser, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
+        }
+        else{
+            MAudio audio = localDatabase.getModel(mMessage.getAudioKey());
+            ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
+            box = new MessageBox(epma, byUser, audio, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
+        }
+
+        friend2.addMessage(box);
+        friend2.getMessageKeys().add(mMessage.getKey());
+    }
+
 
     private int getWriter(int user){
         if(user == localDatabase.getMainUser().getKey()){

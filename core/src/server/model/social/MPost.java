@@ -1,15 +1,14 @@
 package server.model.social;
 
-import server.model.structureModels.ServerModel;
+import server.model.structureModels.TimeStampObject;
 
-import java.util.Comparator;
 import java.util.List;
 
 
 /**
  * Created by Kevin Zheng on 2016-03-02.
  */
-public class MPost extends ServerModel implements Comparable<MPost>{
+public class MPost extends TimeStampObject {
 
 
     protected String title;
@@ -48,11 +47,6 @@ public class MPost extends ServerModel implements Comparable<MPost>{
      * List of id's of audio pieces that the post contains
      */
     protected List<Long> Audio;
-
-    /**
-     * Long representation of the timestamp of when the post was created
-     */
-    protected long timeStamp;
 
 
     public String getTitle(){
@@ -101,14 +95,6 @@ public class MPost extends ServerModel implements Comparable<MPost>{
         Audio = audio;
     }
 
-    public long getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
     public List<Long> getLikes() {
         return likes;
     }
@@ -123,18 +109,5 @@ public class MPost extends ServerModel implements Comparable<MPost>{
 
     public void setCreator(long creator) {
         this.creator = creator;
-    }
-
-    @Override
-    public int compareTo(MPost o) {
-        if(this.timeStamp > o.timeStamp){
-            return 1;
-        }
-        else if(this.timeStamp < o.timeStamp){
-            return -1;
-        }
-        else{
-            return 0;
-        }
     }
 }

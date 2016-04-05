@@ -7,6 +7,8 @@ import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAd
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteMoveSlider;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMusic;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetTime;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateComments;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.stateInterfaces.Executable;
@@ -51,6 +53,9 @@ public class NowPlaying extends State {
     private ImageButton showComments;
     private Image filter;
     private Image picture;
+
+    private ExecuteUpdate update1;
+    private ExecuteUpdate update2;
 
     public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
@@ -134,11 +139,18 @@ public class NowPlaying extends State {
 
 
         //--------------------------------The Two Transition Buttons----------------------------------------------
-        ExecuteToTempState commentEx = new ExecuteToTempState(new Comment(this, post));
+        Comment comment = new Comment(this, post);
+
+        Sec1 sec1 = new Sec1(this, post);
+
+        ExecuteToTempState commentEx = new ExecuteToTempState(comment);
         addImageButton("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
-        ExecuteToTempState secEx = new ExecuteToTempState(new Sec1(this, post));
+        ExecuteToTempState secEx = new ExecuteToTempState(sec1);
         addImageButton("NowPlaying/1S@", secEx, 230, 0, 290, 117);
+
+        this.update1 = new ExecuteUpdateComments(comment, sec1);
+
         //---------------------------------------------------------------------------------------------
 
         initializeSlider();
@@ -178,7 +190,6 @@ public class NowPlaying extends State {
         snapChat.setDragExecutable(new TestExecutable("Snap Chat Drag in NowPlaying"));
         snapChat.setReleaseExecutable(new TestExecutable("Snap Chat Release in NowPlaying"));
         add(snapChat);
-
 
         //-----------------------This is the share button that adds the drag button
         ExecutableMultiplexer em = new ExecutableMultiplexer(

@@ -14,7 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
+import server.model.structureModels.ServerModel;
 import tools.AudioTools.AudioCreator;
+import tools.serverTools.databases.LocalDatabaseFactory;
+import tools.utilities.Utils;
+import java.util.List;
 
 import java.util.TreeMap;
 
@@ -40,6 +44,11 @@ public class Home extends HomeShell {
         temporary.setKey(-420L);
         temporary.setAlbumArt(8000L);
         temporary.setName("Test");
+        temporary.setComments(Utils.newList());
+
+        List<ServerModel> pushList = Utils.newList();
+        pushList.add(temporary);
+        LocalDatabaseFactory.createLocalDatabase().pushModel(pushList);
 
         return temporary;
     }
