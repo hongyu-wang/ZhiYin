@@ -27,7 +27,7 @@ public class ExecutePlayMAudio implements Executable{
             MAudio mAudio = localDatabase.getModel(mAudioKey);
             AudioPlayer audioPlayer = AudioPlayer.getInstance();
 
-            if (audioPlayer.getCurrentAudio()!= null || audioPlayer.getCurrentAudio().getKey() == mAudio.getKey()) {
+            if (audioPlayer.getCurrentAudio()!= null && audioPlayer.getCurrentAudio().getKey() == mAudio.getKey()) {
 
                 if (audioPlayer.isPlaying())
                     audioPlayer.pause();

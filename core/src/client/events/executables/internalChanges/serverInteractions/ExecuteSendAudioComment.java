@@ -51,6 +51,10 @@ public class ExecuteSendAudioComment implements ExecuteServer {
 
         String timestamp = Constants.getCurrentTimestamp(comment.getTimeStamp());
 
+
+        sec1.addPost(userProfile.getUsername(), timestamp, audio);
+        sec1.getCurrentComments().add(comment.getKey());
+
         //------------------Pushing.
         List<ServerModel> pushList = Utils.newList();
 
@@ -60,8 +64,6 @@ public class ExecuteSendAudioComment implements ExecuteServer {
 
         localDatabase.pushModel(pushList);
 
-        sec1.addPost(userProfile.getUsername(), timestamp, audio);
-        sec1.getCurrentComments().add(comment.getKey());
     }
 
     private MComment generateComment(long userKey, long audioKey){

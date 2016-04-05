@@ -1,6 +1,7 @@
 package com.badlogic.gdx.scenes.scene2d.ui;
 
 import client.tools.TagParser;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -69,7 +70,18 @@ public class LabelTextArea extends WorkingTextArea{
                 updateCurrentLine();
             }
         });
+
+
+        setOnscreenKeyboard(new TextField.OnscreenKeyboard(){
+            @Override
+            public void show(boolean visible) {
+
+            }
+        });
+
     }
+
+
 
 
 

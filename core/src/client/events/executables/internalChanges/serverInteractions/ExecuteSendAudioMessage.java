@@ -46,7 +46,8 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
         MMessage message = generateMMessage(audio);
 
         conversation.getMessageList().add(message.getKey());
-
+        friend2.getMessageKeys().add(message.getKey());
+        friend2.addAudioMessage(audio, 1, Constants.getCurrentTimestamp(message.getTimeStamp()));
         List<ServerModel> pushList = Utils.newList();
 
         pushList.add(audio);
@@ -54,8 +55,7 @@ public class ExecuteSendAudioMessage implements ExecuteServer {
         pushList.add(conversation);
         localDatabase.pushModel(pushList);
 
-        friend2.getMessageKeys().add(message.getKey());
-        friend2.addAudioMessage(audio, 1, Constants.getCurrentTimestamp(message.getTimeStamp()));
+
     }
 
     private MMessage generateMMessage(MAudio audio){

@@ -1,6 +1,7 @@
 package com.badlogic.gdx.scenes.scene2d.ui;
 import client.singletons.StateManager;
 import client.tools.Constants;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -25,20 +26,52 @@ import static client.tools.Constants.os;
  */
 public class WorkingTextArea extends TextArea implements Constants {
 
+
+    public static boolean getKeyboardIsVisible() {
+        return keyboardIsVisible;
+    }
+
+
+
+    private static boolean keyboardIsVisible = false;
+
+    private boolean firstTime = true;
+
+
     public WorkingTextArea(String text, Skin skin) {
         super(text, skin);
 
-        addListener(new ZhiYinRealClickListener(this));
-        addListener(new TextAreaListener(){
+        addListener(new InputListener(){
             @Override
-            public boolean keyTyped(InputEvent event, char character) {
-                if (character == 13){
+            public boolean handle(Event e) {
+                if (firstTime){
+                    setText("");
+                    firstTime = false;
+                }
+                if (newLineAtEnd()){
+
                     resetText();
+                    WorkingTextArea.keyboardIsVisible = false;
+                    StateManager.getInstance().translateStage();
+                    return true;
                 }
                 return false;
             }
         });
+        setOnscreenKeyboard(new MyDefaultOnscreenKeyboard());
 
+
+    }
+
+    static public class MyDefaultOnscreenKeyboard extends DefaultOnscreenKeyboard {
+
+        @Override
+        public void show(boolean visible) {
+            WorkingTextArea.keyboardIsVisible = true;
+            StateManager.getInstance().translateStage();
+            Gdx.input.setOnscreenKeyboardVisible(visible);
+
+        }
     }
 
 
@@ -48,7 +81,10 @@ public class WorkingTextArea extends TextArea implements Constants {
     }
 
     protected void resetText(){
-        this.text.trim();
+
+        setText(this.text.trim());
+
+
         this.updateDisplayText();
     }
 

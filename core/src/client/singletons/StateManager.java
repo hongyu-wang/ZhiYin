@@ -6,9 +6,12 @@ import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 
 /**
  * This is essentially a card layout.
@@ -131,10 +134,19 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
     }
 
     public void translateStage() {
-        if (!stateUp)
-            currentState.getStage().getCamera().translate(0, -450, 0);
-        else
-            currentState.getStage().getCamera().translate(0, 450, 0);
-        stateUp = !stateUp;
+        if (os == MAC){
+
+            if (WorkingTextArea.getKeyboardIsVisible()){
+                System.out.println(currentState.getStage().getCamera());
+                if (!stateUp)
+                    currentState.getStage().getCamera().translate(0, -400, 0);
+                stateUp = true;
+            } else{
+                if (stateUp)
+                    currentState.getStage().getCamera().translate(0, 400, 0);
+                stateUp = false;
+            }
+        }
+
     }
 }
