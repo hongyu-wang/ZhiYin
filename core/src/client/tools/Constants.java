@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Hongyu Wang on 4/2/2016.
  */
 public interface Constants {
-    float M = 1F;
+    float M = 1.0F;
 
     int LEFT = -1;
     int RIGHT = 1;
