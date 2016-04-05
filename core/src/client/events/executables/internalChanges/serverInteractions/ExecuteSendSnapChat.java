@@ -40,7 +40,7 @@ public class ExecuteSendSnapChat implements ExecuteServer {
         List<ServerModel> pushList = Utils.newList();
         pushList.add(friend);
         pushList.add(snapShot);
-        pushList.add(snapShot);
+        pushList.add(userRecording);
         localDatabase.pushModel(pushList);
     }
 
