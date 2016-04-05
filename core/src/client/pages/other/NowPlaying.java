@@ -64,8 +64,6 @@ public class NowPlaying extends State {
         init();
     }
 
-
-
     protected void initAlbumArt(){
         LocalDatabase localDatabase = LocalDatabaseFactory.createLocalDatabase();
         

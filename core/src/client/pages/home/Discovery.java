@@ -5,11 +5,13 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteUpdat
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateTags;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 
 /**
  * This is the fourth home diary page as given in the
@@ -20,7 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class Discovery extends DiscoveryShell {
     private Table table;
 
-    private int numTags;
+    private float currentWidth;
 
     private TextField searchField;
 
@@ -36,10 +38,11 @@ public class Discovery extends DiscoveryShell {
         addSearchField();
 
         table = new Table();
+        table.top();
         table.setBounds(0, 0, 750*M, 1134*M);
         stage.addActor(table);
 
-        numTags = 0;
+        currentWidth = 0;
 
         this.update = new ExecuteUpdateTags(this);
     }
@@ -53,29 +56,25 @@ public class Discovery extends DiscoveryShell {
                 e.execute();
             }
         });
+//        Label tag = new Label(tagName, SkinSingleton.getInstance());
 
-        table.add(tag).top().padLeft(20*M).padRight(20*M);
-        //addWrapped(tag);
+        addWrapped(tag);
 
-        //table.layout();
         table.setDebug(true);
     }
 
-    private void addWrapped(Actor actor){
-        float initWidth = table.getWidth();
-        Cell cell = table.add(actor).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
-
-        //System.out.println("initWidth: " + initWidth);
-
-        if(table.getWidth() > initWidth){
-            System.out.println("width: " + table.getWidth());
-            table.removeActor(actor);
-            table.row();
-            table.add(actor).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
+    private void addWrapped(TextButton tag){
+        float newWidth = currentWidth + tag.getWidth();// + 40*M;
+        if(newWidth >= 750*M){
+            table.row().padTop(50*M);
+            currentWidth = 0;
         }
-        else{
-            table.add(actor).padLeft(20 * StateManager.M).padRight(20 * StateManager.M);
-        }
+
+        table.add(tag).width(tag.getWidth()).center();//.maxWidth(tag.getWidth());//.padLeft(20*M).padRight(20*M);
+        currentWidth = currentWidth + tag.getWidth();// + 40*M;
+
+        System.out.println("tag width: " + tag.getWidth());
+        System.out.println("current width: " + currentWidth);
     }
 
     @Override
@@ -84,7 +83,6 @@ public class Discovery extends DiscoveryShell {
         searchField.remove();
         addSearchField();
     }
-
 
 
     private void addSearchField(){
