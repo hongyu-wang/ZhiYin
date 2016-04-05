@@ -93,10 +93,6 @@ public class MyProfile extends MyProfileShell implements Profile {
         super.init();
         serverInit();
 
-        Label label = new Label(name, SkinSingleton.getInstance());
-        label.setPosition(310*M, 1050*M);
-        stage.addActor(label);
-
         if(profilePic != null) {
             profilePic.setBounds(50*M, 967*M, 200*M, 200*M);
             stage.addActor(profilePic);

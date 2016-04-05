@@ -74,7 +74,7 @@ public class Diary1 extends Diary1Shell {
         t.row().padTop(10*M);
         t.add(l3).expand().left().padLeft(50*M);
         t.row();
-        t.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M).padTop(50*M);
+        t.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(150*M).padTop(50*M);
 
         Image i2 = new Image(new Texture("Home/BlackBG@" + M + ".png"));
 
