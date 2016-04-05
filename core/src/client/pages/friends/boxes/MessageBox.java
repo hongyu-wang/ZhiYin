@@ -5,12 +5,8 @@ import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import server.model.media.MAudio;
 
 
@@ -66,20 +62,20 @@ public class MessageBox {
         Image image = new Image(new Texture("Friends4/Bubble" + byUser + "@" + StateManager.M + ".png"));
 
         Table table2 = new Table();
-        Label text = new Label(message, SkinSingleton.getInstance());
-        text.setWrap(true);
-
-        text.setWidth(230 * StateManager.M);
+        LabelTextArea text = new LabelTextArea(message, SkinSingleton.getInstance());
+        text.setPrefRows(message.length()/28 + 1);
         text.pack();
-        float height = text.getHeight() + 40;
+        text.setWidth(460 * StateManager.M);
 
-        table1.add(image).width(480 * StateManager.M).height(height * StateManager.M);
-        table2.add(text).expand().center().left().padLeft(10*StateManager.M).width(460 * StateManager.M);
+        float height = (text.getHeight() + 40) * StateManager.M;
+
+        table1.add(image).width(480 * StateManager.M).height(height);
+        table2.add(text).width(460 * StateManager.M).height(height).expand().center().left().padLeft(10 * StateManager.M).padTop(30 * StateManager.M);
 
         stack.add(table1);
         stack.add(table2);
 
-        stack.setHeight(height * StateManager.M);
+        stack.setHeight(height);
 
         stack.layout();
     }
@@ -107,7 +103,7 @@ public class MessageBox {
 
         stack.add(table);
 
-        stack.layout();
+        //stack.layout();
     }
 
     public Table getTable(){

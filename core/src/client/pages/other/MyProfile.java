@@ -53,6 +53,7 @@ public class MyProfile extends MyProfileShell implements Profile {
     private Table following;
 
     private String name;
+    private String description;
 
     private Image profilePic;
 
@@ -75,6 +76,8 @@ public class MyProfile extends MyProfileShell implements Profile {
         MImage mImage = localDatabase.getModel(userProfile.getImageKey());
 
         this.name = userProfile.getUsername();
+        this.description = "here is a really long description that I am typing just to test wrapping of the words, as well as scrollpane vertical scrolling;" +
+        "more redundant words are being typed right now and stuff and stuff and stuff and more stuff and more stuff and more stuff and more stuff";
         this.profilePic = ImageManagerFactory.createImageManager().mImageToImage(mImage);
 
         currentArtists = Utils.newList();
@@ -85,7 +88,6 @@ public class MyProfile extends MyProfileShell implements Profile {
     }
 
     protected void init(){
-
         super.init();
         serverInit();
 
