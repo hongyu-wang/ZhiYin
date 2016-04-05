@@ -129,6 +129,24 @@ public class AudioPlayer {
         return running;
     }
 
+    private double[] time = {0,0};
+
+    public void startSnapChatTime(){
+        time[0] = this.getCurrentTime();
+    }
+
+    public double[] stopSnapChatTime(){
+        time[1] = this.getCurrentTime();
+
+        double[] timeArray = time;
+
+        time = new double[]{0, 0};
+
+        return timeArray;
+    }
+
+
+
     public MAudio getCurrentAudio(){
         return currentSong;
     }
