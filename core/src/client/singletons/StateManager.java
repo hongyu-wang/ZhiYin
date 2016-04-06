@@ -6,10 +6,17 @@ import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.Texture;
 import tools.AudioTools.AudioPlayer;
+
+import java.awt.*;
 
 /**
  * This is essentially a card layout.
@@ -32,15 +39,12 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         return ourInstance;
     }
 
-    private static AudioPlayer ap = AudioPlayer.getInstance();
+    private static AudioPlayer ap;
 
     public State getCurrentState() {
         return currentState;
     }
 
-    public void setCurrentState(State currentState) {
-        this.currentState = currentState;
-    }
 
     /**
      * This is the current state within the statemanager.
@@ -49,6 +53,9 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
 
     private StateManager(){
+        if (os == MAC){
+            ap = AudioPlayer.getInstance();
+        }
         init();
     }
 
@@ -71,8 +78,9 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
     public void toTemporaryState(State state){
         currentState = state;
-        killActions();
+        //killActions();
         currentState.reset();
+        InputListener.setListener(state);
 
     }
 
@@ -128,6 +136,17 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         currentState.getInputController().checkPressed();
 
     }
+
+    public static Image getCurrentScreenImage(){
+        Pixmap px = ScreenUtils.getFrameBufferPixmap(0, 0, (int)(750*M), (int)(1334*M));
+        Texture texture = new Texture(px);
+        px.dispose();
+        Image temp = new Image(texture);
+        temp.rotateBy(180);
+
+        return new Image(temp.getDrawable());
+    }
+
 
 
     public void receiveDragged(){
