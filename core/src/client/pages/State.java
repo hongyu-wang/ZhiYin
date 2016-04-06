@@ -53,7 +53,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         components = Utils.newList();
         inputController = new InputController();
         stage = new Stage();
-        transitionType = TransitionType.LEFT_TO_RIGHT;
+        transitionType = TransitionType.NONE;
     }
 
     /**
