@@ -42,7 +42,7 @@ public abstract class ArtistShell extends State{
 //        add(sortButton);
 
         TestExecutable sortEx = new TestExecutable("sort");
-        addImageButton("Home/Sort@", sortEx, 688, 1159, 42, 32);
+        addImage("Home/Sort@", sortEx, 688, 1159, 42, 32);
 
 //        stage.addActor(sortButton);
 

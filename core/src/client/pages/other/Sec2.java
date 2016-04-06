@@ -5,7 +5,7 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteSendA
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -26,13 +26,13 @@ public class Sec2 extends Sec2Shell {
         super.init();
 
         ExecuteToTempState backEx = new ExecuteToTempState(previousState, -1);
-        addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         ExecuteToTempState discard = new ExecuteToTempState(sec1);
-        ImageButton discardButton = createImageButton("Other/Discard@", discard, 36, 57, 340, 73);
+        Table discardButton = createImage("Other/Discard@", discard, 36, 57, 340, 73);
 
         final TestExecutable send = new TestExecutable("send");
-        ImageButton sendButton = createImageButton("Other/Send2@", send, 36 + 340, 57, 339, 73);
+        Table sendButton = createImage("Other/Send2@", send, 36 + 340, 57, 339, 73);
         sendButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -44,7 +44,6 @@ public class Sec2 extends Sec2Shell {
         stage.addActor(discardButton);
         stage.addActor(sendButton);
     }
-
 
     @Override
     public void dispose() {

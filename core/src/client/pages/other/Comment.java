@@ -59,7 +59,7 @@ public class Comment extends CommentShell {
         addMessageField();
 
         ExecuteToTempState backEx = new ExecuteToTempState(previousState, -1);
-        addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         initTable();
 
@@ -71,14 +71,7 @@ public class Comment extends CommentShell {
         stage.addActor(scrollpane);
 
         ExecuteSendComment sendEx = new ExecuteSendComment(this);
-        ImageButton sendButton = createImageButton("Other/Send@", sendEx, 604, 32, 122, 60);
-//        sendButton.addListener(new ClickListener(){
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                send();
-//            }
-//        });
-        stage.addActor(sendButton);
+        addImage("Other/Send@", sendEx, 604, 32, 122, 60);
     }
 
     private void initTable(){

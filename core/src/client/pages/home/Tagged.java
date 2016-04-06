@@ -37,10 +37,12 @@ public class Tagged extends TaggedShell {
     protected void init(){
         super.init();
 
+        System.out.println("In tagged");
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
-        ImageButton backButton = createImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
-        backButton.setBounds(0, 1217*M, 117*M, 117*M);
-        stage.addActor(backButton);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+        //        Image backButton = createImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+//        backButton.setBounds(0, 1217*M, 117*M, 117*M);
+//        stage.addActor(backButton);
 
         Table t = new Table();
         t.setBounds(117*M, 1217*M, 516*M, 117*M);

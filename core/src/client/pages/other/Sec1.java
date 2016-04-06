@@ -76,7 +76,7 @@ public class Sec1 extends Sec1Shell {
         super.init();
 
         ExecuteToTempState backEx = new ExecuteToTempState(previousState, -1);
-        addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Image image = new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png"));
         image.setBounds(26*M, 130*M, 698*M, 236*M);

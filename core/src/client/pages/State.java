@@ -14,7 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import tools.utilities.Utils;
 
@@ -115,30 +116,37 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         add(toolsButton);
     }
 
-    protected ImageButton createImageButton(String imagePath, Executable e, int x, int y, int width, int height ){
-        Image image = new Image(new Texture(imagePath + "0.5" + ".png"));
-        ImageButton imageButton = new ImageButton(image.getDrawable());
-        //imageButton.setSize(image.getWidth()*M, image.getHeight()*M);
-        imageButton.setBounds(x*M, y*M, width*M, height*M);
+    protected Table createImage(String imagePath, Executable e, int x, int y, int width, int height ){
+        Image image = new Image(new Texture(imagePath + "1.0" + ".png"));
+        image.setSize(image.getWidth()*M, image.getHeight()*M);
+
+        Stack s = new Stack();
+        s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
+
+        Table t = new Table();
+        t.add(image).width(image.getWidth()).height(image.getHeight());
+        s.add(t);
 
         final Executable executable = e;
-        imageButton.addListener(new ClickListener() {
+        s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 executable.execute();
             }
         });
 
-        return imageButton;
+        Table table = new Table();
+        table.add(s);
+        table.setBounds(x*M, y*M, width*M, height*M);
+
+        return table;
     }
 
-    protected void addImageButton(String imagePath, Executable e, int x, int y, int width, int height){
-        ImageButton button = createImageButton(imagePath, e, x, y, width, height);
-//        Table t = new Table();
-//        t.setBounds(x*M, y*M, width*M, height*M);
-//        t.add(button).width(width*M).height(height*M);
-        stage.addActor(button);
+    protected void addImage(String imagePath, Executable e, int x, int y, int width, int height){
+        Table t = createImage(imagePath, e, x, y, width, height);
+        stage.addActor(t);
     }
+
 
     /**
      * This will return a deep copy of the stored component list
