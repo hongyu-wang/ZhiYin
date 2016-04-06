@@ -23,7 +23,6 @@ public class DragButton extends Component implements Dragable {
     private ActionMonitor monitor;
     private float limit;
     private boolean disable;
-    private boolean playAnimation;
     private long begin;
     public boolean remove = false;
     private Image image;
@@ -42,7 +41,6 @@ public class DragButton extends Component implements Dragable {
 
     @Override
     protected void init() {
-        playAnimation = true;
         begin = 0;
         disable = true;
     }

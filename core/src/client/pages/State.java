@@ -5,6 +5,7 @@ import client.events.ActionEvent;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.internalExceptions.NoExecutableException;
 import client.pageStorage.Pages;
+import client.pages.other.TransitionType;
 import client.pages.pageInternal.inputController.InputController;
 import client.singletons.MainBatch;
 import client.stateInterfaces.*;
@@ -29,6 +30,8 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
     protected Stage stage;
     private InputController inputController;
+    protected TransitionType transitionType;
+
 
     @Override
     public void update(float dt) {
@@ -49,7 +52,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         components = Utils.newList();
         inputController = new InputController();
         stage = new Stage();
-
+        transitionType = TransitionType.LEFT_TO_RIGHT;
     }
 
     /**
@@ -119,7 +122,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         Image image = new Image(new Texture(imagePath + "0.5" + ".png"));
         ImageButton imageButton = new ImageButton(image.getDrawable());
         //imageButton.setSize(image.getWidth()*M, image.getHeight()*M);
-        imageButton.setBounds(x*M, y*M, width*M, height*M);
+        imageButton.setBounds(x * M, y * M, width * M, height * M);
 
         final Executable executable = e;
         imageButton.addListener(new ClickListener() {
@@ -198,7 +201,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         return this.getClass().getName();
     }
 
-
+    public TransitionType getTransitionType(){
+        return transitionType;
+    }
 
 }
 

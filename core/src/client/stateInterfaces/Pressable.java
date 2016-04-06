@@ -27,12 +27,6 @@ public interface Pressable extends Performable{
     boolean isPressed();
 
     /**
-     * This is the method that is called whenever the performable
-     * is about to get pressed.
-     */
-    void setAnimation();
-
-    /**
      * This is the press method. What this method will do is it will send
      * a new ActionEvent to the actionListener.
      */

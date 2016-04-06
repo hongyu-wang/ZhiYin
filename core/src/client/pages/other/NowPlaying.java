@@ -11,12 +11,11 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteSendS
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateComments;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempStateVertical;
 import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
-import client.singletons.Gesturable;
+import client.stateInterfaces.Gesturable;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -106,7 +105,7 @@ public class NowPlaying extends State implements Gesturable{
         super.init();
 
         //Standard Back Button Here.
-        backEx = new ExecuteToTempStateVertical(previousState, -1);
+        backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Table t = new Table();
@@ -349,12 +348,12 @@ public class NowPlaying extends State implements Gesturable{
     }
 
 
+
+
     @Override
-    public void handleGesture(boolean gestureX, boolean gestureY, boolean direction) {
-        if (gestureX){
-            //backEx.execute();
-        }
-        if (!gestureY){
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if (!gestureXRight && directionMainlyX){
+            transitionType = TransitionType.RIGHT_TO_LEFT;
             backEx.execute();
         }
     }

@@ -19,8 +19,6 @@ public class Button extends Component implements Pressable{
 
     private ActionMonitor monitor;
     private Executable executable;
-    private boolean playAnimation;
-    private boolean isReleased;
 
     public Button(ActionMonitor monitor){
         super();
@@ -29,7 +27,6 @@ public class Button extends Component implements Pressable{
 
     @Override
     protected void init() {
-        playAnimation = true;
     }
 
     @Override
@@ -86,10 +83,6 @@ public class Button extends Component implements Pressable{
         return checkInX(il) && checkInY(il);
     }
 
-    @Override
-    public void setAnimation() {
-        playAnimation = !playAnimation;
-    }
 
 
     /**

@@ -7,6 +7,7 @@ import server.model.social.MDiaryPost;
 import server.model.user.User;
 
 /**
+ *
  * Created by Kevin Zheng on 2016-03-02.
  */
 public interface MusicDiary {

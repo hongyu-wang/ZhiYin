@@ -24,6 +24,12 @@ public interface Constants {
     int SENT_READ = 3;
     int SENT_UNREAD = 4;
 
+    /**
+     * This turns on the yellow lines in the buttons.
+     */
+    boolean playAnimation = true;
+
+
     boolean WINDOWS = false;
 
     boolean MAC = true;

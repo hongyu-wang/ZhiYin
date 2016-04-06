@@ -4,10 +4,10 @@ import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
+import client.stateInterfaces.Gesturable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -15,8 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.Texture;
 import tools.AudioTools.AudioPlayer;
-
-import java.awt.*;
 
 /**
  * This is essentially a card layout.
@@ -178,4 +176,8 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
             ((Gesturable) currentState).handleGesture(gestureX, gestureY, magX);
 
     }
+
+
+
+
 }

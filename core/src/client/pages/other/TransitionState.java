@@ -6,15 +6,19 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
+
 /**
  *
  * Created by Hongyu Wang on 4/6/2016.
  */
 public class TransitionState extends State {
+
+
+
     private Stage newStage;
     private Stage oldStage;
     private boolean willDraw;
-    public TransitionState(State newState, int dir){
+    public TransitionState(State newState, TransitionType ty){
         init();
 
         newStage = newState.getStage();
@@ -22,63 +26,14 @@ public class TransitionState extends State {
 
 
         oldStage = StateManager.getInstance().getCurrentState().getStage();
-        oldStage.act();
 
-        oldStage.addAction(Actions.sequence(
-                Actions.moveTo(-dir*750*M, 0, 0.5F, Interpolation.pow2In)
-        ));
-
-
-
-        newStage.addAction(Actions.sequence(
-
-                        Actions.moveTo(dir*750 * M, 0, 0),
-                        Actions.moveTo(0, 0, 0.5F, Interpolation.pow2In),
-                        Actions.run(() -> {
-                            StateManager.getInstance().toTemporaryState(newState);
-                            oldStage.addAction(Actions.moveTo(0, 0));
-                        })
-
-                )
-        );
+        ty.setUpAction(oldStage, newStage, newState);
 
         willDraw = false;
 
 
     }
 
-    public TransitionState(State newState, int dir, boolean verbose){
-        init();
-
-        newStage = newState.getStage();
-
-
-
-        oldStage = StateManager.getInstance().getCurrentState().getStage();
-        oldStage.act();
-
-        oldStage.addAction(Actions.sequence(
-                Actions.moveTo(0, -dir * 1334*M, 0.5F, Interpolation.pow2In)
-        ));
-
-
-
-        newStage.addAction(Actions.sequence(
-
-                        Actions.moveTo(0, dir*1334, 0),
-                        Actions.moveTo(0, 0, 0.5F, Interpolation.pow2In),
-                        Actions.run(() -> {
-                            StateManager.getInstance().toTemporaryState(newState);
-                            oldStage.addAction(Actions.moveTo(0, 0));
-                        })
-
-                )
-        );
-
-        willDraw = false;
-
-
-    }
 
     @Override
     public void draw() {

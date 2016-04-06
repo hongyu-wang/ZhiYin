@@ -22,7 +22,7 @@ public abstract class Friends2Shell extends State {
 
         Button backButton = new Button(this);
         backButton.setBounds(0, 1217, 117, 117);
-        backButton.setExecutable(new ExecuteToTempState(Pages.FRIENDS1.getStateReference(), -1));
+        backButton.setExecutable(new ExecuteToTempState(Pages.FRIENDS1.getStateReference()));
         add(backButton);
     }
 

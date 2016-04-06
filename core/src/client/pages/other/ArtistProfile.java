@@ -7,7 +7,7 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteUpdat
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateArtistSongs;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
-import client.singletons.Gesturable;
+import client.stateInterfaces.Gesturable;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -62,7 +62,7 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
     protected void init() {
         super.init();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState, -1);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         addImageButton("Other/Follow@", followEx, 500, 70, 218, 82);
@@ -143,8 +143,8 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
     }
 
     @Override
-    public void handleGesture(boolean gestureX, boolean gestureY, boolean direction) {
-        if (!gestureX){
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if (!gestureXRight){
 
         }
     }

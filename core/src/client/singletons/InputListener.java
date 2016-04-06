@@ -125,7 +125,6 @@ public class InputListener implements InputProcessor, Constants, GestureDetector
 
         mouseY = Gdx.graphics.getHeight() - screenY;
 
-        System.out.println(mouseX + " " + mouseY);
         stateManager.receiveInput();
 
         return false;
@@ -180,7 +179,9 @@ public class InputListener implements InputProcessor, Constants, GestureDetector
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-        StateManager.getInstance().handleGesture(velocityX > 0, velocityY > 0, Math.abs(velocityX) > Math.abs(velocityY));
+
+
+        StateManager.getInstance().handleGesture(velocityX > 0, velocityY < 0, Math.abs(velocityX) > Math.abs(velocityY));
         return false;
     }
 

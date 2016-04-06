@@ -47,7 +47,7 @@ public class Diary4 extends Diary4Shell{
     protected void init() {
         super.init();
 
-        ExecuteToTempState changePage = new ExecuteToTempState(previousState, -1);
+        ExecuteToTempState changePage = new ExecuteToTempState(previousState);
         addImageButton("NowPlaying/Back@", changePage, 0, 1217, 117, 117);
 
         if(audio != null){

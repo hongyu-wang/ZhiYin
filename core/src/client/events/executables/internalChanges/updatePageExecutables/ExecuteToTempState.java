@@ -2,6 +2,7 @@ package client.events.executables.internalChanges.updatePageExecutables;
 
 import client.pages.State;
 import client.pages.other.TransitionState;
+import client.pages.other.TransitionType;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 
@@ -11,20 +12,16 @@ import client.stateInterfaces.Executable;
  */
 public class ExecuteToTempState implements Executable {
     protected State state;
-    protected int dir;
+
+
     public ExecuteToTempState(State state){
-        this(state, 1);
-    }
-
-
-    public ExecuteToTempState(State state, int dir){
-        this.state = state;
-        this.dir = dir;
-    }
+        this.state = state;  }
 
 
     @Override
     public void execute() {
-        StateManager.getInstance().toTemporaryState(new TransitionState(state, dir));
+        TransitionType transitionType = state.getTransitionType();
+        StateManager.getInstance().toTemporaryState(
+                new TransitionState(state, transitionType));
     }
 }
