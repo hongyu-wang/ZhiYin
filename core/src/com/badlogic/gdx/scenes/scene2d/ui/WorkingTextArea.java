@@ -3,9 +3,7 @@ import client.singletons.StateManager;
 import client.tools.Constants;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 
 /**
@@ -28,45 +26,36 @@ public class WorkingTextArea extends TextArea implements Constants {
 
     public WorkingTextArea(String text, Skin skin) {
         super(text, skin);
-        if (os == WINDOWS) {
-            addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    if (firstTime) {
-                        setText("");
-                        firstTime = false;
-                    }
-                }
-            });
-        }
-        else {
-            addListener(new InputListener() {
-                @Override
-                public boolean handle(Event e) {
-                    if (firstTime) {
-                        setText("");
-                        firstTime = false;
-                    }
-                    if (newLineAtEnd()) {
 
-                        resetText();
-                        if (WorkingTextArea.keyboardIsVisible) {
-                            WorkingTextArea.keyboardIsVisible = false;
-                            StateManager.getInstance().translateStage();
-                        }
-                        return true;
-                    }
-                    return false;
+        addListener(new InputListener(){
+            @Override
+            public boolean handle(Event e) {
+                if (firstTime){
+                    setText("");
+                    firstTime = false;
                 }
-            });
-        }
-        setOnscreenKeyboard(visible -> {
-            if (getY() - getHeight() < KEY_BOARD_HEIGHT) {
-                WorkingTextArea.keyboardIsVisible = true;
+                if (newLineAtEnd()){
+
+                    resetText();
+                    if (WorkingTextArea.keyboardIsVisible) {
+                        WorkingTextArea.keyboardIsVisible = false;
+                        StateManager.getInstance().translateStage();
+                    }
+                    return true;
+                }
+                return false;
             }
-            StateManager.getInstance().translateStage();
-            Gdx.input.setOnscreenKeyboardVisible(visible);
+        });
+        setOnscreenKeyboard(new OnscreenKeyboard() {
+            @Override
+            public void show(boolean visible) {
+                if (getY() - getHeight() < KEY_BOARD_HEIGHT) {
+                    WorkingTextArea.keyboardIsVisible = true;
+                }
+                StateManager.getInstance().translateStage();
+                Gdx.input.setOnscreenKeyboardVisible(visible);
 
+            }
         });
 
 

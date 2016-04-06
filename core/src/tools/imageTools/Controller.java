@@ -36,6 +36,7 @@ public class Controller {
         UIPC = new UIImagePickerController();
         if (UIPC.isSourceTypeAvailable((UIImagePickerControllerSourceType.PhotoLibrary)))
             UIPC.setSourceType(UIImagePickerControllerSourceType.PhotoLibrary);
+
         UIPC.setAllowsEditing(true);
         UIPC.getView().setBounds(UIScreen.getMainScreen().getBounds());
         UIPC.getView().setFrame(UIScreen.getMainScreen().getBounds());

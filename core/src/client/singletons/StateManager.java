@@ -4,16 +4,11 @@ import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
-import client.stateInterfaces.Gesturable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.graphics.Texture;
 import tools.AudioTools.AudioPlayer;
 
 /**
@@ -37,12 +32,13 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         return ourInstance;
     }
 
-    private static AudioPlayer ap;
-
     public State getCurrentState() {
         return currentState;
     }
 
+    public void setCurrentState(State currentState) {
+        this.currentState = currentState;
+    }
 
     /**
      * This is the current state within the statemanager.
@@ -51,9 +47,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
 
     private StateManager(){
-        if (os == MAC){
-            ap = AudioPlayer.getInstance();
-        }
         init();
     }
 
@@ -76,9 +69,8 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
     public void toTemporaryState(State state){
         currentState = state;
-        //killActions();
+        killActions();
         currentState.reset();
-        InputListener.setListener(state);
 
     }
 
@@ -105,11 +97,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
         TalkerFactory.getServerTalker().update(dt);
 
-        if(os == MAC) {
-            if (!ap.isPlaying() && ap.isPlayingSnapshot()) {
-                ap.stop();
-            }
-        }
     }
 
     @Override
@@ -134,16 +121,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         currentState.getInputController().checkPressed();
 
     }
-
-    public static Image getCurrentScreenImage(){
-        Pixmap px = ScreenUtils.getFrameBufferPixmap(0, 0, (int)(750*M), (int)(1334*M));
-        Texture texture = new Texture(px);
-        px.dispose();
-
-
-        return new Image(texture);
-    }
-
 
 
     public void receiveDragged(){
@@ -170,14 +147,4 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         }
 
     }
-
-    public void handleGesture(boolean gestureX, boolean gestureY, boolean magX) {
-        if (currentState instanceof Gesturable)
-            ((Gesturable) currentState).handleGesture(gestureX, gestureY, magX);
-
-    }
-
-
-
-
 }

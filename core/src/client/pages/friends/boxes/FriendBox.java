@@ -5,6 +5,7 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteSeenB
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.friends.Friends2;
+import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -44,7 +45,7 @@ public class FriendBox{
         right.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteToTempState(new Friends2(friendName)).execute();
+                new ExecuteToTempState(new Friends2(friendName), TransitionType.RIGHT_TO_LEFT).execute();
                 new ExecuteSeenByMe(friendName, update).execute();
             }
         });

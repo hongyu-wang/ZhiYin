@@ -62,7 +62,7 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
     protected void init() {
         super.init();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState, this);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         addImage("Other/Follow@", followEx, 500, 70, 218, 82);
@@ -107,7 +107,7 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
 
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
 
-        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, song));
+        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, song), this);
         final ExecuteSetMusic esm = new ExecuteSetMusic(song);
 
         em.addExecutable(e);

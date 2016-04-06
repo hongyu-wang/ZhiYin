@@ -56,7 +56,8 @@ public class AudioRecorder {
         AVAudioSettings.Keys.NumberOfChannels(),
         AVAudioSettings.Keys.BitDepthKey(),
         AVAudioSettings.Keys.IsBigEndianKey(),
-        AVAudioSettings.Keys.IsFloatKey()
+        AVAudioSettings.Keys.IsFloatKey(),
+
     };
 
     private AVAudioSettings settings;
@@ -91,6 +92,8 @@ public class AudioRecorder {
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
+
+
 
     }
 
