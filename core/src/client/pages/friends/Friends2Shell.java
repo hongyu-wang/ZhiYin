@@ -2,6 +2,7 @@ package client.pages.friends;
 
 import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
@@ -23,7 +24,7 @@ public abstract class Friends2Shell extends State {
 
         Button backButton = new Button(this);
         backButton.setBounds(0, 1217, 117, 117);
-        backButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
+        backButton.setExecutable(new ExecuteToTempState(Pages.FRIENDS1.getStateReference(), -1));
         add(backButton);
     }
 

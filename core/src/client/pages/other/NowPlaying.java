@@ -11,14 +11,17 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteSendS
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateComments;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempStateVertical;
 import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
+import client.singletons.Gesturable;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -43,7 +46,7 @@ import java.util.List;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class NowPlaying extends State {
+public class NowPlaying extends State implements Gesturable{
     private ExecuteMoveSlider executeMoveSlider;
     private State previousState;
     private Slider slider;
@@ -66,6 +69,7 @@ public class NowPlaying extends State {
 
     private ExecuteUpdate update1;
     private ExecuteUpdate update2;
+    private ExecuteToTempState backEx;
 
     public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
@@ -107,7 +111,7 @@ public class NowPlaying extends State {
         super.init();
 
         //Standard Back Button Here.
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
+        backEx = new ExecuteToTempStateVertical(previousState, -1);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Table t = new Table();
@@ -350,7 +354,13 @@ public class NowPlaying extends State {
     }
 
 
-
-
-
+    @Override
+    public void handleGesture(boolean gestureX, boolean gestureY, boolean direction) {
+        if (gestureX){
+            //backEx.execute();
+        }
+        if (!gestureY){
+            backEx.execute();
+        }
+    }
 }

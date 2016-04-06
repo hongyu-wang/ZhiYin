@@ -141,10 +141,9 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         Pixmap px = ScreenUtils.getFrameBufferPixmap(0, 0, (int)(750*M), (int)(1334*M));
         Texture texture = new Texture(px);
         px.dispose();
-        Image temp = new Image(texture);
-        temp.rotateBy(180);
 
-        return new Image(temp.getDrawable());
+
+        return new Image(texture);
     }
 
 
@@ -171,6 +170,12 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
                 stateUp = false;
             }
         }
+
+    }
+
+    public void handleGesture(boolean gestureX, boolean gestureY, boolean magX) {
+        if (currentState instanceof Gesturable)
+            ((Gesturable) currentState).handleGesture(gestureX, gestureY, magX);
 
     }
 }

@@ -25,7 +25,7 @@ public class Sec2 extends Sec2Shell {
     protected void init(){
         super.init();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState, -1);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         ExecuteToTempState discard = new ExecuteToTempState(sec1);

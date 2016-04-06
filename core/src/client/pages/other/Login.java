@@ -107,12 +107,12 @@ public class Login extends State {
     @Override
     public void update(float dt) {
         super.update(dt);
-        label.setText(delta+"");
+        label.setText("");
 
         if (checkPull){
 
 
-            if (delta%100 == 99) {
+            if (delta%100 == 0) {
                 pullFromServer();
             }
         }
