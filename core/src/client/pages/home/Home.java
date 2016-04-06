@@ -8,7 +8,6 @@ import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -18,8 +17,8 @@ import server.model.structureModels.ServerModel;
 import tools.AudioTools.AudioCreator;
 import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
-import java.util.List;
 
+import java.util.List;
 import java.util.TreeMap;
 
 
@@ -57,7 +56,7 @@ public class Home extends HomeShell {
         super.init();
 
         newRelease = new Table();
-        Image i1 = new Image(new Texture("Home/NewRelease@" + StateManager.M + ".png"));
+        Image i1 = new Image(new Texture("Home/NewRelease@1.0.png"));
         final ImageButton b1 = new ImageButton(i1.getDrawable());
 
         if (os == WINDOWS) {
@@ -71,10 +70,10 @@ public class Home extends HomeShell {
             });
         }
 
-        newRelease.add(b1);
+        newRelease.add(b1).width(750*M).height(92*M);
 
         topSingles = new Table();
-        Image i2 = new Image(new Texture("Home/TopSingles@" + StateManager.M + ".png"));
+        Image i2 = new Image(new Texture("Home/TopSingles@1.0.png"));
         final ImageButton b2 = new ImageButton(i2.getDrawable());
 
         b2.addListener(new ClickListener() {
@@ -84,25 +83,21 @@ public class Home extends HomeShell {
             }
         });
 
-        topSingles.add(b2);
+        topSingles.add(b2).width(750*M).height(92*M);
 
         table = new Table();
         table.add(newRelease);
-        table.row().padTop(30 * StateManager.M);
+        table.row().padTop(30*M);
         table.add(topSingles);
         table.top();
 
         scrollpane = new ScrollPane(table);
 
-        scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
+        scrollpane.setBounds(0, 117*M, 750*M, 1100*M);
 
         stage.addActor(scrollpane);
         if (os == MAC)
             initMusic();
-
-
-
-
     }
 
     private void initMusic(){
@@ -130,13 +125,13 @@ public class Home extends HomeShell {
     }
 
     public void addNewRelease(String artistName, String songName, MMusic music){
-        newRelease.row().padTop(30 * StateManager.M);
-        newRelease.add(createNewSingle(artistName, songName, music)).width(750 * StateManager.M);
+        newRelease.row().padTop(30*M);
+        newRelease.add(createNewSingle(artistName, songName, music)).width(750*M);
     }
 
     public void addTopSingle(String artistName, String songName, MMusic music) {
-        topSingles.row().padTop(30 * StateManager.M);
-        topSingles.add(createNewSingle(artistName, songName, music)).width(750 * StateManager.M);
+        topSingles.row().padTop(30*M);
+        topSingles.add(createNewSingle(artistName, songName, music)).width(750*M);
     }
 
     private Stack createNewSingle(String artistName, String songName, MMusic music){
@@ -145,20 +140,20 @@ public class Home extends HomeShell {
         Table t = new Table();
 
         Label label = new Label(artistName + "\n" + songName, SkinSingleton.getInstance());
-        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
+        Image line = new Image(new Texture("Home/Line@1.0.png"));
 
-        Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
-        //ImageButton button = new ImageButton(i.getDrawable());
+        Image i = new Image(new Texture("Home/Enter@1.0.png"));
 
-        t.add(label).expand().left().padLeft(50 * StateManager.M);
-        t.add(i).expand().right().padRight(50 * StateManager.M);
+        t.add(label).expand().left().padLeft(50*M);
+        t.add(i).expand().right().padRight(50*M);
         t.row();
-        t.add(line).padTop(28 * StateManager.M);
+        t.add(line).padTop(28*M);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
+        Image i2 = new Image(new Texture("Home/BlackBG@1.0.png"));
 
         s.add(i2);
         s.add(t);
+
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
 
         ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
@@ -166,7 +161,6 @@ public class Home extends HomeShell {
 
         em.addExecutable(e);
         em.addExecutable(esm);
-
 
         s.addListener(new ClickListener() {
             @Override
@@ -178,22 +172,15 @@ public class Home extends HomeShell {
         return s;
     }
 
-
     @Override
     public void dispose() {
 
     }
-
-
 
     @Override
     public void draw(){
         super.draw();
 
     }
-
-
-
-
 
 }

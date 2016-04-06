@@ -71,7 +71,7 @@ public class Diary4 extends Diary4Shell{
         table.add(label1).width(700*M).padLeft(50*M).padTop(50*M);
         table.row();
 
-        table.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M).padTop(50*M);
+        table.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M).padTop(50*M);
         table.row();
 
 //        Label label2 = new Label("What you are reading right now is a very long string that I typed just to test our diary4 page;" +
@@ -79,19 +79,18 @@ public class Diary4 extends Diary4Shell{
         Label label2 = new Label(content, SkinSingleton.getInstance());
         label2.setWrap(true);
         label2.setWidth(700*M);
-        table.add(label2).width(700*M).padLeft(50 * M).padTop(50 * M);
+        table.add(label2).width(700*M).padLeft(50*M).padTop(50*M);
 
         if(image != null){
             table.row();
-            table.add(image).width(750*M).height(750/image.getWidth() * image.getHeight() * M).padTop(50 * M);
+            table.add(image).width(750*M).height(750/image.getWidth()*image.getHeight()*M).padTop(50*M);
         }
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0, 250 * M, 750 * M, 967 * M);
+        scrollpane.setBounds(0, 250*M, 750*M, 967*M);
         stage.addActor(scrollpane);
 
         scrollpane.setScrollingDisabled(true, false);
-        //table.setDebug(true);
     }
 
     @Override

@@ -7,16 +7,12 @@ import client.internalExceptions.NoExecutableException;
 import client.pageStorage.Pages;
 import client.pages.pageInternal.inputController.InputController;
 import client.singletons.MainBatch;
-import client.singletons.StateManager;
 import client.stateInterfaces.*;
 import client.tools.Constants;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -120,9 +116,11 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     }
 
     protected ImageButton createImageButton(String imagePath, Executable e, int x, int y, int width, int height ){
-        Image image = new Image(new Texture(imagePath + StateManager.M + ".png"));
+        Image image = new Image(new Texture(imagePath + "0.5" + ".png"));
         ImageButton imageButton = new ImageButton(image.getDrawable());
-        imageButton.setBounds(x * StateManager.M, y * StateManager.M, width * StateManager.M, height * StateManager.M);
+        //imageButton.setSize(image.getWidth()*M, image.getHeight()*M);
+        imageButton.setBounds(x*M, y*M, width*M, height*M);
+
         final Executable executable = e;
         imageButton.addListener(new ClickListener() {
             @Override
@@ -135,7 +133,11 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     }
 
     protected void addImageButton(String imagePath, Executable e, int x, int y, int width, int height){
-        stage.addActor(createImageButton(imagePath, e, x, y, width, height));
+        ImageButton button = createImageButton(imagePath, e, x, y, width, height);
+//        Table t = new Table();
+//        t.setBounds(x*M, y*M, width*M, height*M);
+//        t.add(button).width(width*M).height(height*M);
+        stage.addActor(button);
     }
 
     /**

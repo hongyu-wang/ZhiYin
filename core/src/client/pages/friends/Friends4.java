@@ -37,12 +37,13 @@ public class Friends4 extends Friends4Shell{
     public void addFriend(String name, Image image){
         Table t = new Table();
         t.add(new Label(name, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
-        t.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26 * M).expand().right().padRight(50*M);
+        t.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26 * M).expand().right().padRight(50*M);
         t.row();
-        t.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750 * M).expandX().padLeft(50 * M);
+        t.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
 
         Stack s = new Stack();
-        s.add(new Image(new Texture("Home/BlackBG@" + M + ".png")));
+        //s.setSize(750*M, 116*M);
+        s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
         s.add(t);
 
         final ExecuteToTempState e = new ExecuteToTempState(new FriendProfile(this, name, image));
@@ -53,18 +54,15 @@ public class Friends4 extends Friends4Shell{
             }
         });
 
-        table.add(s).width(750*M);
+        table.add(s).width(750*M).height(116*M);
         table.row();
     }
-
-
 
 
     @Override
     public void dispose() {
 
     }
-
 
     private void talkerAddFriends(){
         FriendTalker ft = TalkerFactory.getFriendTalker();
