@@ -47,7 +47,7 @@ public final class TagParser {
     }
 
 
-    private static boolean checkValid(String tag) {
+    public static boolean checkValid(String tag) {
         for (String str : hashtags) {
             if (str.equals(tag)) {
                 return true;

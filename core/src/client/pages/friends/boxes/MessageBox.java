@@ -20,6 +20,7 @@ public class MessageBox {
     private Table table;
     private int byUser;
     private MAudio workingMAudio;
+    private String friendName;
     private String timestamp;
 
 
@@ -28,7 +29,8 @@ public class MessageBox {
      * @param message The message in the box.
      * @param byUser 0 means not by user, 1 means is by user.
      */
-    public MessageBox(String message, int byUser, String timestamp){
+    public MessageBox(String message, int byUser, String friendName, String timestamp){
+        this.friendName = friendName;
         this.timestamp = timestamp;
         initTable(byUser);
         initTextBox(message, timestamp);
@@ -39,7 +41,8 @@ public class MessageBox {
      * @param e The executable associated with the button.
      * @param byUser See above.
      */
-    public MessageBox(Executable e, int byUser, MAudio audio, String timestamp){
+    public MessageBox(Executable e, int byUser, MAudio audio, String friendName, String timestamp){
+        this.friendName = friendName;
         this.timestamp = timestamp;
         this.workingMAudio = audio;
         initTable(byUser);
@@ -107,11 +110,18 @@ public class MessageBox {
     }
 
     public Table getTable(){
-        Label label = new Label(timestamp, SkinSingleton.getInstance());
-        label.setColor(0.5f, 0.5f, 0.5f, 1);
-        table.add(label).expandX().left();
+        Label friend = new Label(friendName, SkinSingleton.getInstance());
+        friend.setColor(0.5f, 0.5f, 0.5f, 1);
+        table.add(friend).expandX().left();
         table.row();
+
+        Label time = new Label(timestamp, SkinSingleton.getInstance());
+        time.setColor(0.5f, 0.5f, 0.5f, 1);
+        table.add(time).expandX().left();
+        table.row();
+
         table.add(stack);
+
         return table;
     }
 

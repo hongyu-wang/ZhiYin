@@ -4,19 +4,11 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.pages.friends.Friends2;
 import client.pages.friends.boxes.MessageBox;
 import client.pages.pageInternal.serverClientInteractions.ServerTalker;
-import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
-import client.pages.pageInternal.serverClientInteractions.Talkers;
 import client.tools.Constants;
-import server.model.user.UserConversations;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
-import client.stateInterfaces.Executable;
 import server.model.media.MAudio;
 import server.model.media.MText;
 import server.model.social.MConversation;
 import server.model.social.MMessage;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
 
 import java.util.Collections;
@@ -68,12 +60,12 @@ public class ExecuteUpdateMessages extends ExecuteUpdate {
 
         if(mMessage.getText() != -1L) {
             String text = localDatabase.<MText>getModel(textKey).getText();
-            box = new MessageBox(text, byUser, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
+            box = new MessageBox(text, byUser, friend2.getFriendName(), Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
         }
         else{
             MAudio audio = localDatabase.getModel(mMessage.getAudioKey());
             ExecutePlayMAudio epma = new ExecutePlayMAudio(audio);
-            box = new MessageBox(epma, byUser, audio, Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
+            box = new MessageBox(epma, byUser, audio, friend2.getFriendName(), Constants.getCurrentTimestamp(mMessage.getTimeStamp()));
         }
 
         friend2.addMessage(box);
