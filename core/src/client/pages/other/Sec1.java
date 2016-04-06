@@ -3,30 +3,23 @@ package client.pages.other;
 import client.component.basicComponents.Button;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteCancelRecording;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
-import client.events.executables.internalChanges.serverInteractions.ExecuteSendAudioComment;
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
-import server.model.media.MAudio;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
-import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import server.model.media.MAudio;
 import server.model.media.MMusic;
 import server.model.media.MText;
-import server.model.social.MComment;
 import server.model.social.MDiaryPost;
 import server.model.social.MPost;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -85,10 +78,12 @@ public class Sec1 extends Sec1Shell {
         ExecuteToTempState backEx = new ExecuteToTempState(previousState, -1);
         addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
-        image.setBounds(26 * M, 130 * M, 698 * M, 236 * M);
-        Image label = new Image(new Texture("Other/HoldToRecord@" + StateManager.M + ".png"));
-        label.setPosition(260 * M, 65 * M);
+        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png"));
+        image.setBounds(26*M, 130*M, 698*M, 236*M);
+
+        Table t = new Table();
+        t.setBounds(26*M, 57*M, 698*M, 58*M);
+        t.add(new Image(new Texture("Other/HoldToRecord@1.0.png"))).center();
 
         DragButton dragButton = new DragButton(this, 280, image, getStage());
         dragButton.setInitialBounds(26, 130, 698, 236);
@@ -98,7 +93,6 @@ public class Sec1 extends Sec1Shell {
         dragButton.setReleaseExecutable(new ExecutableMultiplexer(
                 new ExecuteToTempState(
                         new Sec2(this, previousState)
-
                     )
                 )
         );
@@ -111,10 +105,9 @@ public class Sec1 extends Sec1Shell {
                         new ExecuteAddDragButton(dragButton),
                         new ExecuteRecord()
                 )
-
         );
 
-        stage.addActor(label);
+        stage.addActor(t);
         add(holdToRecordButton);
 
         initTable();
@@ -123,18 +116,16 @@ public class Sec1 extends Sec1Shell {
         posts.top();
 
         scrollpane = new ScrollPane(posts);
-        scrollpane.setBounds(0, 200 * StateManager.M, 750 * StateManager.M, 800 * StateManager.M);
+        scrollpane.setBounds(0, 200*M, 750*M, 800*M);
         stage.addActor(scrollpane);
     }
-
-
 
     private void initTable(){
         Label label1 = new Label(title, SkinSingleton.getInstance());
         Label label2 = new Label(subtitle, SkinSingleton.getInstance());
 
         Table table = new Table();
-        table.setBounds(0, 1000 * StateManager.M, 750 * StateManager.M, 217 * StateManager.M);
+        table.setBounds(0, 1000*M, 750*M, 217*M);
         table.add(label1).expand();
         table.row();
         table.add(label2).expand();
@@ -143,8 +134,8 @@ public class Sec1 extends Sec1Shell {
 
     public void addPost(String name, String time, MAudio audio){
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
-        Image ripples = new Image(new Texture("Friends4/Ripples0@" + StateManager.M + ".png"));
-        ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@" + StateManager.M + ".png")).getDrawable());
+        Image ripples = new Image(new Texture("Friends4/Ripples0@1.0.png"));
+        ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@1.0.png")).getDrawable());
 
         final ExecutePlayMAudio ex = new ExecutePlayMAudio(audio);
         playButton.addListener(new ClickListener() {
@@ -154,16 +145,16 @@ public class Sec1 extends Sec1Shell {
             }
         });
 
-        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
+        Image line = new Image(new Texture("Home/Line@1.0.png"));
 
         Table t = new Table();
-        t.add(label1).expand().center().left().padLeft(50 * StateManager.M);
-        t.add(ripples).width(328 * StateManager.M).height(66 * StateManager.M).center().padRight(100 * StateManager.M);
-        t.add(playButton).width(68 * StateManager.M).height(68 * StateManager.M).center().padRight(50 * StateManager.M);//.padLeft(50 * StateManager.M);
+        t.add(label1).expand().center().left().padLeft(50*M);
+        t.add(ripples).width(328*M).height(66*M).center().padRight(100*M);
+        t.add(playButton).width(68*M).height(68*M).center().padRight(50*M);//.padLeft(50 * StateManager.M);
         t.row();
-        t.add(line).width(700 * StateManager.M).center().expandX().padLeft(600 * StateManager.M);
+        t.add(line).width(700*M).center().expandX().padLeft(600*M);
 
-        posts.add(t).width(750 * StateManager.M).height(140 * StateManager.M);
+        posts.add(t).width(750*M).height(140*M);
         posts.row();
     }
 

@@ -6,7 +6,6 @@ import client.events.executables.internalChanges.updatePageExecutables.ExecuteTo
 import client.pages.State;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -17,14 +16,11 @@ import server.model.media.MMusic;
  * Created by blobbydude24 on 2016-03-28.
  */
 public class Tagged extends TaggedShell {
-
-    private String tag;
-
+    private State previousState;
     private ScrollPane scrollpane;
-
     private Table songs;
 
-    private State previousState;
+    private String tag;
 
     private ExecuteUpdate update;
 
@@ -60,20 +56,21 @@ public class Tagged extends TaggedShell {
         stage.addActor(scrollpane);
 
         scrollpane.setScrollingDisabled(true, false);
-
     }
 
     public void addSong(MMusic music){
         String songName = music.getName();
 
         Table table = new Table();
-        table.add(new Label(songName, SkinSingleton.getInstance())).expand().left().padLeft(50 * M);
-        table.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26*M).expand().right().padRight(50 * M);
+        table.add(new Label(songName, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
+        table.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().right().padRight(50*M);
         table.row();
-        table.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750 * M).expandX().padLeft(50*M);
+        table.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
 
         Stack s = new Stack();
-        s.add(new Image(new Texture("Home/BlackBG@" + M + ".png")));
+        Table t = new Table();
+        t.add(new Image(new Texture("Home/BlackBG@1.0.png"))).width(700*M).height(110*M);
+        s.add(t);
         s.add(table);
 
         final ExecuteToTempState ex = new ExecuteToTempState(new NowPlaying(this, music));
@@ -84,7 +81,7 @@ public class Tagged extends TaggedShell {
             }
         });
 
-        songs.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
+        songs.add(s).width(750*M).height(110*M);
         songs.row();
     }
 

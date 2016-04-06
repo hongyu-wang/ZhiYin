@@ -21,7 +21,6 @@ import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -54,7 +53,6 @@ public class NowPlaying extends State implements Gesturable{
     private Label totalTime;
     private Label currentTime;
     private long iterations;
-
 
     private MMusic post;
 
@@ -92,17 +90,14 @@ public class NowPlaying extends State implements Gesturable{
         px.dispose();
 
 
-
         filter = new Image(new Texture("Filter.png"));
         filter.setColor(1, 1, 1, 0.9F);
         filter.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
 
 
-
         picture = new Image(albumArt);
         picture.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
         stage.addActor(picture);
-
     }
 
 
@@ -200,7 +195,7 @@ public class NowPlaying extends State implements Gesturable{
 
     private void setUpSnapChat(){
         //TODO setup this button.
-        DragButton snapChat = new DragButton(this, 250, new Image(new Texture("Friends/SwipeToDiscardButton@" + M + ".png")), getStage());
+        DragButton snapChat = new DragButton(this, 250, new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png")), getStage());
         snapChat.setInitialBounds(32, 135, 750 - 64, 236);
 
         ConfirmDialog dialog = setUpWindows();
@@ -220,7 +215,7 @@ public class NowPlaying extends State implements Gesturable{
                 new ExecuteRecord(),
                 new ExecuteStartSnapChat()
         );
-        Image im = new Image(new Texture("NowPlaying/Share@"+M+".png"));
+        Image im = new Image(new Texture("NowPlaying/Share@1.0.png"));
         im.setBounds((520 + 115 - 30)* M, (117/2 - 26) * M, im.getPrefWidth(), im.getPrefHeight());
         stage.addActor(im);
 
@@ -363,4 +358,5 @@ public class NowPlaying extends State implements Gesturable{
             backEx.execute();
         }
     }
+
 }

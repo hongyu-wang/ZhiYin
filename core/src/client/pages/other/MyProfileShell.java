@@ -1,7 +1,6 @@
 package client.pages.other;
 
 import client.pages.State;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -14,7 +13,7 @@ public abstract class MyProfileShell extends State {
         super.init();
 
         Image background = new Image(new Texture("Other/MyProfileBG.png"));
-        background.setBounds(0, 0, WIDTH* StateManager.M, HEIGHT* StateManager.M);
+        background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
 
         setBottomBar();

@@ -2,10 +2,7 @@ package client.pages.home;
 
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.ArtistProfile;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -13,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MImage;
 import server.model.soundCloud.MBand;
 import server.services.factories.ImageManagerFactory;
+import tools.serverTools.databases.LocalDatabase;
+import tools.serverTools.databases.LocalDatabaseFactory;
 
 /**
  * This is the third home diary page as given in the
@@ -22,9 +21,7 @@ import server.services.factories.ImageManagerFactory;
  */
 public class Artist extends ArtistShell {
     private TextField searchField;
-
     private ScrollPane scrollpane;
-
     private Table table;
 
     public Artist(){
@@ -41,11 +38,11 @@ public class Artist extends ArtistShell {
         addSearchField();
 
         table = new Table();
-        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1000* StateManager.M);
+        table.setBounds(0, 117*M, 750*M, 1000*M);
         table.top();
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1000 * StateManager.M);
+        scrollpane.setBounds(0, 117*M, 750*M, 1000*M);
         scrollpane.setScrollingDisabled(true, false);
 
         stage.addActor(scrollpane);
@@ -75,12 +72,12 @@ public class Artist extends ArtistShell {
         });
 
         Table t1 = new Table();
-        t1.add(new Image(new Texture("Home/BlackBG@" + M + ".png"))).width(600 * M).height(150*M);
+        t1.add(new Image(new Texture("Home/BlackBG@1.0.png"))).width(600*M).height(150*M);
         right.add(t1);
 
         Table t2 = new Table();
         t2.add(new Label(artistName, SkinSingleton.getInstance())).expand().center().left().padLeft(50*M);
-        t2.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26*M).expand().center().right().padRight(50*M);
+        t2.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().center().right().padRight(50*M);
         right.add(t2);
 
         Table artistTable = new Table();
@@ -90,7 +87,7 @@ public class Artist extends ArtistShell {
 
         table.add(artistTable).width(750*M).height(150*M);
         table.row();
-        table.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M);
+        table.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
         table.row();
     }
 
@@ -101,12 +98,10 @@ public class Artist extends ArtistShell {
         addSearchField();
     }
 
-
-
     private void addSearchField(){
         searchField = new WorkingTextArea("Search...", SkinSingleton.getInstance());
-        searchField.setPosition((26 + 1) * M, 1146 * M);
-        searchField.setSize(642 * M, 58 * M);
+        searchField.setPosition(26*M, 1146*M);
+        searchField.setSize(642*M, 58*M);
 
         stage.addActor(searchField);
     }

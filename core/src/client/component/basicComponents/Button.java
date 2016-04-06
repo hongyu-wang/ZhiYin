@@ -25,11 +25,7 @@ public class Button extends Component implements Pressable{
     public Button(ActionMonitor monitor){
         super();
         this.monitor = monitor;
-
     }
-
-
-
 
     @Override
     protected void init() {
