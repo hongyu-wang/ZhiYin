@@ -122,7 +122,6 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     protected Table createImage(String imagePath, Executable e, int x, int y, int width, int height ){
         Image image = new Image(new Texture(imagePath + "1.0" + ".png"));
         image.setSize(image.getWidth()*M, image.getHeight()*M);
-
         Stack s = new Stack();
         s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
 

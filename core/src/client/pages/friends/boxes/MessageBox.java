@@ -63,7 +63,7 @@ public class MessageBox {
 
     private void initTextBox(String message, String timestamp){
         Table table1 = new Table();
-        Image image = new Image(new Texture("Friends4/Bubble" + byUser + "@1.0.png"));
+        Image image = new Image(new Texture("Friends/Bubble" + byUser + "@1.0.png"));
 
         Table table2 = new Table();
         LabelTextArea text = new LabelTextArea(message, SkinSingleton.getInstance());
@@ -87,7 +87,7 @@ public class MessageBox {
     private void initSoundBox(final Executable e, String timestamp){
         stack.setHeight(128*M);
 
-        Image image = new Image(new Texture("Friends4/Bubble" + byUser + "@1.0.png"));
+        Image image = new Image(new Texture("Friends/Bubble" + byUser + "@1.0.png"));
         Table t1 = new Table();
         t1.add(image).width(480*M).height(128*M);
         stack.add(t1);
@@ -95,7 +95,7 @@ public class MessageBox {
         Table t2 = new Table();
         t2.setSize(480*M, 128*M);
 
-        Image image2 = new Image(new Texture("Friends4/Play" + byUser + "@1.0.png"));
+        Image image2 = new Image(new Texture("Friends/Play" + byUser + "@1.0.png"));
         final ImageButton button = new ImageButton(image2.getDrawable());
         button.addListener(new ClickListener() {
             @Override
@@ -106,7 +106,7 @@ public class MessageBox {
         button.setScale(M);
         t2.add(button).width(68*M).height(68*M).expand().left().padLeft(35*M);
 
-        Image image3 = new Image(new Texture("Friends4/Ripples" + byUser + "@1.0.png"));
+        Image image3 = new Image(new Texture("Friends/Ripples" + byUser + "@1.0.png"));
         t2.add(image3).width(362*M).height(88*M).expand().center().right().padRight(25*M);
 
         stack.add(t2);

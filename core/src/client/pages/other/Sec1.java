@@ -130,8 +130,8 @@ public class Sec1 extends Sec1Shell {
 
     public void addPost(String name, String time, MAudio audio){
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
-        Image ripples = new Image(new Texture("Friends4/Ripples0@1.0.png"));
-        ImageButton playButton = new ImageButton(new Image(new Texture("Friends4/Play0@1.0.png")).getDrawable());
+        Image ripples = new Image(new Texture("Friends/Ripples0@1.0.png"));
+        ImageButton playButton = new ImageButton(new Image(new Texture("Friends/Play0@1.0.png")).getDrawable());
 
         final ExecutePlayMAudio ex = new ExecutePlayMAudio(audio);
         playButton.addListener(new ClickListener() {
