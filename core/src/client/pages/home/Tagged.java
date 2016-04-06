@@ -1,6 +1,5 @@
 package client.pages.home;
 
-import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateHashtagSongs;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
@@ -13,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MMusic;
-
-import static client.singletons.StateManager.M;
 
 /**
  * Created by blobbydude24 on 2016-03-28.
@@ -44,25 +41,22 @@ public class Tagged extends TaggedShell {
     protected void init(){
         super.init();
 
-        Table topTable = new Table();
-        topTable.setBounds(0 * StateManager.M, 1217 * StateManager.M, 750 * StateManager.M, 117 * StateManager.M);
-        stage.addActor(topTable);
-
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         ImageButton backButton = createImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
-        topTable.add(backButton).width(117).height(117);
+        backButton.setBounds(0, 1217*M, 117*M, 117*M);
+        stage.addActor(backButton);
 
-        Label tagLabel = new Label(tag, SkinSingleton.getInstance());
         Table t = new Table();
-        t.add(tagLabel).expand().center().padRight(117 * StateManager.M);
-        topTable.add(t).width(633 * StateManager.M).height(117 * StateManager.M);
+        t.setBounds(117*M, 1217*M, 516*M, 117*M);
+        t.add(new Label(tag, SkinSingleton.getInstance())).expand().center();
+        stage.addActor(t);
 
         songs = new Table();
-        songs.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
+        songs.setBounds(0, 117*M, 750*M, 1100*M);
         songs.top();
 
         scrollpane = new ScrollPane(songs);
-        scrollpane.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
+        scrollpane.setBounds(0, 117*M, 750*M, 1100*M);
         stage.addActor(scrollpane);
 
         scrollpane.setScrollingDisabled(true, false);
@@ -93,8 +87,6 @@ public class Tagged extends TaggedShell {
         songs.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
         songs.row();
     }
-
-
 
 
     @Override

@@ -2,22 +2,8 @@ package com.badlogic.gdx.scenes.scene2d.ui;
 import client.singletons.StateManager;
 import client.tools.Constants;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
-import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ZhiYinRealClickListener;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.IntArray;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-
-import static client.tools.Constants.os;
 
 
 /**
@@ -35,7 +21,7 @@ public class WorkingTextArea extends TextArea implements Constants {
 
     private static boolean keyboardIsVisible = false;
 
-    private boolean firstTime = true;
+    private boolean firstTime = false;
 
 
     public WorkingTextArea(String text, Skin skin) {

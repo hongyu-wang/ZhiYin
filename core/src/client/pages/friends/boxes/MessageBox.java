@@ -1,5 +1,6 @@
 package client.pages.friends.boxes;
 
+import client.pages.other.MyProfile;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
@@ -20,6 +21,7 @@ public class MessageBox {
     private Table table;
     private int byUser;
     private MAudio workingMAudio;
+
     private String friendName;
     private String timestamp;
 
@@ -110,9 +112,9 @@ public class MessageBox {
     }
 
     public Table getTable(){
-        Label friend = new Label(friendName, SkinSingleton.getInstance());
-        friend.setColor(0.5f, 0.5f, 0.5f, 1);
-        table.add(friend).expandX().left();
+        Label name = new Label(byUser == 1 ? MyProfile.name : friendName, SkinSingleton.getInstance());
+        name.setColor(0.5f, 0.5f, 0.5f, 1);
+        table.add(name).expandX().left();
         table.row();
 
         Label time = new Label(timestamp, SkinSingleton.getInstance());

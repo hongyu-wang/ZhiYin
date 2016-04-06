@@ -45,6 +45,8 @@ public class MyProfile extends MyProfileShell implements Profile {
     private List<Long> currentDiaries;
     private List<Long> currentArtists;
 
+    public static String name;
+
     private State previousState;
 
     private ScrollPane scrollpane;
@@ -55,7 +57,6 @@ public class MyProfile extends MyProfileShell implements Profile {
     private Table table;
     private Table following;
 
-    private String name;
     private String description;
 
     private Image profilePic;
@@ -78,7 +79,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         userProfile = localDatabase.getModel(user.getProfileKey());
         MImage mImage = localDatabase.getModel(userProfile.getImageKey());
 
-        this.name = userProfile.getUsername();
+        name = userProfile.getUsername();
         this.description = userProfile.getDescription();
         this.profilePic = ImageManagerFactory.createImageManager().mImageToImage(mImage);
 
