@@ -1,5 +1,6 @@
 package com.badlogic.gdx.scenes.scene2d.ui;
 
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayHashtag;
 import client.tools.TagParser;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -164,7 +165,13 @@ public class LabelTextArea extends WorkingTextArea{
                 break;
             }
         }
-        System.out.println(text.substring(left, right));
+
+        if (TagParser.checkValid(text.substring(left + 1, right))){
+            System.out.println(text.substring(left + 1, right));
+            new ExecutePlayHashtag(text.substring(left, right)).execute();
+        }
+
+
         getStage().unfocus(this);
         return new int[] {left, right};
     }
