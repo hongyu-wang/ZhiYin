@@ -14,7 +14,7 @@ import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
-import client.singletons.Gesturable;
+import client.stateInterfaces.Gesturable;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Pixmap;
