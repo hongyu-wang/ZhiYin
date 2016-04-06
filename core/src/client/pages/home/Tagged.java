@@ -37,7 +37,7 @@ public class Tagged extends TaggedShell {
     protected void init(){
         super.init();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState, this);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Table t = new Table();
@@ -71,7 +71,7 @@ public class Tagged extends TaggedShell {
         s.add(t);
         s.add(table);
 
-        final ExecuteToTempState ex = new ExecuteToTempState(new NowPlaying(this, music));
+        final ExecuteToTempState ex = new ExecuteToTempState(new NowPlaying(this, music), this );
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

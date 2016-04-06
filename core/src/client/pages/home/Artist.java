@@ -61,7 +61,7 @@ public class Artist extends ArtistShell {
 
         String artistName = band.getName();
 
-        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, band, profilePic));
+        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, band, profilePic), this);
 
 
         right.addListener(new ClickListener() {

@@ -46,7 +46,7 @@ public class Friends4 extends Friends4Shell{
         s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new FriendProfile(this, name, image));
+        final ExecuteToTempState e = new ExecuteToTempState(new FriendProfile(this, name, image), this);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

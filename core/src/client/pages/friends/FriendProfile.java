@@ -87,7 +87,7 @@ public class FriendProfile extends FriendProfileShell implements Profile {
 
         Button backButton = new Button(this);
         backButton.setBounds(0, 1217, 117, 117);
-        backButton.setExecutable(new ExecuteToTempState(previousState));
+        backButton.setExecutable(new ExecuteToTempState(previousState, this));
         add(backButton);
 
         Table t = new Table();
@@ -139,7 +139,9 @@ public class FriendProfile extends FriendProfileShell implements Profile {
         s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost));
+
+
+        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost), this);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -153,7 +155,7 @@ public class FriendProfile extends FriendProfileShell implements Profile {
 
     public void addFollowing(MBand artist, Image image){
         ImageButton artistButton = new ImageButton(image.getDrawable());
-        final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image));
+        final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image), this);
         artistButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -173,4 +175,6 @@ public class FriendProfile extends FriendProfileShell implements Profile {
     public void update(float dt) {
         super.update(dt);
     }
+
+
 }

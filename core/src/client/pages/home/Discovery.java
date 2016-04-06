@@ -48,7 +48,7 @@ public class Discovery extends DiscoveryShell {
 
     public void addTag(String tagName){
         TextButton tag = new TextButton(tagName, SkinSingleton.getInstance());
-        final ExecuteToTempState e = new ExecuteToTempState(new Tagged(this, tagName));
+        final ExecuteToTempState e = new ExecuteToTempState(new Tagged(this, tagName), this);
         tag.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

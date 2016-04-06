@@ -58,7 +58,7 @@ public class Comment extends CommentShell {
 
         addMessageField();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState, this);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         initTable();
