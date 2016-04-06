@@ -41,10 +41,6 @@ public class Tagged extends TaggedShell {
     protected void init(){
         super.init();
 
-//        Table topTable = new Table();
-//        topTable.setBounds(0 * StateManager.M, 1217 * StateManager.M, 750 * StateManager.M, 117 * StateManager.M);
-//        stage.addActor(topTable);
-
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
         ImageButton backButton = createImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
         backButton.setBounds(0, 1217*M, 117*M, 117*M);
@@ -54,7 +50,6 @@ public class Tagged extends TaggedShell {
         t.setBounds(117*M, 1217*M, 516*M, 117*M);
         t.add(new Label(tag, SkinSingleton.getInstance())).expand().center();
         stage.addActor(t);
-//        topTable.add(t).width(633 * StateManager.M).height(117 * StateManager.M);
 
         songs = new Table();
         songs.setBounds(0, 117*M, 750*M, 1100*M);
