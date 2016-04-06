@@ -7,6 +7,7 @@ import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAd
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteCancelRecording;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSendAudioComment;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
@@ -75,8 +76,8 @@ public class Sec1 extends Sec1Shell {
     protected void init(){
         super.init();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
-        addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState, -1);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Image image = new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png"));
         image.setBounds(26*M, 130*M, 698*M, 236*M);
@@ -90,12 +91,7 @@ public class Sec1 extends Sec1Shell {
 
         dragButton.setDragExecutable(new ExecuteCancelRecording());
 
-        dragButton.setReleaseExecutable(new ExecutableMultiplexer(
-                new ExecuteToTempState(
-                        new Sec2(this, previousState)
-                    )
-                )
-        );
+        dragButton.setReleaseExecutable(new ExecuteSendAudioComment(this));
         add(dragButton);
 
         Button holdToRecordButton = new Button(this);
