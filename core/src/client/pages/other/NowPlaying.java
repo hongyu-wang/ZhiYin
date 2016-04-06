@@ -57,8 +57,10 @@ public class NowPlaying extends State implements Gesturable{
 
     private MMusic post;
 
-    private Table pauseButton;
-    private Table playButton;
+    private static Image play;
+    private static Image pause;
+    private static Image playPause;
+    private static boolean playing;
 
     private Table create;
     private Table showComments;
@@ -124,28 +126,16 @@ public class NowPlaying extends State implements Gesturable{
         TestExecutable forwardEx = new TestExecutable("forward");
         addImage("NowPlaying/Forward@", forwardEx, 535, 246, 53, 46);
 
-        //----
-        TestExecutable pauseEx = new TestExecutable("pause");
-        pauseButton = createImage("NowPlaying/Pause@", pauseEx, 288, 177, 180, 180);
-        pauseButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                pause();
-                new ExecutePlayMusic().execute();
-            }
-        });
+        play = new Image(new Texture("NowPlaying/Play@1.0.png"));
+        pause = new Image(new Texture("NowPlaying/Pause@1.0.png"));
+        playPause = new Image();
+        playing = true;
+        pause();
 
-        TestExecutable playEx = new TestExecutable("play");
-        playButton = createImage("NowPlaying/Play@", playEx, 288, 177, 180, 180);
-        playButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                play();
-                new ExecutePlayMusic().execute();
-            }
-        });
-
-        stage.addActor(playButton);
+        Table t2 = new Table();
+        t2.setBounds(288*M, 177*M, 180*M, 180*M);
+        t2.add(playPause).width(180*M).height(180*M);
+        stage.addActor(t2);
         //------------------------------------------------------------------------------------------
 
 
@@ -176,6 +166,39 @@ public class NowPlaying extends State implements Gesturable{
         setUpSnapChat();
     }
 
+    public static void pause(){
+        if(playing) {
+            playPause.setDrawable(pause.getDrawable());
+            playPause.clearListeners();
+            playPause.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    play();
+                    new ExecutePlayMusic().execute();
+                }
+            });
+
+            playing = !playing;
+        }
+    }
+
+    public static void play(){
+        if(!playing) {
+            playPause.setDrawable(play.getDrawable());
+            playPause.clearListeners();
+            playPause.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    pause();
+                    new ExecutePlayMusic().execute();
+                }
+            });
+
+            playing = !playing;
+        }
+    }
+
+    public static boolean isPlaying(){return playing;}
 
 
     @Override
@@ -279,16 +302,6 @@ public class NowPlaying extends State implements Gesturable{
             showComments.remove();
             stage.addActor(showComments);
         }
-    }
-
-    private void pause(){
-        pauseButton.remove();
-        stage.addActor(playButton);
-    }
-
-    private void play(){
-        playButton.remove();
-        stage.addActor(pauseButton);
     }
 
     public void initializeSlider(){
