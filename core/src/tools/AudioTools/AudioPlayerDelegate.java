@@ -22,7 +22,8 @@ public class AudioPlayerDelegate implements AVAudioPlayerDelegate{
     @Override
     public void didFinishPlaying(AVAudioPlayer avAudioPlayer, boolean b) {
         runnable.run();
-        AudioPlayer.getInstance().stop();
+        if(!AudioPlayer.getInstance().isPlayingSnapShot())
+            AudioPlayer.getInstance().stop();
 
     }
 

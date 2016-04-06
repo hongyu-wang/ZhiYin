@@ -209,4 +209,6 @@ public class AudioPlayer {
     public void setTime(double time){
         musicPlayer.setCurrentTime(time);
     }
+
+    public boolean isPlayingSnapShot(){ return snapShot;}
 }
