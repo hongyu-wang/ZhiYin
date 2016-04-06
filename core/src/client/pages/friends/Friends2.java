@@ -7,14 +7,16 @@ import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAd
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteCancelRecording;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteRecord;
-import client.events.executables.internalChanges.serverInteractions.*;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSendAudioMessage;
+import client.events.executables.internalChanges.serverInteractions.ExecuteSendMessage;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateMessages;
 import client.pages.friends.boxes.MessageBox;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import server.model.media.MAudio;
-import server.model.media.MSnapShot;
 import tools.utilities.Utils;
 
 import java.util.List;
@@ -63,6 +65,11 @@ public class Friends2 extends Friends2Shell{
         this.update = new ExecuteUpdateMessages(this);
 
         addMessageField();
+
+        Table t = new Table();
+        t.setBounds(117*M, 1217*M, 516*M, 117*M);
+        t.add(new Label(friendName, SkinSingleton.getInstance())).center();
+        stage.addActor(t);
 
         table = new Table();
         table.top();
@@ -147,13 +154,13 @@ public class Friends2 extends Friends2Shell{
 
     public void addAudioMessage(MAudio audio, int userType, String timestamp){
         ExecutePlayMAudio executePlayMAudio = new ExecutePlayMAudio(audio);
-        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio, timestamp);
+        MessageBox soundBox = new MessageBox(executePlayMAudio, userType, audio, friendName, timestamp);
 
         this.addMessage(soundBox);
     }
 
     public void addTextMessage(String text, int userType, String timestamp){
-        MessageBox box = new MessageBox(text, userType, timestamp);
+        MessageBox box = new MessageBox(text, userType, friendName, timestamp);
 
         this.addMessage(box);
     }

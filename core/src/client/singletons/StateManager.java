@@ -1,5 +1,4 @@
 package client.singletons;
-import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateSnapChatMessage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
@@ -7,10 +6,7 @@ import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
 import tools.AudioTools.AudioPlayer;
@@ -103,10 +99,10 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
         TalkerFactory.getServerTalker().update(dt);
 
-
-
-        if(!ap.isPlaying() && ap.isPlayingSnapshot()) {
-            ap.stop();
+        if(os == MAC) {
+            if (!ap.isPlaying() && ap.isPlayingSnapshot()) {
+                ap.stop();
+            }
         }
     }
 
