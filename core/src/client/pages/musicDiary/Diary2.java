@@ -8,7 +8,6 @@ import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAd
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.serverInteractions.ExecuteServer;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -43,7 +42,7 @@ Diary2 extends Diary2Shell{
         add(postButton);
 
         //------------------------------------------------------------------------------------------------------
-        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
+        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png"));
 
         DragButton dragButton = new DragButton(this, 360, image, getStage());
         dragButton.setInitialBounds(20, 270, 710, 280);
@@ -51,7 +50,6 @@ Diary2 extends Diary2Shell{
         //TODO setup dragbutton.
         dragButton.setDragExecutable(new ExecutableMultiplexer(
                 () -> System.out.println("Drag")
-
         ));
 
         dragButton.setReleaseExecutable(new ExecutableMultiplexer(

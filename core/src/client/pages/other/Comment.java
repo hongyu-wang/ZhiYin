@@ -1,26 +1,18 @@
 package client.pages.other;
 
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendComment;
-import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateComments;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
-import tools.serverTools.databases.LocalDatabase;
-import tools.serverTools.databases.LocalDatabaseFactory;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import server.model.media.MMusic;
 import server.model.media.MText;
-import server.model.social.MComment;
 import server.model.social.MDiaryPost;
-import server.model.social.MPost;
-import server.model.user.User;
-import server.model.user.UserProfile;
+import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,7 +43,6 @@ public class Comment extends CommentShell {
         init();
     }
 
-
     public Comment(State previousState, MDiaryPost post){
         this.previousState = previousState;
         this.thisPost = post.getKey();
@@ -68,7 +59,7 @@ public class Comment extends CommentShell {
         addMessageField();
 
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
-        addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         initTable();
 
@@ -76,18 +67,11 @@ public class Comment extends CommentShell {
         comments.top();
 
         scrollpane = new ScrollPane(comments);
-        scrollpane.setBounds(0, 122 * StateManager.M, 750 * StateManager.M, 878 * StateManager.M);
+        scrollpane.setBounds(0, 122*M, 750*M, 878*M);
         stage.addActor(scrollpane);
 
         ExecuteSendComment sendEx = new ExecuteSendComment(this);
-        ImageButton sendButton = createImageButton("Other/Send@", sendEx, 604, 32, 122, 60);
-//        sendButton.addListener(new ClickListener(){
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                send();
-//            }
-//        });
-        stage.addActor(sendButton);
+        addImage("Other/Send@", sendEx, 604, 32, 122, 60);
     }
 
     private void initTable(){
@@ -95,7 +79,7 @@ public class Comment extends CommentShell {
         Label label2 = new Label(subtitle, SkinSingleton.getInstance());
 
         Table table = new Table();
-        table.setBounds(0, 1000 * StateManager.M, 750 * StateManager.M, 217 * StateManager.M);
+        table.setBounds(0, 1000*M, 750*M, 217*M);
         table.add(label1).expand();
         table.row();
         table.add(label2).expand();
@@ -104,8 +88,8 @@ public class Comment extends CommentShell {
 
     private void addMessageField(){
         messageField = new WorkingTextArea("Message...", SkinSingleton.getInstance());
-        messageField.setPosition(32 * M, 31 * M);
-        messageField.setSize(554 * M, 60 * M);
+        messageField.setPosition(32*M, 31*M);
+        messageField.setSize(554*M, 60*M);
 
         stage.addActor(messageField);
     }
@@ -117,16 +101,16 @@ public class Comment extends CommentShell {
         Label label3 = new Label(comment, SkinSingleton.getInstance());
         label3.setWrap(true);
         label3.setWidth(700 * StateManager.M);
-        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
+        Image line = new Image(new Texture("Home/Line@1.0.png"));
 
-        t.add(label1).expand().left().padLeft(50 * StateManager.M).padTop(50 * StateManager.M);
-        t.add(label2).expand().right().padRight(50 * StateManager.M).padTop(50 * StateManager.M);
+        t.add(label1).expand().left().padLeft(50*M).padTop(50*M);
+        t.add(label2).expand().right().padRight(50*M).padTop(50*M);
         t.row();
-        t.add(label3).width(700 * StateManager.M).left().padLeft(50 * StateManager.M);
+        t.add(label3).width(700*M).left().padLeft(50*M);
         t.row();
-        t.add(line).width(750 * StateManager.M).padLeft(100 * StateManager.M).padTop(50 * StateManager.M);
+        t.add(line).width(750*M).height(4*M).padLeft(100*M).padTop(50*M);
 
-        comments.add(t).width(750 * StateManager.M);
+        comments.add(t).width(750*M);
         comments.row();
     }
 
@@ -144,7 +128,6 @@ public class Comment extends CommentShell {
         messageField.remove();
         addMessageField();
     }
-
 
 
     @Override

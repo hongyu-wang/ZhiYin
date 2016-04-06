@@ -3,8 +3,6 @@ package client.pages.home;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.NowPlaying;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -20,7 +18,6 @@ import tools.AudioTools.AudioCreator;
  * Created by blobbydude24 on 2016-03-23.
  */
 public class TopSingles extends TopSinglesShell{
-
     private Table table;
 
     public TopSingles(){
@@ -31,17 +28,15 @@ public class TopSingles extends TopSinglesShell{
         super.init();
 
         table = new Table();
-        table.setBounds(0, 117 * StateManager.M, 750 * StateManager.M, 1100 * StateManager.M);
+        table.setBounds(0, 117*M, 750*M, 1100*M);
         table.top();
 
         //table.setDebug(true);
         if (os == MAC)
             addSingles();
 
-
         stage.addActor(table);
     }
-
 
     private void addSingles(){
         int i = 0;
@@ -55,31 +50,29 @@ public class TopSingles extends TopSinglesShell{
         }
     }
 
-
-
-
-
     public void addSingle(String songName, MMusic music){
         Stack s = new Stack();
 
         Table t = new Table();
 
         Label single = new Label(songName, SkinSingleton.getInstance());
-        Image i = new Image(new Texture("Home/Enter@" + StateManager.M + ".png"));
-        Image line = new Image(new Texture("Home/Line@" + StateManager.M + ".png"));
+        Image i = new Image(new Texture("Home/Enter@1.0.png"));
+        Image line = new Image(new Texture("Home/Line@1.0.png"));
+        line.setSize(750*M, 4*M);
 
-        t.add(single).expand().left().padLeft(50 * StateManager.M);
-        t.add(i).expand().right().padRight(50 * StateManager.M);
+        t.add(single).expand().left().padLeft(50*M);
+        t.add(i).width(16 * M).height(26*M).expand().right().padRight(50*M);
         t.row();
-        t.add(line);
+        t.add(line).width(750*M).height(4*M).expandX().padLeft(50 * M);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@" + StateManager.M + ".png"));
+        Image i2 = new Image(new Texture("Home/BlackBG@1.0.png"));
 
         s.add(i2);
         s.add(t);
 
         //TODO ExecuteToTempState stuff
         final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
+//        final TestExecutable e = new TestExecutable("now playing");
 
         s.addListener(new ClickListener() {
             @Override
@@ -88,12 +81,8 @@ public class TopSingles extends TopSinglesShell{
             }
         });
 
-        table.add(s).width(750 * StateManager.M).height(110 * StateManager.M);
+        table.add(s).width(750*M).height(110*M);
         table.row();
-
     }
-
-
-
 
 }

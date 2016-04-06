@@ -1,6 +1,5 @@
 package client.pages.other;
 
-import client.component.basicComponents.Button;
 import client.component.basicComponents.ConfirmDialog;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
@@ -15,12 +14,16 @@ import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
+import client.stateInterfaces.Gesturable;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MImage;
 import server.model.media.MMusic;
@@ -43,7 +46,7 @@ import java.util.List;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class NowPlaying extends State {
+public class NowPlaying extends State implements Gesturable{
     private ExecuteMoveSlider executeMoveSlider;
     private State previousState;
     private Slider slider;
@@ -52,13 +55,15 @@ public class NowPlaying extends State {
     private Label currentTime;
     private long iterations;
 
-
     private MMusic post;
 
-    private ImageButton pauseButton;
-    private ImageButton playButton;
-    private ImageButton create;
-    private ImageButton showComments;
+    private static Image play;
+    private static Image pause;
+    private static Image playPause;
+    private static boolean playing;
+
+    private Table create;
+    private Table showComments;
     private Image filter;
     private Image picture;
 
@@ -66,6 +71,7 @@ public class NowPlaying extends State {
 
     private ExecuteUpdate update1;
     private ExecuteUpdate update2;
+    private ExecuteToTempState backEx;
 
     public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
@@ -88,17 +94,14 @@ public class NowPlaying extends State {
         px.dispose();
 
 
-
         filter = new Image(new Texture("Filter.png"));
         filter.setColor(1, 1, 1, 0.9F);
         filter.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
 
 
-
         picture = new Image(albumArt);
         picture.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
         stage.addActor(picture);
-
     }
 
 
@@ -107,8 +110,8 @@ public class NowPlaying extends State {
         super.init();
 
         //Standard Back Button Here.
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState);
-        addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+        backEx = new ExecuteToTempState(previousState);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Table t = new Table();
         t.setBounds(200*M, 1160*M, 350*M, 150*M);
@@ -118,33 +121,21 @@ public class NowPlaying extends State {
         //-------------------------Sound Control System-----------------------------------------
         //-----
         TestExecutable rewindEx = new TestExecutable("rewind");  //TODO Implement Skip functionality here.
-        addImageButton("NowPlaying/Rewind@", rewindEx, 170, 246, 53, 46);
+        addImage("NowPlaying/Rewind@", rewindEx, 170, 246, 53, 46);
 
         TestExecutable forwardEx = new TestExecutable("forward");
-        addImageButton("NowPlaying/Forward@", forwardEx, 535, 246, 53, 46);
+        addImage("NowPlaying/Forward@", forwardEx, 535, 246, 53, 46);
 
-        //----
-        TestExecutable pauseEx = new TestExecutable("pause");
-        pauseButton = createImageButton("NowPlaying/Pause@", pauseEx, 288, 177, 180, 180);
-        pauseButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                pause();
-                new ExecutePlayMusic().execute();
-            }
-        });
+        play = new Image(new Texture("NowPlaying/Play@1.0.png"));
+        pause = new Image(new Texture("NowPlaying/Pause@1.0.png"));
+        playPause = new Image();
+        playing = true;
+        pause();
 
-        TestExecutable playEx = new TestExecutable("play");
-        playButton = createImageButton("NowPlaying/Play@", playEx, 288, 177, 180, 180);
-        playButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                play();
-                new ExecutePlayMusic().execute();
-            }
-        });
-
-        stage.addActor(playButton);
+        Table t2 = new Table();
+        t2.setBounds(288*M, 177*M, 180*M, 180*M);
+        t2.add(playPause).width(180*M).height(180*M);
+        stage.addActor(t2);
         //------------------------------------------------------------------------------------------
 
 
@@ -155,10 +146,10 @@ public class NowPlaying extends State {
         Sec1 sec1 = new Sec1(this, post);
 
         ExecuteToTempState commentEx = new ExecuteToTempState(comment);
-        addImageButton("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
+        addImage("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
         ExecuteToTempState secEx = new ExecuteToTempState(sec1);
-        addImageButton("NowPlaying/1S@", secEx, 230, 0, 290, 117);
+        addImage("NowPlaying/1S@", secEx, 230, 0, 290, 117);
 
         this.update1 = new ExecuteUpdateComments(comment, sec1);
 
@@ -175,6 +166,39 @@ public class NowPlaying extends State {
         setUpSnapChat();
     }
 
+    public static void pause(){
+        if(playing) {
+            playPause.setDrawable(pause.getDrawable());
+            playPause.clearListeners();
+            playPause.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    play();
+                    new ExecutePlayMusic().execute();
+                }
+            });
+
+            playing = !playing;
+        }
+    }
+
+    public static void play(){
+        if(!playing) {
+            playPause.setDrawable(play.getDrawable());
+            playPause.clearListeners();
+            playPause.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    pause();
+                    new ExecutePlayMusic().execute();
+                }
+            });
+
+            playing = !playing;
+        }
+    }
+
+    public static boolean isPlaying(){return playing;}
 
 
     @Override
@@ -196,7 +220,7 @@ public class NowPlaying extends State {
 
     private void setUpSnapChat(){
         //TODO setup this button.
-        DragButton snapChat = new DragButton(this, 250, new Image(new Texture("Friends/SwipeToDiscardButton@" + M + ".png")), getStage());
+        DragButton snapChat = new DragButton(this, 250, new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png")), getStage());
         snapChat.setInitialBounds(32, 135, 750 - 64, 236);
 
         ConfirmDialog dialog = setUpWindows();
@@ -216,18 +240,10 @@ public class NowPlaying extends State {
                 new ExecuteRecord(),
                 new ExecuteStartSnapChat()
         );
-        Image im = new Image(new Texture("NowPlaying/Share@"+M+".png"));
-        im.setBounds((520 + 115 - 30)* M, (117/2 - 26) * M, im.getPrefWidth(), im.getPrefHeight());
-        stage.addActor(im);
-
-        Button shareButton = new Button(this);
-        shareButton.setBounds(520, 0, 230, 117);
-        shareButton.setExecutable(em);
-        add(shareButton);
+        addImage("NowPlaying/Share@", em, 520, 0, 230, 117);
     }
 
     private ConfirmDialog setUpWindows(){
-
         List<String> names = Utils.newList();
         List<Executable> exs = Utils.newList();
 
@@ -258,7 +274,7 @@ public class NowPlaying extends State {
 
     private void initializeComments(){
         Executable addCommentEx = new TestExecutable("addANewComment");
-        create = createImageButton("NowPlaying/AddComment@", addCommentEx, 537, 1063, 51, 51);
+        create = createImage("NowPlaying/AddComment@", addCommentEx, 537, 1063, 51, 51);
 
         Executable showCommentsEx = () -> {
 
@@ -267,7 +283,7 @@ public class NowPlaying extends State {
 
         };
 
-        showComments = createImageButton("NowPlaying/ShowComments@", showCommentsEx, 607, 1063, 51, 51);
+        showComments = createImage("NowPlaying/ShowComments@", showCommentsEx, 607, 1063, 51, 51);
         stage.addActor(showComments);
 
     }
@@ -288,28 +304,11 @@ public class NowPlaying extends State {
         }
     }
 
-    private void pause(){
-        pauseButton.remove();
-        stage.addActor(playButton);
-    }
-
-    private void play(){
-        playButton.remove();
-        stage.addActor(pauseButton);
-    }
-
-
-
-
-
     public void initializeSlider(){
         slider = new Slider(0, 100, 1, false, SkinSingleton.getInstance());
         Table table = new Table();
         table.add(slider).minWidth(660*M);
-        table.setBounds(45 * M, 400 * M, 660 * M, 10);
-
-
-
+        table.setBounds(45*M, 400*M, 660*M, 20*M);
 
         slider.addListener(new ClickListener() {
             @Override
@@ -322,12 +321,11 @@ public class NowPlaying extends State {
         stage.addActor(table);
     }
 
-
     private void addMusicLabels(){
         currentTime = new Label("0:00", SkinSingleton.getInstance());
         totalTime = new Label("", SkinSingleton.getInstance());
-        currentTime.setBounds(60 * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
-        totalTime.setBounds((WIDTH - 100 - totalTime.getPrefWidth()) * M, 420 * M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
+        currentTime.setBounds(60*M, 420*M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
+        totalTime.setBounds((WIDTH - 100 - totalTime.getPrefWidth())*M, 420*M, currentTime.getPrefWidth(), currentTime.getPrefHeight());
         stage.addActor(totalTime);
         stage.addActor(currentTime);
     }
@@ -352,5 +350,12 @@ public class NowPlaying extends State {
 
 
 
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if (!gestureXRight && directionMainlyX){
+            transitionType = TransitionType.RIGHT_TO_LEFT;
+            backEx.execute();
+        }
+    }
 
 }

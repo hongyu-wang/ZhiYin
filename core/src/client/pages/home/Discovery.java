@@ -21,10 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class Discovery extends DiscoveryShell {
     private Table table;
+    private TextField searchField;
 
     private float currentWidth;
-
-    private TextField searchField;
 
     private ExecuteUpdate update;
 
@@ -86,8 +85,8 @@ public class Discovery extends DiscoveryShell {
 
     private void addSearchField(){
         searchField = new WorkingTextArea("Search...", SkinSingleton.getInstance());
-        searchField.setPosition((26 + 1) * M, 1146 * M);
-        searchField.setSize((750 - 26*2) * M, 58 * M);
+        searchField.setPosition(26*M, 1146*M);
+        searchField.setSize((750 - 26*2)*M, 58*M);
         stage.addActor(searchField);
     }
 

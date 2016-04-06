@@ -17,12 +17,18 @@ public interface Constants {
 
     int HEIGHT = 1334;
 
-    int KEY_BOARD_HEIGHT = 400;
+    int KEY_BOARD_HEIGHT = (int)(HEIGHT*0.3);
 
     int RECIEVED_READ = 1;
     int RECIEVED_UNREAD = 2;
     int SENT_READ = 3;
     int SENT_UNREAD = 4;
+
+    /**
+     * This turns on the yellow lines in the buttons.
+     */
+    boolean playAnimation = true;
+
 
     boolean WINDOWS = false;
 

@@ -5,20 +5,18 @@ import client.events.ActionEvent;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.internalExceptions.NoExecutableException;
 import client.pageStorage.Pages;
+import client.pages.other.TransitionType;
 import client.pages.pageInternal.inputController.InputController;
 import client.singletons.MainBatch;
-import client.singletons.StateManager;
 import client.stateInterfaces.*;
 import client.tools.Constants;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import tools.utilities.Utils;
 
@@ -33,6 +31,8 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
     protected Stage stage;
     private InputController inputController;
+    protected TransitionType transitionType;
+
 
     @Override
     public void update(float dt) {
@@ -53,7 +53,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         components = Utils.newList();
         inputController = new InputController();
         stage = new Stage();
-
+        transitionType = TransitionType.NONE;
     }
 
     /**
@@ -119,24 +119,37 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         add(toolsButton);
     }
 
-    protected ImageButton createImageButton(String imagePath, Executable e, int x, int y, int width, int height ){
-        Image image = new Image(new Texture(imagePath + StateManager.M + ".png"));
-        ImageButton imageButton = new ImageButton(image.getDrawable());
-        imageButton.setBounds(x * StateManager.M, y * StateManager.M, width * StateManager.M, height * StateManager.M);
+    protected Table createImage(String imagePath, Executable e, int x, int y, int width, int height ){
+        Image image = new Image(new Texture(imagePath + "1.0" + ".png"));
+        image.setSize(image.getWidth()*M, image.getHeight()*M);
+
+        Stack s = new Stack();
+        s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
+
+        Table t = new Table();
+        t.add(image).width(image.getWidth()).height(image.getHeight());
+        s.add(t);
+
         final Executable executable = e;
-        imageButton.addListener(new ClickListener() {
+        s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 executable.execute();
             }
         });
 
-        return imageButton;
+        Table table = new Table();
+        table.add(s);
+        table.setBounds(x*M, y*M, width*M, height*M);
+
+        return table;
     }
 
-    protected void addImageButton(String imagePath, Executable e, int x, int y, int width, int height){
-        stage.addActor(createImageButton(imagePath, e, x, y, width, height));
+    protected void addImage(String imagePath, Executable e, int x, int y, int width, int height){
+        Table t = createImage(imagePath, e, x, y, width, height);
+        stage.addActor(t);
     }
+
 
     /**
      * This will return a deep copy of the stored component list
@@ -196,6 +209,9 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         return this.getClass().getName();
     }
 
+    public TransitionType getTransitionType(){
+        return transitionType;
+    }
 
 }
 

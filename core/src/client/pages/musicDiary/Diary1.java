@@ -20,15 +20,12 @@ import java.util.List;
  * Created by Hongyu Wang on 3/9/2016.
  */
 public class Diary1 extends Diary1Shell {
-
     private List<Long> currentDiaries;
-
     public List<Long> getCurrentDiaries(){
         return currentDiaries;
     }
 
     private ScrollPane scrollpane;
-
     private Table table;
 
     private ExecuteUpdate update;
@@ -74,16 +71,15 @@ public class Diary1 extends Diary1Shell {
         t.row().padTop(10*M);
         t.add(l3).expand().left().padLeft(50*M);
         t.row();
-        t.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(150*M).padTop(50*M);
+        t.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(150*M).padTop(50*M);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@" + M + ".png"));
+        Image i2 = new Image(new Texture("Home/BlackBG@1.0.png"));
 
         s.add(i2);
         s.add(t);
 
         final MDiaryPost currentPost = thisPost;
 
-        // Goes to a Diary4 without content or image
         final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, currentPost));
         s.addListener(new ClickListener() {
             @Override
@@ -97,7 +93,6 @@ public class Diary1 extends Diary1Shell {
     }
 
 
-
     @Override
     public void dispose() {
 
@@ -107,6 +102,5 @@ public class Diary1 extends Diary1Shell {
     public void update(float dt){
         super.update(dt);
     }
-
 
 }

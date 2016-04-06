@@ -1,17 +1,13 @@
 package client.pages.home;
 
 import client.component.basicComponents.Button;
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import driver.GameLoop;
 
 /**
  * Created by blobbydude24 on 2016-03-13.
@@ -45,19 +41,10 @@ public abstract class ArtistShell extends State{
 //        sortButton.setExecutable(new TestExecutable("sort"));
 //        add(sortButton);
 
-        Image i = new Image(new Texture("Home/Sort@" + StateManager.M + ".png"));
-        ImageButton sortButton = new ImageButton(i.getDrawable()); //200
+        TestExecutable sortEx = new TestExecutable("sort");
+        addImage("Home/Sort@", sortEx, 688, 1159, 42, 32);
 
-        sortButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                new TestExecutable("sort").execute();
-            }
-        });
-
-        sortButton.setPosition(688 * StateManager.M, 1159 * StateManager.M);
-
-        stage.addActor(sortButton);
+//        stage.addActor(sortButton);
 
         setBottomBar();
     }

@@ -45,6 +45,8 @@ public class MyProfile extends MyProfileShell implements Profile {
     private List<Long> currentDiaries;
     private List<Long> currentArtists;
 
+    public static String name;
+
     private State previousState;
 
     private ScrollPane scrollpane;
@@ -55,7 +57,6 @@ public class MyProfile extends MyProfileShell implements Profile {
     private Table table;
     private Table following;
 
-    private String name;
     private String description;
 
     private Image profilePic;
@@ -63,12 +64,8 @@ public class MyProfile extends MyProfileShell implements Profile {
     private ExecuteUpdate update1;
     private ExecuteUpdate update2;
     private UserProfile userProfile;
-    //private ArrayList<Image> artistImages = new ArrayList<>();
-    //private ArrayList<ImageButton> artistButtons = new ArrayList<>();
-    //private ArrayList<ImageButton> removeButtons = new ArrayList<>();
 
     public MyProfile(){
-//        pull from server for name and image
         init();
     }
 
@@ -78,7 +75,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         userProfile = localDatabase.getModel(user.getProfileKey());
         MImage mImage = localDatabase.getModel(userProfile.getImageKey());
 
-        this.name = userProfile.getUsername();
+        name = userProfile.getUsername();
         this.description = userProfile.getDescription();
         this.profilePic = ImageManagerFactory.createImageManager().mImageToImage(mImage);
 
@@ -154,7 +151,7 @@ public class MyProfile extends MyProfileShell implements Profile {
     public void attemptSetUpImage(){
         try{
             Image image = ImageParser.getImage();
-            image.setBounds(50 * M, 967 * M, 200 * M, 200 * M);
+            image.setBounds(50*M, 967*M, 200*M, 200*M);
             stage.addActor(image);
         } catch(IllegalStateException ex){
             System.out.println("Your stupid.");
@@ -167,13 +164,13 @@ public class MyProfile extends MyProfileShell implements Profile {
         String title = diaryPost.getTitle();
 
         Table t = new Table();
-        t.add(new Label(title, SkinSingleton.getInstance())).expand().left().padLeft(50 * M);
-        t.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26 * M).expand().right().padRight(50*M);
+        t.add(new Label(title, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
+        t.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().right().padRight(50*M);
         t.row();
-        t.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M);
+        t.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
 
         Stack s = new Stack();
-        s.add(new Image(new Texture("Home/BlackBG@" + M + ".png")));
+        s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
         s.add(t);
 
         final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost));
@@ -230,7 +227,6 @@ public class MyProfile extends MyProfileShell implements Profile {
 
         // Do not call scrollpane2.layout(). This will cause the artists to appear vertically instead of horizontally.
     }
-
 
     @Override
     public void dispose() {

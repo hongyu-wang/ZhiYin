@@ -21,10 +21,8 @@ public class Friends1 extends Friends1Shell{
         table = new Table();
         table.setBounds(0, 117*M, 750*M, 1100*M);
         table.top();
-
         stage.addActor(table);
 
-        //table.setDebug(true);
         talkerAddFriends();
     }
 
@@ -33,8 +31,6 @@ public class Friends1 extends Friends1Shell{
         table.add(box.getTable()).width(750*M);
         table.row();
     }
-
-
 
 
     @Override

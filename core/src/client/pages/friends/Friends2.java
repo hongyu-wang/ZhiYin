@@ -13,7 +13,6 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteUpdat
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateMessages;
 import client.pages.friends.boxes.MessageBox;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import server.model.media.MAudio;
@@ -23,29 +22,22 @@ import java.util.List;
 
 public class Friends2 extends Friends2Shell{
     private List<Long> messageKeys;
-
     public List<Long> getMessageKeys(){
         return messageKeys;
     }
 
-
     private ScrollPane scrollpane;
-    private TextField messageField;
-
     public ScrollPane getScrollpane() {
         return scrollpane;
     }
 
     private String friendName;
-
-
     public String getFriendName(){
         return friendName;
     }
 
+    private TextField messageField;
     private Table table;
-
-
 
     private ExecuteUpdate update;
 
@@ -53,10 +45,7 @@ public class Friends2 extends Friends2Shell{
         this.friendName = friendName;
         this.messageKeys = Utils.newList();
         init();
-
     }
-
-
 
     protected void init(){
         super.init();
@@ -75,7 +64,7 @@ public class Friends2 extends Friends2Shell{
         table.top();
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0, 122 * StateManager.M, 750 * StateManager.M, 1095 * StateManager.M);
+        scrollpane.setBounds(0, 122*M, 750*M, 1095*M);
 
         stage.addActor(scrollpane);
 
@@ -92,7 +81,7 @@ public class Friends2 extends Friends2Shell{
 
     private void setUpRecord(){
         //This section initializes the DragButton
-        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@" + StateManager.M + ".png"));
+        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png"));
         DragButton dragButton = new DragButton(this, (int)(500*M), image, getStage());
         dragButton.setInitialBounds(32, 98, 750 - 64, 236);
         dragButton.setReleaseExecutable(new ExecuteSendAudioMessage(this));
@@ -114,7 +103,7 @@ public class Friends2 extends Friends2Shell{
     }
 
     public void addMessage(MessageBox box){
-        table.add(box.getTable()).width(480 * StateManager.M).padTop(56 * StateManager.M).left().padLeft((32 + 214 * box.getByUser()) * StateManager.M);
+        table.add(box.getTable()).width(480*M).padTop(56*M).left().padLeft((32 + 214 * box.getByUser())*M);
         table.row().expandX();
         scrollpane.layout();
         scrollpane.setScrollPercentY(100);
@@ -127,8 +116,8 @@ public class Friends2 extends Friends2Shell{
         super.reset();
         messageField.remove();
         messageField = new WorkingTextArea("Message...", SkinSingleton.getInstance());
-        messageField.setPosition(174 * M, 31 * M);
-        messageField.setSize(412 * M, 60 * M);
+        messageField.setPosition(174*M, 31*M);
+        messageField.setSize(412*M, 60*M);
 
         stage.addActor(messageField);
     }
@@ -145,9 +134,8 @@ public class Friends2 extends Friends2Shell{
 
     private void addMessageField(){
         messageField = new WorkingTextArea("Message...", SkinSingleton.getInstance());
-        messageField.setPosition(174 * M, 31 * M);
-        messageField.setSize(412 * M, 60 * M);
-
+        messageField.setPosition(174*M, 31*M);
+        messageField.setSize(412*M, 60*M);
         stage.addActor(messageField);
     }
 

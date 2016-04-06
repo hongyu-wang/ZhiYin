@@ -48,18 +48,18 @@ public class Diary4 extends Diary4Shell{
         super.init();
 
         ExecuteToTempState changePage = new ExecuteToTempState(previousState);
-        addImageButton("NowPlaying/Back@", changePage, 0, 1217, 117, 117);
+        addImage("NowPlaying/Back@", changePage, 0, 1217, 117, 117);
 
         if(audio != null){
             TestExecutable playAudio = new TestExecutable("play audio");
-            addImageButton("Diary/Play@", playAudio, 0, 0, 250, 250);
+            addImage("Diary/Play@", playAudio, 0, 0, 250, 250);
         }
 
         ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, thisPost));
-        addImageButton("Diary/Comment@", toComment, 250, 0, 250, 250);
+        addImage("Diary/Comment@", toComment, 250, 0, 250, 250);
 
         ExecuteToTempState toSec = new ExecuteToTempState(new Sec1(this, thisPost));
-        addImageButton("Diary/Sec@", toSec, 500, 0, 250, 250);
+        addImage("Diary/Sec@", toSec, 500, 0, 250, 250);
 
         Table table = new Table();
         table.top();
@@ -71,7 +71,7 @@ public class Diary4 extends Diary4Shell{
         table.add(label1).width(700*M).padLeft(50*M).padTop(50*M);
         table.row();
 
-        table.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M).padTop(50*M);
+        table.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M).padTop(50*M);
         table.row();
 
 //        Label label2 = new Label("What you are reading right now is a very long string that I typed just to test our diary4 page;" +
@@ -79,19 +79,18 @@ public class Diary4 extends Diary4Shell{
         Label label2 = new Label(content, SkinSingleton.getInstance());
         label2.setWrap(true);
         label2.setWidth(700*M);
-        table.add(label2).width(700*M).padLeft(50 * M).padTop(50 * M);
+        table.add(label2).width(700*M).padLeft(50*M).padTop(50*M);
 
         if(image != null){
             table.row();
-            table.add(image).width(750*M).height(750/image.getWidth() * image.getHeight() * M).padTop(50 * M);
+            table.add(image).width(750*M).height(750/image.getWidth()*image.getHeight()*M).padTop(50*M);
         }
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0, 250 * M, 750 * M, 967 * M);
+        scrollpane.setBounds(0, 250*M, 750*M, 967*M);
         stage.addActor(scrollpane);
 
         scrollpane.setScrollingDisabled(true, false);
-        //table.setDebug(true);
     }
 
     @Override

@@ -6,6 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * This is the InputListener class.
@@ -16,7 +18,7 @@ import com.badlogic.gdx.InputProcessor;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class InputListener implements InputProcessor, Constants {
+public class InputListener implements InputProcessor, Constants, GestureDetector.GestureListener {
     /**
      * Our instance of InputListener as per the Singleton design pattern.
      */
@@ -38,7 +40,6 @@ public class InputListener implements InputProcessor, Constants {
      * that is currently active within the stateManager.
      */
     private StateManager stateManager;
-
     /**
      * These are the coordinates of where on the screen was pressed.
      */
@@ -92,6 +93,7 @@ public class InputListener implements InputProcessor, Constants {
         prepare();
         im.addProcessor(state.getStage());
         im.addProcessor(InputListener.getInstance());
+        im.addProcessor(new GestureDetector(getInstance()));
         Gdx.input.setInputProcessor(im);
 
     }
@@ -123,7 +125,6 @@ public class InputListener implements InputProcessor, Constants {
 
         mouseY = Gdx.graphics.getHeight() - screenY;
 
-        System.out.println(mouseX + " " + mouseY);
         stateManager.receiveInput();
 
         return false;
@@ -161,6 +162,46 @@ public class InputListener implements InputProcessor, Constants {
     }
 
 
+    @Override
+    public boolean touchDown(float x, float y, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean longPress(float x, float y) {
+        return false;
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY, int button) {
 
 
+        StateManager.getInstance().handleGesture(velocityX > 0, velocityY < 0, Math.abs(velocityX) > Math.abs(velocityY));
+        return false;
+    }
+
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY) {
+        return false;
+    }
+
+    @Override
+    public boolean panStop(float x, float y, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean zoom(float initialDistance, float distance) {
+        return false;
+    }
+
+    @Override
+    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+        return false;
+    }
 }

@@ -20,13 +20,9 @@ import static client.tools.Constants.M;
  * Contains a table of actors. Used in Friends1.
  */
 public class FriendBox{
-
-
-
     private Table table;
     private Image currentIcon;
     private String friendName;
-
     private int state = 0;
 
     private ExecuteUpdate update;
@@ -54,23 +50,23 @@ public class FriendBox{
         });
 
         Table t1 = new Table();
-        t1.add(new Image(new Texture("Home/BlackBG@" + M + ".png"))).width(650 * M).height(110*M);
+        t1.add(new Image(new Texture("Home/BlackBG@1.0.png"))).width(650*M).height(110*M);
         right.add(t1);
 
         Table t2 = new Table();
         t2.add(new Label(friendName, SkinSingleton.getInstance())).expand().center().left().padLeft(50*M);
-        t2.add(new Image(new Texture("Home/Enter@" + M + ".png"))).width(16*M).height(26*M).expand().center().right().padRight(50*M);
+        t2.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().center().right().padRight(50*M);
         right.add(t2);
 
         Table artistTable = new Table();
         artistTable.top();
-        artistTable.add(currentIcon).width(28 *M).height(36*M).expand().center().padLeft(50 * M);
+        artistTable.add(currentIcon).width(28 *M).height(36*M).expand().center().padLeft(50*M);
         artistTable.add(right).width(650*M).height(110*M);
 
         table = new Table();
         table.add(artistTable).width(750*M).height(110*M);
         table.row();
-        table.add(new Image(new Texture("Home/Line@" + M + ".png"))).width(750*M).expandX().padLeft(50*M);
+        table.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
         table.row();
 
         //table.setDebug(true);
@@ -81,7 +77,7 @@ public class FriendBox{
     }
 
     public void setIcon(int iconNum){
-        Image image = new Image(new Texture("Friends/Icon" + iconNum + "@" + M +".png"));
+        Image image = new Image(new Texture("Friends/Icon" + iconNum + "@1.0.png"));
         currentIcon = image;
         setTable();
     }

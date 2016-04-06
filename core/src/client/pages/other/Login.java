@@ -4,22 +4,18 @@ import client.component.basicComponents.Button;
 import client.events.ActionEvent;
 import client.events.executables.internalChanges.loginExecutable.ExecuteLogin;
 import client.events.executables.internalChanges.loginExecutable.ExecuteRemoveButton;
-import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateSnapChatMessage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
 import client.pages.State;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import tools.serverTools.databases.LocalDatabase;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.pages.pageInternal.serverClientInteractions.VeryBeginningInitializer;
 import client.singletons.SkinSingleton;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import tools.serverTools.databases.LocalDatabase;
 
 
 /**
@@ -40,12 +36,8 @@ public class Login extends State {
     private boolean checkPull;
     private VeryBeginningInitializer vb;
 
-
-
     public Login(){
         init();
-
-
     }
 
     @Override
@@ -107,12 +99,12 @@ public class Login extends State {
     @Override
     public void update(float dt) {
         super.update(dt);
-        label.setText(delta+"");
+        label.setText("");
 
         if (checkPull){
 
 
-            if (delta%100 == 99) {
+            if (delta%100 == 0) {
                 pullFromServer();
             }
         }

@@ -4,7 +4,6 @@ import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
-import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -17,7 +16,7 @@ public abstract class Friends1Shell extends State {
         super.init();
 
         Image background = new Image(new Texture("Friends/Friends1BG.png"));
-        background.setBounds(0, 0, WIDTH* StateManager.M, HEIGHT* StateManager.M);
+        background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
 
         Button friendsButton = new Button(this);
