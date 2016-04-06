@@ -109,8 +109,10 @@ public class NowPlaying extends State implements Gesturable{
     protected void init() {
         super.init();
 
+        this.transitionType = TransitionType.RIGHT_TO_LEFT;
+
         //Standard Back Button Here.
-        backEx = new ExecuteToTempState(previousState);
+        backEx = new ExecuteToTempState(previousState, this);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Table t = new Table();
@@ -145,10 +147,10 @@ public class NowPlaying extends State implements Gesturable{
 
         Sec1 sec1 = new Sec1(this, post);
 
-        ExecuteToTempState commentEx = new ExecuteToTempState(comment);
+        ExecuteToTempState commentEx = new ExecuteToTempState(comment, this);
         addImage("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
-        ExecuteToTempState secEx = new ExecuteToTempState(sec1);
+        ExecuteToTempState secEx = new ExecuteToTempState(sec1, this);
         addImage("NowPlaying/1S@", secEx, 230, 0, 290, 117);
 
         this.update1 = new ExecuteUpdateComments(comment, sec1);
@@ -352,10 +354,12 @@ public class NowPlaying extends State implements Gesturable{
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        if (!gestureXRight && directionMainlyX){
-            transitionType = TransitionType.RIGHT_TO_LEFT;
+        if (gestureXRight && directionMainlyX){
+
+
             backEx.execute();
         }
+
     }
 
 }

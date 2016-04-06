@@ -71,7 +71,7 @@ public class TopSingles extends TopSinglesShell{
         s.add(t);
 
         //TODO ExecuteToTempState stuff
-        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
+        final ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music), this);
 //        final TestExecutable e = new TestExecutable("now playing");
 
         s.addListener(new ClickListener() {

@@ -7,6 +7,7 @@ import client.events.executables.internalChanges.updatePageExecutables.ExecuteTo
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.other.NowPlaying;
+import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -65,7 +66,7 @@ public class Home extends HomeShell {
             b1.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    new ExecuteToTempState(tempState).execute();
+                    new ExecuteToTempState(tempState, TransitionType.LEFT_TO_RIGHT).execute();
                 }
             });
         }
@@ -156,7 +157,7 @@ public class Home extends HomeShell {
 
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
 
-        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music));
+        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music), TransitionType.LEFT_TO_RIGHT);
         final ExecuteSetMusic esm = new ExecuteSetMusic(music);
 
         em.addExecutable(e);
