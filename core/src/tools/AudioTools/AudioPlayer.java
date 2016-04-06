@@ -1,8 +1,12 @@
 package tools.AudioTools;
 
+import client.pages.State;
+import client.singletons.StateManager;
+import client.stateInterfaces.HasPlayButtons;
 import org.robovm.apple.avfoundation.AVAudioPlayer;
 import org.robovm.apple.avfoundation.AVAudioSession;
 import org.robovm.apple.avfoundation.AVAudioSessionCategory;
+import org.robovm.apple.avfoundation.AVAudioSessionPortOverride;
 import org.robovm.apple.foundation.NSData;
 import org.robovm.apple.foundation.NSErrorException;
 import org.robovm.apple.foundation.NSTimer;
@@ -23,14 +27,26 @@ public class AudioPlayer {
     private static AVAudioSession session = AVAudioSession.getSharedInstance();
 
     private NSTimer timer;
-
+    private Runnable runnable;
     private MAudio currentSong;
     private static AudioPlayer singleInstance = new AudioPlayer();
 
     private AudioPlayer(){
+        runnable = () -> {
+            State current = StateManager.getInstance().getCurrentState();
+            if (current instanceof HasPlayButtons)
+                ((HasPlayButtons)current).resetPlayButtons();
+
+
+        };
         musicPlayer = new AVAudioPlayer();
         voicePlayer = new AVAudioPlayer();
         snapShotPlayer = new AVAudioPlayer();
+        try {
+            session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker);
+        } catch (NSErrorException e) {
+            e.printStackTrace();
+        }
     }
 
     public static AudioPlayer getInstance(){
@@ -50,6 +66,8 @@ public class AudioPlayer {
             voicePlayer = new AVAudioPlayer(new NSData(voice.getmData()));
             snapShotPlayer = new AVAudioPlayer(new NSData(song.getmData()));
             snapShotPlayer.setCurrentTime(startTime);
+            voicePlayer.setDelegate(new AudioPlayerDelegate());
+            snapShotPlayer.setDelegate(new AudioPlayerDelegate());
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
@@ -69,6 +87,7 @@ public class AudioPlayer {
 
         try {
             musicPlayer = new AVAudioPlayer(new NSData(audio.getmData()));
+            musicPlayer.setDelegate(new AudioPlayerDelegate());
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
@@ -77,19 +96,23 @@ public class AudioPlayer {
     public void prepareToPlay() {
         try {
             session.setActive(true);
-            session.setCategory(AVAudioSessionCategory.PlayAndRecord);
+            session.setCategory(AVAudioSessionCategory.Playback);
+            System.out.println("Playback set");
         } catch (NSErrorException e) {
             e.printStackTrace();
         }
 
-        musicPlayer.prepareToPlay();
-        musicPlayer.setDelegate(musicPlayer.getDelegate());
         if(snapShot) {
             voicePlayer.prepareToPlay();
             voicePlayer.setDelegate(voicePlayer.getDelegate());
             snapShotPlayer.prepareToPlay();
             snapShotPlayer.setDelegate(snapShotPlayer.getDelegate());
+            return;
         }
+
+        musicPlayer.prepareToPlay();
+        musicPlayer.setDelegate(musicPlayer.getDelegate());
+
     }
 
     public void play(){
@@ -186,8 +209,4 @@ public class AudioPlayer {
     public void setTime(double time){
         musicPlayer.setCurrentTime(time);
     }
-
-    public boolean isPlayingSnapshot(){ return snapShot;}
-
-
 }

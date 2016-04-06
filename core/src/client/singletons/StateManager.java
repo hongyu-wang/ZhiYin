@@ -32,8 +32,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         return ourInstance;
     }
 
-    private static AudioPlayer ap = AudioPlayer.getInstance();
-
     public State getCurrentState() {
         return currentState;
     }
@@ -99,11 +97,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
         TalkerFactory.getServerTalker().update(dt);
 
-        if(os == MAC) {
-            if (!ap.isPlaying() && ap.isPlayingSnapshot()) {
-                ap.stop();
-            }
-        }
     }
 
     @Override
