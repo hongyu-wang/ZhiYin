@@ -407,6 +407,8 @@ public class VirtualDatabase {
 
         diaryPost.setComments(Utils.<Long>newList());
 
+        diaryPost.setTimeStamp(1000);
+
         generateComment(diaryPost, creator);
 
         diaryPost.setKey(generator.generateSerial());
