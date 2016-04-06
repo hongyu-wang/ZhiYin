@@ -63,9 +63,9 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
         super.init();
 
         ExecuteToTempState backEx = new ExecuteToTempState(previousState);
-        addImageButton("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-        addImageButton("Other/Follow@", followEx, 500, 70, 218, 82);
+        addImage("Other/Follow@", followEx, 500, 70, 218, 82);
 
         profilePic.setBounds(50*M, 967*M, 200*M, 200*M);
         stage.addActor(profilePic);

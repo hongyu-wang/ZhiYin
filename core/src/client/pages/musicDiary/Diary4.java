@@ -48,18 +48,18 @@ public class Diary4 extends Diary4Shell{
         super.init();
 
         ExecuteToTempState changePage = new ExecuteToTempState(previousState);
-        addImageButton("NowPlaying/Back@", changePage, 0, 1217, 117, 117);
+        addImage("NowPlaying/Back@", changePage, 0, 1217, 117, 117);
 
         if(audio != null){
             TestExecutable playAudio = new TestExecutable("play audio");
-            addImageButton("Diary/Play@", playAudio, 0, 0, 250, 250);
+            addImage("Diary/Play@", playAudio, 0, 0, 250, 250);
         }
 
         ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, thisPost));
-        addImageButton("Diary/Comment@", toComment, 250, 0, 250, 250);
+        addImage("Diary/Comment@", toComment, 250, 0, 250, 250);
 
         ExecuteToTempState toSec = new ExecuteToTempState(new Sec1(this, thisPost));
-        addImageButton("Diary/Sec@", toSec, 500, 0, 250, 250);
+        addImage("Diary/Sec@", toSec, 500, 0, 250, 250);
 
         Table table = new Table();
         table.top();
