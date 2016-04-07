@@ -6,6 +6,8 @@ import client.pages.other.TransitionType;
 import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import server.model.media.MMusic;
+import tools.serverTools.databases.LocalDatabaseFactory;
 
 import java.util.ArrayList;
 
@@ -52,31 +54,19 @@ public class SongSelection extends SongSelectionShell implements Gesturable{
         table.top();
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0, 0, 750*M, 1334*M);
+        scrollpane.setBounds(0, 0, 750 * M, 1334 * M);
         stage.addActor(scrollpane);
 
         songBoxes = new ArrayList<>();
 
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
-        addSong(new SongBox(this, "song1"));
+        if (os == MAC) {
+            addSong(new SongBox(this, LocalDatabaseFactory.createLocalDatabase().<MMusic>getModel(10000L)));
+            addSong(new SongBox(this, LocalDatabaseFactory.createLocalDatabase().<MMusic>getModel(10001L)));
+            addSong(new SongBox(this, LocalDatabaseFactory.createLocalDatabase().<MMusic>getModel(10002L)));
+            addSong(new SongBox(this, LocalDatabaseFactory.createLocalDatabase().<MMusic>getModel(10003L)));
+            addSong(new SongBox(this, LocalDatabaseFactory.createLocalDatabase().<MMusic>getModel(10004L)));
+            addSong(new SongBox(this, LocalDatabaseFactory.createLocalDatabase().<MMusic>getModel(10005L)));
+        }
     }
 
     public void addSong(SongBox songBox){

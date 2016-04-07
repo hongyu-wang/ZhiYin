@@ -21,7 +21,6 @@ import client.stateInterfaces.HasPlayButtons;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -145,10 +144,10 @@ public class NowPlaying extends State implements Gesturable, HasPlayButtons {
 
         Sec1 sec1 = new Sec1(this, post);
 
-        commentEx = new ExecuteToTempState(comment, TransitionType.RIGHT_TO_LEFT);
+        commentEx = new ExecuteToTempState(comment, TransitionType.DOWN_TO_UP);
         addImage("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
-        secEx = new ExecuteToTempState(sec1, TransitionType.RIGHT_TO_LEFT);
+        secEx = new ExecuteToTempState(sec1, TransitionType.DOWN_TO_UP);
         addImage("NowPlaying/1s@", secEx, 230, 0, 290, 117);
 
         this.update1 = new ExecuteUpdateComments(comment, sec1);
@@ -347,8 +346,8 @@ public class NowPlaying extends State implements Gesturable, HasPlayButtons {
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        //if (gestureXRight && directionMainlyX)
-            //backEx.execute();
+        if (gestureYUp && !directionMainlyX)
+            commentEx.execute();
     }
 
     @Override

@@ -83,7 +83,7 @@ public class Diary1 extends Diary1Shell{
 
         final MDiaryPost currentPost = thisPost;
 
-        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, currentPost), TransitionType.RIGHT_TO_LEFT);
+        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, currentPost, null), TransitionType.RIGHT_TO_LEFT);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

@@ -176,7 +176,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         disposables.add(tx);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost), TransitionType.RIGHT_TO_LEFT);
+        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost, null), TransitionType.RIGHT_TO_LEFT);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

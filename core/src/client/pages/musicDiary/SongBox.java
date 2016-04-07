@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
+import server.model.media.MMusic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +31,23 @@ public class SongBox implements Disposable {
 
     private SongSelection songSelect;
     private Table table;
+    private MMusic music;
+
+    public MMusic getMusic() {
+        return music;
+    }
+
+    public void setMusic(MMusic music) {
+        this.music = music;
+    }
 
     private String songName;
     private Image image;
 
-    public SongBox(SongSelection songSelect, String songName){
+    public SongBox(SongSelection songSelect, MMusic song){
         this.songSelect = songSelect;
-        this.songName = songName;
+        this.songName = song.getName();
+        this.music = song;
         disposableList = new ArrayList<>();
         disposableList.add(tx1);
         disposableList.add(tx2);

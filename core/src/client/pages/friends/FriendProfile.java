@@ -152,7 +152,7 @@ public class FriendProfile extends FriendProfileShell implements Profile, Gestur
 
 
 
-        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost), this);
+        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost, null), this);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

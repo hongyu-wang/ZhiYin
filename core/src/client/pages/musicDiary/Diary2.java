@@ -17,6 +17,7 @@ import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
 import client.stateInterfaces.Gesturable;
+import client.tools.ImageParser;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -178,6 +179,15 @@ public class Diary2 extends Diary2Shell implements Gesturable{
         addBodyField();
     }
 
+    public void attemptSetUpImage(){
+        try{
+            Image image = ImageParser.getImage();
+            image.setBounds(50*M, 967*M, 200*M, 200*M);
+            stage.addActor(image);
+        } catch(IllegalStateException ex){
+            System.out.println("Your stupid.");
+        }
+    }
 
     private void addTitleField(){
         titleField = new WorkingTextArea("Title...", SkinSingleton.getInstance());

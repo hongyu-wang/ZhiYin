@@ -1,18 +1,22 @@
 package client.pages.musicDiary;
 
 import client.events.executables.internalChanges.TestExecutable;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecutePlayMAudio;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.pages.other.Comment;
+import client.pages.other.NowPlaying;
 import client.pages.other.Sec1;
 import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MAudio;
 import server.model.media.MImage;
 import server.model.media.MText;
@@ -36,10 +40,12 @@ public class Diary4 extends Diary4Shell implements Gesturable{
     private String content;
     private Image image;
     private MAudio audio;
+    private SongBox songbox;
 
-    public Diary4(State previousState, MDiaryPost thisPost){
+    public Diary4(State previousState, MDiaryPost thisPost, SongBox songbox){
         this.previousState = previousState;
         this.thisPost = thisPost;
+        this.songbox = songbox;
 
         populateFromServer();
 
@@ -54,7 +60,14 @@ public class Diary4 extends Diary4Shell implements Gesturable{
 
         if(audio != null){
             TestExecutable playAudio = new TestExecutable("play audio");
-            addImage("Diary/Play@", playAudio, 0, 0, 250, 250);
+            Table play = createImage("Diary/Play@", playAudio, 0, 0, 250, 250);
+            play.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    new ExecutePlayMAudio(audio).execute();
+                }
+            });
+
         }
 
         ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, thisPost), TransitionType.FADE_IN);
@@ -83,6 +96,20 @@ public class Diary4 extends Diary4Shell implements Gesturable{
         label2.setWrap(true);
         label2.setWidth(700*M);
         table.add(label2).width(700*M).padLeft(50*M).padTop(50*M);
+
+        if(songbox != null) {
+            Image i = new Image(new Texture("NowPlaying/Play@1.0.png"));
+            i.setSize(180 * M, 180 * M);
+            ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, songbox.getMusic()), TransitionType.FADE_IN);
+            i.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    e.execute();
+                }
+            });
+            table.row();
+            table.add(i).width(180*M).height(180*M).center();
+        }
 
         if(image != null){
             table.row();

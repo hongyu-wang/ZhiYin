@@ -1,12 +1,10 @@
 package tools.imageTools;
 
 import client.pageStorage.Pages;
+import client.pages.musicDiary.Diary2;
 import client.pages.other.MyProfile;
 import client.singletons.StateManager;
 import client.tools.ImageParser;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import org.robovm.apple.uikit.*;
 
 /**
@@ -23,7 +21,11 @@ class Delegate extends UINavigationControllerDelegateAdapter implements UIImageP
         Controller.getInstance().closeCameraRoll();
         ImageParser.setUpImage(bytes, false);
         System.out.println("finished picking media");
-        ((MyProfile)Pages.MYPROFILE.getStateReference()).attemptSetUpImage();
+        if(StateManager.getInstance().getCurrentState() == Pages.MYPROFILE.getStateReference())
+            ((MyProfile)Pages.MYPROFILE.getStateReference()).attemptSetUpImage();
+        if(StateManager.getInstance().getCurrentState() instanceof Diary2){
+            ((Diary2)StateManager.getInstance().getCurrentState()).attemptSetUpImage();
+        }
     }
 
     @Override
