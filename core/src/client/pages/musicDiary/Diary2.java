@@ -1,24 +1,26 @@
 package client.pages.musicDiary;
 
 import client.component.basicComponents.Button;
+import client.component.basicComponents.ConfirmDialog;
 import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
-import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCamera;
+import client.events.executables.internalChanges.imageGalleryExecutables.ExecuteOpenCameraRoll;
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetDiaryPostAudio;
-import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteStartSnapChat;
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.serverInteractions.ExecuteServer;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pageStorage.Pages;
 import client.pages.other.TransitionType;
-import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Executable;
 import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.media.MAudio;
 import server.model.media.MImage;
 import server.model.media.MMusic;
@@ -32,6 +34,8 @@ import server.model.media.MMusic;
 public class Diary2 extends Diary2Shell implements Gesturable{
     private TextField titleField;
     private TextField bodyField;
+
+    private SongBox songBox;
 
     public MMusic getMusic() {
         return music;
@@ -113,20 +117,56 @@ public class Diary2 extends Diary2Shell implements Gesturable{
         ));
         add(holdToRecordButton);
 
+        setUpWindow();
+
+        Label label = new Label("Choose\n    a\n  song", SkinSingleton.getInstance());
+        ExecuteToTempState toSelectSong = new ExecuteToTempState(new SongSelection(this), TransitionType.RIGHT_TO_LEFT);
+        label.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                toSelectSong.execute();
+            }
+        });
+
+        Table t = new Table();
+        t.setBounds(489 * M, 0, 261 * M, 264 * M);
+        t.add(label).center();
+        stage.addActor(t);
+    }
+
+    private void setUpWindow(){
         Button pictureButton = new Button(this);
         pictureButton.setBounds(268, 0, 221, 264);
-        pictureButton.setExecutable(new TestExecutable("picture"));
+
+        ConfirmDialog confirmDialog = new ConfirmDialog(
+                "Where do you want to get your picture from?",
+                new String[]{"Gallery",
+                        "Camera",
+                        "Cancel"}
+        );
+        confirmDialog.setUpExecutables(
+                new Executable[]{new ExecuteOpenCameraRoll(),
+                        new ExecuteOpenCamera()}
+        );
+
+        pictureButton.setExecutable(
+                () -> stage.addActor(confirmDialog.getWindow())
+        );
         add(pictureButton);
-
-        Button videoButton = new Button(this);
-        videoButton.setBounds(489, 0, 261, 264);
-        videoButton.setExecutable(new TestExecutable("video"));
-        add(videoButton);
-
     }
 
     private void changeBodyField(float m){
         bodyField.setBounds(0, (1102-m)*M, 750* M, m * M);
+    }
+
+    public void setSongBox(SongBox songBox){
+        this.songBox = songBox;
+        System.out.println(songBox);
+    }
+
+    public boolean hasSongBox(){
+        System.out.println(songBox != null);
+        return songBox != null;
     }
 
     @Override

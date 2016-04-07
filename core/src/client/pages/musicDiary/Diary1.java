@@ -5,7 +5,6 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteUpdat
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
-import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -21,7 +20,7 @@ import java.util.List;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class Diary1 extends Diary1Shell implements Gesturable{
+public class Diary1 extends Diary1Shell{
     private List<Long> currentDiaries;
     public List<Long> getCurrentDiaries(){
         return currentDiaries;
@@ -99,11 +98,5 @@ public class Diary1 extends Diary1Shell implements Gesturable{
     @Override
     public void update(float dt){
         super.update(dt);
-    }
-
-    @Override
-    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        if(gestureYUp && !directionMainlyX)
-            new ExecuteToTempState(new SongSelection(), TransitionType.DOWN_TO_UP).execute();
     }
 }

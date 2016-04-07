@@ -1,5 +1,8 @@
 package client.pages.musicDiary;
 
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.pageStorage.Pages;
+import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -25,13 +28,14 @@ public class SongBox implements Disposable {
     private Image image0 = new Image(tx1);
     private Image image1 = new Image(tx2);
 
+    private SongSelection songSelect;
     private Table table;
 
     private String songName;
     private Image image;
-    private boolean selected;
 
-    public SongBox(String songName){
+    public SongBox(SongSelection songSelect, String songName){
+        this.songSelect = songSelect;
         this.songName = songName;
         disposableList = new ArrayList<>();
         disposableList.add(tx1);
@@ -41,9 +45,8 @@ public class SongBox implements Disposable {
 
     private void init(){
         table = new Table();
-        image = new Image();
-        selected = true;
-        select();
+        image = new Image(new Texture("Diary/Unselected@1.0.png"));
+//        select();
         initTable();
     }
 
@@ -60,10 +63,12 @@ public class SongBox implements Disposable {
         disposableList.add(tx1);
         s.add(t);
 
+        SongBox box = this;
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                select();
+                songSelect.passBox(box);
+                new ExecuteChangePage(Pages.DIARY2, TransitionType.LEFT_TO_RIGHT).execute();
             }
         });
 
@@ -71,14 +76,23 @@ public class SongBox implements Disposable {
         table.row();
     }
 
-    public void select(){
-        selected = !selected;
-        image.setDrawable((selected ? image1 : image0).getDrawable());
-    }
-
-    public boolean isSelected(){
-        return selected;
-    }
+//    public void select(){
+//        if(!selected) {
+//            songSelect.reset();
+//            songSelect.setSelected(this);
+//        }
+//        selected = !selected;
+//        image.setDrawable((selected ? image1 : image0).getDrawable());
+//    }
+//
+//    public void deselect(){
+//        selected = false;
+//        image.setDrawable(image0.getDrawable());
+//    }
+//
+//    public boolean isSelected(){
+//        return selected;
+//    }
 
     public Table getTable(){
         return table;
