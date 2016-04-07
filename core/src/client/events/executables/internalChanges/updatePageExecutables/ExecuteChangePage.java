@@ -19,11 +19,13 @@ public class ExecuteChangePage implements Executable{
     protected Pages page;
     protected TransitionType transitionType;
     public ExecuteChangePage(Pages page){
-        this.transitionType = TransitionType.NONE;
-        this.page = page;
+        this(page, TransitionType.NONE);
     }
 
-
+    public ExecuteChangePage(Pages page, TransitionType transitionType){
+        this.transitionType = transitionType;
+        this.page = page;
+    }
 
     @Override
     public void execute() {

@@ -117,7 +117,7 @@ public class Login extends State {
 
             Pages.initClass();
 
-            new ExecuteChangePage(Pages.HOME).execute();
+            new ExecuteChangePage(Pages.HOME, TransitionType.FADE_IN).execute();
 
 //            new ExecuteUpdateSnapChatMessage();
         }

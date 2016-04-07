@@ -71,6 +71,7 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         currentState = state;
         currentState.reset();
 
+        InputListener.setListener(currentState);
     }
 
 
