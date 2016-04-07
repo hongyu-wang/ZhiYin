@@ -73,7 +73,7 @@ public class Login extends State {
     }
 
     private void initializeComponents(){
-        Image image = new Image(new Texture("Artboards//LoginPage.png"));
+        Image image = new Image(new Texture("Other//LoginBG.png"));
         image.setBounds(0, 0, WIDTH * M, HEIGHT * M);
         stage.addActor(image);
         username = new WorkingTextArea("Alice", SkinSingleton.getInstance());
