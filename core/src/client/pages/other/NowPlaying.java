@@ -144,10 +144,10 @@ public class NowPlaying extends State implements Gesturable{
 
         Sec1 sec1 = new Sec1(this, post);
 
-        commentEx = new ExecuteToTempState(comment, TransitionType.FADE_IN);
+        commentEx = new ExecuteToTempState(comment, TransitionType.RIGHT_TO_LEFT);
         addImage("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
-        secEx = new ExecuteToTempState(sec1, TransitionType.FADE_IN);
+        secEx = new ExecuteToTempState(sec1, TransitionType.RIGHT_TO_LEFT);
         addImage("NowPlaying/1s@", secEx, 230, 0, 290, 117);
 
         this.update1 = new ExecuteUpdateComments(comment, sec1);
