@@ -17,6 +17,7 @@ import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
 import client.stateInterfaces.Gesturable;
+import client.stateInterfaces.HasPlayButtons;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -47,7 +48,7 @@ import java.util.List;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class NowPlaying extends State implements Gesturable{
+public class NowPlaying extends State implements Gesturable, HasPlayButtons {
     private ExecuteMoveSlider executeMoveSlider;
     private State previousState;
     private Slider slider;
@@ -133,7 +134,7 @@ public class NowPlaying extends State implements Gesturable{
         TestExecutable forwardEx = new TestExecutable("forward");
         addImage("NowPlaying/Forward@", forwardEx, 535, 246, 53, 46);
 
-        initStatics(stage);
+        initStatics();
         stage.addActor(pause);
         //------------------------------------------------------------------------------------------
 
@@ -165,7 +166,7 @@ public class NowPlaying extends State implements Gesturable{
         setUpSnapChat();
     }
 
-    public void initStatics(Stage stage){
+    public void initStatics(){
         if(play == null || pause == null){
             pause = new Image(tx = new Texture("NowPlaying/Pause@1.0.png"));
             disposables.add(tx);
@@ -348,5 +349,10 @@ public class NowPlaying extends State implements Gesturable{
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
         //if (gestureXRight && directionMainlyX)
             //backEx.execute();
+    }
+
+    @Override
+    public void resetPlayButtons() {
+        this.play();
     }
 }
