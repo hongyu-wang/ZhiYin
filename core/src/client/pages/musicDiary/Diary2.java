@@ -9,8 +9,12 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteStartSnapChat;
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.serverInteractions.ExecuteServer;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.pageStorage.Pages;
+import client.pages.other.TransitionType;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -25,7 +29,7 @@ import server.model.media.MMusic;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class Diary2 extends Diary2Shell{
+public class Diary2 extends Diary2Shell implements Gesturable{
     private TextField titleField;
     private TextField bodyField;
 
@@ -125,7 +129,6 @@ public class Diary2 extends Diary2Shell{
         bodyField.setBounds(0, (1102-m)*M, 750* M, m * M);
     }
 
-
     @Override
     public void reset() {
         super.reset();
@@ -169,6 +172,9 @@ public class Diary2 extends Diary2Shell{
     }
 
 
-
-
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(gestureXRight && directionMainlyX)
+            new ExecuteChangePage(Pages.DIARY1, TransitionType.LEFT_TO_RIGHT).execute();
+    }
 }

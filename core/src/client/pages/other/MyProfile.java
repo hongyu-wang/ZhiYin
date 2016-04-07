@@ -176,7 +176,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         disposables.add(tx);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost), this);
+        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost), TransitionType.RIGHT_TO_LEFT);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -205,7 +205,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         removeTable.add(removeButton).width(56*M).height(56*M).expand().top().right();
         s.add(removeTable);
 
-        final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image), this);
+        final Executable ex = new ExecuteToTempState(new ArtistProfile(this, artist, image), TransitionType.FADE_IN);
         final ExecuteServer exUnFollow = new ExecuteUnFollowArtist(following, artist, currentArtists);
         s.addListener(new ClickListener() {
             @Override

@@ -22,6 +22,8 @@ public class LabelTextArea extends WorkingTextArea{
     private static Map<String, Float> characterSets;
 
     public static final String RED = "[#FF0000]";
+    public static final String GREY = "[#696969]";
+
 
     private String color;
 
@@ -43,7 +45,7 @@ public class LabelTextArea extends WorkingTextArea{
     }
 
     public LabelTextArea(String text, Skin skin){
-        this(text, skin, RED);
+        this(text, skin, GREY);
     }
 
 

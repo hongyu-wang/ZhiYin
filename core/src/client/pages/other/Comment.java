@@ -60,7 +60,7 @@ public class Comment extends CommentShell implements Gesturable{
         transitionType = TransitionType.UP_TO_DOWN;
         addMessageField();
 
-        backEx = new ExecuteToTempState(previousState, this);
+        backEx = new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         initTable();
@@ -167,7 +167,7 @@ public class Comment extends CommentShell implements Gesturable{
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        if (!gestureYUp && !directionMainlyX)
+        if (gestureXRight && directionMainlyX)
             backEx.execute();
     }
 }

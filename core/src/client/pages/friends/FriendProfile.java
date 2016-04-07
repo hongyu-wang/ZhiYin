@@ -4,12 +4,16 @@ import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileArtists;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateProfileDiary;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.musicDiary.Diary4;
 import client.pages.other.ArtistProfile;
+import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
+import client.stateInterfaces.Gesturable;
 import client.stateInterfaces.Profile;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -25,7 +29,7 @@ import java.util.List;
  *
  * Created by blobbydude24 on 2016-03-21.
  */
-public class FriendProfile extends FriendProfileShell implements Profile {
+public class FriendProfile extends FriendProfileShell implements Profile, Gesturable {
     private List<Long> currentDiaries;
     private List<Long> currentArtists;
 
@@ -88,10 +92,10 @@ public class FriendProfile extends FriendProfileShell implements Profile {
 
         Button backButton = new Button(this);
         backButton.setBounds(0, 1217, 117, 117);
-        backButton.setExecutable(new ExecuteToTempState(previousState, this));
+        backButton.setExecutable(new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT));
         add(backButton);
 
-        ExecuteToTempState e = new ExecuteToTempState(new Friends2(name));
+        ExecuteToTempState e = new ExecuteToTempState(new Friends2(this, name));
         addImage("Friends/Chat@", e, 300, 950, 50, 50);
 
         Table t = new Table();
@@ -181,4 +185,9 @@ public class FriendProfile extends FriendProfileShell implements Profile {
     }
 
 
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(gestureXRight && directionMainlyX)
+            new ExecuteChangePage(Pages.FRIENDS4, TransitionType.LEFT_TO_RIGHT).execute();
+    }
 }

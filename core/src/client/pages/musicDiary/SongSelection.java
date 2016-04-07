@@ -3,6 +3,8 @@ package client.pages.musicDiary;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
+import client.pages.other.TransitionType;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by blobbydude24 on 2016-04-06.
  */
-public class SongSelection extends SongSelectionShell {
+public class SongSelection extends SongSelectionShell implements Gesturable{
 
     private ScrollPane scrollpane;
     private Table table;
@@ -27,7 +29,7 @@ public class SongSelection extends SongSelectionShell {
     protected void init() {
         super.init();
 
-        ExecuteChangePage backEx = new ExecuteChangePage(Pages.DIARY1);
+        ExecuteChangePage backEx = new ExecuteChangePage(Pages.DIARY1, TransitionType.UP_TO_DOWN);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         addImage("Other/Discard@", backEx, 36, 63, 340, 73);
@@ -70,4 +72,9 @@ public class SongSelection extends SongSelectionShell {
     }
 
 
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(!gestureYUp && !directionMainlyX)
+            new ExecuteChangePage(Pages.DIARY1, TransitionType.UP_TO_DOWN).execute();
+    }
 }

@@ -78,7 +78,7 @@ public class Sec1 extends Sec1Shell implements Gesturable{
     protected void init(){
         super.init();
 
-        backEx = new ExecuteToTempState(previousState, TransitionType.UP_TO_DOWN);
+        backEx = new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Image image = new Image(tx = new Texture("Friends/SwipeToDiscardButton@1.0.png"));
@@ -160,11 +160,9 @@ public class Sec1 extends Sec1Shell implements Gesturable{
     }
 
 
-
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-
-        if (!gestureYUp && !directionMainlyX){
+        if (gestureXRight && directionMainlyX){
             backEx.execute();
         }
     }

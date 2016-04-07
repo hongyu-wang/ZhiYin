@@ -40,6 +40,7 @@ public class WorkingTextArea extends TextArea implements Constants {
                     if (WorkingTextArea.keyboardIsVisible) {
                         WorkingTextArea.keyboardIsVisible = false;
                         StateManager.getInstance().translateStage();
+                        client.singletons.InputListener.setListener(StateManager.getInstance().getCurrentState());
                     }
                     return true;
                 }
@@ -54,6 +55,7 @@ public class WorkingTextArea extends TextArea implements Constants {
                 }
                 StateManager.getInstance().translateStage();
                 Gdx.input.setOnscreenKeyboardVisible(visible);
+                client.singletons.InputListener.prepare();
 
             }
         });
