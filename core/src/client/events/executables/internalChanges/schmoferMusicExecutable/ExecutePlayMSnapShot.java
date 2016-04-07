@@ -42,6 +42,8 @@ public class ExecutePlayMSnapShot implements Executable {
                 audioPlayer.setSongSnapShot(voice,song,(double)snapShot.getStartTime());
                 audioPlayer.prepareToPlay();
                 audioPlayer.play();
+
+                localDatabase.removeKeyFromServer(snapShot.getKey());
             }
 
         } else{
