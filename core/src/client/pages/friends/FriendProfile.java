@@ -15,13 +15,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Disposable;
 import server.model.social.MDiaryPost;
 import server.model.soundCloud.MBand;
 import tools.utilities.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by blobbydude24 on 2016-03-21.
  */
 public class FriendProfile extends FriendProfileShell implements Profile {
@@ -54,6 +57,10 @@ public class FriendProfile extends FriendProfileShell implements Profile {
 
     private ExecuteUpdate update1;
     private ExecuteUpdate update2;
+
+
+
+
 
     public FriendProfile(State previousState, String name){
         this.previousState = previousState;
@@ -130,13 +137,16 @@ public class FriendProfile extends FriendProfileShell implements Profile {
         String title = diaryPost.getTitle();
 
         Table t = new Table();
-        t.add(new Label(title, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
-        t.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().right().padRight(50*M);
+        t.add(new Label(title, SkinSingleton.getInstance())).expand().left().padLeft(50 * M);
+        t.add(new Image(tx = new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().right().padRight(50 * M);
+        disposables.add(tx);
         t.row();
-        t.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
+        t.add(new Image(tx = new Texture("Home/Line@1.0.png"))).width(750 * M).height(4*M).expandX().padLeft(50*M);
+        disposables.add(tx);
 
         Stack s = new Stack();
-        s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
+        s.add(new Image(tx = new Texture("Home/BlackBG@1.0.png")));
+        disposables.add(tx);
         s.add(t);
 
 
@@ -149,7 +159,7 @@ public class FriendProfile extends FriendProfileShell implements Profile {
             }
         });
 
-        table.add(s).width(750*M).height(110*M);
+        table.add(s).width(750*M).height(110 * M);
         table.row();
     }
 
@@ -163,13 +173,10 @@ public class FriendProfile extends FriendProfileShell implements Profile {
             }
         });
 
-        following.add(artistButton).width(150*M).height(150*M).padRight(50*M);
+        following.add(artistButton).width(150*M).height(150*M).padRight(50 * M);
     }
 
-    @Override
-    public void dispose() {
 
-    }
 
     @Override
     public void update(float dt) {

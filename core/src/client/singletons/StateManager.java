@@ -2,14 +2,14 @@ package client.singletons;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
-import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Gesturable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import client.tools.ImageParser;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import com.badlogic.gdx.utils.Disposable;
+import server.services.factories.ImageManagerFactory;
 
 /**
  * This is essentially a card layout.
@@ -92,7 +92,16 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
     @Override
     public void dispose() {
-        currentState.dispose();
+        for (State state : State.getEverything()){
+            state.dispose();
+        }
+
+        SkinSingleton.getInstance().dispose();
+        ShapeCreater.getInstance().dispose();
+        MainBatch.getInstance().dispose();
+        ImageParser.dispose();
+        ImageManagerFactory.createImageManager().dispose();
+
     }
 
     /**

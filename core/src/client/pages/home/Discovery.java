@@ -97,9 +97,5 @@ public class Discovery extends DiscoveryShell {
         searchField.getText();//TODO something
     }
 
-    @Override
-    public void dispose() {
-
-    }
 
 }

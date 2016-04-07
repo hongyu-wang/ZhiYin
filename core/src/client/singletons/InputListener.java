@@ -91,8 +91,9 @@ public class InputListener implements InputProcessor, Constants, GestureDetector
 
     public static void setListener(State state){
         prepare();
-        im.addProcessor(new GestureDetector(getInstance()));
+
         im.addProcessor(state.getStage());
+        im.addProcessor(new GestureDetector(getInstance()));
         im.addProcessor(InputListener.getInstance());
         Gdx.input.setInputProcessor(im);
 
@@ -179,6 +180,7 @@ public class InputListener implements InputProcessor, Constants, GestureDetector
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
+
         StateManager.getInstance().handleGesture(velocityX > 0, velocityY < 0, Math.abs(velocityX) > Math.abs(velocityY));
         return true;
     }

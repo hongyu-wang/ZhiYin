@@ -5,6 +5,7 @@ import client.singletons.InputListener;
 import client.singletons.StateManager;
 import client.tools.Constants;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
@@ -72,6 +73,7 @@ public enum TransitionType implements Constants {
                         () -> InputListener.setListener(newState)
                 )
         ));
+
     }
 
     private void handleDone(Stage newStage, State newState){

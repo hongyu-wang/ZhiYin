@@ -97,12 +97,15 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
 
         Table table = new Table();
         table.add(new Label(songName, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
-        table.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().right().padRight(50*M);
+        table.add(new Image(tx = new Texture("Home/Enter@1.0.png"))).width(16*M).height(26 * M).expand().right().padRight(50 * M);
+        disposables.add(tx);
         table.row();
-        table.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
+        table.add(new Image(tx = new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50 * M);
+        disposables.add(tx);
 
         Stack s = new Stack();
-        s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
+        s.add(new Image(tx = new Texture("Home/BlackBG@1.0.png")));
+        disposables.add(tx);
         s.add(table);
 
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
@@ -137,15 +140,9 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
     }
 
 
-    @Override
-    public void dispose() {
-
-    }
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        if (!gestureXRight){
 
-        }
     }
 }

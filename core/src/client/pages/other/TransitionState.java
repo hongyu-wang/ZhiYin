@@ -50,8 +50,5 @@ public class TransitionState extends State {
         willDraw = true;
     }
 
-    @Override
-    public void dispose() {
 
-    }
 }

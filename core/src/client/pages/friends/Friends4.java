@@ -37,13 +37,15 @@ public class Friends4 extends Friends4Shell{
     public void addFriend(String name, Image image){
         Table t = new Table();
         t.add(new Label(name, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
-        t.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26 * M).expand().right().padRight(50*M);
+        t.add(new Image(tx = new Texture("Home/Enter@1.0.png"))).width(16*M).height(26 * M).expand().right().padRight(50*M);
+        disposables.add(tx);
         t.row();
-        t.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
+        t.add(new Image(tx = new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
 
         Stack s = new Stack();
         //s.setSize(750*M, 116*M);
-        s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
+        s.add(new Image(tx = new Texture("Home/BlackBG@1.0.png")));
+        disposables.add(tx);
         s.add(t);
 
         final ExecuteToTempState e = new ExecuteToTempState(new FriendProfile(this, name, image), this);
@@ -59,10 +61,6 @@ public class Friends4 extends Friends4Shell{
     }
 
 
-    @Override
-    public void dispose() {
-
-    }
 
     private void talkerAddFriends(){
         FriendTalker ft = TalkerFactory.getFriendTalker();
@@ -77,9 +75,9 @@ public class Friends4 extends Friends4Shell{
 
                     Pixmap map = new Pixmap(pt.getProfileImage(), 0 ,pt.getProfileImage().length);
 
-                    Image image = new Image(new Texture(map));
-
-                    map.dispose();
+                    Image image = new Image(tx = new Texture(map));
+                    disposables.add(tx);
+                    disposables.add(map);
 
                     addFriend(friendName, image);
                 }

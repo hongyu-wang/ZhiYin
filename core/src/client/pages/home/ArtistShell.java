@@ -17,7 +17,8 @@ public abstract class ArtistShell extends State{
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("Home/ArtistBG.png"));
+        Image background = new Image(tx = new Texture("Home/ArtistBG.png"));
+        disposables.add(tx);
         background.setBounds(0, 0, WIDTH* StateManager.M, HEIGHT* StateManager.M);
         stage.addActor(background);
 
@@ -49,9 +50,5 @@ public abstract class ArtistShell extends State{
         setBottomBar();
     }
 
-    @Override
-    public void dispose() {
-
-    }
 
 }

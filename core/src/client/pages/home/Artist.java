@@ -72,22 +72,25 @@ public class Artist extends ArtistShell {
         });
 
         Table t1 = new Table();
-        t1.add(new Image(new Texture("Home/BlackBG@1.0.png"))).width(600*M).height(150*M);
+        t1.add(new Image(tx = new Texture("Home/BlackBG@1.0.png"))).width(600*M).height(150*M);
+        disposables.add(tx);
         right.add(t1);
 
         Table t2 = new Table();
         t2.add(new Label(artistName, SkinSingleton.getInstance())).expand().center().left().padLeft(50*M);
-        t2.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().center().right().padRight(50*M);
+        t2.add(new Image(tx = new Texture("Home/Enter@1.0.png"))).width(16*M).height(26 * M).expand().center().right().padRight(50 * M);
+        disposables.add(tx);
         right.add(t2);
 
         Table artistTable = new Table();
         artistTable.top();
-        artistTable.add(profilePic).width(100*M).height(100*M).expand().center().padLeft(50*M);
+        artistTable.add(profilePic).width(100*M).height(100 *M).expand().center().padLeft(50*M);
         artistTable.add(right).width(600*M).height(150*M);
 
         table.add(artistTable).width(750*M).height(150*M);
         table.row();
-        table.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
+        table.add(new Image(tx = new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
+        disposables.add(tx);
         table.row();
     }
 
@@ -114,10 +117,7 @@ public class Artist extends ArtistShell {
     }
 
 
-    @Override
-    public void dispose() {
 
-    }
 
     private void pullData(){
         pullArtistsFromServer();

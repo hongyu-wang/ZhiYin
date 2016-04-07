@@ -73,7 +73,8 @@ public class Login extends State {
     }
 
     private void initializeComponents(){
-        Image image = new Image(new Texture("Other//LoginBG.png"));
+        Image image = new Image(tx = new Texture("Other//LoginBG.png"));
+        disposables.add(tx);
         image.setBounds(0, 0, WIDTH * M, HEIGHT * M);
         stage.addActor(image);
         username = new WorkingTextArea("Alice", SkinSingleton.getInstance());
@@ -128,10 +129,6 @@ public class Login extends State {
 
 
 
-    @Override
-    public void dispose() {
-
-    }
 
 
     public void setText(String str){

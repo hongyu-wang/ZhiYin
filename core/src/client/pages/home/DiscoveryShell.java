@@ -15,7 +15,8 @@ public abstract class DiscoveryShell extends State {
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("Home/DiscoveryBG.png"));
+        Image background = new Image(tx = new Texture("Home/DiscoveryBG.png"));
+        disposables.add(tx);
         background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
 
@@ -30,9 +31,5 @@ public abstract class DiscoveryShell extends State {
         add(artistButton);
     }
 
-    @Override
-    public void dispose() {
-
-    }
 
 }

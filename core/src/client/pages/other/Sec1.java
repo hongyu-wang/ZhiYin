@@ -81,12 +81,12 @@ public class Sec1 extends Sec1Shell implements Gesturable{
         backEx = new ExecuteToTempState(previousState, TransitionType.UP_TO_DOWN);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png"));
+        Image image = new Image(tx = new Texture("Friends/SwipeToDiscardButton@1.0.png"));
         image.setBounds(26*M, 130*M, 698*M, 236*M);
 
         Table t = new Table();
         t.setBounds(26*M, 57*M, 698*M, 58*M);
-        t.add(new Image(new Texture("Other/HoldToRecord@1.0.png"))).center();
+        t.add(new Image(tx = new Texture("Other/HoldToRecord@1.0.png"))).center();
 
         DragButton dragButton = new DragButton(this, 280, image, getStage());
         dragButton.setInitialBounds(26, 130, 698, 236);
@@ -132,8 +132,10 @@ public class Sec1 extends Sec1Shell implements Gesturable{
 
     public void addPost(String name, String time, MAudio audio){
         Label label1 = new Label(name + "\n" + time, SkinSingleton.getInstance());
-        Image ripples = new Image(new Texture("Friends/Ripples0@1.0.png"));
-        ImageButton playButton = new ImageButton(new Image(new Texture("Friends/Play0@1.0.png")).getDrawable());
+        Image ripples = new Image(tx = new Texture("Friends/Ripples0@1.0.png"));
+        disposables.add(tx);
+        ImageButton playButton = new ImageButton(new Image(tx = new Texture("Friends/Play0@1.0.png")).getDrawable());
+        disposables.add(tx);
 
         final ExecutePlayMAudio ex = new ExecutePlayMAudio(audio);
         playButton.addListener(new ClickListener() {
@@ -143,7 +145,8 @@ public class Sec1 extends Sec1Shell implements Gesturable{
             }
         });
 
-        Image line = new Image(new Texture("Home/Line@1.0.png"));
+        Image line = new Image(tx = new Texture("Home/Line@1.0.png"));
+        disposables.add(tx);
 
         Table t = new Table();
         t.add(label1).expand().center().left().padLeft(50*M);
@@ -157,10 +160,6 @@ public class Sec1 extends Sec1Shell implements Gesturable{
     }
 
 
-    @Override
-    public void dispose() {
-
-    }
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {

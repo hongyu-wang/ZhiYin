@@ -19,8 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class
-Diary2 extends Diary2Shell{
+public class Diary2 extends Diary2Shell{
     private TextField titleField;
     private TextField bodyField;
 
@@ -42,7 +41,8 @@ Diary2 extends Diary2Shell{
         add(postButton);
 
         //------------------------------------------------------------------------------------------------------
-        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png"));
+        Image image = new Image(tx = new Texture("Friends/SwipeToDiscardButton@1.0.png"));
+        disposables.add(tx);
 
         DragButton dragButton = new DragButton(this, 360, image, getStage());
         dragButton.setInitialBounds(20, 270, 710, 280);
@@ -131,10 +131,7 @@ Diary2 extends Diary2Shell{
         bodyField.getText();//TODO something
     }
 
-    @Override
-    public void dispose() {
 
-    }
 
 
 }

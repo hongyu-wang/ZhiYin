@@ -71,7 +71,8 @@ public class Diary4 extends Diary4Shell{
         table.add(label1).width(700*M).padLeft(50*M).padTop(50*M);
         table.row();
 
-        table.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M).padTop(50*M);
+        table.add(new Image(tx = new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M).padTop(50*M);
+        disposables.add(tx);
         table.row();
 
 //        Label label2 = new Label("What you are reading right now is a very long string that I typed just to test our diary4 page;" +
@@ -93,10 +94,6 @@ public class Diary4 extends Diary4Shell{
         scrollpane.setScrollingDisabled(true, false);
     }
 
-    @Override
-    public void dispose() {
-
-    }
 
     @Override
     public void reset() {

@@ -69,13 +69,15 @@ public class Diary1 extends Diary1Shell implements Gesturable{
         Label l3 = new Label(title, SkinSingleton.getInstance());
 
         t.add(l1).expand().left().padLeft(50*M).padTop(50*M);
-        t.add(l2).expand().right().padRight(50*M).padTop(50*M);
+        t.add(l2).expand().right().padRight(50 * M).padTop(50*M);
         t.row().padTop(10*M);
-        t.add(l3).expand().left().padLeft(50*M);
+        t.add(l3).expand().left().padLeft(50 * M);
         t.row();
-        t.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(150*M).padTop(50*M);
+        t.add(new Image(tx = new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(150*M).padTop(50 * M);
+        disposables.add(tx);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@1.0.png"));
+        Image i2 = new Image(tx = new Texture("Home/BlackBG@1.0.png"));
+        disposables.add(tx);
 
         s.add(i2);
         s.add(t);
@@ -95,10 +97,6 @@ public class Diary1 extends Diary1Shell implements Gesturable{
     }
 
 
-    @Override
-    public void dispose() {
-
-    }
 
     @Override
     public void update(float dt){

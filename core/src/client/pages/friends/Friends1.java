@@ -5,6 +5,7 @@ import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import server.model.user.User;
 
 public class Friends1 extends Friends1Shell{
@@ -30,13 +31,10 @@ public class Friends1 extends Friends1Shell{
     public void addBox(FriendBox box){
         table.add(box.getTable()).width(750*M);
         table.row();
+        disposables.add(box);
     }
 
 
-    @Override
-    public void dispose() {
-
-    }
 
     private void talkerAddFriends(){
         FriendTalker ft = TalkerFactory.getFriendTalker();

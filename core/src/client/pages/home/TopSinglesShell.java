@@ -16,7 +16,8 @@ public abstract class TopSinglesShell extends State {
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("Home/TopSinglesBG.png"));
+        Image background = new Image(tx = new Texture("Home/TopSinglesBG.png"));
+        disposables.add(tx);
         background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
 
@@ -26,9 +27,6 @@ public abstract class TopSinglesShell extends State {
         add(backButton);
     }
 
-    @Override
-    public void dispose() {
 
-    }
 
 }

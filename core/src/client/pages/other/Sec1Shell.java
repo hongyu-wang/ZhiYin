@@ -12,7 +12,8 @@ public abstract class Sec1Shell extends State {
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("Other/Sec1BG.png"));
+        Image background = new Image(tx = new Texture("Other/Sec1BG.png"));
+        disposables.add(tx);
         background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
     }

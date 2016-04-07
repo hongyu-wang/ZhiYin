@@ -128,10 +128,7 @@ public class DragButton extends Component implements Dragable {
     }
 
 
-    @Override
-    public void dispose() {
 
-    }
 
     @Override
     public void update(float dt) {

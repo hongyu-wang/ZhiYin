@@ -45,12 +45,7 @@ public abstract class Container extends Component
         components.clear();
     }
 
-    @Override
-    public void dispose() {
-        for (Component comp : components){
-            comp.dispose();
-        }
-    }
+
 
     public void draw() {
         for (Component comp : components){

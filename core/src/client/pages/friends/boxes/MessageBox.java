@@ -7,7 +7,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Disposable;
 import server.model.media.MAudio;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static client.tools.Constants.M;
 
@@ -15,7 +19,7 @@ import static client.tools.Constants.M;
 /**
  * Contains a stack of actors. Used in Friends4.
  */
-public class MessageBox {
+public class MessageBox implements Disposable{
     //private static float y = 1334; // -56 each time
 
     private Stack stack;
@@ -25,6 +29,12 @@ public class MessageBox {
 
     private String friendName;
     private String timestamp;
+    private List<Disposable> disposables;
+    private Texture tx;
+
+    private MessageBox(){
+        disposables = new ArrayList<>();
+    }
 
     /**
      *
@@ -32,6 +42,7 @@ public class MessageBox {
      * @param byUser 0 means not by user, 1 means is by user.
      */
     public MessageBox(String message, int byUser, String friendName, String timestamp){
+        this();
         this.friendName = friendName;
         this.timestamp = timestamp;
         initTable(byUser);
@@ -43,7 +54,9 @@ public class MessageBox {
      * @param e The executable associated with the button.
      * @param byUser See above.
      */
+
     public MessageBox(Executable e, int byUser, MAudio audio, String friendName, String timestamp){
+        this();
         this.friendName = friendName;
         this.timestamp = timestamp;
         this.workingMAudio = audio;
@@ -63,8 +76,8 @@ public class MessageBox {
 
     private void initTextBox(String message, String timestamp){
         Table table1 = new Table();
-        Image image = new Image(new Texture("Friends/Bubble" + byUser + "@1.0.png"));
-
+        Image image = new Image(tx = new Texture("Friends/Bubble" + byUser + "@1.0.png"));
+        disposables.add(tx);
         Table table2 = new Table();
         LabelTextArea text = new LabelTextArea(message, SkinSingleton.getInstance());
         text.setPrefRows(message.length()/28 + 1);
@@ -85,17 +98,19 @@ public class MessageBox {
     }
 
     private void initSoundBox(final Executable e, String timestamp){
-        stack.setHeight(128*M);
+        stack.setHeight(128 * M);
 
-        Image image = new Image(new Texture("Friends/Bubble" + byUser + "@1.0.png"));
+        Image image = new Image(tx = new Texture("Friends/Bubble" + byUser + "@1.0.png"));
+        disposables.add(tx);
         Table t1 = new Table();
         t1.add(image).width(480*M).height(128*M);
         stack.add(t1);
 
         Table t2 = new Table();
-        t2.setSize(480*M, 128*M);
+        t2.setSize(480 * M, 128 * M);
 
-        Image image2 = new Image(new Texture("Friends/Play" + byUser + "@1.0.png"));
+        Image image2 = new Image(tx = new Texture("Friends/Play" + byUser + "@1.0.png"));
+        disposables.add(tx);
         final ImageButton button = new ImageButton(image2.getDrawable());
         button.addListener(new ClickListener() {
             @Override
@@ -106,7 +121,8 @@ public class MessageBox {
         button.setScale(M);
         t2.add(button).width(68*M).height(68*M).expand().left().padLeft(35*M);
 
-        Image image3 = new Image(new Texture("Friends/Ripples" + byUser + "@1.0.png"));
+        Image image3 = new Image(tx = new Texture("Friends/Ripples" + byUser + "@1.0.png"));
+        disposables.add(tx);
         t2.add(image3).width(362*M).height(88*M).expand().center().right().padRight(25*M);
 
         stack.add(t2);
@@ -132,4 +148,10 @@ public class MessageBox {
         return this.byUser;
     }
 
+    @Override
+    public void dispose() {
+        for (Disposable i : disposables){
+            i.dispose();
+        }
+    }
 }

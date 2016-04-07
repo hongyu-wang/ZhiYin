@@ -6,6 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Disposable;
 
 
 /**
@@ -15,13 +16,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public final class ImageParser {
 
     private static Image image;
-
+    private static Texture tx;
     public static void setUpImage(byte [] bytes, boolean cancelled){
         if(cancelled)
             image = null;
         else {
+
             Pixmap pixmap = new Pixmap(bytes, 0, bytes.length);
-            image = new Image(new Texture(pixmap));
+            image = new Image(tx = new Texture(pixmap));
             pixmap.dispose();
         }
 
@@ -37,6 +39,9 @@ public final class ImageParser {
         return image;
     }
 
+    public static void dispose(){
+        tx.dispose();
+    }
 
 
 }

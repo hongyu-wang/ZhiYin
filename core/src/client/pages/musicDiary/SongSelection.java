@@ -63,13 +63,11 @@ public class SongSelection extends SongSelectionShell {
     }
 
     private void addSong(SongBox songBox){
+        disposables.add(songBox);
         songBoxes.add(songBox);
         table.add(songBox.getTable()).width(750*M).height(110*M);
         table.row();
     }
 
-    @Override
-    public void dispose() {
 
-    }
 }

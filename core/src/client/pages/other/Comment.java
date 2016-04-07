@@ -103,7 +103,8 @@ public class Comment extends CommentShell implements Gesturable{
         Label label3 = new Label(comment, SkinSingleton.getInstance());
         label3.setWrap(true);
         label3.setWidth(700 * StateManager.M);
-        Image line = new Image(new Texture("Home/Line@1.0.png"));
+        Image line = new Image(tx = new Texture("Home/Line@1.0.png"));
+        disposables.add(tx);
 
         t.add(label1).expand().left().padLeft(50*M).padTop(50*M);
         t.add(label2).expand().right().padRight(50*M).padTop(50*M);
@@ -132,13 +133,9 @@ public class Comment extends CommentShell implements Gesturable{
     }
 
 
-    @Override
-    public void dispose() {
-
-    }
 
     public void update(float fy){
-        stage.act();
+        super.update(fy);
 
         pullData();
     }

@@ -12,13 +12,11 @@ public abstract class ArtistProfileShell extends State {
     protected void init() {
         super.init();
 
-        Image background = new Image(new Texture("Other/ArtistProfileBG.png"));
+        Image background = new Image(tx = new Texture("Other/ArtistProfileBG.png"));
+        disposables.add(tx);
         background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
     }
 
-    @Override
-    public void dispose() {
 
-    }
 }

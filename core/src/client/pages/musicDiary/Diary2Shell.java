@@ -16,7 +16,8 @@ public abstract class Diary2Shell extends State {
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("Diary/Diary2BG.png"));
+        Image background = new Image(tx = new Texture("Diary/Diary2BG.png"));
+        disposables.add(tx);
         background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
 
@@ -63,9 +64,6 @@ public abstract class Diary2Shell extends State {
 
     }
 
-    @Override
-    public void dispose() {
 
-    }
 
 }

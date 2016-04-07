@@ -29,10 +29,7 @@ public class Button extends Component implements Pressable{
     protected void init() {
     }
 
-    @Override
-    public void dispose() {
 
-    }
 
     public void draw(Batch sb, float parentAlpha) {
         super.draw(sb, parentAlpha);

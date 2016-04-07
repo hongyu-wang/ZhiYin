@@ -12,7 +12,8 @@ public abstract class TaggedShell extends State {
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("Home/TaggedBG.png"));
+        Image background = new Image(tx = new Texture("Home/TaggedBG.png"));
+        disposables.add(tx);
         background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
 

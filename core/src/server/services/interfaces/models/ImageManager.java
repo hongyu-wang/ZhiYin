@@ -1,6 +1,7 @@
 package server.services.interfaces.models;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Disposable;
 import server.model.media.MImage;
 
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by Kevin Zheng on 2016-03-04.
  */
-public interface ImageManager {
+public interface ImageManager extends Disposable{
 
     /**Creates a new image based on an mImage.
      *

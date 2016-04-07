@@ -81,7 +81,8 @@ public class Friends2 extends Friends2Shell{
 
     private void setUpRecord(){
         //This section initializes the DragButton
-        Image image = new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png"));
+        Image image = new Image(tx = new Texture("Friends/SwipeToDiscardButton@1.0.png"));
+        disposables.add(tx);
         DragButton dragButton = new DragButton(this, (int)(500*M), image, getStage());
         dragButton.setInitialBounds(32, 98, 750 - 64, 236);
         dragButton.setReleaseExecutable(new ExecuteSendAudioMessage(this));
@@ -107,7 +108,7 @@ public class Friends2 extends Friends2Shell{
         table.row().expandX();
         scrollpane.layout();
         scrollpane.setScrollPercentY(100);
-
+        disposables.add(box);
         //new ExecuteSendAudioMessage(this, box).execute();
     }
 
@@ -127,10 +128,7 @@ public class Friends2 extends Friends2Shell{
         super.update(dt);
     }
 
-    @Override
-    public void dispose() {
 
-    }
 
     private void addMessageField(){
         messageField = new WorkingTextArea("Message...", SkinSingleton.getInstance());

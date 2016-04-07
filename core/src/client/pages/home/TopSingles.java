@@ -56,16 +56,19 @@ public class TopSingles extends TopSinglesShell{
         Table t = new Table();
 
         Label single = new Label(songName, SkinSingleton.getInstance());
-        Image i = new Image(new Texture("Home/Enter@1.0.png"));
-        Image line = new Image(new Texture("Home/Line@1.0.png"));
-        line.setSize(750*M, 4*M);
+        Image i = new Image(tx = new Texture("Home/Enter@1.0.png"));
+        disposables.add(tx);
+        Image line = new Image(tx = new Texture("Home/Line@1.0.png"));
+        disposables.add(tx);
+        line.setSize(750 * M, 4*M);
 
         t.add(single).expand().left().padLeft(50*M);
-        t.add(i).width(16 * M).height(26*M).expand().right().padRight(50*M);
+        t.add(i).width(16 * M).height(26 * M).expand().right().padRight(50*M);
         t.row();
         t.add(line).width(750*M).height(4*M).expandX().padLeft(50 * M);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@1.0.png"));
+        Image i2 = new Image(tx = new Texture("Home/BlackBG@1.0.png"));
+        disposables.add(tx);
 
         s.add(i2);
         s.add(t);

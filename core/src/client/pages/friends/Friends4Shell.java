@@ -15,26 +15,19 @@ public abstract class Friends4Shell extends State {
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("Friends/Friends4BG.png"));
+        Image background = new Image(tx = new Texture("Friends/Friends4BG.png"));
         background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
+        disposables.add(tx);
 
         Button messagesButton = new Button(this);
         messagesButton.setBounds(0, 1217, 375, 117);
         messagesButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
         add(messagesButton);
 
-//        DragButton SwipeToDiscardDragButton = new DragButton(this, 300);
-//        SwipeToDiscardDragButton.setBounds(0 + 1, 117, 750, 283);
-//        SwipeToDiscardDragButton.setDragExecutable(new ExecuteChangePage(Pages.FRIENDS1));
-//        SwipeToDiscardDragButton.setReleaseExecutable(new ExecuteChangePage(Pages.FRIENDS3));
-//        add(SwipeToDiscardDragButton);
 
         setBottomBar();
     }
 
-    @Override
-    public void dispose() {
 
-    }
 }

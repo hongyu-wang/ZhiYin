@@ -12,7 +12,8 @@ public abstract class CommentShell extends State {
     public void init(){
         super.init();
 
-        Image background = new Image(new Texture("Other/CommentBG.png"));
+        Image background = new Image(tx = new Texture("Other/CommentBG.png"));
+        disposables.add(tx);
         background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
     }

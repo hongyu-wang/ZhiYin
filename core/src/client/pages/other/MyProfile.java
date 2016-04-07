@@ -165,12 +165,15 @@ public class MyProfile extends MyProfileShell implements Profile {
 
         Table t = new Table();
         t.add(new Label(title, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
-        t.add(new Image(new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().right().padRight(50*M);
+        t.add(new Image(tx = new Texture("Home/Enter@1.0.png"))).width(16*M).height(26 * M).expand().right().padRight(50 * M);
+        disposables.add(tx);
         t.row();
-        t.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
+        t.add(new Image(tx = new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50 * M);
+        disposables.add(tx);
 
         Stack s = new Stack();
-        s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
+        s.add(new Image(tx = new Texture("Home/BlackBG@1.0.png")));
+        disposables.add(tx);
         s.add(t);
 
         final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, diaryPost), this);
@@ -191,7 +194,8 @@ public class MyProfile extends MyProfileShell implements Profile {
         Stack s = new Stack();
 
         final ImageButton artistButton = new ImageButton(image.getDrawable());
-        final ImageButton removeButton = new ImageButton(new Image(new Texture("Other/Unfollow@1.0.png")).getDrawable());
+        final ImageButton removeButton = new ImageButton(new Image(tx = new Texture("Other/Unfollow@1.0.png")).getDrawable());
+        disposables.add(tx);
 
         Table artistTable = new Table();
         artistTable.add(artistButton).width(150*M).height(150*M);
@@ -228,8 +232,5 @@ public class MyProfile extends MyProfileShell implements Profile {
         // Do not call scrollpane2.layout(). This will cause the artists to appear vertically instead of horizontally.
     }
 
-    @Override
-    public void dispose() {
 
-    }
 }

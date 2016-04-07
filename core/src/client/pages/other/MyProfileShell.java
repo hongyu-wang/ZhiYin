@@ -12,7 +12,8 @@ public abstract class MyProfileShell extends State {
     protected void init(){
         super.init();
 
-        Image background = new Image(new Texture("Other/MyProfileBG.png"));
+        Image background = new Image(tx = new Texture("Other/MyProfileBG.png"));
+        disposables.add(tx);
         background.setBounds(0, 0, WIDTH*M, HEIGHT*M);
         stage.addActor(background);
 
@@ -20,10 +21,6 @@ public abstract class MyProfileShell extends State {
 
     }
 
-    @Override
-    public void dispose() {
-
-    }
 
 
 }

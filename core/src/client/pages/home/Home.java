@@ -57,7 +57,9 @@ public class Home extends HomeShell {
         super.init();
 
         newRelease = new Table();
-        Image i1 = new Image(new Texture("Home/NewRelease@1.0.png"));
+        Image i1 = new Image(tx = new Texture("Home/NewRelease@1.0.png"));
+        disposables.add(tx);
+
         final ImageButton b1 = new ImageButton(i1.getDrawable());
 
         if (os == WINDOWS) {
@@ -74,7 +76,8 @@ public class Home extends HomeShell {
         newRelease.add(b1).width(750*M).height(92*M);
 
         topSingles = new Table();
-        Image i2 = new Image(new Texture("Home/TopSingles@1.0.png"));
+        Image i2 = new Image(tx = new Texture("Home/TopSingles@1.0.png"));
+        disposables.add(tx);
         final ImageButton b2 = new ImageButton(i2.getDrawable());
 
         b2.addListener(new ClickListener() {
@@ -141,16 +144,19 @@ public class Home extends HomeShell {
         Table t = new Table();
 
         Label label = new Label(artistName + "\n" + songName, SkinSingleton.getInstance());
-        Image line = new Image(new Texture("Home/Line@1.0.png"));
+        Image line = new Image(tx = new Texture("Home/Line@1.0.png"));
+        disposables.add(tx);
 
-        Image i = new Image(new Texture("Home/Enter@1.0.png"));
+        Image i = new Image(tx = new Texture("Home/Enter@1.0.png"));
+        disposables.add(tx);
 
         t.add(label).expand().left().padLeft(50*M);
         t.add(i).expand().right().padRight(50*M);
         t.row();
         t.add(line).padTop(28*M);
 
-        Image i2 = new Image(new Texture("Home/BlackBG@1.0.png"));
+        Image i2 = new Image(tx = new Texture("Home/BlackBG@1.0.png"));
+        disposables.add(tx);
 
         s.add(i2);
         s.add(t);
@@ -173,10 +179,6 @@ public class Home extends HomeShell {
         return s;
     }
 
-    @Override
-    public void dispose() {
-
-    }
 
     @Override
     public void draw(){

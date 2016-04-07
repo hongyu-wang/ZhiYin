@@ -1,16 +1,14 @@
 package client.component;
 
 import client.singletons.MainBatch;
-import client.stateInterfaces.Disposable;
-import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Disposable;
 
 
-
-public abstract class Component extends Actor implements Disposable, Updatable, Constants
+public abstract class Component extends Actor implements Updatable, Constants
 {
 
 

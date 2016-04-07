@@ -33,7 +33,6 @@ public class GameLoop extends ApplicationAdapter  {
 
 
 
-
     }
 
 	@Override

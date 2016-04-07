@@ -18,8 +18,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Disposable;
 import tools.utilities.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,10 +31,15 @@ import java.util.List;
  */
 public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor, Constants {
 
+    private static List<State> everything = new ArrayList<>();
+    protected ArrayList<Disposable> disposables;
+
     protected Stage stage;
     private InputController inputController;
     protected TransitionType transitionType;
 
+    protected Texture tx;
+    protected Disposable ds;
 
     @Override
     public void update(float dt) {
@@ -50,6 +57,8 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
      * This method will initialize all values as required within state
      */
     protected void init(){
+        disposables = new ArrayList<>();
+        everything.add(this);
         components = Utils.newList();
         inputController = new InputController();
         stage = new Stage();
@@ -120,10 +129,16 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     }
 
     protected Table createImage(String imagePath, Executable e, int x, int y, int width, int height ){
-        Image image = new Image(new Texture(imagePath + "1.0" + ".png"));
-        image.setSize(image.getWidth()*M, image.getHeight()*M);
+
+        Image image = new Image(tx = new Texture(imagePath + "1.0" + ".png"));
+        disposables.add(tx);
+
+        image.setSize(image.getWidth() * M, image.getHeight() * M);
+
+
         Stack s = new Stack();
-        s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
+        s.add(new Image(tx = new Texture("Home/BlackBG@1.0.png")));
+        disposables.add(tx);
 
         Table t = new Table();
         t.add(image).width(image.getWidth()).height(image.getHeight());
@@ -139,7 +154,7 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
         Table table = new Table();
         table.add(s);
-        table.setBounds(x*M, y*M, width*M, height*M);
+        table.setBounds(x * M, y * M, width * M, height * M);
 
         return table;
     }
@@ -212,5 +227,15 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
         return transitionType;
     }
 
+    public static List<State> getEverything() {
+        return everything;
+    }
+
+    @Override
+    public void dispose() {
+        for (Disposable i : disposables){
+            i.dispose();
+        }
+    }
 }
 
