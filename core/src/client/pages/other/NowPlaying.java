@@ -200,10 +200,7 @@ public class NowPlaying extends State implements Gesturable{
         stage.addActor(pause);
     }
 
-    @Override
-    public void dispose() {
 
-    }
 
     @Override
     public void update(float dt){

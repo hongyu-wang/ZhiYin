@@ -27,9 +27,8 @@ public enum TransitionType implements Constants {
     private int dir;
     private boolean type;
     private String name;
-    private State newState, oldState;
+    private State newState;
     private Stage newStage, oldStage;
-    private TransitionState transitionState;
 
     TransitionType(String name){
         this.name = name;
@@ -44,10 +43,10 @@ public enum TransitionType implements Constants {
 
 
 
-    public void setUpAction(State newState, State oldState, TransitionState transitionState){
-        this.transitionState = transitionState;
+    public void setUpAction(State newState, State oldState){
+
         this.newState = newState;
-        this.oldState = oldState;
+
         newStage = newState.getStage();
         oldStage = oldState.getStage();
 
@@ -101,7 +100,7 @@ public enum TransitionType implements Constants {
                         Actions.run(() -> {
 
                             StateManager.getInstance().toTemporaryState(newState);
-
+                            oldStage.addAction(Actions.moveTo(0, 0));
                         })
 
                 )
@@ -122,7 +121,7 @@ public enum TransitionType implements Constants {
                         Actions.moveTo(0, 0, 0.5F, Interpolation.pow2Out),
                         Actions.run(() -> {
                             StateManager.getInstance().toTemporaryState(newState);
-
+                            oldStage.addAction(Actions.moveTo(0, 0));
                         })
 
                 )
