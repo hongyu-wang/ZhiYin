@@ -346,7 +346,7 @@ public class NowPlaying extends State implements Gesturable{
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        if (gestureXRight && directionMainlyX)
-            backEx.execute();
+        //if (gestureXRight && directionMainlyX)
+            //backEx.execute();
     }
 }
