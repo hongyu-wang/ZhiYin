@@ -177,7 +177,7 @@ public class NowPlaying extends State implements Gesturable{
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     play();
-                    new ExecutePlayMusic().execute();
+//                    new ExecutePlayMusic().execute();
                 }
             });
 
@@ -193,7 +193,7 @@ public class NowPlaying extends State implements Gesturable{
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     pause();
-                    new ExecutePlayMusic().execute();
+//                    new ExecutePlayMusic().execute();
                 }
             });
 
@@ -203,10 +203,8 @@ public class NowPlaying extends State implements Gesturable{
 
     public static boolean isPlaying(){return playing;}
 
-
     @Override
     public void dispose() {
-
 
     }
 
@@ -350,20 +348,13 @@ public class NowPlaying extends State implements Gesturable{
         return minutes+":"+seconds;
     }
 
-
-
-
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
         if (gestureXRight && directionMainlyX){
-
-
             backEx.execute();
         }
-
         if (gestureYUp && !directionMainlyX)
             commentEx.execute();
-
     }
 
 }

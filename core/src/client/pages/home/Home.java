@@ -20,7 +20,7 @@ import tools.serverTools.databases.LocalDatabaseFactory;
 import tools.utilities.Utils;
 
 import java.util.List;
-import java.util.TreeMap;
+import java.util.Map;
 
 
 /**
@@ -103,7 +103,7 @@ public class Home extends HomeShell {
 
     private void initMusic(){
         int i = 0;
-        TreeMap<String, MMusic> map = AudioCreator.songNameToMMusic;
+        Map<String, MMusic> map = AudioCreator.songNameToMMusic;
 
         boolean isTopSingle = false;
         for (String str : map.keySet()){

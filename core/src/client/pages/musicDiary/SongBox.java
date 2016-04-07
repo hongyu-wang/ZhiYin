@@ -15,8 +15,8 @@ import static client.tools.Constants.M;
  */
 public class SongBox {
 
-    private static Image image0 = new Image(new Texture("Diary/Unselected.png"));
-    private static Image image1 = new Image(new Texture("Diary/Selected.png"));
+    private static Image image0 = new Image(new Texture("Diary/Unselected@1.0.png"));
+    private static Image image1 = new Image(new Texture("Diary/Selected@1.0.png"));
 
     private Table table;
 
@@ -38,15 +38,15 @@ public class SongBox {
     }
 
     private void initTable(){
-        Table table = new Table();
-        table.add(new Label(songName, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
-        table.add(image).width(40*M).height(40*M).expand().right().padRight(50*M);
-        table.row();
-        table.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
+        Table t = new Table();
+        t.add(new Label(songName, SkinSingleton.getInstance())).expand().left().padLeft(50*M);
+        t.add(image).width(40*M).height(40*M).expand().right().padRight(50*M);
+        t.row();
+        t.add(new Image(new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(50*M);
 
         Stack s = new Stack();
         s.add(new Image(new Texture("Home/BlackBG@1.0.png")));
-        s.add(table);
+        s.add(t);
 
         s.addListener(new ClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class SongBox {
 
     public void select(){
         selected = !selected;
-        image.setDrawable((selected ? image0 : image1).getDrawable());
+        image.setDrawable((selected ? image1 : image0).getDrawable());
     }
 
     public boolean isSelected(){

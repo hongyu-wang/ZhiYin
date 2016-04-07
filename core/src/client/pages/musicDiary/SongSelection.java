@@ -33,7 +33,7 @@ public class SongSelection extends SongSelectionShell {
         addImage("Other/Discard@", backEx, 36, 63, 340, 73);
 
         TestExecutable sendEx = new TestExecutable("send");
-        addImage("Other/Send@", backEx, 376, 63, 339, 73);
+        addImage("Other/Send2@", sendEx, 376, 63, 339, 73);
 
         table = new Table();
         table.top();
@@ -44,29 +44,28 @@ public class SongSelection extends SongSelectionShell {
 
         songBoxes = new ArrayList<>();
 
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
-        addSong(new SongBox("song"));
+        addSong(new SongBox("song1"));
+        addSong(new SongBox("song2"));
+        addSong(new SongBox("song3"));
+        addSong(new SongBox("song4"));
+        addSong(new SongBox("song5"));
+        addSong(new SongBox("song6"));
+        addSong(new SongBox("song7"));
+        addSong(new SongBox("song8"));
+        addSong(new SongBox("song9"));
+        addSong(new SongBox("song10"));
+        addSong(new SongBox("song11"));
+        addSong(new SongBox("song12"));
+        addSong(new SongBox("song13"));
+        addSong(new SongBox("song14"));
+        addSong(new SongBox("song15"));
+        addSong(new SongBox("song16"));
     }
 
     private void addSong(SongBox songBox){
         songBoxes.add(songBox);
         table.add(songBox.getTable()).width(750*M).height(110*M);
+        table.row();
     }
 
     @Override
