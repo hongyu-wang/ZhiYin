@@ -64,7 +64,6 @@ Diary2 extends Diary2Shell{
 
         add(dragButton);
 
-
         Button holdToRecordButton = new Button(this);
         holdToRecordButton.setBounds(0, 0, 268, 264);
         holdToRecordButton.setExecutable(new ExecutableMultiplexer(

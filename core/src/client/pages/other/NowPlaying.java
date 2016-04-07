@@ -159,6 +159,11 @@ public class NowPlaying extends State implements Gesturable{
         initAlbumArt();
 
         setUpSnapChat();
+
+        System.out.println("END OF NOW PLAYING INIT");
+        System.out.println("play: " + play.getX() + " " + play.getY() + " " + play.getWidth() + " " + play.getHeight());
+        System.out.println("pause: " + pause.getX() + " " + pause.getY() + " " + pause.getWidth() + " " + pause.getHeight());
+
     }
 
     public static void initStatics(Stage stage){
@@ -184,16 +189,23 @@ public class NowPlaying extends State implements Gesturable{
             play.setBounds(288 * M, 177 * M, 180 * M, 180 * M);
         }
         staticStage = stage;
+        System.out.println("INITSTATICS WAS EXECUTED");
+        System.out.println("static stage: " + staticStage);
+        System.out.println("stage: " + stage);
+        System.out.println("play: " + play);
+        System.out.println("pause " + pause;
     }
 
     public static void pause(){
         pause.remove();
         staticStage.addActor(play);
+        System.out.println("PAUSE WAS EXECUTED");
     }
 
     public static void play(){
         play.remove();
         staticStage.addActor(pause);
+        System.out.println("PLAY WAS EXECUTED");
     }
 
     @Override
