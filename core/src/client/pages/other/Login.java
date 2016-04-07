@@ -120,7 +120,7 @@ public class Login extends State {
 
             new ExecuteChangePage(Pages.HOME, TransitionType.FADE_IN).execute();
 
-//            new ExecuteUpdateSnapChatMessage();
+
         }
         else{
 //            vb.pull();

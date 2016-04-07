@@ -4,6 +4,7 @@ import server.model.social.MDiaryPost;
 import server.model.media.*;
 import server.model.user.User;
 import server.services.interfaces.models.MusicDiary;
+import tools.utilities.Utils;
 
 /**
  * Created by calin on 06/03/2016.
@@ -31,13 +32,17 @@ public class MusicDiaryImplementation implements MusicDiary {
 //        return diaryPost;
 //    }
     @Override
-    public MDiaryPost createDiaryPost(User user, long image, long music, String title, long description){
+    public MDiaryPost createDiaryPost(User user, long image, long music,long audio, String title, long description){
         MDiaryPost diaryPost = new MDiaryPost();
         diaryPost.setCreator(user.getKey());
         diaryPost.setImageKey(image);
         diaryPost.setMusicKey(music);
+        diaryPost.setAudioKey(audio);
         diaryPost.setTitle(title);
         diaryPost.setText(description);
+        diaryPost.setMusic(Utils.newList());
+        diaryPost.setComments(Utils.newList());
+        diaryPost.setAudio(Utils.newList());
 
         return diaryPost;
     }

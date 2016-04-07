@@ -1,4 +1,5 @@
 package client.singletons;
+import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateSnapChatMessage;
 import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
@@ -19,7 +20,6 @@ import server.services.factories.ImageManagerFactory;
  */
 public class StateManager implements Disposable, Updatable, Drawable, Constants {
     private boolean stateUp;
-
     /**
      * The current instance of StateManager
      */
@@ -60,6 +60,8 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
      */
     public void changeState(Pages page){
         toTemporaryState(page.getStateReference());
+
+        new ExecuteUpdateSnapChatMessage().execute();
     }
 
 
@@ -70,6 +72,9 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         currentState.reset();
 
         InputListener.setListener(currentState);
+
+
+        new ExecuteUpdateSnapChatMessage().execute();
     }
 
 

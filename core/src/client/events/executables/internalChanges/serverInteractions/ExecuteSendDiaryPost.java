@@ -1,6 +1,9 @@
 package client.events.executables.internalChanges.serverInteractions;
 
 import client.pages.musicDiary.Diary2;
+import server.model.media.MAudio;
+import server.model.media.MImage;
+import server.model.media.MMusic;
 import server.model.media.MText;
 import server.model.social.MDiaryPost;
 import server.model.structureModels.ServerModel;
@@ -29,7 +32,11 @@ public class ExecuteSendDiaryPost implements ExecuteServer {
         UserDiaryContent userDiaryContent  = localDatabase.getModel(mainUser.getDiary());
 
         MText diaryBody = generateMText(diary2.getBody());
-        MDiaryPost diary = generateMDiaryPost(mainUser, diaryBody, diary2.getTitle());
+        MAudio audio = diary2.getAudio();
+        MMusic music = diary2.getMusic();
+        MImage image = diary2.getImage();
+
+        MDiaryPost diary = generateMDiaryPost(mainUser, diaryBody, diary2.getTitle(), image, music, audio);
 
         userDiaryContent.getDiaryKeys().add(diary.getKey());
 
@@ -39,7 +46,15 @@ public class ExecuteSendDiaryPost implements ExecuteServer {
         pushList.add(diary);
         pushList.add(diaryBody);
         pushList.add(userDiaryContent);
-
+        if(audio.getKey() != 0){
+            pushList.add(audio);
+        }
+        if(music.getKey() != 0){
+            pushList.add(music);
+        }
+        if(image.getKey() != 0){
+            pushList.add(image);
+        }
         localDatabase.pushModel(pushList);
     }
 
@@ -51,8 +66,8 @@ public class ExecuteSendDiaryPost implements ExecuteServer {
         return diaryBody;
     }
 
-    private MDiaryPost generateMDiaryPost(User mainUser, MText diaryBody, String diaryTitle){
-        MDiaryPost diaryPost = MusicDiaryFactory.createMusicDiary().createDiaryPost(mainUser, -1, -1, diaryTitle, diaryBody.getKey());
+    private MDiaryPost generateMDiaryPost(User mainUser, MText diaryBody, String diaryTitle, MImage image, MMusic music, MAudio audio){
+        MDiaryPost diaryPost = MusicDiaryFactory.createMusicDiary().createDiaryPost(mainUser, image.getKey(), music.getKey(), audio.getKey(), diaryTitle, diaryBody.getKey());
 
         diaryPost.setTimeStamp(System.currentTimeMillis());
 

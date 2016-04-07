@@ -5,13 +5,19 @@ import client.component.basicComponents.DragButton;
 import client.events.executables.internalChanges.ExecutableMultiplexer;
 import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.dragButtonExecutables.ExecuteAddDragButton;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteSetDiaryPostAudio;
+import client.events.executables.internalChanges.schmoferMusicExecutable.ExecuteStartSnapChat;
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendDiaryPost;
 import client.events.executables.internalChanges.serverInteractions.ExecuteServer;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.singletons.SkinSingleton;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
+import server.model.media.MAudio;
+import server.model.media.MImage;
+import server.model.media.MMusic;
 
 /**
  * This is the second music diary page as given in the
@@ -23,6 +29,35 @@ public class Diary2 extends Diary2Shell{
     private TextField titleField;
     private TextField bodyField;
 
+    public MMusic getMusic() {
+        return music;
+    }
+
+    public void setMusic(MMusic music) {
+        this.music = music;
+    }
+
+    public MAudio getAudio() {
+        return audio;
+    }
+
+    public void setAudio(MAudio audio) {
+        this.audio = audio;
+    }
+
+    private MMusic music;
+    private MAudio audio;
+
+    public MImage getImage() {
+        return image;
+    }
+
+    public void setImage(MImage image) {
+        this.image = image;
+    }
+
+    private MImage image;
+
     public Diary2(){
         init();
     }
@@ -30,6 +65,10 @@ public class Diary2 extends Diary2Shell{
     protected void init() {
 
         super.init();
+
+        image = new MImage();
+        audio = new MAudio();
+        music = new MMusic();
 
         addTitleField();
         addBodyField();
@@ -53,9 +92,8 @@ public class Diary2 extends Diary2Shell{
         ));
 
         dragButton.setReleaseExecutable(new ExecutableMultiplexer(
-
-                () -> System.out.println("Release")
-            /*
+                new ExecuteSetDiaryPostAudio(this)
+             /*
              *TODO make a new Diary4 using title, body, audio (audio may be null).
              *new ExecuteToTempState(new Diary4())
              */
