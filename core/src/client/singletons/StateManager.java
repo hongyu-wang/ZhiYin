@@ -60,8 +60,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
      */
     public void changeState(Pages page){
         toTemporaryState(page.getStateReference());
-
-        new ExecuteUpdateSnapChatMessage().execute();
     }
 
 
@@ -72,9 +70,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         currentState.reset();
 
         InputListener.setListener(currentState);
-
-
-        new ExecuteUpdateSnapChatMessage().execute();
     }
 
 
