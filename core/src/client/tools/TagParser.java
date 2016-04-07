@@ -59,7 +59,7 @@ public final class TagParser {
 
 
     public static Queue<int[]> checkForTag(String message) {
-        Pattern checkRegex = Pattern.compile("#[A-Za-z]*");
+        Pattern checkRegex = Pattern.compile("#[A-Za-z0-9]*");
         Matcher regexMatcher = checkRegex.matcher(message);
         Queue<int[]> tagIndices = new ArrayDeque<>();
         while (regexMatcher.find()) {
