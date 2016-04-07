@@ -58,8 +58,9 @@ public class NowPlaying extends State implements Gesturable{
 
     private MMusic post;
 
-    private Image play;
-    private Image pause;
+    private static Image play;
+    private static Image pause;
+    private static Stage staticStage;
 
     private Table create;
     private Table showComments;
@@ -89,16 +90,12 @@ public class NowPlaying extends State implements Gesturable{
         byte [] bytes = image.getImage();
 
         Pixmap px = new Pixmap(bytes, 0, bytes.length);
-        disposables.add(px);
+
         Texture albumArt = new Texture(px);
-        disposables.add(tx);
-        disposables.add(albumArt);
+        px.dispose();
 
 
-
-        filter = new Image(tx = new Texture("Filter.png"));
-        disposables.add(tx);
-
+        filter = new Image(new Texture("Filter.png"));
         filter.setColor(1, 1, 1, 0.9F);
         filter.setBounds((50) * M, (1160 - 655) * M, (655) * M, (655) * M);
 
@@ -162,12 +159,16 @@ public class NowPlaying extends State implements Gesturable{
         initAlbumArt();
 
         setUpSnapChat();
+
+        System.out.println("END OF NOW PLAYING INIT");
+        System.out.println("play: " + play.getX() + " " + play.getY() + " " + play.getWidth() + " " + play.getHeight());
+        System.out.println("pause: " + pause.getX() + " " + pause.getY() + " " + pause.getWidth() + " " + pause.getHeight());
+
     }
 
-    public void initStatics(Stage stage){
+    public static void initStatics(Stage stage){
         if(play == null || pause == null){
-            pause = new Image(tx = new Texture("NowPlaying/Pause@1.0.png"));
-            disposables.add(tx);
+            pause = new Image(new Texture("NowPlaying/Pause@1.0.png"));
             pause.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -177,8 +178,7 @@ public class NowPlaying extends State implements Gesturable{
             });
             pause.setBounds(288*M, 177*M, 180*M, 180*M);
 
-            play = new Image(tx = new Texture("NowPlaying/Play@1.0.png"));
-            disposables.add(tx);
+            play = new Image(new Texture("NowPlaying/Play@1.0.png"));
             play.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -188,18 +188,30 @@ public class NowPlaying extends State implements Gesturable{
             });
             play.setBounds(288 * M, 177 * M, 180 * M, 180 * M);
         }
+        staticStage = stage;
+        System.out.println("INITSTATICS WAS EXECUTED");
+        System.out.println("static stage: " + staticStage);
+        System.out.println("stage: " + stage);
+        System.out.println("play: " + play);
+        System.out.println("pause " + pause;
     }
 
-    public void pause(){
+    public static void pause(){
         pause.remove();
-        stage.addActor(play);
+        staticStage.addActor(play);
+        System.out.println("PAUSE WAS EXECUTED");
     }
 
-    public void play(){
+    public static void play(){
         play.remove();
-        stage.addActor(pause);
+        staticStage.addActor(pause);
+        System.out.println("PLAY WAS EXECUTED");
     }
 
+    @Override
+    public void dispose() {
+
+    }
 
     @Override
     public void update(float dt){
@@ -214,8 +226,7 @@ public class NowPlaying extends State implements Gesturable{
 
     private void setUpSnapChat(){
         //TODO setup this button.
-        DragButton snapChat = new DragButton(this, 250, new Image(tx = new Texture("Friends/SwipeToDiscardButton@1.0.png")), getStage());
-        disposables.add(tx);
+        DragButton snapChat = new DragButton(this, 250, new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png")), getStage());
         snapChat.setInitialBounds(32, 135, 750 - 64, 236);
 
         ConfirmDialog dialog = setUpWindows();
