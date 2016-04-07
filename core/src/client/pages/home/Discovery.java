@@ -24,6 +24,7 @@ public class Discovery extends DiscoveryShell {
     private TextField searchField;
 
     private float currentWidth;
+    private int numTags;
 
     private ExecuteUpdate update;
 
@@ -37,11 +38,12 @@ public class Discovery extends DiscoveryShell {
         addSearchField();
 
         table = new Table();
-        table.top().padTop(50*M);
+        table.top();
         table.setBounds(0, 0, 750*M, 1134*M);
         stage.addActor(table);
 
         currentWidth = 0;
+        numTags = 0;
 
         this.update = new ExecuteUpdateTags(this);
     }
@@ -56,9 +58,14 @@ public class Discovery extends DiscoveryShell {
             }
         });
 
-        addWrapped(tag);
+        if(numTags++ % 3 == 0){
+            table.row().padTop(50*M);
+        }
+        table.add(tag).center().padLeft(20*M).padRight(20*M);
 
-        table.setDebug(true);
+//        addWrapped(tag);
+
+//        table.setDebug(true);
     }
 
     private void addWrapped(TextButton tag){
