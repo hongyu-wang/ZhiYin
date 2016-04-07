@@ -43,8 +43,6 @@ public class ExecuteUpdateSnapChatMessage extends ExecuteUpdate {
             pushList.add(user);
 
             localDatabase.pushModel(pushList);
-
-            localDatabase.removeKeyFromServer(snapShot.getKey());
         }
     }
 
