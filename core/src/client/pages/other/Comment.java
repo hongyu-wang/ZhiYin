@@ -5,6 +5,7 @@ import client.events.executables.internalChanges.updatePageExecutables.ExecuteTo
 import client.pages.State;
 import client.singletons.SkinSingleton;
 import client.singletons.StateManager;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import server.model.media.MMusic;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by blobbydude24 on 2016-03-28.
  */
-public class Comment extends CommentShell {
+public class Comment extends CommentShell implements Gesturable{
     private long thisPost;
 
     private List<Long> currentComments;
@@ -32,6 +33,7 @@ public class Comment extends CommentShell {
 
     private ScrollPane scrollpane;
     private Table comments;
+    private ExecuteToTempState backEx;
 
     public Comment(State previousState, MMusic post){
         this.previousState = previousState;
@@ -55,10 +57,10 @@ public class Comment extends CommentShell {
 
     public void init(){
         super.init();
-
+        transitionType = TransitionType.UP_TO_DOWN;
         addMessageField();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState, this);
+        backEx = new ExecuteToTempState(previousState, this);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         initTable();
@@ -164,5 +166,11 @@ public class Comment extends CommentShell {
 
     public Table getComments() {
         return comments;
+    }
+
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if (!gestureYUp && !directionMainlyX)
+            backEx.execute();
     }
 }

@@ -36,9 +36,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         return currentState;
     }
 
-    public void setCurrentState(State currentState) {
-        this.currentState = currentState;
-    }
 
     /**
      * This is the current state within the statemanager.
@@ -61,9 +58,7 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
      * @param page the page within the Pages enum
      */
     public void changeState(Pages page){
-        currentState = page.getStateReference();
-        currentState.reset();
-        InputListener.setListener(currentState);
+        toTemporaryState(page.getStateReference());
     }
 
 
@@ -137,9 +132,9 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
     }
 
     public void handleGesture(boolean gestureX, boolean gestureY, boolean magX) {
-        if (currentState instanceof Gesturable)
+        if (currentState instanceof Gesturable) {
             ((Gesturable) currentState).handleGesture(gestureX, gestureY, magX);
-
+        }
     }
 
 
