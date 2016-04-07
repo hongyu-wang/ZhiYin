@@ -15,12 +15,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Disposable;
 import server.model.social.MDiaryPost;
 import server.model.soundCloud.MBand;
 import tools.utilities.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,10 +56,6 @@ public class FriendProfile extends FriendProfileShell implements Profile {
     private ExecuteUpdate update1;
     private ExecuteUpdate update2;
 
-
-
-
-
     public FriendProfile(State previousState, String name){
         this.previousState = previousState;
         this.name = name;
@@ -96,6 +90,9 @@ public class FriendProfile extends FriendProfileShell implements Profile {
         backButton.setBounds(0, 1217, 117, 117);
         backButton.setExecutable(new ExecuteToTempState(previousState, this));
         add(backButton);
+
+        ExecuteToTempState e = new ExecuteToTempState(new Friends2(name));
+        addImage("Friends/Chat@", e, 300, 950, 50, 50);
 
         Table t = new Table();
         t.setBounds(300*M, 1000*M, 450*M, 167*M);
