@@ -16,6 +16,10 @@ public class ExecuteToTempState implements Executable {
     protected boolean useBaseTransitionType;
     protected TransitionType base;
 
+    public ExecuteToTempState(State state){
+        this(state, TransitionType.NONE);
+    }
+
     public ExecuteToTempState(State state, State previous){
         this.state = state;
         this.previous = previous;

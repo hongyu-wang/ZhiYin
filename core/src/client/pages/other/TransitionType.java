@@ -1,6 +1,7 @@
 package client.pages.other;
 
 import client.pages.State;
+import client.singletons.InputListener;
 import client.singletons.StateManager;
 import client.tools.Constants;
 import com.badlogic.gdx.math.Interpolation;
@@ -15,7 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
  * Created by Hongyu Wang on 4/6/2016.
  */
 public enum TransitionType implements Constants {
-    UP_TO_DOWN(1, true, "Up to down"), DOWN_TO_UP(-1, true, "Down to up"), LEFT_TO_RIGHT(1, false, "Left to right"), RIGHT_TO_LEFT(-1, false, "Right to left"), NONE("None");
+    UP_TO_DOWN(1, true, "Up to down"),
+    DOWN_TO_UP(-1, true, "Down to up"),
+    LEFT_TO_RIGHT(1, false, "Left to right"),
+    RIGHT_TO_LEFT(-1, false, "Right to left"),
+    NONE("None"),
+    FADE_IN("Fade in");
 
     private int dir;
     private boolean type;
@@ -43,12 +49,11 @@ public enum TransitionType implements Constants {
      */
     public void setUpAction(Stage oldStage, Stage newStage, State newState){
         if (this.name.equals("None")) {
-            newStage.addAction(Actions.run(() -> {
-                StateManager.getInstance().toTemporaryState(newState);
-                oldStage.addAction(Actions.moveTo(0, 0));
-            }));
+            handleDone(newStage, newState);
         }
-
+        else if (this.name.equals("Fade in")){
+            handleFadeIn(newStage, newState);
+        }
         else if (type) {
             handleHorizontal(oldStage, newStage, newState);
         } else {
@@ -57,6 +62,24 @@ public enum TransitionType implements Constants {
 
     }
 
+    private void handleFadeIn(Stage newStage, State newState) {
+        newStage.addAction(Actions.sequence(
+                Actions.alpha(0),
+
+                Actions.fadeIn(0.5F),
+
+                Actions.run(
+                        () -> InputListener.setListener(newState)
+                )
+        ));
+    }
+
+    private void handleDone(Stage newStage, State newState){
+        newStage.addAction(Actions.run(() -> {
+            StateManager.getInstance().toTemporaryState(newState);
+        }));
+
+    }
 
     private void handleHorizontal(Stage oldStage, Stage newStage, State newState){
         oldStage.addAction(Actions.sequence(
