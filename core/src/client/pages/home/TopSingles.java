@@ -1,8 +1,12 @@
 package client.pages.home;
 
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pageStorage.Pages;
 import client.pages.other.NowPlaying;
+import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -17,7 +21,7 @@ import tools.AudioTools.AudioCreator;
  *
  * Created by blobbydude24 on 2016-03-23.
  */
-public class TopSingles extends TopSinglesShell{
+public class TopSingles extends TopSinglesShell implements Gesturable{
     private Table table;
 
     public TopSingles(){
@@ -88,4 +92,9 @@ public class TopSingles extends TopSinglesShell{
         table.row();
     }
 
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(gestureXRight && directionMainlyX)
+            new ExecuteChangePage(Pages.HOME, TransitionType.LEFT_TO_RIGHT).execute();
+    }
 }

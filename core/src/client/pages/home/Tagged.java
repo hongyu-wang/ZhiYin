@@ -2,10 +2,14 @@ package client.pages.home;
 
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateHashtagSongs;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pageStorage.Pages;
 import client.pages.State;
 import client.pages.other.NowPlaying;
+import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -15,7 +19,7 @@ import server.model.media.MMusic;
 /**
  * Created by blobbydude24 on 2016-03-28.
  */
-public class Tagged extends TaggedShell {
+public class Tagged extends TaggedShell implements Gesturable{
     private State previousState;
     private ScrollPane scrollpane;
     private Table songs;
@@ -37,7 +41,7 @@ public class Tagged extends TaggedShell {
     protected void init(){
         super.init();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState, this);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Table t = new Table();
@@ -87,4 +91,9 @@ public class Tagged extends TaggedShell {
     }
 
 
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(gestureXRight && directionMainlyX)
+            new ExecuteChangePage(Pages.DISCOVERY, TransitionType.LEFT_TO_RIGHT).execute();
+    }
 }

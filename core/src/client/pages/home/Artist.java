@@ -1,8 +1,12 @@
 package client.pages.home;
 
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pageStorage.Pages;
 import client.pages.other.ArtistProfile;
+import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -19,7 +23,7 @@ import tools.serverTools.databases.LocalDatabaseFactory;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class Artist extends ArtistShell {
+public class Artist extends ArtistShell implements Gesturable{
     private TextField searchField;
     private ScrollPane scrollpane;
     private Table table;
@@ -62,8 +66,6 @@ public class Artist extends ArtistShell {
         String artistName = band.getName();
 
         final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, band, profilePic), this);
-
-
         right.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -131,5 +133,13 @@ public class Artist extends ArtistShell {
             mb = localDatabase.getModel(i);
             addArtist(mb);
         }
+    }
+
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(gestureXRight && directionMainlyX)
+            new ExecuteChangePage(Pages.HOME, TransitionType.LEFT_TO_RIGHT).execute();
+        else if(!gestureXRight && directionMainlyX)
+            new ExecuteChangePage(Pages.DISCOVERY, TransitionType.RIGHT_TO_LEFT).execute();
     }
 }

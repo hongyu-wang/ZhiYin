@@ -5,6 +5,7 @@ import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.other.TransitionType;
 import client.singletons.StateManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -24,12 +25,12 @@ public abstract class ArtistShell extends State{
 
         Button homeButton = new Button(this);
         homeButton.setBounds(0, 1217, 260, 117);
-        homeButton.setExecutable(new ExecuteChangePage(Pages.HOME));
+        homeButton.setExecutable(new ExecuteChangePage(Pages.HOME, TransitionType.LEFT_TO_RIGHT));
         add(homeButton);
 
         Button discoveryButton = new Button(this);
         discoveryButton.setBounds(410, 1217, 340, 117);
-        discoveryButton.setExecutable(new ExecuteChangePage(Pages.DISCOVERY));
+        discoveryButton.setExecutable(new ExecuteChangePage(Pages.DISCOVERY, TransitionType.RIGHT_TO_LEFT));
         add(discoveryButton);
 
 //        Button searchButton = new Button(this);

@@ -1,11 +1,9 @@
 package client.pages.other;
 
 import client.pages.State;
-import client.singletons.InputListener;
 import client.singletons.StateManager;
 import client.tools.Constants;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
@@ -56,7 +54,7 @@ public enum TransitionType implements Constants {
         else if (this.name.equals("Fade in")){
             handleFadeIn();
         }
-        else if (type) {
+        else if (!type) {
             handleHorizontal();
         } else {
             handleVertical();
@@ -88,7 +86,7 @@ public enum TransitionType implements Constants {
 
     }
 
-    private void handleHorizontal(){
+    private void handleVertical(){
         oldStage.addAction(Actions.sequence(
                 Actions.moveTo(0, -dir * 1334 * M, 0.5F, Interpolation.pow2Out)
         ));
@@ -108,16 +106,16 @@ public enum TransitionType implements Constants {
     }
 
 
-    private void handleVertical(){
+    private void handleHorizontal(){
         oldStage.addAction(Actions.sequence(
-                Actions.moveTo(-dir*750*M, 0, 0.5F, Interpolation.pow2Out)
+                Actions.moveTo(dir*750*M, 0, 0.5F, Interpolation.pow2Out)
         ));
 
 
 
         newStage.addAction(Actions.sequence(
 
-                        Actions.moveTo(dir*750 * M, 0, 0),
+                        Actions.moveTo(-dir*750 * M, 0, 0),
                         Actions.moveTo(0, 0, 0.5F, Interpolation.pow2Out),
                         Actions.run(() -> {
                             StateManager.getInstance().toTemporaryState(newState);

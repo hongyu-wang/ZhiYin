@@ -24,12 +24,12 @@ public abstract class HomeShell extends State{
 
         Button artistButton = new Button(this);
         artistButton.setBounds(260, 1217, 150, 117);
-        artistButton.setExecutable(new ExecuteChangePage(Pages.ARTIST, TransitionType.LEFT_TO_RIGHT));
+        artistButton.setExecutable(new ExecuteChangePage(Pages.ARTIST, TransitionType.RIGHT_TO_LEFT));
         add(artistButton);
 
         Button discoveryButton = new Button(this);
         discoveryButton.setBounds(410, 1217, 340, 117);
-        discoveryButton.setExecutable(new ExecuteChangePage(Pages.DISCOVERY, TransitionType.LEFT_TO_RIGHT));
+        discoveryButton.setExecutable(new ExecuteChangePage(Pages.DISCOVERY, TransitionType.RIGHT_TO_LEFT));
         add(discoveryButton);
 
         setBottomBar();

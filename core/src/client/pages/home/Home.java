@@ -9,6 +9,7 @@ import client.pages.State;
 import client.pages.other.NowPlaying;
 import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -29,7 +30,7 @@ import java.util.Map;
  *
  * Created by Hongyu Wang on 3/9/2016.
  */
-public class Home extends HomeShell {
+public class Home extends HomeShell implements Gesturable{
     private ScrollPane scrollpane;
     private Table table;
     private Table newRelease;
@@ -186,4 +187,11 @@ public class Home extends HomeShell {
 
     }
 
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(!gestureXRight && directionMainlyX) {
+            new ExecuteChangePage(Pages.ARTIST, TransitionType.RIGHT_TO_LEFT).execute();
+
+        }
+    }
 }

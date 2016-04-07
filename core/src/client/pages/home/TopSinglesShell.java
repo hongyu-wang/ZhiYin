@@ -4,6 +4,7 @@ import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.other.TransitionType;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -23,7 +24,7 @@ public abstract class TopSinglesShell extends State {
 
         Button backButton = new Button(this);
         backButton.setBounds(0, 1217, 117, 117);
-        backButton.setExecutable(new ExecuteChangePage(Pages.HOME));
+        backButton.setExecutable(new ExecuteChangePage(Pages.HOME, TransitionType.LEFT_TO_RIGHT));
         add(backButton);
     }
 

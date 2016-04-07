@@ -3,7 +3,6 @@ package client.singletons;
 import client.pages.State;
 import client.tools.Constants;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
@@ -92,8 +91,8 @@ public class InputListener implements InputProcessor, Constants, GestureDetector
     public static void setListener(State state){
         prepare();
 
-        im.addProcessor(state.getStage());
         im.addProcessor(new GestureDetector(getInstance()));
+        im.addProcessor(state.getStage());
         im.addProcessor(InputListener.getInstance());
         Gdx.input.setInputProcessor(im);
 
@@ -139,7 +138,7 @@ public class InputListener implements InputProcessor, Constants, GestureDetector
 
         stateManager.receiveRelease();
 
-        return false;
+        return true;
     }
 
     @Override
@@ -180,9 +179,10 @@ public class InputListener implements InputProcessor, Constants, GestureDetector
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
+        System.out.println("velocityX = [" + velocityX + "], velocityY = [" + velocityY + "])");
 
         StateManager.getInstance().handleGesture(velocityX > 0, velocityY < 0, Math.abs(velocityX) > Math.abs(velocityY));
-        return true;
+        return false;
     }
 
     @Override
