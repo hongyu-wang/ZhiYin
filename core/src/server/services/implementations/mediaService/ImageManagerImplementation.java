@@ -31,6 +31,7 @@ public class ImageManagerImplementation implements ImageManager {
 
     @Override
     public Image mImageToImage(MImage mImage){
+        this.dispose();
         Image tempImage = null;
         if(mImage != null) {
             Texture tx;

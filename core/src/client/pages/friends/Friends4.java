@@ -82,6 +82,7 @@ public class Friends4 extends Friends4Shell implements Gesturable{
                     disposables.add(map);
 
                     addFriend(friendName, image);
+                    System.out.println("FUCK ME");
                 }
             }
         }
