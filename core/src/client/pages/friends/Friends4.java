@@ -90,6 +90,6 @@ public class Friends4 extends Friends4Shell implements Gesturable{
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
         if(gestureXRight && directionMainlyX)
-            new ExecuteChangePage(Pages.FRIENDS4, TransitionType.LEFT_TO_RIGHT).execute();
+            new ExecuteChangePage(Pages.FRIENDS1, TransitionType.LEFT_TO_RIGHT).execute();
     }
 }
