@@ -132,7 +132,7 @@ public class MyProfile extends MyProfileShell implements Profile {
         button.setBounds(280, 920, 80, 80);
 
         ConfirmDialog confirmDialog = new ConfirmDialog(
-                "Where do you want your profile image from?",
+                "Where do you want to get your picture from?",
                 new String[]{"Gallery",
                 "Camera",
                 "Cancel"}

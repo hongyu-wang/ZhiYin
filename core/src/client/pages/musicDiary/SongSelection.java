@@ -1,6 +1,5 @@
 package client.pages.musicDiary;
 
-import client.events.executables.internalChanges.TestExecutable;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.other.TransitionType;
@@ -15,13 +14,17 @@ import java.util.ArrayList;
  */
 public class SongSelection extends SongSelectionShell implements Gesturable{
 
+    private Diary2 diary2;
+
     private ScrollPane scrollpane;
     private Table table;
 
     private ArrayList<SongBox> songBoxes;
+    private SongBox selected;
 
     //TODO add songs to the constructor
-    public SongSelection(){
+    public SongSelection(Diary2 diary2){
+        this.diary2 = diary2;
         init();
     }
 
@@ -29,52 +32,79 @@ public class SongSelection extends SongSelectionShell implements Gesturable{
     protected void init() {
         super.init();
 
-        ExecuteChangePage backEx = new ExecuteChangePage(Pages.DIARY1, TransitionType.UP_TO_DOWN);
-        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
+//        ExecuteChangePage backEx = new ExecuteChangePage(Pages.DIARY2, TransitionType.LEFT_TO_RIGHT);
+//        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
-        addImage("Other/Discard@", backEx, 36, 63, 340, 73);
-
-        TestExecutable sendEx = new TestExecutable("send");
-        addImage("Other/Send2@", sendEx, 376, 63, 339, 73);
+//        ExecuteChangePage sendEx = new ExecuteChangePage(Pages.DIARY2, TransitionType.LEFT_TO_RIGHT);
+//        Table send = createImage("Diary/Share@", sendEx, 35, 64, 680, 72);
+//        send.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                if(diary2.hasSongBox()) {
+//                    diary2.setSongBox(selected);
+//                    sendEx.execute();
+//                }
+//            }
+//        });
+//        stage.addActor(send);
 
         table = new Table();
         table.top();
 
         scrollpane = new ScrollPane(table);
-        scrollpane.setBounds(0, 200*M, 750*M, 1017*M);
+        scrollpane.setBounds(0, 0, 750*M, 1334*M);
         stage.addActor(scrollpane);
 
         songBoxes = new ArrayList<>();
 
-        addSong(new SongBox("song1"));
-        addSong(new SongBox("song2"));
-        addSong(new SongBox("song3"));
-        addSong(new SongBox("song4"));
-        addSong(new SongBox("song5"));
-        addSong(new SongBox("song6"));
-        addSong(new SongBox("song7"));
-        addSong(new SongBox("song8"));
-        addSong(new SongBox("song9"));
-        addSong(new SongBox("song10"));
-        addSong(new SongBox("song11"));
-        addSong(new SongBox("song12"));
-        addSong(new SongBox("song13"));
-        addSong(new SongBox("song14"));
-        addSong(new SongBox("song15"));
-        addSong(new SongBox("song16"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
+        addSong(new SongBox(this, "song1"));
     }
 
-    private void addSong(SongBox songBox){
+    public void addSong(SongBox songBox){
         disposables.add(songBox);
         songBoxes.add(songBox);
         table.add(songBox.getTable()).width(750*M).height(110*M);
         table.row();
     }
 
+    public void passBox(SongBox box){
+        diary2.setSongBox(box);
+    }
+
+//
+//    public void reset(){
+//        for(SongBox box : songBoxes){
+//            box.deselect();
+//        }
+//    }
+//
+//    public void setSelected(SongBox box){
+//        selected = box;
+//    }
+
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        if(!gestureYUp && !directionMainlyX)
-            new ExecuteChangePage(Pages.DIARY1, TransitionType.UP_TO_DOWN).execute();
+        if(gestureXRight && directionMainlyX)
+            new ExecuteChangePage(Pages.DIARY2, TransitionType.LEFT_TO_RIGHT).execute();
     }
 }

@@ -25,7 +25,7 @@ public abstract class Diary1Shell extends State{
 
         Button composeButton = new Button(this);
         composeButton.setBounds(750 - 117, 1217, 117, 117);
-        composeButton.setExecutable(new ExecuteChangePage(Pages.DIARY2, TransitionType.FADE_IN));
+        composeButton.setExecutable(new ExecuteChangePage(Pages.DIARY2, TransitionType.RIGHT_TO_LEFT));
         add(composeButton);
 
         setBottomBar();
