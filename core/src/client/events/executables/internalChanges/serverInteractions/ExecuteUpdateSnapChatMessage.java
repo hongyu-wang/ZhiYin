@@ -36,7 +36,7 @@ public class ExecuteUpdateSnapChatMessage extends ExecuteUpdate {
 
             ConfirmDialog dialog = setUpWindows(snapShot, friend);
 
-            StateManager.getInstance().getCurrentState().add(dialog.getWindow());
+            StateManager.getInstance().getCurrentState().getStage().addActor(dialog.getWindow());
 
             snapChats.add(user.getSnapChat());
         }
