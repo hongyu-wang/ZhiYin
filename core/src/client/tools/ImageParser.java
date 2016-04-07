@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Disposable;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -16,14 +18,15 @@ import com.badlogic.gdx.utils.Disposable;
 public final class ImageParser {
 
     private static Image image;
-    private static Texture tx;
+    private static ArrayList<Disposable> arrayList;
     public static void setUpImage(byte [] bytes, boolean cancelled){
         if(cancelled)
             image = null;
         else {
-
+            Texture tx;
             Pixmap pixmap = new Pixmap(bytes, 0, bytes.length);
             image = new Image(tx = new Texture(pixmap));
+            arrayList.add(tx);
             pixmap.dispose();
         }
 
@@ -40,7 +43,9 @@ public final class ImageParser {
     }
 
     public static void dispose(){
-        tx.dispose();
+        for (Disposable i : arrayList){
+            i.dispose();
+        }
     }
 
 
