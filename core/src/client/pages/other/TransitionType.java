@@ -73,8 +73,7 @@ public enum TransitionType implements Constants {
 
                 Actions.run(
                         () -> {
-                            oldState.hide();
-                            transitionState.hide();
+
                             InputListener.setListener(newState);
                         }
                 )
@@ -84,8 +83,7 @@ public enum TransitionType implements Constants {
 
     private void handleDone(){
         newStage.addAction(Actions.run(() -> {
-            oldState.hide();
-            transitionState.hide();
+
             StateManager.getInstance().toTemporaryState(newState);
         }));
 
@@ -101,8 +99,7 @@ public enum TransitionType implements Constants {
                         Actions.moveTo(0, dir * 1334, 0),
                         Actions.moveTo(0, 0, 0.5F, Interpolation.pow2Out),
                         Actions.run(() -> {
-                            oldState.hide();
-                            transitionState.hide();
+
                             StateManager.getInstance().toTemporaryState(newState);
 
                         })
@@ -124,8 +121,6 @@ public enum TransitionType implements Constants {
                         Actions.moveTo(dir*750 * M, 0, 0),
                         Actions.moveTo(0, 0, 0.5F, Interpolation.pow2Out),
                         Actions.run(() -> {
-                            oldState.hide();
-                            transitionState.hide();
                             StateManager.getInstance().toTemporaryState(newState);
 
                         })

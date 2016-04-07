@@ -31,8 +31,6 @@ public class TransitionState extends State {
         super.init();
         this.oldState = StateManager.getInstance().getCurrentState();
 
-        newState.show();
-
         transitionType.setUpAction(newState, oldState, this);
 
         willDraw = false;
