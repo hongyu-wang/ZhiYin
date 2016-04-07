@@ -37,11 +37,11 @@ public final class AudioCreator {
 
     private static Map<String, Long> albumToKey;
 
-    public static TreeMap<String, MMusic> songNameToMMusic;
+    public static Map<String, MMusic> songNameToMMusic;
 
-    public static TreeMap<String, List<MMusic>> artistToMMusic;
+    public static Map<String, List<MMusic>> artistToMMusic;
 
-    public static TreeMap<Long, MAudio> keyToMAudio = new TreeMap<Long,MAudio>();
+    public static Map<Long, MAudio> keyToMAudio;
 
     private static List<ServerModel> models = Utils.newList();
 
@@ -75,11 +75,14 @@ public final class AudioCreator {
 
     public static void initializeAll(){
         fm = new NSFileManager();
-        int count=0;
+
         initializeAlbums();
         //Top Singles, Tagged
-        songNameToMMusic = new TreeMap<String,MMusic>();
-        artistToMMusic = new TreeMap<String, List<MMusic>>();
+        //songNameToMMusic = new TreeMap<String,MMusic>();
+        songNameToMMusic = Utils.<String, MMusic>newMap();
+        //artistToMMusic = new TreeMap<String, List<MMusic>>();
+        artistToMMusic = Utils.<String, List<MMusic>>newMap();
+        keyToMAudio = Utils.newMap();
 
         List<String> urls = NSBundle.getMainBundle().findResourcesPaths("mp3",null);
 
@@ -98,7 +101,7 @@ public final class AudioCreator {
                 List<MMusic> temp = artistToMMusic.get(m.getArtist());
                 temp.add(m);
                 artistToMMusic.put(m.getArtist(), temp);
-                count++;
+
 
 
 

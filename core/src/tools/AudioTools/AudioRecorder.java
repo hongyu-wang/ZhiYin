@@ -102,6 +102,7 @@ public class AudioRecorder {
         try {
 
             //avar.dispose();
+            session.setActive(true);
             String file =  fp+count;
             filePath = new NSURL(file);
             count++;
@@ -110,7 +111,7 @@ public class AudioRecorder {
             avar.setMeteringEnabled(true);
             session.setCategory(AVAudioSessionCategory.PlayAndRecord);
 
-            session.setActive(true);
+
             avar.prepareToRecord();
 
         }catch(NSErrorException e){
@@ -132,11 +133,7 @@ public class AudioRecorder {
 
     public MAudio stopRecording(){
         running = false;
-        try {
-            session.setActive(false);
-        } catch (NSErrorException e) {
-            e.printStackTrace();
-        }
+
         avar.stop();
 
 
@@ -144,6 +141,14 @@ public class AudioRecorder {
 
         MAudio audio = AudioCreator.createMAudio(mData);
         audio.setKey(LocalDatabaseFactory.createLocalDatabase().generateKey());
+
+        AudioPlayer.getInstance().stop();
+
+        try {
+            session.setActive(false);
+        } catch (NSErrorException e) {
+            e.printStackTrace();
+        }
         return audio;
     }
 
