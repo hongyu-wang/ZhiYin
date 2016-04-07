@@ -65,7 +65,7 @@ public class Artist extends ArtistShell implements Gesturable{
 
         String artistName = band.getName();
 
-        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, band, profilePic), this);
+        final ExecuteToTempState e = new ExecuteToTempState(new ArtistProfile(this, band, profilePic), TransitionType.RIGHT_TO_LEFT);
         right.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -80,7 +80,7 @@ public class Artist extends ArtistShell implements Gesturable{
 
         Table t2 = new Table();
         t2.add(new Label(artistName, SkinSingleton.getInstance())).expand().center().left().padLeft(50*M);
-        t2.add(new Image(tx = new Texture("Home/Enter@1.0.png"))).width(16*M).height(26 * M).expand().center().right().padRight(50 * M);
+        t2.add(new Image(tx = new Texture("Home/Enter@1.0.png"))).width(16*M).height(26*M).expand().center().right().padRight(50*M);
         disposables.add(tx);
         right.add(t2);
 
@@ -117,9 +117,6 @@ public class Artist extends ArtistShell implements Gesturable{
 
         searchField.getText();//TODO something
     }
-
-
-
 
     private void pullData(){
         pullArtistsFromServer();

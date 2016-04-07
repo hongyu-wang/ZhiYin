@@ -11,8 +11,12 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteSendA
 import client.events.executables.internalChanges.serverInteractions.ExecuteSendMessage;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateMessages;
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pages.State;
 import client.pages.friends.boxes.MessageBox;
+import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import server.model.media.MAudio;
@@ -20,7 +24,7 @@ import tools.utilities.Utils;
 
 import java.util.List;
 
-public class Friends2 extends Friends2Shell{
+public class Friends2 extends Friends2Shell implements Gesturable{
     private List<Long> messageKeys;
     public List<Long> getMessageKeys(){
         return messageKeys;
@@ -36,12 +40,15 @@ public class Friends2 extends Friends2Shell{
         return friendName;
     }
 
+    private State previousState;
+
     private TextField messageField;
     private Table table;
 
     private ExecuteUpdate update;
 
-    public Friends2(String friendName){
+    public Friends2(State previousState, String friendName){
+        this.previousState = previousState;
         this.friendName = friendName;
         this.messageKeys = Utils.newList();
         init();
@@ -54,6 +61,9 @@ public class Friends2 extends Friends2Shell{
         this.update = new ExecuteUpdateMessages(this);
 
         addMessageField();
+
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Table t = new Table();
         t.setBounds(117*M, 1217*M, 516*M, 117*M);
@@ -155,4 +165,9 @@ public class Friends2 extends Friends2Shell{
         return messageField.getText();
     }
 
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(gestureXRight && directionMainlyX)
+            new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT).execute();
+    }
 }

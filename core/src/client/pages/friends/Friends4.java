@@ -1,11 +1,15 @@
 package client.pages.friends;
 
 
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pageStorage.Pages;
+import client.pages.other.TransitionType;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import server.model.user.User;
 
-public class Friends4 extends Friends4Shell{
+public class Friends4 extends Friends4Shell implements Gesturable{
     private ScrollPane scrollpane;
 
     private Table table;
@@ -48,7 +52,7 @@ public class Friends4 extends Friends4Shell{
         disposables.add(tx);
         s.add(t);
 
-        final ExecuteToTempState e = new ExecuteToTempState(new FriendProfile(this, name, image), this);
+        final ExecuteToTempState e = new ExecuteToTempState(new FriendProfile(this, name, image), TransitionType.RIGHT_TO_LEFT);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -59,8 +63,6 @@ public class Friends4 extends Friends4Shell{
         table.add(s).width(750*M).height(116*M);
         table.row();
     }
-
-
 
     private void talkerAddFriends(){
         FriendTalker ft = TalkerFactory.getFriendTalker();
@@ -83,5 +85,11 @@ public class Friends4 extends Friends4Shell{
                 }
             }
         }
+    }
+
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(gestureXRight && directionMainlyX)
+            new ExecuteChangePage(Pages.FRIENDS4, TransitionType.LEFT_TO_RIGHT).execute();
     }
 }

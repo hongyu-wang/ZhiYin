@@ -4,6 +4,7 @@ import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.other.TransitionType;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -22,7 +23,7 @@ public abstract class Friends1Shell extends State {
 
         Button friendsButton = new Button(this);
         friendsButton.setBounds(375, 1217, 375, 117);
-        friendsButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS4));
+        friendsButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS4, TransitionType.RIGHT_TO_LEFT));
         add(friendsButton);
 
         setBottomBar();

@@ -72,6 +72,7 @@ public class NowPlaying extends State implements Gesturable{
     private ExecuteUpdate update2;
     private ExecuteToTempState backEx;
     private ExecuteToTempState commentEx;
+    private ExecuteToTempState secEx;
 
     public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
@@ -116,7 +117,7 @@ public class NowPlaying extends State implements Gesturable{
         this.transitionType = TransitionType.RIGHT_TO_LEFT;
 
         //Standard Back Button Here.
-        backEx = new ExecuteToTempState(previousState, this);
+        backEx = new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Table t = new Table();
@@ -143,10 +144,10 @@ public class NowPlaying extends State implements Gesturable{
 
         Sec1 sec1 = new Sec1(this, post);
 
-        commentEx = new ExecuteToTempState(comment, TransitionType.DOWN_TO_UP);
+        commentEx = new ExecuteToTempState(comment, TransitionType.FADE_IN);
         addImage("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
-        ExecuteToTempState secEx = new ExecuteToTempState(sec1, TransitionType.DOWN_TO_UP);
+        secEx = new ExecuteToTempState(sec1, TransitionType.FADE_IN);
         addImage("NowPlaying/1s@", secEx, 230, 0, 290, 117);
 
         this.update1 = new ExecuteUpdateComments(comment, sec1);
@@ -345,11 +346,7 @@ public class NowPlaying extends State implements Gesturable{
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        if (gestureXRight && directionMainlyX){
+        if (gestureXRight && directionMainlyX)
             backEx.execute();
-        }
-        if (gestureYUp && !directionMainlyX)
-            commentEx.execute();
     }
-
 }

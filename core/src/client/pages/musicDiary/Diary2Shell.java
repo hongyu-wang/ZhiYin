@@ -4,6 +4,7 @@ import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.other.TransitionType;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -23,7 +24,7 @@ public abstract class Diary2Shell extends State {
 
         Button backButton = new Button(this);
         backButton.setBounds(0, 1217, 117, 117);
-        backButton.setExecutable(new ExecuteChangePage(Pages.DIARY1));
+        backButton.setExecutable(new ExecuteChangePage(Pages.DIARY1, TransitionType.LEFT_TO_RIGHT));
         add(backButton);
 
 //        Button recordButton = new Button(this);
@@ -61,7 +62,6 @@ public abstract class Diary2Shell extends State {
 //        discardButton.setExecutable(new ExecuteChangePage(Pages.DIARY1));
 //        add(discardButton);
 //
-
     }
 
 

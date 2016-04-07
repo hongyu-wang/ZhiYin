@@ -7,8 +7,8 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteUpdat
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdateArtistSongs;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
-import client.stateInterfaces.Gesturable;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -62,7 +62,7 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
     protected void init() {
         super.init();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState, this);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         addImage("Other/Follow@", followEx, 500, 70, 218, 82);
@@ -110,7 +110,7 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
 
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
 
-        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, song), this);
+        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, song), TransitionType.RIGHT_TO_LEFT);
         final ExecuteSetMusic esm = new ExecuteSetMusic(song);
 
         em.addExecutable(e);
@@ -143,6 +143,7 @@ public class ArtistProfile extends ArtistProfileShell implements Gesturable {
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-
+        if(gestureXRight && directionMainlyX)
+            new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT).execute();
     }
 }

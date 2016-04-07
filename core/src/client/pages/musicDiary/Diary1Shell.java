@@ -4,6 +4,7 @@ import client.component.basicComponents.Button;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
 import client.pageStorage.Pages;
 import client.pages.State;
+import client.pages.other.TransitionType;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -24,7 +25,7 @@ public abstract class Diary1Shell extends State{
 
         Button composeButton = new Button(this);
         composeButton.setBounds(750 - 117, 1217, 117, 117);
-        composeButton.setExecutable(new ExecuteChangePage(Pages.DIARY2));
+        composeButton.setExecutable(new ExecuteChangePage(Pages.DIARY2, TransitionType.FADE_IN));
         add(composeButton);
 
         setBottomBar();

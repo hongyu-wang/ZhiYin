@@ -4,6 +4,7 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteSeenB
 import client.events.executables.internalChanges.serverInteractions.ExecuteSeenByMe;
 import client.events.executables.internalChanges.serverInteractions.ExecuteUpdate;
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
+import client.pages.State;
 import client.pages.friends.Friends2;
 import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
@@ -25,6 +26,8 @@ import static client.tools.Constants.M;
  * Contains a table of actors. Used in Friends1.
  */
 public class FriendBox implements Disposable {
+    private State friends1;
+
     private Table table;
     private Image currentIcon;
     private String friendName;
@@ -39,8 +42,9 @@ public class FriendBox implements Disposable {
      * @param iconNum The number representing an icon.
      * @param friendName The friend's name.
      */
-    public FriendBox(int iconNum, String friendName){
+    public FriendBox(State friends1, int iconNum, String friendName){
         disposables = new ArrayList<>();
+        this.friends1 = friends1;
         this.friendName = friendName;
         setIcon(iconNum);
 
@@ -53,7 +57,7 @@ public class FriendBox implements Disposable {
         right.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteToTempState(new Friends2(friendName), TransitionType.RIGHT_TO_LEFT).execute();
+                new ExecuteToTempState(new Friends2(friends1, friendName), TransitionType.RIGHT_TO_LEFT).execute();
                 new ExecuteSeenByMe(friendName, update).execute();
             }
         });

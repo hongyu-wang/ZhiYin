@@ -73,7 +73,7 @@ public class Diary1 extends Diary1Shell implements Gesturable{
         t.row().padTop(10*M);
         t.add(l3).expand().left().padLeft(50 * M);
         t.row();
-        t.add(new Image(tx = new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(150*M).padTop(50 * M);
+        t.add(new Image(tx = new Texture("Home/Line@1.0.png"))).width(750*M).height(4*M).expandX().padLeft(150*M).padTop(50*M);
         disposables.add(tx);
 
         Image i2 = new Image(tx = new Texture("Home/BlackBG@1.0.png"));
@@ -84,7 +84,7 @@ public class Diary1 extends Diary1Shell implements Gesturable{
 
         final MDiaryPost currentPost = thisPost;
 
-        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, currentPost), this);
+        final ExecuteToTempState e = new ExecuteToTempState(new Diary4(this, currentPost), TransitionType.RIGHT_TO_LEFT);
         s.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -96,8 +96,6 @@ public class Diary1 extends Diary1Shell implements Gesturable{
         table.row();
     }
 
-
-
     @Override
     public void update(float dt){
         super.update(dt);
@@ -105,8 +103,7 @@ public class Diary1 extends Diary1Shell implements Gesturable{
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        transitionType = TransitionType.DOWN_TO_UP;
         if(gestureYUp && !directionMainlyX)
-            new ExecuteToTempState(new SongSelection()).execute();
+            new ExecuteToTempState(new SongSelection(), TransitionType.DOWN_TO_UP).execute();
     }
 }

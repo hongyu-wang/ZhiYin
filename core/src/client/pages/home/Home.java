@@ -69,7 +69,7 @@ public class Home extends HomeShell implements Gesturable{
             b1.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    new ExecuteToTempState(tempState, TransitionType.LEFT_TO_RIGHT).execute();
+                    new ExecuteToTempState(tempState, TransitionType.RIGHT_TO_LEFT).execute();
                 }
             });
         }
@@ -84,7 +84,7 @@ public class Home extends HomeShell implements Gesturable{
         b2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.TOPSINGLES, TransitionType.FADE_IN).execute();
+                new ExecuteChangePage(Pages.TOPSINGLES, TransitionType.RIGHT_TO_LEFT).execute();
             }
         });
 
@@ -164,7 +164,7 @@ public class Home extends HomeShell implements Gesturable{
 
         final ExecutableMultiplexer em = new ExecutableMultiplexer();
 
-        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music), TransitionType.LEFT_TO_RIGHT);
+        ExecuteToTempState e = new ExecuteToTempState(new NowPlaying(this, music), TransitionType.RIGHT_TO_LEFT);
         final ExecuteSetMusic esm = new ExecuteSetMusic(music);
 
         em.addExecutable(e);
