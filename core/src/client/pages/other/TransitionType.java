@@ -64,6 +64,11 @@ public enum TransitionType implements Constants {
 
     private void handleFadeIn() {
         newStage.addAction(Actions.sequence(
+                Actions.run(
+                        () -> {oldStage.addAction(Actions.alpha(0));
+                        oldStage.act();}
+                ),
+
                 Actions.alpha(0),
 
                 Actions.fadeIn(0.5F),
@@ -72,6 +77,7 @@ public enum TransitionType implements Constants {
                         () -> {
 
                             StateManager.getInstance().toTemporaryState(newState);
+                            oldStage.addAction(Actions.alpha(1));
                         }
                 )
         ));
@@ -99,6 +105,7 @@ public enum TransitionType implements Constants {
 
                             StateManager.getInstance().toTemporaryState(newState);
                             oldStage.addAction(Actions.moveTo(0, 0));
+                            oldStage.act();
                         })
 
                 )
@@ -120,6 +127,7 @@ public enum TransitionType implements Constants {
                         Actions.run(() -> {
                             StateManager.getInstance().toTemporaryState(newState);
                             oldStage.addAction(Actions.moveTo(0, 0));
+                            oldStage.act();
                         })
 
                 )

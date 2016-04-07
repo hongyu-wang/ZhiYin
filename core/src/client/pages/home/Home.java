@@ -84,7 +84,7 @@ public class Home extends HomeShell implements Gesturable{
         b2.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new ExecuteChangePage(Pages.TOPSINGLES).execute();
+                new ExecuteChangePage(Pages.TOPSINGLES, TransitionType.FADE_IN).execute();
             }
         });
 
@@ -189,9 +189,7 @@ public class Home extends HomeShell implements Gesturable{
 
     @Override
     public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
-        if(!gestureXRight && directionMainlyX) {
+        if(!gestureXRight && directionMainlyX)
             new ExecuteChangePage(Pages.ARTIST, TransitionType.RIGHT_TO_LEFT).execute();
-
-        }
     }
 }

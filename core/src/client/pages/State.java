@@ -108,22 +108,22 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     protected void setBottomBar(){
         Button homeButton = new Button(this);
         homeButton.setBounds(0, 0, 210, 117);
-        homeButton.setExecutable(new ExecuteChangePage(Pages.HOME));
+        homeButton.setExecutable(new ExecuteChangePage(Pages.HOME, TransitionType.FADE_IN));
         add(homeButton);
 
         Button diaryButton = new Button(this);
         diaryButton.setBounds(210, 0, 180, 117);
-        diaryButton.setExecutable(new ExecuteChangePage(Pages.DIARY1));
+        diaryButton.setExecutable(new ExecuteChangePage(Pages.DIARY1, TransitionType.FADE_IN));
         add(diaryButton);
 
         Button friendsButton = new Button(this);
         friendsButton.setBounds(390, 0, 160, 117);
-        friendsButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1));
+        friendsButton.setExecutable(new ExecuteChangePage(Pages.FRIENDS1, TransitionType.FADE_IN));
         add(friendsButton);
 
         Button toolsButton = new Button(this);
         toolsButton.setBounds(550, 0, 200, 117);
-        toolsButton.setExecutable(new ExecuteChangePage(Pages.MYPROFILE));
+        toolsButton.setExecutable(new ExecuteChangePage(Pages.MYPROFILE, TransitionType.FADE_IN));
         add(toolsButton);
     }
 
