@@ -1,6 +1,7 @@
 package client.events.executables.internalChanges.updatePageExecutables;
 
 import client.pageStorage.Pages;
+import client.pages.other.TransitionType;
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 
@@ -16,14 +17,19 @@ import client.stateInterfaces.Executable;
  */
 public class ExecuteChangePage implements Executable{
     protected Pages page;
-
+    protected TransitionType transitionType;
     public ExecuteChangePage(Pages page){
+        this(page, TransitionType.NONE);
+    }
+
+    public ExecuteChangePage(Pages page, TransitionType transitionType){
+        this.transitionType = transitionType;
         this.page = page;
     }
 
     @Override
     public void execute() {
-        StateManager.getInstance().changeState(page);
+        new ExecuteToTempState(page.getStateReference(), transitionType).execute();
 
     }
 }

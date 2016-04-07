@@ -72,6 +72,7 @@ public class NowPlaying extends State implements Gesturable{
     private ExecuteUpdate update1;
     private ExecuteUpdate update2;
     private ExecuteToTempState backEx;
+    private ExecuteToTempState commentEx;
 
     public NowPlaying(State previousState, MMusic post){
         this.previousState = previousState;
@@ -147,10 +148,10 @@ public class NowPlaying extends State implements Gesturable{
 
         Sec1 sec1 = new Sec1(this, post);
 
-        ExecuteToTempState commentEx = new ExecuteToTempState(comment, this);
+        commentEx = new ExecuteToTempState(comment, TransitionType.DOWN_TO_UP);
         addImage("NowPlaying/Comment@", commentEx, 0, 0, 230, 117);
 
-        ExecuteToTempState secEx = new ExecuteToTempState(sec1, this);
+        ExecuteToTempState secEx = new ExecuteToTempState(sec1, TransitionType.DOWN_TO_UP);
         addImage("NowPlaying/1S@", secEx, 230, 0, 290, 117);
 
         this.update1 = new ExecuteUpdateComments(comment, sec1);
@@ -359,6 +360,9 @@ public class NowPlaying extends State implements Gesturable{
 
             backEx.execute();
         }
+
+        if (gestureYUp && !directionMainlyX)
+            commentEx.execute();
 
     }
 

@@ -11,6 +11,7 @@ import client.events.executables.internalChanges.serverInteractions.ExecuteSendA
 import client.events.executables.internalChanges.updatePageExecutables.ExecuteToTempState;
 import client.pages.State;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -28,7 +29,7 @@ import java.util.List;
 /**
  * Created by blobbydude24 on 2016-03-28.
  */
-public class Sec1 extends Sec1Shell {
+public class Sec1 extends Sec1Shell implements Gesturable{
     private MPost thisPost;
 
     public List<Long> getCurrentComments() {
@@ -52,6 +53,7 @@ public class Sec1 extends Sec1Shell {
     private String subtitle;
 
     //private DragButton dragButton;
+    private ExecuteToTempState backEx;
 
     public Sec1(State previousState, MMusic post){
         this.previousState = previousState;
@@ -76,7 +78,7 @@ public class Sec1 extends Sec1Shell {
     protected void init(){
         super.init();
 
-        ExecuteToTempState backEx = new ExecuteToTempState(previousState, this);
+        backEx = new ExecuteToTempState(previousState, TransitionType.UP_TO_DOWN);
         addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         Image image = new Image(new Texture("Friends/SwipeToDiscardButton@1.0.png"));
@@ -158,5 +160,13 @@ public class Sec1 extends Sec1Shell {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+
+        if (!gestureYUp && !directionMainlyX){
+            backEx.execute();
+        }
     }
 }
