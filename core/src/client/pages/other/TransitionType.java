@@ -47,18 +47,18 @@ public enum TransitionType implements Constants {
                 StateManager.getInstance().toTemporaryState(newState);
                 oldStage.addAction(Actions.moveTo(0, 0));
             }));
-            return;
         }
-        if (type) {
-            handleHorizontal(oldStage, newStage, dir, newState);
+
+        else if (type) {
+            handleHorizontal(oldStage, newStage, newState);
         } else {
-            handleVertical(oldStage, newStage, dir, newState);
+            handleVertical(oldStage, newStage, newState);
         }
 
     }
 
 
-    private void handleHorizontal(Stage oldStage, Stage newStage, int dir, State newState){
+    private void handleHorizontal(Stage oldStage, Stage newStage, State newState){
         oldStage.addAction(Actions.sequence(
                 Actions.moveTo(0, -dir * 1334 * M, 0.5F, Interpolation.pow2Out)
         ));
@@ -77,7 +77,7 @@ public enum TransitionType implements Constants {
     }
 
 
-    private void handleVertical(Stage oldStage, Stage newStage, int dir, State newState){
+    private void handleVertical(Stage oldStage, Stage newStage, State newState){
         oldStage.addAction(Actions.sequence(
                 Actions.moveTo(-dir*750*M, 0, 0.5F, Interpolation.pow2Out)
         ));

@@ -10,7 +10,6 @@ import client.tools.Constants;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.WorkingTextArea;
-import tools.AudioTools.AudioPlayer;
 
 /**
  * This is essentially a card layout.
@@ -70,24 +69,10 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
     public void toTemporaryState(State state){
         currentState = state;
-        killActions();
         currentState.reset();
 
     }
 
-    private void killActions(){
-        InputListener.prepare();
-        Action action = Actions.sequence(
-                Actions.alpha(0),
-
-                Actions.fadeIn(0.5F),
-
-                Actions.run(
-                        () -> InputListener.setListener(currentState)
-                )
-        );
-        currentState.getStage().addAction(action);
-    }
 
 
 
