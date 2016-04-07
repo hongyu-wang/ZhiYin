@@ -106,7 +106,7 @@ public class Home extends HomeShell {
         Map<String, MMusic> map = AudioCreator.songNameToMMusic;
 
         boolean isTopSingle = false;
-        for (String str : mafp.keySet()){
+        for (String str : map.keySet()){
             MMusic temporary = map.get(str);
 
             if (isTopSingle)

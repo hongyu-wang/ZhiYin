@@ -14,12 +14,13 @@ import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
-import client.stateInterfaces.Gesturable;
 import client.singletons.SkinSingleton;
 import client.stateInterfaces.Executable;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -59,8 +60,7 @@ public class NowPlaying extends State implements Gesturable{
 
     private static Image play;
     private static Image pause;
-    private static Image playPause;
-    private static boolean playing;
+    private static Stage staticStage;
 
     private Table create;
     private Table showComments;
@@ -129,16 +129,8 @@ public class NowPlaying extends State implements Gesturable{
         TestExecutable forwardEx = new TestExecutable("forward");
         addImage("NowPlaying/Forward@", forwardEx, 535, 246, 53, 46);
 
-        play = new Image(new Texture("NowPlaying/Play@1.0.png"));
-        pause = new Image(new Texture("NowPlaying/Pause@1.0.png"));
-        playPause = new Image();
-        playing = true;
-        pause();
-
-        Table t2 = new Table();
-        t2.setBounds(288*M, 177*M, 180*M, 180*M);
-        t2.add(playPause).width(180*M).height(180*M);
-        stage.addActor(t2);
+        initStatics(stage);
+        stage.addActor(pause);
         //------------------------------------------------------------------------------------------
 
 
@@ -169,39 +161,40 @@ public class NowPlaying extends State implements Gesturable{
         setUpSnapChat();
     }
 
-    public static void pause(){
-        if(playing) {
-            playPause.setDrawable(pause.getDrawable());
-            playPause.clearListeners();
-            playPause.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    play();
-//                    new ExecutePlayMusic().execute();
-                }
-            });
-
-            playing = !playing;
-        }
-    }
-
-    public static void play(){
-        if(!playing) {
-            playPause.setDrawable(play.getDrawable());
-            playPause.clearListeners();
-            playPause.addListener(new ClickListener() {
+    public static void initStatics(Stage stage){
+        if(play == null || pause == null){
+            pause = new Image(new Texture("NowPlaying/Pause@1.0.png"));
+            pause.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     pause();
-//                    new ExecutePlayMusic().execute();
+                    new ExecutePlayMusic().execute();
                 }
             });
+            pause.setBounds(288*M, 177*M, 180*M, 180*M);
 
-            playing = !playing;
+            play = new Image(new Texture("NowPlaying/Play@1.0.png"));
+            play.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    play();
+                    new ExecutePlayMusic().execute();
+                }
+            });
+            play.setBounds(288 * M, 177 * M, 180 * M, 180 * M);
         }
+        staticStage = stage;
     }
 
-    public static boolean isPlaying(){return playing;}
+    public static void pause(){
+        pause.remove();
+        staticStage.addActor(play);
+    }
+
+    public static void play(){
+        play.remove();
+        staticStage.addActor(pause);
+    }
 
     @Override
     public void dispose() {
