@@ -205,7 +205,7 @@ public class NowPlaying extends State implements Gesturable{
     @Override
     public void update(float dt){
         super.update(dt);
-        if (iterations%5 == 0)
+        if (iterations%60 == 0)
             executeMoveSlider.execute();
         if (os == MAC)
             updateMusicLabels(AudioManager.getTime());

@@ -15,6 +15,7 @@ import java.util.List;
 public class GameLoop extends ApplicationAdapter  {
 	private StateManager stateManager;
 	private SpriteBatch spriteBatch;
+	private long diff, start = System.currentTimeMillis();
 
 	public static boolean INITIALPUSH = false;
 
@@ -35,6 +36,12 @@ public class GameLoop extends ApplicationAdapter  {
 
     }
 
+
+
+
+
+
+
 	@Override
 	public void render () {
 
@@ -48,6 +55,7 @@ public class GameLoop extends ApplicationAdapter  {
 		stateManager.draw();
 
 		spriteBatch.end();
+		sleep(60);
 	}
 
     @Override
@@ -55,4 +63,16 @@ public class GameLoop extends ApplicationAdapter  {
         stateManager.dispose();
     }
 
+	public void sleep(int fps) {
+		if(fps>0){
+			diff = System.currentTimeMillis() - start;
+			long targetDelay = 1000/fps;
+			if (diff < targetDelay) {
+				try{
+					Thread.sleep(targetDelay - diff);
+				} catch (InterruptedException e) {}
+			}
+			start = System.currentTimeMillis();
+		}
+	}
 }
