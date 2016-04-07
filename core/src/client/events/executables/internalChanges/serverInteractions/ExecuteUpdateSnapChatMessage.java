@@ -6,6 +6,7 @@ import client.events.executables.internalChanges.schmoferMusicExecutable.Execute
 import client.singletons.StateManager;
 import client.stateInterfaces.Executable;
 import server.model.media.MSnapShot;
+import server.model.structureModels.ServerModel;
 import server.model.user.User;
 import server.model.user.UserProfile;
 import tools.utilities.Utils;
@@ -16,10 +17,10 @@ import java.util.List;
  * Created by Kevin Zheng on 2016-04-05.
  */
 public class ExecuteUpdateSnapChatMessage extends ExecuteUpdate {
-    private List<Long> snapChats;
+//    private List<Long> snapChats;
 
     public ExecuteUpdateSnapChatMessage(){
-        snapChats = Utils.newList();
+
     }
 
     @Override
@@ -27,9 +28,6 @@ public class ExecuteUpdateSnapChatMessage extends ExecuteUpdate {
         User user = localDatabase.getMainUser();
 
         if(user.getSnapChat() != 0){
-            if(snapChats.contains(user.getSnapChat())){
-                return;
-            }
             MSnapShot snapShot = localDatabase.getModel(user.getSnapChat());
 
             User friend = localDatabase.getModel(snapShot.getCreator());
@@ -38,7 +36,15 @@ public class ExecuteUpdateSnapChatMessage extends ExecuteUpdate {
 
             StateManager.getInstance().getCurrentState().getStage().addActor(dialog.getWindow());
 
-            snapChats.add(user.getSnapChat());
+            user.setSnapChat(0L);
+
+            List<ServerModel> pushList = Utils.newList();
+
+            pushList.add(user);
+
+            localDatabase.pushModel(pushList);
+
+            localDatabase.removeKeyFromServer(snapShot.getKey());
         }
     }
 

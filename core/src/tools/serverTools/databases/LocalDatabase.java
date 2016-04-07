@@ -220,6 +220,11 @@ public class LocalDatabase {
         }
     }
 
+    public void removeKeyFromServer(long key){
+        models.remove(key);
+    }
+
+
     /**Call this to update models within this class.
      *
      * @param model The updated model.
