@@ -4,6 +4,7 @@ import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.stateInterfaces.Disposable;
 import client.stateInterfaces.Drawable;
+import client.stateInterfaces.Gesturable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -123,6 +124,7 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
     }
 
 
+
     public void receiveDragged(){
         currentState.getInputController().checkDragged();
     }
@@ -147,4 +149,14 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
         }
 
     }
+
+    public void handleGesture(boolean gestureX, boolean gestureY, boolean magX) {
+        if (currentState instanceof Gesturable)
+            ((Gesturable) currentState).handleGesture(gestureX, gestureY, magX);
+
+    }
+
+
+
+
 }
