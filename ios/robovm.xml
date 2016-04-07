@@ -7,6 +7,10 @@
   <iosInfoPList>Info.plist.xml</iosInfoPList>
   <resources>
 
+    <resourrce>
+      <directory>resources</directory>
+    </resourrce>
+
     <resource>
       <directory>../android/assets/massets</directory>
       <includes>
