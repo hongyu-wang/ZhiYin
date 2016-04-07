@@ -1,9 +1,11 @@
 package client.events.executables.internalChanges.schmoferMusicExecutable;
 
 import client.stateInterfaces.Executable;
+import com.badlogic.gdx.Audio;
 import server.model.media.MAudio;
 import server.model.media.MHashtag;
 import server.model.media.MMusic;
+import tools.AudioTools.AudioPlayer;
 import tools.serverTools.databases.LocalDatabase;
 import tools.serverTools.databases.LocalDatabaseFactory;
 
@@ -28,6 +30,11 @@ public class ExecutePlayHashtag implements Executable {
         if(tag == null){
             return;
         }
+        if (AudioPlayer.getInstance().isPlaying()){
+            AudioPlayer.getInstance().pause();
+            return;
+        }
+
         int num = (int) (Math.random()*tag.getMusicKeys().size());
 
         MMusic music = LocalDatabaseFactory.createLocalDatabase().getModel(tag.getMusicKeys().get(num));
