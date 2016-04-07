@@ -27,8 +27,9 @@ public enum TransitionType implements Constants {
     private int dir;
     private boolean type;
     private String name;
-
-
+    private State newState, oldState;
+    private Stage newStage, oldStage;
+    private TransitionState transitionState;
 
     TransitionType(String name){
         this.name = name;
@@ -42,48 +43,55 @@ public enum TransitionType implements Constants {
 
 
 
-    /**
-     * Sets up the actions for the stage during the transitions.
-     * @param oldStage The stage that you are transitioning from
-     * @param newStage The stage that you are transitioning to
-     * @param newState The state that you are transitioning to
-     */
-    public void setUpAction(Stage oldStage, Stage newStage, State newState){
+
+    public void setUpAction(State newState, State oldState, TransitionState transitionState){
+        this.transitionState = transitionState;
+        this.newState = newState;
+        this.oldState = oldState;
+        newStage = newState.getStage();
+        oldStage = oldState.getStage();
+
         if (this.name.equals("None")) {
-            handleDone(newStage, newState);
+            handleDone();
         }
         else if (this.name.equals("Fade in")){
-            handleFadeIn(newStage, newState);
+            handleFadeIn();
         }
         else if (type) {
-            handleHorizontal(oldStage, newStage, newState);
+            handleHorizontal();
         } else {
-            handleVertical(oldStage, newStage, newState);
+            handleVertical();
         }
 
     }
 
-    private void handleFadeIn(Stage newStage, State newState) {
+    private void handleFadeIn() {
         newStage.addAction(Actions.sequence(
                 Actions.alpha(0),
 
                 Actions.fadeIn(0.5F),
 
                 Actions.run(
-                        () -> InputListener.setListener(newState)
+                        () -> {
+                            oldState.hide();
+                            transitionState.hide();
+                            InputListener.setListener(newState);
+                        }
                 )
         ));
 
     }
 
-    private void handleDone(Stage newStage, State newState){
+    private void handleDone(){
         newStage.addAction(Actions.run(() -> {
+            oldState.hide();
+            transitionState.hide();
             StateManager.getInstance().toTemporaryState(newState);
         }));
 
     }
 
-    private void handleHorizontal(Stage oldStage, Stage newStage, State newState){
+    private void handleHorizontal(){
         oldStage.addAction(Actions.sequence(
                 Actions.moveTo(0, -dir * 1334 * M, 0.5F, Interpolation.pow2Out)
         ));
@@ -93,8 +101,10 @@ public enum TransitionType implements Constants {
                         Actions.moveTo(0, dir * 1334, 0),
                         Actions.moveTo(0, 0, 0.5F, Interpolation.pow2Out),
                         Actions.run(() -> {
+                            oldState.hide();
+                            transitionState.hide();
                             StateManager.getInstance().toTemporaryState(newState);
-                            oldStage.addAction(Actions.moveTo(0, 0));
+
                         })
 
                 )
@@ -102,7 +112,7 @@ public enum TransitionType implements Constants {
     }
 
 
-    private void handleVertical(Stage oldStage, Stage newStage, State newState){
+    private void handleVertical(){
         oldStage.addAction(Actions.sequence(
                 Actions.moveTo(-dir*750*M, 0, 0.5F, Interpolation.pow2Out)
         ));
@@ -114,8 +124,10 @@ public enum TransitionType implements Constants {
                         Actions.moveTo(dir*750 * M, 0, 0),
                         Actions.moveTo(0, 0, 0.5F, Interpolation.pow2Out),
                         Actions.run(() -> {
+                            oldState.hide();
+                            transitionState.hide();
                             StateManager.getInstance().toTemporaryState(newState);
-                            oldStage.addAction(Actions.moveTo(0, 0));
+
                         })
 
                 )

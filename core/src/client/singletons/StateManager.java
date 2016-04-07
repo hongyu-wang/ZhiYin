@@ -4,6 +4,7 @@ import client.pages.State;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
 import client.stateInterfaces.Drawable;
 import client.stateInterfaces.Gesturable;
+import client.stateInterfaces.Showable;
 import client.stateInterfaces.Updatable;
 import client.tools.Constants;
 import client.tools.ImageParser;
@@ -64,6 +65,8 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
 
     public void toTemporaryState(State state){
         currentState = state;
+
+
         currentState.reset();
 
         InputListener.setListener(currentState);
@@ -145,7 +148,6 @@ public class StateManager implements Disposable, Updatable, Drawable, Constants 
             ((Gesturable) currentState).handleGesture(gestureX, gestureY, magX);
         }
     }
-
 
 
 

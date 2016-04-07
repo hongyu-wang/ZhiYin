@@ -15,38 +15,41 @@ public class TransitionState extends State {
 
 
 
-    private Stage newStage;
-    private Stage oldStage;
+    private State newState;
+    private State oldState;
+    private TransitionType transitionType;
     private boolean willDraw;
-    public TransitionState(State newState, TransitionType ty){
+    public TransitionState(State newState, TransitionType transitionType){
+        this.newState = newState;
+        this.transitionType = transitionType;
         init();
-
-        newStage = newState.getStage();
-
-
-
-        oldStage = StateManager.getInstance().getCurrentState().getStage();
-
-        ty.setUpAction(oldStage, newStage, newState);
-
-        willDraw = false;
 
 
     }
 
+    protected void init(){
+        super.init();
+        this.oldState = StateManager.getInstance().getCurrentState();
+
+        newState.show();
+
+        transitionType.setUpAction(newState, oldState, this);
+
+        willDraw = false;
+    }
 
     @Override
     public void draw() {
         if (willDraw) {
-            oldStage.draw();
-            newStage.draw();
+            newState.getStage().draw();
+            oldState.getStage().draw();
         }
     }
 
     @Override
     public void update(float dt) {
-        oldStage.act(dt);
-        newStage.act(dt);
+        newState.getStage().act(dt);
+        oldState.getStage().act(dt);
         willDraw = true;
     }
 

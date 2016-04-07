@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public final class ImageParser {
 
     private static Image image;
-    private static ArrayList<Disposable> arrayList;
+    private static ArrayList<Disposable> arrayList = new ArrayList<>();
     public static void setUpImage(byte [] bytes, boolean cancelled){
         if(cancelled)
             image = null;

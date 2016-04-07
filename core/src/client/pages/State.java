@@ -29,7 +29,7 @@ import java.util.List;
  *
  * All pages should extend this.
  */
-public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor, Constants {
+public abstract class State implements Updatable, Drawable, Disposable, ActionMonitor, Constants, Showable {
 
     private static List<State> everything = new ArrayList<>();
     protected ArrayList<Disposable> disposables;
@@ -39,7 +39,6 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
     protected TransitionType transitionType;
 
     protected Texture tx;
-    protected Disposable ds;
 
     @Override
     public void update(float dt) {
@@ -233,9 +232,19 @@ public abstract class State implements Updatable, Drawable, Disposable, ActionMo
 
     @Override
     public void dispose() {
-        for (Disposable i : disposables){
-            i.dispose();
+        while (!disposables.isEmpty()){
+            disposables.remove(0).dispose();
         }
+    }
+
+    @Override
+    public void show() {
+        init();
+    }
+
+    @Override
+    public void hide() {
+        dispose();
     }
 }
 
