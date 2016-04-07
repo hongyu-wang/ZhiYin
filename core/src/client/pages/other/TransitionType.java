@@ -73,7 +73,7 @@ public enum TransitionType implements Constants {
                 Actions.run(
                         () -> {
 
-                            InputListener.setListener(newState);
+                            StateManager.getInstance().toTemporaryState(newState);
                         }
                 )
         ));
