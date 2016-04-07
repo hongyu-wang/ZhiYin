@@ -26,6 +26,8 @@ public abstract class TopSinglesShell extends State {
         backButton.setBounds(0, 1217, 117, 117);
         backButton.setExecutable(new ExecuteChangePage(Pages.HOME, TransitionType.LEFT_TO_RIGHT));
         add(backButton);
+
+        setBottomBar();
     }
 
 

@@ -1,14 +1,17 @@
 package client.pages.friends;
 
+import client.events.executables.internalChanges.updatePageExecutables.ExecuteChangePage;
+import client.pageStorage.Pages;
 import client.pages.friends.boxes.FriendBox;
+import client.pages.other.TransitionType;
 import client.pages.pageInternal.serverClientInteractions.FriendTalker;
 import client.pages.pageInternal.serverClientInteractions.ProfileTalker;
 import client.pages.pageInternal.serverClientInteractions.TalkerFactory;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Disposable;
 import server.model.user.User;
 
-public class Friends1 extends Friends1Shell{
+public class Friends1 extends Friends1Shell implements Gesturable{
 
     private Table table;
 
@@ -34,8 +37,6 @@ public class Friends1 extends Friends1Shell{
         disposables.add(box);
     }
 
-
-
     private void talkerAddFriends(){
         FriendTalker ft = TalkerFactory.getFriendTalker();
         ProfileTalker pt = TalkerFactory.getProfileTalker();
@@ -48,9 +49,15 @@ public class Friends1 extends Friends1Shell{
 
                     String friendName = pt.getName();
 
-                    addBox(new FriendBox(1, friendName));
+                    addBox(new FriendBox(this, 1, friendName));
                 }
             }
         }
+    }
+
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(!gestureXRight && directionMainlyX)
+            new ExecuteChangePage(Pages.FRIENDS4, TransitionType.RIGHT_TO_LEFT).execute();
     }
 }

@@ -5,7 +5,9 @@ import client.events.executables.internalChanges.updatePageExecutables.ExecuteTo
 import client.pages.State;
 import client.pages.other.Comment;
 import client.pages.other.Sec1;
+import client.pages.other.TransitionType;
 import client.singletons.SkinSingleton;
+import client.stateInterfaces.Gesturable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -24,7 +26,7 @@ import tools.serverTools.databases.LocalDatabaseFactory;
  *
  * Created by Hongyu Wang on 3/19/2016.
  */
-public class Diary4 extends Diary4Shell{
+public class Diary4 extends Diary4Shell implements Gesturable{
     MDiaryPost thisPost;
 
     private State previousState;
@@ -47,18 +49,18 @@ public class Diary4 extends Diary4Shell{
     protected void init() {
         super.init();
 
-        ExecuteToTempState changePage = new ExecuteToTempState(previousState, this);
-        addImage("NowPlaying/Back@", changePage, 0, 1217, 117, 117);
+        ExecuteToTempState backEx = new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT);
+        addImage("NowPlaying/Back@", backEx, 0, 1217, 117, 117);
 
         if(audio != null){
             TestExecutable playAudio = new TestExecutable("play audio");
             addImage("Diary/Play@", playAudio, 0, 0, 250, 250);
         }
 
-        ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, thisPost), this);
+        ExecuteToTempState toComment = new ExecuteToTempState(new Comment(this, thisPost), TransitionType.FADE_IN);
         addImage("Diary/Comment@", toComment, 250, 0, 250, 250);
 
-        ExecuteToTempState toSec = new ExecuteToTempState(new Sec1(this, thisPost), this);
+        ExecuteToTempState toSec = new ExecuteToTempState(new Sec1(this, thisPost), TransitionType.FADE_IN);
         addImage("Diary/Sec@", toSec, 500, 0, 250, 250);
 
         Table table = new Table();
@@ -117,5 +119,11 @@ public class Diary4 extends Diary4Shell{
         this.image = ImageManagerFactory.createImageManager().mImageToImage(image);
 
         this.audio = localDatabase.getModel(thisPost.getAudioKey());
+    }
+
+    @Override
+    public void handleGesture(boolean gestureXRight, boolean gestureYUp, boolean directionMainlyX) {
+        if(gestureXRight && directionMainlyX)
+            new ExecuteToTempState(previousState, TransitionType.LEFT_TO_RIGHT).execute();
     }
 }
