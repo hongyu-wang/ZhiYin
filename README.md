@@ -4,17 +4,6 @@ A Social Media App revolving around music
 A Demo that was presented at the Harvard China Forum
 App recieved offers of substantial sums
 
-# Capabilities
-
-Allows users over the same network to
-  * Send Audio / Images / text to other users
-  * Create a music snapshot and send it to another user
-  * Upload profile picture and edit your profile
-  * Favorite other artists 
-  * Listen to music
-  * Create Diary posts around songs
-  * Comment on other users Diary posts
-
 
 # Requirements
 
@@ -40,6 +29,17 @@ RoboVM (for iOS use)
 1. Alice
 2. Benny
 3. Cindy
+
+# Capabilities
+
+Allows users over the same network to
+  * Send Audio / Images / text to other users
+  * Create a music snapshot and send it to another user
+  * Upload profile picture and edit your profile
+  * Favorite other artists 
+  * Listen to music
+  * Create Diary posts around songs
+  * Comment on other users Diary posts
 
 # Screenshots of the App
 ![alt text](https://github.com/darknal43/ZhiYin/blob/master/android/assets/Unused%20Assets/Unused%20Art/Artboards/LoginPage.png)
