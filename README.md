@@ -1,8 +1,8 @@
 # ZhiYin
 
-A Social Media App revolving around music
-A Demo that was presented at the Harvard China Forum
-App recieved offers of substantial sums
+A Social Media App revolving around music  
+A Demo that was presented at the Harvard China Forum  
+App recieved offers of substantial sums  
 
 
 # Requirements
