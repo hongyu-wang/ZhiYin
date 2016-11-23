@@ -15,7 +15,7 @@ RoboVM (for iOS use)
 1. Clone this repository
 2. Open in IDE of choice
 3. Navigate to DesktopLauncher.java (Desktop Folder)
-4. Configure working directory Android/Assets
+4. Configure working directory to Android/Assets
 5. Navigate to core/src/server/webclient
 6. Run ResteasyNettyRunner.java
 7. Run DesktopLauncher.java (Multiple runs simulate multiple users)
